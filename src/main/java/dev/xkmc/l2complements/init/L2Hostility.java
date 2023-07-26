@@ -1,6 +1,7 @@
 package dev.xkmc.l2complements.init;
 
 import com.tterrag.registrate.providers.ProviderType;
+import dev.xkmc.l2complements.content.capability.mob.CapSyncPacket;
 import dev.xkmc.l2complements.init.data.*;
 import dev.xkmc.l2complements.init.registrate.*;
 import dev.xkmc.l2damagetracker.contents.materials.vanilla.GenItemVanillaType;
@@ -15,6 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.NetworkDirection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,7 +27,8 @@ public class L2Hostility {
 
 	public static final String MODID = "l2hostility";
 	public static final PacketHandlerWithConfig HANDLER = new PacketHandlerWithConfig(
-			new ResourceLocation(MODID, "main"), 1
+			new ResourceLocation(MODID, "main"), 1,
+			e -> e.create(CapSyncPacket.class, NetworkDirection.PLAY_TO_CLIENT)
 	);
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
@@ -34,7 +37,7 @@ public class L2Hostility {
 	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();
 		LHItems.register();
-		LHBlocks.register();
+		LHModifiers.register();
 		LHEffects.register();
 		LHParticle.register();
 		LHEnchantments.register();
