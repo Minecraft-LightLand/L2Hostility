@@ -1,0 +1,2 @@
+fix potion jei display
+ritual sync

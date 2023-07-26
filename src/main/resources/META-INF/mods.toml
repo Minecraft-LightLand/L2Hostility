@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[46,)"
+license="All rights reserved"
+[[mods]]
+modId="l2hostility"
+version="${file.jarVersion}" #mandatory
+displayName="L2 Hostility" #mandatory
+logoFile="l2hostility.png" #optional
+credits="Thanks for this example mod goes to Java" #optional
+authors="Love, Cheese and small house plants" #optional
+description='''
+'''
+[[dependencies.l2hostility]]
+    modId="forge"
+    mandatory=true
+    versionRange="[46.0.0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.l2hostility]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20,1.21)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.l2hostility]]
+    modId="l2library"
+    mandatory=true
+    versionRange="[2.4.6,)"
+    ordering="AFTER"
+    side="BOTH"
