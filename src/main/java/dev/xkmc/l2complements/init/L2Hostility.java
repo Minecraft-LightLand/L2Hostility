@@ -1,11 +1,15 @@
 package dev.xkmc.l2complements.init;
 
 import com.tterrag.registrate.providers.ProviderType;
+import dev.xkmc.l2complements.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2complements.content.capability.mob.CapSyncPacket;
+import dev.xkmc.l2complements.content.capability.mob.MobModifierCap;
+import dev.xkmc.l2complements.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2complements.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2complements.init.data.*;
 import dev.xkmc.l2complements.init.registrate.*;
-import dev.xkmc.l2damagetracker.contents.materials.vanilla.GenItemVanillaType;
 import dev.xkmc.l2library.base.L2Registrate;
+import dev.xkmc.l2library.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -32,7 +36,8 @@ public class L2Hostility {
 	);
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
-	public static final GenItemVanillaType MATS = new GenItemVanillaType(MODID, REGISTRATE);
+
+	public static final ConfigTypeEntry<WorldDifficultyConfig> WORLD = new ConfigTypeEntry<>(HANDLER, "world", WorldDifficultyConfig.class);
 
 	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();
@@ -44,6 +49,10 @@ public class L2Hostility {
 		LHEntities.register();
 		LHRecipes.register(bus);
 		LHConfig.init();
+
+		MobModifierCap.register();
+		ChunkDifficulty.register();
+		PlayerDifficulty.register();
 
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);

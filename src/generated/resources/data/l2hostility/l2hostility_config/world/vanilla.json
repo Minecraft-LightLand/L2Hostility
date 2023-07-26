@@ -1,0 +1,196 @@
+{
+  "biomeMap": {
+    "minecraft:badlands": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:bamboo_jungle": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:birch_forest": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:dark_forest": {
+      "base": 10,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:deep_cold_ocean": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:deep_dark": {
+      "base": 50,
+      "scale": 2.0,
+      "variation": 4.0
+    },
+    "minecraft:deep_frozen_ocean": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:deep_lukewarm_ocean": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:deep_ocean": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:desert": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:dripstone_caves": {
+      "base": 10,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:eroded_badlands": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:flower_forest": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:forest": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:frozen_peaks": {
+      "base": 30,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:ice_spikes": {
+      "base": 30,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:jagged_peaks": {
+      "base": 30,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:jungle": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:lush_caves": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:mangrove_swamp": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:mushroom_fields": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:savanna": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:savanna_plateau": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:snowy_slopes": {
+      "base": 30,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:snowy_taiga": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:sparse_jungle": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:stony_peaks": {
+      "base": 30,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:stony_shore": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:swamp": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:taiga": {
+      "base": 10,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:windswept_forest": {
+      "base": 10,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:windswept_gravelly_hills": {
+      "base": 10,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:windswept_hills": {
+      "base": 10,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:windswept_savanna": {
+      "base": 10,
+      "scale": 1.0,
+      "variation": 1.0
+    },
+    "minecraft:wooded_badlands": {
+      "base": 20,
+      "scale": 1.0,
+      "variation": 1.0
+    }
+  },
+  "levelMap": {
+    "minecraft:overworld": {
+      "base": 0,
+      "scale": 1.0,
+      "variation": 4.0
+    },
+    "minecraft:the_end": {
+      "base": 40,
+      "scale": 3.0,
+      "variation": 16.0
+    },
+    "minecraft:the_nether": {
+      "base": 20,
+      "scale": 2.0,
+      "variation": 16.0
+    }
+  }
+}

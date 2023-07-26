@@ -5,19 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "l2complements.refmap.json",
   "mixins": [
-	"AnvilBlockMixin",
-	"BlockBehaviorMixin",
-	"EntityMixin",
-	"ItemEntityMixin",
-	"ItemStackMixin",
-	"LivingEntityMixin",
-	"ServerPlayerGameModeMixin"
   ],
   "client": [
-	"AnvilScreenMixin",
-	"HumanoidArmorLayerMixin",
-	"ItemInHandLayerMixin",
-	"LocalPlayerMixin"
   ],
   "injectors": {
 	"defaultRequire": 1

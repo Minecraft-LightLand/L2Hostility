@@ -21,6 +21,7 @@ public class ChunkDifficultyCap implements ICapabilitySerializable<CompoundTag> 
 	public ChunkDifficultyCap(LevelChunk level) {
 		this.w = level;
 		handler = new ChunkDifficulty(level);
+		handler.init();
 		lo = LazyOptional.of(() -> this.handler);
 	}
 
