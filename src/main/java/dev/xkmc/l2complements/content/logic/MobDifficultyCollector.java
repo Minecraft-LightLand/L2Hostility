@@ -4,9 +4,9 @@ import dev.xkmc.l2complements.content.config.WorldDifficultyConfig;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
-public class DifficultyInstance {
+public class MobDifficultyCollector {
 
-	private int base, count, difficulty, cap = Integer.MAX_VALUE;
+	private int base, count, difficulty, cap = Integer.MAX_VALUE, modifierCap = ModifierManager.getMaxLevel();
 	private double scale, varSq;
 
 	public void acceptConfig(WorldDifficultyConfig.DifficultyConfig config) {
@@ -16,8 +16,8 @@ public class DifficultyInstance {
 		count++;
 	}
 
-	public void acceptBonus(int difficulty) {
-		this.difficulty += difficulty;
+	public void acceptBonus(DifficultyLevel difficulty) {
+		this.difficulty += difficulty.level;
 	}
 
 	public void setCap(int cap) {
@@ -30,6 +30,14 @@ public class DifficultyInstance {
 			mean += random.nextGaussian() * Math.sqrt(varSq / count);
 		}
 		return Math.round((int) Mth.clamp(mean, 0, cap));
+	}
+
+	public void setModifierCap(int cap) {
+		modifierCap = Math.min(cap, modifierCap);
+	}
+
+	public int getMaxModifierLevel() {
+		return modifierCap;
 	}
 
 }

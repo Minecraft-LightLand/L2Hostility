@@ -1,2 +1,5 @@
-// 1.20.1	2023-07-26T20:44:50.186316	L2Hostility Config
-a99a2a2e716fe76ea165fcbaf531a2f0ac5223bb data/l2hostility/l2hostility_config/world/vanilla.json
+// 1.20.1	2023-07-27T08:36:50.884313	L2Hostility Config
+09ff3363cc87e04f86ca8cc4b34be5988fc57d45 data/l2hostility/l2hostility_config/difficulty/end.json
+258d643bbc8c523641e40ae9073c5181d20ba171 data/l2hostility/l2hostility_config/difficulty/mobs.json
+7e33254b84f95b9430238740139b6164facdb41d data/l2hostility/l2hostility_config/difficulty/nether.json
+8018b36edce6f135d93d3550c6322b2d9e2d7c6f data/l2hostility/l2hostility_config/difficulty/overworld.json

@@ -1,0 +1,11 @@
+{
+  "biomeMap": {},
+  "entityMap": {},
+  "levelMap": {
+    "minecraft:the_end": {
+      "base": 40,
+      "scale": 3.0,
+      "variation": 16.0
+    }
+  }
+}

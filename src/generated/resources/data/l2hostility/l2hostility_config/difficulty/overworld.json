@@ -176,21 +176,12 @@
       "variation": 1.0
     }
   },
+  "entityMap": {},
   "levelMap": {
     "minecraft:overworld": {
       "base": 0,
       "scale": 1.0,
       "variation": 4.0
-    },
-    "minecraft:the_end": {
-      "base": 40,
-      "scale": 3.0,
-      "variation": 16.0
-    },
-    "minecraft:the_nether": {
-      "base": 20,
-      "scale": 2.0,
-      "variation": 16.0
     }
   }
 }

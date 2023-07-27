@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2complements.content.modifiers.core;
+package dev.xkmc.l2complements.content.modifiers.base;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

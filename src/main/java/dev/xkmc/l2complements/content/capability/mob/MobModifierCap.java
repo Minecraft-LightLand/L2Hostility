@@ -2,7 +2,8 @@ package dev.xkmc.l2complements.content.capability.mob;
 
 import dev.xkmc.l2complements.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2complements.content.capability.player.PlayerDifficulty;
-import dev.xkmc.l2complements.content.logic.DifficultyInstance;
+import dev.xkmc.l2complements.content.logic.MobDifficultyCollector;
+import dev.xkmc.l2complements.content.logic.ModifierManager;
 import dev.xkmc.l2complements.content.modifiers.core.MobModifierInstance;
 import dev.xkmc.l2complements.init.L2Hostility;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
@@ -54,7 +55,11 @@ public class MobModifierCap extends GeneralCapabilityTemplate<LivingEntity, MobM
 	}
 
 	public void init(Level level, LivingEntity le, ChunkDifficulty difficulty) {
-		DifficultyInstance instance = new DifficultyInstance();
+		MobDifficultyCollector instance = new MobDifficultyCollector();
+		var diff = L2Hostility.DIFFICULTY.getMerged().entityMap.get(le.getType());
+		if (diff != null) {
+			instance.acceptConfig(diff);
+		}
 		difficulty.modifyInstance(le.blockPosition(), instance);
 		Player player = level.getNearestPlayer(le, 128);
 		if (player != null && PlayerDifficulty.HOLDER.isProper(player)) {
@@ -62,6 +67,7 @@ public class MobModifierCap extends GeneralCapabilityTemplate<LivingEntity, MobM
 			playerDiff.apply(instance);
 		}
 		lv = instance.getDifficulty(le.getRandom());
+		ModifierManager.fill(le, lv, modifiers, instance.getMaxModifierLevel());
 		if (!le.hasCustomName()) {
 			le.setCustomName(le.getType().getDescription().copy().append(" Lv. " + lv));
 		}
@@ -69,8 +75,18 @@ public class MobModifierCap extends GeneralCapabilityTemplate<LivingEntity, MobM
 		syncToClient(le);
 	}
 
+	public int getLevel() {
+		return lv;
+	}
+
 	public boolean isInitialized() {
 		return initialized;
+	}
+
+	public void tick(LivingEntity mob) {
+		for (var e : modifiers) {
+			e.modifier().tick(mob, e.level());
+		}
 	}
 
 }

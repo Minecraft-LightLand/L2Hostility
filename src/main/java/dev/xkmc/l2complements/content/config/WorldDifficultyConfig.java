@@ -6,6 +6,7 @@ import dev.xkmc.l2library.serial.config.ConfigCollect;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.dimension.DimensionType;
 
@@ -22,6 +23,10 @@ public class WorldDifficultyConfig extends BaseConfig {
 	@SerialClass.SerialField
 	public final HashMap<ResourceLocation, DifficultyConfig> biomeMap = new HashMap<>();
 
+	@ConfigCollect(CollectType.MAP_OVERWRITE)
+	@SerialClass.SerialField
+	public final HashMap<EntityType<?>, DifficultyConfig> entityMap = new HashMap<>();
+
 	public record DifficultyConfig(int base, double variation, double scale) {
 
 	}
@@ -35,6 +40,13 @@ public class WorldDifficultyConfig extends BaseConfig {
 	public final WorldDifficultyConfig putBiome(int base, double var, double scale, ResourceKey<Biome>... keys) {
 		for (var key : keys) {
 			biomeMap.put(key.location(), new DifficultyConfig(base, var, scale));
+		}
+		return this;
+	}
+
+	public final WorldDifficultyConfig putEntity(int base, double var, double scale, EntityType<?>... keys) {
+		for (var key : keys) {
+			entityMap.put(key, new DifficultyConfig(base, var, scale));
 		}
 		return this;
 	}

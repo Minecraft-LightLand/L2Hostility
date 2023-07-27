@@ -5,6 +5,7 @@ import dev.xkmc.l2complements.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2complements.content.capability.mob.CapSyncPacket;
 import dev.xkmc.l2complements.content.capability.mob.MobModifierCap;
 import dev.xkmc.l2complements.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2complements.content.config.ModifierConfig;
 import dev.xkmc.l2complements.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2complements.init.data.*;
 import dev.xkmc.l2complements.init.registrate.*;
@@ -37,7 +38,8 @@ public class L2Hostility {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
 
-	public static final ConfigTypeEntry<WorldDifficultyConfig> WORLD = new ConfigTypeEntry<>(HANDLER, "world", WorldDifficultyConfig.class);
+	public static final ConfigTypeEntry<WorldDifficultyConfig> DIFFICULTY = new ConfigTypeEntry<>(HANDLER, "difficulty", WorldDifficultyConfig.class);
+	public static final ConfigTypeEntry<ModifierConfig> MODIFIER = new ConfigTypeEntry<>(HANDLER, "modifier", ModifierConfig.class);
 
 	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();

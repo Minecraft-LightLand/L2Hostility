@@ -1,0 +1,11 @@
+{
+  "biomeMap": {},
+  "entityMap": {},
+  "levelMap": {
+    "minecraft:the_nether": {
+      "base": 20,
+      "scale": 2.0,
+      "variation": 16.0
+    }
+  }
+}

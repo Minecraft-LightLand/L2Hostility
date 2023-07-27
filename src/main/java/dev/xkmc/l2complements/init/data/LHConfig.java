@@ -17,8 +17,27 @@ public class LHConfig {
 
 	public static class Common {
 
+		public ForgeConfigSpec.IntValue killPerLevel;
+		public ForgeConfigSpec.IntValue modifierCapPerLevel;
+		public ForgeConfigSpec.DoubleValue deathDecay;
+
+		public ForgeConfigSpec.DoubleValue healthFactor;
+
 
 		Common(ForgeConfigSpec.Builder builder) {
+			builder.push("difficulty");
+			killPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
+					.defineInRange("killPerLevel", 10, 1, 10000);
+			modifierCapPerLevel = builder.comment("Mob modifier cap per difficulty level. This is not the only factor")
+					.defineInRange("modifierCapPerLevel", 20, 1, 10000);
+			deathDecay = builder.comment("Decay in player difficulty on death")
+					.defineInRange("deathDecay", 0.9, 0, 2);
+			builder.pop();
+
+			builder.push("attributes");
+			healthFactor = builder.comment("Health factor per level")
+					.defineInRange("healthFactor", 0.02, 0, 1000);
+			builder.pop();
 		}
 
 	}

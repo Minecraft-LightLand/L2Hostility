@@ -1,6 +1,9 @@
 package dev.xkmc.l2complements.content.capability.player;
 
-import dev.xkmc.l2complements.content.logic.DifficultyInstance;
+import dev.xkmc.l2complements.content.capability.mob.MobModifierCap;
+import dev.xkmc.l2complements.content.logic.DifficultyLevel;
+import dev.xkmc.l2complements.content.logic.MobDifficultyCollector;
+import dev.xkmc.l2complements.content.logic.ModifierManager;
 import dev.xkmc.l2complements.init.L2Hostility;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
@@ -22,7 +25,10 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 					PlayerDifficulty.class, PlayerDifficulty::new, PlayerCapabilityNetworkHandler::new);
 
 	@SerialClass.SerialField
-	private int difficulty = 0;
+	private DifficultyLevel difficulty = new DifficultyLevel();
+
+	@SerialClass.SerialField
+	private int maxRankKilled = 0;
 
 	public PlayerDifficulty() {
 	}
@@ -32,15 +38,19 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 
 	public void onClone(boolean isWasDeath) {
 		if (isWasDeath) {
-			difficulty = 0;
+			difficulty.decay();
 		}
 	}
 
 	public void tick() {
 	}
 
-	public void apply(DifficultyInstance instance) {
+	public void apply(MobDifficultyCollector instance) {
 		instance.acceptBonus(difficulty);
+		instance.setModifierCap(ModifierManager.getModifierCap(maxRankKilled, difficulty));
 	}
 
+	public void addKillCredit(MobModifierCap cap) {
+		difficulty.grow(cap);
+	}
 }

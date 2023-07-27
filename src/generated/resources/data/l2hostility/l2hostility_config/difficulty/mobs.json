@@ -1,0 +1,26 @@
+{
+  "biomeMap": {},
+  "entityMap": {
+    "minecraft:elder_guardian": {
+      "base": 20,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:ender_dragon": {
+      "base": 100,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:piglin_brute": {
+      "base": 20,
+      "scale": 0.0,
+      "variation": 1.0
+    },
+    "minecraft:wither": {
+      "base": 50,
+      "scale": 0.0,
+      "variation": 1.0
+    }
+  },
+  "levelMap": {}
+}
