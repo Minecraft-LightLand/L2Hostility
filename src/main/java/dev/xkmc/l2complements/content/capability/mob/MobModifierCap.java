@@ -6,6 +6,7 @@ import dev.xkmc.l2complements.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2complements.content.logic.ModifierManager;
 import dev.xkmc.l2complements.content.modifiers.core.MobModifierInstance;
 import dev.xkmc.l2complements.init.L2Hostility;
+import dev.xkmc.l2complements.init.data.TagGen;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
 import dev.xkmc.l2serial.serialization.SerialClass;
@@ -29,7 +30,8 @@ public class MobModifierCap extends GeneralCapabilityTemplate<LivingEntity, MobM
 
 	public static final GeneralCapabilityHolder<LivingEntity, MobModifierCap> HOLDER =
 			new GeneralCapabilityHolder<>(new ResourceLocation(L2Hostility.MODID, "modifiers"),
-					CAPABILITY, MobModifierCap.class, MobModifierCap::new, LivingEntity.class, (e) -> e instanceof Enemy);
+					CAPABILITY, MobModifierCap.class, MobModifierCap::new, LivingEntity.class, (e) ->
+					e instanceof Enemy && !e.getType().is(TagGen.BLACKLIST));
 
 	@SerialClass.SerialField(toClient = true)
 	public final ArrayList<MobModifierInstance> modifiers = new ArrayList<>();

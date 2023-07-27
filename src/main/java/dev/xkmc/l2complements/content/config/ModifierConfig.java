@@ -9,10 +9,10 @@ import java.util.LinkedHashSet;
 @SerialClass
 public class ModifierConfig extends BaseConfig {
 
-	public static final ModifierConfig DEFAULT = new ModifierConfig(10, 1);
+	public static final ModifierConfig DEFAULT = new ModifierConfig(10, 1, 1);
 
 	@SerialClass.SerialField
-	public int cost;
+	public int cost, maxLevel;
 
 	@SerialClass.SerialField
 	public double chance;
@@ -27,9 +27,10 @@ public class ModifierConfig extends BaseConfig {
 	public ModifierConfig() {
 	}
 
-	public ModifierConfig(int cost, double chance) {
+	public ModifierConfig(int cost, double chance, int maxLevel) {
 		this.cost = cost;
 		this.chance = chance;
+		this.maxLevel = maxLevel;
 	}
 
 

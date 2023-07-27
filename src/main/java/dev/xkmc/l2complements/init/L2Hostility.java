@@ -7,8 +7,10 @@ import dev.xkmc.l2complements.content.capability.mob.MobModifierCap;
 import dev.xkmc.l2complements.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2complements.content.config.ModifierConfig;
 import dev.xkmc.l2complements.content.config.WorldDifficultyConfig;
+import dev.xkmc.l2complements.events.LHAttackListener;
 import dev.xkmc.l2complements.init.data.*;
 import dev.xkmc.l2complements.init.registrate.*;
+import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
@@ -67,6 +69,7 @@ public class L2Hostility {
 		FMLJavaModLoadingContext ctx = FMLJavaModLoadingContext.get();
 		IEventBus bus = ctx.getModEventBus();
 		registerRegistrates(bus);
+		AttackEventHandler.register(4500, new LHAttackListener());
 	}
 
 	@SubscribeEvent

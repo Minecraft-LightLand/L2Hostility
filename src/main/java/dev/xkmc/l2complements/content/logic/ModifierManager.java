@@ -3,6 +3,7 @@ package dev.xkmc.l2complements.content.logic;
 import dev.xkmc.l2complements.content.modifiers.core.MobModifier;
 import dev.xkmc.l2complements.content.modifiers.core.MobModifierInstance;
 import dev.xkmc.l2complements.init.data.LHConfig;
+import dev.xkmc.l2complements.init.data.TagGen;
 import dev.xkmc.l2complements.init.registrate.LHModifiers;
 import dev.xkmc.l2library.util.math.MathHelper;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,8 +25,13 @@ public class ModifierManager {
 
 	public static void fill(LivingEntity le, int lv, ArrayList<MobModifierInstance> modifiers, int maxModLv) {
 		// add attributes
-		addAttribute(le, Attributes.MAX_HEALTH, "hostility_health", lv * LHConfig.COMMON.healthFactor.get());
+		if (!le.getType().is(TagGen.NO_SCALING)) {
+			addAttribute(le, Attributes.MAX_HEALTH, "hostility_health", lv * LHConfig.COMMON.healthFactor.get());
+		}
 		// add modifiers
+
+		if (le.getType().is(TagGen.NO_MODIFIER)) return;
+
 		List<MobModifier> list = new ArrayList<>(LHModifiers.MODIFIERS.get().getValues().stream().filter(e -> e.allow(le, lv)).toList());
 		var rand = le.getRandom();
 		int level = lv;
@@ -37,7 +43,7 @@ public class ModifierManager {
 				level--;
 				continue;
 			}
-			int maxLv = Math.min(maxModLv, level / cost);
+			int maxLv = Math.min(Math.min(maxModLv, level / cost), e.getMaxLevel());
 			if (maxLv == 0) {
 				level--;
 				continue;

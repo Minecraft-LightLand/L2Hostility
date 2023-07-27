@@ -22,6 +22,7 @@ public class LHConfig {
 		public ForgeConfigSpec.DoubleValue deathDecay;
 
 		public ForgeConfigSpec.DoubleValue healthFactor;
+		public ForgeConfigSpec.DoubleValue damageFactor;
 
 
 		Common(ForgeConfigSpec.Builder builder) {
@@ -36,7 +37,9 @@ public class LHConfig {
 
 			builder.push("attributes");
 			healthFactor = builder.comment("Health factor per level")
-					.defineInRange("healthFactor", 0.02, 0, 1000);
+					.defineInRange("healthFactor", 0.03, 0, 1000);
+			damageFactor = builder.comment("Damage factor per level")
+					.defineInRange("damageFactor", 0.02, 0, 1000);
 			builder.pop();
 		}
 

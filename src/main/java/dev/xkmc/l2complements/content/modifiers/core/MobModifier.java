@@ -2,9 +2,15 @@ package dev.xkmc.l2complements.content.modifiers.core;
 
 import dev.xkmc.l2complements.content.config.ModifierConfig;
 import dev.xkmc.l2complements.init.L2Hostility;
+import dev.xkmc.l2complements.init.data.TagGen;
 import dev.xkmc.l2complements.init.registrate.LHModifiers;
+import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2library.base.NamedEntry;
+import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class MobModifier extends NamedEntry<MobModifier> {
 
@@ -23,6 +29,10 @@ public class MobModifier extends NamedEntry<MobModifier> {
 		return getConfig().cost;
 	}
 
+	public int getMaxLevel() {
+		return getConfig().maxLevel;
+	}
+
 	public boolean allow(LivingEntity le, int difficulty) {
 		ModifierConfig config = getConfig();
 		if (difficulty < config.cost) return false;
@@ -35,6 +45,15 @@ public class MobModifier extends NamedEntry<MobModifier> {
 	}
 
 	public void tick(LivingEntity mob, int level) {
+	}
+
+	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
+	}
+
+	public void onHurtByOthers(int level, LivingEntity entity, LivingHurtEvent event) {
+	}
+
+	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {
 	}
 
 }
