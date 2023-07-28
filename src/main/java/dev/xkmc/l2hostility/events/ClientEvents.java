@@ -5,13 +5,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ForgeHooksClient;
@@ -34,29 +30,32 @@ public class ClientEvents {
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void renderNamePlate(RenderNameTagEvent event) {
 		if (event.getEntity() instanceof LivingEntity le && MobTraitCap.HOLDER.isProper(le)) {
-			renderNameTag(event.getEntityRenderer(),
-					Wrappers.cast(le),
-					MobTraitCap.HOLDER.get(le).getTitle(),
-					event.getPoseStack(),
-					event.getMultiBufferSource(),
-					event.getPackedLight());
+			var list = MobTraitCap.HOLDER.get(le).getTitle();
+			int offset = list.size();
+			for (var e : list) {
+				renderNameTag(event, e, event.getPoseStack(), offset * 0.2f);
+				offset--;
+			}
 		}
-		;
+
 	}
 
-	protected static <T extends Entity> void renderNameTag(EntityRenderer<T> renderer, T entity, Component text, PoseStack pose, MultiBufferSource source, int light) {
+	protected static void renderNameTag(RenderNameTagEvent event, Component text, PoseStack pose, float offset) {
 		var dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-		double d0 = dispatcher.distanceToSqr(entity);
-		if (ForgeHooksClient.isNameplateInRenderDistance(entity, d0)) {
-			float f = entity.getNameTagOffsetY();
+		double d0 = dispatcher.distanceToSqr(event.getEntity());
+		if (ForgeHooksClient.isNameplateInRenderDistance(event.getEntity(), d0)) {
+			float f = event.getEntity().getNameTagOffsetY() + offset;
 			pose.pushPose();
 			pose.translate(0.0F, f, 0.0F);
 			pose.mulPose(dispatcher.cameraOrientation());
 			pose.scale(-0.025F, -0.025F, 0.025F);
 			Matrix4f matrix4f = pose.last().pose();
-			Font font = renderer.getFont();
+			Font font = event.getEntityRenderer().getFont();
 			float f2 = (float) (-font.width(text) / 2);
-			font.drawInBatch(text, f2, 0, -1, false, matrix4f, source, Font.DisplayMode.NORMAL, 0, light);
+			float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
+			int j = (int) (f1 * 255.0F) << 24;
+			font.drawInBatch(text, f2, 0, -1, false, matrix4f,
+					event.getMultiBufferSource(), Font.DisplayMode.NORMAL, j, event.getPackedLight());
 			pose.popPose();
 		}
 	}

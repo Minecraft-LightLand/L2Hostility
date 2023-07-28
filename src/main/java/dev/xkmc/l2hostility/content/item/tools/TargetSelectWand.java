@@ -27,25 +27,26 @@ public class TargetSelectWand extends Item {
 
 	@Override
 	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
+		if (player.level().isClientSide())
+			return InteractionResult.SUCCESS;
+		stack = player.getItemInHand(hand);
 		if (stack.getOrCreateTag().contains(KEY)) {
 			Entity other = entity.level().getEntity(stack.getOrCreateTag().getInt(KEY));
 			if (other instanceof LivingEntity le) {
-				if (!player.level().isClientSide()) {
-					boolean succeed = false;
-					if (entity instanceof Mob mob) {
-						mob.setTarget(le);
-						succeed = true;
-					}
-					if (le instanceof Mob mob) {
-						mob.setTarget(entity);
-						succeed = true;
-					}
-					stack.getOrCreateTag().remove(KEY);
-					if (succeed) {
-						player.sendSystemMessage(LangData.MSG_SET_TARGET.get(entity.getDisplayName(), le.getDisplayName()));
-					} else {
-						player.sendSystemMessage(LangData.MSG_TARGET_FAIL.get(entity.getDisplayName(), le.getDisplayName()));
-					}
+				boolean succeed = false;
+				if (entity instanceof Mob mob) {
+					mob.setTarget(le);
+					succeed = true;
+				}
+				if (le instanceof Mob mob) {
+					mob.setTarget(entity);
+					succeed = true;
+				}
+				stack.getOrCreateTag().remove(KEY);
+				if (succeed) {
+					player.sendSystemMessage(LangData.MSG_SET_TARGET.get(entity.getDisplayName(), le.getDisplayName()));
+				} else {
+					player.sendSystemMessage(LangData.MSG_TARGET_FAIL.get(entity.getDisplayName(), le.getDisplayName()));
 				}
 				return InteractionResult.SUCCESS;
 			}

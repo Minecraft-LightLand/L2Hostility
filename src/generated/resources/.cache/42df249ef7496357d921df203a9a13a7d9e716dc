@@ -1,6 +1,6 @@
-// 1.20.1	2023-07-28T14:55:05.805119	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
-1e81691e5f2d4e658aa18310fcd63f71f46c21b6 assets/l2hostility/lang/en_ud.json
-26453309d1ca7d27bfde6d01e60a7696e1d4bedb assets/l2hostility/lang/en_us.json
+// 1.20.1	2023-07-28T15:36:35.559143	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+a8273749b73c403b1be306200cb8217702990566 assets/l2hostility/lang/en_ud.json
+74b12b2a6635f9f9b363626b2ea9a21f5d96baae assets/l2hostility/lang/en_us.json
 3f4f2d4a69bf712997b2de1b947d152d4cf8754b assets/l2hostility/models/item/ai_config_wand.json
 c338976f33b1c3c565980899494ad0f6697b1fc5 assets/l2hostility/models/item/equipment_wand.json
 c9ce23339b6d683e4e58a192c62e9bd904571b36 assets/l2hostility/models/item/target_select_wand.json

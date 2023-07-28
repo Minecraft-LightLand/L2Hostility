@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.content.logic;
 
-import dev.xkmc.l2hostility.content.traits.common.MobTrait;
+import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
@@ -19,7 +19,11 @@ public class TraitManager {
 	public static void addAttribute(LivingEntity le, Attribute attr, String name, double factor, AttributeModifier.Operation op) {
 		var ins = le.getAttribute(attr);
 		if (ins == null) return;
-		ins.addPermanentModifier(new AttributeModifier(MathHelper.getUUIDFromString(name), name, factor, op));
+		var modifier = new AttributeModifier(MathHelper.getUUIDFromString(name), name, factor, op);
+		if (ins.hasModifier(modifier)) {
+			ins.removeModifier(modifier.getId());
+		}
+		ins.addPermanentModifier(modifier);
 	}
 
 	public static void fill(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, int maxModLv) {
@@ -55,6 +59,7 @@ public class TraitManager {
 		for (var e : traits.entrySet()) {
 			e.getKey().initialize(le, e.getValue());
 		}
+		le.setHealth(le.getMaxHealth());
 	}
 
 	public static int getMaxLevel() {

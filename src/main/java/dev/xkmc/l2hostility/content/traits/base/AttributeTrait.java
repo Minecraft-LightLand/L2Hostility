@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
 import dev.xkmc.l2hostility.content.logic.TraitManager;
-import dev.xkmc.l2hostility.content.traits.common.MobTrait;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -18,7 +18,8 @@ public class AttributeTrait extends MobTrait {
 
 	private final AttributeEntry[] entries;
 
-	public AttributeTrait(AttributeEntry... entries) {
+	public AttributeTrait(ChatFormatting style, AttributeEntry... entries) {
+		super(style);
 		this.entries = entries;
 	}
 

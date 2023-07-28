@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.traits.common;
+package dev.xkmc.l2hostility.content.traits.base;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
@@ -6,14 +6,21 @@ import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class MobTrait extends NamedEntry<MobTrait> {
 
-	public MobTrait() {
+	private final ChatFormatting style;
+
+	public MobTrait(ChatFormatting style) {
 		super(LHTraits.TRAITS);
+		this.style = style;
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -57,4 +64,9 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {
 	}
 
+	public MutableComponent getFullDesc(Integer value) {
+		return getDesc().append(CommonComponents.SPACE)
+				.append(Component.translatable("enchantment.level." + value))
+				.withStyle(style);
+	}
 }

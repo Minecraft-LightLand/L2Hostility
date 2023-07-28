@@ -7,7 +7,7 @@
   "l2hostility.msg.ai": "Configure %s: Set NoAI to %s.",
   "l2hostility.msg.select_trait": "Selected trait: %s",
   "l2hostility.msg.set_target": "Set %s and %s to fight",
-  "l2hostility.msg.set_trait": "Set trait $1%s on entity $2%s to level $3%s",
+  "l2hostility.msg.set_trait": "Set trait %1$s on entity %2$s to level %3$s",
   "l2hostility.msg.target_fail": "%s and %s cannot fight",
   "l2hostility.msg.target_record": "Recorded %s",
   "l2hostility.tooltip.disable": "%s enchantments disabled for %ss. Any new enchantment will vanish.",

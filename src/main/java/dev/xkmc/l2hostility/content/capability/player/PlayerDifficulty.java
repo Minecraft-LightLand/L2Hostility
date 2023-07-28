@@ -25,10 +25,10 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 					PlayerDifficulty.class, PlayerDifficulty::new, PlayerCapabilityNetworkHandler::new);
 
 	@SerialClass.SerialField
-	private DifficultyLevel difficulty = new DifficultyLevel();
+	private final DifficultyLevel difficulty = new DifficultyLevel();
 
 	@SerialClass.SerialField
-	private int maxRankKilled = 0;
+	private final int maxRankKilled = 0;
 
 	public PlayerDifficulty() {
 	}

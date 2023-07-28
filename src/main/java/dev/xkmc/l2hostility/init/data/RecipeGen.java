@@ -22,7 +22,7 @@ import static dev.xkmc.l2library.serial.recipe.AbstractSmithingRecipe.TEMPLATE_P
 
 public class RecipeGen {
 
-	private static String currentFolder = "";
+	private static final String currentFolder = "";
 
 	@SuppressWarnings("ConstantConditions")
 	public static void genRecipe(RegistrateRecipeProvider pvd) {

@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.content.item.tools;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.traits.common.MobTrait;
+import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.nbt.Tag;
@@ -103,6 +103,9 @@ public class TraitAdderWand extends Item {
 				ans = cap.traits.compute(trait, TraitAdderWand::dec);
 			}
 			int val = ans == null ? 0 : ans;
+			trait.initialize(target, val);
+			cap.syncToClient(target);
+			target.setHealth(target.getMaxHealth());
 			player.sendSystemMessage(LangData.MSG_SET_TRAIT.get(trait.getDesc(), target.getDisplayName(), val));
 		}
 		return InteractionResult.PASS;
@@ -110,6 +113,9 @@ public class TraitAdderWand extends Item {
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		if (level.isClientSide()) {
+			return InteractionResultHolder.success(player.getItemInHand(hand));
+		}
 		ItemStack stack = player.getItemInHand(hand);
 		MobTrait old = get(stack), next;
 		if (player.isShiftKeyDown()) {

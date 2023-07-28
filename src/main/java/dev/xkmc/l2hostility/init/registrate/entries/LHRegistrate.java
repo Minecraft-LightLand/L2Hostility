@@ -2,7 +2,7 @@ package dev.xkmc.l2hostility.init.registrate.entries;
 
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
-import dev.xkmc.l2hostility.content.traits.common.MobTrait;
+import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2library.base.L2Registrate;
 
 public class LHRegistrate extends L2Registrate {

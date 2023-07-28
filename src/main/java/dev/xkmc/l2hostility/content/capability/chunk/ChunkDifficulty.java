@@ -21,7 +21,7 @@ import net.minecraftforge.common.capabilities.CapabilityToken;
 public class ChunkDifficulty {
 
 	public enum Stage {
-		PRE_INIT, INIT, CLEARED;
+		PRE_INIT, INIT, CLEARED
 	}
 
 	public static Capability<ChunkDifficulty> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
