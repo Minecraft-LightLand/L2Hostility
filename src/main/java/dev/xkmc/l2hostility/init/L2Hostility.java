@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.init;
 
 import com.tterrag.registrate.providers.ProviderType;
+import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.CapSyncPacket;
 import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
@@ -10,8 +11,7 @@ import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.events.LHAttackListener;
 import dev.xkmc.l2hostility.init.data.*;
 import dev.xkmc.l2hostility.init.registrate.*;
-import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
-import dev.xkmc.l2library.base.L2Registrate;
+import dev.xkmc.l2hostility.init.registrate.entries.LHRegistrate;
 import dev.xkmc.l2library.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
 import net.minecraft.data.PackOutput;
@@ -38,7 +38,7 @@ public class L2Hostility {
 			e -> e.create(CapSyncPacket.class, NetworkDirection.PLAY_TO_CLIENT)
 	);
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
+	public static final LHRegistrate REGISTRATE = new LHRegistrate(MODID);
 
 	public static final ConfigTypeEntry<WorldDifficultyConfig> DIFFICULTY = new ConfigTypeEntry<>(HANDLER, "difficulty", WorldDifficultyConfig.class);
 	public static final ConfigTypeEntry<ModifierConfig> MODIFIER = new ConfigTypeEntry<>(HANDLER, "modifier", ModifierConfig.class);
@@ -51,7 +51,7 @@ public class L2Hostility {
 		LHParticle.register();
 		LHEnchantments.register();
 		LHEntities.register();
-		LHRecipes.register(bus);
+		LHMiscs.register();
 		LHConfig.init();
 
 		MobModifierCap.register();

@@ -9,7 +9,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
 public class LHConfigGen extends ConfigDataProvider {
+
+	public static final List<Consumer<Collector>> LIST = new ArrayList<>();
 
 	public LHConfigGen(DataGenerator generator) {
 		super(generator, "L2Hostility Config");
@@ -17,6 +23,8 @@ public class LHConfigGen extends ConfigDataProvider {
 
 	@Override
 	public void add(Collector collector) {
+		LIST.forEach(e -> e.accept(collector));
+
 		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "overworld"), new WorldDifficultyConfig()
 				.putDim(BuiltinDimensionTypes.OVERWORLD, 0, 4, 1)
 				.putBiome(10, 1, 0,

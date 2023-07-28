@@ -1,12 +1,13 @@
 package dev.xkmc.l2hostility.content.modifiers.core;
 
+import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2hostility.content.config.ModifierConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHModifiers;
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
-import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2library.base.NamedEntry;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class MobModifier extends NamedEntry<MobModifier> {
@@ -45,6 +46,9 @@ public class MobModifier extends NamedEntry<MobModifier> {
 	}
 
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
+	}
+
+	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
 	}
 
 	public void onHurtByOthers(int level, LivingEntity entity, LivingHurtEvent event) {

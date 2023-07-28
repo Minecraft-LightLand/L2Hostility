@@ -17,29 +17,63 @@ public class LHConfig {
 
 	public static class Common {
 
-		public ForgeConfigSpec.IntValue killPerLevel;
-		public ForgeConfigSpec.IntValue modifierCapPerLevel;
-		public ForgeConfigSpec.DoubleValue deathDecay;
+		public final ForgeConfigSpec.IntValue killPerLevel;
+		public final ForgeConfigSpec.IntValue modifierCapPerLevel;
+		public final ForgeConfigSpec.DoubleValue deathDecay;
 
-		public ForgeConfigSpec.DoubleValue healthFactor;
-		public ForgeConfigSpec.DoubleValue damageFactor;
+		public final ForgeConfigSpec.DoubleValue healthFactor;
+		public final ForgeConfigSpec.DoubleValue damageFactor;
 
+		public final ForgeConfigSpec.DoubleValue tankHealth;
+		public final ForgeConfigSpec.DoubleValue tankArmor;
+		public final ForgeConfigSpec.DoubleValue tankTough;
+		public final ForgeConfigSpec.DoubleValue speedy;
+		public final ForgeConfigSpec.DoubleValue regen;
+		public final ForgeConfigSpec.DoubleValue adaptFactor;
+		public final ForgeConfigSpec.DoubleValue reflect;
+		public final ForgeConfigSpec.IntValue dispellTime;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("difficulty");
-			killPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
-					.defineInRange("killPerLevel", 10, 1, 10000);
-			modifierCapPerLevel = builder.comment("Mob modifier cap per difficulty level. This is not the only factor")
-					.defineInRange("modifierCapPerLevel", 20, 1, 10000);
-			deathDecay = builder.comment("Decay in player difficulty on death")
-					.defineInRange("deathDecay", 0.9, 0, 2);
+			{
+				killPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
+						.defineInRange("killPerLevel", 10, 1, 10000);
+				modifierCapPerLevel = builder.comment("Mob modifier cap per difficulty level. This is not the only factor")
+						.defineInRange("modifierCapPerLevel", 20, 1, 10000);
+				deathDecay = builder.comment("Decay in player difficulty on death")
+						.defineInRange("deathDecay", 0.9, 0, 2);
+			}
 			builder.pop();
 
-			builder.push("attributes");
-			healthFactor = builder.comment("Health factor per level")
-					.defineInRange("healthFactor", 0.03, 0, 1000);
-			damageFactor = builder.comment("Damage factor per level")
-					.defineInRange("damageFactor", 0.02, 0, 1000);
+			builder.push("scaling");
+			{
+				healthFactor = builder.comment("Health factor per level")
+						.defineInRange("healthFactor", 0.03, 0, 1000);
+				damageFactor = builder.comment("Damage factor per level")
+						.defineInRange("damageFactor", 0.02, 0, 1000);
+			}
+			builder.pop();
+
+			builder.push("modifiers");
+			{
+				tankHealth = builder.comment("Health bonus for Tank modifier per level")
+						.defineInRange("tankHealth", 0.5, 0, 1000);
+				tankArmor = builder.comment("Armor bonus for Tank modifier per level")
+						.defineInRange("tankArmor", 10d, 0, 1000);
+				tankTough = builder.comment("Toughness bonus for Tank modifier per level")
+						.defineInRange("tankTough", 4d, 0, 1000);
+				speedy = builder.comment("Speed bonus for Speedy modifier per level")
+						.defineInRange("speedy", 0.2, 0, 1000);
+				regen = builder.comment("Regen rate for Regeneration modifier per second per level")
+						.defineInRange("regen", 0.02, 0, 1000);
+				adaptFactor = builder.comment("Damage factor for Adaptive. Higher means less reduction")
+						.defineInRange("adaptFactor", 0.5, 0, 1000);
+				reflect = builder.comment("Reflect factor per level for Reflect. 0.5 means +50% extra damage")
+						.defineInRange("reflect", 0.5, 0, 1000);
+				dispellTime = builder.comment("Duration in ticks for enchantments to be disabled per level for Dispell")
+						.defineInRange("dispellTime", 200, 1, 60000);
+
+			}
 			builder.pop();
 		}
 

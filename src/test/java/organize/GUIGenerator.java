@@ -22,7 +22,7 @@ import java.util.Map;
 public class GUIGenerator {
 
     public static void main(String[] args) throws Exception {
-        new GUIGenerator("l2library").gen();
+        new GUIGenerator("l2hostility").gen();
     }
 
     private class Comp {
@@ -99,8 +99,8 @@ public class GUIGenerator {
 
     GUIGenerator(String modid) {
         GUI = "./src/test/resources/" + modid + "/gui/";
-        DST = "./src/test/resources/" + modid + "/assets/textures/gui/";
-        CDST = "./src/test/resources/" + modid + "/data/" + modid + "/gui/";
+        DST = "./src/main/resources/assets/" + modid + "/textures/gui/";
+        CDST = "./src/main/resources/data/" + modid + "/l2library_config/menu_layout/";
         CONT = GUI + "-templates/container/" + modid + "/";
     }
 
@@ -111,16 +111,12 @@ public class GUIGenerator {
         File f = new File(CONT);
         Item top = ITEM_MAP.get("top");
         Item middle = ITEM_MAP.get("middle");
+        Item bottom = ITEM_MAP.get("bottom");
         for (File fi : f.listFiles()) {
             JsonObject e = readJsonFile(fi.getPath()).getAsJsonObject();
             JsonObject out = new JsonObject();
             List<Item> side = new ArrayList<>();
             List<Comp> comp = new ArrayList<>();
-            int height = 0;
-            if (e.has("height")) {
-                height = e.get("height").getAsInt();
-            }
-            Item bottom = ITEM_MAP.get(e.get("isContainer").getAsBoolean() ? "bottom" : "bottom_screen");
             e.get("side").getAsJsonArray().forEach(s -> side.add(ITEM_MAP.get(s.getAsString())));
             for (Map.Entry<String, JsonElement> ent : e.get("comp").getAsJsonObject().entrySet())
                 comp.add(new Comp(ent.getKey(), ent.getValue().getAsJsonObject()));
@@ -128,9 +124,6 @@ public class GUIGenerator {
             for (Comp c : comp) {
                 y0 = Math.min(y0, c.gety0());
                 y1 = Math.max(y1, c.gety1());
-            }
-            if (top.h + y1 - y0 + bottom.h < height) {
-                y1 = height - bottom.h - top.h + y0;
             }
             out.addProperty("height", top.h + y1 - y0 + bottom.h);
             BufferedImage bimg = new BufferedImage(256, 256, BufferedImage.TYPE_INT_ARGB);
@@ -180,8 +173,7 @@ public class GUIGenerator {
             File fx = new File(DST + "container/" + fi.getName().split("\\.")[0] + ".png");
             check(fx);
             ImageIO.write(bimg, "PNG", fx);
-            write(DST + "coords/" + fi.getName(), out);
-            write(CDST + "coords/" + fi.getName(), out);
+            write(CDST + fi.getName(), out);
 
         }
 

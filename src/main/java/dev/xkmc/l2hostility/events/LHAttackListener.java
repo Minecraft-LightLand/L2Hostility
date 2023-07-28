@@ -1,12 +1,12 @@
 package dev.xkmc.l2hostility.events;
 
-import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
-import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.AttackListener;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
+import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
+import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.TagGen;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -20,18 +20,15 @@ public class LHAttackListener implements AttackListener {
 			if (!mob.getType().is(TagGen.NO_SCALING)) {
 				cache.addHurtModifier(DamageModifier.multTotal(1 + (float) (cap.getLevel() * LHConfig.COMMON.damageFactor.get())));
 			}
-			for (var e : cap.modifiers) {
-				e.modifier().onHurtTarget(e.level(), cache.getAttacker(), cache);
-			}
+			cap.modifiers.forEach((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache));
 		}
 	}
 
 	@Override
 	public void onCreateSource(CreateSourceEvent event) {
 		if (MobModifierCap.HOLDER.isProper(event.getAttacker())) {
-			for (var e : MobModifierCap.HOLDER.get(event.getAttacker()).modifiers) {
-				e.modifier().onCreateSource(e.level(), event.getAttacker(), event);
-			}
+			MobModifierCap.HOLDER.get(event.getAttacker()).modifiers
+					.forEach((k, v) -> k.onCreateSource(v, event.getAttacker(), event));
 		}
 	}
 
