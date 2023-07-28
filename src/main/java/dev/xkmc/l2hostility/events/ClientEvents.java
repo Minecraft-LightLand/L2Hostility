@@ -2,8 +2,8 @@ package dev.xkmc.l2hostility.events;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
-import dev.xkmc.l2hostility.content.item.modifiers.EnchantmentDisabler;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.client.Minecraft;
@@ -26,20 +26,22 @@ import org.joml.Matrix4f;
 public class ClientEvents {
 
 	@SubscribeEvent
-	public static void addTooltip(ItemTooltipEvent event){
+	public static void addTooltip(ItemTooltipEvent event) {
+		if (event.getEntity() == null) return;
 		EnchantmentDisabler.modifyTooltip(event.getItemStack(), event.getToolTip(), event.getEntity().level());
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void renderNamePlate(RenderNameTagEvent event) {
-		if (event.getEntity() instanceof LivingEntity le && MobModifierCap.HOLDER.isProper(le)) {
+		if (event.getEntity() instanceof LivingEntity le && MobTraitCap.HOLDER.isProper(le)) {
 			renderNameTag(event.getEntityRenderer(),
 					Wrappers.cast(le),
-					MobModifierCap.HOLDER.get(le).getTitle(),
+					MobTraitCap.HOLDER.get(le).getTitle(),
 					event.getPoseStack(),
 					event.getMultiBufferSource(),
 					event.getPackedLight());
-		} ;
+		}
+		;
 	}
 
 	protected static <T extends Entity> void renderNameTag(EntityRenderer<T> renderer, T entity, Component text, PoseStack pose, MultiBufferSource source, int light) {

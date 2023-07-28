@@ -14,8 +14,8 @@ public class ClientCapHandler {
 		if (level == null) return;
 		Entity entity = level.getEntity(packet.id);
 		if (!(entity instanceof LivingEntity le)) return;
-		if (!MobModifierCap.HOLDER.isProper(le)) return;
-		TagCodec.fromTag(packet.tag, MobModifierCap.class, MobModifierCap.HOLDER.get(le), SerialClass.SerialField::toClient);
+		if (!MobTraitCap.HOLDER.isProper(le)) return;
+		TagCodec.fromTag(packet.tag, MobTraitCap.class, MobTraitCap.HOLDER.get(le), SerialClass.SerialField::toClient);
 	}
 
 }

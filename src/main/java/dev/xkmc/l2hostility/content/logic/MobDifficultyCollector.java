@@ -6,7 +6,7 @@ import net.minecraft.util.RandomSource;
 
 public class MobDifficultyCollector {
 
-	private int base, count, difficulty, cap = Integer.MAX_VALUE, modifierCap = ModifierManager.getMaxLevel();
+	private int base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel();
 	private double scale, varSq;
 
 	public void acceptConfig(WorldDifficultyConfig.DifficultyConfig config) {
@@ -32,12 +32,12 @@ public class MobDifficultyCollector {
 		return Math.round((int) Mth.clamp(mean, 0, cap));
 	}
 
-	public void setModifierCap(int cap) {
-		modifierCap = Math.min(cap, modifierCap);
+	public void setTraitCap(int cap) {
+		traitCap = Math.min(cap, traitCap);
 	}
 
-	public int getMaxModifierLevel() {
-		return modifierCap;
+	public int getMaxTraitLevel() {
+		return traitCap;
 	}
 
 }

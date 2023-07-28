@@ -1,6 +1,6 @@
-package dev.xkmc.l2hostility.content.modifiers.base;
+package dev.xkmc.l2hostility.content.traits.base;
 
-import dev.xkmc.l2hostility.content.modifiers.core.MobModifier;
+import dev.xkmc.l2hostility.content.traits.common.MobTrait;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -8,11 +8,11 @@ import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Supplier;
 
-public class SelfEffectModifier extends MobModifier {
+public class SelfEffectTrait extends MobTrait {
 
 	public final Supplier<MobEffect> effect;
 
-	public SelfEffectModifier(Supplier<MobEffect> effect) {
+	public SelfEffectTrait(Supplier<MobEffect> effect) {
 		this.effect = effect;
 	}
 

@@ -1,9 +1,9 @@
 package dev.xkmc.l2hostility.content.capability.player;
 
-import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
-import dev.xkmc.l2hostility.content.logic.ModifierManager;
+import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
@@ -47,10 +47,10 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 
 	public void apply(MobDifficultyCollector instance) {
 		instance.acceptBonus(difficulty);
-		instance.setModifierCap(ModifierManager.getModifierCap(maxRankKilled, difficulty));
+		instance.setTraitCap(TraitManager.getTraitCap(maxRankKilled, difficulty));
 	}
 
-	public void addKillCredit(MobModifierCap cap) {
+	public void addKillCredit(MobTraitCap cap) {
 		difficulty.grow(cap);
 	}
 }

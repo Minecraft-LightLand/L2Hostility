@@ -4,9 +4,9 @@ import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.CapSyncPacket;
-import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
-import dev.xkmc.l2hostility.content.config.ModifierConfig;
+import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.events.LHAttackListener;
 import dev.xkmc.l2hostility.init.data.*;
@@ -41,12 +41,12 @@ public class L2Hostility {
 	public static final LHRegistrate REGISTRATE = new LHRegistrate(MODID);
 
 	public static final ConfigTypeEntry<WorldDifficultyConfig> DIFFICULTY = new ConfigTypeEntry<>(HANDLER, "difficulty", WorldDifficultyConfig.class);
-	public static final ConfigTypeEntry<ModifierConfig> MODIFIER = new ConfigTypeEntry<>(HANDLER, "modifier", ModifierConfig.class);
+	public static final ConfigTypeEntry<TraitConfig> TRAIT = new ConfigTypeEntry<>(HANDLER, "trait", TraitConfig.class);
 
 	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();
 		LHItems.register();
-		LHModifiers.register();
+		LHTraits.register();
 		LHEffects.register();
 		LHParticle.register();
 		LHEnchantments.register();
@@ -54,7 +54,7 @@ public class L2Hostility {
 		LHMiscs.register();
 		LHConfig.init();
 
-		MobModifierCap.register();
+		MobTraitCap.register();
 		ChunkDifficulty.register();
 		PlayerDifficulty.register();
 

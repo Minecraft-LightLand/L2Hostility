@@ -1,8 +1,7 @@
-package dev.xkmc.l2hostility.content.modifiers.common;
+package dev.xkmc.l2hostility.content.traits.common;
 
 import dev.xkmc.l2hostility.content.capability.mob.CapStorageData;
-import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
-import dev.xkmc.l2hostility.content.modifiers.core.MobModifier;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.tags.DamageTypeTags;
@@ -11,14 +10,14 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.ArrayList;
 
-public class AdaptingModifier extends MobModifier {
+public class AdaptingTrait extends MobTrait {
 
 	@Override
 	public void onHurtByOthers(int level, LivingEntity entity, LivingHurtEvent event) {
 		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
 				event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS))
 			return;
-		MobModifierCap cap = MobModifierCap.HOLDER.get(entity);
+		MobTraitCap cap = MobTraitCap.HOLDER.get(entity);
 		Data data = cap.getOrCreateData(getRegistryName(), Data::new);
 		String id = event.getSource().getMsgId();
 		if (data.memory.contains(id)) {

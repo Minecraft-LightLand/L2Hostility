@@ -1,9 +1,9 @@
 package dev.xkmc.l2hostility.content.item.tools;
 
-import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
-import dev.xkmc.l2hostility.content.modifiers.core.MobModifier;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.traits.common.MobTrait;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2hostility.init.registrate.LHModifiers;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
@@ -21,30 +21,30 @@ import java.util.List;
 
 public class TraitAdderWand extends Item {
 
-	private static final String MODIFIER = "l2hostility_modifier";
+	private static final String TRAIT = "l2hostility_trait";
 
-	public static ItemStack set(ItemStack ans, MobModifier modifier) {
-		ans.getOrCreateTag().putString(MODIFIER, modifier.getID());
+	public static ItemStack set(ItemStack ans, MobTrait trait) {
+		ans.getOrCreateTag().putString(TRAIT, trait.getID());
 		return ans;
 	}
 
-	public static MobModifier get(ItemStack stack) {
-		if (stack.getOrCreateTag().contains(MODIFIER, Tag.TAG_STRING)) {
-			String str = stack.getOrCreateTag().getString(MODIFIER);
+	public static MobTrait get(ItemStack stack) {
+		if (stack.getOrCreateTag().contains(TRAIT, Tag.TAG_STRING)) {
+			String str = stack.getOrCreateTag().getString(TRAIT);
 			ResourceLocation id = new ResourceLocation(str);
-			MobModifier ans = LHModifiers.MODIFIERS.get().getValue(id);
+			MobTrait ans = LHTraits.TRAITS.get().getValue(id);
 			if (ans != null) {
 				return ans;
 			}
 		}
-		return LHModifiers.TANK.get();
+		return LHTraits.TANK.get();
 	}
 
-	private static List<MobModifier> values() {
-		return new ArrayList<>(LHModifiers.MODIFIERS.get().getValues());
+	private static List<MobTrait> values() {
+		return new ArrayList<>(LHTraits.TRAITS.get().getValues());
 	}
 
-	private static MobModifier next(MobModifier mod) {
+	private static MobTrait next(MobTrait mod) {
 		var list = values();
 		int index = list.indexOf(mod);
 		if (index + 1 >= list.size()) {
@@ -53,7 +53,7 @@ public class TraitAdderWand extends Item {
 		return list.get(index + 1);
 	}
 
-	private static MobModifier prev(MobModifier mod) {
+	private static MobTrait prev(MobTrait mod) {
 		var list = values();
 		int index = list.indexOf(mod);
 		if (index == 0) {
@@ -63,7 +63,7 @@ public class TraitAdderWand extends Item {
 	}
 
 	@Nullable
-	private static Integer inc(MobModifier k, @Nullable Integer old) {
+	private static Integer inc(MobTrait k, @Nullable Integer old) {
 		if (old == null || old == 0) {
 			return k.getMaxLevel();
 		}
@@ -74,7 +74,7 @@ public class TraitAdderWand extends Item {
 	}
 
 	@Nullable
-	private static Integer dec(MobModifier k, @Nullable Integer old) {
+	private static Integer dec(MobTrait k, @Nullable Integer old) {
 		if (old == null) {
 			return 1;
 		}
@@ -90,20 +90,20 @@ public class TraitAdderWand extends Item {
 
 	@Override
 	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
-		if (MobModifierCap.HOLDER.isProper(target)) {
+		if (MobTraitCap.HOLDER.isProper(target)) {
 			if (player.level().isClientSide()) {
 				return InteractionResult.SUCCESS;
 			}
-			MobModifierCap cap = MobModifierCap.HOLDER.get(target);
-			MobModifier modifier = get(stack);
+			MobTraitCap cap = MobTraitCap.HOLDER.get(target);
+			MobTrait trait = get(stack);
 			Integer ans;
 			if (player.isShiftKeyDown()) {
-				ans = cap.modifiers.compute(modifier, TraitAdderWand::inc);
+				ans = cap.traits.compute(trait, TraitAdderWand::inc);
 			} else {
-				ans = cap.modifiers.compute(modifier, TraitAdderWand::dec);
+				ans = cap.traits.compute(trait, TraitAdderWand::dec);
 			}
 			int val = ans == null ? 0 : ans;
-			player.sendSystemMessage(LangData.MSG_SET_MODIFIER.get(modifier.getDesc(), target.getDisplayName(), val));
+			player.sendSystemMessage(LangData.MSG_SET_TRAIT.get(trait.getDesc(), target.getDisplayName(), val));
 		}
 		return InteractionResult.PASS;
 	}
@@ -111,14 +111,14 @@ public class TraitAdderWand extends Item {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		MobModifier old = get(stack), next;
+		MobTrait old = get(stack), next;
 		if (player.isShiftKeyDown()) {
 			next = prev(old);
 		} else {
 			next = next(old);
 		}
 		set(stack, next);
-		player.sendSystemMessage(LangData.MSG_SELECT_MODIFIER.get(next.getDesc()));
+		player.sendSystemMessage(LangData.MSG_SELECT_TRAIT.get(next.getDesc()));
 		return InteractionResultHolder.success(player.getItemInHand(hand));
 	}
 

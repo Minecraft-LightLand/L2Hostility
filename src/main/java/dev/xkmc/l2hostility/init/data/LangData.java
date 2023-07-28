@@ -13,8 +13,8 @@ public enum LangData {
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),
 	MSG_TARGET_FAIL("msg.target_fail", "%s and %s cannot fight", 2),
 	MSG_TARGET_RECORD("msg.target_record", "Recorded %s", 1),
-	MSG_SET_MODIFIER("msg.set_modifier", "Set trait $1%s on entity $2%s to level $3%s", 3),
-	MSG_SELECT_MODIFIER("msg.select_modifier", "Selected trait: %s", 1),
+	MSG_SET_TRAIT("msg.set_trait", "Set trait $1%s on entity $2%s to level $3%s", 3),
+	MSG_SELECT_TRAIT("msg.select_trait", "Selected trait: %s", 1),
 	;
 
 	final String id, def;

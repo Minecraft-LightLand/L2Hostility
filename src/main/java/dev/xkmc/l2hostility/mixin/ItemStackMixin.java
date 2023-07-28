@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.mixin;
 
-import dev.xkmc.l2hostility.content.item.modifiers.EnchantmentDisabler;
+import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;

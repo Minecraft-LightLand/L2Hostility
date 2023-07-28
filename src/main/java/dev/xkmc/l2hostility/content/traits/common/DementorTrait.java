@@ -1,14 +1,13 @@
-package dev.xkmc.l2hostility.content.modifiers.common;
+package dev.xkmc.l2hostility.content.traits.common;
 
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
-import dev.xkmc.l2hostility.content.modifiers.core.MobModifier;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
-public class DementorModifier extends MobModifier {
+public class DementorTrait extends MobTrait {
 
 	@Override
 	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {

@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2hostility.content.modifiers.base;
+package dev.xkmc.l2hostility.content.traits.base;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

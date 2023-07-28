@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.events;
 
-import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -13,16 +13,16 @@ public class MobEvents {
 
 	@SubscribeEvent
 	public static void onMobAttack(LivingAttackEvent event) {
-		if (MobModifierCap.HOLDER.isProper(event.getEntity())) {
-			MobModifierCap.HOLDER.get(event.getEntity()).modifiers
+		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
+			MobTraitCap.HOLDER.get(event.getEntity()).traits
 					.forEach((k, v) -> k.onAttackedByOthers(v, event.getEntity(), event));
 		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void onMobHurt(LivingHurtEvent event) {
-		if (MobModifierCap.HOLDER.isProper(event.getEntity())) {
-			MobModifierCap.HOLDER.get(event.getEntity()).modifiers
+		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
+			MobTraitCap.HOLDER.get(event.getEntity()).traits
 					.forEach((k, v) -> k.onHurtByOthers(v, event.getEntity(), event));
 		}
 	}

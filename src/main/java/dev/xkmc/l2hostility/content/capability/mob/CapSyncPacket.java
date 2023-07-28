@@ -19,9 +19,9 @@ public class CapSyncPacket extends SerialPacketBase {
 	public CapSyncPacket() {
 	}
 
-	public CapSyncPacket(LivingEntity entity, MobModifierCap cap) {
+	public CapSyncPacket(LivingEntity entity, MobTraitCap cap) {
 		id = entity.getId();
-		tag = TagCodec.toTag(new CompoundTag(), MobModifierCap.class, cap, SerialClass.SerialField::toClient);
+		tag = TagCodec.toTag(new CompoundTag(), MobTraitCap.class, cap, SerialClass.SerialField::toClient);
 	}
 
 	@Override

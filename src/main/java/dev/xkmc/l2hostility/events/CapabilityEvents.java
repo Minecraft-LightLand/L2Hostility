@@ -2,7 +2,7 @@ package dev.xkmc.l2hostility.events;
 
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficultyCap;
-import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.core.BlockPos;
@@ -35,15 +35,15 @@ public class CapabilityEvents {
 	@SubscribeEvent
 	public static void onStartTracking(PlayerEvent.StartTracking event) {
 		if (event.getTarget() instanceof LivingEntity entity && event.getEntity() instanceof ServerPlayer player) {
-			if (MobModifierCap.HOLDER.isProper(entity)) {
-				MobModifierCap.HOLDER.get(entity).syncToPlayer(entity, player);
+			if (MobTraitCap.HOLDER.isProper(entity)) {
+				MobTraitCap.HOLDER.get(entity).syncToPlayer(entity, player);
 			}
 		}
 	}
 
 	private static void initMob(LivingEntity mob) {
-		if (MobModifierCap.HOLDER.isProper(mob)) {
-			MobModifierCap cap = MobModifierCap.HOLDER.get(mob);
+		if (MobTraitCap.HOLDER.isProper(mob)) {
+			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			if (!mob.level().isClientSide() && !cap.isInitialized()) {
 				BlockPos pos = mob.blockPosition();
 				ChunkAccess chunk = mob.level().getChunk(pos.getX() >> 4, pos.getZ() >> 4, ChunkStatus.CARVERS);
@@ -71,8 +71,8 @@ public class CapabilityEvents {
 	public static void livingTickEvent(LivingEvent.LivingTickEvent event) {
 		LivingEntity mob = event.getEntity();
 		initMob(mob);
-		if (MobModifierCap.HOLDER.isProper(mob)) {
-			MobModifierCap cap = MobModifierCap.HOLDER.get(mob);
+		if (MobTraitCap.HOLDER.isProper(mob)) {
+			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			cap.tick(mob);
 		}
 	}
@@ -88,8 +88,8 @@ public class CapabilityEvents {
 		} else if (killer instanceof OwnableEntity own && own.getOwner() instanceof Player pl) {
 			player = pl;
 		}
-		if (player != null && MobModifierCap.HOLDER.isProper(mob)) {
-			MobModifierCap cap = MobModifierCap.HOLDER.get(mob);
+		if (player != null && MobTraitCap.HOLDER.isProper(mob)) {
+			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
 			playerDiff.addKillCredit(cap);
 			LevelChunk chunk = mob.level().getChunkAt(mob.blockPosition());

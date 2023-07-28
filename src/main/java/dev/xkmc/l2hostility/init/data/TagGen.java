@@ -13,7 +13,7 @@ public class TagGen {
 
 	public static final TagKey<EntityType<?>> BLACKLIST = create("blacklist");
 	public static final TagKey<EntityType<?>> NO_SCALING = create("no_scaling");
-	public static final TagKey<EntityType<?>> NO_MODIFIER = create("no_modifier");
+	public static final TagKey<EntityType<?>> NO_TRAIT = create("no_trait");
 
 	public static void onBlockTagGen(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {
 	}
@@ -24,7 +24,7 @@ public class TagGen {
 	public static void onEntityTagGen(RegistrateTagsProvider.IntrinsicImpl<EntityType<?>> pvd) {
 		pvd.addTag(BLACKLIST).add(EntityType.ENDERMITE);
 		pvd.addTag(NO_SCALING).addTag(BLACKLIST);
-		pvd.addTag(NO_MODIFIER).addTag(BLACKLIST);
+		pvd.addTag(NO_TRAIT).addTag(BLACKLIST);
 	}
 
 	public static TagKey<EntityType<?>> create(String id) {

@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.init.registrate.entries;
 
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import dev.xkmc.l2hostility.content.config.ModifierConfig;
-import dev.xkmc.l2hostility.content.modifiers.core.MobModifier;
+import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.traits.common.MobTrait;
 import dev.xkmc.l2library.base.L2Registrate;
 
 public class LHRegistrate extends L2Registrate {
@@ -11,8 +11,8 @@ public class LHRegistrate extends L2Registrate {
 		super(modid);
 	}
 
-	public final <T extends MobModifier> MobModifierBuilder<T, LHRegistrate> regModifier(String id, NonNullSupplier<T> sup, ModifierConfig config) {
-		return this.entry(id, cb -> new MobModifierBuilder<>(this, this, id, cb, sup, config));
+	public final <T extends MobTrait> TraitBuilder<T, LHRegistrate> regTrait(String id, NonNullSupplier<T> sup, TraitConfig config) {
+		return this.entry(id, cb -> new TraitBuilder<>(this, this, id, cb, sup, config));
 	}
 
 }

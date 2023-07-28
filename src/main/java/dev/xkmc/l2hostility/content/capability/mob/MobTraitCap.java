@@ -3,8 +3,8 @@ package dev.xkmc.l2hostility.content.capability.mob;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
-import dev.xkmc.l2hostility.content.logic.ModifierManager;
-import dev.xkmc.l2hostility.content.modifiers.core.MobModifier;
+import dev.xkmc.l2hostility.content.logic.TraitManager;
+import dev.xkmc.l2hostility.content.traits.common.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
@@ -27,18 +27,18 @@ import java.util.LinkedHashMap;
 import java.util.function.Supplier;
 
 @SerialClass
-public class MobModifierCap extends GeneralCapabilityTemplate<LivingEntity, MobModifierCap> {
+public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTraitCap> {
 
-	public static final Capability<MobModifierCap> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+	public static final Capability<MobTraitCap> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
 	});
 
-	public static final GeneralCapabilityHolder<LivingEntity, MobModifierCap> HOLDER =
-			new GeneralCapabilityHolder<>(new ResourceLocation(L2Hostility.MODID, "modifiers"),
-					CAPABILITY, MobModifierCap.class, MobModifierCap::new, LivingEntity.class, (e) ->
+	public static final GeneralCapabilityHolder<LivingEntity, MobTraitCap> HOLDER =
+			new GeneralCapabilityHolder<>(new ResourceLocation(L2Hostility.MODID, "traits"),
+					CAPABILITY, MobTraitCap.class, MobTraitCap::new, LivingEntity.class, (e) ->
 					e instanceof Enemy && !e.getType().is(TagGen.BLACKLIST));
 
 	@SerialClass.SerialField(toClient = true)
-	public final LinkedHashMap<MobModifier, Integer> modifiers = new LinkedHashMap<>();
+	public final LinkedHashMap<MobTrait, Integer> traits = new LinkedHashMap<>();
 
 	@SerialClass.SerialField
 	public boolean initialized = false;
@@ -48,7 +48,7 @@ public class MobModifierCap extends GeneralCapabilityTemplate<LivingEntity, MobM
 
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
-	public MobModifierCap() {
+	public MobTraitCap() {
 	}
 
 	public void syncToClient(LivingEntity entity) {
@@ -75,7 +75,7 @@ public class MobModifierCap extends GeneralCapabilityTemplate<LivingEntity, MobM
 			playerDiff.apply(instance);
 		}
 		lv = instance.getDifficulty(le.getRandom());
-		ModifierManager.fill(le, lv, modifiers, instance.getMaxModifierLevel());
+		TraitManager.fill(le, lv, traits, instance.getMaxTraitLevel());
 		initialized = true;
 		syncToClient(le);
 	}
@@ -89,7 +89,7 @@ public class MobModifierCap extends GeneralCapabilityTemplate<LivingEntity, MobM
 	}
 
 	public void tick(LivingEntity mob) {
-		modifiers.forEach((k, v) -> k.tick(mob, v));
+		traits.forEach((k, v) -> k.tick(mob, v));
 	}
 
 	public <T extends CapStorageData> T getData(ResourceLocation id) {

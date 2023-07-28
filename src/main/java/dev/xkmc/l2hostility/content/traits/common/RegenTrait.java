@@ -1,10 +1,9 @@
-package dev.xkmc.l2hostility.content.modifiers.common;
+package dev.xkmc.l2hostility.content.traits.common;
 
-import dev.xkmc.l2hostility.content.modifiers.core.MobModifier;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.world.entity.LivingEntity;
 
-public class RegenModifier extends MobModifier {
+public class RegenTrait extends MobTrait {
 
 	@Override
 	public void tick(LivingEntity mob, int level) {

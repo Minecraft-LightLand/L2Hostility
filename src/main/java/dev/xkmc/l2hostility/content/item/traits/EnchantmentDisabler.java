@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.item.modifiers;
+package dev.xkmc.l2hostility.content.item.traits;
 
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;

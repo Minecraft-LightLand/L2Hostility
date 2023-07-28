@@ -18,7 +18,7 @@ public class LHConfig {
 	public static class Common {
 
 		public final ForgeConfigSpec.IntValue killPerLevel;
-		public final ForgeConfigSpec.IntValue modifierCapPerLevel;
+		public final ForgeConfigSpec.IntValue traitCapPerLevel;
 		public final ForgeConfigSpec.DoubleValue deathDecay;
 
 		public final ForgeConfigSpec.DoubleValue healthFactor;
@@ -38,8 +38,8 @@ public class LHConfig {
 			{
 				killPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
 						.defineInRange("killPerLevel", 10, 1, 10000);
-				modifierCapPerLevel = builder.comment("Mob modifier cap per difficulty level. This is not the only factor")
-						.defineInRange("modifierCapPerLevel", 20, 1, 10000);
+				traitCapPerLevel = builder.comment("Mob trait cap per difficulty level. This is not the only factor")
+						.defineInRange("traitCapPerLevel", 20, 1, 10000);
 				deathDecay = builder.comment("Decay in player difficulty on death")
 						.defineInRange("deathDecay", 0.9, 0, 2);
 			}
@@ -54,17 +54,17 @@ public class LHConfig {
 			}
 			builder.pop();
 
-			builder.push("modifiers");
+			builder.push("traits");
 			{
-				tankHealth = builder.comment("Health bonus for Tank modifier per level")
+				tankHealth = builder.comment("Health bonus for Tank trait per level")
 						.defineInRange("tankHealth", 0.5, 0, 1000);
-				tankArmor = builder.comment("Armor bonus for Tank modifier per level")
+				tankArmor = builder.comment("Armor bonus for Tank trait per level")
 						.defineInRange("tankArmor", 10d, 0, 1000);
-				tankTough = builder.comment("Toughness bonus for Tank modifier per level")
+				tankTough = builder.comment("Toughness bonus for Tank trait per level")
 						.defineInRange("tankTough", 4d, 0, 1000);
-				speedy = builder.comment("Speed bonus for Speedy modifier per level")
+				speedy = builder.comment("Speed bonus for Speedy trait per level")
 						.defineInRange("speedy", 0.2, 0, 1000);
-				regen = builder.comment("Regen rate for Regeneration modifier per second per level")
+				regen = builder.comment("Regen rate for Regeneration trait per second per level")
 						.defineInRange("regen", 0.02, 0, 1000);
 				adaptFactor = builder.comment("Damage factor for Adaptive. Higher means less reduction")
 						.defineInRange("adaptFactor", 0.5, 0, 1000);

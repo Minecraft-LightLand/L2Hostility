@@ -1,9 +1,9 @@
 package dev.xkmc.l2hostility.content.capability.chunk;
 
-import dev.xkmc.l2hostility.content.capability.mob.MobModifierCap;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
-import dev.xkmc.l2hostility.content.logic.ModifierManager;
+import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
@@ -59,7 +59,7 @@ public class ChunkDifficulty {
 		}
 	}
 
-	public void addKillHistory(Player player, LivingEntity mob, MobModifierCap cap) {
+	public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {
 		BlockPos pos = mob.blockPosition();
 		int index = chunk.getMinSection() + (pos.getY() >> 4);
 		if (index >= 0 && index < sections.length) {
@@ -98,10 +98,10 @@ public class ChunkDifficulty {
 		public void modifyInstance(Holder<Biome> biome, MobDifficultyCollector instance) {
 			biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location())).ifPresent(instance::acceptConfig);
 			instance.acceptBonus(difficulty);
-			instance.setModifierCap(ModifierManager.getModifierCap(0, difficulty));
+			instance.setTraitCap(TraitManager.getTraitCap(0, difficulty));
 		}
 
-		public void addKillHistory(Player player, LivingEntity mob, MobModifierCap cap) {
+		public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {
 			difficulty.grow(cap);
 		}
 

@@ -1,25 +1,25 @@
-package dev.xkmc.l2hostility.content.modifiers.core;
+package dev.xkmc.l2hostility.content.traits.common;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
-import dev.xkmc.l2hostility.content.config.ModifierConfig;
+import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2hostility.init.registrate.LHModifiers;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public class MobModifier extends NamedEntry<MobModifier> {
+public class MobTrait extends NamedEntry<MobTrait> {
 
-	public MobModifier() {
-		super(LHModifiers.MODIFIERS);
+	public MobTrait() {
+		super(LHTraits.TRAITS);
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public ModifierConfig getConfig() {
-		ModifierConfig ans = L2Hostility.MODIFIER.getEntry(getRegistryName());
-		if (ans == null) return ModifierConfig.DEFAULT;
+	public TraitConfig getConfig() {
+		TraitConfig ans = L2Hostility.TRAIT.getEntry(getRegistryName());
+		if (ans == null) return TraitConfig.DEFAULT;
 		return ans;
 	}
 
@@ -32,7 +32,7 @@ public class MobModifier extends NamedEntry<MobModifier> {
 	}
 
 	public boolean allow(LivingEntity le, int difficulty) {
-		ModifierConfig config = getConfig();
+		TraitConfig config = getConfig();
 		if (difficulty < config.cost) return false;
 		if (config.blacklist.contains(le.getType())) return false;
 		if (!config.whitelist.isEmpty() && !config.whitelist.contains(le.getType())) return false;
