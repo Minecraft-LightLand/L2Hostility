@@ -34,30 +34,29 @@ public class TraitManager {
 					AttributeModifier.Operation.MULTIPLY_TOTAL);
 		}
 		// add traits
-
-		if (le.getType().is(TagGen.NO_TRAIT)) return;
-
-		List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e -> e.allow(le, lv)).toList());
-		var rand = le.getRandom();
-		int level = lv;
-		while (level > 0) {
-			if (list.size() == 0) break;
-			MobTrait e = list.remove(rand.nextInt(list.size()));
-			int cost = e.getCost();
-			if (cost == 0) {
-				level--;
-				continue;
+		if (!le.getType().is(TagGen.NO_TRAIT)) {
+			List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e -> e.allow(le, lv)).toList());
+			var rand = le.getRandom();
+			int level = lv;
+			while (level > 0) {
+				if (list.size() == 0) break;
+				MobTrait e = list.remove(rand.nextInt(list.size()));
+				int cost = e.getCost();
+				if (cost == 0) {
+					level--;
+					continue;
+				}
+				int maxLv = Math.min(Math.min(maxModLv, level / cost), e.getMaxLevel());
+				if (maxLv == 0) {
+					level--;
+					continue;
+				}
+				level -= maxLv * cost;
+				traits.put(e, maxLv);
 			}
-			int maxLv = Math.min(Math.min(maxModLv, level / cost), e.getMaxLevel());
-			if (maxLv == 0) {
-				level--;
-				continue;
+			for (var e : traits.entrySet()) {
+				e.getKey().initialize(le, e.getValue());
 			}
-			level -= maxLv * cost;
-			traits.put(e, maxLv);
-		}
-		for (var e : traits.entrySet()) {
-			e.getKey().initialize(le, e.getValue());
 		}
 		le.setHealth(le.getMaxHealth());
 	}

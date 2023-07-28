@@ -1,3 +1,19 @@
 {
-
+  "item.l2hostility": {
+	"ai_config_wand": "AI控制手杖",
+	"equipment_wand": "装备配置手杖",
+	"target_select_wand": "攻击目标控制手杖",
+	"trait_adder_wand": "词条配置手杖"
+  },
+  "trait.l2hostility": {
+	"adaptive": "适应",
+	"dementor": "摄魂",
+	"dispell": "破魔",
+	"invisible": "隐身",
+	"protection": "保护",
+	"reflect": "反射",
+	"regenerate": "再生",
+	"speedy": "神速",
+	"tank": "重装"
+  }
 }

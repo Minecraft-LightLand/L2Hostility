@@ -41,7 +41,6 @@ public class ChunkDifficultyCap implements ICapabilitySerializable<CompoundTag> 
 	@Override
 	public void deserializeNBT(CompoundTag tag) {
 		Wrappers.get(() -> TagCodec.fromTag(tag, ChunkDifficulty.class, handler, f -> true));
-		handler.init();
 	}
 
 }

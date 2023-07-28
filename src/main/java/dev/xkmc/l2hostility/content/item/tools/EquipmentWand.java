@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.content.item.tools;
 
-import dev.xkmc.l2hostility.content.menu.EquipmentsMenuPvd;
+import dev.xkmc.l2hostility.content.menu.equipments.EquipmentsMenuPvd;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

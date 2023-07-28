@@ -21,6 +21,7 @@ public class EnchantmentDisabler {
 		if (!root.contains(ENCH, Tag.TAG_LIST)) return;
 		CompoundTag tag = stack.getOrCreateTagElement(ROOT);
 		tag.put(OLD, root.getList(ENCH, Tag.TAG_COMPOUND));
+		root.remove(ENCH);
 		tag.putLong(TIME, level.getGameTime() + duration);
 	}
 
@@ -41,7 +42,7 @@ public class EnchantmentDisabler {
 	public static void modifyTooltip(ItemStack stack, List<Component> tooltip, Level level) {
 		if (stack.getTag() == null || !stack.getTag().contains(ROOT, Tag.TAG_COMPOUND)) return;
 		CompoundTag tag = stack.getOrCreateTagElement(ROOT);
-		long time = tag.getLong(TIME) - level.getGameTime();
+		long time = Math.max(0, tag.getLong(TIME) - level.getGameTime());
 		ListTag list = tag.getList(OLD, Tag.TAG_COMPOUND);
 		tooltip.add(LangData.TOOLTIP_DISABLE.get(
 						Component.literal(list.size() + "")

@@ -5,15 +5,11 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficultyCap;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ChunkStatus;
-import net.minecraft.world.level.chunk.ImposterProtoChunk;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -45,17 +41,8 @@ public class CapabilityEvents {
 		if (MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			if (!mob.level().isClientSide() && !cap.isInitialized()) {
-				BlockPos pos = mob.blockPosition();
-				ChunkAccess chunk = mob.level().getChunk(pos.getX() >> 4, pos.getZ() >> 4, ChunkStatus.CARVERS);
-				if (chunk instanceof ImposterProtoChunk im) {
-					chunk = im.getWrapped();
-				}
-				if (chunk instanceof LevelChunk c) {
-					var opt = c.getCapability(ChunkDifficulty.CAPABILITY);
-					if (opt.resolve().isPresent()) {
-						cap.init(mob.level(), mob, opt.resolve().get());
-					}
-				}
+				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
+				opt.ifPresent(chunkDifficulty -> cap.init(mob.level(), mob, chunkDifficulty));
 			}
 		}
 	}

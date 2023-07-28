@@ -8,10 +8,7 @@ import dev.xkmc.l2serial.serialization.SerialClass;
 public class DifficultyLevel {
 
 	@SerialClass.SerialField
-	public int level;
-
-	@SerialClass.SerialField
-	private int exp;
+	public int level, exp;
 
 	public void grow(MobTraitCap cap) {
 		exp += cap.getLevel() * cap.getLevel();
@@ -27,4 +24,8 @@ public class DifficultyLevel {
 		exp = 0;
 	}
 
+	public int getMaxExp() {
+		int factor = LHConfig.COMMON.killPerLevel.get();
+		return level * level * factor;
+	}
 }

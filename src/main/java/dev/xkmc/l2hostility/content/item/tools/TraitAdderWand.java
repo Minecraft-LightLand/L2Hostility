@@ -5,6 +5,7 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -126,6 +128,12 @@ public class TraitAdderWand extends Item {
 		set(stack, next);
 		player.sendSystemMessage(LangData.MSG_SELECT_TRAIT.get(next.getDesc()));
 		return InteractionResultHolder.success(player.getItemInHand(hand));
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+		MobTrait trait = get(stack);
+		list.add(LangData.MSG_SELECT_TRAIT.get(trait.getDesc()));
 	}
 
 }

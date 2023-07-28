@@ -15,7 +15,13 @@ public enum LangData {
 	MSG_TARGET_RECORD("msg.target_record", "Recorded %s", 1),
 	MSG_SET_TRAIT("msg.set_trait", "Set trait %1$s on entity %2$s to level %3$s", 3),
 	MSG_SELECT_TRAIT("msg.select_trait", "Selected trait: %s", 1),
-	;
+
+	INFO_PLAYER_LEVEL("info.player_level", "Player difficulty level: %s", 1),
+	INFO_PLAYER_EXP("info.player_exp", "Difficulty progress: %s/%s", 2),
+	INFO_PLAYER_CAP("info.player_cap", "Mob trait rank limit: %s", 1),
+	INFO_CHUNK_LEVEL("info.chunk_level", "Chunk base difficulty: %s", 1),
+	INFO_CHUNK_SCALE("info.chunk_scale", "Chunk difficulty scale: %s", 1),
+	TAB_TITLE("info.title", "Difficulty Information", 0);
 
 	final String id, def;
 	final int count;

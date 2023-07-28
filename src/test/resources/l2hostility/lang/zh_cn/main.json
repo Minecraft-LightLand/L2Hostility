@@ -1,3 +1,22 @@
 {
-
+  "itemGroup.l2library.hostility": "莱特兰·恶意",
+  "l2hostility": {
+	"tooltip.disable": "%s个附魔被抑制了，剩余%s秒。任何新附魔将会被抹消。",
+	"msg": {
+	  "ai": "配置实体%s：将NoAI设为%s",
+	  "select_trait": "词条：%s",
+	  "set_target": "让%s和%s对战",
+	  "set_trait": "将实体%2$s的词条%1$s设为%3$s级",
+	  "target_fail": "%s和%s无法对战",
+	  "target_record": "选中实体%s"
+	},
+	"info": {
+	  "chunk_level": "区块难度基础值：%s",
+	  "chunk_scale": "区块玩家难度倍率：%s",
+	  "player_cap": "怪物词条阶级上限：%s",
+	  "player_exp": "玩家难度等级进度：%s/%s",
+	  "player_level": "玩家难度等级：%s",
+	  "title": "难度信息"
+	}
+  }
 }

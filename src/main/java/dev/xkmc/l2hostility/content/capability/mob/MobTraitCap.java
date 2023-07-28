@@ -11,6 +11,7 @@ import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.l2serial.util.Wrappers;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -44,11 +45,12 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public final LinkedHashMap<MobTrait, Integer> traits = new LinkedHashMap<>();
 
 	@SerialClass.SerialField
-	public boolean initialized = false;
+	private boolean initialized = false;
 
 	@SerialClass.SerialField(toClient = true)
 	private int lv;
 
+	@SerialClass.SerialField
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
 	public MobTraitCap() {
@@ -114,7 +116,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				temp = comp;
 				count = 1;
 			} else {
-				temp.append(" / ").append(comp);
+				temp.append(Component.literal(" / ").withStyle(ChatFormatting.WHITE)).append(comp);
 				count++;
 				if (count == 4) {
 					ans.add(temp);

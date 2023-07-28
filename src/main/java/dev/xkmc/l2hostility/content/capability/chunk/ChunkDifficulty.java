@@ -8,14 +8,17 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.chunk.*;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
+
+import java.util.Optional;
 
 @SerialClass
 public class ChunkDifficulty {
@@ -26,6 +29,21 @@ public class ChunkDifficulty {
 
 	public static Capability<ChunkDifficulty> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
 	});
+
+	public static Optional<ChunkDifficulty> at(Level level, BlockPos pos) {
+		return at(level, pos.getX() >> 4, pos.getZ() >> 4);
+	}
+
+	public static Optional<ChunkDifficulty> at(Level level, int x, int z) {
+		ChunkAccess chunk = level.getChunk(x, z, ChunkStatus.CARVERS, false);
+		if (chunk instanceof ImposterProtoChunk im) {
+			chunk = im.getWrapped();
+		}
+		if (chunk instanceof LevelChunk c) {
+			return c.getCapability(CAPABILITY).resolve();
+		}
+		return Optional.empty();
+	}
 
 	public final LevelChunk chunk;
 
@@ -44,16 +62,19 @@ public class ChunkDifficulty {
 		stage = Stage.INIT;
 	}
 
+	public Section getSection(int y) {
+		int index = (y >> 4) - chunk.getMinSection();
+		index = Mth.clamp(index, 0, sections.length);
+		return sections[index];
+	}
+
 	public void modifyInstance(BlockPos pos, MobDifficultyCollector instance) {
 		check();
 		var levelDiff = L2Hostility.DIFFICULTY.getMerged().levelMap.get(chunk.getLevel().dimensionTypeId().location());
 		if (levelDiff != null) {
 			instance.acceptConfig(levelDiff);
 		}
-		int index = chunk.getMinSection() + (pos.getY() >> 4);
-		if (index >= 0 && index < sections.length) {
-			sections[index].modifyInstance(chunk.getLevel().getBiome(pos), instance);
-		}
+		getSection(pos.getY()).modifyInstance(chunk.getLevel().getBiome(pos), instance);
 		if (stage == Stage.CLEARED) {
 			instance.setCap(0);
 		}
@@ -67,6 +88,7 @@ public class ChunkDifficulty {
 		}
 	}
 
+	@SerialClass.OnInject
 	public void init() {
 		int size = chunk.getLevel().getSectionsCount();
 		if (sections == null || sections.length != size) {

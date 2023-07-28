@@ -6,8 +6,8 @@ import net.minecraft.util.RandomSource;
 
 public class MobDifficultyCollector {
 
-	private int base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel();
-	private double scale, varSq;
+	public int base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel();
+	public double scale, varSq;
 
 	public void acceptConfig(WorldDifficultyConfig.DifficultyConfig config) {
 		base += config.base();

@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.menu;
+package dev.xkmc.l2hostility.content.menu.equipments;
 
 import dev.xkmc.l2library.base.menu.base.BaseContainerMenu;
 import net.minecraft.world.item.ItemStack;

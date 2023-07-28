@@ -2,6 +2,6 @@
   "blacklist": [],
   "chance": 1.0,
   "cost": 20,
-  "maxLevel": 1,
+  "maxLevel": 5,
   "whitelist": []
 }
