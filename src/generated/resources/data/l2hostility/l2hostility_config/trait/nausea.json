@@ -1,0 +1,7 @@
+{
+  "blacklist": [],
+  "chance": 0.25,
+  "cost": 10,
+  "maxLevel": 3,
+  "whitelist": []
+}

@@ -1,10 +1,13 @@
-// 1.20.1	2023-07-28T22:28:09.836659	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
-c4b24347ab83ff0ce712c7e58eba9cfcc5d14f7b assets/l2hostility/lang/en_ud.json
-211a778ca374325bc289d3432b7a20d0accb7d51 assets/l2hostility/lang/en_us.json
+// 1.20.1	2023-07-29T21:53:10.705254	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+75d5cfe2f8530ba6c95a8640858fcf077d324fa3 assets/l2hostility/lang/en_ud.json
+c1d8487e97678e421b65d7cec06e7d815b19a618 assets/l2hostility/lang/en_us.json
 3f4f2d4a69bf712997b2de1b947d152d4cf8754b assets/l2hostility/models/item/ai_config_wand.json
 c338976f33b1c3c565980899494ad0f6697b1fc5 assets/l2hostility/models/item/equipment_wand.json
 c9ce23339b6d683e4e58a192c62e9bd904571b36 assets/l2hostility/models/item/target_select_wand.json
 d15fb4e09e453cb371b4e4bc666b60233cd09b7b assets/l2hostility/models/item/trait_adder_wand.json
+24bfb5e024a004de204f60dbcc7e5c67a4ad17a3 data/l2hostility/tags/entity_types/armor_target.json
 edf64deed56924f50118492f25104511eb052cab data/l2hostility/tags/entity_types/blacklist.json
+a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/melee_weapon_target.json
 217ca38cad2e92f1ca03034aaa17f2dc686cbf50 data/l2hostility/tags/entity_types/no_scaling.json
 217ca38cad2e92f1ca03034aaa17f2dc686cbf50 data/l2hostility/tags/entity_types/no_trait.json
+491cd1e8e645dbf235be362a3810e0349391249b data/l2hostility/tags/items/valid_melee_weapons.json

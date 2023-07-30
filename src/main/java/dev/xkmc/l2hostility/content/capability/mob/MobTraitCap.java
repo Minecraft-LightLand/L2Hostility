@@ -6,6 +6,7 @@ import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
@@ -41,11 +42,15 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 					CAPABILITY, MobTraitCap.class, MobTraitCap::new, LivingEntity.class, (e) ->
 					e instanceof Enemy && !e.getType().is(TagGen.BLACKLIST));
 
+	public enum Stage {
+		PRE_INIT, INIT, POST_INIT
+	}
+
 	@SerialClass.SerialField(toClient = true)
 	public final LinkedHashMap<MobTrait, Integer> traits = new LinkedHashMap<>();
 
-	@SerialClass.SerialField
-	private boolean initialized = false;
+	@SerialClass.SerialField(toClient = true)
+	private Stage stage = Stage.PRE_INIT;
 
 	@SerialClass.SerialField(toClient = true)
 	private int lv;
@@ -81,8 +86,12 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		}
 		lv = instance.getDifficulty(le.getRandom());
 		TraitManager.fill(le, lv, traits, instance.getMaxTraitLevel());
-		initialized = true;
+		stage = Stage.INIT;
 		syncToClient(le);
+	}
+
+	public int getEnchantBonus() {
+		return (int) (lv * LHConfig.COMMON.enchantFactor.get());
 	}
 
 	public int getLevel() {
@@ -90,11 +99,26 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public boolean isInitialized() {
-		return initialized;
+		return stage != Stage.PRE_INIT;
 	}
 
 	public void tick(LivingEntity mob) {
-		traits.forEach((k, v) -> k.tick(mob, v));
+		if (!mob.level().isClientSide()) {
+			if (!isInitialized()) {
+				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
+				opt.ifPresent(chunkDifficulty -> init(mob.level(), mob, chunkDifficulty));
+			}
+			if (stage == Stage.INIT) {
+				stage = Stage.POST_INIT;
+				TraitManager.postFill(this, mob);
+				traits.forEach((k, v) -> k.postInit(mob, v));
+				mob.setHealth(mob.getMaxHealth());
+				syncToClient(mob);
+			}
+		}
+		if (isInitialized()) {
+			traits.forEach((k, v) -> k.tick(mob, v));
+		}
 	}
 
 	public <T extends CapStorageData> T getData(ResourceLocation id) {

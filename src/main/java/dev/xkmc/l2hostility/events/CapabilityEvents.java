@@ -57,7 +57,6 @@ public class CapabilityEvents {
 	@SubscribeEvent
 	public static void livingTickEvent(LivingEvent.LivingTickEvent event) {
 		LivingEntity mob = event.getEntity();
-		initMob(mob);
 		if (MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			cap.tick(mob);

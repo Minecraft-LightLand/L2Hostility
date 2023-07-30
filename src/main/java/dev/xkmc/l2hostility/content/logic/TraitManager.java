@@ -1,14 +1,22 @@
 package dev.xkmc.l2hostility.content.logic;
 
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.util.math.MathHelper;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +34,47 @@ public class TraitManager {
 		ins.addPermanentModifier(modifier);
 	}
 
+	private static void populateArmors(LivingEntity le, int lv) {
+		int rank = Math.min(4, lv / LHConfig.COMMON.armorFactor.get() - 1);
+		if (rank < 0) return;
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			if (slot.getType() == EquipmentSlot.Type.ARMOR) {
+				ItemStack stack = le.getItemBySlot(slot);
+				if (stack.isEmpty()) {
+					Item item = Mob.getEquipmentForSlot(slot, rank);
+					if (item != null) {
+						le.setItemSlot(slot, new ItemStack(item));
+					}
+				}
+			}
+		}
+	}
+
+	private static void generateTraits(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, int maxModLv) {
+		List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e -> e.allow(le, lv)).toList());
+		var rand = le.getRandom();
+		int level = lv;
+		while (level > 0) {
+			if (list.size() == 0) break;
+			MobTrait e = list.remove(rand.nextInt(list.size()));
+			int cost = e.getCost();
+			if (cost == 0) {
+				level--;
+				continue;
+			}
+			int maxLv = Math.min(Math.min(maxModLv, level / cost), e.getMaxLevel());
+			if (maxLv == 0) {
+				level--;
+				continue;
+			}
+			level -= maxLv * cost;
+			traits.put(e, maxLv);
+		}
+		for (var e : traits.entrySet()) {
+			e.getKey().initialize(le, e.getValue());
+		}
+	}
+
 	public static void fill(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, int maxModLv) {
 		// add attributes
 		if (!le.getType().is(TagGen.NO_SCALING)) {
@@ -33,32 +82,35 @@ public class TraitManager {
 					lv * LHConfig.COMMON.healthFactor.get(),
 					AttributeModifier.Operation.MULTIPLY_TOTAL);
 		}
+		// armor
+		if (le.getType().is(TagGen.ARMOR_TARGET)) {
+			populateArmors(le, lv);
+		}
 		// add traits
 		if (!le.getType().is(TagGen.NO_TRAIT)) {
-			List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e -> e.allow(le, lv)).toList());
-			var rand = le.getRandom();
-			int level = lv;
-			while (level > 0) {
-				if (list.size() == 0) break;
-				MobTrait e = list.remove(rand.nextInt(list.size()));
-				int cost = e.getCost();
-				if (cost == 0) {
-					level--;
-					continue;
-				}
-				int maxLv = Math.min(Math.min(maxModLv, level / cost), e.getMaxLevel());
-				if (maxLv == 0) {
-					level--;
-					continue;
-				}
-				level -= maxLv * cost;
-				traits.put(e, maxLv);
-			}
-			for (var e : traits.entrySet()) {
-				e.getKey().initialize(le, e.getValue());
-			}
+			generateTraits(le, lv, traits, maxModLv);
 		}
 		le.setHealth(le.getMaxHealth());
+	}
+
+	public static void postFill(MobTraitCap cap, LivingEntity le) {
+		// add weapon
+		RandomSource r = le.getRandom();
+		if (le.getType().is(TagGen.MELEE_WEAPON_TARGET)) {
+			var manager = ForgeRegistries.ITEMS.tags();
+			if (manager != null && le.getMainHandItem().isEmpty()) {
+				manager.getTag(TagGen.VALID_MELEE_WEAPONS).getRandomElement(r)
+						.ifPresent(item -> le.setItemSlot(EquipmentSlot.MAINHAND, item.getDefaultInstance()));
+			}
+		}
+		// enchant
+		for (var e : EquipmentSlot.values()) {
+			ItemStack stack = le.getItemBySlot(e);
+			if (!stack.isEnchanted() && stack.isEnchantable()) {
+				int lvl = 5 + r.nextInt(18) + cap.getEnchantBonus();
+				le.setItemSlot(e, EnchantmentHelper.enchantItem(r, stack, lvl, false));
+			}
+		}
 	}
 
 	public static int getMaxLevel() {

@@ -10,17 +10,24 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import java.util.function.IntSupplier;
+
 public class MobTrait extends NamedEntry<MobTrait> {
 
-	private final ChatFormatting style;
+	private final IntSupplier color;
 
-	public MobTrait(ChatFormatting style) {
+	public MobTrait(ChatFormatting format) {
+		this(format::getColor);
+	}
+
+	public MobTrait(IntSupplier color) {
 		super(LHTraits.TRAITS);
-		this.style = style;
+		this.color = color;
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -46,7 +53,11 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		return le.getRandom().nextDouble() < config.chance;
 	}
 
-	public void initialize(LivingEntity le, int level) {
+	public void initialize(LivingEntity mob, int level) {
+	}
+
+	public void postInit(LivingEntity mob, int lv) {
+
 	}
 
 	public void tick(LivingEntity mob, int level) {
@@ -67,6 +78,7 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	public MutableComponent getFullDesc(Integer value) {
 		return getDesc().append(CommonComponents.SPACE)
 				.append(Component.translatable("enchantment.level." + value))
-				.withStyle(style);
+				.withStyle(Style.EMPTY.withColor(color.getAsInt()));
 	}
+
 }

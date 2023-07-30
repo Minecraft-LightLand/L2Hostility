@@ -23,6 +23,8 @@ public class LHConfig {
 
 		public final ForgeConfigSpec.DoubleValue healthFactor;
 		public final ForgeConfigSpec.DoubleValue damageFactor;
+		public final ForgeConfigSpec.IntValue armorFactor;
+		public final ForgeConfigSpec.DoubleValue enchantFactor;
 
 		public final ForgeConfigSpec.DoubleValue tankHealth;
 		public final ForgeConfigSpec.DoubleValue tankArmor;
@@ -32,6 +34,17 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue adaptFactor;
 		public final ForgeConfigSpec.DoubleValue reflect;
 		public final ForgeConfigSpec.IntValue dispellTime;
+		public final ForgeConfigSpec.IntValue fieryTime;
+		public final ForgeConfigSpec.IntValue weakTime;
+		public final ForgeConfigSpec.IntValue slowTime;
+		public final ForgeConfigSpec.IntValue poisonTime;
+		public final ForgeConfigSpec.IntValue witherTime;
+		public final ForgeConfigSpec.IntValue levitationTime;
+		public final ForgeConfigSpec.IntValue blindTime;
+		public final ForgeConfigSpec.IntValue confusionTime;
+		public final ForgeConfigSpec.IntValue soulBurnerTime;
+		public final ForgeConfigSpec.IntValue freezingTime;
+		public final ForgeConfigSpec.IntValue curseTime;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("difficulty");
@@ -51,6 +64,10 @@ public class LHConfig {
 						.defineInRange("healthFactor", 0.03, 0, 1000);
 				damageFactor = builder.comment("Damage factor per level")
 						.defineInRange("damageFactor", 0.02, 0, 1000);
+				armorFactor = builder.comment("Armor rank per n level")
+						.defineInRange("armorFactor", 10, 0, 1000);
+				enchantFactor = builder.comment("Enchantment bonus per level")
+						.defineInRange("enchantFactor", 1.0, 0, 1000);
 			}
 			builder.pop();
 
@@ -72,6 +89,28 @@ public class LHConfig {
 						.defineInRange("reflect", 0.5, 0, 1000);
 				dispellTime = builder.comment("Duration in ticks for enchantments to be disabled per level for Dispell")
 						.defineInRange("dispellTime", 200, 1, 60000);
+				fieryTime = builder.comment("Duration in seconds to set target on fire by Fiery")
+						.defineInRange("fieryTime", 5, 0, 3000);
+				weakTime = builder.comment("Duration in ticks for Weakness")
+						.defineInRange("weakTime", 200, 0, 3000);
+				slowTime = builder.comment("Duration in ticks for Slowness")
+						.defineInRange("slowTime", 200, 0, 3000);
+				poisonTime = builder.comment("Duration in ticks for Poison")
+						.defineInRange("poisonTime", 200, 0, 3000);
+				witherTime = builder.comment("Duration in ticks for Wither")
+						.defineInRange("witherTime", 200, 0, 3000);
+				levitationTime = builder.comment("Duration in ticks for Levitation")
+						.defineInRange("levitationTime", 200, 0, 3000);
+				blindTime = builder.comment("Duration in ticks for Blindness")
+						.defineInRange("blindTime", 200, 0, 3000);
+				confusionTime = builder.comment("Duration in ticks for Nausea")
+						.defineInRange("confusionTime", 200, 0, 3000);
+				soulBurnerTime = builder.comment("Duration in ticks for Soul Burner")
+						.defineInRange("soulBurnerTime", 60, 0, 3000);
+				freezingTime = builder.comment("Duration in ticks for Freezing")
+						.defineInRange("freezingTime", 200, 0, 3000);
+				curseTime = builder.comment("Duration in ticks for Cursed")
+						.defineInRange("curseTime", 200, 0, 3000);
 
 			}
 			builder.pop();

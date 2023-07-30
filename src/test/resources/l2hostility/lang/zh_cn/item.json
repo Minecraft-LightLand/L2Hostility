@@ -14,6 +14,17 @@
 	"reflect": "反射",
 	"regenerate": "再生",
 	"speedy": "神速",
-	"tank": "重装"
+	"tank": "重装",
+	"blindness": "致盲",
+	"cursed": "诅咒",
+	"fiery": "烈焰",
+	"freezing": "寒流",
+	"levitation": "升空",
+	"nausea": "扭曲",
+	"poison": "剧毒",
+	"slowness": "流沙",
+	"soul_burner": "业火",
+	"weakness": "虚弱",
+	"wither": "凋零"
   }
 }

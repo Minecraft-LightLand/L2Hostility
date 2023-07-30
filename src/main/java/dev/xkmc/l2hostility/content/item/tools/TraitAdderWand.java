@@ -106,6 +106,7 @@ public class TraitAdderWand extends Item {
 			}
 			int val = ans == null ? 0 : ans;
 			trait.initialize(target, val);
+			trait.postInit(target, val);
 			cap.syncToClient(target);
 			target.setHealth(target.getMaxHealth());
 			player.sendSystemMessage(LangData.MSG_SET_TRAIT.get(trait.getDesc(), target.getDisplayName(), val));
