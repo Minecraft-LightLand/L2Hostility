@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
@@ -55,7 +56,11 @@ public class ClientEvents {
 			float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
 			int j = (int) (f1 * 255.0F) << 24;
 			font.drawInBatch(text, f2, 0, -1, false, matrix4f,
-					event.getMultiBufferSource(), Font.DisplayMode.NORMAL, j, event.getPackedLight());
+					event.getMultiBufferSource(),
+					Proxy.getClientPlayer().hasLineOfSight(event.getEntity()) ?
+							Font.DisplayMode.SEE_THROUGH :
+							Font.DisplayMode.NORMAL,
+					j, event.getPackedLight());
 			pose.popPose();
 		}
 	}

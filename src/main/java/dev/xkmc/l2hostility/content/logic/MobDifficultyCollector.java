@@ -33,6 +33,7 @@ public class MobDifficultyCollector {
 	}
 
 	public void setTraitCap(int cap) {
+
 		traitCap = Math.min(cap, traitCap);
 	}
 

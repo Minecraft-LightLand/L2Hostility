@@ -46,7 +46,7 @@ public class TraitBuilder<T extends MobTrait, P> extends AbstractBuilder<MobTrai
 
 	public <I extends TraitSymbol> ItemBuilder<I, TraitBuilder<T, P>> item(NonNullFunction<Item.Properties, I> sup) {
 		return getOwner().item(this, getName(), sup)
-				.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("trait/" + ctx.getName())))
+				.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/trait/" + ctx.getName())))
 				.setData(ProviderType.LANG, NonNullBiConsumer.noop());
 	}
 

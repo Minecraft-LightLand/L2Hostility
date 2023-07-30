@@ -32,8 +32,7 @@ public class SelfEffectTrait extends MobTrait {
 		ChatFormatting color = effect.get().getCategory().getTooltipFormatting();
 		if (getMaxLevel() == 1) {
 			list.add(effect.get().getDisplayName().copy().withStyle(color));
-		}
-		list.add(mapLevel(e ->
+		} else list.add(mapLevel(e ->
 				Component.translatable("potion.withAmplifier", effect.get().getDisplayName(),
 								Component.translatable("potion.potency." + (e - 1)))
 						.withStyle(color))

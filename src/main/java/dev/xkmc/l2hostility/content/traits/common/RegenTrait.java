@@ -28,7 +28,6 @@ public class RegenTrait extends MobTrait {
 						mapLevel(i -> Component.literal((int) Math.round(LHConfig.COMMON.regen.get() * 100 * i) + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
-		super.addDetail(list);
 	}
 
 }

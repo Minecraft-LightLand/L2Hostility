@@ -50,7 +50,6 @@ public class AdaptingTrait extends MobTrait {
 						mapLevel(i -> Component.literal("" + i)
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
-		super.addDetail(list);
 	}
 
 

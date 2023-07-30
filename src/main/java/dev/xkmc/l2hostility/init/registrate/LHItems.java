@@ -18,17 +18,20 @@ public class LHItems {
 			"hostility", "L2Hostility", e -> e.icon(LHItems.ADDER::asStack));
 
 	public static final ItemEntry<TraitAdderWand> ADDER = L2Hostility.REGISTRATE.item(
-			"trait_adder_wand", p -> new TraitAdderWand(p.stacksTo(1))).register();
+					"trait_adder_wand", p -> new TraitAdderWand(p.stacksTo(1)))
+			.model((ctx, pvd) -> pvd.handheld(ctx)).register();
 
 	public static final ItemEntry<TargetSelectWand> TARGET = L2Hostility.REGISTRATE.item(
-			"target_select_wand", p -> new TargetSelectWand(p.stacksTo(1))).register();
+					"target_select_wand", p -> new TargetSelectWand(p.stacksTo(1)))
+			.model((ctx, pvd) -> pvd.handheld(ctx)).register();
 
 	public static final ItemEntry<AiConfigWand> AI = L2Hostility.REGISTRATE.item(
-			"ai_config_wand", p -> new AiConfigWand(p.stacksTo(1))).register();
+					"ai_config_wand", p -> new AiConfigWand(p.stacksTo(1)))
+			.model((ctx, pvd) -> pvd.handheld(ctx)).register();
 
 	public static final ItemEntry<EquipmentWand> EQUIPMENT = L2Hostility.REGISTRATE.item(
-			"equipment_wand", p -> new EquipmentWand(p.stacksTo(1))).register();
-
+					"equipment_wand", p -> new EquipmentWand(p.stacksTo(1)))
+			.model((ctx, pvd) -> pvd.handheld(ctx)).register();
 
 	public static void register() {
 	}

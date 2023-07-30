@@ -31,7 +31,6 @@ public class ReflectTrait extends MobTrait {
 						mapLevel(i -> Component.literal((int) Math.round(100 * (1 + i * LHConfig.COMMON.reflect.get())) + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
-		super.addDetail(list);
 	}
 
 
