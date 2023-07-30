@@ -53,7 +53,6 @@ public class DispellTrait extends LegendaryTrait {
 						mapLevel(i -> Component.literal(LHConfig.COMMON.dispellTime.get() * i / 20 + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
-		super.addDetail(list);
 	}
 
 }

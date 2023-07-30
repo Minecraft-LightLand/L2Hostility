@@ -10,7 +10,11 @@ public class LHConfig {
 
 	public static class Client {
 
+		public final ForgeConfigSpec.BooleanValue showAsNamePlate;
+
 		Client(ForgeConfigSpec.Builder builder) {
+			showAsNamePlate = builder.comment("Render Traits in name plate form")
+					.define("showAsNamePlate", true);
 		}
 
 	}
@@ -24,7 +28,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue healthFactor;
 		public final ForgeConfigSpec.DoubleValue damageFactor;
 		public final ForgeConfigSpec.IntValue armorFactor;
-		public final ForgeConfigSpec.DoubleValue enchantFactor;
+		public final ForgeConfigSpec.DoubleValue enchantmentFactor;
+		public final ForgeConfigSpec.BooleanValue addLevelToName;
 
 		public final ForgeConfigSpec.DoubleValue tankHealth;
 		public final ForgeConfigSpec.DoubleValue tankArmor;
@@ -60,6 +65,10 @@ public class LHConfig {
 						.defineInRange("deathDecay", 0.9, 0, 2);
 			}
 			builder.pop();
+			builder.push("misc");
+			addLevelToName = builder.comment("Add mob level to name")
+					.define("addLevelToName", true);
+			builder.pop();
 
 			builder.push("scaling");
 			{
@@ -69,8 +78,10 @@ public class LHConfig {
 						.defineInRange("damageFactor", 0.02, 0, 1000);
 				armorFactor = builder.comment("Armor rank per n level")
 						.defineInRange("armorFactor", 10, 0, 1000);
-				enchantFactor = builder.comment("Enchantment bonus per level")
-						.defineInRange("enchantFactor", 1.0, 0, 1000);
+				enchantmentFactor = builder.comment("Enchantment bonus per level.",
+								"Note: use it only when Apotheosis is installed",
+								"Otherwise too high enchantment level will yield no enchantment")
+						.defineInRange("enchantmentFactor", 0d, 0, 1000);
 			}
 			builder.pop();
 

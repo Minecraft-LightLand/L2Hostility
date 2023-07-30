@@ -52,7 +52,7 @@ public class LHTraits {
 							LHConfig.COMMON.tankHealth::get, AttributeModifier.Operation.MULTIPLY_TOTAL),
 					new AttributeTrait.AttributeEntry("tank_armor", () -> Attributes.ARMOR,
 							LHConfig.COMMON.tankArmor::get, AttributeModifier.Operation.ADDITION),
-					new AttributeTrait.AttributeEntry("tank_tough", () -> Attributes.ARMOR,
+					new AttributeTrait.AttributeEntry("tank_tough", () -> Attributes.ARMOR_TOUGHNESS,
 							LHConfig.COMMON.tankTough::get, AttributeModifier.Operation.ADDITION)
 			), () -> new TraitConfig(10, 1, 5)).lang("Tanky").register();
 

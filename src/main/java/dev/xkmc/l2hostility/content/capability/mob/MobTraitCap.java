@@ -92,7 +92,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public int getEnchantBonus() {
-		return (int) (lv * LHConfig.COMMON.enchantFactor.get());
+		return (int) (lv * LHConfig.COMMON.enchantmentFactor.get());
 	}
 
 	public int getLevel() {
@@ -114,7 +114,9 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				TraitManager.postFill(this, mob);
 				traits.forEach((k, v) -> k.postInit(mob, v));
 				mob.setHealth(mob.getMaxHealth());
-				mob.setCustomName(mob.getName().copy().append(" Lv." + lv));
+				if (LHConfig.COMMON.addLevelToName.get()) {
+					mob.setCustomName(mob.getName().copy().append(" Lv." + lv));
+				}
 				syncToClient(mob);
 			}
 		}
@@ -132,8 +134,12 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		return Wrappers.cast(data.computeIfAbsent(id, e -> sup.get()));
 	}
 
-	public List<Component> getTitle() {
+	public List<Component> getTitle(boolean showTrait) {
 		List<Component> ans = new ArrayList<>();
+		if (!LHConfig.COMMON.addLevelToName.get()) {
+			ans.add(Component.literal("Lv." + lv).withStyle(ChatFormatting.GRAY));
+		}
+		if (!showTrait) return ans;
 		MutableComponent temp = null;
 		int count = 0;
 		for (var e : traits.entrySet()) {

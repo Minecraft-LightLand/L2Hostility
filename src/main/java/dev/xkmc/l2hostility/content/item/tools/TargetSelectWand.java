@@ -32,7 +32,7 @@ public class TargetSelectWand extends Item {
 		stack = player.getItemInHand(hand);
 		if (stack.getOrCreateTag().contains(KEY)) {
 			Entity other = entity.level().getEntity(stack.getOrCreateTag().getInt(KEY));
-			if (other instanceof LivingEntity le) {
+			if (other instanceof LivingEntity le && le != entity) {
 				boolean succeed = false;
 				if (entity instanceof Mob mob) {
 					mob.setTarget(le);

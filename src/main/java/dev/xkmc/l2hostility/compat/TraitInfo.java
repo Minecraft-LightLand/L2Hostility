@@ -17,7 +17,7 @@ public class TraitInfo implements IEntityComponentProvider {
 	public void appendTooltip(ITooltip list, EntityAccessor entity, IPluginConfig config) {
 		if (entity.getEntity() instanceof LivingEntity le) {
 			if (MobTraitCap.HOLDER.isProper(le)) {
-				list.addAll(MobTraitCap.HOLDER.get(le).getTitle());
+				list.addAll(MobTraitCap.HOLDER.get(le).getTitle(true));
 			}
 		}
 	}

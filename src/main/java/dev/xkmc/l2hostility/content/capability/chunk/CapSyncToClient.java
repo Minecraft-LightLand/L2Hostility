@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.capability.chunk;
 
+import dev.xkmc.l2hostility.init.network.ClientSyncHandler;
 import dev.xkmc.l2serial.network.SerialPacketBase;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.nbt.CompoundTag;

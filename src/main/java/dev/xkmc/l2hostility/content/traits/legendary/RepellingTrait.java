@@ -55,7 +55,6 @@ public class RepellingTrait extends LegendaryTrait {
 						Component.literal(LHConfig.COMMON.repellRange.get() + "")
 								.withStyle(ChatFormatting.AQUA))
 				.withStyle(ChatFormatting.GRAY));
-		super.addDetail(list);
 	}
 
 }

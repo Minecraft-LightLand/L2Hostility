@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
 import net.minecraft.client.Minecraft;
@@ -38,7 +39,7 @@ public class ClientEvents {
 			if (le.isInvisible() && RayTraceUtil.rayTraceEntity(player, player.getEntityReach(), e -> e == le) == null) {
 				return;
 			}
-			var list = MobTraitCap.HOLDER.get(le).getTitle();
+			var list = MobTraitCap.HOLDER.get(le).getTitle(LHConfig.CLIENT.showAsNamePlate.get());
 			int offset = list.size();
 			Font.DisplayMode mode = player.hasLineOfSight(event.getEntity()) ?
 					Font.DisplayMode.SEE_THROUGH :
