@@ -6,11 +6,13 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdaptingTrait extends MobTrait {
 
@@ -39,6 +41,18 @@ public class AdaptingTrait extends MobTrait {
 			}
 		}
 	}
+
+	@Override
+	public void addDetail(List<Component> list) {
+		list.add(Component.translatable(getDescriptionId() + ".desc",
+						Component.literal((int) Math.round(100 * (1 - LHConfig.COMMON.adaptFactor.get())) + "")
+								.withStyle(ChatFormatting.AQUA),
+						mapLevel(i -> Component.literal("" + i)
+								.withStyle(ChatFormatting.AQUA)))
+				.withStyle(ChatFormatting.GRAY));
+		super.addDetail(list);
+	}
+
 
 	@SerialClass
 	public static class Data extends CapStorageData {

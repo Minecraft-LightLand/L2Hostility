@@ -13,8 +13,12 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.function.Function;
 import java.util.function.IntSupplier;
 
 public class MobTrait extends NamedEntry<MobTrait> {
@@ -45,7 +49,7 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		return getConfig().maxLevel;
 	}
 
-	public boolean allow(LivingEntity le, int difficulty) {
+	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
 		TraitConfig config = getConfig();
 		if (difficulty < config.cost) return false;
 		if (config.blacklist.contains(le.getType())) return false;
@@ -75,10 +79,32 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {
 	}
 
-	public MutableComponent getFullDesc(Integer value) {
-		return getDesc().append(CommonComponents.SPACE)
-				.append(Component.translatable("enchantment.level." + value))
-				.withStyle(Style.EMPTY.withColor(color.getAsInt()));
+	public void onDeath(int level, LivingEntity entity, LivingDeathEvent event) {
+
+	}
+
+	public MutableComponent getFullDesc(@Nullable Integer value) {
+		var ans = getDesc();
+		if (value != null) ans = ans.append(CommonComponents.SPACE)
+				.append(Component.translatable("enchantment.level." + value));
+		return ans.withStyle(Style.EMPTY.withColor(color.getAsInt()));
+	}
+
+	public void addDetail(List<Component> list) {
+		list.add(Component.translatable(getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY));
+	}
+
+	protected MutableComponent mapLevel(Function<Integer, MutableComponent> func) {
+		MutableComponent comp = null;
+		for (int i = 1; i <= getMaxLevel(); i++) {
+			if (comp == null) {
+				comp = func.apply(i);
+			} else {
+				comp = comp.append(Component.literal("/").withStyle(ChatFormatting.GRAY)).append(func.apply(i));
+			}
+		}
+		assert comp != null;
+		return comp;
 	}
 
 }

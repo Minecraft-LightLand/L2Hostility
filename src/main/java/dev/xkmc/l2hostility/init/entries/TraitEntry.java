@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.init.registrate.entries;
+package dev.xkmc.l2hostility.init.entries;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;

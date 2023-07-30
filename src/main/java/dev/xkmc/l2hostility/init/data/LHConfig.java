@@ -45,6 +45,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue soulBurnerTime;
 		public final ForgeConfigSpec.IntValue freezingTime;
 		public final ForgeConfigSpec.IntValue curseTime;
+		public final ForgeConfigSpec.IntValue teleportDuration;
+		public final ForgeConfigSpec.IntValue teleportRange;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("difficulty");
@@ -111,6 +113,10 @@ public class LHConfig {
 						.defineInRange("freezingTime", 200, 0, 3000);
 				curseTime = builder.comment("Duration in ticks for Cursed")
 						.defineInRange("curseTime", 200, 0, 3000);
+				teleportDuration = builder.comment("Interval in ticks for Teleport")
+						.defineInRange("teleportDuration", 100, 0, 3000);
+				teleportRange = builder.comment("Range in blocks for Teleport")
+						.defineInRange("teleportRange", 16, 0, 64);
 
 			}
 			builder.pop();

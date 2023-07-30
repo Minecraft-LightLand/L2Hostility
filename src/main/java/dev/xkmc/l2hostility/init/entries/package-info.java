@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2hostility.init.registrate.entries;
+package dev.xkmc.l2hostility.init.entries;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

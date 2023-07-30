@@ -10,8 +10,10 @@ import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.events.LHAttackListener;
 import dev.xkmc.l2hostility.init.data.*;
-import dev.xkmc.l2hostility.init.registrate.*;
-import dev.xkmc.l2hostility.init.registrate.entries.LHRegistrate;
+import dev.xkmc.l2hostility.init.entries.LHRegistrate;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
 import net.minecraft.data.PackOutput;
@@ -47,10 +49,6 @@ public class L2Hostility {
 		ForgeMod.enableMilkFluid();
 		LHItems.register();
 		LHTraits.register();
-		LHEffects.register();
-		LHParticle.register();
-		LHEnchantments.register();
-		LHEntities.register();
 		LHMiscs.register();
 		LHConfig.init();
 

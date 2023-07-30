@@ -51,7 +51,7 @@ public class TraitManager {
 	}
 
 	private static void generateTraits(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, int maxModLv) {
-		List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e -> e.allow(le, lv)).toList());
+		List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e -> e.allow(le, lv, maxModLv)).toList());
 		var rand = le.getRandom();
 		int level = lv;
 		while (level > 0) {

@@ -1,14 +1,20 @@
 {
   "itemGroup.l2library.hostility": "莱特兰·恶意",
   "l2hostility": {
-	"tooltip.disable": "%s个附魔被抑制了，剩余%s秒。任何新附魔将会被抹消。",
+	"tooltip":{
+	  "disable": "%s个附魔被抑制了，剩余%s秒。任何新附魔将会被抹消。",
+	  "self_effect": "怪物获得常驻效果：",
+	  "target_effect": "怪物攻击将会施加："
+	},
 	"msg": {
 	  "ai": "配置实体%s：将NoAI设为%s",
 	  "select_trait": "词条：%s",
 	  "set_target": "让%s和%s对战",
 	  "set_trait": "将实体%2$s的词条%1$s设为%3$s级",
 	  "target_fail": "%s和%s无法对战",
-	  "target_record": "选中实体%s"
+	  "target_record": "选中实体%s",
+	  "err_disallow": "该词条不适用于当前生物",
+	  "err_max": "该词条已达到最大值"
 	},
 	"info": {
 	  "chunk_level": "区块难度基础值：%s",

@@ -1,10 +1,33 @@
-// 1.20.1	2023-07-29T21:53:10.705254	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
-75d5cfe2f8530ba6c95a8640858fcf077d324fa3 assets/l2hostility/lang/en_ud.json
-c1d8487e97678e421b65d7cec06e7d815b19a618 assets/l2hostility/lang/en_us.json
+// 1.20.1	2023-07-30T16:04:50.4994	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+fe53a5ab612d6391c87add9bd45ce8c3fab06d9b assets/l2hostility/lang/en_ud.json
+ca3c44184459b1225715be2bf7226fc7961848fb assets/l2hostility/lang/en_us.json
+68769a0e9a5bea27c665811fda43d0e2add2fc8e assets/l2hostility/models/item/adaptive.json
 3f4f2d4a69bf712997b2de1b947d152d4cf8754b assets/l2hostility/models/item/ai_config_wand.json
+e4d5a06558381706eb83410c602234bbce245a3f assets/l2hostility/models/item/blindness.json
+6adfbd0a34e0991665cc5ad08b97c0ca11908109 assets/l2hostility/models/item/cursed.json
+3ed19f13382f9f956a924589c29cab7d7c518981 assets/l2hostility/models/item/dementor.json
+0a1efcc749df1429c6db6f1ad877ecb029715631 assets/l2hostility/models/item/dispell.json
 c338976f33b1c3c565980899494ad0f6697b1fc5 assets/l2hostility/models/item/equipment_wand.json
+c4cfdd9bd6271f5b7f1d362bc7389fdc5fb8a391 assets/l2hostility/models/item/fiery.json
+dfb4d79efb3f90c386601fb7c4f585341b9ce03c assets/l2hostility/models/item/freezing.json
+081f0b4084b936dbd38688b1653e102434e94783 assets/l2hostility/models/item/invisible.json
+cca8c9236c373f3c99e064009d6d968357db5ed6 assets/l2hostility/models/item/levitation.json
+120472be7f1c17d1e4b67bf61024f86c38870748 assets/l2hostility/models/item/nausea.json
+e81caa407ce7698f6dc46d91861ef50b9337f85d assets/l2hostility/models/item/poison.json
+7b5f4fa8b1ddf6998692c5b2821aeb2a80d24143 assets/l2hostility/models/item/protection.json
+2244a4d36bace40c422883f1045f2047ae079d94 assets/l2hostility/models/item/reflect.json
+0d5d949d338c6ffab2ee2dccb3af0eecbda56d6e assets/l2hostility/models/item/regenerate.json
+761c31f594ee31a2c1b219db0dd5a67baee0f57c assets/l2hostility/models/item/repelling.json
+52b789a4c9bb1f83133f9d77ce797672fd3270e5 assets/l2hostility/models/item/slowness.json
+821b90b18728ff5f67d122f3dd1c667cd442f839 assets/l2hostility/models/item/soul_burner.json
+504d7d8ce8ee145769b11f98f4feba2e160e25e2 assets/l2hostility/models/item/speedy.json
+f65f18cde86e999836729cfa6cdd69196db22edf assets/l2hostility/models/item/tank.json
 c9ce23339b6d683e4e58a192c62e9bd904571b36 assets/l2hostility/models/item/target_select_wand.json
+ff2ed3dd3c00b10c459e081cc89f6e79210b3693 assets/l2hostility/models/item/teleport.json
 d15fb4e09e453cb371b4e4bc666b60233cd09b7b assets/l2hostility/models/item/trait_adder_wand.json
+dd65b810c19ece0457fde545ee0e60f22a354b2d assets/l2hostility/models/item/undying.json
+d9086c116b05f42a43c2acf7a14a5ea3d392c283 assets/l2hostility/models/item/weakness.json
+18ffc5343db996578a308598ecd7e236a6bfbd3f assets/l2hostility/models/item/wither.json
 24bfb5e024a004de204f60dbcc7e5c67a4ad17a3 data/l2hostility/tags/entity_types/armor_target.json
 edf64deed56924f50118492f25104511eb052cab data/l2hostility/tags/entity_types/blacklist.json
 a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/melee_weapon_target.json

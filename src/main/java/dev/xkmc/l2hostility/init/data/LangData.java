@@ -9,12 +9,17 @@ import java.util.Locale;
 
 public enum LangData {
 	TOOLTIP_DISABLE("tooltip.disable", "%s enchantments disabled for %ss. Any new enchantment will vanish.", 2),
+	TOOLTIP_SELF_EFFECT("tooltip.self_effect", "Mob gains continuous effect: ", 0),
+	TOOLTIP_TARGET_EFFECT("tooltip.target_effect", "Mob inflict effect on hit: ", 0),
+
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),
 	MSG_TARGET_FAIL("msg.target_fail", "%s and %s cannot fight", 2),
 	MSG_TARGET_RECORD("msg.target_record", "Recorded %s", 1),
 	MSG_SET_TRAIT("msg.set_trait", "Set trait %1$s on entity %2$s to level %3$s", 3),
 	MSG_SELECT_TRAIT("msg.select_trait", "Selected trait: %s", 1),
+	MSG_ERR_MAX("msg.err_max", "Trait level already reached max value", 0),
+	MSG_ERR_DISALLOW("msg.err_disallow", "Trait not applicable on this entity", 0),
 
 	INFO_PLAYER_LEVEL("info.player_level", "Player difficulty level: %s", 1),
 	INFO_PLAYER_EXP("info.player_exp", "Difficulty progress: %s/%s", 2),

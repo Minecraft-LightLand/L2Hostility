@@ -1,0 +1,16 @@
+{
+  "blacklist": [],
+  "chance": 1.0,
+  "cost": 30,
+  "maxLevel": 1,
+  "whitelist": [
+    "minecraft:skeleton",
+    "minecraft:stray",
+    "minecraft:pillager",
+    "minecraft:evoker",
+    "minecraft:witch",
+    "minecraft:guardian",
+    "minecraft:elder_guardian",
+    "minecraft:wither"
+  ]
+}

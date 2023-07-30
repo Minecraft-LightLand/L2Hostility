@@ -65,7 +65,7 @@ public class TraitAdderWand extends Item {
 	}
 
 	@Nullable
-	private static Integer inc(MobTrait k, @Nullable Integer old) {
+	public static Integer decrease(MobTrait k, @Nullable Integer old) {
 		if (old == null || old == 0) {
 			return k.getMaxLevel();
 		}
@@ -76,7 +76,7 @@ public class TraitAdderWand extends Item {
 	}
 
 	@Nullable
-	private static Integer dec(MobTrait k, @Nullable Integer old) {
+	public static Integer increase(MobTrait k, @Nullable Integer old) {
 		if (old == null) {
 			return 1;
 		}
@@ -100,9 +100,9 @@ public class TraitAdderWand extends Item {
 			MobTrait trait = get(stack);
 			Integer ans;
 			if (player.isShiftKeyDown()) {
-				ans = cap.traits.compute(trait, TraitAdderWand::inc);
+				ans = cap.traits.compute(trait, TraitAdderWand::decrease);
 			} else {
-				ans = cap.traits.compute(trait, TraitAdderWand::dec);
+				ans = cap.traits.compute(trait, TraitAdderWand::increase);
 			}
 			int val = ans == null ? 0 : ans;
 			trait.initialize(target, val);

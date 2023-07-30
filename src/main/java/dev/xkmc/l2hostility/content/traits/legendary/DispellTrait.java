@@ -1,13 +1,13 @@
-package dev.xkmc.l2hostility.content.traits.common;
+package dev.xkmc.l2hostility.content.traits.legendary;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
-import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +16,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DispellTrait extends MobTrait {
+public class DispellTrait extends LegendaryTrait {
 
 	public DispellTrait(ChatFormatting style) {
 		super(style);
@@ -45,6 +45,15 @@ public class DispellTrait extends MobTrait {
 				event.getSource().is(L2DamageTypes.MAGIC)) {
 			event.setCanceled(true);
 		}
+	}
+
+	@Override
+	public void addDetail(List<Component> list) {
+		list.add(Component.translatable(getDescriptionId() + ".desc",
+						mapLevel(i -> Component.literal(LHConfig.COMMON.dispellTime.get() * i / 20 + "")
+								.withStyle(ChatFormatting.AQUA)))
+				.withStyle(ChatFormatting.GRAY));
+		super.addDetail(list);
 	}
 
 }

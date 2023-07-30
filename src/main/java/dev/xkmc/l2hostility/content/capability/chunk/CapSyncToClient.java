@@ -28,7 +28,7 @@ public class CapSyncToClient extends SerialPacketBase {
 
 	@Override
 	public void handle(NetworkEvent.Context context) {
-		ClientSyncHandler.handle(level, x,z,tag);
+		ClientSyncHandler.handle(level, x, z, tag);
 	}
 
 }

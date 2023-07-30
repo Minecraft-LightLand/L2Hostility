@@ -4,6 +4,7 @@ import dev.xkmc.l2library.serial.config.BaseConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.world.entity.EntityType;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 
 @SerialClass
@@ -33,5 +34,9 @@ public class TraitConfig extends BaseConfig {
 		this.maxLevel = maxLevel;
 	}
 
+	public TraitConfig whitelist(EntityType<?>... types) {
+		whitelist.addAll(Arrays.asList(types));
+		return this;
+	}
 
 }
