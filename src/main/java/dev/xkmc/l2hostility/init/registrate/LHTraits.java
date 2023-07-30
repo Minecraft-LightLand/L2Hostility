@@ -116,7 +116,7 @@ public class LHTraits {
 									EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
 									EntityType.WITHER
 							))
-					.desc("Mob will push away entities hostile to it, and immune to projectiles.")
+					.desc("Mob will push away entities hostile to it within %s blocks, and immune to projectiles.")
 					.lang("Repelling").register();
 		}
 

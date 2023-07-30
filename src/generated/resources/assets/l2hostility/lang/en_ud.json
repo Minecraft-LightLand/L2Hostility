@@ -1,4 +1,5 @@
 {
+  "config.jade.plugin_l2hostility.mob": "ʎʇıןıʇsoHᄅꞀ",
   "item.l2hostility.ai_config_wand": "puɐM bıɟuoƆ ıⱯ",
   "item.l2hostility.equipment_wand": "puɐM ʇuǝɯdınbƎ",
   "item.l2hostility.target_select_wand": "puɐM ʇɔǝןǝS ʇǝbɹɐ⟘",
@@ -42,7 +43,7 @@
   "trait.l2hostility.regenerate": "buıʇɐɹǝuǝbǝᴚ",
   "trait.l2hostility.regenerate.desc": "˙puoɔǝs ʎɹǝʌǝ ɥʇןɐǝɥ ןןnɟ ɟo %s%% sןɐǝH",
   "trait.l2hostility.repelling": "buıןןǝdǝᴚ",
-  "trait.l2hostility.repelling.desc": "˙sǝןıʇɔǝظoɹd oʇ ǝunɯɯı puɐ 'ʇı oʇ ǝןıʇsoɥ sǝıʇıʇuǝ ʎɐʍɐ ɥsnd ןןıʍ qoW",
+  "trait.l2hostility.repelling.desc": "˙sǝןıʇɔǝظoɹd oʇ ǝunɯɯı puɐ 'sʞɔoןq %s uıɥʇıʍ ʇı oʇ ǝןıʇsoɥ sǝıʇıʇuǝ ʎɐʍɐ ɥsnd ןןıʍ qoW",
   "trait.l2hostility.slowness": "ʎɐɹʇS",
   "trait.l2hostility.soul_burner": "ɹǝuɹnᗺ ןnoS",
   "trait.l2hostility.speedy": "ʎpǝǝdS",

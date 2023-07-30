@@ -50,6 +50,7 @@ public enum LangData {
 			String str = strs[strs.length - 1];
 			pvd.add(L2Hostility.MODID + "." + id.id, id.def);
 		}
+		pvd.add("config.jade.plugin_l2hostility.mob", "L2Hostility");
 	}
 
 	public static String asId(String name) {

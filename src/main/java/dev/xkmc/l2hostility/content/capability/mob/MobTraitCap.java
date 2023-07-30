@@ -114,6 +114,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				TraitManager.postFill(this, mob);
 				traits.forEach((k, v) -> k.postInit(mob, v));
 				mob.setHealth(mob.getMaxHealth());
+				mob.setCustomName(mob.getName().copy().append(" Lv." + lv));
 				syncToClient(mob);
 			}
 		}
@@ -133,7 +134,6 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	public List<Component> getTitle() {
 		List<Component> ans = new ArrayList<>();
-		ans.add(Component.literal("Lv. " + lv));
 		MutableComponent temp = null;
 		int count = 0;
 		for (var e : traits.entrySet()) {
@@ -144,7 +144,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			} else {
 				temp.append(Component.literal(" / ").withStyle(ChatFormatting.WHITE)).append(comp);
 				count++;
-				if (count == 4) {
+				if (count >= 3) {
 					ans.add(temp);
 					count = 0;
 					temp = null;

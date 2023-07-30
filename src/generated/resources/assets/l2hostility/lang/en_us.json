@@ -1,4 +1,5 @@
 {
+  "config.jade.plugin_l2hostility.mob": "L2Hostility",
   "item.l2hostility.ai_config_wand": "Ai Config Wand",
   "item.l2hostility.equipment_wand": "Equipment Wand",
   "item.l2hostility.target_select_wand": "Target Select Wand",
@@ -42,7 +43,7 @@
   "trait.l2hostility.regenerate": "Regenerating",
   "trait.l2hostility.regenerate.desc": "Heals %s%% of full health every second.",
   "trait.l2hostility.repelling": "Repelling",
-  "trait.l2hostility.repelling.desc": "Mob will push away entities hostile to it, and immune to projectiles.",
+  "trait.l2hostility.repelling.desc": "Mob will push away entities hostile to it within %s blocks, and immune to projectiles.",
   "trait.l2hostility.slowness": "Stray",
   "trait.l2hostility.soul_burner": "Soul Burner",
   "trait.l2hostility.speedy": "Speedy",

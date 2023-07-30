@@ -47,6 +47,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue curseTime;
 		public final ForgeConfigSpec.IntValue teleportDuration;
 		public final ForgeConfigSpec.IntValue teleportRange;
+		public final ForgeConfigSpec.IntValue repellRange;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("difficulty");
@@ -117,6 +118,8 @@ public class LHConfig {
 						.defineInRange("teleportDuration", 100, 0, 3000);
 				teleportRange = builder.comment("Range in blocks for Teleport")
 						.defineInRange("teleportRange", 16, 0, 64);
+				repellRange = builder.comment("Range in blocks for Repell")
+						.defineInRange("repellRange", 10, 0, 64);
 
 			}
 			builder.pop();

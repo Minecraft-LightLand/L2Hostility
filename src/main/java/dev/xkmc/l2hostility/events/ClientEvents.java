@@ -6,8 +6,10 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2library.util.Proxy;
+import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -31,17 +33,25 @@ public class ClientEvents {
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void renderNamePlate(RenderNameTagEvent event) {
 		if (event.getEntity() instanceof LivingEntity le && MobTraitCap.HOLDER.isProper(le)) {
+			LocalPlayer player = Proxy.getClientPlayer();
+			assert player != null;
+			if (le.isInvisible() && RayTraceUtil.rayTraceEntity(player, player.getEntityReach(), e -> e == le) == null) {
+				return;
+			}
 			var list = MobTraitCap.HOLDER.get(le).getTitle();
 			int offset = list.size();
+			Font.DisplayMode mode = player.hasLineOfSight(event.getEntity()) ?
+					Font.DisplayMode.SEE_THROUGH :
+					Font.DisplayMode.NORMAL;
 			for (var e : list) {
-				renderNameTag(event, e, event.getPoseStack(), offset * 0.2f);
+				renderNameTag(event, e, event.getPoseStack(), offset * 0.2f, mode);
 				offset--;
 			}
 		}
 
 	}
 
-	protected static void renderNameTag(RenderNameTagEvent event, Component text, PoseStack pose, float offset) {
+	protected static void renderNameTag(RenderNameTagEvent event, Component text, PoseStack pose, float offset, Font.DisplayMode mode) {
 		var dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
 		double d0 = dispatcher.distanceToSqr(event.getEntity());
 		if (ForgeHooksClient.isNameplateInRenderDistance(event.getEntity(), d0)) {
@@ -56,11 +66,7 @@ public class ClientEvents {
 			float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
 			int j = (int) (f1 * 255.0F) << 24;
 			font.drawInBatch(text, f2, 0, -1, false, matrix4f,
-					event.getMultiBufferSource(),
-					Proxy.getClientPlayer().hasLineOfSight(event.getEntity()) ?
-							Font.DisplayMode.SEE_THROUGH :
-							Font.DisplayMode.NORMAL,
-					j, event.getPackedLight());
+					event.getMultiBufferSource(), mode, j, event.getPackedLight());
 			pose.popPose();
 		}
 	}
