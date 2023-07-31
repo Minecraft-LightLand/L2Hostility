@@ -12,9 +12,9 @@
       "trait": "l2hostility:freezing"
     }
   ],
-  "rankBonus": 0.2,
+  "rankBonus": 0.1,
   "result": {
-    "Count": 1,
+    "Count": 2,
     "id": "l2complements:hard_ice"
   },
   "trait": "l2hostility:freezing"

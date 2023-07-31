@@ -12,9 +12,9 @@
       "trait": "l2hostility:speedy"
     }
   ],
-  "rankBonus": 0.2,
+  "rankBonus": 0.1,
   "result": {
-    "Count": 1,
+    "Count": 2,
     "id": "minecraft:rabbit_foot"
   },
   "trait": "l2hostility:speedy"

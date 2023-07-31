@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class TraitGLMProvider extends GlobalLootModifierProvider {
 
-	public static final RegistryEntry<LootItemConditionType> TRAIT_AND_LEVEL = L2Hostility.REGISTRATE.simple("trait_and_level", Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(new TraitLootCondition.TraitSerializer()));
+	public static final RegistryEntry<LootItemConditionType> TRAIT_AND_LEVEL = L2Hostility.REGISTRATE.simple("trait_and_level", Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(new TraitSerializer<>(TraitLootCondition.class)));
 	public static final RegistryEntry<Codec<TraitLootModifier>> TRAIT_SCALED = L2Hostility.REGISTRATE.simple("trait_scaled", ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> TraitLootModifier.CODEC);
 
 	public static void register() {
@@ -39,7 +39,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 	protected void start() {
 		add(LHTraits.TANK.get(), new ItemStack(Items.DIAMOND, 4), 1, 0, 0.1);
 		add(LHTraits.TANK.get(), new ItemStack(Items.NETHERITE_SCRAP, 1), 3, 0, 0.1);
-		add(LHTraits.SPEEDY.get(), new ItemStack(Items.RABBIT_FOOT, 1), 1, 0, 0.2);
+		add(LHTraits.SPEEDY.get(), new ItemStack(Items.RABBIT_FOOT, 2), 1, 0, 0.1);
 		add(LHTraits.SPEEDY.get(), new ItemStack(LCItems.CAPTURED_WIND, 1), 3, 0, 0.1);
 		add(LHTraits.PROTECTION.get(), new ItemStack(Items.SCUTE, 4), 1, 0, 0.1);
 		add(LHTraits.PROTECTION.get(), new ItemStack(LCItems.EXPLOSION_SHARD, 1), 3, 0, 0.1);
@@ -57,16 +57,16 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.ENDER.get(), new ItemStack(LCItems.VOID_EYE.get(), 1), 1, 0.2, 0.1);
 		add(LHTraits.REPELLING.get(), new ItemStack(LCItems.FORCE_FIELD.get(), 1), 1, 0.2, 0.1);
 
-		add(LHTraits.WEAKNESS.get(), new ItemStack(Items.FERMENTED_SPIDER_EYE, 4), 1, 0, 0.2);
-		add(LHTraits.SLOWNESS.get(), new ItemStack(Items.COBWEB, 2), 1, 0, 0.2);
-		add(LHTraits.POISON.get(), new ItemStack(Items.SPIDER_EYE, 4), 1, 0, 0.2);
-		add(LHTraits.WITHER.get(), new ItemStack(Items.WITHER_ROSE, 4), 1, 0, 0.2);
+		add(LHTraits.WEAKNESS.get(), new ItemStack(Items.FERMENTED_SPIDER_EYE, 8), 1, 0, 0.1);
+		add(LHTraits.SLOWNESS.get(), new ItemStack(Items.COBWEB, 4), 1, 0, 0.1);
+		add(LHTraits.POISON.get(), new ItemStack(Items.SPIDER_EYE, 8), 1, 0, 0.1);
+		add(LHTraits.WITHER.get(), new ItemStack(Items.WITHER_ROSE, 8), 1, 0, 0.1);
 		add(LHTraits.WITHER.get(), new ItemStack(Items.WITHER_SKELETON_SKULL, 1), 3, 0, 0.1);
 		add(LHTraits.LEVITATION.get(), new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.1);
-		add(LHTraits.BLIND.get(), new ItemStack(Items.INK_SAC, 4), 1, 0, 0.2);
-		add(LHTraits.CONFUSION.get(), new ItemStack(Items.PUFFERFISH, 2), 1, 0, 0.2);
-		add(LHTraits.SOUL_BURNER.get(), new ItemStack(LCItems.SOUL_FLAME, 1), 1, 0, 0.2);
-		add(LHTraits.FREEZING.get(), new ItemStack(LCItems.HARD_ICE, 1), 1, 0, 0.2);
+		add(LHTraits.BLIND.get(), new ItemStack(Items.INK_SAC, 8), 1, 0, 0.1);
+		add(LHTraits.CONFUSION.get(), new ItemStack(Items.PUFFERFISH, 4), 1, 0, 0.1);
+		add(LHTraits.SOUL_BURNER.get(), new ItemStack(LCItems.SOUL_FLAME, 2), 1, 0, 0.1);
+		add(LHTraits.FREEZING.get(), new ItemStack(LCItems.HARD_ICE, 2), 1, 0, 0.1);
 		add(LHTraits.CURSED.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Objects.requireNonNull(ForgeRegistries.POTIONS.getValue(new ResourceLocation(L2Complements.MODID, "curse")))), 1, 0, 0.2);
 		add(LHTraits.CURSED.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.05);
 	}

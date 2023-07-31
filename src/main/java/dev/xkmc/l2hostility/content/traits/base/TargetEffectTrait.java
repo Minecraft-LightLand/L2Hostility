@@ -24,7 +24,9 @@ public class TargetEffectTrait extends MobTrait {
 
 	@Override
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
-		EffectUtil.addEffect(cache.getAttackTarget(), func.apply(level), EffectUtil.AddReason.NONE, attacker);
+		if (cache.getLivingHurtEvent().getAmount() > 0) {
+			EffectUtil.addEffect(cache.getAttackTarget(), func.apply(level), EffectUtil.AddReason.NONE, attacker);
+		}
 	}
 
 	@Override

@@ -12,9 +12,9 @@
       "trait": "l2hostility:slowness"
     }
   ],
-  "rankBonus": 0.2,
+  "rankBonus": 0.1,
   "result": {
-    "Count": 2,
+    "Count": 4,
     "id": "minecraft:cobweb"
   },
   "trait": "l2hostility:slowness"

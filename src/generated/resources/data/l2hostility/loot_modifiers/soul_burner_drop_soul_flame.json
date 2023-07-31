@@ -12,9 +12,9 @@
       "trait": "l2hostility:soul_burner"
     }
   ],
-  "rankBonus": 0.2,
+  "rankBonus": 0.1,
   "result": {
-    "Count": 1,
+    "Count": 2,
     "id": "l2complements:soul_flame"
   },
   "trait": "l2hostility:soul_burner"

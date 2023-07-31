@@ -54,17 +54,4 @@ public class TraitLootCondition implements LootItemCondition {
 		return false;
 	}
 
-	public static class TraitSerializer implements Serializer<TraitLootCondition> {
-
-		@Override
-		public void serialize(JsonObject json, TraitLootCondition conditions, JsonSerializationContext ctx) {
-			JsonCodec.toJsonObject(conditions, json);
-		}
-
-		@Override
-		public TraitLootCondition deserialize(JsonObject json, JsonDeserializationContext ctx) {
-			return Objects.requireNonNull(JsonCodec.from(json, TraitLootCondition.class, null));
-		}
-	}
-
 }

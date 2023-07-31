@@ -12,9 +12,9 @@
       "trait": "l2hostility:poison"
     }
   ],
-  "rankBonus": 0.2,
+  "rankBonus": 0.1,
   "result": {
-    "Count": 4,
+    "Count": 8,
     "id": "minecraft:spider_eye"
   },
   "trait": "l2hostility:poison"
