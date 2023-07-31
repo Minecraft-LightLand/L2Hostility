@@ -1,0 +1,24 @@
+{
+  "type": "l2hostility:trait_scaled",
+  "chance": 0.0,
+  "conditions": [
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "condition": "l2hostility:trait_and_level",
+      "maxLevel": 5,
+      "minLevel": 1,
+      "trait": "l2hostility:cursed"
+    }
+  ],
+  "rankBonus": 0.2,
+  "result": {
+    "Count": 1,
+    "id": "minecraft:potion",
+    "tag": {
+      "Potion": "l2complements:curse"
+    }
+  },
+  "trait": "l2hostility:cursed"
+}

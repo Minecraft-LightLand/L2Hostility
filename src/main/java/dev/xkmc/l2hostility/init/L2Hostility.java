@@ -11,6 +11,7 @@ import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.events.LHAttackListener;
 import dev.xkmc.l2hostility.init.data.*;
 import dev.xkmc.l2hostility.init.entries.LHRegistrate;
+import dev.xkmc.l2hostility.init.loot.TraitGLMProvider;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
@@ -54,6 +55,8 @@ public class L2Hostility {
 		LHMiscs.register();
 		LHConfig.init();
 
+		TraitGLMProvider.register();
+
 		MobTraitCap.register();
 		ChunkDifficulty.register();
 		PlayerDifficulty.register();
@@ -81,11 +84,13 @@ public class L2Hostility {
 
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
-		boolean gen = event.includeServer();
+		boolean server = event.includeServer();
 		PackOutput output = event.getGenerator().getPackOutput();
 		var pvd = event.getLookupProvider();
 		var helper = event.getExistingFileHelper();
-		event.getGenerator().addProvider(gen, new LHConfigGen(event.getGenerator()));
+		var gen = event.getGenerator();
+		gen.addProvider(server, new LHConfigGen(gen));
+		gen.addProvider(server, new TraitGLMProvider(gen));
 	}
 
 }

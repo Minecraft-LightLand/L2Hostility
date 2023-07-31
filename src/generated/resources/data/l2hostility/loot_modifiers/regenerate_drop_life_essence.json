@@ -1,0 +1,21 @@
+{
+  "type": "l2hostility:trait_scaled",
+  "chance": 0.2,
+  "conditions": [
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "condition": "l2hostility:trait_and_level",
+      "maxLevel": 5,
+      "minLevel": 5,
+      "trait": "l2hostility:regenerate"
+    }
+  ],
+  "rankBonus": 0.0,
+  "result": {
+    "Count": 1,
+    "id": "l2complements:life_essence"
+  },
+  "trait": "l2hostility:regenerate"
+}

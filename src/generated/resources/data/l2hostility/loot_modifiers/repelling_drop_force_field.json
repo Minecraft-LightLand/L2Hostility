@@ -1,0 +1,21 @@
+{
+  "type": "l2hostility:trait_scaled",
+  "chance": 0.2,
+  "conditions": [
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "condition": "l2hostility:trait_and_level",
+      "maxLevel": 5,
+      "minLevel": 1,
+      "trait": "l2hostility:repelling"
+    }
+  ],
+  "rankBonus": 0.1,
+  "result": {
+    "Count": 1,
+    "id": "l2complements:force_field"
+  },
+  "trait": "l2hostility:repelling"
+}
