@@ -1,29 +1,31 @@
 package dev.xkmc.l2hostility.content.capability.chunk;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.*;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @SerialClass
 public class ChunkDifficulty {
 
-	public enum Stage {
-		PRE_INIT, INIT, CLEARED
+
+	public enum ChunkStage {
+		PRE_INIT, INIT
 	}
 
 	public static Capability<ChunkDifficulty> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
@@ -47,21 +49,21 @@ public class ChunkDifficulty {
 	public final LevelChunk chunk;
 
 	@SerialClass.SerialField
-	private Stage stage = Stage.PRE_INIT;
+	private ChunkStage stage = ChunkStage.PRE_INIT;
 
 	@SerialClass.SerialField
-	private Section[] sections;
+	private SectionDifficulty[] sections;
 
 	protected ChunkDifficulty(LevelChunk chunk) {
 		this.chunk = chunk;
 	}
 
 	private void check() {
-		if (stage != Stage.PRE_INIT) return;
-		stage = Stage.INIT;
+		if (stage != ChunkStage.PRE_INIT) return;
+		stage = ChunkStage.INIT;
 	}
 
-	public Section getSection(int y) {
+	public SectionDifficulty getSection(int y) {
 		int index = (y >> 4) - chunk.getMinSection();
 		index = Mth.clamp(index, 0, sections.length);
 		return sections[index];
@@ -69,14 +71,14 @@ public class ChunkDifficulty {
 
 	public void modifyInstance(BlockPos pos, MobDifficultyCollector instance) {
 		check();
-		var levelDiff = L2Hostility.DIFFICULTY.getMerged().levelMap.get(chunk.getLevel().dimensionTypeId().location());
+		var levelDiff = L2Hostility.DIFFICULTY.getMerged()
+				.levelMap.get(chunk.getLevel().dimensionTypeId().location());
 		if (levelDiff != null) {
 			instance.acceptConfig(levelDiff);
 		}
 		getSection(pos.getY()).modifyInstance(chunk.getLevel().getBiome(pos), instance);
-		if (stage == Stage.CLEARED) {
-			instance.setCap(0);
-		}
+		instance.acceptBonusLevel((int) Math.round(LHConfig.COMMON.distanceFactor.get() *
+				Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ())));
 	}
 
 	public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {
@@ -91,9 +93,9 @@ public class ChunkDifficulty {
 	public void init() {
 		int size = chunk.getLevel().getSectionsCount();
 		if (sections == null || sections.length != size) {
-			sections = new Section[size];
+			sections = new SectionDifficulty[size];
 			for (int i = 0; i < size; i++) {
-				sections[i] = new Section();
+				sections[i] = new SectionDifficulty();
 				sections[i].index = chunk.getMinSection() + i;
 			}
 		}
@@ -103,29 +105,6 @@ public class ChunkDifficulty {
 	}
 
 	public static void register() {
-	}
-
-	@SerialClass
-	public static class Section {
-
-		@SerialClass.SerialField
-		private int index;
-
-		@SerialClass.SerialField
-		private final DifficultyLevel difficulty = new DifficultyLevel();
-
-		private LevelChunkSection section;
-
-		public void modifyInstance(Holder<Biome> biome, MobDifficultyCollector instance) {
-			biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location())).ifPresent(instance::acceptConfig);
-			instance.acceptBonus(difficulty);
-			//instance.setTraitCap(TraitManager.getTraitCap(0, difficulty));
-		}
-
-		public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {
-			difficulty.grow(cap);
-		}
-
 	}
 
 }

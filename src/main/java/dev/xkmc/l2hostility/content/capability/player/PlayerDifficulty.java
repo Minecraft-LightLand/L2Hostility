@@ -6,6 +6,7 @@ import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
@@ -88,7 +89,11 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public DifficultyLevel getLevel() {
-		return difficulty;
+		return DifficultyLevel.merge(difficulty, getExtraLevel());
+	}
+
+	private int getExtraLevel() {
+		return (dimensions.size() - 1) * LHConfig.COMMON.dimensionFactor.get();
 	}
 
 

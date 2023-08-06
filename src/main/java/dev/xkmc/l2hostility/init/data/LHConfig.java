@@ -29,6 +29,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue damageFactor;
 		public final ForgeConfigSpec.IntValue armorFactor;
 		public final ForgeConfigSpec.DoubleValue enchantmentFactor;
+		public final ForgeConfigSpec.IntValue dimensionFactor;
+		public final ForgeConfigSpec.DoubleValue distanceFactor;
 		public final ForgeConfigSpec.BooleanValue addLevelToName;
 
 		public final ForgeConfigSpec.DoubleValue tankHealth;
@@ -82,6 +84,10 @@ public class LHConfig {
 								"Note: use it only when Apotheosis is installed",
 								"Otherwise too high enchantment level will yield no enchantment")
 						.defineInRange("enchantmentFactor", 0d, 0, 1000);
+				dimensionFactor = builder.comment("Difficulty bonus per level visited")
+						.defineInRange("dimensionFactor", 10, 0, 1000);
+				distanceFactor = builder.comment("Difficulty bonus per block from origin")
+						.defineInRange("distanceFactor", 0.01, 0, 1000);
 			}
 			builder.pop();
 

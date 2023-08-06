@@ -6,10 +6,11 @@ import net.minecraft.util.RandomSource;
 
 public class MobDifficultyCollector {
 
-	public int base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel();
+	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel();
 	public double scale, varSq;
 
 	public void acceptConfig(WorldDifficultyConfig.DifficultyConfig config) {
+		min = Math.max(min, config.min());
 		base += config.base();
 		scale += config.scale();
 		varSq += config.variation() * config.variation();
@@ -17,11 +18,16 @@ public class MobDifficultyCollector {
 	}
 
 	public void acceptBonus(DifficultyLevel difficulty) {
-		this.difficulty += difficulty.level;
+		this.difficulty += difficulty.getLevel();
+	}
+
+
+	public void acceptBonusLevel(int difficulty) {
+		this.difficulty += difficulty;
 	}
 
 	public void setCap(int cap) {
-		this.cap = Math.min(this.cap, cap);
+		this.cap = Math.min(this.cap, Math.max(min, cap));
 	}
 
 	public int getDifficulty(RandomSource random) {
@@ -29,11 +35,10 @@ public class MobDifficultyCollector {
 		if (count > 0) {
 			mean += random.nextGaussian() * Math.sqrt(varSq / count);
 		}
-		return Math.round((int) Mth.clamp(mean, 0, cap));
+		return Math.round((int) Mth.clamp(mean, min, cap));
 	}
 
 	public void setTraitCap(int cap) {
-
 		traitCap = Math.min(cap, traitCap);
 	}
 

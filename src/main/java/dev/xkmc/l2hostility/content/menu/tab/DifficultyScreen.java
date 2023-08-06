@@ -42,8 +42,8 @@ public class DifficultyScreen extends BaseTextScreen {
 		Player player = Minecraft.getInstance().player;
 		assert player != null;
 		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
-		list.add(LangData.INFO_PLAYER_LEVEL.get(cap.getLevel().level));
-		list.add(LangData.INFO_PLAYER_EXP.get(cap.getLevel().exp, cap.getLevel().getMaxExp()));
+		list.add(LangData.INFO_PLAYER_LEVEL.get(cap.getLevel().getLevel()));
+		list.add(LangData.INFO_PLAYER_EXP.get(cap.getLevel().getExp(), cap.getLevel().getMaxExp()));
 		list.add(LangData.INFO_PLAYER_CAP.get(cap.getRankCap()));
 		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 		if (opt.isPresent()) {

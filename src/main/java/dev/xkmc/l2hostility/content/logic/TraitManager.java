@@ -118,7 +118,7 @@ public class TraitManager {
 	}
 
 	public static int getTraitCap(int maxRankKilled, DifficultyLevel playerDifficulty) {
-		return Math.max(maxRankKilled + 1, playerDifficulty.level / LHConfig.COMMON.traitCapPerLevel.get());
+		return Math.max(maxRankKilled + 1, playerDifficulty.getLevel() / LHConfig.COMMON.traitCapPerLevel.get());
 	}
 
 }

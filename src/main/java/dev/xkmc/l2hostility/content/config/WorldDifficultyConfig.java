@@ -27,26 +27,26 @@ public class WorldDifficultyConfig extends BaseConfig {
 	@SerialClass.SerialField
 	public final HashMap<EntityType<?>, DifficultyConfig> entityMap = new HashMap<>();
 
-	public record DifficultyConfig(int base, double variation, double scale) {
+	public record DifficultyConfig(int min, int base, double variation, double scale) {
 
 	}
 
-	public WorldDifficultyConfig putDim(ResourceKey<DimensionType> key, int base, double var, double scale) {
-		levelMap.put(key.location(), new DifficultyConfig(base, var, scale));
+	public WorldDifficultyConfig putDim(ResourceKey<DimensionType> key, int min, int base, double var, double scale) {
+		levelMap.put(key.location(), new DifficultyConfig(min, base, var, scale));
 		return this;
 	}
 
 	@SafeVarargs
-	public final WorldDifficultyConfig putBiome(int base, double var, double scale, ResourceKey<Biome>... keys) {
+	public final WorldDifficultyConfig putBiome(int min, int base, double var, double scale, ResourceKey<Biome>... keys) {
 		for (var key : keys) {
-			biomeMap.put(key.location(), new DifficultyConfig(base, var, scale));
+			biomeMap.put(key.location(), new DifficultyConfig(min, base, var, scale));
 		}
 		return this;
 	}
 
-	public final WorldDifficultyConfig putEntity(int base, double var, double scale, EntityType<?>... keys) {
+	public final WorldDifficultyConfig putEntity(int min, int base, double var, double scale, EntityType<?>... keys) {
 		for (var key : keys) {
-			entityMap.put(key, new DifficultyConfig(base, var, scale));
+			entityMap.put(key, new DifficultyConfig(min, base, var, scale));
 		}
 		return this;
 	}
