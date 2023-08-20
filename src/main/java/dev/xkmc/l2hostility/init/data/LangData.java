@@ -26,7 +26,9 @@ public enum LangData {
 	INFO_PLAYER_CAP("info.player_cap", "Mob trait rank limit: %s", 1),
 	INFO_CHUNK_LEVEL("info.chunk_level", "Chunk base difficulty: %s", 1),
 	INFO_CHUNK_SCALE("info.chunk_scale", "Chunk difficulty scale: %s", 1),
-	TAB_TITLE("info.title", "Difficulty Information", 0);
+	TAB_TITLE("info.title", "Difficulty Information", 0),
+	LOOT_TITLE("jei.loot_title", "Trait Loot", 0),
+	CHANCE("jei.loot_chance", "%s%% chance to drop at Rank %s", 2);
 
 	final String id, def;
 	final int count;

@@ -1,8 +1,8 @@
-// 1.20.1	2023-07-30T14:17:12.883647	L2Hostility Config
-09ff3363cc87e04f86ca8cc4b34be5988fc57d45 data/l2hostility/l2hostility_config/difficulty/end.json
-258d643bbc8c523641e40ae9073c5181d20ba171 data/l2hostility/l2hostility_config/difficulty/mobs.json
-7e33254b84f95b9430238740139b6164facdb41d data/l2hostility/l2hostility_config/difficulty/nether.json
-8018b36edce6f135d93d3550c6322b2d9e2d7c6f data/l2hostility/l2hostility_config/difficulty/overworld.json
+// 1.20.1	2023-08-20T23:54:13.141823	L2Hostility Config
+175f917a777e6d88f2b3815647060c62e5d9848d data/l2hostility/l2hostility_config/difficulty/end.json
+8ce5807b8cbd5c2f6a74e74683ed577446a1fe41 data/l2hostility/l2hostility_config/difficulty/mobs.json
+369d1454b30dd13a883771fb78eb710724d5982d data/l2hostility/l2hostility_config/difficulty/nether.json
+87b20c47bf80ce84f153946c3f940dab96e8dbd3 data/l2hostility/l2hostility_config/difficulty/overworld.json
 2238b44e56ae92de117d0ff4d1b4a1e177d0a677 data/l2hostility/l2hostility_config/trait/adaptive.json
 c15f3a626f58ae764e07baed452c03e76ba40554 data/l2hostility/l2hostility_config/trait/blindness.json
 c3f01389dc6c9ac0f4d20ccb6fc887abd4b6244c data/l2hostility/l2hostility_config/trait/cursed.json

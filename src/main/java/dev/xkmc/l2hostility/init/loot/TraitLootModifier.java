@@ -23,9 +23,9 @@ public class TraitLootModifier extends LootModifier {
 					ItemStack.CODEC.fieldOf("result").forGetter(e -> e.result)))
 			.apply(i, TraitLootModifier::new));
 
-	private final MobTrait trait;
-	private final double chance, rankBonus;
-	private final ItemStack result;
+	public final MobTrait trait;
+	public final double chance, rankBonus;
+	public final ItemStack result;
 
 	public TraitLootModifier(MobTrait trait, double chance, double rankBonus, ItemStack result, LootItemCondition... conditionsIn) {
 		super(conditionsIn);
@@ -71,6 +71,10 @@ public class TraitLootModifier extends LootModifier {
 	@Override
 	public Codec<TraitLootModifier> codec() {
 		return CODEC;
+	}
+
+	public LootItemCondition[] getConditions() {
+		return conditions;
 	}
 
 }

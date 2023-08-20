@@ -2,6 +2,11 @@ package dev.xkmc.l2hostility.events;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
+import dev.xkmc.l2hostility.init.network.LootDataToClient;
+import dev.xkmc.l2hostility.mixin.ForgeInternalHandlerAccessor;
+import dev.xkmc.l2library.init.L2Library;
+import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -37,6 +42,22 @@ public class MobEvents {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			MobTraitCap.HOLDER.get(event.getEntity()).traits
 					.forEach((k, v) -> k.onDeath(v, event.getEntity(), event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onDatapackSync(OnDatapackSyncEvent event) {
+		List<TraitLootModifier> list = new ArrayList<>();
+		for (var e : ForgeInternalHandlerAccessor.callGetLootModifierManager().getAllLootMods()) {
+			if (e instanceof TraitLootModifier loot) {
+				list.add(loot);
+			}
+		}
+		LootDataToClient packet = new LootDataToClient(list);
+		if (event.getPlayer() == null) {
+			L2Library.PACKET_HANDLER.toAllClient(packet);
+		} else {
+			L2Library.PACKET_HANDLER.toClientPlayer(packet, event.getPlayer());
 		}
 	}
 

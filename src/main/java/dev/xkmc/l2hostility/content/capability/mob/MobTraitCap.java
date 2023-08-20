@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.capability.mob;
 
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
+import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
@@ -73,7 +74,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public static void register() {
 	}
 
-	public void init(Level level, LivingEntity le, ChunkDifficulty difficulty) {
+	public void init(Level level, LivingEntity le, RegionalDifficultyModifier difficulty) {
 		MobDifficultyCollector instance = new MobDifficultyCollector();
 		var diff = L2Hostility.DIFFICULTY.getMerged().entityMap.get(le.getType());
 		if (diff != null) {
@@ -86,7 +87,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			playerDiff.apply(instance);
 		}
 		lv = instance.getDifficulty(le.getRandom());
-		TraitManager.fill(le, lv, traits, instance.getMaxTraitLevel());
+		TraitManager.fill(le, lv, traits, instance);
 		stage = Stage.INIT;
 		syncToClient(le);
 	}
@@ -134,9 +135,9 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		return Wrappers.cast(data.computeIfAbsent(id, e -> sup.get()));
 	}
 
-	public List<Component> getTitle(boolean showTrait) {
+	public List<Component> getTitle(boolean showLevel, boolean showTrait) {
 		List<Component> ans = new ArrayList<>();
-		if (!LHConfig.COMMON.addLevelToName.get()) {
+		if (showLevel) {
 			ans.add(Component.literal("Lv." + lv).withStyle(ChatFormatting.GRAY));
 		}
 		if (!showTrait) return ans;

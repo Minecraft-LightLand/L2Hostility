@@ -3,8 +3,11 @@
   "entityMap": {},
   "levelMap": {
     "minecraft:the_nether": {
+      "apply_chance": 1.0,
       "base": 20,
+      "min": 0,
       "scale": 2.0,
+      "trait_chance": 1.0,
       "variation": 16.0
     }
   }

@@ -12,6 +12,7 @@ import dev.xkmc.l2hostility.events.LHAttackListener;
 import dev.xkmc.l2hostility.init.data.*;
 import dev.xkmc.l2hostility.init.entries.LHRegistrate;
 import dev.xkmc.l2hostility.init.loot.TraitGLMProvider;
+import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
@@ -40,7 +41,8 @@ public class L2Hostility {
 	public static final PacketHandlerWithConfig HANDLER = new PacketHandlerWithConfig(
 			new ResourceLocation(MODID, "main"), 1,
 			e -> e.create(CapSyncPacket.class, NetworkDirection.PLAY_TO_CLIENT),
-			e -> e.create(TraitEffectToClient.class, NetworkDirection.PLAY_TO_CLIENT)
+			e -> e.create(TraitEffectToClient.class, NetworkDirection.PLAY_TO_CLIENT),
+			e -> e.create(LootDataToClient.class, NetworkDirection.PLAY_TO_CLIENT)
 	);
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final LHRegistrate REGISTRATE = new LHRegistrate(MODID);

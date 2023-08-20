@@ -75,8 +75,11 @@ public class TraitManager {
 		}
 	}
 
-	public static void fill(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, int maxModLv) {
+	public static void fill(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
 		// add attributes
+		if (ins.apply_chance() < le.getRandom().nextDouble()) {
+			return;
+		}
 		if (!le.getType().is(TagGen.NO_SCALING)) {
 			addAttribute(le, Attributes.MAX_HEALTH, "hostility_health",
 					lv * LHConfig.COMMON.healthFactor.get(),
@@ -87,8 +90,10 @@ public class TraitManager {
 			populateArmors(le, lv);
 		}
 		// add traits
-		if (!le.getType().is(TagGen.NO_TRAIT)) {
-			generateTraits(le, lv, traits, maxModLv);
+		if (ins.trait_chance() >= le.getRandom().nextDouble()) {
+			if (!le.getType().is(TagGen.NO_TRAIT)) {
+				generateTraits(le, lv, traits, ins.getMaxTraitLevel());
+			}
 		}
 		le.setHealth(le.getMaxHealth());
 	}

@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.item.spawner.tile;
 
-import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.item.spawner.block.TraitSpawnerBlock;
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2modularblock.tile_api.TickableBlockEntity;

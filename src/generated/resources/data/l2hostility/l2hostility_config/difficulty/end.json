@@ -3,8 +3,11 @@
   "entityMap": {},
   "levelMap": {
     "minecraft:the_end": {
+      "apply_chance": 1.0,
       "base": 40,
+      "min": 0,
       "scale": 3.0,
+      "trait_chance": 1.0,
       "variation": 16.0
     }
   }

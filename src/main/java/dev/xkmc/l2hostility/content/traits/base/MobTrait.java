@@ -12,9 +12,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -105,6 +108,14 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		}
 		assert comp != null;
 		return comp;
+	}
+
+	public Item asItem() {
+		Item item = ForgeRegistries.ITEMS.getValue(getRegistryName());
+		if (item == null) {
+			item = Items.AIR;
+		}
+		return item;
 	}
 
 }

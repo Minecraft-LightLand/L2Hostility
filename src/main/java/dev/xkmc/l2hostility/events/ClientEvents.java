@@ -39,7 +39,10 @@ public class ClientEvents {
 			if (le.isInvisible() && RayTraceUtil.rayTraceEntity(player, player.getEntityReach(), e -> e == le) == null) {
 				return;
 			}
-			var list = MobTraitCap.HOLDER.get(le).getTitle(LHConfig.CLIENT.showAsNamePlate.get());
+			var list = MobTraitCap.HOLDER.get(le).getTitle(
+					LHConfig.CLIENT.showLevelAsNamePlate.get(),
+					LHConfig.CLIENT.showAsNamePlate.get()
+			);
 			int offset = list.size();
 			Font.DisplayMode mode = player.hasLineOfSight(event.getEntity()) ?
 					Font.DisplayMode.SEE_THROUGH :

@@ -7,7 +7,7 @@ import net.minecraft.util.RandomSource;
 public class MobDifficultyCollector {
 
 	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel();
-	public double scale, varSq;
+	public double scale, varSq, apply_chance = 1, trait_chance = 1;
 
 	public void acceptConfig(WorldDifficultyConfig.DifficultyConfig config) {
 		min = Math.max(min, config.min());
@@ -15,6 +15,8 @@ public class MobDifficultyCollector {
 		scale += config.scale();
 		varSq += config.variation() * config.variation();
 		count++;
+		apply_chance *= config.apply_chance();
+		trait_chance *= config.trait_chance();
 	}
 
 	public void acceptBonus(DifficultyLevel difficulty) {
@@ -44,6 +46,14 @@ public class MobDifficultyCollector {
 
 	public int getMaxTraitLevel() {
 		return traitCap;
+	}
+
+	public double apply_chance() {
+		return apply_chance;
+	}
+
+	public double trait_chance() {
+		return trait_chance;
 	}
 
 }

@@ -11,6 +11,8 @@
   "l2hostility.info.player_exp": "Difficulty progress: %s/%s",
   "l2hostility.info.player_level": "Player difficulty level: %s",
   "l2hostility.info.title": "Difficulty Information",
+  "l2hostility.jei.loot_chance": "%s%% chance to drop at Rank %s",
+  "l2hostility.jei.loot_title": "Trait Loot",
   "l2hostility.msg.ai": "Configure %s: Set NoAI to %s.",
   "l2hostility.msg.err_disallow": "Trait not applicable on this entity",
   "l2hostility.msg.err_max": "Trait level already reached max value",

@@ -11,10 +11,13 @@ public class LHConfig {
 	public static class Client {
 
 		public final ForgeConfigSpec.BooleanValue showAsNamePlate;
+		public final ForgeConfigSpec.BooleanValue showLevelAsNamePlate;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			showAsNamePlate = builder.comment("Render Traits in name plate form")
 					.define("showAsNamePlate", true);
+			showLevelAsNamePlate = builder.comment("Render mob level in name plate form")
+					.define("showLevelAsNamePlate", false);
 		}
 
 	}
@@ -32,6 +35,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue dimensionFactor;
 		public final ForgeConfigSpec.DoubleValue distanceFactor;
 		public final ForgeConfigSpec.BooleanValue addLevelToName;
+		public final ForgeConfigSpec.DoubleValue globalApplyChance;
+		public final ForgeConfigSpec.DoubleValue globalTraitChance;
 
 		public final ForgeConfigSpec.DoubleValue tankHealth;
 		public final ForgeConfigSpec.DoubleValue tankArmor;
@@ -57,21 +62,6 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue repellRange;
 
 		Common(ForgeConfigSpec.Builder builder) {
-			builder.push("difficulty");
-			{
-				killPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
-						.defineInRange("killPerLevel", 10, 1, 10000);
-				traitCapPerLevel = builder.comment("Mob trait cap per difficulty level. This is not the only factor")
-						.defineInRange("traitCapPerLevel", 20, 1, 10000);
-				deathDecay = builder.comment("Decay in player difficulty on death")
-						.defineInRange("deathDecay", 0.9, 0, 2);
-			}
-			builder.pop();
-			builder.push("misc");
-			addLevelToName = builder.comment("Add mob level to name")
-					.define("addLevelToName", true);
-			builder.pop();
-
 			builder.push("scaling");
 			{
 				healthFactor = builder.comment("Health factor per level")
@@ -88,7 +78,26 @@ public class LHConfig {
 						.defineInRange("dimensionFactor", 10, 0, 1000);
 				distanceFactor = builder.comment("Difficulty bonus per block from origin")
 						.defineInRange("distanceFactor", 0.01, 0, 1000);
+				globalApplyChance = builder.comment("Chance for health/damage bonus and trait to apply")
+						.defineInRange("globalApplyChance", 1d, 0, 1);
+				globalTraitChance = builder.comment("Chance for trait to apply")
+						.defineInRange("globalTraitChance", 1d, 0, 1);
 			}
+			builder.pop();
+
+			builder.push("difficulty");
+			{
+				killPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
+						.defineInRange("killPerLevel", 10, 1, 10000);
+				traitCapPerLevel = builder.comment("Mob trait cap per difficulty level. This is not the only factor")
+						.defineInRange("traitCapPerLevel", 20, 1, 10000);
+				deathDecay = builder.comment("Decay in player difficulty on death")
+						.defineInRange("deathDecay", 0.9, 0, 2);
+			}
+			builder.pop();
+			builder.push("misc");
+			addLevelToName = builder.comment("Add mob level to name")
+					.define("addLevelToName", true);
 			builder.pop();
 
 			builder.push("traits");

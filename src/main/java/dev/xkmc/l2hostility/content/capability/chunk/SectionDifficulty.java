@@ -33,7 +33,7 @@ public class SectionDifficulty {
 	private final DifficultyLevel difficulty = new DifficultyLevel();
 
 	@SerialClass.SerialField
-	private SectionStage stage = SectionStage.INIT;
+	private final SectionStage stage = SectionStage.INIT;
 
 	LevelChunkSection section;
 

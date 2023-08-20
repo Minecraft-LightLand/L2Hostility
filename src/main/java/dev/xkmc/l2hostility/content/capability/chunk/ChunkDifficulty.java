@@ -10,18 +10,18 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.*;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ChunkStatus;
+import net.minecraft.world.level.chunk.ImposterProtoChunk;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @SerialClass
-public class ChunkDifficulty {
+public class ChunkDifficulty implements RegionalDifficultyModifier {
 
 
 	public enum ChunkStage {
@@ -65,7 +65,7 @@ public class ChunkDifficulty {
 
 	public SectionDifficulty getSection(int y) {
 		int index = (y >> 4) - chunk.getMinSection();
-		index = Mth.clamp(index, 0, sections.length);
+		index = Mth.clamp(index, 0, sections.length - 1);
 		return sections[index];
 	}
 
