@@ -1,13 +1,19 @@
 package dev.xkmc.l2hostility.content.logic;
 
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
 public class MobDifficultyCollector {
 
 	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel();
-	public double scale, varSq, apply_chance = 1, trait_chance = 1;
+	public double scale, varSq, apply_chance, trait_chance;
+
+	public MobDifficultyCollector() {
+		apply_chance = LHConfig.COMMON.globalApplyChance.get();
+		trait_chance = LHConfig.COMMON.globalTraitChance.get();
+	}
 
 	public void acceptConfig(WorldDifficultyConfig.DifficultyConfig config) {
 		min = Math.max(min, config.min());
