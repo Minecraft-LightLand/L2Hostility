@@ -55,9 +55,9 @@ public class MobEvents {
 		}
 		LootDataToClient packet = new LootDataToClient(list);
 		if (event.getPlayer() == null) {
-			L2Library.PACKET_HANDLER.toAllClient(packet);
+			L2Hostility.HANDLER.toAllClient(packet);
 		} else {
-			L2Library.PACKET_HANDLER.toClientPlayer(packet, event.getPlayer());
+			L2Hostility.HANDLER.toClientPlayer(packet, event.getPlayer());
 		}
 	}
 

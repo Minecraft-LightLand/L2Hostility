@@ -24,6 +24,10 @@
 	  "player_exp": "玩家难度等级进度：%s/%s",
 	  "player_level": "玩家难度等级：%s",
 	  "title": "难度信息"
+	},
+	"jei": {
+	  "loot_chance": "%2$s阶词条%1$s%%概率掉落",
+	  "loot_title": "恶意词条掉落"
 	}
   }
 }

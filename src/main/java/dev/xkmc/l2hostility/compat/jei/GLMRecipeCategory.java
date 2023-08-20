@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.compat;
+package dev.xkmc.l2hostility.compat.jei;
 
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -12,6 +12,7 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -55,7 +56,7 @@ public class GLMRecipeCategory extends BaseRecipeCategory<TraitLootModifier, GLM
 			}
 		}
 		for (int lv = min; lv <= max; lv++) {
-			list.add(LangData.CHANCE.get(Math.round((recipe.chance + recipe.rankBonus * lv) * 100), lv));
+			list.add(LangData.CHANCE.get(Math.round((recipe.chance + recipe.rankBonus * lv) * 100), lv).withStyle(ChatFormatting.GRAY));
 		}
 	}
 

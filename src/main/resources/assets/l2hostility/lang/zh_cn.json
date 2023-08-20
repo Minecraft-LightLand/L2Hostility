@@ -53,5 +53,7 @@
   "l2hostility.info.player_cap": "怪物词条阶级上限：%s",
   "l2hostility.info.player_exp": "玩家难度等级进度：%s/%s",
   "l2hostility.info.player_level": "玩家难度等级：%s",
-  "l2hostility.info.title": "难度信息"
+  "l2hostility.info.title": "难度信息",
+  "l2hostility.jei.loot_chance": "%2$s阶词条%1$s%%概率掉落",
+  "l2hostility.jei.loot_title": "恶意词条掉落"
 }

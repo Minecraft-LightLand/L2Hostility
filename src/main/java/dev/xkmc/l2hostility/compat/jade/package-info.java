@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2hostility.compat;
+package dev.xkmc.l2hostility.compat.jade;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

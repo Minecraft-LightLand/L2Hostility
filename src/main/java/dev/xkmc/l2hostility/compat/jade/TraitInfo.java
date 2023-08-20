@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.compat;
+package dev.xkmc.l2hostility.compat.jade;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.L2Hostility;

@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.compat;
+package dev.xkmc.l2hostility.compat.jade;
 
 import net.minecraft.world.entity.LivingEntity;
 import snownee.jade.api.IWailaClientRegistration;
