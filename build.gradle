@@ -201,6 +201,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:attributefix-280510:4588114")
     runtimeOnly fg.deobf("curse.maven:bookshelf-228525:4581675")
     runtimeOnly fg.deobf("curse.maven:enchantment-descriptions-250419:4587429")
+    runtimeOnly fg.deobf("curse.maven:patchouli-306770:4633797")
 
     runtimeOnly fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:4599236")
 

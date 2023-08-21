@@ -1,0 +1,21 @@
+{
+  "conditions": [
+	{
+	  "type": "forge:mod_loaded",
+	  "modid": "patchouli"
+	}
+  ],
+  "type": "patchouli:shapeless_book_recipe",
+  "ingredients": [
+	{
+	  "item": "minecraft:book"
+	},
+	{
+	  "item": "minecraft:rotten_flesh"
+	},
+	{
+	  "item": "minecraft:bone"
+	}
+  ],
+  "book": "l2hostility:hostility_guide"
+}

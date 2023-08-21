@@ -11,6 +11,7 @@ public enum LangData {
 	TOOLTIP_DISABLE("tooltip.disable", "%s enchantments disabled for %ss. Any new enchantment will vanish.", 2),
 	TOOLTIP_SELF_EFFECT("tooltip.self_effect", "Mob gains continuous effect: ", 0),
 	TOOLTIP_TARGET_EFFECT("tooltip.target_effect", "Mob inflict effect on hit: ", 0),
+	LEGENDARY("tooltip.legendary", "Legendary", 0),
 
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),
@@ -27,6 +28,7 @@ public enum LangData {
 	INFO_CHUNK_LEVEL("info.chunk_level", "Chunk base difficulty: %s", 1),
 	INFO_CHUNK_SCALE("info.chunk_scale", "Chunk difficulty scale: %s", 1),
 	TAB_TITLE("info.title", "Difficulty Information", 0),
+
 	LOOT_TITLE("jei.loot_title", "Trait Loot", 0),
 	CHANCE("jei.loot_chance", "%s%% chance to drop at Rank %s", 2);
 

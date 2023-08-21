@@ -1,0 +1,8 @@
+{
+  "name": "patchouli.l2hostility.title",
+  "landing_text": "patchouli.l2hostility.landing",
+  "version": 1,
+  "model": "l2hostility:book",
+  "creative_tab": "l2library:hostility",
+  "use_resource_pack": true
+}

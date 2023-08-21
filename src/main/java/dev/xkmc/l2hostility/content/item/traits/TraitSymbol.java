@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.content.item.traits;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
@@ -79,6 +80,9 @@ public class TraitSymbol extends Item {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(get().getFullDesc(null));
+		if (get() instanceof LegendaryTrait) {
+			list.add(LangData.LEGENDARY.get().withStyle(ChatFormatting.GOLD));
+		}
 		get().addDetail(list);
 	}
 

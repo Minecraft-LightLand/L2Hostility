@@ -21,7 +21,7 @@ public class L2HostilityClient {
 	public static void client(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
 			TAB_DIFFICULTY = TabRegistry.registerTab(5000, DifficultyTab::new,
-					() -> Items.ROTTEN_FLESH, LangData.TAB_TITLE.get());
+					() -> Items.ZOMBIE_HEAD, LangData.TAB_TITLE.get());
 		});
 	}
 

@@ -15,7 +15,7 @@ import net.minecraft.world.item.CreativeModeTab;
 public class LHItems {
 
 	public static final RegistryEntry<CreativeModeTab> TAB = L2Hostility.REGISTRATE.buildL2CreativeTab(
-			"hostility", "L2Hostility", e -> e.icon(LHItems.ADDER::asStack));
+			"hostility", "L2Hostility", e -> e.icon(() -> LHTraits.ENDER.get().asItem().getDefaultInstance()));
 
 	public static final ItemEntry<TraitAdderWand> ADDER = L2Hostility.REGISTRATE.item(
 					"trait_adder_wand", p -> new TraitAdderWand(p.stacksTo(1)))
