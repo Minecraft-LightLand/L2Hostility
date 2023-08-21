@@ -75,15 +75,18 @@ public class TraitManager {
 		}
 	}
 
-	public static void fill(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
-		// add attributes
+	public static int fill(LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
+		int lv = ins.getDifficulty(le.getRandom());
+		int ans = 0;
 		if (ins.apply_chance() < le.getRandom().nextDouble()) {
-			return;
+			return ans;
 		}
+		// add attributes
 		if (!le.getType().is(TagGen.NO_SCALING)) {
 			addAttribute(le, Attributes.MAX_HEALTH, "hostility_health",
 					lv * LHConfig.COMMON.healthFactor.get(),
 					AttributeModifier.Operation.MULTIPLY_TOTAL);
+			ans = lv;
 		}
 		// armor
 		if (le.getType().is(TagGen.ARMOR_TARGET)) {
@@ -94,8 +97,10 @@ public class TraitManager {
 			if (!le.getType().is(TagGen.NO_TRAIT)) {
 				generateTraits(le, lv, traits, ins.getMaxTraitLevel());
 			}
+			ans = lv;
 		}
 		le.setHealth(le.getMaxHealth());
+		return ans;
 	}
 
 	public static void postFill(MobTraitCap cap, LivingEntity le) {

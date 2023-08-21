@@ -86,8 +86,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
 			playerDiff.apply(instance);
 		}
-		lv = instance.getDifficulty(le.getRandom());
-		TraitManager.fill(le, lv, traits, instance);
+		lv = TraitManager.fill(le, traits, instance);
 		stage = Stage.INIT;
 		syncToClient(le);
 	}
@@ -115,7 +114,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				TraitManager.postFill(this, mob);
 				traits.forEach((k, v) -> k.postInit(mob, v));
 				mob.setHealth(mob.getMaxHealth());
-				if (LHConfig.COMMON.addLevelToName.get()) {
+				if (lv > 0 && LHConfig.COMMON.addLevelToName.get()) {
 					mob.setCustomName(mob.getName().copy().append(" Lv." + lv));
 				}
 				syncToClient(mob);
@@ -137,7 +136,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	public List<Component> getTitle(boolean showLevel, boolean showTrait) {
 		List<Component> ans = new ArrayList<>();
-		if (showLevel) {
+		if (showLevel && lv > 0) {
 			ans.add(Component.literal("Lv." + lv).withStyle(ChatFormatting.GRAY));
 		}
 		if (!showTrait) return ans;

@@ -1,0 +1,16 @@
+{
+  "name": "Datapack",
+  "icon": "minecraft:book",
+  "category": "l2hostility:mechanics",
+  "sortnum": 102,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "Exact rules to determine mob level can be configured through datapack. You can specify the minimum level(min), additive level bonus(base), level bonus as a factor of player level (scale), randomness (variation), and chance to make mobs to gain level or having traits.$(br2)One can specify a difficulty config entry for each dimension / biome / entity type, and all of them take effect collectively."
+	},
+	{
+	  "type": "patchoili:text",
+	  "text": "You can also configure the chance, level cost, max rank, and entity blacklist / whitelist for each trait. When generating traits for a mob, each trait will have a chance to enter the trait pool. Then we pick one random trait from the pool, assign a rank, and repeat this process until we have no traits left in the pool, or total level cost of traits reach the mob level."
+	}
+  ]
+}

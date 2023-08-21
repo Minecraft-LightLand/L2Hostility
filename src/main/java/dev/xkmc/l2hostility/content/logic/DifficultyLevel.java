@@ -30,13 +30,13 @@ public class DifficultyLevel {
 	}
 
 	public void decay() {
-		level *= LHConfig.COMMON.deathDecay.get();
+		level = Math.max(0, level - Math.max(1, (int) Math.ceil(level * LHConfig.COMMON.deathDecay.get())));
 		exp = 0;
 	}
 
 	public int getMaxExp() {
 		int factor = LHConfig.COMMON.killPerLevel.get();
-		return level * level * factor;
+		return Math.max(1, level * level * factor);
 	}
 
 	public int getLevel() {

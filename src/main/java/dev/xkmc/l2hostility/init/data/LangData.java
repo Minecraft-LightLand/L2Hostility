@@ -23,14 +23,17 @@ public enum LangData {
 	MSG_ERR_DISALLOW("msg.err_disallow", "Trait not applicable on this entity", 0),
 
 	INFO_PLAYER_LEVEL("info.player_level", "Player difficulty level: %s", 1),
-	INFO_PLAYER_EXP("info.player_exp", "Difficulty progress: %s/%s", 2),
+	INFO_PLAYER_EXP("info.player_exp", "Difficulty progress: %s%%", 1),
 	INFO_PLAYER_CAP("info.player_cap", "Mob trait rank limit: %s", 1),
 	INFO_CHUNK_LEVEL("info.chunk_level", "Chunk base difficulty: %s", 1),
 	INFO_CHUNK_SCALE("info.chunk_scale", "Chunk difficulty scale: %s", 1),
 	TAB_TITLE("info.title", "Difficulty Information", 0),
 
 	LOOT_TITLE("jei.loot_title", "Trait Loot", 0),
-	CHANCE("jei.loot_chance", "%s%% chance to drop at Rank %s", 2);
+	CHANCE("jei.loot_chance", "%s%% chance to drop at Rank %s", 2),
+
+	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
+	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0);
 
 	final String id, def;
 	final int count;

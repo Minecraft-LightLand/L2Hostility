@@ -37,6 +37,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue addLevelToName;
 		public final ForgeConfigSpec.DoubleValue globalApplyChance;
 		public final ForgeConfigSpec.DoubleValue globalTraitChance;
+		public final ForgeConfigSpec.BooleanValue allowLegendary;
 
 		public final ForgeConfigSpec.DoubleValue tankHealth;
 		public final ForgeConfigSpec.DoubleValue tankArmor;
@@ -82,6 +83,8 @@ public class LHConfig {
 						.defineInRange("globalApplyChance", 1d, 0, 1);
 				globalTraitChance = builder.comment("Chance for trait to apply")
 						.defineInRange("globalTraitChance", 1d, 0, 1);
+				allowLegendary = builder.comment("Allow legendary traits")
+						.define("allowLegendary", true);
 			}
 			builder.pop();
 

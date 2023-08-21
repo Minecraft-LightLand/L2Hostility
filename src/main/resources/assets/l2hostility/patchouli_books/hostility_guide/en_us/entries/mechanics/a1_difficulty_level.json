@@ -1,0 +1,16 @@
+{
+  "name": "Difficulty Mechanics",
+  "icon": "minecraft:zombie_head",
+  "category": "l2hostility:mechanics",
+  "sortnum": 1,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "Mobs spawned will be assigned a level based on dimension, biome, location, entity type, and nearest player. Mobs will gain health, damage, and traits based on its level.$(br2)Player will gain difficulty when killing mobs. Killing mobs with higher level will increase difficulty faster. Dying will reduce player difficulty."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "There are also other factors that may determine mob level: By default, mobs further from the origin will have higher levels, and the more dimensions you have visited, the stronger the mobs you meet will be.$(br2)You can view all related information in your inventory tab."
+	}
+  ]
+}

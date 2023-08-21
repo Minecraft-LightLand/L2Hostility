@@ -61,6 +61,8 @@ public class AdaptingTrait extends MobTrait {
 
 		@SerialClass.SerialField
 		public int count;
+
 	}
+
 
 }

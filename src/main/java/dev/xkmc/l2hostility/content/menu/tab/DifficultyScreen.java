@@ -43,7 +43,8 @@ public class DifficultyScreen extends BaseTextScreen {
 		assert player != null;
 		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
 		list.add(LangData.INFO_PLAYER_LEVEL.get(cap.getLevel().getLevel()));
-		list.add(LangData.INFO_PLAYER_EXP.get(cap.getLevel().getExp(), cap.getLevel().getMaxExp()));
+		int perc = Math.round(100f * cap.getLevel().getExp() / cap.getLevel().getMaxExp());
+		list.add(LangData.INFO_PLAYER_EXP.get(perc));
 		list.add(LangData.INFO_PLAYER_CAP.get(cap.getRankCap()));
 		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 		if (opt.isPresent()) {
