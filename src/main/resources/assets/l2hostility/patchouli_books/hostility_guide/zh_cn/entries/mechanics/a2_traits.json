@@ -1,0 +1,16 @@
+{
+  "name": "Traits",
+  "icon": "l2hostility:fiery",
+  "category": "l2hostility:mechanics",
+  "sortnum": 2,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "Mob will have traits when they have high enough level. At first, player may only find mobs with rank 1 traits. When player kills a mob with rank 1 trait, rank 2 traits will be unlocked for mobs spawned near this player.$(br2)Traits have their own loot table. You can check JEI for drops of each trait."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "The number of traits a mob can have depends on level and trait ranks. When the maximum trait rank is low while mob level is high, the mob would have a lot of traits. Conversely, if the mob has low level but is allowed to have high rank traits, the mob may have only one trait."
+	}
+  ]
+}

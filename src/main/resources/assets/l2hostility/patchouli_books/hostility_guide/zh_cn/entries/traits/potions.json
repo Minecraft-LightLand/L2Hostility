@@ -1,0 +1,46 @@
+{
+  "name": "Potion Effect Traits",
+  "icon": "l2hostility:blindness",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "There are 7 traits that allow mobs to apply vanilla potion effects."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:blindness",
+	  "text": "This trait allows mobs to apply blindness effect, which significantly reduce sight."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:nausea",
+	  "text": "This trait allows mobs to apply nausea effect, which significantly distorts sight."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:levitation",
+	  "text": "This trait allows mobs to apply levitation effect."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:slowness",
+	  "text": "This trait allows mobs to apply slowness effect."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:weakness",
+	  "text": "This trait allows mobs to apply weakness effect."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:poison",
+	  "text": "This trait allows mobs to apply poison effect."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:wither",
+	  "text": "This trait allows mobs to apply wither effect."
+	}
+  ]
+}

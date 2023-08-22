@@ -1,0 +1,16 @@
+{
+  "name": "Protection",
+  "icon": "l2hostility:protection",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:protection",
+	  "text": "Mob will have resistance effect, with level equal to rank of this trait."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To deal with mobs with Protection trait, weapons that bypass resistance or cleanse potion that erase all potions would help."
+	}
+  ]
+}

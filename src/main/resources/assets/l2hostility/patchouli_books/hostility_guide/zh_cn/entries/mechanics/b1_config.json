@@ -1,0 +1,16 @@
+{
+  "name": "Mod Configuration",
+  "icon": "minecraft:paper",
+  "category": "l2hostility:mechanics",
+  "sortnum": 101,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "You can configure difficulty calculation in config: There are config values that allow mobs spawned further from origin to have higher levels, and config values that allow mobs you meet to have a level bonus for each dimension you have visited.$(br2)You can also specify how frequent mobs with level and trait will spawn."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "You can also specify how much mobs are buffed, and the strength of each trait in config. All numbers are configurable in this mod.$(br2)Advanced configuration are available through datapack."
+	}
+  ]
+}

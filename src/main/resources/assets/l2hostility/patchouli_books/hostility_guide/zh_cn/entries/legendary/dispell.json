@@ -1,0 +1,16 @@
+{
+  "name": "Dispell",
+  "icon": "l2hostility:dispell",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:dispell",
+	  "text": "Mobs with this trait can deal damage that bypass magical protection, and randomly negate enchantments on one of your equipments temporarily. Also, they will be immune to magic damage."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To fight this mob, you need shields to block attacks. Otherwise their attack might be more effective than you think."
+	}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Adaptive",
+  "icon": "l2hostility:adaptive",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:adaptive",
+	  "text": "Mobs with this trait will get used to attacks. They will remember most recent damage types, and get used to them. They can remember as many damage types as its rank."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To fight mobs with Adaptive trait, you need to use various damage types to clear their memory. Alternative melee, trident, arrow attacks are effective.$(br2)If the rank is high, potion, lava, fire, cactus, falling damage etc can help to clear the memory."
+	}
+  ]
+}

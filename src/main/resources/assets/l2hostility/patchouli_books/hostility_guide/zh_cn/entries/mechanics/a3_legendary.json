@@ -1,0 +1,16 @@
+{
+  "name": "Legendary Traits",
+  "icon": "l2hostility:teleport",
+  "category": "l2hostility:mechanics",
+  "sortnum": 3,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "Legendary traits are unlocked only when player unlocks rank 5 traits. Legendary traits are special abilities that could be annoying to fight, very threatening for endgame players, or requires specific mechanics to kill.$(br2)If you think they are too strong, you can disable them through config or datapack."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "Here are some examples of legendary traits that requires specific mechanics to kill:$(li)Cursed effect is required to kill mobs with Undying trait. Otherwise they will respawn indefinitely.$(li)Magic damage is required to kill mobs with Teleport Trait or Dementor Trait."
+	}
+  ]
+}

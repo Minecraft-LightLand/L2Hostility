@@ -1,0 +1,12 @@
+{
+  "name": "Speedy",
+  "icon": "l2hostility:speedy",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:speedy",
+	  "text": "Mobs with this trait moves very fast."
+	}
+  ]
+}

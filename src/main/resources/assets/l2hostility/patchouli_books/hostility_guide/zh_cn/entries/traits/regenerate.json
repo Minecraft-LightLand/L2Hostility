@@ -1,0 +1,16 @@
+{
+  "name": "Regenerate",
+  "icon": "l2hostility:regenerate",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:regenerate",
+	  "text": "Mob with this trait will regenerate health every second."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To deal with mobs with this trait, either kill it fast enough, or apply cursed effect, which prevents healing."
+	}
+  ]
+}

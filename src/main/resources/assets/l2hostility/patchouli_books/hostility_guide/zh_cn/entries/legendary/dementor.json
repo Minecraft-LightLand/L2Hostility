@@ -1,0 +1,16 @@
+{
+  "name": "Dementor",
+  "icon": "l2hostility:dementor",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:dementor",
+	  "text": "Mobs with this trait is immune to physical damage, and will deal magical damage that bypasses armor."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To fight mobs with this trait, you need to use weapons that can deal magic damage, or bypass magical protection. Also, you might need strong protection enchantments to protect yourself."
+	}
+  ]
+}
