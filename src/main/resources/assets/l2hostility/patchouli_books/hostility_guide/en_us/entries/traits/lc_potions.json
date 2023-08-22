@@ -1,0 +1,26 @@
+{
+  "name": "L2Complements Effect Traits",
+  "icon": "l2hostility:freezing",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "There are 3 traits that allow mobs to inflict potion effects from L2Complements: Cursed, Soul Burner, and Freezing"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:cursed",
+	  "text": "This trait allows mobs to apply cursed effect, which prevents healing."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:soul_burner",
+	  "text": "This trait allows mobs to apply soul flame effect, which deals high damage."
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:freezing",
+	  "text": "This trait allows mobs to apply frost effect, which slows down target and reduce visibility."
+	}
+  ]
+}

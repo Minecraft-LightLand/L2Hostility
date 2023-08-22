@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.traits.goals;
 
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -18,7 +19,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
-public class EnderTrait extends MobTrait {
+public class EnderTrait extends LegendaryTrait {
 
 	public EnderTrait(ChatFormatting format) {
 		super(format);

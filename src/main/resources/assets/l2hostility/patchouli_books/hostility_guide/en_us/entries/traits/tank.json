@@ -1,0 +1,16 @@
+{
+  "name": "Tank",
+  "icon": "l2hostility:tank",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:tank",
+	  "text": "Mob with this trait gains extra armor and health."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "Weapons that bypass armor or magic damage are good against mobs with this trait."
+	}
+  ]
+}

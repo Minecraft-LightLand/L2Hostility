@@ -4,6 +4,7 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffects;
 import net.minecraft.ChatFormatting;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -17,6 +18,9 @@ public class UndyingTrait extends LegendaryTrait {
 	@Override
 	public void onDeath(int level, LivingEntity entity, LivingDeathEvent event) {
 		if (entity.level().isClientSide()) {
+			return;
+		}
+		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
 			return;
 		}
 		float health = ForgeEventFactory.onLivingHeal(entity, entity.getMaxHealth());

@@ -1,6 +1,6 @@
 {
   "name": "Legendary Traits",
-  "icon": "minecraft:teleport",
+  "icon": "l2hostility:teleport",
   "category": "l2hostility:mechanics",
   "sortnum": 3,
   "pages": [

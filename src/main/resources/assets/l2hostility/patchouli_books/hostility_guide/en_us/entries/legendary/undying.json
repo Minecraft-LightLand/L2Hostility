@@ -1,0 +1,16 @@
+{
+  "name": "Undying",
+  "icon": "l2hostility:undying",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:undying",
+	  "text": "Mobs with this trait will revive to full health when attempted to be killed, unless it cannot heal or the damage is void damage."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To kill mobs with this trait, cursed effect is the best, as this effect can prevent healing.$(br2)You need to kill mobs with Cursed trait to obtain items that can craft weapons capable of inflicting cursed effect."
+	}
+  ]
+}

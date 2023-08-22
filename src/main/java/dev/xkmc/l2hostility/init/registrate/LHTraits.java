@@ -74,7 +74,7 @@ public class LHTraits {
 		{
 			FIERY = L2Hostility.REGISTRATE.regTrait("fiery", FieryTrait::new,
 							() -> new TraitConfig(10, 1, 1))
-					.desc("Ignite attacker and attack target for %s seconds.")
+					.desc("Ignite attacker and attack target for %s seconds. Makes mob immune to fire.")
 					.lang("Fiery").register();
 			REGEN = L2Hostility.REGISTRATE.regTrait("regenerate", () -> new RegenTrait(ChatFormatting.RED),
 							() -> new TraitConfig(10, 1, 5))
@@ -99,7 +99,7 @@ public class LHTraits {
 					.lang("Dementor").register();
 			DISPELL = L2Hostility.REGISTRATE.regTrait("dispell", () -> new DispellTrait(ChatFormatting.DARK_PURPLE),
 							() -> new TraitConfig(50, 0.5, 3))
-					.desc("Immune to magic damage. Damage bypass magical protections. Randomly picks an equipment slot and disable enchantments on them for %s seconds.")
+					.desc("Immune to magic damage. Damage bypass magical protections. Randomly picks an enchanted equipment and disable enchantments on them for %s seconds.")
 					.lang("Dispell").register();
 			UNDYING = L2Hostility.REGISTRATE.regTrait("undying", () -> new UndyingTrait(ChatFormatting.DARK_BLUE),
 							() -> new TraitConfig(80, 1, 1))

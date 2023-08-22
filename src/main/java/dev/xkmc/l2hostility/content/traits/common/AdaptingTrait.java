@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AdaptingTrait extends MobTrait {
@@ -31,13 +32,15 @@ public class AdaptingTrait extends MobTrait {
 		if (data.memory.contains(id)) {
 			data.memory.remove(id);
 			data.memory.add(0, id);
-			data.count++;
-			double factor = Math.pow(LHConfig.COMMON.adaptFactor.get(), data.count);
+			int val = data.adaption.compute(id, (k, old) -> old == null ? 1 : old + 1);
+			double factor = Math.pow(LHConfig.COMMON.adaptFactor.get(), val - 1);
 			event.setAmount((float) (event.getAmount() * factor));
 		} else {
 			data.memory.add(0, id);
+			data.adaption.put(id, 0);
 			if (data.memory.size() > level) {
-				data.memory.remove(data.memory.size() - 1);
+				String old = data.memory.remove(data.memory.size() - 1);
+				data.adaption.remove(old);
 			}
 		}
 	}
@@ -60,7 +63,7 @@ public class AdaptingTrait extends MobTrait {
 		public final ArrayList<String> memory = new ArrayList<>();
 
 		@SerialClass.SerialField
-		public int count;
+		public final HashMap<String, Integer> adaption = new HashMap<>();
 
 	}
 

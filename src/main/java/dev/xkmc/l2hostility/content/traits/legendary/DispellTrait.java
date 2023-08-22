@@ -9,6 +9,7 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -31,7 +32,12 @@ public class DispellTrait extends LegendaryTrait {
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
 		LivingEntity target = cache.getAttackTarget();
 		List<ItemStack> list = new ArrayList<>();
-		target.getArmorSlots().forEach(list::add);
+		for (EquipmentSlot slot : EquipmentSlot.values()){
+			ItemStack stack = target.getItemBySlot(slot);
+			if (stack.isEnchanted()){
+				list.add(stack);
+			}
+		}
 		if (list.size() == 0) return;
 		int index = attacker.getRandom().nextInt(list.size());
 		int time = LHConfig.COMMON.dispellTime.get() * level;

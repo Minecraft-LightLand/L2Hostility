@@ -1,0 +1,16 @@
+{
+  "name": "Reflect",
+  "icon": "l2hostility:reflect",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:reflect",
+	  "text": "Mobs with this trait would reflect direct physical damage to attacker. Higher rank of this trait would amplify reflected damage. Note that this is a magic attack, which bypasses armor."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To deal with mobs with Reflect trait, try to use arrow, throwable weapons, or magic damage."
+	}
+  ]
+}

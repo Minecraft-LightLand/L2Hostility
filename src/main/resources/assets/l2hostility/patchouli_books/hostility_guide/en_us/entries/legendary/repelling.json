@@ -1,0 +1,16 @@
+{
+  "name": "Repelling",
+  "icon": "l2hostility:repelling",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:repelling",
+	  "text": "Mobs with this trait can repel players and entities targeting it, and are immune to projectiles."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To kill mobs with this trait, you can use magical damage, explosions, or projectiles that can bypass projectile immunity."
+	}
+  ]
+}

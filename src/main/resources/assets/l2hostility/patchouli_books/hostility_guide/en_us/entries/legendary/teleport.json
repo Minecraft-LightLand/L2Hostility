@@ -1,0 +1,16 @@
+{
+  "name": "Teleport",
+  "icon": "l2hostility:teleport",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:teleport",
+	  "text": "Mobs with this trait can teleport to escape non-magic damage. In case it failed to teleport, it can still repel projectiles.$(br2)This trait also allows mobs to teleport to their target directly."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To fight mobs with this trait, you need to use weapons that can deal magic damage, bypass magical protections, or prevent teleport."
+	}
+  ]
+}

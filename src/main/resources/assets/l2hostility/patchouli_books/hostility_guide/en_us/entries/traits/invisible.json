@@ -1,0 +1,16 @@
+{
+  "name": "Invisible",
+  "icon": "l2hostility:invisible",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:invisible",
+	  "text": "Invisible trait makes mobs invisible. It applies Transparent enchantment on equipments to hide them as well. It also hides the trait title unless you look at them directly."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "Applying cleansed potion or glowing effect can help you to see the invisible mob."
+	}
+  ]
+}
