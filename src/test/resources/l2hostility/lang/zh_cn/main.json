@@ -28,7 +28,8 @@
 	  "player_cap": "怪物词条阶级上限：%s",
 	  "player_exp": "玩家难度等级进度：%s%%",
 	  "player_level": "玩家难度等级：%s",
-	  "title": "难度信息"
+	  "title": "难度信息",
+	  "clear": "子区块难度已清除"
 	},
 	"jei": {
 	  "loot_chance": "%2$s阶词条%1$s%%概率掉落",

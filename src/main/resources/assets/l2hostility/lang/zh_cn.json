@@ -3,6 +3,7 @@
   "item.l2hostility.equipment_wand": "装备配置手杖",
   "item.l2hostility.target_select_wand": "攻击目标控制手杖",
   "item.l2hostility.trait_adder_wand": "词条配置手杖",
+  "block.l2hostility.hostility_spawner": "恶意刷怪笼",
   "trait.l2hostility.adaptive": "适应",
   "trait.l2hostility.adaptive.desc": "记忆最近收到的%2$s种伤害。每次受到记忆中的伤害时，对那个伤害叠加%s%%的减伤（无上限）",
   "trait.l2hostility.dementor": "摄魂",
@@ -57,6 +58,7 @@
   "l2hostility.info.player_exp": "玩家难度等级进度：%s%%",
   "l2hostility.info.player_level": "玩家难度等级：%s",
   "l2hostility.info.title": "难度信息",
+  "l2hostility.info.clear": "子区块难度已清除",
   "l2hostility.jei.loot_chance": "%2$s阶词条%1$s%%概率掉落",
   "l2hostility.jei.loot_title": "恶意词条掉落",
   "l2hostility.jei.min_level": "等级%s及以上的怪物掉落"
