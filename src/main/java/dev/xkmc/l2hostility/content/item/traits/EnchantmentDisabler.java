@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
@@ -19,10 +20,14 @@ public class EnchantmentDisabler {
 	public static void disableEnchantment(Level level, ItemStack stack, int duration) {
 		CompoundTag root = stack.getOrCreateTag();
 		if (!root.contains(ENCH, Tag.TAG_LIST)) return;
+		double durability = stack.getMaxDamage() == 0 ? 0 : 1d * stack.getDamageValue() / stack.getMaxDamage();
 		CompoundTag tag = stack.getOrCreateTagElement(ROOT);
 		tag.put(OLD, root.getList(ENCH, Tag.TAG_COMPOUND));
 		root.remove(ENCH);
 		tag.putLong(TIME, level.getGameTime() + duration);
+		if (stack.isDamageableItem()) {
+			stack.setDamageValue(Mth.clamp((int) Math.floor(durability * stack.getMaxDamage()), 0, stack.getMaxDamage() - 1));
+		}
 	}
 
 	public static void tickStack(Level level, ItemStack stack) {

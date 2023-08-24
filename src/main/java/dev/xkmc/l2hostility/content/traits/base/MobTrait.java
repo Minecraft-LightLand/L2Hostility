@@ -49,15 +49,18 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	}
 
 	public int getMaxLevel() {
-		return getConfig().maxLevel;
+		return getConfig().max_rank;
 	}
 
 	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
 		TraitConfig config = getConfig();
+		if (difficulty < config.min_level) return false;
 		if (difficulty < config.cost) return false;
 		if (config.blacklist.contains(le.getType())) return false;
-		if (!config.whitelist.isEmpty() && !config.whitelist.contains(le.getType())) return false;
-		return le.getRandom().nextDouble() < config.chance;
+		if (!config.whitelist.isEmpty()) {
+			return config.whitelist.contains(le.getType());
+		}
+		return true;
 	}
 
 	public void initialize(LivingEntity mob, int level) {

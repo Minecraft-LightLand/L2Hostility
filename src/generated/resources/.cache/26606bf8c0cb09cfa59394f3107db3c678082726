@@ -1,4 +1,4 @@
-// 1.20.1	2023-07-31T22:28:01.211673	Global Loot Modifiers : l2hostility
+// 1.20.1	2023-08-24T14:27:31.938022	Global Loot Modifiers : l2hostility
 00967009c5d113a8365aa1729f24bd007d47fc05 data/forge/loot_modifiers/global_loot_modifiers.json
 71c3d84efb2863fa013f196cf603381ee5e4d875 data/l2hostility/loot_modifiers/adaptive_drop_cursed_droplet.json
 9b0c9dca753c5f8f2009e01878642ffb19c51a7f data/l2hostility/loot_modifiers/blindness_drop_ink_sac.json
@@ -21,7 +21,7 @@ cb566f8e2f4400e1710cebc12ebf1ded2698f1c2 data/l2hostility/loot_modifiers/reflect
 6af3ecbb0522e353322c3a8923a1d475707ca82c data/l2hostility/loot_modifiers/repelling_drop_force_field.json
 4acffbbf8fbe59edc757a7b5c16b8eb9e453d193 data/l2hostility/loot_modifiers/slowness_drop_cobweb.json
 15afc182c8379bd7e867089464807b65f0bdfec2 data/l2hostility/loot_modifiers/soul_burner_drop_soul_flame.json
-2d5b930053916bf00851aa0103e1e11050565922 data/l2hostility/loot_modifiers/speedy_drop_captured_wind.json
+cac003749c4b8eaab96023c6433ddff0ac423992 data/l2hostility/loot_modifiers/speedy_drop_captured_wind.json
 b02f026a3f309fc13a0670af08e7873154ba28d1 data/l2hostility/loot_modifiers/speedy_drop_rabbit_foot.json
 b70eaca9cfa7f417ebc16334be6e95b64d361c7d data/l2hostility/loot_modifiers/tank_drop_diamond.json
 b013d5215303c31ac391ee266534a4519316860e data/l2hostility/loot_modifiers/tank_drop_netherite_scrap.json

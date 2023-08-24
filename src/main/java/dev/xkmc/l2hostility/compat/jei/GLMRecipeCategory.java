@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.compat.jei;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.loot.MobCapLootCondition;
 import dev.xkmc.l2hostility.init.loot.TraitLootCondition;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2library.serial.recipe.BaseRecipeCategory;
@@ -47,13 +48,19 @@ public class GLMRecipeCategory extends BaseRecipeCategory<TraitLootModifier, GLM
 	}
 
 	private void addtooltip(IRecipeSlotView view, List<Component> list, TraitLootModifier recipe) {
-		int max = recipe.trait.getConfig().maxLevel;
+		int max = recipe.trait.getConfig().max_rank;
 		int min = 1;
+		int minLevel = 0;
 		for (var c : recipe.getConditions()) {
 			if (c instanceof TraitLootCondition cl && cl.trait == recipe.trait) {
 				max = Math.min(max, cl.maxLevel);
 				min = Math.max(min, cl.minLevel);
+			} else if (c instanceof MobCapLootCondition cl) {
+				minLevel = cl.minLevel;
 			}
+		}
+		if (minLevel > 0) {
+			list.add(LangData.MIN_LEVEL.get(minLevel).withStyle(ChatFormatting.LIGHT_PURPLE));
 		}
 		for (int lv = min; lv <= max; lv++) {
 			list.add(LangData.CHANCE.get(Math.round((recipe.chance + recipe.rankBonus * lv) * 100), lv).withStyle(ChatFormatting.GRAY));

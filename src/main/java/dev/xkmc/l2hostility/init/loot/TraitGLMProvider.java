@@ -24,8 +24,21 @@ import java.util.Objects;
 
 public class TraitGLMProvider extends GlobalLootModifierProvider {
 
-	public static final RegistryEntry<LootItemConditionType> TRAIT_AND_LEVEL = L2Hostility.REGISTRATE.simple("trait_and_level", Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(new TraitSerializer<>(TraitLootCondition.class)));
-	public static final RegistryEntry<Codec<TraitLootModifier>> TRAIT_SCALED = L2Hostility.REGISTRATE.simple("trait_scaled", ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> TraitLootModifier.CODEC);
+	public static final RegistryEntry<LootItemConditionType> TRAIT_AND_LEVEL;
+	public static final RegistryEntry<LootItemConditionType> MOB_LEVEL;
+	public static final RegistryEntry<Codec<TraitLootModifier>> TRAIT_SCALED;
+
+	static {
+		TRAIT_AND_LEVEL = L2Hostility.REGISTRATE.simple("trait_and_level",
+				Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(
+						new TraitSerializer<>(TraitLootCondition.class)));
+		MOB_LEVEL = L2Hostility.REGISTRATE.simple("mob_level",
+				Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(
+						new TraitSerializer<>(MobCapLootCondition.class)));
+		TRAIT_SCALED = L2Hostility.REGISTRATE.simple("trait_scaled",
+				ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> TraitLootModifier.CODEC);
+
+	}
 
 	public static void register() {
 
@@ -40,7 +53,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.TANK.get(), new ItemStack(Items.DIAMOND, 4), 1, 0, 0.1);
 		add(LHTraits.TANK.get(), new ItemStack(Items.NETHERITE_SCRAP, 1), 3, 0, 0.1);
 		add(LHTraits.SPEEDY.get(), new ItemStack(Items.RABBIT_FOOT, 2), 1, 0, 0.1);
-		add(LHTraits.SPEEDY.get(), new ItemStack(LCItems.CAPTURED_WIND, 1), 3, 0, 0.1);
+		add(LHTraits.SPEEDY.get(), new ItemStack(LCItems.CAPTURED_WIND, 1), 3, 0, 0.1, 50);
 		add(LHTraits.PROTECTION.get(), new ItemStack(Items.SCUTE, 4), 1, 0, 0.1);
 		add(LHTraits.PROTECTION.get(), new ItemStack(LCItems.EXPLOSION_SHARD, 1), 3, 0, 0.1);
 		add(LHTraits.INVISIBLE.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.INVISIBILITY), 1, 1, 0);
@@ -69,6 +82,15 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.FREEZING.get(), new ItemStack(LCItems.HARD_ICE, 2), 1, 0, 0.1);
 		add(LHTraits.CURSED.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Objects.requireNonNull(ForgeRegistries.POTIONS.getValue(new ResourceLocation(L2Complements.MODID, "curse")))), 1, 0, 0.2);
 		add(LHTraits.CURSED.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.05);
+	}
+
+	private void add(MobTrait trait, ItemStack stack, int start, double chance, double bonus, int min) {
+		String name = trait.getRegistryName().getPath() + "_drop_" + ForgeRegistries.ITEMS.getKey(stack.getItem()).getPath();
+		add(name, new TraitLootModifier(trait, chance, bonus, stack,
+				LootTableTemplate.byPlayer().build(),
+				new TraitLootCondition(trait, start, 5),
+				new MobCapLootCondition(min)
+		));
 	}
 
 	private void add(MobTrait trait, ItemStack stack, int start, double chance, double bonus) {

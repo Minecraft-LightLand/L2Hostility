@@ -31,8 +31,10 @@ public enum LangData {
 
 	LOOT_TITLE("jei.loot_title", "Trait Loot", 0),
 	CHANCE("jei.loot_chance", "%s%% chance to drop at Rank %s", 2),
+	MIN_LEVEL("jei.min_level", "Drops on mobs with level %s or higher", 1),
 
 	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
+
 	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0);
 
 	final String id, def;

@@ -32,9 +32,9 @@ public class DispellTrait extends LegendaryTrait {
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
 		LivingEntity target = cache.getAttackTarget();
 		List<ItemStack> list = new ArrayList<>();
-		for (EquipmentSlot slot : EquipmentSlot.values()){
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			ItemStack stack = target.getItemBySlot(slot);
-			if (stack.isEnchanted()){
+			if (stack.isEnchanted()) {
 				list.add(stack);
 			}
 		}

@@ -10,13 +10,10 @@ import java.util.LinkedHashSet;
 @SerialClass
 public class TraitConfig extends BaseConfig {
 
-	public static final TraitConfig DEFAULT = new TraitConfig(10, 1, 1);
+	public static final TraitConfig DEFAULT = new TraitConfig(10, 100, 1, 10);
 
 	@SerialClass.SerialField
-	public int cost, maxLevel;
-
-	@SerialClass.SerialField
-	public double chance;
+	public int min_level, cost, max_rank, weight;
 
 	@SerialClass.SerialField
 	public LinkedHashSet<EntityType<?>> blacklist = new LinkedHashSet<>();
@@ -28,10 +25,11 @@ public class TraitConfig extends BaseConfig {
 	public TraitConfig() {
 	}
 
-	public TraitConfig(int cost, double chance, int maxLevel) {
+	public TraitConfig(int cost, int weight, int maxRank, int minLevel) {
 		this.cost = cost;
-		this.chance = chance;
-		this.maxLevel = maxLevel;
+		this.weight = weight;
+		this.max_rank = maxRank;
+		this.min_level = minLevel;
 	}
 
 	public TraitConfig whitelist(EntityType<?>... types) {

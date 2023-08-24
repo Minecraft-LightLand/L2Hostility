@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.content.traits.goals;
 
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
-import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;

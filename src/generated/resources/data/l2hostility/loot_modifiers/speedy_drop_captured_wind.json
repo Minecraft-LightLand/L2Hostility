@@ -10,6 +10,10 @@
       "maxLevel": 5,
       "minLevel": 3,
       "trait": "l2hostility:speedy"
+    },
+    {
+      "condition": "l2hostility:mob_level",
+      "minLevel": 50
     }
   ],
   "rankBonus": 0.1,

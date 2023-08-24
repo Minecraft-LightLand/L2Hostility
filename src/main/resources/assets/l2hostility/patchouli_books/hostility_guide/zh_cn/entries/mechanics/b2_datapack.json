@@ -10,7 +10,7 @@
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "You can also configure the chance, level cost, max rank, and entity blacklist / whitelist for each trait. When generating traits for a mob, each trait will have a chance to enter the trait pool. Then we pick one random trait from the pool, assign a rank, and repeat this process until we have no traits left in the pool, or total level cost of traits reach the mob level."
+	  "text": "You can also configure the weight, level cost, max rank, min level, and entity blacklist / whitelist for each trait. When generating traits for a mob, each trait will have a chance to enter the trait pool. Then we pick one random trait from the pool, assign a rank, and repeat this process until we have no traits left in the pool, or total level cost of traits reach the mob level."
 	}
   ]
 }

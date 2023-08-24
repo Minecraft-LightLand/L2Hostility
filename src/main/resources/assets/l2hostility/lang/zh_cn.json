@@ -58,5 +58,6 @@
   "l2hostility.info.player_level": "玩家难度等级：%s",
   "l2hostility.info.title": "难度信息",
   "l2hostility.jei.loot_chance": "%2$s阶词条%1$s%%概率掉落",
-  "l2hostility.jei.loot_title": "恶意词条掉落"
+  "l2hostility.jei.loot_title": "恶意词条掉落",
+  "l2hostility.jei.min_level": "Drops on mobs with level %s or higher"
 }

@@ -1,8 +1,9 @@
 {
   "blacklist": [],
-  "chance": 1.0,
   "cost": 30,
-  "maxLevel": 1,
+  "max_rank": 1,
+  "min_level": 50,
+  "weight": 100,
   "whitelist": [
     "minecraft:skeleton",
     "minecraft:stray",

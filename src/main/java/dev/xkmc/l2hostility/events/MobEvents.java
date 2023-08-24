@@ -5,7 +5,6 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.mixin.ForgeInternalHandlerAccessor;
-import dev.xkmc.l2library.init.L2Library;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;

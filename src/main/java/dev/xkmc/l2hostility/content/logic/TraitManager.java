@@ -52,17 +52,30 @@ public class TraitManager {
 
 	private static void generateTraits(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, int maxModLv) {
 		List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e -> e.allow(le, lv, maxModLv)).toList());
+		int weights = 0;
+		for (var e : list) {
+			weights += e.getConfig().weight;
+		}
 		var rand = le.getRandom();
 		int level = lv;
 		while (level > 0) {
 			if (list.size() == 0) break;
-			MobTrait e = list.remove(rand.nextInt(list.size()));
+			int val = rand.nextInt(weights);
+			MobTrait e = list.get(0);
+			for (var x : list) {
+				val -= x.getConfig().weight;
+				if (val <= 0) {
+					e = x;
+				}
+			}
+			weights -= e.getConfig().weight;
+			list.remove(e);
 			int cost = e.getCost();
 			if (cost == 0) {
 				level--;
 				continue;
 			}
-			int maxLv = Math.min(Math.min(maxModLv, level / cost), e.getMaxLevel());
+			int maxLv = Math.min(Math.min(maxModLv, rand.nextInt(level / cost) + 1), e.getMaxLevel());
 			if (maxLv == 0) {
 				level--;
 				continue;
