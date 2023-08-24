@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "l2hostility:block/hostility_spawner_failed"
+  }
+}

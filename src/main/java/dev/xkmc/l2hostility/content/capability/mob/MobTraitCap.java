@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.content.capability.mob;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.item.spawner.tile.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
@@ -14,6 +15,7 @@ import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -59,6 +61,16 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	@SerialClass.SerialField
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
+
+	@SerialClass.SerialField
+	public boolean noDrop = false;
+
+	@Nullable
+	@SerialClass.SerialField
+	public BlockPos pos = null;
+
+	@Nullable
+	private TraitSpawnerBlockEntity summoner = null;
 
 	public MobTraitCap() {
 	}
@@ -122,6 +134,22 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		}
 		if (isInitialized()) {
 			traits.forEach((k, v) -> k.tick(mob, v));
+		}
+		if (!mob.level().isClientSide() && pos != null) {
+			if (summoner == null) {
+				if (mob.level().getBlockEntity(pos) instanceof TraitSpawnerBlockEntity be) {
+					summoner = be;
+				}
+			}
+			if (summoner == null || summoner.isRemoved()) {
+				mob.kill();
+			}
+		}
+	}
+
+	public void onKilled(LivingEntity mob) {
+		if (summoner != null && !summoner.isRemoved()) {
+			summoner.data.onDeath(mob);
 		}
 	}
 

@@ -5,12 +5,15 @@ import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.registrate.LHBlocks;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.ItemLike;
@@ -24,9 +27,14 @@ public class RecipeGen {
 
 	private static final String currentFolder = "";
 
-	@SuppressWarnings("ConstantConditions")
 	public static void genRecipe(RegistrateRecipeProvider pvd) {
-
+		unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHBlocks.BURST_SPAWNER.get(), 1)::unlockedBy, Items.NETHER_STAR)
+				.pattern("ADA").pattern("BCB").pattern("ABA")
+				.define('C', Items.NETHER_STAR)
+				.define('B', LCItems.EXPLOSION_SHARD)
+				.define('A', Items.NETHERITE_INGOT)
+				.define('D', LCItems.CURSED_DROPLET)
+				.save(pvd);
 	}
 
 	@SuppressWarnings("ConstantConditions")

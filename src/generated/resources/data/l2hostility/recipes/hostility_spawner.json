@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "B": {
+      "item": "l2complements:explosion_shard"
+    },
+    "C": {
+      "item": "minecraft:nether_star"
+    },
+    "D": {
+      "item": "l2complements:cursed_droplet"
+    }
+  },
+  "pattern": [
+    "ADA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "item": "l2hostility:hostility_spawner"
+  },
+  "show_notification": true
+}

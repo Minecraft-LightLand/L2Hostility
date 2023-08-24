@@ -1,0 +1,17 @@
+{
+  "name": "Hostility Spawner",
+  "icon": "l2hostility:hostility_spawner",
+  "category": "l2hostility:mechanics",
+  "sortnum": 4,
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "hostility_spawner",
+	  "text": "This item can help you to clear difficulty in a chunk section. To use it, place it in the desired chunk section. Right click it to activate. It will summon a hoard of enemies, and kill them all to clear chunk section difficulty. If any mob are dead for suspicious cause, The spawner will fail. You can click it to restore."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "When a chunk is cleared, you can check it in your difficulty tab, or place down a hostility spawner. Spawner will turn green automatically in cleared regions."
+	}
+  ]
+}

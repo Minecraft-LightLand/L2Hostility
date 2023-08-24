@@ -1,4 +1,5 @@
 {
+  "block.l2hostility.hostility_spawner": "Hostility Spawner",
   "config.jade.plugin_l2hostility.mob": "L2Hostility",
   "item.l2hostility.ai_config_wand": "Ai Config Wand",
   "item.l2hostility.equipment_wand": "Equipment Wand",
@@ -7,6 +8,7 @@
   "itemGroup.l2library.hostility": "L2Hostility",
   "l2hostility.info.chunk_level": "Chunk base difficulty: %s",
   "l2hostility.info.chunk_scale": "Chunk difficulty scale: %s",
+  "l2hostility.info.clear": "Chunk Section difficulty cleared",
   "l2hostility.info.player_cap": "Mob trait rank limit: %s",
   "l2hostility.info.player_exp": "Difficulty progress: %s%%",
   "l2hostility.info.player_level": "Player difficulty level: %s",

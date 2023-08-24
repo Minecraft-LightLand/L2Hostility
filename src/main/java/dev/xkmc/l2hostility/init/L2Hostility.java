@@ -14,6 +14,7 @@ import dev.xkmc.l2hostility.init.entries.LHRegistrate;
 import dev.xkmc.l2hostility.init.loot.TraitGLMProvider;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
+import dev.xkmc.l2hostility.init.registrate.LHBlocks;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
@@ -21,7 +22,6 @@ import dev.xkmc.l2library.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -51,7 +51,7 @@ public class L2Hostility {
 	public static final ConfigTypeEntry<TraitConfig> TRAIT = new ConfigTypeEntry<>(HANDLER, "trait", TraitConfig.class);
 
 	private static void registerRegistrates(IEventBus bus) {
-		ForgeMod.enableMilkFluid();
+		LHBlocks.register();
 		LHItems.register();
 		LHTraits.register();
 		LHMiscs.register();

@@ -33,7 +33,7 @@ public class SectionDifficulty {
 	private final DifficultyLevel difficulty = new DifficultyLevel();
 
 	@SerialClass.SerialField
-	private final SectionStage stage = SectionStage.INIT;
+	private SectionStage stage = SectionStage.INIT;
 
 	LevelChunkSection section;
 
@@ -48,6 +48,10 @@ public class SectionDifficulty {
 
 	public boolean isCleared() {
 		return stage == SectionStage.CLEARED;
+	}
+
+	public void setClear() {
+		stage = SectionStage.CLEARED;
 	}
 
 	public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {

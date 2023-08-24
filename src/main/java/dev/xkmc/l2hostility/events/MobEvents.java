@@ -9,6 +9,7 @@ import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -41,6 +42,17 @@ public class MobEvents {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			MobTraitCap.HOLDER.get(event.getEntity()).traits
 					.forEach((k, v) -> k.onDeath(v, event.getEntity(), event));
+		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public static void onMobDrop(LivingDropsEvent event) {
+		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
+			if (MobTraitCap.HOLDER.get(event.getEntity()).noDrop) {
+				event.setCanceled(true);
+				return;
+			}
+			// TODO multiply
 		}
 	}
 

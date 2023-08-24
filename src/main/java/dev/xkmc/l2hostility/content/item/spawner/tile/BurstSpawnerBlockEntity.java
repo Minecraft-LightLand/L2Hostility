@@ -7,6 +7,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.random.WeightedRandomList;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
@@ -27,7 +29,11 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 	}
 
 	public static int getSpawnGroup() {
-		return 32;//TODO config
+		return 16;//TODO config
+	}
+
+	public static int getBonusLevel() {
+		return 100;//TODO config
 	}
 
 	@Override
@@ -48,14 +54,21 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 			if (e.isPresent()) {
 				Entity entity = e.get().type.create(sl);
 				if (entity == null) continue;
-				entity.setPos(Vec3.atCenterOf(pos));
+				entity.setPos(Vec3.atCenterOf(getBlockPos().above()));
 				if (entity instanceof LivingEntity le) {
 					if (MobTraitCap.HOLDER.isProper(le)) {
 						MobTraitCap cap = MobTraitCap.HOLDER.get(le);
-						cap.init(level, le, cdcap.get());//TODO
+						cap.init(level, le, (a, b) -> {
+							cdcap.get().modifyInstance(a, b);
+							b.acceptBonusLevel(getBonusLevel());
+						});
+						cap.noDrop = true;
+						cap.pos = getBlockPos();
 					}
+					le.addEffect(new MobEffectInstance(MobEffects.GLOWING, MobEffectInstance.INFINITE_DURATION));
+					data.add(le);
+					level.addFreshEntity(entity);
 				}
-				level.addFreshEntity(entity);
 			}
 
 		}

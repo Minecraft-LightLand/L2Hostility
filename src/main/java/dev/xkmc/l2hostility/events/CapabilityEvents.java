@@ -74,14 +74,19 @@ public class CapabilityEvents {
 		} else if (killer instanceof OwnableEntity own && own.getOwner() instanceof Player pl) {
 			player = pl;
 		}
-		if (player != null && MobTraitCap.HOLDER.isProper(mob)) {
+		if (MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
-			PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
-			playerDiff.addKillCredit(cap);
-			LevelChunk chunk = mob.level().getChunkAt(mob.blockPosition());
-			var opt = chunk.getCapability(ChunkDifficulty.CAPABILITY);
-			if (opt.resolve().isPresent()) {
-				opt.resolve().get().addKillHistory(player, mob, cap);
+			if (killer != null) {
+				cap.onKilled(mob);
+			}
+			if (player != null) {
+				PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
+				playerDiff.addKillCredit(cap);
+				LevelChunk chunk = mob.level().getChunkAt(mob.blockPosition());
+				var opt = chunk.getCapability(ChunkDifficulty.CAPABILITY);
+				if (opt.resolve().isPresent()) {
+					opt.resolve().get().addKillHistory(player, mob, cap);
+				}
 			}
 		}
 	}

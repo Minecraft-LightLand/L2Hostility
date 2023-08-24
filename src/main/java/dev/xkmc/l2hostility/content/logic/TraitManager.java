@@ -66,12 +66,13 @@ public class TraitManager {
 				val -= x.getConfig().weight;
 				if (val <= 0) {
 					e = x;
+					break;
 				}
 			}
 			weights -= e.getConfig().weight;
 			list.remove(e);
 			int cost = e.getCost();
-			if (cost == 0) {
+			if (cost > level) {
 				level--;
 				continue;
 			}

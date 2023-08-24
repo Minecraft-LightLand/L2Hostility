@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.item.spawner.tile;
 
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.item.spawner.block.TraitSpawnerBlock;
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
 import dev.xkmc.l2modularblock.tile_api.TickableBlockEntity;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class TraitSpawnerBlockEntity extends BaseBlockEntity implements TickableBlockEntity {
 
 	@SerialClass.SerialField
-	private final TraitSpawnerData data = new TraitSpawnerData();
+	public final TraitSpawnerData data = new TraitSpawnerData();
 
 	public TraitSpawnerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -34,9 +35,17 @@ public abstract class TraitSpawnerBlockEntity extends BaseBlockEntity implements
 			return;
 		}
 		if (getBlockState().getValue(TraitSpawnerBlock.STATE) == TraitSpawnerBlock.State.ACTIVATED) {
-			if (data.tick()) {
+			var next = data.tick();
+			if (next == TraitSpawnerBlock.State.FAILED) {
 				data.stop();
 				level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(TraitSpawnerBlock.STATE, TraitSpawnerBlock.State.FAILED));
+			} else if (next == TraitSpawnerBlock.State.CLEAR) {
+				var cdcap = ChunkDifficulty.at(level, getBlockPos());
+				if (cdcap.isPresent()) {
+					var section = cdcap.get().getSection(getBlockPos().getY());
+					section.setClear();
+				}
+				level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(TraitSpawnerBlock.STATE, TraitSpawnerBlock.State.CLEAR));
 			}
 		}
 	}

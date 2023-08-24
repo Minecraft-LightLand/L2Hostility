@@ -1,4 +1,5 @@
 {
+  "block.l2hostility.hostility_spawner": "ɹǝuʍɐdS ʎʇıןıʇsoH",
   "config.jade.plugin_l2hostility.mob": "ʎʇıןıʇsoHᄅꞀ",
   "item.l2hostility.ai_config_wand": "puɐM bıɟuoƆ ıⱯ",
   "item.l2hostility.equipment_wand": "puɐM ʇuǝɯdınbƎ",
@@ -7,6 +8,7 @@
   "itemGroup.l2library.hostility": "ʎʇıןıʇsoHᄅꞀ",
   "l2hostility.info.chunk_level": "%s :ʎʇןnɔıɟɟıp ǝsɐq ʞunɥƆ",
   "l2hostility.info.chunk_scale": "%s :ǝןɐɔs ʎʇןnɔıɟɟıp ʞunɥƆ",
+  "l2hostility.info.clear": "pǝɹɐǝןɔ ʎʇןnɔıɟɟıp uoıʇɔǝS ʞunɥƆ",
   "l2hostility.info.player_cap": "%s :ʇıɯıן ʞuɐɹ ʇıɐɹʇ qoW",
   "l2hostility.info.player_exp": "%s%% :ssǝɹboɹd ʎʇןnɔıɟɟıᗡ",
   "l2hostility.info.player_level": "%s :ןǝʌǝן ʎʇןnɔıɟɟıp ɹǝʎɐןԀ",

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "state=activated": {
+      "model": "l2hostility:block/hostility_spawner_activated"
+    },
+    "state=clear": {
+      "model": "l2hostility:block/hostility_spawner_clear"
+    },
+    "state=failed": {
+      "model": "l2hostility:block/hostility_spawner_failed"
+    },
+    "state=idle": {
+      "model": "l2hostility:block/hostility_spawner"
+    }
+  }
+}

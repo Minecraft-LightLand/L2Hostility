@@ -27,6 +27,7 @@ public enum LangData {
 	INFO_PLAYER_CAP("info.player_cap", "Mob trait rank limit: %s", 1),
 	INFO_CHUNK_LEVEL("info.chunk_level", "Chunk base difficulty: %s", 1),
 	INFO_CHUNK_SCALE("info.chunk_scale", "Chunk difficulty scale: %s", 1),
+	INFO_CHUNK_CLEAR("info.clear", "Chunk Section difficulty cleared", 0),
 	TAB_TITLE("info.title", "Difficulty Information", 0),
 
 	LOOT_TITLE("jei.loot_title", "Trait Loot", 0),
@@ -34,7 +35,6 @@ public enum LangData {
 	MIN_LEVEL("jei.min_level", "Drops on mobs with level %s or higher", 1),
 
 	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
-
 	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0);
 
 	final String id, def;

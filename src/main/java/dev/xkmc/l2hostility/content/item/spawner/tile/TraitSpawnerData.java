@@ -1,12 +1,13 @@
 package dev.xkmc.l2hostility.content.item.spawner.tile;
 
+import dev.xkmc.l2hostility.content.item.spawner.block.TraitSpawnerBlock;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 @SerialClass
@@ -17,7 +18,7 @@ public class TraitSpawnerData {
 	}
 
 	@SerialClass.SerialField
-	private final ArrayList<TrackedEntity> list = new ArrayList<>();
+	private final HashMap<UUID, TrackedEntity> list = new HashMap<>();
 
 	@SerialClass
 	public static class TrackedEntity {
@@ -71,10 +72,11 @@ public class TraitSpawnerData {
 				state = EntityState.MISSING;
 			}
 		}
+
 	}
 
 	protected void init(Level level) {
-		for (var e : list) {
+		for (var e : list.values()) {
 			if (level instanceof ServerLevel sl) {
 				e.serverInit(sl);
 			} else {
@@ -89,20 +91,29 @@ public class TraitSpawnerData {
 		entry.uid = le.getId();
 		entry.entity = le;
 		entry.state = EntityState.ALIVE;
-		list.add(entry);
+		list.put(entry.uuid, entry);
 	}
 
-	protected boolean tick() {
+	public void onDeath(LivingEntity mob) {
+		var ans = list.get(mob.getUUID());
+		if (ans != null) {
+			ans.state = EntityState.DEAD;
+		}
+	}
+
+	protected TraitSpawnerBlock.State tick() {
 		boolean hasMissing = false;
-		for (var e : list) {
+		boolean hasAlive = false;
+		for (var e : list.values()) {
 			e.tick();
 			hasMissing |= e.state == EntityState.MISSING;
+			hasAlive |= e.state == EntityState.ALIVE;
 		}
-		return hasMissing;
+		return hasMissing ? TraitSpawnerBlock.State.FAILED : hasAlive ? TraitSpawnerBlock.State.ACTIVATED : TraitSpawnerBlock.State.CLEAR;
 	}
 
 	protected void stop() {
-		for (var e : list) {
+		for (var e : list.values()) {
 			if (e.getEntity() == null) continue;
 			if (e.state == EntityState.ALIVE) {
 				e.getEntity().discard();

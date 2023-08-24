@@ -37,7 +37,7 @@ public class AdaptingTrait extends MobTrait {
 			event.setAmount((float) (event.getAmount() * factor));
 		} else {
 			data.memory.add(0, id);
-			data.adaption.put(id, 0);
+			data.adaption.put(id, 1);
 			if (data.memory.size() > level) {
 				String old = data.memory.remove(data.memory.size() - 1);
 				data.adaption.remove(old);

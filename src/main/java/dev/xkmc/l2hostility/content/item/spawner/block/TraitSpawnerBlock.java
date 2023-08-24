@@ -1,5 +1,8 @@
 package dev.xkmc.l2hostility.content.item.spawner.block;
 
+import dev.xkmc.l2hostility.content.item.spawner.tile.BurstSpawnerBlockEntity;
+import dev.xkmc.l2hostility.init.registrate.LHBlocks;
+import dev.xkmc.l2modularblock.impl.BlockEntityBlockMethodImpl;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
@@ -30,6 +33,10 @@ public class TraitSpawnerBlock {
 	}
 
 	public static final EnumProperty<State> STATE = EnumProperty.create("state", State.class);
+
+	public static final BlockEntityBlockMethodImpl<BurstSpawnerBlockEntity> BE_BURST =
+			new BlockEntityBlockMethodImpl<>(LHBlocks.BE_BURST, BurstSpawnerBlockEntity.class);
+
 	public static final BaseTraitMethod BASE = new BaseTraitMethod();
 	public static final BurstTraitMethod BURST = new BurstTraitMethod();
 	public static final ClickTraitMethod CLICK = new ClickTraitMethod();
