@@ -1,15 +1,12 @@
-package dev.xkmc.l2hostility.content.item.tools;
+package dev.xkmc.l2hostility.content.item.tools.wand;
 
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -17,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TargetSelectWand extends Item {
+public class TargetSelectWand extends BaseWand {
 
 	private static final String KEY = "cachedMobID";
 
@@ -26,10 +23,7 @@ public class TargetSelectWand extends Item {
 	}
 
 	@Override
-	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
-		if (player.level().isClientSide())
-			return InteractionResult.SUCCESS;
-		stack = player.getItemInHand(hand);
+	public void clickTarget(ItemStack stack, Player player, LivingEntity entity) {
 		if (stack.getOrCreateTag().contains(KEY)) {
 			Entity other = entity.level().getEntity(stack.getOrCreateTag().getInt(KEY));
 			if (other instanceof LivingEntity le && le != entity) {
@@ -48,12 +42,11 @@ public class TargetSelectWand extends Item {
 				} else {
 					player.sendSystemMessage(LangData.MSG_TARGET_FAIL.get(entity.getDisplayName(), le.getDisplayName()));
 				}
-				return InteractionResult.SUCCESS;
+				return;
 			}
 		}
 		stack.getOrCreateTag().putInt(KEY, entity.getId());
 		player.sendSystemMessage(LangData.MSG_TARGET_RECORD.get(entity.getDisplayName()));
-		return InteractionResult.SUCCESS;
 	}
 
 	@Override
@@ -65,6 +58,8 @@ public class TargetSelectWand extends Item {
 						le.getDisplayName().copy().withStyle(ChatFormatting.AQUA)
 				).withStyle(ChatFormatting.GRAY));
 			}
+		} else {
+			list.add(LangData.ITEM_WAND_TARGET.get().withStyle(ChatFormatting.GRAY));
 		}
 	}
 

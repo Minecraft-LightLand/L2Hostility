@@ -51,7 +51,7 @@ public class ChunkDifficulty implements RegionalDifficultyModifier {
 	@SerialClass.SerialField
 	private ChunkStage stage = ChunkStage.PRE_INIT;
 
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
 	private SectionDifficulty[] sections;
 
 	protected ChunkDifficulty(LevelChunk chunk) {

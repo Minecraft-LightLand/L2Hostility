@@ -63,7 +63,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
 	@SerialClass.SerialField
-	public boolean noDrop = false;
+	public boolean summoned = false;
 
 	@Nullable
 	@SerialClass.SerialField
@@ -142,7 +142,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				}
 			}
 			if (summoner == null || summoner.isRemoved()) {
-				mob.kill();
+				mob.discard();
 			}
 		}
 	}

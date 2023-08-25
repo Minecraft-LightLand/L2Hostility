@@ -39,6 +39,9 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue globalTraitChance;
 		public final ForgeConfigSpec.BooleanValue allowLegendary;
 
+		public final ForgeConfigSpec.IntValue hostilitySpawnCount;
+		public final ForgeConfigSpec.IntValue hostilitySpawnLevelBonus;
+
 		public final ForgeConfigSpec.DoubleValue tankHealth;
 		public final ForgeConfigSpec.DoubleValue tankArmor;
 		public final ForgeConfigSpec.DoubleValue tankTough;
@@ -98,6 +101,16 @@ public class LHConfig {
 						.defineInRange("deathDecay", 0.9, 0, 2);
 			}
 			builder.pop();
+
+			builder.push("spanwer");
+			{
+				hostilitySpawnCount = builder.comment("Number of mobs to spawn in Hostility Spawner")
+						.defineInRange("hostilitySpawnCount", 16, 1, 64);
+				hostilitySpawnLevelBonus = builder.comment("Level bonus for mobs to spawn in Hostility Spawner")
+						.defineInRange("hostilitySpawnLevelBonus", 100, 1, 10000);
+			}
+			builder.pop();
+
 			builder.push("misc");
 			addLevelToName = builder.comment("Add mob level to name")
 					.define("addLevelToName", true);

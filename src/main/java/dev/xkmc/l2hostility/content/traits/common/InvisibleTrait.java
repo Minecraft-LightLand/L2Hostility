@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.traits.common;
 
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -11,6 +12,14 @@ public class InvisibleTrait extends SelfEffectTrait {
 
 	public InvisibleTrait() {
 		super(() -> MobEffects.INVISIBILITY);
+	}
+
+	@Override
+	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
+		if (MobTraitCap.HOLDER.get(le).summoned) {
+			return false;
+		}
+		return super.allow(le, difficulty, maxModLv);
 	}
 
 	@Override

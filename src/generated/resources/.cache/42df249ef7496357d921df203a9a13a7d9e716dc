@@ -1,7 +1,7 @@
-// 1.20.1	2023-08-24T22:36:14.91283	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-08-25T19:49:26.363689	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-2c83ad85d8a27b1ab67924d98a35f7ef92872b5b assets/l2hostility/lang/en_ud.json
-985f27dd2caada12aed284239efba8387e423851 assets/l2hostility/lang/en_us.json
+3d57da26003f2a02fcabc4ae8b1c5fa7e6d81535 assets/l2hostility/lang/en_ud.json
+d8b2ab66efe00389f008e7db9d0b28c600656428 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -15,6 +15,8 @@ e03c67c42220f6df8ddd1ce5d593aad8c3e4a36b assets/l2hostility/models/item/dementor
 31eb768e73a9e25dd120627d1792a0fc4b23a659 assets/l2hostility/models/item/equipment_wand.json
 f117d90bc61f2d6aeb5834aebc1586489852df9b assets/l2hostility/models/item/fiery.json
 e7e55f331359b1db7239fd6e4832bd09872690b7 assets/l2hostility/models/item/freezing.json
+20e51dcb17187561c46bfd411cd6733de2bb0a06 assets/l2hostility/models/item/hostility_detector.json
+6e3e167f1b7742efa394e5ab17725dc3cdd953cb assets/l2hostility/models/item/hostility_orb.json
 ba69cec47e6a481ee3a839b4b203736c07085f0e assets/l2hostility/models/item/hostility_spawner.json
 f045490ae872f5c496f506fdc31f68272f24b159 assets/l2hostility/models/item/invisible.json
 03c0c90c969f780007ee467fa770267e70192636 assets/l2hostility/models/item/levitation.json
@@ -34,8 +36,10 @@ e49951d95c32da51497bee60ae0d2f3534adcd8a assets/l2hostility/models/item/teleport
 2cec4ff1e023648897d87805e86c947278597273 assets/l2hostility/models/item/undying.json
 87ed8607d663c99cb526e66dd162e8a25e285ce1 assets/l2hostility/models/item/weakness.json
 e1674754c0a1b60d94e45dc02a8df9abe0f64675 assets/l2hostility/models/item/wither.json
+ea1d1829f63f15c21378af0c479cb1aa4f41faef data/l2hostility/advancements/recipes/misc/hostility_detector.json
 5d6cd682359617ff4fa7d1c3ea2f1a5a46ec6053 data/l2hostility/advancements/recipes/misc/hostility_spawner.json
 e03c87788865e847130c7b79b3808e7b7b41742a data/l2hostility/loot_tables/blocks/hostility_spawner.json
+9980fd7cbfd6d6b8dcb0978baaada8db79f94847 data/l2hostility/recipes/hostility_detector.json
 9d69a4fe6460f801733a68acad83c2003651a129 data/l2hostility/recipes/hostility_spawner.json
 24bfb5e024a004de204f60dbcc7e5c67a4ad17a3 data/l2hostility/tags/entity_types/armor_target.json
 edf64deed56924f50118492f25104511eb052cab data/l2hostility/tags/entity_types/blacklist.json

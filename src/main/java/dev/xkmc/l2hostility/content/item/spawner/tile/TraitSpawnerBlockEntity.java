@@ -43,7 +43,7 @@ public abstract class TraitSpawnerBlockEntity extends BaseBlockEntity implements
 				var cdcap = ChunkDifficulty.at(level, getBlockPos());
 				if (cdcap.isPresent()) {
 					var section = cdcap.get().getSection(getBlockPos().getY());
-					section.setClear();
+					section.setClear(cdcap.get(), getBlockPos());
 				}
 				level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(TraitSpawnerBlock.STATE, TraitSpawnerBlock.State.CLEAR));
 			}

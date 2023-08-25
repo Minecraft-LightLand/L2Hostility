@@ -12,6 +12,14 @@
 	  "target_effect": "怪物攻击将会施加：",
 	  "legendary": "传奇词条"
 	},
+	"item": {
+	  "wand": {
+		"adder": "右键方块选择词条。右键生物调整词条等级。按住Shift切换选择方向",
+		"ai": "右键怪物移除或者恢复怪物AI",
+		"equipment": "右键怪物打开怪物装备栏",
+		"target": "右键2个怪物让它们互相攻击"
+	  }
+	},
 	"msg": {
 	  "ai": "配置实体%s：将NoAI设为%s",
 	  "select_trait": "词条：%s",
@@ -29,7 +37,8 @@
 	  "player_exp": "玩家难度等级进度：%s%%",
 	  "player_level": "玩家难度等级：%s",
 	  "title": "难度信息",
-	  "clear": "子区块难度已清除"
+	  "clear": "子区块难度已清除",
+	  "reward": "已获得%s个奖励"
 	},
 	"jei": {
 	  "loot_chance": "%2$s阶词条%1$s%%概率掉落",

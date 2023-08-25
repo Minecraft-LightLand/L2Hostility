@@ -8,6 +8,7 @@ import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -34,6 +35,14 @@ public class RecipeGen {
 				.define('B', LCItems.EXPLOSION_SHARD)
 				.define('A', Items.NETHERITE_INGOT)
 				.define('D', LCItems.CURSED_DROPLET)
+				.save(pvd);
+
+		unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.DETECTOR.get(), 1)::unlockedBy, Items.LIGHTNING_ROD)
+				.pattern("ADA").pattern("BCB").pattern("ABA")
+				.define('A', Items.ROTTEN_FLESH)
+				.define('B', Items.BONE)
+				.define('C', Items.IRON_INGOT)
+				.define('D', Items.LIGHTNING_ROD)
 				.save(pvd);
 	}
 

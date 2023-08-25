@@ -1,17 +1,15 @@
 package dev.xkmc.l2hostility.init.network;
 
-import dev.xkmc.l2hostility.content.traits.base.MobTrait;
-import net.minecraft.world.entity.LivingEntity;
-
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public enum TraitEffects {
-	UNDYING(() -> ClientSyncHandler::triggerUndying);
+	UNDYING(() -> ClientSyncHandler::triggerUndying),
+	CLEAR(() -> ClientSyncHandler::triggerClear);
 
-	public final Supplier<BiConsumer<LivingEntity, MobTrait>> func;
+	public final Supplier<Consumer<TraitEffectToClient>> func;
 
-	TraitEffects(Supplier<BiConsumer<LivingEntity, MobTrait>> func) {
+	TraitEffects(Supplier<Consumer<TraitEffectToClient>> func) {
 		this.func = func;
 	}
 }

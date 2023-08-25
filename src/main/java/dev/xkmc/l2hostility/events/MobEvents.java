@@ -48,7 +48,7 @@ public class MobEvents {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onMobDrop(LivingDropsEvent event) {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			if (MobTraitCap.HOLDER.get(event.getEntity()).noDrop) {
+			if (MobTraitCap.HOLDER.get(event.getEntity()).summoned) {
 				event.setCanceled(true);
 				return;
 			}

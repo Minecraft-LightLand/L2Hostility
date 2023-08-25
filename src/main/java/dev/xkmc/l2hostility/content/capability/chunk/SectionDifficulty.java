@@ -4,6 +4,8 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
+import dev.xkmc.l2hostility.init.network.TraitEffects;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -29,10 +31,10 @@ public class SectionDifficulty {
 	@SerialClass.SerialField
 	int index;
 
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
 	private final DifficultyLevel difficulty = new DifficultyLevel();
 
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
 	private SectionStage stage = SectionStage.INIT;
 
 	LevelChunkSection section;
@@ -50,8 +52,9 @@ public class SectionDifficulty {
 		return stage == SectionStage.CLEARED;
 	}
 
-	public void setClear() {
+	public void setClear(ChunkDifficulty chunk, BlockPos pos) {
 		stage = SectionStage.CLEARED;
+		L2Hostility.toTrackingChunk(chunk.chunk, new TraitEffectToClient(pos, TraitEffects.CLEAR));
 	}
 
 	public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {

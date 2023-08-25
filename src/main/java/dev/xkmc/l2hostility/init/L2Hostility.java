@@ -2,7 +2,9 @@ package dev.xkmc.l2hostility.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
+import dev.xkmc.l2hostility.content.capability.chunk.CapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
+import dev.xkmc.l2hostility.content.capability.chunk.InfoRequestToServer;
 import dev.xkmc.l2hostility.content.capability.mob.CapSyncPacket;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
@@ -20,8 +22,10 @@ import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
+import dev.xkmc.l2serial.network.SerialPacketBase;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,6 +33,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +47,9 @@ public class L2Hostility {
 			new ResourceLocation(MODID, "main"), 1,
 			e -> e.create(CapSyncPacket.class, NetworkDirection.PLAY_TO_CLIENT),
 			e -> e.create(TraitEffectToClient.class, NetworkDirection.PLAY_TO_CLIENT),
-			e -> e.create(LootDataToClient.class, NetworkDirection.PLAY_TO_CLIENT)
+			e -> e.create(LootDataToClient.class, NetworkDirection.PLAY_TO_CLIENT),
+			e -> e.create(InfoRequestToServer.class, NetworkDirection.PLAY_TO_SERVER),
+			e -> e.create(CapSyncToClient.class, NetworkDirection.PLAY_TO_CLIENT)
 	);
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final LHRegistrate REGISTRATE = new LHRegistrate(MODID);
@@ -93,6 +100,10 @@ public class L2Hostility {
 		var gen = event.getGenerator();
 		gen.addProvider(server, new LHConfigGen(gen));
 		gen.addProvider(server, new TraitGLMProvider(gen));
+	}
+
+	public static void toTrackingChunk(LevelChunk chunk, SerialPacketBase packet) {
+		HANDLER.channel.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), packet);
 	}
 
 }

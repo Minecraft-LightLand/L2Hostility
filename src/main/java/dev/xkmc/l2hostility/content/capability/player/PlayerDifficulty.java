@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
@@ -37,7 +38,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	private final DifficultyLevel difficulty = new DifficultyLevel();
 
 	@SerialClass.SerialField
-	private int maxRankKilled = 0;
+	private int maxRankKilled = 0, rewardCount = 0;
 
 	@SerialClass.SerialField
 	private final TreeSet<ResourceLocation> dimensions = new TreeSet<>();
@@ -85,6 +86,11 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		difficulty.grow(cap);
 		cap.traits.values().stream().max(Comparator.naturalOrder())
 				.ifPresent(integer -> maxRankKilled = Math.max(maxRankKilled, integer));
+		if (getLevel().getLevel() > rewardCount * 10) {
+			rewardCount++;
+			player.addItem(LHItems.HOSTILITY_ORB.asStack());
+			// TODO drop reward
+		}
 		HOLDER.network.toClientSyncAll((ServerPlayer) player);
 	}
 

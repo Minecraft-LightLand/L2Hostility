@@ -45,7 +45,7 @@ public class TraitSymbol extends Item {
 		if (MobTraitCap.HOLDER.isProper(target)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(target);
 			MobTrait trait = get();
-			if (!trait.allow(target, Integer.MAX_VALUE, TraitManager.getMaxLevel())) {
+			if (!trait.allow(target, Integer.MAX_VALUE, TraitManager.getMaxLevel() + 1)) {
 				if (player instanceof ServerPlayer sp) {
 					sp.sendSystemMessage(LangData.MSG_ERR_DISALLOW.get().withStyle(ChatFormatting.RED), true);
 				}
@@ -81,7 +81,7 @@ public class TraitSymbol extends Item {
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(get().getFullDesc(null));
 		if (get() instanceof LegendaryTrait) {
-			list.add(LangData.LEGENDARY.get().withStyle(ChatFormatting.GOLD));
+			list.add(LangData.TOOLTIP_LEGENDARY.get().withStyle(ChatFormatting.GOLD));
 		}
 		get().addDetail(list);
 	}

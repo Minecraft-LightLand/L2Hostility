@@ -19,6 +19,10 @@ public class CapSyncToClient extends SerialPacketBase {
 	@SerialClass.SerialField
 	public int x, z;
 
+	@Deprecated
+	public CapSyncToClient() {
+	}
+
 	public CapSyncToClient(ResourceLocation level, int x, int z, CompoundTag tag) {
 		this.level = level;
 		this.x = x;
@@ -29,7 +33,7 @@ public class CapSyncToClient extends SerialPacketBase {
 
 	@Override
 	public void handle(NetworkEvent.Context context) {
-		ClientSyncHandler.handle(level, x, z, tag);
+		ClientSyncHandler.handleChunkUpdate(level, x, z, tag);
 	}
 
 }

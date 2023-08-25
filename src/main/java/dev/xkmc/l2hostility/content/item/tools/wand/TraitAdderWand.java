@@ -1,18 +1,15 @@
-package dev.xkmc.l2hostility.content.item.tools;
+package dev.xkmc.l2hostility.content.item.tools.wand;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -21,7 +18,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TraitAdderWand extends Item {
+public class TraitAdderWand extends BaseWand {
 
 	private static final String TRAIT = "l2hostility_trait";
 
@@ -90,12 +87,10 @@ public class TraitAdderWand extends Item {
 		super(properties);
 	}
 
+
 	@Override
-	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
+	public void clickTarget(ItemStack stack, Player player, LivingEntity target) {
 		if (MobTraitCap.HOLDER.isProper(target)) {
-			if (player.level().isClientSide()) {
-				return InteractionResult.SUCCESS;
-			}
 			MobTraitCap cap = MobTraitCap.HOLDER.get(target);
 			MobTrait trait = get(stack);
 			Integer ans;
@@ -111,15 +106,10 @@ public class TraitAdderWand extends Item {
 			target.setHealth(target.getMaxHealth());
 			player.sendSystemMessage(LangData.MSG_SET_TRAIT.get(trait.getDesc(), target.getDisplayName(), val));
 		}
-		return InteractionResult.PASS;
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-		if (level.isClientSide()) {
-			return InteractionResultHolder.success(player.getItemInHand(hand));
-		}
-		ItemStack stack = player.getItemInHand(hand);
+	public void clickNothing(ItemStack stack, Player player) {
 		MobTrait old = get(stack), next;
 		if (player.isShiftKeyDown()) {
 			next = prev(old);
@@ -128,13 +118,13 @@ public class TraitAdderWand extends Item {
 		}
 		set(stack, next);
 		player.sendSystemMessage(LangData.MSG_SELECT_TRAIT.get(next.getDesc()));
-		return InteractionResultHolder.success(player.getItemInHand(hand));
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+		list.add(LangData.ITEM_WAND_ADDER.get().withStyle(ChatFormatting.GRAY));
 		MobTrait trait = get(stack);
-		list.add(LangData.MSG_SELECT_TRAIT.get(trait.getDesc()));
+		list.add(LangData.MSG_SELECT_TRAIT.get(trait.getDesc().withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.GRAY));
 	}
 
 }

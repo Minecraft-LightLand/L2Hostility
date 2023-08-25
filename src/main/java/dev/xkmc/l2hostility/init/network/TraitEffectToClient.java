@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.init.network;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2serial.network.SerialPacketBase;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -18,6 +19,9 @@ public class TraitEffectToClient extends SerialPacketBase {
 	@SerialClass.SerialField
 	public TraitEffects effect;
 
+	@SerialClass.SerialField
+	public BlockPos pos = BlockPos.ZERO;
+
 	@Deprecated
 	public TraitEffectToClient() {
 	}
@@ -28,9 +32,14 @@ public class TraitEffectToClient extends SerialPacketBase {
 		this.effect = effect;
 	}
 
+	public TraitEffectToClient(BlockPos pos, TraitEffects effect) {
+		this.pos = pos;
+		this.effect = effect;
+	}
+
 	@Override
 	public void handle(NetworkEvent.Context context) {
-		ClientSyncHandler.handleEffect(id, trait, effect);
+		ClientSyncHandler.handleEffect(this);
 	}
 
 }

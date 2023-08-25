@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2hostility.content.item.tools;
+package dev.xkmc.l2hostility.content.item.tools.equipment;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

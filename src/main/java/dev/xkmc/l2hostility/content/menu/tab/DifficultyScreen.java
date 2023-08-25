@@ -4,6 +4,7 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.SectionDifficulty;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
+import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2HostilityClient;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2tabs.tabs.contents.BaseTextScreen;
@@ -34,31 +35,36 @@ public class DifficultyScreen extends BaseTextScreen {
 		int x = this.leftPos + 8;
 		int y = this.topPos + 6;
 		List<Component> list = new ArrayList<>();
-		add(list);
+		addDifficultyInfo(list, ChatFormatting.DARK_RED, ChatFormatting.DARK_GREEN);
+		list.add(LangData.INFO_REWARD.get(0).withStyle(ChatFormatting.DARK_GREEN));
+		// TODO rewards
 		for (Component c : list) {
 			g.drawString(this.font, c, x, y += 10, 0, false);
 		}
 	}
 
-	private void add(List<Component> list) {
+	public static void addDifficultyInfo(List<Component> list, ChatFormatting... formats) {// red, green
 		Player player = Minecraft.getInstance().player;
 		assert player != null;
 		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
+		cap.updateChunkFlag = true;
 		list.add(LangData.INFO_PLAYER_LEVEL.get(cap.getLevel().getLevel()));
 		int perc = Math.round(100f * cap.getLevel().getExp() / cap.getLevel().getMaxExp());
 		list.add(LangData.INFO_PLAYER_EXP.get(perc));
-		list.add(LangData.INFO_PLAYER_CAP.get(cap.getRankCap()));
+		int maxCap = cap.getRankCap();
+		list.add(LangData.INFO_PLAYER_CAP.get(maxCap > TraitManager.getMaxLevel() ?
+				LangData.TOOLTIP_LEGENDARY.get().withStyle(ChatFormatting.GOLD) : maxCap));
 		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 		if (opt.isPresent()) {
 			ChunkDifficulty chunk = opt.get();
 			SectionDifficulty sec = chunk.getSection(player.blockPosition().getY());
 			if (sec.isCleared()) {
-				list.add(LangData.INFO_CHUNK_CLEAR.get().withStyle(ChatFormatting.DARK_GREEN));
+				list.add(LangData.INFO_CHUNK_CLEAR.get().withStyle(formats[1]));
 			} else {
 				MobDifficultyCollector ins = new MobDifficultyCollector();
 				chunk.modifyInstance(player.blockPosition(), ins);
-				list.add(LangData.INFO_CHUNK_LEVEL.get(ins.base).withStyle(ChatFormatting.DARK_RED));
-				list.add(LangData.INFO_CHUNK_SCALE.get(ins.scale).withStyle(ChatFormatting.DARK_RED));
+				list.add(LangData.INFO_CHUNK_LEVEL.get(ins.base).withStyle(formats[0]));
+				list.add(LangData.INFO_CHUNK_SCALE.get(ins.scale).withStyle(formats[0]));
 			}
 		}
 	}

@@ -1,0 +1,16 @@
+{
+  "name": "Player Difficulty",
+  "icon": "minecraft:player_head",
+  "category": "l2hostility:mechanics",
+  "sortnum": 4,
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "When your difficulty level reach a certain point, you can get rewards when killing the next mob. You can check how many rewards you have got."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "There are items that have effect based on your player difficulty level. You can try to use them and be stronger, or keep dying to prevent growing difficulty. Choose wisely."
+	}
+  ]
+}

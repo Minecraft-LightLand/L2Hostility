@@ -11,7 +11,12 @@ public enum LangData {
 	TOOLTIP_DISABLE("tooltip.disable", "%s enchantments disabled for %ss. Any new enchantment will vanish.", 2),
 	TOOLTIP_SELF_EFFECT("tooltip.self_effect", "Mob gains continuous effect: ", 0),
 	TOOLTIP_TARGET_EFFECT("tooltip.target_effect", "Mob inflict effect on hit: ", 0),
-	LEGENDARY("tooltip.legendary", "Legendary", 0),
+	TOOLTIP_LEGENDARY("tooltip.legendary", "Legendary", 0),
+
+	ITEM_WAND_AI("item.wand.ai", "Right click to remove or restore mob AI.", 0),
+	ITEM_WAND_EQUIPMENT("item.wand.equipment", "Right click to open mob equipment menu.", 0),
+	ITEM_WAND_TARGET("item.wand.target", "Right click 2 mobs to make them fight each other.", 0),
+	ITEM_WAND_ADDER("item.wand.adder", "Right click blocks to select trait. Right click mobs to select trait rank. Press shift to select in opposite direction.", 0),
 
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),
@@ -28,7 +33,8 @@ public enum LangData {
 	INFO_CHUNK_LEVEL("info.chunk_level", "Chunk base difficulty: %s", 1),
 	INFO_CHUNK_SCALE("info.chunk_scale", "Chunk difficulty scale: %s", 1),
 	INFO_CHUNK_CLEAR("info.clear", "Chunk Section difficulty cleared", 0),
-	TAB_TITLE("info.title", "Difficulty Information", 0),
+	INFO_TAB_TITLE("info.title", "Difficulty Information", 0),
+	INFO_REWARD("info.reward", "Obtained %s rewards", 1),
 
 	LOOT_TITLE("jei.loot_title", "Trait Loot", 0),
 	CHANCE("jei.loot_chance", "%s%% chance to drop at Rank %s", 2),

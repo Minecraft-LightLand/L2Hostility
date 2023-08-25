@@ -30,7 +30,7 @@ public class DifficultyLevel {
 	}
 
 	public void decay() {
-		level = Math.max(0, level - Math.max(1, (int) Math.ceil(level * LHConfig.COMMON.deathDecay.get())));
+		level = Math.max(0, level - Math.max(1, (int) Math.ceil(level * (1 - LHConfig.COMMON.deathDecay.get()))));
 		exp = 0;
 	}
 

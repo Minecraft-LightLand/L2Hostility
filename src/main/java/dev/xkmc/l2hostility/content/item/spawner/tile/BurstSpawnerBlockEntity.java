@@ -2,13 +2,12 @@ package dev.xkmc.l2hostility.content.item.spawner.tile;
 
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.random.WeightedRandomList;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
@@ -29,11 +28,11 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 	}
 
 	public static int getSpawnGroup() {
-		return 16;//TODO config
+		return LHConfig.COMMON.hostilitySpawnCount.get();
 	}
 
 	public static int getBonusLevel() {
-		return 100;//TODO config
+		return LHConfig.COMMON.hostilitySpawnLevelBonus.get();
 	}
 
 	@Override
@@ -54,18 +53,18 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 			if (e.isPresent()) {
 				Entity entity = e.get().type.create(sl);
 				if (entity == null) continue;
-				entity.setPos(Vec3.atCenterOf(getBlockPos().above()));
+				entity.setPos(Vec3.atCenterOf(getBlockPos()));
 				if (entity instanceof LivingEntity le) {
 					if (MobTraitCap.HOLDER.isProper(le)) {
 						MobTraitCap cap = MobTraitCap.HOLDER.get(le);
+						cap.summoned = true;
+						cap.pos = getBlockPos();
 						cap.init(level, le, (a, b) -> {
 							cdcap.get().modifyInstance(a, b);
 							b.acceptBonusLevel(getBonusLevel());
 						});
-						cap.noDrop = true;
-						cap.pos = getBlockPos();
 					}
-					le.addEffect(new MobEffectInstance(MobEffects.GLOWING, MobEffectInstance.INFINITE_DURATION));
+					entity.setPos(Vec3.atCenterOf(getBlockPos().above()));
 					data.add(le);
 					level.addFreshEntity(entity);
 				}
