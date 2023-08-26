@@ -8,6 +8,7 @@
   "item.l2hostility.target_select_wand": "Target Select Wand",
   "item.l2hostility.trait_adder_wand": "Trait Adder Wand",
   "itemGroup.l2library.hostility": "L2Hostility",
+  "l2hostility.boss_event": "Hostility Clearing Progress: %s/%s",
   "l2hostility.info.chunk_level": "Chunk base difficulty: %s",
   "l2hostility.info.chunk_scale": "Chunk difficulty scale: %s",
   "l2hostility.info.clear": "Chunk Section difficulty cleared",

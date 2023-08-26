@@ -42,6 +42,7 @@
   "config.jade.plugin_l2hostility.mob": "莱特兰·恶意",
   "l2hostility.patchouli.title": "莱特兰·恶意-教程与词条列表",
   "l2hostility.patchouli.landing": "这个模组提升了怪物数值，并添加了各种能力",
+  "l2hostility.boss_event": "恶意清除进度：%s/%s",
   "l2hostility.tooltip.disable": "%s个附魔被抑制了，剩余%s秒。任何新附魔将会被抹消",
   "l2hostility.tooltip.self_effect": "怪物获得常驻效果：",
   "l2hostility.tooltip.target_effect": "怪物攻击将会施加：",

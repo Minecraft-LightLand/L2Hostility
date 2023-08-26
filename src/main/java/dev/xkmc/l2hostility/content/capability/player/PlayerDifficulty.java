@@ -1,7 +1,9 @@
 package dev.xkmc.l2hostility.content.capability.player;
 
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.InfoRequestToServer;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.item.spawner.tile.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
@@ -14,9 +16,6 @@ import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ImposterProtoChunk;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -58,15 +57,24 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public void tick() {
+		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 		if (player.level().isClientSide()) {
 			if (updateChunkFlag && !pendingFlag && player.tickCount % 20 == 0) {
 				pendingFlag = true;
 				updateChunkFlag = false;
-				ChunkAccess chunk = player.level().getChunk(player.blockPosition());
-				if (chunk instanceof ImposterProtoChunk c) chunk = c.getWrapped();
-				if (chunk instanceof LevelChunk c) L2Hostility.HANDLER.toServer(new InfoRequestToServer(c));
+				opt.ifPresent(chunkDifficulty -> L2Hostility.HANDLER.toServer(new InfoRequestToServer(chunkDifficulty.chunk)));
 			}
 			return;
+		}
+		if (opt.isPresent()) {
+			var sec = opt.get().getSection(player.blockPosition().getY());
+			if (sec.activePos != null) {
+				if (player.level().isLoaded(sec.activePos)) {
+					if (player.level().getBlockEntity(sec.activePos) instanceof TraitSpawnerBlockEntity spawner) {
+						spawner.track(player);
+					}
+				}
+			}
 		}
 		if (dimensions.add(player.level().dimension().location())) {
 			HOLDER.network.toClientSyncAll((ServerPlayer) player);

@@ -36,12 +36,15 @@ public enum LangData {
 	INFO_TAB_TITLE("info.title", "Difficulty Information", 0),
 	INFO_REWARD("info.reward", "Obtained %s rewards", 1),
 
+	BOSS_EVENT("boss_event", "Hostility Clearing Progress: %s/%s", 2),
+
 	LOOT_TITLE("jei.loot_title", "Trait Loot", 0),
 	CHANCE("jei.loot_chance", "%s%% chance to drop at Rank %s", 2),
 	MIN_LEVEL("jei.min_level", "Drops on mobs with level %s or higher", 1),
 
 	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
-	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0);
+	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0),
+	;
 
 	final String id, def;
 	final int count;

@@ -31,6 +31,9 @@ public class SectionDifficulty {
 	@SerialClass.SerialField
 	int index;
 
+	@SerialClass.SerialField
+	public BlockPos activePos = null;
+
 	@SerialClass.SerialField(toClient = true)
 	private final DifficultyLevel difficulty = new DifficultyLevel();
 

@@ -20,16 +20,18 @@ public class TraitSpawnerData {
 	@SerialClass.SerialField
 	private final HashMap<UUID, TrackedEntity> list = new HashMap<>();
 
+	private boolean init = false;
+
 	@SerialClass
 	public static class TrackedEntity {
 
 		@SerialClass.SerialField
 		public UUID uuid;
 
-		@SerialClass.SerialField
+		@SerialClass.SerialField(toClient = true)
 		public int uid;
 
-		@SerialClass.SerialField
+		@SerialClass.SerialField(toClient = true)
 		public EntityState state;
 
 		@Nullable
@@ -76,6 +78,7 @@ public class TraitSpawnerData {
 	}
 
 	protected void init(Level level) {
+		if (init) return;
 		for (var e : list.values()) {
 			if (level instanceof ServerLevel sl) {
 				e.serverInit(sl);
@@ -83,6 +86,7 @@ public class TraitSpawnerData {
 				e.clientInit(level);
 			}
 		}
+		init = true;
 	}
 
 	protected void add(LivingEntity le) {
@@ -120,6 +124,20 @@ public class TraitSpawnerData {
 			}
 		}
 		list.clear();
+	}
+
+	protected int getMax() {
+		return list.size();
+	}
+
+	protected int getAlive() {
+		int i = 0;
+		for (var e : list.values()) {
+			if (e.state == EntityState.ALIVE) {
+				i++;
+			}
+		}
+		return i;
 	}
 
 }
