@@ -5,7 +5,8 @@
 	"target_select_wand": "攻击目标控制手杖",
 	"trait_adder_wand": "词条配置手杖",
 	"hostility_detector": "恶意探测器",
-	"hostility_orb": "恶意吸收宝珠"
+	"hostility_orb": "恶意吸收宝珠",
+	"detector_glasses": "侦测眼镜"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"
