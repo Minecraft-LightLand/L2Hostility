@@ -21,7 +21,8 @@ public class DifficultyOverlay extends InfoSideBar<SideBar.IntSignature> {
 	@Override
 	protected List<Component> getText() {
 		List<Component> comp = new ArrayList<>();
-		DifficultyScreen.addDifficultyInfo(comp, ChatFormatting.RED, ChatFormatting.GREEN);
+		DifficultyScreen.addDifficultyInfo(comp,
+				ChatFormatting.RED, ChatFormatting.GREEN, ChatFormatting.GOLD);
 		return comp;
 	}
 

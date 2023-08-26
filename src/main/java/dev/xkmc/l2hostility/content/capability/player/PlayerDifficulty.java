@@ -102,6 +102,10 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		HOLDER.network.toClientSyncAll((ServerPlayer) player);
 	}
 
+	public int getRewardCount(){
+		return rewardCount;
+	}
+
 	public DifficultyLevel getLevel() {
 		return DifficultyLevel.merge(difficulty, getExtraLevel());
 	}

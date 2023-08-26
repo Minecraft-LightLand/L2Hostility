@@ -35,15 +35,21 @@ public class DifficultyScreen extends BaseTextScreen {
 		int x = this.leftPos + 8;
 		int y = this.topPos + 6;
 		List<Component> list = new ArrayList<>();
-		addDifficultyInfo(list, ChatFormatting.DARK_RED, ChatFormatting.DARK_GREEN);
-		list.add(LangData.INFO_REWARD.get(0).withStyle(ChatFormatting.DARK_GREEN));
-		// TODO rewards
+		addDifficultyInfo(list, ChatFormatting.DARK_RED, ChatFormatting.DARK_GREEN, ChatFormatting.DARK_PURPLE);
+		addRewardInfo(list);
 		for (Component c : list) {
 			g.drawString(this.font, c, x, y += 10, 0, false);
 		}
 	}
 
-	public static void addDifficultyInfo(List<Component> list, ChatFormatting... formats) {// red, green
+	public static void addRewardInfo(List<Component> list) {
+		Player player = Minecraft.getInstance().player;
+		assert player != null;
+		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
+		list.add(LangData.INFO_REWARD.get(cap.getRewardCount()).withStyle(ChatFormatting.DARK_GREEN));
+	}
+
+	public static void addDifficultyInfo(List<Component> list, ChatFormatting... formats) {// red, green, gold
 		Player player = Minecraft.getInstance().player;
 		assert player != null;
 		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
@@ -53,7 +59,7 @@ public class DifficultyScreen extends BaseTextScreen {
 		list.add(LangData.INFO_PLAYER_EXP.get(perc));
 		int maxCap = cap.getRankCap();
 		list.add(LangData.INFO_PLAYER_CAP.get(maxCap > TraitManager.getMaxLevel() ?
-				LangData.TOOLTIP_LEGENDARY.get().withStyle(ChatFormatting.GOLD) : maxCap));
+				LangData.TOOLTIP_LEGENDARY.get().withStyle(formats[2]) : maxCap));
 		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 		if (opt.isPresent()) {
 			ChunkDifficulty chunk = opt.get();
