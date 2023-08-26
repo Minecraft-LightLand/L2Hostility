@@ -44,6 +44,12 @@ public class RecipeGen {
 				.define('C', Items.IRON_INGOT)
 				.define('D', Items.LIGHTNING_ROD)
 				.save(pvd);
+
+		unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.DETECTOR_GLASSES.get(), 1)::unlockedBy, Items.ENDER_EYE)
+				.pattern("ADA")
+				.define('A', Items.ENDER_EYE)
+				.define('D', Items.IRON_INGOT)
+				.save(pvd);
 	}
 
 	@SuppressWarnings("ConstantConditions")

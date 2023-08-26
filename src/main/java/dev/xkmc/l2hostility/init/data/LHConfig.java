@@ -12,12 +12,18 @@ public class LHConfig {
 
 		public final ForgeConfigSpec.BooleanValue showAsNamePlate;
 		public final ForgeConfigSpec.BooleanValue showLevelAsNamePlate;
+		public final ForgeConfigSpec.IntValue glowingRangeHidden;
+		public final ForgeConfigSpec.IntValue glowingRangeNear;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			showAsNamePlate = builder.comment("Render Traits in name plate form")
 					.define("showAsNamePlate", true);
 			showLevelAsNamePlate = builder.comment("Render mob level in name plate form")
 					.define("showLevelAsNamePlate", false);
+			glowingRangeHidden = builder.comment("Detector Glasses glowing range for hidden mobs")
+					.defineInRange("glowingRangeHidden", 32, 1, 256);
+			glowingRangeNear = builder.comment("Detector Glasses glowing range for nearby mobs")
+					.defineInRange("glowingRangeNear", 16, 1, 256);
 		}
 
 	}

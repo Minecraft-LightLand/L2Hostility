@@ -62,7 +62,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	@SerialClass.SerialField
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
 	public boolean summoned = false;
 
 	@Nullable
