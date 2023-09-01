@@ -18,6 +18,10 @@ public enum LangData {
 	ITEM_WAND_TARGET("item.wand.target", "Right click 2 mobs to make them fight each other.", 0),
 	ITEM_WAND_ADDER("item.wand.adder", "Right click blocks to select trait. Right click mobs to select trait rank. Press shift to select in opposite direction.", 0),
 
+	ITEM_GLASSES("item.equipment.glasses", "Allow you to see invisible mobs, and see mobs when you have blindness or darkness effects", 0),
+	ITEM_SPAWNER("item.spawner", "Summon strong mobs. Kill them all to make a chunk section safe", 0),
+	ITEM_ORB("item.consumable.orb", "Make a chunk section safe. Useful when building your base. Use wisely.", 0),
+
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),
 	MSG_TARGET_FAIL("msg.target_fail", "%s and %s cannot fight", 2),

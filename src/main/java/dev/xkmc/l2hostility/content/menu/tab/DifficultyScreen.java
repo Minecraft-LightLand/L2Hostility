@@ -69,7 +69,7 @@ public class DifficultyScreen extends BaseTextScreen {
 			} else {
 				MobDifficultyCollector ins = new MobDifficultyCollector();
 				chunk.modifyInstance(player.blockPosition(), ins);
-				list.add(LangData.INFO_CHUNK_LEVEL.get(ins.base).withStyle(formats[0]));
+				list.add(LangData.INFO_CHUNK_LEVEL.get(ins.getBase()).withStyle(formats[0]));
 				list.add(LangData.INFO_CHUNK_SCALE.get(ins.scale).withStyle(formats[0]));
 			}
 		}

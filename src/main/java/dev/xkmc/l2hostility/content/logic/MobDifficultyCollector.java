@@ -31,7 +31,7 @@ public class MobDifficultyCollector {
 
 
 	public void acceptBonusLevel(int difficulty) {
-		this.difficulty += difficulty;
+		this.base += difficulty;
 	}
 
 	public void setCap(int cap) {
@@ -62,4 +62,7 @@ public class MobDifficultyCollector {
 		return trait_chance;
 	}
 
+	public int getBase() {
+		return (int) Math.round(base + difficulty * scale);
+	}
 }

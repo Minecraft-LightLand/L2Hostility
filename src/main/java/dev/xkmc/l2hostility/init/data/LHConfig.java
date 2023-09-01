@@ -87,7 +87,7 @@ public class LHConfig {
 				dimensionFactor = builder.comment("Difficulty bonus per level visited")
 						.defineInRange("dimensionFactor", 10, 0, 1000);
 				distanceFactor = builder.comment("Difficulty bonus per block from origin")
-						.defineInRange("distanceFactor", 0.01, 0, 1000);
+						.defineInRange("distanceFactor", 0.005, 0, 1000);
 				globalApplyChance = builder.comment("Chance for health/damage bonus and trait to apply")
 						.defineInRange("globalApplyChance", 1d, 0, 1);
 				globalTraitChance = builder.comment("Chance for trait to apply")
