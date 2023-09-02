@@ -1,16 +1,16 @@
 {
-  "name": "Dementor",
+  "name": "摄魂",
   "icon": "l2hostility:dementor",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:dementor",
-	  "text": "Mobs with this trait is immune to physical damage, and will deal magical damage that bypasses armor."
+	  "text": "拥有这个词条的怪物免疫物理攻击，并且攻击目标会无视护甲造成魔法伤害。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "To fight mobs with this trait, you need to use weapons that can deal magic damage, or bypass magical protection. Also, you might need strong protection enchantments to protect yourself."
+	  "text": "与拥有此词条的怪物战斗时需要选取能够造成魔法伤害的武器或想办法无视他的保护。 除此之外，装备拥有强大保护附魔的防具也至关重要。"
 	}
   ]
 }

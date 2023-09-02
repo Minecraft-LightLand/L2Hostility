@@ -1,46 +1,46 @@
 {
-  "name": "Potion Effect Traits",
+  "name": "药水效果词条",
   "icon": "l2hostility:blindness",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "There are 7 traits that allow mobs to apply vanilla potion effects."
+	  "text": "以下的7个词条可以让怪物对目标施加药水效果。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:blindness",
-	  "text": "This trait allows mobs to apply blindness effect, which significantly reduce sight."
+	  "text": "这个词条可以让怪物施加致盲效果，减少目标的有效视野。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:nausea",
-	  "text": "This trait allows mobs to apply nausea effect, which significantly distorts sight."
+	  "text": "这个词条可以让怪物施加反胃效果，扭曲目标视野。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:levitation",
-	  "text": "This trait allows mobs to apply levitation effect."
+	  "text": "这个词条可以让怪物施加漂浮效果。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:slowness",
-	  "text": "This trait allows mobs to apply slowness effect."
+	  "text": "这个词条可以让怪物施加减速效果。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:weakness",
-	  "text": "This trait allows mobs to apply weakness effect."
+	  "text": "这个词条可以让怪物施加虚弱效果。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:poison",
-	  "text": "This trait allows mobs to apply poison effect."
+	  "text": "这个词条可以让怪物施加中毒效果。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:wither",
-	  "text": "This trait allows mobs to apply wither effect."
+	  "text": "这个词条可以让怪物施加凋零效果。"
 	}
   ]
 }

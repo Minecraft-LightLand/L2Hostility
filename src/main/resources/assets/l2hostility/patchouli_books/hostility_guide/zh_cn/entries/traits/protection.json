@@ -1,16 +1,16 @@
 {
-  "name": "Protection",
+  "name": "保护",
   "icon": "l2hostility:protection",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:protection",
-	  "text": "Mob will have resistance effect, with level equal to rank of this trait."
+	  "text": "这个词条让怪物获得伤害抗性，级别等同于词条等级。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "To deal with mobs with Protection trait, weapons that bypass resistance or cleanse potion that erase all potions would help."
+	  "text": "为了对付具有保护特性的生物，无视抗性的武器或净化药水会有所帮助。"
 	}
   ]
 }

@@ -1,16 +1,16 @@
 {
-  "name": "Difficulty Mechanics",
+  "name": "难度机制",
   "icon": "minecraft:zombie_head",
   "category": "l2hostility:mechanics",
   "sortnum": 1,
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "Mobs spawned will be assigned a level based on dimension, biome, location, entity type, and nearest player. Mobs will gain health, damage, and traits based on its level.$(br2)Player will gain difficulty when killing mobs. Killing mobs with higher level will increase difficulty faster. Dying will reduce player difficulty."
+	  "text": "生成的怪物将根据维度、生物群系、位置、实体类型和最近的玩家的等级从而获得自己的等级。 怪物会根据其等级提升生命值、伤害和附加额外词条。$(br2)玩家在杀死怪物时会获得困难值，击杀的怪物等级越高，难度值提升的速度就越快。 死亡会降低玩家难度值。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "There are also other factors that may determine mob level: By default, mobs further from the origin will have higher levels, and the more dimensions you have visited, the stronger the mobs you meet will be.$(br2)You can view all related information in your inventory tab."
+	  "text": "还有其他因素可能决定怪物等级：一般情况下，距离出生点越远的怪物等级越高，随着你访问的维度越来越多，遇到的怪物也会越来越强大。$(br2)你可以在库存选项卡中查看所有相关信息。"
 	}
   ]
 }

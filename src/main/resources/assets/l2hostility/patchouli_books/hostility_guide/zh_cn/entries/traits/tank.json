@@ -1,16 +1,16 @@
 {
-  "name": "Tank",
+  "name": "重装",
   "icon": "l2hostility:tank",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:tank",
-	  "text": "Mob with this trait gains extra armor and health."
+	  "text": "拥有该词条的怪物获得额外的生命值与护甲。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "Weapons that bypass armor or magic damage are good against mobs with this trait."
+	  "text": "可以无视护甲的武器或者魔法伤害可以有效地对付这类怪物。"
 	}
   ]
 }

@@ -1,12 +1,12 @@
 {
-  "name": "Fiery",
+  "name": "烈焰",
   "icon": "l2hostility:fiery",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:fiery",
-	  "text": "Fiery trait makes mob immune to fire, ignite attackers, and ignite targets attacked."
+	  "text": "烈焰词条可以让怪物免疫火焰并且点燃攻击者与被攻击者。"
 	}
   ]
 }

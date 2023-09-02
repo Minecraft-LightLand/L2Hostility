@@ -1,16 +1,16 @@
 {
-  "name": "Datapack",
+  "name": "数据包",
   "icon": "minecraft:book",
   "category": "l2hostility:mechanics",
   "sortnum": 102,
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "Exact rules to determine mob level can be configured through datapack. You can specify the minimum level(min), additive level bonus(base), level bonus as a factor of player level (scale), randomness (variation), and chance to make mobs to gain level or having traits.$(br2)One can specify a difficulty config entry for each dimension / biome / entity type, and all of them take effect collectively."
+	  "text": "你可以通过数据包为生成怪物等级指定一个确切的规则。 你可以编辑怪物最低等级，附加等级奖励，甚至调控等级奖励与玩家等级之间的联系与特殊词条怪物生成的概率。$(br2)你可以为每个维度/生物群系/实体类型指定一个难度配置规则，这些规则可以同时生效。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "You can also configure the weight, level cost, max rank, min level, and entity blacklist / whitelist for each trait. When generating traits for a mob, each trait will have a chance to enter the trait pool. Then we pick one random trait from the pool, assign a rank, and repeat this process until we have no traits left in the pool, or total level cost of traits reach the mob level."
+	  "text": "你还可以为每个词条配置权重、生成条件、最高等级、最低等级以及实体黑名单/白名单。每个词条都有机会进入词条池，当为怪物获得词条时，我们从池中随机选择一个词条，分配一个等级并重复此过程，直到池中没有剩余词条，或者词条的总等级达到怪物自身等级。"
 	}
   ]
 }
