@@ -1,16 +1,16 @@
 {
-  "name": "Traits",
+  "name": "词条",
   "icon": "l2hostility:fiery",
   "category": "l2hostility:mechanics",
   "sortnum": 2,
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "Mob will have traits when they have high enough level. At first, player may only find mobs with rank 1 traits. When player kills a mob with rank 1 trait, rank 2 traits will be unlocked for mobs spawned near this player.$(br2)Traits have their own loot table. You can check JEI for drops of each trait."
+	  "text": "当怪物达到一定等级时会获得特殊词条。起初玩家只可能发现拥有一级词条的怪物。拥有二级词条的怪物将会在玩家击杀拥有一级词条的怪物之后开始在他附近生成。$(br2)词条怪物有自己的战利品表。你可以查看 JEI 以了解每个词条战利品的掉落情况。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "The number of traits a mob can have depends on level and trait ranks. When the maximum trait rank is low while mob level is high, the mob would have a lot of traits. Conversely, if the mob has low level but is allowed to have high rank traits, the mob may have only one trait."
+	  "text": "一个怪物可拥有的词条数量取决于怪物自身等级和词条等级。当怪物自身等级远大于词条最高等级时, 这只怪物将会有大量的词条。相反，如果怪物本身等级较低但具有高等级词条，则该怪物可能只有一种词条。"
 	}
   ]
 }

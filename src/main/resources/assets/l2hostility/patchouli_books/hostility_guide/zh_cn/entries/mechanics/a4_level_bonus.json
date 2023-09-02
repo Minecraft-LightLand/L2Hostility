@@ -1,17 +1,17 @@
 {
-  "name": "Player Difficulty",
+  "name": "玩家难度值",
   "icon": "l2hostility:hostility_orb",
   "category": "l2hostility:mechanics",
   "sortnum": 4,
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "When your difficulty level reach a certain point, you can get rewards (including a Hostility Orb) when killing the next mob. You can check how many rewards you have got."
+	  "text": "当你的难度值达到一定程度时，你可以在杀死下一个怪物时获得奖励（包括恶意吸收宝珠），你可以查看您获得了多少奖励。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:hostility_orb",
-	  "text": "Reward is the only source for Hostility Orb, which can prevent mobs spawned in a chunk section to have levels. It has the same effect as clearing a hostility spawner."
+	  "text": "击杀怪物的掉落奖励是恶意吸收宝珠的的唯一获取方式，它可以防止在一个区块中生成的怪物具有恶意等级，可以达到和清除恶意刷怪笼同样的效果。"
 	}
   ]
 }

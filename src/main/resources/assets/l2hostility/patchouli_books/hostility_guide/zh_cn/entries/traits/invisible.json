@@ -1,16 +1,16 @@
 {
-  "name": "Invisible",
+  "name": "隐身",
   "icon": "l2hostility:invisible",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:invisible",
-	  "text": "Invisible trait makes mobs invisible. It applies Transparent enchantment on equipments to hide them as well. It also hides the trait title unless you look at them directly."
+	  "text": "隐形词条可以让怪物本身和它们身上的装备通过透明附魔完全隐形。如果你不直视它们，他们甚至连词条标志都能隐去。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "Applying cleansed potion or glowing effect can help you to see the invisible mob."
+	  "text": "使用净化药水或发光效果可以帮助你看到隐形的生物。"
 	}
   ]
 }

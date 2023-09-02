@@ -1,26 +1,26 @@
 {
-  "name": "L2Complements Effect Traits",
+  "name": "L2Complements 效果词条",
   "icon": "l2hostility:freezing",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "There are 3 traits that allow mobs to inflict potion effects from L2Complements: Cursed, Soul Burner, and Freezing"
+	  "text": "L2Complements中还有三个强力的怪物词条效果：诅咒、业火和寒流"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:cursed",
-	  "text": "This trait allows mobs to apply cursed effect, which prevents healing."
+	  "text": "这个词条可以让怪物的攻击获得诅咒效果，攻击时令目标无法恢复生命值。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:soul_burner",
-	  "text": "This trait allows mobs to apply soul flame effect, which deals high damage."
+	  "text": "这个词条可以让怪物的攻击附带高伤害的魂火效果。"
 	},
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:freezing",
-	  "text": "This trait allows mobs to apply frost effect, which slows down target and reduce visibility."
+	  "text": "这个词条可以让怪物施加减速并且干扰视野的寒流效果。"
 	}
   ]
 }

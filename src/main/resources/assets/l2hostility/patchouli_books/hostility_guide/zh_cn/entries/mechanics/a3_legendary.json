@@ -1,16 +1,16 @@
 {
-  "name": "Legendary Traits",
+  "name": "传奇词条",
   "icon": "l2hostility:teleport",
   "category": "l2hostility:mechanics",
   "sortnum": 3,
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "Legendary traits are unlocked only when player unlocks rank 5 traits. Legendary traits are special abilities that could be annoying to fight, very threatening for endgame players, or requires specific mechanics to kill.$(br2)If you think they are too strong, you can disable them through config or datapack."
+	  "text": "玩家在解锁五级词条时，传奇词条也会随之解锁。传奇词条是非常特殊的能力，拥有传说词条的怪物往往会使你在战斗中焦头烂额，它们威胁性极强，甚至可能需要特殊的机制才能够杀死。$(br2)如果你认为传奇词条太过强大而影响到了游戏体验，你可以在配置中或使用数据包来禁用它。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "Here are some examples of legendary traits that requires specific mechanics to kill:$(li)Cursed effect is required to kill mobs with Undying trait. Otherwise they will respawn indefinitely.$(li)Magic damage is required to kill mobs with Teleport Trait or Dementor Trait."
+	  "text": "以下是用于击杀具有传说词条怪物的一些特殊机制示例：$(li)杀死具有不死词条的怪物需要诅咒效果，否则它们将无限制地重生。$(li)需要使用魔法伤害来杀死具有传送词条或摄魂词条的生物。"
 	}
   ]
 }
