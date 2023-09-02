@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:undying",
-	  "text": "拥有此词条的怪物死亡时会立刻满血复活，除非在死亡时他们处于无法恢复的状态或受到虚空伤害。"
+	  "text": "拥有此词条的怪物死亡时会立刻满血复活，除非在死亡前他们处于无法恢复的状态或受到虚空伤害。"
 	},
 	{
 	  "type": "patchouli:text",
