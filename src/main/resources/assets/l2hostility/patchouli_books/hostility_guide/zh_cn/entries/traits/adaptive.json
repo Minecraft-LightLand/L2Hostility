@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:adaptive",
-	  "text": "拥有此词条的怪物可以记忆最近受到伤害的种类并以此减免受到的该类伤害，可同时记忆的伤害种类取决于词条等级。"
+	  "text": "拥有此词条的怪物可以记忆最近受到伤害的种类并以此减免受到的该类伤害，可同时记忆的伤害种类数量取决于词条等级。"
 	},
 	{
 	  "type": "patchouli:text",
