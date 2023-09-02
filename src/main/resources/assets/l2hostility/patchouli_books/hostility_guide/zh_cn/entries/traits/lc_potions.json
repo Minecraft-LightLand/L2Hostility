@@ -10,7 +10,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:cursed",
-	  "text": "这个词条可以让怪物的攻击获得诅咒效果，令目标无法恢复生命值。"
+	  "text": "这个词条可以让怪物的攻击获得诅咒效果，攻击时令目标无法恢复生命值。"
 	},
 	{
 	  "type": "patchouli:spotlight",
