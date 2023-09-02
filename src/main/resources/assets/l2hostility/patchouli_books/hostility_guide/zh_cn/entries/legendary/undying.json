@@ -1,16 +1,16 @@
 {
-  "name": "Undying",
+  "name": "不死",
   "icon": "l2hostility:undying",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:undying",
-	  "text": "Mobs with this trait will revive to full health when attempted to be killed, unless it cannot heal or the damage is void damage."
+	  "text": "拥有此词条的怪物死亡时会立刻满血复活，除非在死亡时他们处于无法恢复的状态或受到虚空伤害。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "To kill mobs with this trait, cursed effect is the best, as this effect can prevent healing.$(br2)You need to kill mobs with Cursed trait to obtain items that can craft weapons capable of inflicting cursed effect."
+	  "text": "使用可以让敌人无法恢复的诅咒效果来对抗拥有此词条的敌人是最佳对策。$(br2)具有诅咒词条的小怪凋落物可以制造具有诅咒效果的武器。"
 	}
   ]
 }

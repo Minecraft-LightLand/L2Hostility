@@ -1,16 +1,16 @@
 {
-  "name": "Mod Configuration",
+  "name": "Mod配置",
   "icon": "minecraft:paper",
   "category": "l2hostility:mechanics",
   "sortnum": 101,
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "You can configure difficulty calculation in config: There are config values that allow mobs spawned further from origin to have higher levels, and config values that allow mobs you meet to have a level bonus for each dimension you have visited.$(br2)You can also specify how frequent mobs with level and trait will spawn."
+	  "text": "你可以在配置中调整难度算法：有一些配置值可以让距离出生点更远的小怪拥有更高的等级奖励，也可以让你遇到的怪物随着你探索的维度数量而额外提升等级。$(br2)你也可以设定拥有恶意等级和特殊词条的怪物的生成方式。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "You can also specify how much mobs are buffed, and the strength of each trait in config. All numbers are configurable in this mod.$(br2)Advanced configuration are available through datapack."
+	  "text": "你还可以自由配置怪物永远有的增益数量和词条等级。$(br2)更高级的配置需要配合数据包使用。"
 	}
   ]
 }

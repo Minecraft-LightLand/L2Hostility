@@ -1,16 +1,16 @@
 {
-  "name": "Repelling",
+  "name": "排斥",
   "icon": "l2hostility:repelling",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:repelling",
-	  "text": "Mobs with this trait can repel players and entities targeting it, and are immune to projectiles."
+	  "text": "具有此词条的怪物可以不断推开身边的玩家和敌对生物，并且不受弹射物影响。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "To kill mobs with this trait, you can use magical damage, explosions, or projectiles that can bypass projectile immunity."
+	  "text": "你可以使用魔法伤害、爆炸或可以绕过弹射物免疫的弹射物来杀死具有此词条的怪物。"
 	}
   ]
 }

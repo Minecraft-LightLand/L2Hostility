@@ -1,16 +1,16 @@
 {
-  "name": "Adaptive",
+  "name": "适应",
   "icon": "l2hostility:adaptive",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:adaptive",
-	  "text": "Mobs with this trait will get used to attacks. They will remember most recent damage types, and get used to them. They can remember as many damage types as its rank."
+	  "text": "拥有此词条的怪物可以记忆最近受到伤害的种类并以此减免受到的该类伤害，可同时记忆的伤害种类取决于词条等级。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "To fight mobs with Adaptive trait, you need to use various damage types to clear their memory. Alternative melee, trident, arrow attacks are effective.$(br2)If the rank is high, potion, lava, fire, cactus, falling damage etc can help to clear the memory."
+	  "text": "对付具有适应词条的怪物时，你需要使用不同种类的伤害来不断重置它们的记忆，近战、三叉戟、弓箭的攻击都颇有效果。$(br2)如果词条等级过高的话，药水、岩浆、火焰、仙人掌、掉落伤害等可以帮助清除记忆。"
 	}
   ]
 }

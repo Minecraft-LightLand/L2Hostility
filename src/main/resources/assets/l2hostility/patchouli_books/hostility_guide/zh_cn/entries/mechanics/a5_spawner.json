@@ -1,5 +1,5 @@
 {
-  "name": "Hostility Spawner",
+  "name": "恶意刷怪笼",
   "icon": "l2hostility:hostility_spawner",
   "category": "l2hostility:mechanics",
   "sortnum": 5,
@@ -7,11 +7,11 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:hostility_spawner",
-	  "text": "This item can help you to clear difficulty in a chunk section. To use it, place it in the desired chunk section. Right click it to activate. It will summon a hoard of enemies, and kill them all to clear chunk section difficulty. If any mob are dead for suspicious cause, The spawner will fail. You can click it to restore."
+	  "text": "这个物品和可以帮助你解决一个区块的困难度问题。你要将其放置在所需的区块中并右键单击它来激活。它会召唤一群敌人并将他们全部杀死以清除区块难度。如果任何怪物因可疑原因而死亡则恶意刷怪笼将会失败，你可以单击它来恢复。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "When a chunk is cleared, you can check it in your difficulty tab, or place down a hostility spawner. Spawner will turn green automatically in cleared regions."
+	  "text": "当一个区块被清理后，你可以放置一个恶意刷怪笼或者在难度选项卡中检查它，而已刷怪笼在已清理的区域会自动变绿。"
 	}
   ]
 }

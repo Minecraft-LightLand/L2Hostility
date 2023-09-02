@@ -1,16 +1,16 @@
 {
-  "name": "Dispell",
+  "name": "破魔",
   "icon": "l2hostility:dispell",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:dispell",
-	  "text": "Mobs with this trait can deal damage that bypass magical protection, and randomly negate enchantments on one of your equipments temporarily. Also, they will be immune to magic damage."
+	  "text": "拥有此词条的怪物将无视目标的魔法保护, 并会在一段时间内会消除你身上随机一件装备的附魔，除此之外怪物还将免疫魔法伤害。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "To fight this mob, you need shields to block attacks. Otherwise their attack might be more effective than you think."
+	  "text": "你需要盾牌来对抗这些残暴的家伙，否则你可能会一命呜呼。"
 	}
   ]
 }
