@@ -42,6 +42,8 @@
   "l2hostility.tooltip.legendary": "Legendary",
   "l2hostility.tooltip.self_effect": "Mob gains continuous effect: ",
   "l2hostility.tooltip.target_effect": "Mob inflict effect on hit: ",
+  "patchouli.l2hostility.landing": "Find out the mechanics and mob traits to know what to prepare for",
+  "patchouli.l2hostility.title": "L2Hostility Guide",
   "trait.l2hostility.adaptive": "Adaptive",
   "trait.l2hostility.adaptive.desc": "Memorize damage types taken and stack %s%% damage reduction for those damage every time. Memorizes last %s different damage types.",
   "trait.l2hostility.blindness": "Blinder",

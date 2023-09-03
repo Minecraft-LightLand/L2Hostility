@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.content.item.spawner.block.TraitSpawnerBlock;
 import dev.xkmc.l2hostility.content.item.spawner.tile.BurstSpawnerBlockEntity;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2modularblock.DelegateBlock;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -35,7 +36,9 @@ public class LHBlocks {
 							var ans = pvd.models().cubeAll(name, pvd.modLoc("block/" + name))
 									.renderType("cutout");
 							return ConfiguredModel.builder().modelFile(ans).build();
-						})).simpleItem().register();
+						}))
+				.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+				.simpleItem().register();
 
 		BE_BURST = L2Hostility.REGISTRATE.blockEntity("hostility_spawner", BurstSpawnerBlockEntity::new)
 				.validBlocks(BURST_SPAWNER).register();

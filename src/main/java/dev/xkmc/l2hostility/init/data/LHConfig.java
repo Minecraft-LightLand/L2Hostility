@@ -54,7 +54,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue speedy;
 		public final ForgeConfigSpec.DoubleValue regen;
 		public final ForgeConfigSpec.DoubleValue adaptFactor;
-		public final ForgeConfigSpec.DoubleValue reflect;
+		public final ForgeConfigSpec.DoubleValue reflectFactor;
 		public final ForgeConfigSpec.IntValue dispellTime;
 		public final ForgeConfigSpec.IntValue fieryTime;
 		public final ForgeConfigSpec.IntValue weakTime;
@@ -70,6 +70,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue teleportDuration;
 		public final ForgeConfigSpec.IntValue teleportRange;
 		public final ForgeConfigSpec.IntValue repellRange;
+		public final ForgeConfigSpec.DoubleValue corrosionFactor;
+		public final ForgeConfigSpec.DoubleValue erosionFactor;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("scaling");
@@ -136,8 +138,8 @@ public class LHConfig {
 						.defineInRange("regen", 0.02, 0, 1000);
 				adaptFactor = builder.comment("Damage factor for Adaptive. Higher means less reduction")
 						.defineInRange("adaptFactor", 0.5, 0, 1000);
-				reflect = builder.comment("Reflect factor per level for Reflect. 0.5 means +50% extra damage")
-						.defineInRange("reflect", 0.5, 0, 1000);
+				reflectFactor = builder.comment("Reflect factor per level for Reflect. 0.5 means +50% extra damage")
+						.defineInRange("reflectFactor", 0.3, 0, 1000);
 				dispellTime = builder.comment("Duration in ticks for enchantments to be disabled per level for Dispell")
 						.defineInRange("dispellTime", 200, 1, 60000);
 				fieryTime = builder.comment("Duration in seconds to set target on fire by Fiery")
@@ -168,6 +170,11 @@ public class LHConfig {
 						.defineInRange("teleportRange", 16, 0, 64);
 				repellRange = builder.comment("Range in blocks for Repell")
 						.defineInRange("repellRange", 10, 0, 64);
+
+				corrosionFactor = builder.comment("Fraction of remaining durability to corrode, per trait rank")
+						.defineInRange("corrosionFactor", 0.1, 0, 1);
+				erosionFactor = builder.comment("Fraction of lost durability to erode, per trait rank")
+						.defineInRange("erosionFactor", 0.3, 0, 1);
 
 			}
 			builder.pop();

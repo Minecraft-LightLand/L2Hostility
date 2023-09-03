@@ -20,16 +20,15 @@ public class ReflectTrait extends MobTrait {
 	@Override
 	public void onHurtByOthers(int level, LivingEntity entity, LivingHurtEvent event) {
 		if (event.getSource().getDirectEntity() instanceof LivingEntity le && !event.getSource().is(L2DamageTypes.MAGIC)) {
-			float factor = (float) (1 + level * LHConfig.COMMON.reflect.get());
+			float factor = (float) (level * LHConfig.COMMON.reflectFactor.get());
 			MobEvents.schedule(() -> le.hurt(entity.level().damageSources().indirectMagic(entity, null), event.getAmount() * factor));
 		}
 	}
 
-
 	@Override
 	public void addDetail(List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-						mapLevel(i -> Component.literal((int) Math.round(100 * (1 + i * LHConfig.COMMON.reflect.get())) + "")
+						mapLevel(i -> Component.literal((int) Math.round(100 * (1 + i * LHConfig.COMMON.reflectFactor.get())) + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

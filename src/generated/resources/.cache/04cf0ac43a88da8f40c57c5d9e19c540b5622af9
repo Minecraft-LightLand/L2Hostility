@@ -1,9 +1,9 @@
-// 1.20.1	2023-08-24T14:28:49.232257	L2Hostility Config
+// 1.20.1	2023-09-03T18:42:33.737256	L2Hostility Config
 175f917a777e6d88f2b3815647060c62e5d9848d data/l2hostility/l2hostility_config/difficulty/end.json
 8ce5807b8cbd5c2f6a74e74683ed577446a1fe41 data/l2hostility/l2hostility_config/difficulty/mobs.json
 369d1454b30dd13a883771fb78eb710724d5982d data/l2hostility/l2hostility_config/difficulty/nether.json
 87b20c47bf80ce84f153946c3f940dab96e8dbd3 data/l2hostility/l2hostility_config/difficulty/overworld.json
-0296e7d27ca5b678584e1edc4b58e478fcb6cb2a data/l2hostility/l2hostility_config/trait/adaptive.json
+e89101365c79dab2740a674da8584e0e31cb71ec data/l2hostility/l2hostility_config/trait/adaptive.json
 9293c5fd6e495465e655a44f5f222949a42ef675 data/l2hostility/l2hostility_config/trait/blindness.json
 0bf65a7eb4ed2c5c3a4f81607005d79d19849adc data/l2hostility/l2hostility_config/trait/cursed.json
 c2df70d7be1c1e0bfc7e3ad1f2245ac0afd518e7 data/l2hostility/l2hostility_config/trait/dementor.json
@@ -15,7 +15,7 @@ af7cfe697eabb53745625b3885e2692ec3f75de9 data/l2hostility/l2hostility_config/tra
 af7cfe697eabb53745625b3885e2692ec3f75de9 data/l2hostility/l2hostility_config/trait/nausea.json
 df84b5ba21c5a1ea339932c457ffdd825b312395 data/l2hostility/l2hostility_config/trait/poison.json
 2854e235cb4ebb783cede33840df8bc305887d00 data/l2hostility/l2hostility_config/trait/protection.json
-0296e7d27ca5b678584e1edc4b58e478fcb6cb2a data/l2hostility/l2hostility_config/trait/reflect.json
+9ad02163d01fc19438fc4575797ebb423b30be20 data/l2hostility/l2hostility_config/trait/reflect.json
 ec32ab9851bcf549f9d66de79348da06c471fd10 data/l2hostility/l2hostility_config/trait/regenerate.json
 f9546a758df66af221cadfb80f84dca11857c6a0 data/l2hostility/l2hostility_config/trait/repelling.json
 ec32ab9851bcf549f9d66de79348da06c471fd10 data/l2hostility/l2hostility_config/trait/slowness.json

@@ -1,11 +1,11 @@
 {
-  "name": "L2Complements 效果词条",
+  "name": "莱特兰扩展效果词条",
   "icon": "l2hostility:freezing",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "L2Complements中还有三个强力的怪物词条效果：诅咒、业火和寒流"
+	  "text": "莱特兰扩展中还有三个强力的怪物词条效果：诅咒、业火和寒流"
 	},
 	{
 	  "type": "patchouli:spotlight",

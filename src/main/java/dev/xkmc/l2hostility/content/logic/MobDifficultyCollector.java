@@ -7,7 +7,7 @@ import net.minecraft.util.RandomSource;
 
 public class MobDifficultyCollector {
 
-	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel();
+	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel() + 1;
 	public double scale, varSq, apply_chance, trait_chance;
 
 	public MobDifficultyCollector() {

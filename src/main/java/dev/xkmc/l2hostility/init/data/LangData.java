@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import dev.xkmc.l2hostility.compat.patchouli.PatchouliLang;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -73,6 +74,7 @@ public enum LangData {
 			pvd.add(L2Hostility.MODID + "." + id.id, id.def);
 		}
 		pvd.add("config.jade.plugin_l2hostility.mob", "L2Hostility");
+		PatchouliLang.genLang(pvd);
 	}
 
 	public static String asId(String name) {

@@ -1,6 +1,8 @@
 {
   "itemGroup.l2library.hostility": "莱特兰·恶意",
   "config.jade.plugin_l2hostility.mob": "莱特兰·恶意",
+  "patchouli.l2hostility.landing": "了解难度机制和怪物词条，以更好地应对它们",
+  "patchouli.l2hostility.title": "莱特兰恶意教程",
   "l2hostility": {
 	"patchouli": {
 	  "title": "莱特兰·恶意-教程与词条列表",

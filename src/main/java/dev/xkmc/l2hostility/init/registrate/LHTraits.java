@@ -9,10 +9,7 @@ import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
 import dev.xkmc.l2hostility.content.traits.base.TargetEffectTrait;
 import dev.xkmc.l2hostility.content.traits.common.*;
 import dev.xkmc.l2hostility.content.traits.goals.EnderTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.DementorTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.DispellTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.RepellingTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.UndyingTrait;
+import dev.xkmc.l2hostility.content.traits.legendary.*;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.base.L2Registrate;
@@ -81,11 +78,11 @@ public class LHTraits {
 					.desc("Heals %s%% of full health every second.")
 					.lang("Regenerating").register();
 			ADAPTIVE = L2Hostility.REGISTRATE.regTrait("adaptive", () -> new AdaptingTrait(ChatFormatting.GOLD),
-							() -> new TraitConfig(20, 100, 5, 50))
+							() -> new TraitConfig(50, 50, 5, 50))
 					.desc("Memorize damage types taken and stack %s%% damage reduction for those damage every time. Memorizes last %s different damage types.")
 					.lang("Adaptive").register();
 			REFLECT = L2Hostility.REGISTRATE.regTrait("reflect", () -> new ReflectTrait(ChatFormatting.DARK_RED),
-							() -> new TraitConfig(20, 100, 5, 50))
+							() -> new TraitConfig(30, 50, 5, 50))
 					.desc("Reflect direct physical damage as %s%% magical damage")
 					.lang("Reflect").register();
 
