@@ -1,6 +1,6 @@
 {
   "blacklist": [],
-  "cost": 10,
+  "cost": 15,
   "max_rank": 3,
   "min_level": 20,
   "weight": 25,
