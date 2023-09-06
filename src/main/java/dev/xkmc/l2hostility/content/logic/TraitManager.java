@@ -50,8 +50,9 @@ public class TraitManager {
 		}
 	}
 
-	private static void generateTraits(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, int maxModLv) {
-		List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e -> e.allow(le, lv, maxModLv)).toList());
+	private static void generateTraits(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
+		List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
+				e.allow(le, lv, ins.getMaxTraitLevel())).toList());
 		int weights = 0;
 		for (var e : list) {
 			weights += e.getConfig().weight;
@@ -76,13 +77,17 @@ public class TraitManager {
 				level--;
 				continue;
 			}
-			int maxLv = Math.min(Math.min(maxModLv, rand.nextInt(level / cost) + 1), e.getMaxLevel());
+			int maxLv = Math.min(Math.min(ins.getMaxTraitLevel(),
+					rand.nextInt(level / cost) + 1), e.getMaxLevel());
 			if (maxLv == 0) {
 				level--;
 				continue;
 			}
 			level -= maxLv * cost;
 			traits.put(e, maxLv);
+			if (!ins.isFullChance() && rand.nextDouble() < LHConfig.COMMON.globalTraitSuppression.get()) {
+				break;
+			}
 		}
 		for (var e : traits.entrySet()) {
 			e.getKey().initialize(le, e.getValue());
@@ -109,7 +114,7 @@ public class TraitManager {
 		// add traits
 		if (ins.trait_chance() >= le.getRandom().nextDouble()) {
 			if (!le.getType().is(TagGen.NO_TRAIT)) {
-				generateTraits(le, lv, traits, ins.getMaxTraitLevel());
+				generateTraits(le, lv, traits, ins);
 			}
 			ans = lv;
 		}

@@ -10,6 +10,8 @@ public class MobDifficultyCollector {
 	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel() + 1;
 	public double scale, varSq, apply_chance, trait_chance;
 
+	private boolean fullChance = false;
+
 	public MobDifficultyCollector() {
 		apply_chance = LHConfig.COMMON.globalApplyChance.get();
 		trait_chance = LHConfig.COMMON.globalTraitChance.get();
@@ -55,14 +57,23 @@ public class MobDifficultyCollector {
 	}
 
 	public double apply_chance() {
-		return apply_chance;
+		return fullChance ? 1 : apply_chance;
 	}
 
 	public double trait_chance() {
-		return trait_chance;
+		return fullChance ? 1 : trait_chance;
 	}
 
 	public int getBase() {
 		return (int) Math.round(base + difficulty * scale);
 	}
+
+	public void setFullChance() {
+		fullChance = true;
+	}
+
+	public boolean isFullChance() {
+		return fullChance;
+	}
+
 }

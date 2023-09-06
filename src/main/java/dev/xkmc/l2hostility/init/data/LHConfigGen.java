@@ -56,7 +56,7 @@ public class LHConfigGen extends ConfigDataProvider {
 		);
 
 		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "nether"), new WorldDifficultyConfig()
-				.putDim(BuiltinDimensionTypes.NETHER, 0, 20, 16, 1.2)
+				.putDim(BuiltinDimensionTypes.NETHER, 0, 20, 9, 1.2)
 		);
 
 		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "end"), new WorldDifficultyConfig()

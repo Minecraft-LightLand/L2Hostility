@@ -5,6 +5,7 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -48,6 +49,10 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 		return LHConfig.COMMON.hostilitySpawnLevelBonus.get();
 	}
 
+	public static int getMaxTrials() {
+		return 4;
+	}
+
 	public BurstSpawnerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 	}
@@ -64,7 +69,8 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 			}
 		}
 		sec.activePos = getBlockPos();
-		for (int i = 0; i < getSpawnGroup(); i++) {
+		int count = 0;
+		for (int i = 0; i < getSpawnGroup() * getMaxTrials(); i++) {
 			int x = level.getRandom().nextInt(16);
 			int y = level.getRandom().nextInt(16);
 			int z = level.getRandom().nextInt(16);
@@ -75,6 +81,9 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 			);
 			var e = mobsAt(sl, MobCategory.MONSTER, pos).getRandom(level.getRandom());
 			if (e.isPresent()) {
+				if (e.get().type.is(TagGen.NO_SCALING) || e.get().type.is(TagGen.NO_TRAIT)) {
+					continue;
+				}
 				Entity entity = e.get().type.create(sl);
 				if (entity == null) continue;
 				entity.setPos(Vec3.atCenterOf(getBlockPos()));
@@ -86,14 +95,18 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 						cap.init(level, le, (a, b) -> {
 							cdcap.get().modifyInstance(a, b);
 							b.acceptBonusLevel(getBonusLevel());
+							b.setFullChance();
 						});
 					}
 					entity.setPos(Vec3.atCenterOf(getBlockPos().above()));
 					data.add(le);
 					level.addFreshEntity(entity);
+					count++;
+					if (count >= getSpawnGroup()) {
+						break;
+					}
 				}
 			}
-
 		}
 	}
 

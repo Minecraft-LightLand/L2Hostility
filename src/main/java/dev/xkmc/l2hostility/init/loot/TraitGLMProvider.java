@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -56,7 +55,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.SPEEDY.get(), new ItemStack(LCItems.CAPTURED_WIND, 1), 3, 0, 0.1, 50);
 		add(LHTraits.PROTECTION.get(), new ItemStack(Items.SCUTE, 4), 1, 0, 0.1);
 		add(LHTraits.PROTECTION.get(), new ItemStack(LCItems.EXPLOSION_SHARD, 1), 3, 0, 0.1);
-		add(LHTraits.INVISIBLE.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.INVISIBILITY), 1, 1, 0);
+		add(LHTraits.INVISIBLE.get(), new ItemStack(Items.PHANTOM_MEMBRANE, 4), 1, 0.25, 0);
 		add(LHTraits.FIERY.get(), new ItemStack(Items.BLAZE_ROD, 8), 1, 0.25, 0);
 		add(LHTraits.REGEN.get(), new ItemStack(Items.GHAST_TEAR, 4), 1, 0, 0.1);
 		add(LHTraits.REGEN.get(), new ItemStack(LCMats.TOTEMIC_GOLD.getNugget(), 4), 3, 0, 0.1);

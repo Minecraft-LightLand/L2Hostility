@@ -30,9 +30,9 @@ public class LHConfig {
 
 	public static class Common {
 
-		public final ForgeConfigSpec.IntValue killPerLevel;
+		public final ForgeConfigSpec.IntValue killsPerLevel;
 		public final ForgeConfigSpec.IntValue traitCapPerLevel;
-		public final ForgeConfigSpec.DoubleValue deathDecay;
+		public final ForgeConfigSpec.DoubleValue playerDeathDecay;
 
 		public final ForgeConfigSpec.DoubleValue healthFactor;
 		public final ForgeConfigSpec.DoubleValue damageFactor;
@@ -43,6 +43,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue addLevelToName;
 		public final ForgeConfigSpec.DoubleValue globalApplyChance;
 		public final ForgeConfigSpec.DoubleValue globalTraitChance;
+		public final ForgeConfigSpec.DoubleValue globalTraitSuppression;
 		public final ForgeConfigSpec.BooleanValue allowLegendary;
 
 		public final ForgeConfigSpec.IntValue hostilitySpawnCount;
@@ -89,11 +90,13 @@ public class LHConfig {
 				dimensionFactor = builder.comment("Difficulty bonus per level visited")
 						.defineInRange("dimensionFactor", 10, 0, 1000);
 				distanceFactor = builder.comment("Difficulty bonus per block from origin")
-						.defineInRange("distanceFactor", 0.005, 0, 1000);
+						.defineInRange("distanceFactor", 0.003, 0, 1000);
 				globalApplyChance = builder.comment("Chance for health/damage bonus and trait to apply")
 						.defineInRange("globalApplyChance", 1d, 0, 1);
 				globalTraitChance = builder.comment("Chance for trait to apply")
 						.defineInRange("globalTraitChance", 1d, 0, 1);
+				globalTraitSuppression = builder.comment("Chance to stop adding traits after adding a trait")
+						.defineInRange("globalTraitSuppression", 0.1d, 0, 1);
 				allowLegendary = builder.comment("Allow legendary traits")
 						.define("allowLegendary", true);
 			}
@@ -101,12 +104,12 @@ public class LHConfig {
 
 			builder.push("difficulty");
 			{
-				killPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
-						.defineInRange("killPerLevel", 10, 1, 10000);
+				killsPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
+						.defineInRange("killsPerLevel", 30, 1, 10000);
 				traitCapPerLevel = builder.comment("Mob trait cap per difficulty level. This is not the only factor")
 						.defineInRange("traitCapPerLevel", 20, 1, 10000);
-				deathDecay = builder.comment("Decay in player difficulty on death")
-						.defineInRange("deathDecay", 0.9, 0, 2);
+				playerDeathDecay = builder.comment("Decay in player difficulty on death")
+						.defineInRange("playerDeathDecay", 0.8, 0, 2);
 			}
 			builder.pop();
 

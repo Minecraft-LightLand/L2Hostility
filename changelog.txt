@@ -1,2 +1,17 @@
-fix potion jei display
-ritual sync
+2.4.4
+- Increase levels required by traits for most traits
+- Fix the bug that spawner might spawn mobs with no traits if trait spawn chance is not 100%
+
+
+2.4.3
+- Regenerate will not appear on mobs immune to effects
+- Tune down difficulty in general
+- Reduce chance for Weakness and Levitation to appear
+
+2.4.2
+- Undying will not appear on mobs immune to effects
+
+2.4.1
+- Fix the bug that Legendary traits won't spawn
+- Reduce Reflective damage
+- Increase Reflective and Adaptive level cost

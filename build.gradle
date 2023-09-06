@@ -154,7 +154,6 @@ repositories {
     flatDir {
         dirs 'libs'
     }
-    maven { url 'https://jitpack.io' }
     maven {
         // Location of the maven that hosts JEI files (and TiC)
         name 'Progwml6 maven'
@@ -177,6 +176,7 @@ repositories {
     maven {
         url = "https://maven.theillusivec4.top/"
     }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {

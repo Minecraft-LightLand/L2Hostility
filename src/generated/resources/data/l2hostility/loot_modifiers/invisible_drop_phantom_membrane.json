@@ -1,6 +1,6 @@
 {
   "type": "l2hostility:trait_scaled",
-  "chance": 1.0,
+  "chance": 0.25,
   "conditions": [
     {
       "condition": "minecraft:killed_by_player"
@@ -14,11 +14,8 @@
   ],
   "rankBonus": 0.0,
   "result": {
-    "Count": 1,
-    "id": "minecraft:potion",
-    "tag": {
-      "Potion": "minecraft:invisibility"
-    }
+    "Count": 4,
+    "id": "minecraft:phantom_membrane"
   },
   "trait": "l2hostility:invisible"
 }

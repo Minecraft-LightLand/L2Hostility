@@ -1,6 +1,5 @@
 {
   "entries": [
-    "l2hostility:invisible_drop_potion",
     "l2hostility:adaptive_drop_cursed_droplet",
     "l2hostility:repelling_drop_force_field",
     "l2hostility:weakness_drop_fermented_spider_eye",
@@ -14,6 +13,7 @@
     "l2hostility:regenerate_drop_totemic_gold_nugget",
     "l2hostility:wither_drop_wither_rose",
     "l2hostility:reflect_drop_explosion_shard",
+    "l2hostility:invisible_drop_phantom_membrane",
     "l2hostility:undying_drop_totem_of_undying",
     "l2hostility:cursed_drop_cursed_droplet",
     "l2hostility:protection_drop_scute",
