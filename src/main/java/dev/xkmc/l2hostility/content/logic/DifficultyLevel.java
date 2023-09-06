@@ -8,15 +8,16 @@ import dev.xkmc.l2serial.serialization.SerialClass;
 public class DifficultyLevel {
 
 	@SerialClass.SerialField
-	private int level, exp;
+	protected int level, exp;
 
-	private int extraLevel;
+	@SerialClass.SerialField
+	protected int extraLevel;
 
 	public static DifficultyLevel merge(DifficultyLevel difficulty, int extraLevel) {
 		DifficultyLevel ans = new DifficultyLevel();
 		ans.level = difficulty.level;
 		ans.exp = difficulty.exp;
-		ans.extraLevel = extraLevel;
+		ans.extraLevel = difficulty.extraLevel + extraLevel;
 		return ans;
 	}
 
@@ -40,7 +41,7 @@ public class DifficultyLevel {
 	}
 
 	public int getLevel() {
-		return level + extraLevel;
+		return Math.max(0, level + extraLevel);
 	}
 
 	public int getExp() {

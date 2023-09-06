@@ -5,6 +5,7 @@ import dev.xkmc.l2hostility.content.capability.chunk.InfoRequestToServer;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.spawner.tile.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
+import dev.xkmc.l2hostility.content.logic.LevelEditor;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -37,10 +38,10 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	private final DifficultyLevel difficulty = new DifficultyLevel();
 
 	@SerialClass.SerialField
-	private int maxRankKilled = 0, rewardCount = 0;
+	public int maxRankKilled = 0, rewardCount = 0;
 
 	@SerialClass.SerialField
-	private final TreeSet<ResourceLocation> dimensions = new TreeSet<>();
+	public final TreeSet<ResourceLocation> dimensions = new TreeSet<>();
 
 	public boolean updateChunkFlag = false, pendingFlag = false;
 
@@ -102,7 +103,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		HOLDER.network.toClientSyncAll((ServerPlayer) player);
 	}
 
-	public int getRewardCount(){
+	public int getRewardCount() {
 		return rewardCount;
 	}
 
@@ -111,8 +112,12 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	private int getExtraLevel() {
-		return (dimensions.size() - 1) * LHConfig.COMMON.dimensionFactor.get();
+		int count = Math.max(0, dimensions.size() - 1);
+		return count * LHConfig.COMMON.dimensionFactor.get();
 	}
 
 
+	public LevelEditor getLevelEditor() {
+		return new LevelEditor(difficulty, getExtraLevel());
+	}
 }

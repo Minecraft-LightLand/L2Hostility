@@ -47,6 +47,13 @@ public enum LangData {
 	CHANCE("jei.loot_chance", "%s%% chance to drop at Rank %s", 2),
 	MIN_LEVEL("jei.min_level", "Drops on mobs with level %s or higher", 1),
 
+	COMMAND_PLAYER_SUCCEED("command.player.success", "Performed actions on %s players", 1),
+	COMMAND_PLAYER_FAIL("command.player.fail", "Command has no target or no effect", 0),
+	COMMAND_PLAYER_GET_BASE("command.player.get_base", "%s has base difficulty level %s", 2),
+	COMMAND_PLAYER_GET_TOTAL("command.player.get_total", "%s has overall difficulty level %s", 2),
+	COMMAND_PLAYER_GET_DIM("command.player.get_dim", "%s has visited %s dimensions", 2),
+	COMMAND_PLAYER_GET_TRAIT_CAP("command.player.trait_cap", "The max rank %s has killed is rank %s", 2),
+
 	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
 	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0),
 	;

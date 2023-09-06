@@ -1,7 +1,10 @@
 2.4.4
+- Change default config values (delete old config file to take effect)
+- Add command system
 - Increase levels required by traits for most traits
 - Fix the bug that spawner might spawn mobs with no traits if trait spawn chance is not 100%
-
+- Change Invisibility drop from potion to phantom membrane
+- Mobs that cannot attack nearest player will not have a level
 
 2.4.3
 - Regenerate will not appear on mobs immune to effects

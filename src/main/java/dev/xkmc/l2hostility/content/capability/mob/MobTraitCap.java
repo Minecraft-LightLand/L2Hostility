@@ -21,6 +21,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -87,6 +88,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void init(Level level, LivingEntity le, RegionalDifficultyModifier difficulty) {
+		boolean skip = false;
 		MobDifficultyCollector instance = new MobDifficultyCollector();
 		var diff = L2Hostility.DIFFICULTY.getMerged().entityMap.get(le.getType());
 		if (diff != null) {
@@ -97,8 +99,11 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		if (player != null && PlayerDifficulty.HOLDER.isProper(player)) {
 			PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
 			playerDiff.apply(instance);
+			if (le instanceof OwnableEntity own && own.getOwner() == player) {
+				skip = true;
+			}
 		}
-		lv = TraitManager.fill(le, traits, instance);
+		lv = skip ? 0 : TraitManager.fill(le, traits, instance);
 		stage = Stage.INIT;
 		syncToClient(le);
 	}

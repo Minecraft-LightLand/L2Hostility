@@ -45,6 +45,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue globalTraitChance;
 		public final ForgeConfigSpec.DoubleValue globalTraitSuppression;
 		public final ForgeConfigSpec.BooleanValue allowLegendary;
+		public final ForgeConfigSpec.BooleanValue allowSectionDifficulty;
 
 		public final ForgeConfigSpec.IntValue hostilitySpawnCount;
 		public final ForgeConfigSpec.IntValue hostilitySpawnLevelBonus;
@@ -99,6 +100,8 @@ public class LHConfig {
 						.defineInRange("globalTraitSuppression", 0.1d, 0, 1);
 				allowLegendary = builder.comment("Allow legendary traits")
 						.define("allowLegendary", true);
+				allowSectionDifficulty = builder.comment("Allow chunk section to accumulate difficulty")
+						.define("allowSectionDifficulty", true);
 			}
 			builder.pop();
 

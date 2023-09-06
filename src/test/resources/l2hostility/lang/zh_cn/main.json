@@ -4,6 +4,16 @@
   "patchouli.l2hostility.landing": "了解难度机制和怪物词条，以更好地应对它们",
   "patchouli.l2hostility.title": "莱特兰恶意教程",
   "l2hostility": {
+	"command": {
+	  "player": {
+		"fail": "指令无目标或者无效",
+		"get_base": "%s的基础难度等级位Lv.%s",
+		"get_dim": "%s造访过%s个维度",
+		"get_total": "%s综合难度等级为Lv.%s",
+		"success": "指令已对%s个玩家起效",
+		"trait_cap": "%s击杀的最高阶级词条为阶级%s"
+	  }
+	},
 	"patchouli": {
 	  "title": "莱特兰·恶意-教程与词条列表",
 	  "landing": "这个模组提升了怪物数值，并添加了各种能力"

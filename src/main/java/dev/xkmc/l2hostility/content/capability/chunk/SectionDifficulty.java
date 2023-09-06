@@ -4,6 +4,7 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffects;
 import dev.xkmc.l2serial.serialization.SerialClass;
@@ -44,7 +45,8 @@ public class SectionDifficulty {
 
 	public void modifyInstance(Holder<Biome> biome, MobDifficultyCollector instance) {
 		biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location())).ifPresent(instance::acceptConfig);
-		instance.acceptBonus(difficulty);
+		if (LHConfig.COMMON.allowSectionDifficulty.get())
+			instance.acceptBonus(difficulty);
 		if (stage == SectionStage.CLEARED) {
 			instance.setCap(0);
 		}
