@@ -50,7 +50,6 @@ public class SectionDifficulty {
 		if (stage == SectionStage.CLEARED) {
 			instance.setCap(0);
 		}
-		//instance.setTraitCap(TraitManager.getTraitCap(0, difficulty));
 	}
 
 	public boolean isCleared() {

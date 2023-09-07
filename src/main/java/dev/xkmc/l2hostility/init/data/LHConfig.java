@@ -46,6 +46,10 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue globalTraitSuppression;
 		public final ForgeConfigSpec.BooleanValue allowLegendary;
 		public final ForgeConfigSpec.BooleanValue allowSectionDifficulty;
+		public final ForgeConfigSpec.BooleanValue allowBypassMinimum;
+		public final ForgeConfigSpec.IntValue defaultLevelBase;
+		public final ForgeConfigSpec.DoubleValue defaultLevelVar;
+		public final ForgeConfigSpec.DoubleValue defaultLevelScale;
 
 		public final ForgeConfigSpec.IntValue hostilitySpawnCount;
 		public final ForgeConfigSpec.IntValue hostilitySpawnLevelBonus;
@@ -93,15 +97,26 @@ public class LHConfig {
 				distanceFactor = builder.comment("Difficulty bonus per block from origin")
 						.defineInRange("distanceFactor", 0.003, 0, 1000);
 				globalApplyChance = builder.comment("Chance for health/damage bonus and trait to apply")
+						.comment("Not applicable to mobs with minimum level.")
 						.defineInRange("globalApplyChance", 1d, 0, 1);
 				globalTraitChance = builder.comment("Chance for trait to apply")
+						.comment("Not applicable to mobs with minimum level.")
 						.defineInRange("globalTraitChance", 1d, 0, 1);
 				globalTraitSuppression = builder.comment("Chance to stop adding traits after adding a trait")
+						.comment("Not applicable to mobs with minimum level.")
 						.defineInRange("globalTraitSuppression", 0.1d, 0, 1);
 				allowLegendary = builder.comment("Allow legendary traits")
 						.define("allowLegendary", true);
 				allowSectionDifficulty = builder.comment("Allow chunk section to accumulate difficulty")
 						.define("allowSectionDifficulty", true);
+				allowBypassMinimum = builder.comment("Allow difficulty clearing bypass mob minimum level")
+						.define("allowBypassMinimum", true);
+				defaultLevelBase = builder.comment("Default dimension base difficulty for mod dimensions")
+						.defineInRange("defaultLevelBase", 20, 0, 1000);
+				defaultLevelVar = builder.comment("Default dimension difficulty variation for mod dimensions")
+						.defineInRange("defaultLevelVar", 16d, 0, 1000);
+				defaultLevelScale = builder.comment("Default dimension difficulty scale for mod dimensions")
+						.defineInRange("defaultLevelScale", 1.5, 0, 10);
 			}
 			builder.pop();
 
@@ -116,7 +131,7 @@ public class LHConfig {
 			}
 			builder.pop();
 
-			builder.push("spanwer");
+			builder.push("spawner");
 			{
 				hostilitySpawnCount = builder.comment("Number of mobs to spawn in Hostility Spawner")
 						.defineInRange("hostilitySpawnCount", 16, 1, 64);

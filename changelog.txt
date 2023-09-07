@@ -5,6 +5,10 @@
 - Fix the bug that spawner might spawn mobs with no traits if trait spawn chance is not 100%
 - Change Invisibility drop from potion to phantom membrane
 - Mobs that cannot attack nearest player will not have a level
+- Adds default dimension difficulty
+- Add options for minimum level to be bypassed by difficulty clearing or not
+- Add suppression mechanics: mobs will randomly terminate trait generation with a chance
+- Mobs with non-zero minimum level will not be affected by supression, apply chance, and trait chance
 
 2.4.3
 - Regenerate will not appear on mobs immune to effects

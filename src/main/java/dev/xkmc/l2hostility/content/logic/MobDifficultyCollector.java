@@ -10,7 +10,7 @@ public class MobDifficultyCollector {
 	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel() + 1;
 	public double scale, varSq, apply_chance, trait_chance;
 
-	private boolean fullChance = false;
+	private boolean fullChance;
 
 	public MobDifficultyCollector() {
 		apply_chance = LHConfig.COMMON.globalApplyChance.get();
@@ -25,6 +25,7 @@ public class MobDifficultyCollector {
 		count++;
 		apply_chance *= config.apply_chance();
 		trait_chance *= config.trait_chance();
+		fullChance |= min > 0;
 	}
 
 	public void acceptBonus(DifficultyLevel difficulty) {
@@ -37,7 +38,12 @@ public class MobDifficultyCollector {
 	}
 
 	public void setCap(int cap) {
-		this.cap = Math.min(this.cap, Math.max(min, cap));
+		if (LHConfig.COMMON.allowBypassMinimum.get()) {
+			this.min = Math.min(this.min, cap);
+		} else {
+			cap = Math.max(this.min, cap);
+		}
+		this.cap = Math.min(this.cap, cap);
 	}
 
 	public int getDifficulty(RandomSource random) {

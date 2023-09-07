@@ -27,12 +27,9 @@ public record LevelEditor(DifficultyLevel difficulty, int extra) {
 	}
 
 	public boolean addTotal(int level) {
-		int old = difficulty().getLevel();
-		if (level + getTotal() < 0) {
-			level = -getTotal();
-		}
+		int old = difficulty().extraLevel;
 		difficulty().extraLevel += level;
-		return old != difficulty().getLevel();
+		return old != difficulty().extraLevel;
 	}
 
 	public int getTotal() {

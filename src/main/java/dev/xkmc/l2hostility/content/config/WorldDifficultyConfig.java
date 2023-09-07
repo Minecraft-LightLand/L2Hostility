@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.config;
 
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.serial.config.BaseConfig;
 import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
@@ -14,6 +15,13 @@ import java.util.HashMap;
 
 @SerialClass
 public class WorldDifficultyConfig extends BaseConfig {
+
+	public static DifficultyConfig defaultLevel() {
+		int base = LHConfig.COMMON.defaultLevelBase.get();
+		double var = LHConfig.COMMON.defaultLevelVar.get();
+		double scale = LHConfig.COMMON.defaultLevelScale.get();
+		return new DifficultyConfig(0, base, var, scale, 1, 1);
+	}
 
 	@ConfigCollect(CollectType.MAP_OVERWRITE)
 	@SerialClass.SerialField
