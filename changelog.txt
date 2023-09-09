@@ -1,3 +1,11 @@
+2.4.6
+- Fix MobCapLootCondition
+- Add weapon config
+- Add entity config, remove entityMap from difficulty config
+
+2.4.5
+- Fix chunk not marked dirty when using hostility orb
+
 2.4.4
 - Change default config values (delete old config file to take effect)
 - Add command system

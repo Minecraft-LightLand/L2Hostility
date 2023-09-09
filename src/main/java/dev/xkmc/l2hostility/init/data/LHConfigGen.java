@@ -1,11 +1,15 @@
 package dev.xkmc.l2hostility.init.data;
 
+import dev.xkmc.l2hostility.content.config.EntityConfig;
+import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.serial.config.ConfigDataProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 
@@ -63,10 +67,17 @@ public class LHConfigGen extends ConfigDataProvider {
 				.putDim(BuiltinDimensionTypes.END, 0, 40, 16, 1.5)
 		);
 
-		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "mobs"), new WorldDifficultyConfig()
-				.putEntity(0, 20, 1, 0, EntityType.ELDER_GUARDIAN, EntityType.PIGLIN_BRUTE)
-				.putEntity(0, 50, 1, 0, EntityType.WITHER)
-				.putEntity(100, 50, 1, 0, EntityType.ENDER_DRAGON)
+		collector.add(L2Hostility.ENTITY, new ResourceLocation(L2Hostility.MODID, "bosses"), new EntityConfig()
+				.putEntity(0, 20, 1, 0, List.of(EntityType.ELDER_GUARDIAN, EntityType.PIGLIN_BRUTE), List.of())
+				.putEntity(0, 50, 1, 0, List.of(EntityType.WITHER),
+						List.of(new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1)))
+				.putEntity(100, 50, 1, 0, List.of(EntityType.ENDER_DRAGON), List.of())
+		);
+
+		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Hostility.MODID, "melee"), new WeaponConfig()
+				.putMeleeWeapon(20, 100, Items.IRON_AXE, Items.IRON_SWORD)
+				.putMeleeWeapon(30, 100, Items.DIAMOND_AXE, Items.DIAMOND_SWORD)
+				.putMeleeWeapon(40, 100, Items.NETHERITE_AXE, Items.NETHERITE_SWORD)
 		);
 
 	}

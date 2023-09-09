@@ -1,7 +1,9 @@
 package dev.xkmc.l2hostility.content.logic;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
@@ -51,14 +53,29 @@ public class TraitManager {
 	}
 
 	private static void generateTraits(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
+		var config = L2Hostility.ENTITY.getMerged().get(le.getType());
+
+		var rand = le.getRandom();
+		int level = lv;
+
+		if (config != null) {
+			for (var base : config.traits()) {
+				MobTrait e = base.trait();
+				if (!e.allow(le, lv, ins.getMaxTraitLevel())) continue;
+				int maxLv = Math.min(Math.min(ins.getMaxTraitLevel(),
+						rand.nextInt(base.min(), level / e.getCost()) + 1), e.getMaxLevel());
+				if (maxLv == 0) continue;
+				level -= maxLv * e.getCost();
+				traits.put(e, maxLv);
+			}
+		}
+
 		List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
-				e.allow(le, lv, ins.getMaxTraitLevel())).toList());
+				!traits.containsKey(e) && e.allow(le, lv, ins.getMaxTraitLevel())).toList());
 		int weights = 0;
 		for (var e : list) {
 			weights += e.getConfig().weight;
 		}
-		var rand = le.getRandom();
-		int level = lv;
 		while (level > 0) {
 			if (list.size() == 0) break;
 			int val = rand.nextInt(weights);
@@ -128,8 +145,10 @@ public class TraitManager {
 		if (le.getType().is(TagGen.MELEE_WEAPON_TARGET)) {
 			var manager = ForgeRegistries.ITEMS.tags();
 			if (manager != null && le.getMainHandItem().isEmpty()) {
-				manager.getTag(TagGen.VALID_MELEE_WEAPONS).getRandomElement(r)
-						.ifPresent(item -> le.setItemSlot(EquipmentSlot.MAINHAND, item.getDefaultInstance()));
+				ItemStack stack = WeaponConfig.getRandomWeapon(cap.getLevel(), r);
+				if (!stack.isEmpty()) {
+					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+				}
 			}
 		}
 		// enchant

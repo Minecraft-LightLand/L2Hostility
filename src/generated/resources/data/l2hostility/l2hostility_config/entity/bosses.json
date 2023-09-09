@@ -1,0 +1,52 @@
+{
+  "list": [
+    {
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 20,
+        "min": 0,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 1.0
+      },
+      "entities": [
+        "minecraft:elder_guardian",
+        "minecraft:piglin_brute"
+      ],
+      "traits": []
+    },
+    {
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 50,
+        "min": 0,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 1.0
+      },
+      "entities": [
+        "minecraft:wither"
+      ],
+      "traits": [
+        {
+          "min": 1,
+          "trait": "l2hostility:cursed"
+        }
+      ]
+    },
+    {
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 50,
+        "min": 100,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 1.0
+      },
+      "entities": [
+        "minecraft:ender_dragon"
+      ],
+      "traits": []
+    }
+  ]
+}

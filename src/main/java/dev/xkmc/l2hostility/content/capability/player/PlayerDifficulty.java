@@ -45,6 +45,8 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 
 	public boolean updateChunkFlag = false, pendingFlag = false;
 
+	private int updateCooldown = 0, pendingTimeout = 0;
+
 	public PlayerDifficulty() {
 	}
 
@@ -60,10 +62,25 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	public void tick() {
 		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 		if (player.level().isClientSide()) {
-			if (updateChunkFlag && !pendingFlag && player.tickCount % 20 == 0) {
-				pendingFlag = true;
-				updateChunkFlag = false;
-				opt.ifPresent(chunkDifficulty -> L2Hostility.HANDLER.toServer(new InfoRequestToServer(chunkDifficulty.chunk)));
+			if (updateChunkFlag) {
+				if (pendingFlag) {
+					if (pendingTimeout > 0) {
+						pendingTimeout--;
+					} else {
+						pendingFlag = false;
+					}
+				}
+				if (!pendingFlag) {
+					if (updateCooldown > 0) {
+						updateCooldown--;
+					} else {
+						pendingFlag = true;
+						updateChunkFlag = false;
+						updateCooldown = 10;
+						pendingTimeout = 100;
+						opt.ifPresent(chunkDifficulty -> L2Hostility.HANDLER.toServer(new InfoRequestToServer(chunkDifficulty.chunk)));
+					}
+				}
 			}
 			return;
 		}

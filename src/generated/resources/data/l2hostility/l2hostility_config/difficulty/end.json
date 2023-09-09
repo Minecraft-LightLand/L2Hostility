@@ -1,6 +1,5 @@
 {
   "biomeMap": {},
-  "entityMap": {},
   "levelMap": {
     "minecraft:the_end": {
       "apply_chance": 1.0,

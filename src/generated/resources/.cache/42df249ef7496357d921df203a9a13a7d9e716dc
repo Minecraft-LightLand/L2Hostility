@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-06T20:30:07.235673	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-09-10T01:00:32.614048	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 97132ddb36b57ee924925a87b28aeb53bb661e3c assets/l2hostility/lang/en_ud.json
 f04a8803eee304db690334bc7042f381bc6f6043 assets/l2hostility/lang/en_us.json
@@ -50,5 +50,4 @@ edf64deed56924f50118492f25104511eb052cab data/l2hostility/tags/entity_types/blac
 a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/melee_weapon_target.json
 217ca38cad2e92f1ca03034aaa17f2dc686cbf50 data/l2hostility/tags/entity_types/no_scaling.json
 217ca38cad2e92f1ca03034aaa17f2dc686cbf50 data/l2hostility/tags/entity_types/no_trait.json
-491cd1e8e645dbf235be362a3810e0349391249b data/l2hostility/tags/items/valid_melee_weapons.json
 e7bd765cf86b012712df42659c7ff073ed8568a2 data/minecraft/tags/blocks/mineable/pickaxe.json

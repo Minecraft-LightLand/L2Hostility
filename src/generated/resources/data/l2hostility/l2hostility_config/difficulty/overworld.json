@@ -281,7 +281,6 @@
       "variation": 1.0
     }
   },
-  "entityMap": {},
   "levelMap": {
     "minecraft:overworld": {
       "apply_chance": 1.0,

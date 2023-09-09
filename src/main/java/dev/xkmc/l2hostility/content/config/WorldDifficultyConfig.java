@@ -31,10 +31,6 @@ public class WorldDifficultyConfig extends BaseConfig {
 	@SerialClass.SerialField
 	public final HashMap<ResourceLocation, DifficultyConfig> biomeMap = new HashMap<>();
 
-	@ConfigCollect(CollectType.MAP_OVERWRITE)
-	@SerialClass.SerialField
-	public final HashMap<EntityType<?>, DifficultyConfig> entityMap = new HashMap<>();
-
 	public record DifficultyConfig(int min, int base, double variation, double scale, double apply_chance,
 								   double trait_chance) {
 
@@ -49,13 +45,6 @@ public class WorldDifficultyConfig extends BaseConfig {
 	public final WorldDifficultyConfig putBiome(int min, int base, double var, double scale, ResourceKey<Biome>... keys) {
 		for (var key : keys) {
 			biomeMap.put(key.location(), new DifficultyConfig(min, base, var, scale, 1, 1));
-		}
-		return this;
-	}
-
-	public final WorldDifficultyConfig putEntity(int min, int base, double var, double scale, EntityType<?>... keys) {
-		for (var key : keys) {
-			entityMap.put(key, new DifficultyConfig(min, base, var, scale, 1, 1));
 		}
 		return this;
 	}

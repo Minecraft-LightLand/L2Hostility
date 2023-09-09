@@ -90,9 +90,9 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public void init(Level level, LivingEntity le, RegionalDifficultyModifier difficulty) {
 		boolean skip = false;
 		MobDifficultyCollector instance = new MobDifficultyCollector();
-		var diff = L2Hostility.DIFFICULTY.getMerged().entityMap.get(le.getType());
+		var diff = L2Hostility.ENTITY.getMerged().get(le.getType());
 		if (diff != null) {
-			instance.acceptConfig(diff);
+			instance.acceptConfig(diff.difficulty());
 		}
 		difficulty.modifyInstance(le.blockPosition(), instance);
 		Player player = level.getNearestPlayer(le, 128);

@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.item.tools.consumable;
 
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
+import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -33,6 +34,8 @@ public class HostilityOrb extends Item {
 					sec.setClear(opt.get(), player.blockPosition());
 				}
 			}
+		} else {
+			PlayerDifficulty.HOLDER.get(player).updateChunkFlag = true;
 		}
 		return InteractionResultHolder.success(stack);
 	}

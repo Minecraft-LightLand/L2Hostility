@@ -1,0 +1,46 @@
+{
+  "melee_weapons": [
+    {
+      "level": 20,
+      "stack": [
+        {
+          "item": "minecraft:iron_axe",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:iron_sword",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "level": 30,
+      "stack": [
+        {
+          "item": "minecraft:diamond_axe",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:diamond_sword",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "level": 40,
+      "stack": [
+        {
+          "item": "minecraft:netherite_axe",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:netherite_sword",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 100
+    }
+  ]
+}

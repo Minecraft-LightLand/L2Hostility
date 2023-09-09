@@ -59,6 +59,7 @@ public class SectionDifficulty {
 	public void setClear(ChunkDifficulty chunk, BlockPos pos) {
 		stage = SectionStage.CLEARED;
 		L2Hostility.toTrackingChunk(chunk.chunk, new TraitEffectToClient(pos, TraitEffects.CLEAR));
+		chunk.chunk.setUnsaved(true);
 	}
 
 	public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {

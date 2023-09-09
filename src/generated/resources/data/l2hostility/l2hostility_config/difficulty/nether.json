@@ -1,6 +1,5 @@
 {
   "biomeMap": {},
-  "entityMap": {},
   "levelMap": {
     "minecraft:the_nether": {
       "apply_chance": 1.0,
