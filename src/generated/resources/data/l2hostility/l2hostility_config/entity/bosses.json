@@ -1,6 +1,7 @@
 {
   "list": [
     {
+      "blacklist": [],
       "difficulty": {
         "apply_chance": 1.0,
         "base": 20,
@@ -16,6 +17,7 @@
       "traits": []
     },
     {
+      "blacklist": [],
       "difficulty": {
         "apply_chance": 1.0,
         "base": 50,
@@ -29,12 +31,14 @@
       ],
       "traits": [
         {
+          "free": 0,
           "min": 1,
           "trait": "l2hostility:cursed"
         }
       ]
     },
     {
+      "blacklist": [],
       "difficulty": {
         "apply_chance": 1.0,
         "base": 50,

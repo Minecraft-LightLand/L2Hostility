@@ -1,7 +1,7 @@
 {
   "melee_weapons": [
     {
-      "level": 20,
+      "level": 30,
       "stack": [
         {
           "item": "minecraft:iron_axe",
@@ -15,7 +15,7 @@
       "weight": 100
     },
     {
-      "level": 30,
+      "level": 50,
       "stack": [
         {
           "item": "minecraft:diamond_axe",
@@ -29,7 +29,7 @@
       "weight": 100
     },
     {
-      "level": 40,
+      "level": 70,
       "stack": [
         {
           "item": "minecraft:netherite_axe",

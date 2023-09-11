@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.util.math.MathHelper;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -62,11 +63,15 @@ public class TraitManager {
 			for (var base : config.traits()) {
 				MobTrait e = base.trait();
 				if (!e.allow(le, lv, ins.getMaxTraitLevel())) continue;
-				int maxLv = Math.min(Math.min(ins.getMaxTraitLevel(),
-						rand.nextInt(base.min(), level / e.getCost()) + 1), e.getMaxLevel());
-				if (maxLv == 0) continue;
-				level -= maxLv * e.getCost();
-				traits.put(e, maxLv);
+				int upper = base.free() + level / e.getCost();
+				int lower = Math.min(upper, base.min());
+				int max = Math.min(ins.getMaxTraitLevel(), e.getMaxLevel());
+				int rank = Math.min(max, rand.nextInt(lower, upper) + 1);
+				if (rank == 0) continue;
+				if (rank > base.free()) {
+					level -= (rank - base.free()) * e.getCost();
+				}
+				traits.put(e, rank);
 			}
 		}
 
@@ -155,8 +160,10 @@ public class TraitManager {
 		for (var e : EquipmentSlot.values()) {
 			ItemStack stack = le.getItemBySlot(e);
 			if (!stack.isEnchanted() && stack.isEnchantable()) {
-				int lvl = 5 + r.nextInt(18) + cap.getEnchantBonus();
-				le.setItemSlot(e, EnchantmentHelper.enchantItem(r, stack, lvl, false));
+				float lvl = Mth.clamp(cap.getLevel() * 0.02f, 0, 1) *
+						r.nextInt(30) +
+						cap.getEnchantBonus();
+				le.setItemSlot(e, EnchantmentHelper.enchantItem(r, stack, (int) lvl, false));
 			}
 		}
 	}
@@ -165,8 +172,8 @@ public class TraitManager {
 		return 5;
 	}
 
-	public static int getTraitCap(int maxRankKilled, DifficultyLevel playerDifficulty) {
-		return Math.max(maxRankKilled + 1, playerDifficulty.getLevel() / LHConfig.COMMON.traitCapPerLevel.get());
+	public static int getTraitCap(int maxRankKilled, DifficultyLevel diff) {
+		return maxRankKilled + 1;
 	}
 
 }

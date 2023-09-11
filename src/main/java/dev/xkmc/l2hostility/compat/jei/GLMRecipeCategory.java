@@ -87,7 +87,7 @@ public class GLMRecipeCategory extends BaseRecipeCategory<TraitLootModifier, GLM
 			list.add(LangData.LOOT_MIN_LEVEL.get(minLevel).withStyle(ChatFormatting.LIGHT_PURPLE));
 		}
 		for (int lv = min; lv <= max; lv++) {
-			list.add(LangData.LOOT_CHANCE.get(Math.round((recipe.chance + recipe.rankBonus * lv) * 100), recipe.trait.getDesc(), lv)
+			list.add(LangData.LOOT_CHANCE.get(Math.round((recipe.chance + recipe.rankBonus * lv) * 100), recipe.trait.getFullDesc(null), lv)
 					.withStyle(ChatFormatting.AQUA));
 		}
 		for (var c : other) {
@@ -98,7 +98,7 @@ public class GLMRecipeCategory extends BaseRecipeCategory<TraitLootModifier, GLM
 					cmax >= c.trait.getMaxLevel() ?
 							cmin + "+" :
 							cmin + "-" + cmax;
-			list.add(LangData.LOOT_OTHER_TRAIT.get(c.trait, str).withStyle(ChatFormatting.RED));
+			list.add(LangData.LOOT_OTHER_TRAIT.get(c.trait.getFullDesc(null), str).withStyle(ChatFormatting.RED));
 		}
 	}
 

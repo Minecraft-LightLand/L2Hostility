@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.config;
 
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2library.serial.config.BaseConfig;
 import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
@@ -12,6 +13,12 @@ import java.util.*;
 
 @SerialClass
 public class EntityConfig extends BaseConfig {
+
+	public static boolean allow(EntityType<?> type, MobTrait trait) {
+		Config config = L2Hostility.ENTITY.getMerged().get(type);
+		if (config == null) return true;
+		return !config.blacklist.contains(trait);
+	}
 
 	@SerialClass.SerialField
 	@ConfigCollect(CollectType.COLLECT)
@@ -43,6 +50,9 @@ public class EntityConfig extends BaseConfig {
 		private final ArrayList<TraitBase> traits = new ArrayList<>();
 
 		@SerialClass.SerialField
+		private final LinkedHashSet<MobTrait> blacklist = new LinkedHashSet<>();
+
+		@SerialClass.SerialField
 		private WorldDifficultyConfig.DifficultyConfig difficulty =
 				new WorldDifficultyConfig.DifficultyConfig(0, 0, 0, 0, 1, 1);
 
@@ -59,11 +69,11 @@ public class EntityConfig extends BaseConfig {
 			this.difficulty = difficulty;
 		}
 
-		public ArrayList<EntityType<?>> entities() {
-			return entities;
+		public Set<MobTrait> blacklist() {
+			return blacklist;
 		}
 
-		public ArrayList<TraitBase> traits() {
+		public List<TraitBase> traits() {
 			return traits;
 		}
 
@@ -73,7 +83,7 @@ public class EntityConfig extends BaseConfig {
 
 	}
 
-	public record TraitBase(MobTrait trait, int min) {
+	public record TraitBase(MobTrait trait, int free, int min) {
 
 	}
 

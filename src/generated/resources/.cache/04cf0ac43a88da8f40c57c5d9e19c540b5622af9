@@ -1,8 +1,8 @@
-// 1.20.1	2023-09-10T01:29:03.24311	L2Hostility Config
+// 1.20.1	2023-09-11T23:24:59.48769	L2Hostility Config
 0d0dd29a0d3d593d0f01c9f47dc364309fe4f58d data/l2hostility/l2hostility_config/difficulty/end.json
 a7eea3f1b7bbacf4fe14aaf21abc23af93abb723 data/l2hostility/l2hostility_config/difficulty/nether.json
 5d62d0961f22262e8fcaca6fcfbed04a354c2fb7 data/l2hostility/l2hostility_config/difficulty/overworld.json
-52d4e61df379112698f8ab4bad62249aa78f0f0a data/l2hostility/l2hostility_config/entity/bosses.json
+7388dad77fdc3ae9daeecf238dc6827c81d8e9c2 data/l2hostility/l2hostility_config/entity/bosses.json
 c5d8ceb35123d326385e6e74990e3021892d7a86 data/l2hostility/l2hostility_config/trait/adaptive.json
 a6af3c7bdaba1dbe6408ad0a040bb5d459b059c8 data/l2hostility/l2hostility_config/trait/blindness.json
 15d3175267bae6cae30d98989b0c8817bcbd9949 data/l2hostility/l2hostility_config/trait/cursed.json
@@ -26,4 +26,5 @@ a6af3c7bdaba1dbe6408ad0a040bb5d459b059c8 data/l2hostility/l2hostility_config/tra
 e28cf86b3e8f6fe1189a601061eaef1f49a375e0 data/l2hostility/l2hostility_config/trait/undying.json
 5b36803f7849db75fc92fbcf6967f65098d499fe data/l2hostility/l2hostility_config/trait/weakness.json
 38f1969463d3d9adbc84965876e39445a0438c89 data/l2hostility/l2hostility_config/trait/wither.json
-18a46860373f20d0cfb6092104b109f9e374237a data/l2hostility/l2hostility_config/weapon/melee.json
+1f523c8024b86d5adee492e40c5d6e8d442c3395 data/l2hostility/l2hostility_config/weapon/melee.json
+f66e2b9cc259e0a96a0be32c79b84cf451327363 data/twilightforest/l2hostility_config/entity/bosses.json

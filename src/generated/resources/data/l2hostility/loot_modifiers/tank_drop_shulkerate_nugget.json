@@ -18,9 +18,9 @@
       "trait": "l2hostility:protection"
     }
   ],
-  "rankBonus": 0.2,
+  "rankBonus": 0.1,
   "result": {
-    "Count": 4,
+    "Count": 6,
     "id": "l2complements:shulkerate_nugget"
   },
   "trait": "l2hostility:tank"

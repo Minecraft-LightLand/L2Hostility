@@ -12,6 +12,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.minecraftforge.fml.ModList;
+import twilightforest.TwilightForestMod;
+import twilightforest.init.TFEntities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,16 +73,52 @@ public class LHConfigGen extends ConfigDataProvider {
 		collector.add(L2Hostility.ENTITY, new ResourceLocation(L2Hostility.MODID, "bosses"), new EntityConfig()
 				.putEntity(0, 20, 1, 0, List.of(EntityType.ELDER_GUARDIAN, EntityType.PIGLIN_BRUTE), List.of())
 				.putEntity(0, 50, 1, 0, List.of(EntityType.WITHER),
-						List.of(new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1)))
+						List.of(new EntityConfig.TraitBase(LHTraits.CURSED.get(), 0, 1)))
 				.putEntity(100, 50, 1, 0, List.of(EntityType.ENDER_DRAGON), List.of())
 		);
 
 		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Hostility.MODID, "melee"), new WeaponConfig()
-				.putMeleeWeapon(20, 100, Items.IRON_AXE, Items.IRON_SWORD)
-				.putMeleeWeapon(30, 100, Items.DIAMOND_AXE, Items.DIAMOND_SWORD)
-				.putMeleeWeapon(40, 100, Items.NETHERITE_AXE, Items.NETHERITE_SWORD)
+				.putMeleeWeapon(30, 100, Items.IRON_AXE, Items.IRON_SWORD)
+				.putMeleeWeapon(50, 100, Items.DIAMOND_AXE, Items.DIAMOND_SWORD)
+				.putMeleeWeapon(70, 100, Items.NETHERITE_AXE, Items.NETHERITE_SWORD)
 		);
 
+		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
+			collector.add(L2Hostility.ENTITY, new ResourceLocation(TwilightForestMod.ID, "bosses"), new EntityConfig()
+					.putEntity(50, 20, 0, 0, List.of(TFEntities.NAGA.get()), List.of(
+							new EntityConfig.TraitBase(LHTraits.SPEEDY.get(), 1, 2),
+							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 0, 1)
+					))
+					.putEntity(100, 30, 0, 0, List.of(TFEntities.LICH.get()), List.of(
+							new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 2, 3),
+							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+					))
+					.putEntity(100, 30, 0, 0, List.of(TFEntities.MINOSHROOM.get()), List.of(
+							new EntityConfig.TraitBase(LHTraits.TANK.get(), 0, 3),
+							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+					))
+					.putEntity(100, 30, 0, 0, List.of(TFEntities.ALPHA_YETI.get()), List.of(
+							new EntityConfig.TraitBase(LHTraits.REGEN.get(), 1, 1),
+							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+					))
+					.putEntity(150, 50, 0, 0, List.of(TFEntities.HYDRA.get()), List.of(
+							new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 1, 1),
+							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+					))
+					.putEntity(150, 50, 0, 0, List.of(TFEntities.KNIGHT_PHANTOM.get()), List.of(
+							new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 0, 1),
+							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+					))
+					.putEntity(150, 50, 0, 0, List.of(TFEntities.SNOW_QUEEN.get()), List.of(
+							new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 1, 1),
+							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+					))
+					.putEntity(150, 50, 0, 0, List.of(TFEntities.UR_GHAST.get()), List.of(
+							new EntityConfig.TraitBase(LHTraits.WITHER.get(), 1, 1),
+							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+					))
+			);
+		}
 	}
 
 }

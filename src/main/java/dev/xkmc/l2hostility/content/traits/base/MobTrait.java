@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.traits.base;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
+import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
@@ -56,6 +57,7 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		TraitConfig config = getConfig();
 		if (difficulty < config.min_level) return false;
 		if (difficulty < config.cost) return false;
+		if (!EntityConfig.allow(le.getType(), this)) return false;
 		if (config.blacklist.contains(le.getType())) return false;
 		if (!config.whitelist.isEmpty()) {
 			return config.whitelist.contains(le.getType());

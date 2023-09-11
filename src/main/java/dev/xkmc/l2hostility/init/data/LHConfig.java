@@ -31,7 +31,6 @@ public class LHConfig {
 	public static class Common {
 
 		public final ForgeConfigSpec.IntValue killsPerLevel;
-		public final ForgeConfigSpec.IntValue traitCapPerLevel;
 		public final ForgeConfigSpec.DoubleValue playerDeathDecay;
 
 		public final ForgeConfigSpec.DoubleValue healthFactor;
@@ -124,8 +123,6 @@ public class LHConfig {
 			{
 				killsPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
 						.defineInRange("killsPerLevel", 30, 1, 10000);
-				traitCapPerLevel = builder.comment("Mob trait cap per difficulty level. This is not the only factor")
-						.defineInRange("traitCapPerLevel", 20, 1, 10000);
 				playerDeathDecay = builder.comment("Decay in player difficulty on death")
 						.defineInRange("playerDeathDecay", 0.8, 0, 2);
 			}

@@ -84,20 +84,20 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.CURSED.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.05);
 
 
-		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getNugget(), 4), 0, 0.2,
+		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getNugget(), 6), 0, 0.1,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),
 				new TraitLootCondition(LHTraits.PROTECTION.get(), 1, 3)
 		);
-		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getIngot(), 4), 0, 0.1,
+		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getIngot(), 2), 0, 0.1,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),
 				new TraitLootCondition(LHTraits.PROTECTION.get(), 4, 5)
 		);
-		add(LHTraits.TANK.get(), new ItemStack(LCMats.SCULKIUM.getNugget(), 4), 0, 0.1,
+		add(LHTraits.SPEEDY.get(), new ItemStack(LCMats.SCULKIUM.getNugget(), 4), 0, 0.1,
 				LootTableTemplate.byPlayer().build(),
-				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),
-				new TraitLootCondition(LHTraits.SPEEDY.get(), 3, 5)
+				new TraitLootCondition(LHTraits.SPEEDY.get(), 3, 5),
+				new TraitLootCondition(LHTraits.TANK.get(), 3, 5)
 		);
 	}
 
