@@ -1,0 +1,27 @@
+{
+  "type": "l2hostility:trait_scaled",
+  "chance": 0.0,
+  "conditions": [
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "condition": "l2hostility:trait_and_level",
+      "maxLevel": 5,
+      "minLevel": 3,
+      "trait": "l2hostility:tank"
+    },
+    {
+      "condition": "l2hostility:trait_and_level",
+      "maxLevel": 3,
+      "minLevel": 1,
+      "trait": "l2hostility:protection"
+    }
+  ],
+  "rankBonus": 0.2,
+  "result": {
+    "Count": 4,
+    "id": "l2complements:shulkerate_nugget"
+  },
+  "trait": "l2hostility:tank"
+}

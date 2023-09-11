@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -81,22 +82,42 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.FREEZING.get(), new ItemStack(LCItems.HARD_ICE, 2), 1, 0, 0.1);
 		add(LHTraits.CURSED.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Objects.requireNonNull(ForgeRegistries.POTIONS.getValue(new ResourceLocation(L2Complements.MODID, "curse")))), 1, 0, 0.2);
 		add(LHTraits.CURSED.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.05);
+
+
+		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getNugget(), 4), 0, 0.2,
+				LootTableTemplate.byPlayer().build(),
+				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),
+				new TraitLootCondition(LHTraits.PROTECTION.get(), 1, 3)
+		);
+		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getIngot(), 4), 0, 0.1,
+				LootTableTemplate.byPlayer().build(),
+				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),
+				new TraitLootCondition(LHTraits.PROTECTION.get(), 4, 5)
+		);
+		add(LHTraits.TANK.get(), new ItemStack(LCMats.SCULKIUM.getNugget(), 4), 0, 0.1,
+				LootTableTemplate.byPlayer().build(),
+				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),
+				new TraitLootCondition(LHTraits.SPEEDY.get(), 3, 5)
+		);
 	}
 
 	private void add(MobTrait trait, ItemStack stack, int start, double chance, double bonus, int min) {
-		String name = trait.getRegistryName().getPath() + "_drop_" + ForgeRegistries.ITEMS.getKey(stack.getItem()).getPath();
-		add(name, new TraitLootModifier(trait, chance, bonus, stack,
+		add(trait, stack, chance, bonus,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(trait, start, 5),
 				new MobCapLootCondition(min)
-		));
+		);
 	}
 
 	private void add(MobTrait trait, ItemStack stack, int start, double chance, double bonus) {
-		String name = trait.getRegistryName().getPath() + "_drop_" + ForgeRegistries.ITEMS.getKey(stack.getItem()).getPath();
-		add(name, new TraitLootModifier(trait, chance, bonus, stack,
+		add(trait, stack, chance, bonus,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(trait, start, 5)
-		));
+		);
+	}
+
+	private void add(MobTrait trait, ItemStack stack, double chance, double bonus, LootItemCondition... conditions) {
+		String name = trait.getRegistryName().getPath() + "_drop_" + ForgeRegistries.ITEMS.getKey(stack.getItem()).getPath();
+		add(name, new TraitLootModifier(trait, chance, bonus, stack, conditions));
 	}
 }

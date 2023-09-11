@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.compat.jei;
 
 import dev.xkmc.l2complements.init.L2Complements;
+import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.loot.MobCapLootCondition;
@@ -16,10 +17,13 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GLMRecipeCategory extends BaseRecipeCategory<TraitLootModifier, GLMRecipeCategory> {
 
@@ -42,28 +46,59 @@ public class GLMRecipeCategory extends BaseRecipeCategory<TraitLootModifier, GLM
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, TraitLootModifier recipe, IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(Ingredient.of(recipe.trait.asItem()));
+		builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addItemStacks(getTraits(recipe));
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 1).addItemStack(recipe.result)
-				.addTooltipCallback((v, l) -> addtooltip(v, l, recipe));
+				.addTooltipCallback((v, l) -> addTooltip(v, l, recipe));
 	}
 
-	private void addtooltip(IRecipeSlotView view, List<Component> list, TraitLootModifier recipe) {
+	private List<ItemStack> getTraits(TraitLootModifier recipe) {
+		Set<MobTrait> set = new LinkedHashSet<>();
+		set.add(recipe.trait);
+		for (var c : recipe.getConditions()) {
+			if (c instanceof TraitLootCondition cl) {
+				set.add(cl.trait);
+			}
+		}
+		List<ItemStack> ans = new ArrayList<>();
+		for (var e : set) {
+			ans.add(e.asItem().getDefaultInstance());
+		}
+		return ans;
+	}
+
+	private void addTooltip(IRecipeSlotView view, List<Component> list, TraitLootModifier recipe) {
 		int max = recipe.trait.getConfig().max_rank;
 		int min = 1;
 		int minLevel = 0;
+		List<TraitLootCondition> other = new ArrayList<>();
 		for (var c : recipe.getConditions()) {
-			if (c instanceof TraitLootCondition cl && cl.trait == recipe.trait) {
-				max = Math.min(max, cl.maxLevel);
-				min = Math.max(min, cl.minLevel);
+			if (c instanceof TraitLootCondition cl) {
+				if (cl.trait == recipe.trait) {
+					max = Math.min(max, cl.maxLevel);
+					min = Math.max(min, cl.minLevel);
+				} else {
+					other.add(cl);
+				}
 			} else if (c instanceof MobCapLootCondition cl) {
 				minLevel = cl.minLevel;
 			}
 		}
 		if (minLevel > 0) {
-			list.add(LangData.MIN_LEVEL.get(minLevel).withStyle(ChatFormatting.LIGHT_PURPLE));
+			list.add(LangData.LOOT_MIN_LEVEL.get(minLevel).withStyle(ChatFormatting.LIGHT_PURPLE));
 		}
 		for (int lv = min; lv <= max; lv++) {
-			list.add(LangData.CHANCE.get(Math.round((recipe.chance + recipe.rankBonus * lv) * 100), lv).withStyle(ChatFormatting.GRAY));
+			list.add(LangData.LOOT_CHANCE.get(Math.round((recipe.chance + recipe.rankBonus * lv) * 100), recipe.trait.getDesc(), lv)
+					.withStyle(ChatFormatting.AQUA));
+		}
+		for (var c : other) {
+			int cmin = Math.max(c.minLevel, 1);
+			int cmax = Math.min(c.maxLevel, c.trait.getMaxLevel());
+			String str = cmax == cmin ?
+					cmin + "" :
+					cmax >= c.trait.getMaxLevel() ?
+							cmin + "+" :
+							cmin + "-" + cmax;
+			list.add(LangData.LOOT_OTHER_TRAIT.get(c.trait, str).withStyle(ChatFormatting.RED));
 		}
 	}
 

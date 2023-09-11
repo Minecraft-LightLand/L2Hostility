@@ -44,8 +44,9 @@ public enum LangData {
 	BOSS_EVENT("boss_event", "Hostility Clearing Progress: %s/%s", 2),
 
 	LOOT_TITLE("jei.loot_title", "Trait Loot", 0),
-	CHANCE("jei.loot_chance", "%s%% chance to drop at Rank %s", 2),
-	MIN_LEVEL("jei.min_level", "Drops on mobs with level %s or higher", 1),
+	LOOT_CHANCE("jei.loot_chance", "%s%% chance to drop for %s rank %s", 3),
+	LOOT_MIN_LEVEL("jei.min_level", "Drops on mobs with level %s or higher", 1),
+	LOOT_OTHER_TRAIT("jei.other_trait", "Requires mobs to also have %s at rank %s", 2),
 
 	COMMAND_PLAYER_SUCCEED("command.player.success", "Performed actions on %s players", 1),
 	COMMAND_PLAYER_FAIL("command.player.fail", "Command has no target or no effect", 0),

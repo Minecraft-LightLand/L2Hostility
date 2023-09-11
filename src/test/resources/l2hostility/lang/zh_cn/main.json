@@ -57,9 +57,10 @@
 	  "reward": "已获得%s个奖励"
 	},
 	"jei": {
-	  "loot_chance": "%2$s阶词条%1$s%%概率掉落",
+	  "loot_chance": "%3$s阶%2$s词条%1$s%%概率掉落",
 	  "loot_title": "恶意词条掉落",
-	  "min_level": "等级%s及以上的怪物掉落"
+	  "min_level": "等级%s及以上的怪物掉落",
+	  "other_trait": "同时需要%2$s阶%1$s词条"
 	}
   }
 }
