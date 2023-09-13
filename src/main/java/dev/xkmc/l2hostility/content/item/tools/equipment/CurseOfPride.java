@@ -23,7 +23,7 @@ public class CurseOfPride extends CurseCurioItem {
 		int damage = (int) Math.round(100 * LHConfig.COMMON.prideDamageBonus.get());
 		int trait = (int) Math.round(100 * (1 / LHConfig.COMMON.prideTraitFactor.get() - 1));
 		list.add(LangData.ITEM_CHARM_PRIDE.get(protect, damage).withStyle(ChatFormatting.GOLD));
-		list.add(LangData.ITEM_CHARM_ADD_LEVEL.get(trait).withStyle(ChatFormatting.RED));
+		list.add(LangData.ITEM_CHARM_TRAIT_CHEAP.get(trait).withStyle(ChatFormatting.RED));
 	}
 
 }

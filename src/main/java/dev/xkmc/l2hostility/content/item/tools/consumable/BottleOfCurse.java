@@ -30,7 +30,7 @@ public class BottleOfCurse extends DrinkableBottleItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.ITEM_BOTTLE_CURSE.get().withStyle(ChatFormatting.GRAY));
+		list.add(LangData.ITEM_BOTTLE_CURSE.get(LHConfig.COMMON.bottleOfCurseLevel.get()).withStyle(ChatFormatting.GRAY));
 	}
 
 }

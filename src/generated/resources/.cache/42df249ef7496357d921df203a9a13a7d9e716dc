@@ -1,7 +1,7 @@
-// 1.20.1	2023-09-13T23:59:01.606222	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-09-14T00:58:47.264873	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-533921d1e4a5b34b4a1663fbdf950b2fe8eba6b9 assets/l2hostility/lang/en_ud.json
-b6895e3269a49b322328e0e352f472f65856398a assets/l2hostility/lang/en_us.json
+dc6be4abb009e83b1151284f32cafffdcd116c28 assets/l2hostility/lang/en_ud.json
+2da1ee06766ece467f0303dcdebdab3c5f89b814 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json

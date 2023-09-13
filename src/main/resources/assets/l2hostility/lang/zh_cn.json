@@ -100,7 +100,7 @@
   "l2hostility.info.title": "难度信息",
   "l2hostility.info.clear": "子区块难度已清除",
   "l2hostility.info.reward": "已获得%s个奖励",
-  "l2hostility.jei.loot_chance": "%3$s阶%2$s词条%1$s%%概率掉落",
+  "l2hostility.jei.loot_chance": "%3$s阶%2$s词条%1$s概率掉落",
   "l2hostility.jei.loot_title": "恶意词条掉落",
   "l2hostility.jei.min_level": "等级%s及以上的怪物掉落",
   "l2hostility.jei.other_trait": "同时需要%2$s阶%1$s词条"
