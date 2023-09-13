@@ -1,4 +1,5 @@
-// 1.20.1	2023-09-11T23:24:59.48769	L2Hostility Config
+// 1.20.1	2023-09-13T20:20:14.943795	L2Hostility Config
+cc60113e53b38f8ea4dbd7b841f48d9676e7d21e data/l2hostility/l2damagetracker_config/armor/equipments.json
 0d0dd29a0d3d593d0f01c9f47dc364309fe4f58d data/l2hostility/l2hostility_config/difficulty/end.json
 a7eea3f1b7bbacf4fe14aaf21abc23af93abb723 data/l2hostility/l2hostility_config/difficulty/nether.json
 5d62d0961f22262e8fcaca6fcfbed04a354c2fb7 data/l2hostility/l2hostility_config/difficulty/overworld.json

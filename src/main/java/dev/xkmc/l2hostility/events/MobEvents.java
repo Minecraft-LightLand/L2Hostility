@@ -1,16 +1,23 @@
 package dev.xkmc.l2hostility.events;
 
+import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
+import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.mixin.ForgeInternalHandlerAccessor;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,11 +41,25 @@ public class MobEvents {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			MobTraitCap.HOLDER.get(event.getEntity()).traits
 					.forEach((k, v) -> k.onHurtByOthers(v, event.getEntity(), event));
+		} else if (event.getEntity() instanceof Player player &&
+				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
+				!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
+				CurioCompat.hasItem(player, LHItems.CURSE_PRIDE.get())) {
+			int level = PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
+			double rate = LHConfig.COMMON.prideProtectionBonus.get();
+			double factor = Math.pow(1 - rate, level);
+			event.setAmount((float) (event.getAmount() * factor));
 		}
 	}
 
 	@SubscribeEvent
 	public static void onMobDeath(LivingDeathEvent event) {
+		if (event.getEntity() instanceof Mob mob &&
+				mob.getKillCredit() instanceof Player player &&
+				CurioCompat.hasItem(player, LHItems.CURSE_LUST.get())) {
+			for (var e : EquipmentSlot.values())
+				mob.setDropChance(e, 1);
+		}
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			MobTraitCap.HOLDER.get(event.getEntity()).traits
 					.forEach((k, v) -> k.onDeath(v, event.getEntity(), event));
@@ -53,6 +74,16 @@ public class MobEvents {
 				return;
 			}
 			// TODO multiply
+		}
+	}
+
+	@SubscribeEvent(priority = EventPriority.HIGH)
+	public static void onPotionTest(MobEffectEvent.Applicable event) {
+		if (event.getEntity() instanceof Player player && CurioCompat.hasItem(player, LHItems.CURSE_WRATH.get())) {
+			var config = ArmorEffectConfig.get().getImmunity(LHItems.CURSE_WRATH.getId().toString());
+			if (config.contains(event.getEffectInstance().getEffect())) {
+				event.setResult(Event.Result.DENY);
+			}
 		}
 	}
 

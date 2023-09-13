@@ -1,13 +1,17 @@
 package dev.xkmc.l2hostility.init.data;
 
+import dev.xkmc.l2damagetracker.init.L2DamageTracker;
+import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.serial.config.ConfigDataProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biomes;
@@ -31,6 +35,11 @@ public class LHConfigGen extends ConfigDataProvider {
 	@Override
 	public void add(Collector collector) {
 		LIST.forEach(e -> e.accept(collector));
+
+		collector.add(L2DamageTracker.ARMOR, new ResourceLocation(L2Hostility.MODID, "equipments"), new ArmorEffectConfig()
+				.add(LHItems.CURSE_WRATH.getId().toString(),
+						MobEffects.BLINDNESS, MobEffects.DARKNESS, MobEffects.CONFUSION,
+						MobEffects.MOVEMENT_SLOWDOWN, MobEffects.DIG_SLOWDOWN, MobEffects.WEAKNESS));
 
 		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "overworld"), new WorldDifficultyConfig()
 				.putDim(BuiltinDimensionTypes.OVERWORLD, 0, 0, 4, 1)

@@ -8,13 +8,14 @@ import net.minecraft.util.RandomSource;
 public class MobDifficultyCollector {
 
 	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel() + 1;
-	public double scale, varSq, apply_chance, trait_chance;
+	public double scale, varSq, apply_chance, trait_chance, trait_cost;
 
 	private boolean fullChance;
 
 	public MobDifficultyCollector() {
 		apply_chance = LHConfig.COMMON.globalApplyChance.get();
 		trait_chance = LHConfig.COMMON.globalTraitChance.get();
+		trait_cost = 1;
 	}
 
 	public void acceptConfig(WorldDifficultyConfig.DifficultyConfig config) {
@@ -32,9 +33,12 @@ public class MobDifficultyCollector {
 		this.difficulty += difficulty.getLevel();
 	}
 
-
 	public void acceptBonusLevel(int difficulty) {
 		this.base += difficulty;
+	}
+
+	public void traitCostFactor(double factor) {
+		trait_cost *= factor;
 	}
 
 	public void setCap(int cap) {

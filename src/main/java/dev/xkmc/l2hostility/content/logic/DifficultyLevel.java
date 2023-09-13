@@ -21,8 +21,8 @@ public class DifficultyLevel {
 		return ans;
 	}
 
-	public void grow(MobTraitCap cap) {
-		exp += cap.getLevel() * cap.getLevel();
+	public void grow(double growFactor, MobTraitCap cap) {
+		exp += growFactor * cap.getLevel() * cap.getLevel();
 		int factor = LHConfig.COMMON.killsPerLevel.get();
 		while (exp >= level * level * factor) {
 			exp -= level * level * factor;

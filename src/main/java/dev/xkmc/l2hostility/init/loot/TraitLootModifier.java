@@ -3,10 +3,13 @@ package dev.xkmc.l2hostility.init.loot;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.item.tools.equipment.CurseCurioItem;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -49,10 +52,18 @@ public class TraitLootModifier extends LootModifier {
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
 				if (cap.traits.containsKey(trait)) {
+					double factor = 1;
+					if (context.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) {
+						Player player = context.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
+						var pl = PlayerDifficulty.HOLDER.get(player);
+						for (var stack : CurseCurioItem.getFromPlayer(player)) {
+							factor *= stack.item().getLootFactor(stack.stack(), pl, cap);
+						}
+					}
 					int lv = cap.traits.get(trait);
 					double rate = chance + lv * rankBonus;
 					int count = 0;
-					for (int i = 0; i < result.getCount(); i++) {
+					for (int i = 0; i < result.getCount() * factor; i++) {
 						if (context.getRandom().nextDouble() < rate) {
 							count++;
 						}

@@ -53,6 +53,19 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue defaultLevelVar;
 		public final ForgeConfigSpec.DoubleValue defaultLevelScale;
 
+		public final ForgeConfigSpec.IntValue bottleOfCurseLevel;
+		public final ForgeConfigSpec.IntValue envyExtraLevel;
+		public final ForgeConfigSpec.IntValue greedExtraLevel;
+		public final ForgeConfigSpec.IntValue lustExtraLevel;
+		public final ForgeConfigSpec.IntValue wrathExtraLevel;
+		public final ForgeConfigSpec.DoubleValue greedDropFactor;
+		public final ForgeConfigSpec.DoubleValue envyDropRate;
+		public final ForgeConfigSpec.DoubleValue gluttonyDropRate;
+		public final ForgeConfigSpec.DoubleValue prideDamageBonus;
+		public final ForgeConfigSpec.DoubleValue prideProtectionBonus;
+		public final ForgeConfigSpec.DoubleValue prideTraitFactor;
+		public final ForgeConfigSpec.DoubleValue wrathDamageBonus;
+
 		public final ForgeConfigSpec.IntValue hostilitySpawnCount;
 		public final ForgeConfigSpec.IntValue hostilitySpawnLevelBonus;
 
@@ -137,6 +150,37 @@ public class LHConfig {
 						.defineInRange("hostilitySpawnCount", 16, 1, 64);
 				hostilitySpawnLevelBonus = builder.comment("Level bonus for mobs to spawn in Hostility Spawner")
 						.defineInRange("hostilitySpawnLevelBonus", 100, 1, 10000);
+			}
+			builder.pop();
+
+			builder.push("items");
+			{
+				bottleOfCurseLevel = builder.comment("Number of level to add when using bottle of curse")
+						.defineInRange("bottleOfCurseLevel", 50, 1, 1000);
+
+				envyExtraLevel = builder.comment("Number of level to add when using Curse of Envy")
+						.defineInRange("envyExtraLevel", 50, 0, 1000);
+				greedExtraLevel = builder.comment("Number of level to add when using Curse of Greed")
+						.defineInRange("greedExtraLevel", 50, 0, 1000);
+				lustExtraLevel = builder.comment("Number of level to add when using Curse of Lust")
+						.defineInRange("lustExtraLevel", 50, 0, 1000);
+				wrathExtraLevel = builder.comment("Number of level to add when using Curse of Wrath")
+						.defineInRange("wrathExtraLevel", 50, 0, 1000);
+
+				greedDropFactor = builder.comment("Hostility loot drop factor when using Curse of Greed")
+						.defineInRange("greedDropFactor", 2d, 1, 10);
+				envyDropRate = builder.comment("Trait item drop rate per rank when using Curse of Envy")
+						.defineInRange("envyDropRate", 0.02, 0, 1);
+				gluttonyDropRate = builder.comment("Bottle of Curse drop rate per level when using Curse of Gluttony")
+						.defineInRange("gluttonyDropRate", 0.01, 0, 1);
+				wrathDamageBonus = builder.comment("Damage bonus per level difference when using Curse of Wrath")
+						.defineInRange("wrathDamageBonus", 0.05, 0, 1);
+				prideDamageBonus = builder.comment("Damage bonus per level when using Curse of Pride")
+						.defineInRange("prideDamageBonus", 0.02, 0, 1);
+				prideProtectionBonus = builder.comment("Damage reduction per level when using Curse of Pride")
+						.defineInRange("prideProtectionBonus", 0.01, 0, 1);
+				prideTraitFactor = builder.comment("Trait cost multiplier when using Curse of Pride")
+						.defineInRange("prideTraitFactor", 0.5, 0.01, 1);
 			}
 			builder.pop();
 

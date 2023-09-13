@@ -112,8 +112,9 @@ public class LHPlayerCommands extends HostilityCommands {
 	private static int iterate(List<ServerPlayer> list, Predicate<PlayerDifficulty> task) {
 		int count = 0;
 		for (var e : list) {
-			if (task.test(PlayerDifficulty.HOLDER.get(e))) {
-				PlayerDifficulty.HOLDER.network.toClientSyncAll(e);
+			PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(e);
+			if (task.test(cap)) {
+				cap.sync();
 				count++;
 			}
 		}

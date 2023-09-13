@@ -1,9 +1,11 @@
 package dev.xkmc.l2hostility.content.capability.player;
 
+import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.InfoRequestToServer;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.spawner.tile.TraitSpawnerBlockEntity;
+import dev.xkmc.l2hostility.content.item.tools.equipment.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.LevelEditor;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
@@ -95,13 +97,21 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 			}
 		}
 		if (dimensions.add(player.level().dimension().location())) {
-			HOLDER.network.toClientSyncAll((ServerPlayer) player);
+			sync();
 		}
+	}
+
+	public void sync() {
+		HOLDER.network.toClientSyncAll((ServerPlayer) player);
 	}
 
 	public void apply(MobDifficultyCollector instance) {
 		instance.acceptBonus(difficulty);
 		instance.setTraitCap(getRankCap());
+		if (CurioCompat.hasItem(player, LHItems.CURSE_PRIDE.get())) {
+			instance.traitCostFactor(LHConfig.COMMON.prideTraitFactor.get());
+			instance.setFullChance();
+		}
 	}
 
 	public int getRankCap() {
@@ -109,7 +119,11 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public void addKillCredit(MobTraitCap cap) {
-		difficulty.grow(cap);
+		double growFactor = 1;
+		for (var stack : CurseCurioItem.getFromPlayer(player)) {
+			growFactor *= stack.item().getGrowFactor(stack.stack(), this, cap);
+		}
+		difficulty.grow(growFactor, cap);
 		cap.traits.values().stream().max(Comparator.naturalOrder())
 				.ifPresent(integer -> maxRankKilled = Math.max(maxRankKilled, integer));
 		if (getLevel().getLevel() > rewardCount * 10) {
@@ -117,7 +131,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 			player.addItem(LHItems.HOSTILITY_ORB.asStack());
 			// TODO drop reward
 		}
-		HOLDER.network.toClientSyncAll((ServerPlayer) player);
+		sync();
 	}
 
 	public int getRewardCount() {
@@ -129,10 +143,14 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	private int getExtraLevel() {
+		int ans = 0;
 		int count = Math.max(0, dimensions.size() - 1);
-		return count * LHConfig.COMMON.dimensionFactor.get();
+		ans += count * LHConfig.COMMON.dimensionFactor.get();
+		for (var stack : CurseCurioItem.getFromPlayer(player)) {
+			ans += stack.item().getExtraLevel(stack.stack());
+		}
+		return ans;
 	}
-
 
 	public LevelEditor getLevelEditor() {
 		return new LevelEditor(difficulty, getExtraLevel());

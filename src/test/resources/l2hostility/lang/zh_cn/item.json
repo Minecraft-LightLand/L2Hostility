@@ -6,7 +6,16 @@
 	"trait_adder_wand": "词条配置手杖",
 	"hostility_detector": "恶意探测器",
 	"hostility_orb": "恶意吸收宝珠",
-	"detector_glasses": "侦测眼镜"
+	"detector_glasses": "侦测眼镜",
+	"bottle_of_curse": "瓶装恶意",
+	"bottle_of_sanity": "恶意净化药水",
+	"curse_of_envy": "嫉妒诅咒",
+	"curse_of_gluttony": "暴食诅咒",
+	"curse_of_greed": "贪婪诅咒",
+	"curse_of_lust": "色欲诅咒",
+	"curse_of_pride": "傲慢诅咒",
+	"curse_of_sloth": "怠惰诅咒",
+	"curse_of_wrath": "暴怒诅咒"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"

@@ -45,8 +45,8 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		return ans;
 	}
 
-	public int getCost() {
-		return getConfig().cost;
+	public int getCost(double factor) {
+		return Math.max(1, (int) Math.round(getConfig().cost * factor));
 	}
 
 	public int getMaxLevel() {

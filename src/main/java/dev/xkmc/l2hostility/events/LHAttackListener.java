@@ -5,9 +5,11 @@ import dev.xkmc.l2damagetracker.contents.attack.AttackListener;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public class LHAttackListener implements AttackListener {
@@ -21,6 +23,11 @@ public class LHAttackListener implements AttackListener {
 				cache.addHurtModifier(DamageModifier.multTotal(1 + (float) (cap.getLevel() * LHConfig.COMMON.damageFactor.get())));
 			}
 			cap.traits.forEach((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache));
+		}
+		if (mob instanceof Player player) {
+			int level = PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
+			double rate = LHConfig.COMMON.prideDamageBonus.get();
+			cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
 		}
 	}
 

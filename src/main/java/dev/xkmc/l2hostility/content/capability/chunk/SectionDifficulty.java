@@ -63,7 +63,7 @@ public class SectionDifficulty {
 	}
 
 	public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {
-		difficulty.grow(cap);
+		difficulty.grow(1, cap);
 	}
 
 }

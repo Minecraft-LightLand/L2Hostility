@@ -63,13 +63,13 @@ public class TraitManager {
 			for (var base : config.traits()) {
 				MobTrait e = base.trait();
 				if (!e.allow(le, lv, ins.getMaxTraitLevel())) continue;
-				int upper = base.free() + level / e.getCost();
+				int upper = base.free() + level / e.getCost(ins.trait_cost);
 				int lower = Math.min(upper, base.min());
 				int max = Math.min(ins.getMaxTraitLevel(), e.getMaxLevel());
 				int rank = Math.min(max, rand.nextInt(lower, upper + 1));
 				if (rank == 0) continue;
 				if (rank > base.free()) {
-					level -= (rank - base.free()) * e.getCost();
+					level -= (rank - base.free()) * e.getCost(ins.trait_cost);
 				}
 				traits.put(e, rank);
 			}
@@ -94,7 +94,7 @@ public class TraitManager {
 			}
 			weights -= e.getConfig().weight;
 			list.remove(e);
-			int cost = e.getCost();
+			int cost = e.getCost(ins.trait_cost);
 			if (cost > level) {
 				level--;
 				continue;

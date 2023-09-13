@@ -22,6 +22,20 @@ public enum LangData {
 	ITEM_GLASSES("item.equipment.glasses", "Allow you to see invisible mobs, and see mobs when you have blindness or darkness effects", 0),
 	ITEM_SPAWNER("item.spawner", "Summon strong mobs. Kill them all to make a chunk section safe", 0),
 	ITEM_ORB("item.consumable.orb", "Make a chunk section safe. Useful when building your base. Use wisely.", 0),
+	ITEM_BOTTLE_CURSE("item.consumable.bottle_of_curse", "Increase player difficulty by %s", 1),
+	ITEM_BOTTLE_SANITY("item.consumable.bottle_of_sanity", "Clear all base player difficulty", 0),
+
+	ITEM_CHARM_ENVY("item.equipment.curse_of_envy", "Get trait items when you kill mobs with traits, with a chance of %s%% per trait rank", 1),
+	ITEM_CHARM_GLUTTONY("item.equipment.curse_of_gluttony", "Get Bottle of Curse when you kill mobs with level, with a chance of %s%% per level", 1),
+	ITEM_CHARM_GREED("item.equipment.curse_of_greed", "Mobs you kill will drop +%s%% hostility loot", 1),
+	ITEM_CHARM_LUST("item.equipment.curse_of_lust", "Mobs you kill will drop all equipments", 0),
+	ITEM_CHARM_PRIDE("item.equipment.curse_of_pride", "Gain %s%% damage reduction and %s%% attack damage per difficulty level", 2),
+	ITEM_CHARM_SLOTH("item.equipment.curse_of_sloth", "You will not gain difficulty by killing mobs", 0),
+	ITEM_CHARM_WRATH("item.equipment.curse_of_wrath", "Gain %s%% attack damage per difficulty level difference against mobs with higher level than you.", 1),
+	ITEM_CHARM_ADD_LEVEL("item.equipment.curse_add_level", "Gain %s extra difficulty level", 1),
+	ITEM_CHARM_NO_DROP("item.equipment.curse_no_drop", "Mobs you kill will not drop hostility loot", 0),
+	ITEM_CHARM_TRAIT_CHEAP("item.equipment.curse_trait_cheap", "Mob traits will be +%s%% more frequent", 1),
+
 
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),
