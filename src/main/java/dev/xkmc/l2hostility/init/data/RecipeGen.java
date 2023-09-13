@@ -50,6 +50,19 @@ public class RecipeGen {
 				.define('A', Items.ENDER_EYE)
 				.define('D', Items.IRON_INGOT)
 				.save(pvd);
+
+		unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LHItems.BOTTLE_SANITY.get(), 3)::unlockedBy, LHItems.HOSTILITY_ORB.get())
+				.requires(LHItems.HOSTILITY_ORB.get()).requires(Items.GLASS_BOTTLE, 3)
+				.save(pvd, getID(LHItems.BOTTLE_SANITY.get(), "_craft"));
+
+		unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LHItems.BOTTLE_SANITY.get(), 3)::unlockedBy, LCItems.LIFE_ESSENCE.get())
+				.requires(LHItems.BOTTLE_SANITY.get()).requires(LCItems.LIFE_ESSENCE).requires(Items.GLASS_BOTTLE, 2)
+				.save(pvd, getID(LHItems.BOTTLE_SANITY.get(), "_renew"));
+
+		unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LHItems.BOTTLE_CURSE.get(), 3)::unlockedBy, LCItems.CURSED_DROPLET.get())
+				.requires(LCItems.CURSED_DROPLET).requires(Items.GLASS_BOTTLE, 3)
+				.save(pvd);
+
 	}
 
 	@SuppressWarnings("ConstantConditions")

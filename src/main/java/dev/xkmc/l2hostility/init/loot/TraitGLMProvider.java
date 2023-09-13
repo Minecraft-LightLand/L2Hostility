@@ -7,6 +7,7 @@ import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.util.data.LootTableTemplate;
 import net.minecraft.core.registries.Registries;
@@ -24,9 +25,11 @@ import java.util.Objects;
 
 public class TraitGLMProvider extends GlobalLootModifierProvider {
 
-	public static final RegistryEntry<LootItemConditionType> TRAIT_AND_LEVEL;
-	public static final RegistryEntry<LootItemConditionType> MOB_LEVEL;
+	public static final RegistryEntry<LootItemConditionType> TRAIT_AND_LEVEL, MOB_LEVEL, HAS_ITEM;
 	public static final RegistryEntry<Codec<TraitLootModifier>> TRAIT_SCALED;
+	public static final RegistryEntry<Codec<EnvyLootModifier>> LOOT_ENVY;
+	public static final RegistryEntry<Codec<GluttonyLootModifier>> LOOT_GLUTTONY;
+
 
 	static {
 		TRAIT_AND_LEVEL = L2Hostility.REGISTRATE.simple("trait_and_level",
@@ -35,8 +38,16 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		MOB_LEVEL = L2Hostility.REGISTRATE.simple("mob_level",
 				Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(
 						new TraitSerializer<>(MobCapLootCondition.class)));
+		HAS_ITEM = L2Hostility.REGISTRATE.simple("player_has_item",
+				Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(
+						new TraitSerializer<>(PlayerHasItemCondition.class)));
+
 		TRAIT_SCALED = L2Hostility.REGISTRATE.simple("trait_scaled",
 				ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> TraitLootModifier.CODEC);
+		LOOT_ENVY = L2Hostility.REGISTRATE.simple("loot_envy",
+				ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> EnvyLootModifier.CODEC);
+		LOOT_GLUTTONY = L2Hostility.REGISTRATE.simple("loot_gluttony",
+				ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> GluttonyLootModifier.CODEC);
 
 	}
 
@@ -50,6 +61,11 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 
 	@Override
 	protected void start() {
+		add("loot_envy", new EnvyLootModifier(LootTableTemplate.byPlayer().build(),
+				new PlayerHasItemCondition(LHItems.CURSE_ENVY.get())));
+		add("loot_gluttony", new GluttonyLootModifier(LootTableTemplate.byPlayer().build(),
+				new PlayerHasItemCondition(LHItems.CURSE_GLUTTONY.get())));
+
 		add(LHTraits.TANK.get(), new ItemStack(Items.DIAMOND, 4), 1, 0, 0.1);
 		add(LHTraits.TANK.get(), new ItemStack(Items.NETHERITE_SCRAP, 1), 3, 0, 0.1);
 		add(LHTraits.SPEEDY.get(), new ItemStack(Items.RABBIT_FOOT, 2), 1, 0, 0.1);
@@ -120,4 +136,5 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		String name = trait.getRegistryName().getPath() + "_drop_" + ForgeRegistries.ITEMS.getKey(stack.getItem()).getPath();
 		add(name, new TraitLootModifier(trait, chance, bonus, stack, conditions));
 	}
+
 }

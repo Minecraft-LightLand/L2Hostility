@@ -1,0 +1,12 @@
+{
+  "name": "Bottle of Sanity",
+  "icon": "l2hostility:bottle_of_sanity",
+  "category": "l2hostility:items",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:bottle_of_sanity",
+	  "text": "This item clears your base player difficulty, and reset visited dimension count. Clearing base difficulty is equivalent to dying repeatedly."
+	}
+  ]
+}

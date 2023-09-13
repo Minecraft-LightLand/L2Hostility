@@ -1,0 +1,12 @@
+{
+  "name": "Curse of Wrath",
+  "icon": "l2hostility:curse_of_wrath",
+  "category": "l2hostility:items",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:curse_of_wrath",
+	  "text": "One of the 7 sins. Immune to several negative effects, and deal higher damage against mobs with higher levels."
+	}
+  ]
+}

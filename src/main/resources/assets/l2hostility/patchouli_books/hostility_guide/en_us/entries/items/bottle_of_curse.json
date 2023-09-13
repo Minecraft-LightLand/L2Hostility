@@ -1,0 +1,12 @@
+{
+  "name": "Bottle of Curse",
+  "icon": "l2hostility:bottle_of_curse",
+  "category": "l2hostility:items",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:bottle_of_curse",
+	  "text": "This item increase player difficulty. This is equivalent to killing mobs with high level.$(br2)The difficulty gained by this item can be reduced by dying, or using bottle of sanity."
+	}
+  ]
+}

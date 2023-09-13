@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cursed_droplet": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2complements:cursed_droplet"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "l2hostility:bottle_of_curse"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cursed_droplet",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "l2hostility:bottle_of_curse"
+    ]
+  },
+  "sends_telemetry_event": false
+}

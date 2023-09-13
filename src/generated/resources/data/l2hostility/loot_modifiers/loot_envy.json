@@ -1,0 +1,12 @@
+{
+  "type": "l2hostility:loot_envy",
+  "conditions": [
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "condition": "l2hostility:player_has_item",
+      "item": "l2hostility:curse_of_envy"
+    }
+  ]
+}

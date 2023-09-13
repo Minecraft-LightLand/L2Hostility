@@ -1,0 +1,16 @@
+{
+  "name": "Curse of Envy",
+  "icon": "l2hostility:curse_of_envy",
+  "category": "l2hostility:items",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:curse_of_envy",
+	  "text": "One of the 7 sins. When killing mobs, mobs drops traits as item. Those item can be applied on other mobs to make those mobs stronger."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "Some gears might require those trait items, so this item is the key to late game L2Hostility progression."
+	}
+  ]
+}

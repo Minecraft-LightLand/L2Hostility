@@ -1,0 +1,12 @@
+{
+  "name": "Hostility Orb",
+  "icon": "l2hostility:hostility_orb",
+  "category": "l2hostility:items",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:hostility_orb",
+	  "text": "This item allows you to mark a chunk section no longer spawn mobs with traits. You can use it to make your home safer, or to make mob farms."
+	}
+  ]
+}

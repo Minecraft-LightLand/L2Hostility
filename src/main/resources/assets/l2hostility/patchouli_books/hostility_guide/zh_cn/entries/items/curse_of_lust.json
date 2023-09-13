@@ -1,0 +1,16 @@
+{
+  "name": "Curse of Lust",
+  "icon": "l2hostility:curse_of_lust",
+  "category": "l2hostility:items",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:curse_of_lust",
+	  "text": "One of the 7 sins. When killing mobs, mobs drops all equipments."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "Time to strip enemies naked. Be prepared to bring storage items to collect all those equipments."
+	}
+  ]
+}
