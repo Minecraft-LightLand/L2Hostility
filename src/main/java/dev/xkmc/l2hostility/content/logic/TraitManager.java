@@ -66,7 +66,7 @@ public class TraitManager {
 				int upper = base.free() + level / e.getCost();
 				int lower = Math.min(upper, base.min());
 				int max = Math.min(ins.getMaxTraitLevel(), e.getMaxLevel());
-				int rank = Math.min(max, rand.nextInt(lower, upper) + 1);
+				int rank = Math.min(max, rand.nextInt(lower, upper + 1));
 				if (rank == 0) continue;
 				if (rank > base.free()) {
 					level -= (rank - base.free()) * e.getCost();

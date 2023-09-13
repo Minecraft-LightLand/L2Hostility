@@ -3,6 +3,7 @@
 - Add weapon config
 - Add entity config, remove entityMap from difficulty config
 - Add multi-trait conditions JEI support and examples
+- Add default configs for Twilight Forest mobs
 
 2.4.5
 - Fix chunk not marked dirty when using hostility orb

@@ -36,7 +36,8 @@ public class ClientEvents {
 		if (event.getEntity() instanceof LivingEntity le && MobTraitCap.HOLDER.isProper(le)) {
 			LocalPlayer player = Proxy.getClientPlayer();
 			assert player != null;
-			if (le.isInvisible() && RayTraceUtil.rayTraceEntity(player, player.getEntityReach(), e -> e == le) == null) {
+			boolean needHover = le.isInvisible() || LHConfig.CLIENT.showOnlyWhenHovered.get();
+			if (needHover && RayTraceUtil.rayTraceEntity(player, player.getEntityReach(), e -> e == le) == null) {
 				return;
 			}
 			var list = MobTraitCap.HOLDER.get(le).getTitle(
