@@ -28,3 +28,9 @@ description='''
     versionRange="[2.4.6,)"
     ordering="AFTER"
     side="BOTH"
+[[dependencies.l2hostility]]
+    modId="l2complements"
+    mandatory=true
+    versionRange="[2.4.14,)"
+    ordering="AFTER"
+    side="BOTH"

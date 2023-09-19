@@ -1,8 +1,8 @@
 {
   "blacklist": [],
-  "cost": 30,
+  "cost": 50,
   "max_rank": 3,
-  "min_level": 20,
+  "min_level": 70,
   "weight": 50,
   "whitelist": []
 }

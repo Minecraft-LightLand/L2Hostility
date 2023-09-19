@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.events;
 
+import dev.xkmc.l2complements.init.data.DamageTypeGen;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.AttackListener;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
@@ -16,6 +17,10 @@ public class LHAttackListener implements AttackListener {
 
 	@Override
 	public void onHurt(AttackCache cache, ItemStack weapon) {
+		var event = cache.getLivingHurtEvent();
+		assert event != null;
+		if (event.getSource().is(DamageTypeGen.SOUL_FLAME))
+			return;
 		LivingEntity mob = cache.getAttacker();
 		if (mob != null && MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);

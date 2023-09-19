@@ -178,7 +178,7 @@ public class LHConfig {
 				prideDamageBonus = builder.comment("Damage bonus per level when using Curse of Pride")
 						.defineInRange("prideDamageBonus", 0.02, 0, 1);
 				prideProtectionBonus = builder.comment("Damage reduction per level when using Curse of Pride")
-						.defineInRange("prideProtectionBonus", 0.01, 0, 1);
+						.defineInRange("prideProtectionBonus", 0.02, 0, 1);
 				prideTraitFactor = builder.comment("Trait cost multiplier when using Curse of Pride")
 						.defineInRange("prideTraitFactor", 0.5, 0.01, 1);
 			}

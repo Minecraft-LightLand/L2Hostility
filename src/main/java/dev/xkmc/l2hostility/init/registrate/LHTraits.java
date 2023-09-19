@@ -78,11 +78,11 @@ public class LHTraits {
 					.desc("Heals %s%% of full health every second.")
 					.lang("Regenerating").register();
 			ADAPTIVE = L2Hostility.REGISTRATE.regTrait("adaptive", () -> new AdaptingTrait(ChatFormatting.GOLD),
-							() -> new TraitConfig(80, 50, 5, 50))
+							() -> new TraitConfig(80, 50, 5, 100))
 					.desc("Memorize damage types taken and stack %s%% damage reduction for those damage every time. Memorizes last %s different damage types.")
 					.lang("Adaptive").register();
 			REFLECT = L2Hostility.REGISTRATE.regTrait("reflect", () -> new ReflectTrait(ChatFormatting.DARK_RED),
-							() -> new TraitConfig(80, 50, 5, 50))
+							() -> new TraitConfig(80, 50, 5, 100))
 					.desc("Reflect direct physical damage as %s%% magical damage")
 					.lang("Reflect").register();
 
@@ -107,7 +107,7 @@ public class LHTraits {
 					.desc("Mob will attempt to teleport to avoid physical damage and track targets.")
 					.lang("Teleport").register();
 			REPELLING = L2Hostility.REGISTRATE.regTrait("repelling", () -> new RepellingTrait(ChatFormatting.DARK_GREEN),
-							() -> new TraitConfig(50, 100, 1, 50).whitelist(
+							() -> new TraitConfig(50, 100, 1, 100).whitelist(
 									EntityType.SKELETON, EntityType.STRAY,
 									EntityType.PILLAGER, EntityType.EVOKER, EntityType.WITCH,
 									EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN,
@@ -121,7 +121,7 @@ public class LHTraits {
 		{
 			WEAKNESS = L2Hostility.REGISTRATE.regTrait("weakness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.WEAKNESS, LHConfig.COMMON.weakTime.get(), lv - 1)),
-					() -> new TraitConfig(25, 50, 5, 20)).lang("Weakener").register();
+					() -> new TraitConfig(25, 50, 5, 40)).lang("Weakener").register();
 			SLOWNESS = L2Hostility.REGISTRATE.regTrait("slowness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, LHConfig.COMMON.slowTime.get(), lv)),
 					() -> new TraitConfig(10, 100, 5, 20)).lang("Stray").register();
@@ -133,19 +133,19 @@ public class LHTraits {
 					() -> new TraitConfig(15, 50, 3, 20)).lang("Withering").register();
 			LEVITATION = L2Hostility.REGISTRATE.regTrait("levitation", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.LEVITATION, LHConfig.COMMON.levitationTime.get() * lv)),
-					() -> new TraitConfig(25, 25, 3, 20)).lang("Levitater").register();
+					() -> new TraitConfig(25, 25, 3, 40)).lang("Levitater").register();
 			BLIND = L2Hostility.REGISTRATE.regTrait("blindness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.BLINDNESS, LHConfig.COMMON.blindTime.get() * lv)),
-					() -> new TraitConfig(30, 50, 3, 20)).lang("Blinder").register();
+					() -> new TraitConfig(30, 50, 3, 40)).lang("Blinder").register();
 			CONFUSION = L2Hostility.REGISTRATE.regTrait("nausea", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.CONFUSION, LHConfig.COMMON.confusionTime.get() * lv)),
-					() -> new TraitConfig(30, 25, 3, 20)).lang("Distorter").register();
+					() -> new TraitConfig(30, 25, 3, 40)).lang("Distorter").register();
 			SOUL_BURNER = L2Hostility.REGISTRATE.regTrait("soul_burner", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.FLAME.get(), LHConfig.COMMON.soulBurnerTime.get(), lv - 1)),
-					() -> new TraitConfig(30, 50, 3, 20)).lang("Soul Burner").register();
+					() -> new TraitConfig(50, 50, 3, 70)).lang("Soul Burner").register();
 			FREEZING = L2Hostility.REGISTRATE.regTrait("freezing", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.ICE.get(), LHConfig.COMMON.freezingTime.get() * lv)),
-					() -> new TraitConfig(30, 50, 3, 20)).lang("Freezing").register();
+					() -> new TraitConfig(30, 50, 3, 50)).lang("Freezing").register();
 			CURSED = L2Hostility.REGISTRATE.regTrait("cursed", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.CURSE.get(), LHConfig.COMMON.curseTime.get() * lv)),
 					() -> new TraitConfig(20, 100, 3, 20)).lang("Cursed").register();

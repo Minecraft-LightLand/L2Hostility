@@ -47,8 +47,8 @@ public class MobEvents {
 				CurioCompat.hasItem(player, LHItems.CURSE_PRIDE.get())) {
 			int level = PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
 			double rate = LHConfig.COMMON.prideProtectionBonus.get();
-			double factor = Math.pow(1 - rate, level);
-			event.setAmount((float) (event.getAmount() * factor));
+			double factor = 1 + rate * level;
+			event.setAmount((float) (event.getAmount() / factor));
 		}
 	}
 

@@ -2,7 +2,7 @@
   "blacklist": [],
   "cost": 25,
   "max_rank": 3,
-  "min_level": 20,
+  "min_level": 40,
   "weight": 25,
   "whitelist": []
 }
