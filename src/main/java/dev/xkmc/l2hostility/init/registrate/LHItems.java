@@ -1,14 +1,17 @@
 package dev.xkmc.l2hostility.init.registrate;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
-import dev.xkmc.l2hostility.content.item.tools.consumable.BottleOfCurse;
-import dev.xkmc.l2hostility.content.item.tools.consumable.BottleOfSanity;
-import dev.xkmc.l2hostility.content.item.tools.consumable.HostilityOrb;
+import dev.xkmc.l2hostility.content.item.consumable.BottleOfCurse;
+import dev.xkmc.l2hostility.content.item.consumable.BottleOfSanity;
+import dev.xkmc.l2hostility.content.item.consumable.HostilityOrb;
+import dev.xkmc.l2hostility.content.item.curse.*;
+import dev.xkmc.l2hostility.content.item.tool.DetectorGlasses;
+import dev.xkmc.l2hostility.content.item.tools.curse.*;
 import dev.xkmc.l2hostility.content.item.tools.equipment.*;
-import dev.xkmc.l2hostility.content.item.tools.wand.AiConfigWand;
-import dev.xkmc.l2hostility.content.item.tools.wand.EquipmentWand;
-import dev.xkmc.l2hostility.content.item.tools.wand.TargetSelectWand;
-import dev.xkmc.l2hostility.content.item.tools.wand.TraitAdderWand;
+import dev.xkmc.l2hostility.content.item.wand.AiConfigWand;
+import dev.xkmc.l2hostility.content.item.wand.EquipmentWand;
+import dev.xkmc.l2hostility.content.item.wand.TargetSelectWand;
+import dev.xkmc.l2hostility.content.item.wand.TraitAdderWand;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;

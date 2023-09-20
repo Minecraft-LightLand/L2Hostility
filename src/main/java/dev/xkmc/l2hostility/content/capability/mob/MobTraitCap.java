@@ -3,7 +3,7 @@ package dev.xkmc.l2hostility.content.capability.mob;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
-import dev.xkmc.l2hostility.content.item.spawner.tile.TraitSpawnerBlockEntity;
+import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
