@@ -1,18 +1,16 @@
-package dev.xkmc.l2hostility.content.item.curse;
+package dev.xkmc.l2hostility.content.item.curio;
 
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurseCurioItem extends Item {
+public class CurseCurioItem extends CurioItem {
 
 	public static List<GenericItemStack<CurseCurioItem>> getFromPlayer(Player player) {
 		var list = CurioCompat.getItems(player, e -> e.getItem() instanceof CurseCurioItem);
@@ -26,7 +24,7 @@ public class CurseCurioItem extends Item {
 	}
 
 	public CurseCurioItem(Properties props) {
-		super(props.stacksTo(1).fireResistant().rarity(Rarity.EPIC));
+		super(props);
 	}
 
 	public int getExtraLevel(ItemStack stack) {

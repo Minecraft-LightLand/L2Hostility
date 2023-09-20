@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "l2hostility:item/curse_of_sloth"
+    "layer0": "l2hostility:item/curio/curse_of_sloth"
   }
 }

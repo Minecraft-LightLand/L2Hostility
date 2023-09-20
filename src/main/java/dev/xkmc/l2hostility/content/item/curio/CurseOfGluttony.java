@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.item.curse;
+package dev.xkmc.l2hostility.content.item.curio;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;

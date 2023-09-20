@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.xkmc.l2hostility.content.item.curse;
+package dev.xkmc.l2hostility.content.item.curio;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

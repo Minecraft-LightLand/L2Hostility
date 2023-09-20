@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.item.curse;
+package dev.xkmc.l2hostility.content.item.curio;
 
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;

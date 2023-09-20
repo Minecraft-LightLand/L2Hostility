@@ -4,10 +4,11 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.xkmc.l2hostility.content.item.consumable.BottleOfCurse;
 import dev.xkmc.l2hostility.content.item.consumable.BottleOfSanity;
 import dev.xkmc.l2hostility.content.item.consumable.HostilityOrb;
-import dev.xkmc.l2hostility.content.item.curse.*;
+import dev.xkmc.l2hostility.content.item.curio.*;
+import dev.xkmc.l2hostility.content.item.curio.RingOfDivinity;
+import dev.xkmc.l2hostility.content.item.curio.RingOfLife;
+import dev.xkmc.l2hostility.content.item.curio.RingOfOcean;
 import dev.xkmc.l2hostility.content.item.tool.DetectorGlasses;
-import dev.xkmc.l2hostility.content.item.tools.curse.*;
-import dev.xkmc.l2hostility.content.item.tools.equipment.*;
 import dev.xkmc.l2hostility.content.item.wand.AiConfigWand;
 import dev.xkmc.l2hostility.content.item.wand.EquipmentWand;
 import dev.xkmc.l2hostility.content.item.wand.TargetSelectWand;
@@ -38,6 +39,11 @@ public class LHItems {
 	public static final ItemEntry<CurseOfSloth> CURSE_SLOTH;
 	public static final ItemEntry<CurseOfWrath> CURSE_WRATH;
 
+	public static final ItemEntry<RingOfOcean> MEDAL_OCEAN;
+	public static final ItemEntry<RingOfLife> MEDAL_LIFE;
+	public static final ItemEntry<RingOfDivinity> MEDAL_DIVINITY;
+
+
 	public static final ItemEntry<TraitAdderWand> ADDER;
 	public static final ItemEntry<TargetSelectWand> TARGET;
 	public static final ItemEntry<AiConfigWand> AI;
@@ -66,18 +72,39 @@ public class LHItems {
 					.register();
 
 			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
+			TagKey<Item> ring = ItemTags.create(new ResourceLocation("curios", "ring"));
 
-			CURSE_ENVY = L2Hostility.REGISTRATE.item(
-							"curse_of_envy", CurseOfEnvy::new)
+			CURSE_ENVY = L2Hostility.REGISTRATE.item("curse_of_envy", CurseOfEnvy::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
+					.tag(charm).register();
+			CURSE_GLUTTONY = L2Hostility.REGISTRATE.item("curse_of_gluttony", CurseOfGluttony::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
+					.tag(charm).register();
+			CURSE_GREED = L2Hostility.REGISTRATE.item("curse_of_greed", CurseOfGreed::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
+					.tag(charm).register();
+			CURSE_LUST = L2Hostility.REGISTRATE.item("curse_of_lust", CurseOfLust::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
+					.tag(charm).register();
+			CURSE_PRIDE = L2Hostility.REGISTRATE.item("curse_of_pride", CurseOfPride::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
+					.tag(charm).register();
+			CURSE_SLOTH = L2Hostility.REGISTRATE.item("curse_of_sloth", CurseOfSloth::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
+					.tag(charm).register();
+			CURSE_WRATH = L2Hostility.REGISTRATE.item("curse_of_wrath", CurseOfWrath::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
 					.tag(charm).register();
 
-			CURSE_GLUTTONY = L2Hostility.REGISTRATE.item("curse_of_gluttony", CurseOfGluttony::new).tag(charm).register();
-			CURSE_GREED = L2Hostility.REGISTRATE.item("curse_of_greed", CurseOfGreed::new).tag(charm).register();
-			CURSE_LUST = L2Hostility.REGISTRATE.item("curse_of_lust", CurseOfLust::new).tag(charm).register();
-			CURSE_PRIDE = L2Hostility.REGISTRATE.item("curse_of_pride", CurseOfPride::new).tag(charm).register();
-			CURSE_SLOTH = L2Hostility.REGISTRATE.item("curse_of_sloth", CurseOfSloth::new).tag(charm).register();
-			CURSE_WRATH = L2Hostility.REGISTRATE.item("curse_of_wrath", CurseOfWrath::new).tag(charm).register();
-
+			MEDAL_OCEAN = L2Hostility.REGISTRATE.item("ring_of_ocean", RingOfOcean::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
+					.tag(ring).register();
+			MEDAL_LIFE = L2Hostility.REGISTRATE.item("ring_of_life", RingOfLife::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
+					.tag(ring).register();
+			MEDAL_DIVINITY = L2Hostility.REGISTRATE.item("ring_of_divinity", RingOfDivinity::new)
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
+					.tag(ring).register();
 		}
 
 		// wands

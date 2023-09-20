@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.events;
 
+import dev.xkmc.l2complements.content.effect.skill.SkillEffect;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
@@ -10,8 +11,10 @@ import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.mixin.ForgeInternalHandlerAccessor;
+import dev.xkmc.l2library.base.effects.EffectUtil;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.OnDatapackSyncEvent;
@@ -53,12 +56,23 @@ public class MobEvents {
 	}
 
 	@SubscribeEvent
+	public static void onDamage(LivingDamageEvent event) {
+		if (CurioCompat.hasItem(event.getEntity(), LHItems.MEDAL_LIFE.get())) {
+			float damage = event.getAmount();
+			float maxHealth = event.getEntity().getMaxHealth();
+			damage = Math.min(damage, (float) (maxHealth * LHConfig.COMMON.medalOfLifeMaxDamage.get()));
+			event.setAmount(damage);
+		}
+	}
+
+	@SubscribeEvent
 	public static void onMobDeath(LivingDeathEvent event) {
-		if (event.getEntity() instanceof Mob mob &&
-				mob.getKillCredit() instanceof Player player &&
-				CurioCompat.hasItem(player, LHItems.CURSE_LUST.get())) {
-			for (var e : EquipmentSlot.values())
-				mob.setDropChance(e, 1);
+		if (event.getEntity() instanceof Mob mob) {
+			var credit = mob.getKillCredit();
+			if (credit != null && CurioCompat.hasItem(credit, LHItems.CURSE_LUST.get())) {
+				for (var e : EquipmentSlot.values())
+					mob.setDropChance(e, 1);
+			}
 		}
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			MobTraitCap.HOLDER.get(event.getEntity()).traits
@@ -69,17 +83,34 @@ public class MobEvents {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onMobDrop(LivingDropsEvent event) {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			if (MobTraitCap.HOLDER.get(event.getEntity()).summoned) {
+			var cap = MobTraitCap.HOLDER.get(event.getEntity());
+			if (cap.summoned) {
 				event.setCanceled(true);
 				return;
 			}
-			// TODO multiply
+			// TODO drop multiply
+		}
+	}
+
+	@SubscribeEvent()
+	public static void onExpDrop(LivingExperienceDropEvent event) {
+		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
+			var cap = MobTraitCap.HOLDER.get(event.getEntity());
+			if (cap.summoned) {
+				event.setCanceled(true);
+				return;
+			}
+			int exp = event.getDroppedExperience();
+			int level = cap.getLevel();
+			exp *= 1 + level * LHConfig.COMMON.expDropFactor.get() * level;
+			event.setDroppedExperience(exp);
 		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onPotionTest(MobEffectEvent.Applicable event) {
-		if (event.getEntity() instanceof Player player && CurioCompat.hasItem(player, LHItems.CURSE_WRATH.get())) {
+		LivingEntity entity = event.getEntity();
+		if (CurioCompat.hasItem(entity, LHItems.CURSE_WRATH.get())) {
 			var config = ArmorEffectConfig.get().getImmunity(LHItems.CURSE_WRATH.getId().toString());
 			if (config.contains(event.getEffectInstance().getEffect())) {
 				event.setResult(Event.Result.DENY);

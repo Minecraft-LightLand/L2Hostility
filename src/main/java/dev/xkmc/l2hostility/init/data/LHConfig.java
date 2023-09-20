@@ -38,6 +38,7 @@ public class LHConfig {
 
 		public final ForgeConfigSpec.DoubleValue healthFactor;
 		public final ForgeConfigSpec.DoubleValue damageFactor;
+		public final ForgeConfigSpec.DoubleValue expDropFactor;
 		public final ForgeConfigSpec.IntValue armorFactor;
 		public final ForgeConfigSpec.DoubleValue enchantmentFactor;
 		public final ForgeConfigSpec.IntValue dimensionFactor;
@@ -94,6 +95,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue corrosionFactor;
 		public final ForgeConfigSpec.DoubleValue erosionFactor;
 
+		public final ForgeConfigSpec.DoubleValue medalOfLifeMaxDamage;
+
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("scaling");
 			{
@@ -101,6 +104,8 @@ public class LHConfig {
 						.defineInRange("healthFactor", 0.03, 0, 1000);
 				damageFactor = builder.comment("Damage factor per level")
 						.defineInRange("damageFactor", 0.02, 0, 1000);
+				expDropFactor = builder.comment("Experience drop factor per level")
+						.defineInRange("expDropFactor", 0.05, 0, 1000);
 				armorFactor = builder.comment("Armor rank per n level")
 						.defineInRange("armorFactor", 10, 0, 1000);
 				enchantmentFactor = builder.comment("Enchantment bonus per level.",
@@ -158,29 +163,34 @@ public class LHConfig {
 				bottleOfCurseLevel = builder.comment("Number of level to add when using bottle of curse")
 						.defineInRange("bottleOfCurseLevel", 50, 1, 1000);
 
-				envyExtraLevel = builder.comment("Number of level to add when using Curse of Envy")
-						.defineInRange("envyExtraLevel", 50, 0, 1000);
-				greedExtraLevel = builder.comment("Number of level to add when using Curse of Greed")
-						.defineInRange("greedExtraLevel", 50, 0, 1000);
-				lustExtraLevel = builder.comment("Number of level to add when using Curse of Lust")
-						.defineInRange("lustExtraLevel", 50, 0, 1000);
-				wrathExtraLevel = builder.comment("Number of level to add when using Curse of Wrath")
-						.defineInRange("wrathExtraLevel", 50, 0, 1000);
+				medalOfLifeMaxDamage = builder.comment("Max percentage of max health a damage can hurt wearer of Medal of Life")
+						.defineInRange("medalOfLifeMaxDamage", 0.8, 0, 1);
 
-				greedDropFactor = builder.comment("Hostility loot drop factor when using Curse of Greed")
-						.defineInRange("greedDropFactor", 2d, 1, 10);
-				envyDropRate = builder.comment("Trait item drop rate per rank when using Curse of Envy")
-						.defineInRange("envyDropRate", 0.02, 0, 1);
-				gluttonyDropRate = builder.comment("Bottle of Curse drop rate per level when using Curse of Gluttony")
-						.defineInRange("gluttonyDropRate", 0.01, 0, 1);
-				wrathDamageBonus = builder.comment("Damage bonus per level difference when using Curse of Wrath")
-						.defineInRange("wrathDamageBonus", 0.05, 0, 1);
-				prideDamageBonus = builder.comment("Damage bonus per level when using Curse of Pride")
-						.defineInRange("prideDamageBonus", 0.02, 0, 1);
-				prideProtectionBonus = builder.comment("Damage reduction per level when using Curse of Pride")
-						.defineInRange("prideProtectionBonus", 0.02, 0, 1);
-				prideTraitFactor = builder.comment("Trait cost multiplier when using Curse of Pride")
-						.defineInRange("prideTraitFactor", 0.5, 0.01, 1);
+				{
+					envyExtraLevel = builder.comment("Number of level to add when using Curse of Envy")
+							.defineInRange("envyExtraLevel", 50, 0, 1000);
+					greedExtraLevel = builder.comment("Number of level to add when using Curse of Greed")
+							.defineInRange("greedExtraLevel", 50, 0, 1000);
+					lustExtraLevel = builder.comment("Number of level to add when using Curse of Lust")
+							.defineInRange("lustExtraLevel", 50, 0, 1000);
+					wrathExtraLevel = builder.comment("Number of level to add when using Curse of Wrath")
+							.defineInRange("wrathExtraLevel", 50, 0, 1000);
+
+					greedDropFactor = builder.comment("Hostility loot drop factor when using Curse of Greed")
+							.defineInRange("greedDropFactor", 2d, 1, 10);
+					envyDropRate = builder.comment("Trait item drop rate per rank when using Curse of Envy")
+							.defineInRange("envyDropRate", 0.02, 0, 1);
+					gluttonyDropRate = builder.comment("Bottle of Curse drop rate per level when using Curse of Gluttony")
+							.defineInRange("gluttonyDropRate", 0.01, 0, 1);
+					wrathDamageBonus = builder.comment("Damage bonus per level difference when using Curse of Wrath")
+							.defineInRange("wrathDamageBonus", 0.05, 0, 1);
+					prideDamageBonus = builder.comment("Damage bonus per level when using Curse of Pride")
+							.defineInRange("prideDamageBonus", 0.02, 0, 1);
+					prideProtectionBonus = builder.comment("Damage reduction per level when using Curse of Pride")
+							.defineInRange("prideProtectionBonus", 0.02, 0, 1);
+					prideTraitFactor = builder.comment("Trait cost multiplier when using Curse of Pride")
+							.defineInRange("prideTraitFactor", 0.5, 0.01, 1);
+				}
 			}
 			builder.pop();
 

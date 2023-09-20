@@ -1,7 +1,7 @@
-// 1.20.1	2023-09-14T00:58:47.264873	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-09-20T22:08:34.32105	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-dc6be4abb009e83b1151284f32cafffdcd116c28 assets/l2hostility/lang/en_ud.json
-2da1ee06766ece467f0303dcdebdab3c5f89b814 assets/l2hostility/lang/en_us.json
+a944793afa403ae26c815776d3a06920b564bb07 assets/l2hostility/lang/en_ud.json
+673a85e606d1ad498d1e3f1629d38e12848a9f54 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -11,13 +11,13 @@ de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostili
 fb67e1e3e8e35bbee363f44ee5412f7371478aa6 assets/l2hostility/models/item/blindness.json
 68d41070d34ebc05ec1870aed6e0e53e40d12147 assets/l2hostility/models/item/bottle_of_curse.json
 38ebdcb219de6ddebd2181e8c53d6c00711a4b1f assets/l2hostility/models/item/bottle_of_sanity.json
-d91af9294881bef07f85f9397d5fdbc654cc7c2a assets/l2hostility/models/item/curse_of_envy.json
-9eb87c19d3e777d90e73dd0dd03e63cbf38390c2 assets/l2hostility/models/item/curse_of_gluttony.json
-d9b6f952cd5d19e9a2ee42ba6cdff2ad2d502923 assets/l2hostility/models/item/curse_of_greed.json
-2eb2573ed907046cced8b7292ba73a446f0569b6 assets/l2hostility/models/item/curse_of_lust.json
-00f507b0f411555e25dae252d12a764a1e13367e assets/l2hostility/models/item/curse_of_pride.json
-d9c5f14376853bfbeb9fa0f42f2480e68cc1111f assets/l2hostility/models/item/curse_of_sloth.json
-39b204e14cbb7201177308403a1174880f2ef5ab assets/l2hostility/models/item/curse_of_wrath.json
+7909e1656814009b9422ca65329ddf5bedf29177 assets/l2hostility/models/item/curse_of_envy.json
+0c0cb3d3751e09832f0065fe9d48f94149ec6933 assets/l2hostility/models/item/curse_of_gluttony.json
+c57e5a2e58572c7df99be031ba81fa38357bdda8 assets/l2hostility/models/item/curse_of_greed.json
+9b6b5b19b59a8bc6e0e42164c021c447b470827c assets/l2hostility/models/item/curse_of_lust.json
+085b3999633f0d953c49029ba647ea94cae85c34 assets/l2hostility/models/item/curse_of_pride.json
+3a5a800a253404ffb37c88bb5cce1dfa9bad710e assets/l2hostility/models/item/curse_of_sloth.json
+2b60a15fe7b6f4e01ee3040a1681580d481d0240 assets/l2hostility/models/item/curse_of_wrath.json
 a608475305a25ed5806a7919247a81627c5a2c29 assets/l2hostility/models/item/cursed.json
 e03c67c42220f6df8ddd1ce5d593aad8c3e4a36b assets/l2hostility/models/item/dementor.json
 0f51d8c6b255ece00b8e0e60f0f90a4a748106f2 assets/l2hostility/models/item/detector_glasses.json
@@ -36,6 +36,9 @@ e6f4ee990db09cc5cba2368f79c4f4364a1b06e1 assets/l2hostility/models/item/protecti
 0762984afc62ad24a5d146abaa55dbcb590f033f assets/l2hostility/models/item/reflect.json
 f56f2f1f0446968656f212a449c10148deb6588a assets/l2hostility/models/item/regenerate.json
 3059e15485093d955ecac31993fad49d810d84db assets/l2hostility/models/item/repelling.json
+834aa04dbe72188d793d95bf1242cc676e0055f2 assets/l2hostility/models/item/ring_of_divinity.json
+f928384379d5ad5842826ea0664b052490e32012 assets/l2hostility/models/item/ring_of_life.json
+09e165575a74e763d341022dac9e89bd5f305920 assets/l2hostility/models/item/ring_of_ocean.json
 25ae990db0ca5f683e547b3397ef320d6de1e062 assets/l2hostility/models/item/slowness.json
 b047f9ec2784ac049190fc2bef6a8138f5d22cbf assets/l2hostility/models/item/soul_burner.json
 6ada0f5ea65ab428dbcffdc19d8aabc54a48efe2 assets/l2hostility/models/item/speedy.json
@@ -48,6 +51,7 @@ e49951d95c32da51497bee60ae0d2f3534adcd8a assets/l2hostility/models/item/teleport
 e1674754c0a1b60d94e45dc02a8df9abe0f64675 assets/l2hostility/models/item/wither.json
 d71f7aad9c585bef4ff66b28cd3e1655ff90070b data/curios/tags/items/charm.json
 c971287cbe42ec82e6ab848853221e98446f5760 data/curios/tags/items/head.json
+ec5dac22aac37961756848b77be68cee2092c3d3 data/curios/tags/items/ring.json
 5390655f853ac0e38d158b122b4c3c492de4ea81 data/l2hostility/advancements/recipes/misc/bottle_of_curse.json
 d89c5a52d1a034bbf27d94dfc6d88aefda4c5e53 data/l2hostility/advancements/recipes/misc/bottle_of_sanity_craft.json
 e3f2e16976b94317d9840442c2d815c84db5003c data/l2hostility/advancements/recipes/misc/bottle_of_sanity_renew.json

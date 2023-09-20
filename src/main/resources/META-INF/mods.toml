@@ -34,3 +34,9 @@ description='''
     versionRange="[2.4.14,)"
     ordering="AFTER"
     side="BOTH"
+[[dependencies.l2hostility]]
+    modId="curios"
+    mandatory=true
+    versionRange="[5.2.0-beta.3,)"
+    ordering="AFTER"
+    side="BOTH"

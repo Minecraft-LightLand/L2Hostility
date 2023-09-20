@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "l2hostility:item/curio/curse_of_greed"
+    "layer0": "l2hostility:item/curio/ring_of_ocean"
   }
 }
