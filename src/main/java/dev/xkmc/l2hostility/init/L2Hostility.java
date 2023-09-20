@@ -104,6 +104,7 @@ public class L2Hostility {
 		var gen = event.getGenerator();
 		gen.addProvider(server, new LHConfigGen(gen));
 		gen.addProvider(server, new TraitGLMProvider(gen));
+		gen.addProvider(server, new SlotGen(gen));
 	}
 
 	public static void toTrackingChunk(LevelChunk chunk, SerialPacketBase packet) {

@@ -45,10 +45,13 @@
 		"curse_of_gluttony": "击杀怪物掉落瓶装恶意，概率为每级%s%%",
 		"curse_of_greed": "击杀怪物掉落的词条掉落物+%s%%",
 		"curse_of_lust": "击杀怪物掉落所有装备",
-		"curse_of_pride": "根据玩家难度每级获得%s%%伤害抗性和%s%%伤害提升",
+		"curse_of_pride": "根据玩家难度每级获得%s%%血量上限和%s%%伤害提升",
 		"curse_of_sloth": "击杀生物不再提升难度",
 		"curse_of_wrath": "攻击等级比自己高的怪物时伤害提升%s%%",
-		"curse_trait_cheap": "怪物词条总量+%s%%"
+		"curse_trait_cheap": "怪物词条总量+%s%%",
+		"ring_of_ocean": "玩家永远湿润",
+		"ring_of_life": "玩家一次损失血量不会超过总血量的%s%%",
+		"ring_of_divinity": "玩家免疫魔法伤害，获得持续的净化效果"
 	  },
 	  "spawner": "召唤强力怪物。击败它们能让当前子区块变得安全"
 	},

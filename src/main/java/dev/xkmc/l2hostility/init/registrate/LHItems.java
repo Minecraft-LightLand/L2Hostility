@@ -39,9 +39,9 @@ public class LHItems {
 	public static final ItemEntry<CurseOfSloth> CURSE_SLOTH;
 	public static final ItemEntry<CurseOfWrath> CURSE_WRATH;
 
-	public static final ItemEntry<RingOfOcean> MEDAL_OCEAN;
-	public static final ItemEntry<RingOfLife> MEDAL_LIFE;
-	public static final ItemEntry<RingOfDivinity> MEDAL_DIVINITY;
+	public static final ItemEntry<RingOfOcean> RING_OCEAN;
+	public static final ItemEntry<RingOfLife> RING_LIFE;
+	public static final ItemEntry<RingOfDivinity> RING_DIVINITY;
 
 
 	public static final ItemEntry<TraitAdderWand> ADDER;
@@ -96,13 +96,13 @@ public class LHItems {
 					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
 					.tag(charm).register();
 
-			MEDAL_OCEAN = L2Hostility.REGISTRATE.item("ring_of_ocean", RingOfOcean::new)
+			RING_OCEAN = L2Hostility.REGISTRATE.item("ring_of_ocean", RingOfOcean::new)
 					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
 					.tag(ring).register();
-			MEDAL_LIFE = L2Hostility.REGISTRATE.item("ring_of_life", RingOfLife::new)
+			RING_LIFE = L2Hostility.REGISTRATE.item("ring_of_life", RingOfLife::new)
 					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
 					.tag(ring).register();
-			MEDAL_DIVINITY = L2Hostility.REGISTRATE.item("ring_of_divinity", RingOfDivinity::new)
+			RING_DIVINITY = L2Hostility.REGISTRATE.item("ring_of_divinity", RingOfDivinity::new)
 					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
 					.tag(ring).register();
 		}

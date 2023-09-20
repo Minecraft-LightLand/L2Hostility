@@ -6,11 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:curse_of_pride",
-	  "text": "One of the 7 sins. Gains damage boost with additive stacking. Gains damage reduction with hyperbolic stacking:$(br2)actual = damage / (1 + reduction * level)"
-	},
-	{
-	  "type": "patchouli:text",
-	  "text": "Note that the damage reduction provided here counts as magical protection and can be bypassed by Dispell trait."
+	  "text": "One of the 7 sins. Gains health and damage boost with additive stacking."
 	}
   ]
 }

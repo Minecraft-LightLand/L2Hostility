@@ -30,10 +30,10 @@ public class EntityMixin {
 	}
 
 	@Inject(at = @At("HEAD"), method = "isInRain", cancellable = true)
-	public void l2hostility$isInRain$medal(CallbackInfoReturnable<Boolean> cir) {
+	public void l2hostility$isInRain$ringOfOcean(CallbackInfoReturnable<Boolean> cir) {
 		Entity self = Wrappers.cast(this);
 		if (self instanceof LivingEntity le) {
-			if (CurioCompat.hasItem(le, LHItems.MEDAL_OCEAN.get())) {
+			if (CurioCompat.hasItem(le, LHItems.RING_OCEAN.get())) {
 				cir.setReturnValue(true);
 			}
 		}

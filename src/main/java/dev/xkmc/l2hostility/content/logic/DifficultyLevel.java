@@ -1,8 +1,11 @@
 package dev.xkmc.l2hostility.content.logic;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 @SerialClass
 public class DifficultyLevel {
@@ -19,6 +22,16 @@ public class DifficultyLevel {
 		ans.exp = difficulty.exp;
 		ans.extraLevel = difficulty.extraLevel + extraLevel;
 		return ans;
+	}
+
+	public static int ofAny(LivingEntity entity) {
+		if (entity instanceof Player player) {
+			return PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
+		}
+		if (MobTraitCap.HOLDER.isProper(entity)) {
+			return MobTraitCap.HOLDER.get(entity).getLevel();
+		}
+		return 0;
 	}
 
 	public void grow(double growFactor, MobTraitCap cap) {

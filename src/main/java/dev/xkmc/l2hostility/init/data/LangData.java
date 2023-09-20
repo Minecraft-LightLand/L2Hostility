@@ -29,12 +29,16 @@ public enum LangData {
 	ITEM_CHARM_GLUTTONY("item.equipment.curse_of_gluttony", "Get Bottle of Curse when you kill mobs with level, with a chance of %s%% per level", 1),
 	ITEM_CHARM_GREED("item.equipment.curse_of_greed", "Mobs you kill will drop +%s%% hostility loot", 1),
 	ITEM_CHARM_LUST("item.equipment.curse_of_lust", "Mobs you kill will drop all equipments", 0),
-	ITEM_CHARM_PRIDE("item.equipment.curse_of_pride", "Gain %s%% damage reduction and %s%% attack damage per difficulty level", 2),
+	ITEM_CHARM_PRIDE("item.equipment.curse_of_pride", "Gain %s%% health and %s%% attack damage per difficulty level", 2),
 	ITEM_CHARM_SLOTH("item.equipment.curse_of_sloth", "You will not gain difficulty by killing mobs", 0),
 	ITEM_CHARM_WRATH("item.equipment.curse_of_wrath", "Gain %s%% attack damage per difficulty level difference against mobs with higher level than you.", 1),
 	ITEM_CHARM_ADD_LEVEL("item.equipment.curse_add_level", "Gain %s extra difficulty level", 1),
 	ITEM_CHARM_NO_DROP("item.equipment.curse_no_drop", "Mobs you kill will not drop hostility loot", 0),
 	ITEM_CHARM_TRAIT_CHEAP("item.equipment.curse_trait_cheap", "Mob traits will be +%s%% more frequent", 1),
+
+	ITEM_RING_OCEAN("item.equipment.ring_of_ocean", "You will always be wet", 0),
+	ITEM_RING_LIFE("item.equipment.ring_of_life", "You will not lose more than %s%% of your max health at once", 1),
+	ITEM_RING_DIVINITY("item.equipment.ring_of_divinity", "Immune to magic damage. Gets permanent Cleanse effect", 0),
 
 
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),

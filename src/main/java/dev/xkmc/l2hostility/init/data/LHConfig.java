@@ -63,7 +63,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue envyDropRate;
 		public final ForgeConfigSpec.DoubleValue gluttonyDropRate;
 		public final ForgeConfigSpec.DoubleValue prideDamageBonus;
-		public final ForgeConfigSpec.DoubleValue prideProtectionBonus;
+		public final ForgeConfigSpec.DoubleValue prideHealthBonus;
 		public final ForgeConfigSpec.DoubleValue prideTraitFactor;
 		public final ForgeConfigSpec.DoubleValue wrathDamageBonus;
 
@@ -95,7 +95,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue corrosionFactor;
 		public final ForgeConfigSpec.DoubleValue erosionFactor;
 
-		public final ForgeConfigSpec.DoubleValue medalOfLifeMaxDamage;
+		public final ForgeConfigSpec.DoubleValue ringOfLifeMaxDamage;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("scaling");
@@ -163,8 +163,8 @@ public class LHConfig {
 				bottleOfCurseLevel = builder.comment("Number of level to add when using bottle of curse")
 						.defineInRange("bottleOfCurseLevel", 50, 1, 1000);
 
-				medalOfLifeMaxDamage = builder.comment("Max percentage of max health a damage can hurt wearer of Medal of Life")
-						.defineInRange("medalOfLifeMaxDamage", 0.8, 0, 1);
+				ringOfLifeMaxDamage = builder.comment("Max percentage of max health a damage can hurt wearer of Ring of Life")
+						.defineInRange("ringOfLifeMaxDamage", 0.9, 0, 1);
 
 				{
 					envyExtraLevel = builder.comment("Number of level to add when using Curse of Envy")
@@ -186,8 +186,8 @@ public class LHConfig {
 							.defineInRange("wrathDamageBonus", 0.05, 0, 1);
 					prideDamageBonus = builder.comment("Damage bonus per level when using Curse of Pride")
 							.defineInRange("prideDamageBonus", 0.02, 0, 1);
-					prideProtectionBonus = builder.comment("Damage reduction per level when using Curse of Pride")
-							.defineInRange("prideProtectionBonus", 0.02, 0, 1);
+					prideHealthBonus = builder.comment("Health boost per level in percentage when using Curse of Pride")
+							.defineInRange("prideHealthBonus", 0.02, 0, 1);
 					prideTraitFactor = builder.comment("Trait cost multiplier when using Curse of Pride")
 							.defineInRange("prideTraitFactor", 0.5, 0.01, 1);
 				}

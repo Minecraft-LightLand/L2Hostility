@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.events;
 
-import dev.xkmc.l2complements.content.effect.skill.SkillEffect;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
+import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
@@ -11,7 +11,6 @@ import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.mixin.ForgeInternalHandlerAccessor;
-import dev.xkmc.l2library.base.effects.EffectUtil;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,6 +32,15 @@ public class MobEvents {
 
 	@SubscribeEvent
 	public static void onMobAttack(LivingAttackEvent event) {
+		boolean bypassInvul = event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY);
+		boolean bypassMagic = event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS);
+		boolean magic = event.getSource().is(L2DamageTypes.MAGIC);
+		if (magic && !bypassInvul && !bypassMagic) {
+			if (CurioCompat.hasItem(event.getEntity(), LHItems.RING_DIVINITY.get())) {
+				event.setCanceled(true);
+				return;
+			}
+		}
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			MobTraitCap.HOLDER.get(event.getEntity()).traits
 					.forEach((k, v) -> k.onAttackedByOthers(v, event.getEntity(), event));
@@ -49,7 +57,7 @@ public class MobEvents {
 				!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
 				CurioCompat.hasItem(player, LHItems.CURSE_PRIDE.get())) {
 			int level = PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
-			double rate = LHConfig.COMMON.prideProtectionBonus.get();
+			double rate = LHConfig.COMMON.prideHealthBonus.get();
 			double factor = 1 + rate * level;
 			event.setAmount((float) (event.getAmount() / factor));
 		}
@@ -57,11 +65,15 @@ public class MobEvents {
 
 	@SubscribeEvent
 	public static void onDamage(LivingDamageEvent event) {
-		if (CurioCompat.hasItem(event.getEntity(), LHItems.MEDAL_LIFE.get())) {
-			float damage = event.getAmount();
-			float maxHealth = event.getEntity().getMaxHealth();
-			damage = Math.min(damage, (float) (maxHealth * LHConfig.COMMON.medalOfLifeMaxDamage.get()));
-			event.setAmount(damage);
+		boolean bypassInvul = event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY);
+		boolean bypassMagic = event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS);
+		if (!bypassInvul && !bypassMagic) {
+			if (CurioCompat.hasItem(event.getEntity(), LHItems.RING_LIFE.get())) {
+				float damage = event.getAmount();
+				float maxHealth = event.getEntity().getMaxHealth();
+				damage = Math.min(damage, (float) (maxHealth * LHConfig.COMMON.ringOfLifeMaxDamage.get()));
+				event.setAmount(damage);
+			}
 		}
 	}
 
