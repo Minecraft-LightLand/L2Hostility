@@ -5,9 +5,6 @@ import dev.xkmc.l2hostility.content.item.consumable.BottleOfCurse;
 import dev.xkmc.l2hostility.content.item.consumable.BottleOfSanity;
 import dev.xkmc.l2hostility.content.item.consumable.HostilityOrb;
 import dev.xkmc.l2hostility.content.item.curio.*;
-import dev.xkmc.l2hostility.content.item.curio.RingOfDivinity;
-import dev.xkmc.l2hostility.content.item.curio.RingOfLife;
-import dev.xkmc.l2hostility.content.item.curio.RingOfOcean;
 import dev.xkmc.l2hostility.content.item.tool.DetectorGlasses;
 import dev.xkmc.l2hostility.content.item.wand.AiConfigWand;
 import dev.xkmc.l2hostility.content.item.wand.EquipmentWand;
@@ -19,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 
 @SuppressWarnings({"unsafe"})
@@ -31,6 +29,7 @@ public class LHItems {
 
 	public static final ItemEntry<Item> DETECTOR;
 	public static final ItemEntry<DetectorGlasses> DETECTOR_GLASSES;
+	public static final ItemEntry<Item> CHAOS_INGOT;
 	public static final ItemEntry<CurseOfEnvy> CURSE_ENVY;
 	public static final ItemEntry<CurseOfGluttony> CURSE_GLUTTONY;
 	public static final ItemEntry<CurseOfGreed> CURSE_GREED;
@@ -57,9 +56,11 @@ public class LHItems {
 			HOSTILITY_ORB = L2Hostility.REGISTRATE.item(
 					"hostility_orb", p -> new HostilityOrb(p.stacksTo(16).rarity(Rarity.EPIC))).register();
 			BOTTLE_CURSE = L2Hostility.REGISTRATE.item(
-					"bottle_of_curse", p -> new BottleOfCurse(p.stacksTo(16).rarity(Rarity.RARE))).register();
+					"bottle_of_curse", p -> new BottleOfCurse(p.stacksTo(16).rarity(Rarity.RARE)
+							.craftRemainder(Items.GLASS_BOTTLE))).register();
 			BOTTLE_SANITY = L2Hostility.REGISTRATE.item(
-					"bottle_of_sanity", p -> new BottleOfSanity(p.stacksTo(16).rarity(Rarity.RARE))).register();
+					"bottle_of_sanity", p -> new BottleOfSanity(p.stacksTo(16).rarity(Rarity.RARE)
+							.craftRemainder(Items.GLASS_BOTTLE))).register();
 		}
 
 		// equipments
@@ -70,6 +71,8 @@ public class LHItems {
 							"detector_glasses", p -> new DetectorGlasses(p.stacksTo(1)))
 					.tag(ItemTags.create(new ResourceLocation("curios", "head")))
 					.register();
+
+			CHAOS_INGOT = L2Hostility.REGISTRATE.item("chaos_ingot", Item::new).register();
 
 			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
 			TagKey<Item> ring = ItemTags.create(new ResourceLocation("curios", "ring"));

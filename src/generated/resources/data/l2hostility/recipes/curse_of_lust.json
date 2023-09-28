@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "type": "l2library:enchantment",
+      "enchantment": "minecraft:looting",
+      "min_level": 1
+    },
+    "2": {
+      "type": "l2library:enchantment",
+      "enchantment": "minecraft:binding_curse",
+      "min_level": 1
+    },
+    "B": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "C": {
+      "item": "l2hostility:regenerate"
+    },
+    "D": {
+      "item": "l2hostility:invisible"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "B1B",
+    "CID",
+    "B2B"
+  ],
+  "result": {
+    "item": "l2hostility:curse_of_lust"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "l2hostility:fiery"
+    },
+    "2": {
+      "item": "l2hostility:soul_burner"
+    },
+    "B": {
+      "item": "l2complements:sculkium_ingot"
+    },
+    "C": {
+      "item": "l2hostility:teleport"
+    },
+    "D": {
+      "item": "l2hostility:reflect"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "B1B",
+    "CID",
+    "B2B"
+  ],
+  "result": {
+    "item": "l2hostility:curse_of_wrath"
+  },
+  "show_notification": true
+}

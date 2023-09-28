@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2complements:guardian_eye"
+    },
+    "B": {
+      "item": "l2complements:poseidite_ingot"
+    },
+    "D": {
+      "item": "l2hostility:nausea"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "DID",
+    "BAB"
+  ],
+  "result": {
+    "item": "l2hostility:ring_of_ocean"
+  },
+  "show_notification": true
+}

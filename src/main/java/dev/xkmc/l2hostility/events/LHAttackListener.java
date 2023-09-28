@@ -5,12 +5,13 @@ import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.AttackListener;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
+import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public class LHAttackListener implements AttackListener {
@@ -29,10 +30,17 @@ public class LHAttackListener implements AttackListener {
 			}
 			cap.traits.forEach((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache));
 		}
-		if (mob instanceof Player player) {
-			int level = PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
+		if (mob != null && CurioCompat.hasItem(mob, LHItems.CURSE_PRIDE.get())) {
+			int level = DifficultyLevel.ofAny(mob);
 			double rate = LHConfig.COMMON.prideDamageBonus.get();
 			cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
+		}
+		if (mob != null && CurioCompat.hasItem(mob, LHItems.CURSE_WRATH.get())) {
+			int level = DifficultyLevel.ofAny(cache.getAttackTarget()) - DifficultyLevel.ofAny(mob);
+			if (level > 0) {
+				double rate = LHConfig.COMMON.wrathDamageBonus.get();
+				cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
+			}
 		}
 	}
 

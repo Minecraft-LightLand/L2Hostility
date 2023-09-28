@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "type": "l2library:enchantment",
+      "enchantment": "minecraft:looting",
+      "min_level": 1
+    },
+    "2": {
+      "type": "l2library:enchantment",
+      "enchantment": "minecraft:vanishing_curse",
+      "min_level": 1
+    },
+    "B": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "C": {
+      "item": "l2hostility:cursed"
+    },
+    "D": {
+      "item": "l2hostility:wither"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "B1B",
+    "CID",
+    "B2B"
+  ],
+  "result": {
+    "item": "l2hostility:curse_of_gluttony"
+  },
+  "show_notification": true
+}

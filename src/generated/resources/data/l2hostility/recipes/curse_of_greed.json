@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "type": "l2library:enchantment",
+      "enchantment": "minecraft:looting",
+      "min_level": 1
+    },
+    "2": {
+      "type": "l2library:enchantment",
+      "enchantment": "minecraft:fortune",
+      "min_level": 1
+    },
+    "B": {
+      "item": "minecraft:gold_ingot"
+    },
+    "C": {
+      "item": "l2hostility:speedy"
+    },
+    "D": {
+      "item": "l2hostility:tank"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "B1B",
+    "CID",
+    "B2B"
+  ],
+  "result": {
+    "item": "l2hostility:curse_of_greed"
+  },
+  "show_notification": true
+}
