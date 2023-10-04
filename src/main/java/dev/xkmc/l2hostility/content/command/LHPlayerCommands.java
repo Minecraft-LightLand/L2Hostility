@@ -20,7 +20,6 @@ public class LHPlayerCommands extends HostilityCommands {
 
 	protected static LiteralArgumentBuilder<CommandSourceStack> build() {
 		return literal("player")
-				.requires(e -> e.hasPermission(2))
 				.then(argument("player", EntityArgument.players())
 						.then(difficulty())
 						.then(trait())
@@ -32,10 +31,12 @@ public class LHPlayerCommands extends HostilityCommands {
 		return literal("difficulty")
 				.then(literal("base")
 						.then(literal("set")
+								.requires(e -> e.hasPermission(2))
 								.then(argument("level", IntegerArgumentType.integer(0))
 										.executes(playerLevel((player, level) ->
 												player.getLevelEditor().setBase(level)))))
 						.then(literal("add")
+								.requires(e -> e.hasPermission(2))
 								.then(argument("level", IntegerArgumentType.integer())
 										.executes(playerLevel((player, level) ->
 												player.getLevelEditor().addBase(level)))))
@@ -43,10 +44,12 @@ public class LHPlayerCommands extends HostilityCommands {
 								LangData.COMMAND_PLAYER_GET_BASE.get(player.player.getDisplayName(), player.getLevelEditor().getBase())))))
 				.then(literal("total")
 						.then(literal("set")
+								.requires(e -> e.hasPermission(2))
 								.then(argument("level", IntegerArgumentType.integer(0))
 										.executes(playerLevel((player, level) ->
 												player.getLevelEditor().setTotal(level)))))
 						.then(literal("add")
+								.requires(e -> e.hasPermission(2))
 								.then(argument("level", IntegerArgumentType.integer())
 										.executes(playerLevel((player, level) ->
 												player.getLevelEditor().addTotal(level)))))
@@ -57,6 +60,7 @@ public class LHPlayerCommands extends HostilityCommands {
 	private static LiteralArgumentBuilder<CommandSourceStack> trait() {
 		return literal("traitCap")
 				.then(literal("set")
+						.requires(e -> e.hasPermission(2))
 						.then(argument("level", IntegerArgumentType.integer(0, TraitManager.getMaxLevel()))
 								.executes(playerLevel((player, level) -> {
 									player.maxRankKilled = level;
@@ -68,11 +72,13 @@ public class LHPlayerCommands extends HostilityCommands {
 
 	private static LiteralArgumentBuilder<CommandSourceStack> dim() {
 		return literal("dimensions")
-				.then(literal("clear").executes(playerRun(player -> {
-					boolean ans = !player.dimensions.isEmpty();
-					player.dimensions.clear();
-					return ans;
-				})))
+				.then(literal("clear")
+						.requires(e -> e.hasPermission(2))
+						.executes(playerRun(player -> {
+							boolean ans = !player.dimensions.isEmpty();
+							player.dimensions.clear();
+							return ans;
+						})))
 				.then(literal("get").executes(playerGet(player ->
 						LangData.COMMAND_PLAYER_GET_DIM.get(player.player.getDisplayName(), player.dimensions.size()))));
 	}

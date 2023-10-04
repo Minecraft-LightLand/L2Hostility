@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "l2hostility:poison"
+    },
+    "2": {
+      "item": "l2hostility:wither"
+    },
+    "3": {
+      "item": "l2hostility:slowness"
+    },
+    "4": {
+      "item": "l2hostility:weakness"
+    },
+    "5": {
+      "item": "l2hostility:levitation"
+    },
+    "6": {
+      "item": "l2hostility:freezing"
+    },
+    "7": {
+      "item": "l2hostility:cursed"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "123",
+    "7I4",
+    "S65"
+  ],
+  "result": {
+    "item": "l2hostility:witch_wand"
+  },
+  "show_notification": true
+}

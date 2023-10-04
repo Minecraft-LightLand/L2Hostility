@@ -13,6 +13,7 @@
     },
     {
       "condition": "l2hostility:mob_level",
+      "maxLevel": 0,
       "minLevel": 50
     }
   ],

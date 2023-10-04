@@ -1,5 +1,8 @@
-2.4.7-pre4
-- Add 3 rings
+2.4.7-pre5
+- Add 4 rings
+- add 2 hand curio
+- add witch wand
+- no longer add level to name
 - Make mobs drop more exp
 
 2.4.7-pre3

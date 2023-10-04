@@ -39,7 +39,10 @@ public enum LangData {
 	ITEM_RING_OCEAN("item.equipment.ring_of_ocean", "You will always be wet", 0),
 	ITEM_RING_LIFE("item.equipment.ring_of_life", "You will not lose more than %s%% of your max health at once", 1),
 	ITEM_RING_DIVINITY("item.equipment.ring_of_divinity", "Immune to magic damage. Gets permanent Cleanse effect", 0),
-
+	ITEM_RING_REFLECTION("item.equipment.ring_of_reflection", "When a mob trait tries to apply a negative effect to you, apply it to surrounding enemies that target you instead.", 0),
+	ITEM_FLAME_THORN("item.equipment.flame_thorn", "When you damage a mob, inflict Soul Flame with level equals to total number of effects that mob has, for %ss", 1),
+	ITEM_IMAGINE_BREAKER("item.equipment.imagine_breaker", "All your melee damage bypass magical protection.", 0),
+	ITEM_WITCH_WAND("item.equipment.witch_wand", "throw random splash potions on right click. Types selected from random potion traits.", 0),
 
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),

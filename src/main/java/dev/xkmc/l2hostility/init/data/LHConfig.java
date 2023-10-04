@@ -10,17 +10,17 @@ public class LHConfig {
 
 	public static class Client {
 
-		public final ForgeConfigSpec.BooleanValue showAsNamePlate;
-		public final ForgeConfigSpec.BooleanValue showLevelAsNamePlate;
+		public final ForgeConfigSpec.BooleanValue showTraitOverHead;
+		public final ForgeConfigSpec.BooleanValue showLevelOverHead;
 		public final ForgeConfigSpec.BooleanValue showOnlyWhenHovered;
 		public final ForgeConfigSpec.IntValue glowingRangeHidden;
 		public final ForgeConfigSpec.IntValue glowingRangeNear;
 
 		Client(ForgeConfigSpec.Builder builder) {
-			showAsNamePlate = builder.comment("Render Traits in name plate form")
-					.define("showAsNamePlate", true);
-			showLevelAsNamePlate = builder.comment("Render mob level in name plate form")
-					.define("showLevelAsNamePlate", false);
+			showTraitOverHead = builder.comment("Render Traits in name plate form")
+					.define("showTraitOverHead", true);
+			showLevelOverHead = builder.comment("Render mob level in name plate form")
+					.define("showLevelOverHead", true);
 			showOnlyWhenHovered = builder.comment("Show nameplate style trait and name only when hovered")
 					.define("showOnlyWhenHovered", false);
 			glowingRangeHidden = builder.comment("Detector Glasses glowing range for hidden mobs")
@@ -43,7 +43,6 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue enchantmentFactor;
 		public final ForgeConfigSpec.IntValue dimensionFactor;
 		public final ForgeConfigSpec.DoubleValue distanceFactor;
-		public final ForgeConfigSpec.BooleanValue addLevelToName;
 		public final ForgeConfigSpec.DoubleValue globalApplyChance;
 		public final ForgeConfigSpec.DoubleValue globalTraitChance;
 		public final ForgeConfigSpec.DoubleValue globalTraitSuppression;
@@ -96,6 +95,9 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue erosionFactor;
 
 		public final ForgeConfigSpec.DoubleValue ringOfLifeMaxDamage;
+		public final ForgeConfigSpec.IntValue flameThornTime;
+		public final ForgeConfigSpec.IntValue ringOfReflectionRadius;
+		public final ForgeConfigSpec.IntValue witchWandFactor;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("scaling");
@@ -166,6 +168,16 @@ public class LHConfig {
 				ringOfLifeMaxDamage = builder.comment("Max percentage of max health a damage can hurt wearer of Ring of Life")
 						.defineInRange("ringOfLifeMaxDamage", 0.9, 0, 1);
 
+				flameThornTime = builder.comment("Time in ticks of Soul Flame to inflict")
+						.defineInRange("flameThornTime", 100, 1, 10000);
+
+				ringOfReflectionRadius = builder.comment("Radius in blicks for Ring of Reflection to work")
+						.defineInRange("ringOfReflectionRadius", 16, 1, 256);
+
+				witchWandFactor = builder.comment("Factor of effect duration for witch wand, to make up for splash decay")
+						.defineInRange("witchWandFactor", 4, 1, 100);
+
+				// curse
 				{
 					envyExtraLevel = builder.comment("Number of level to add when using Curse of Envy")
 							.defineInRange("envyExtraLevel", 50, 0, 1000);
@@ -192,11 +204,6 @@ public class LHConfig {
 							.defineInRange("prideTraitFactor", 0.5, 0.01, 1);
 				}
 			}
-			builder.pop();
-
-			builder.push("misc");
-			addLevelToName = builder.comment("Add mob level to name")
-					.define("addLevelToName", true);
 			builder.pop();
 
 			builder.push("traits");

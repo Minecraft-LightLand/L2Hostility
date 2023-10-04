@@ -19,7 +19,7 @@ public class SlotGen extends RecordDataProvider {
 	public void add(BiConsumer<String, Record> map) {
 		map.accept("curios/curios/entities/l2hostility_entity", new CurioEntityBuilder(
 				new ArrayList<>(List.of(new ResourceLocation("player"))),
-				new ArrayList<>(List.of("head", "charm", "ring"))
+				new ArrayList<>(List.of("head", "charm", "ring", "hands"))
 		));
 	}
 }

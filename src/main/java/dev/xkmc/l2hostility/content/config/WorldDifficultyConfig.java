@@ -7,7 +7,6 @@ import dev.xkmc.l2library.serial.config.ConfigCollect;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.dimension.DimensionType;
 

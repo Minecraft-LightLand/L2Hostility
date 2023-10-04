@@ -4,13 +4,16 @@ import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class TagGen {
+
+	public static final TagKey<Item> CHAOS_CURIO = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "chaos_equipment"));
 
 	public static final TagKey<EntityType<?>> BLACKLIST = createEntityTag("blacklist");
 	public static final TagKey<EntityType<?>> NO_SCALING = createEntityTag("no_scaling");

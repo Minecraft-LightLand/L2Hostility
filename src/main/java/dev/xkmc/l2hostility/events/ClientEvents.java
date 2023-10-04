@@ -41,8 +41,8 @@ public class ClientEvents {
 				return;
 			}
 			var list = MobTraitCap.HOLDER.get(le).getTitle(
-					LHConfig.CLIENT.showLevelAsNamePlate.get(),
-					LHConfig.CLIENT.showAsNamePlate.get()
+					LHConfig.CLIENT.showLevelOverHead.get(),
+					LHConfig.CLIENT.showTraitOverHead.get()
 			);
 			int offset = list.size();
 			Font.DisplayMode mode = player.hasLineOfSight(event.getEntity()) ?

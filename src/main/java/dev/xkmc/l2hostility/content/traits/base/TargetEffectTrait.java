@@ -1,7 +1,10 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -9,13 +12,14 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 
 import java.util.List;
 import java.util.function.Function;
 
 public class TargetEffectTrait extends MobTrait {
 
-	private final Function<Integer, MobEffectInstance> func;
+	public final Function<Integer, MobEffectInstance> func;
 
 	public TargetEffectTrait(Function<Integer, MobEffectInstance> func) {
 		super(() -> func.apply(1).getEffect().getColor());
@@ -25,7 +29,17 @@ public class TargetEffectTrait extends MobTrait {
 	@Override
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
 		if (cache.getLivingHurtEvent().getAmount() > 0) {
-			EffectUtil.addEffect(cache.getAttackTarget(), func.apply(level), EffectUtil.AddReason.NONE, attacker);
+			LivingEntity target = cache.getAttackTarget();
+			if (CurioCompat.hasItem(target, LHItems.RING_REFLECTION.get())) {
+				int radius = LHConfig.COMMON.ringOfReflectionRadius.get();
+				for (var e : target.level().getEntities(target, target.getBoundingBox().inflate(radius))) {
+					if (!(e instanceof Mob mob)) continue;
+					if (mob.distanceTo(target) > radius) continue;
+					EffectUtil.addEffect(mob, func.apply(level), EffectUtil.AddReason.NONE, attacker);
+				}
+			} else {
+				EffectUtil.addEffect(target, func.apply(level), EffectUtil.AddReason.NONE, attacker);
+			}
 		}
 	}
 

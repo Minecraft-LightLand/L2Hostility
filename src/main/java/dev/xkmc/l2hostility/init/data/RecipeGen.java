@@ -177,9 +177,41 @@ public class RecipeGen {
 					.define('D', LHTraits.DISPELL.get().asItem())
 					.save(pvd);
 
-		}
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.RING_REFLECTION.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("1A2").pattern("DID").pattern("3A4")
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('A', LCItems.FORCE_FIELD.get())
+					.define('1', LHTraits.POISON.get().asItem())
+					.define('2', LHTraits.SLOWNESS.get().asItem())
+					.define('3', LHTraits.CONFUSION.get().asItem())
+					.define('4', LHTraits.BLIND.get().asItem())
+					.define('D', LHTraits.REFLECT.get().asItem())
+					.save(pvd);
 
-		// slowness, poison, levitation, blindness, freezing
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.FLAMING_THORN.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("BAB").pattern("DID").pattern("BAB")
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('A', LCItems.SOUL_FLAME.get())
+					.define('B', LCItems.WARDEN_BONE_SHARD.get())
+					.define('D', LHTraits.SOUL_BURNER.get().asItem())
+					.save(pvd);
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.WITCH_WAND.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("123").pattern("7I4").pattern("S65")
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('S', Items.STICK)
+					.define('1', LHTraits.POISON.get().asItem())
+					.define('2', LHTraits.WITHER.get().asItem())
+					.define('3', LHTraits.SLOWNESS.get().asItem())
+					.define('4', LHTraits.WEAKNESS.get().asItem())
+					.define('5', LHTraits.LEVITATION.get().asItem())
+					.define('6', LHTraits.FREEZING.get().asItem())
+					.define('7', LHTraits.CURSED.get().asItem())
+					.save(pvd);
+
+			recycle(pvd, TagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
+
+		}
 
 	}
 
@@ -236,6 +268,11 @@ public class RecipeGen {
 	public static void blasting(RegistrateRecipeProvider pvd, Item source, Item result, float experience) {
 		unlock(pvd, SimpleCookingRecipeBuilder.blasting(Ingredient.of(source), RecipeCategory.MISC, result, experience, 200)::unlockedBy, source)
 				.save(pvd, getID(source));
+	}
+
+	public static void recycle(RegistrateRecipeProvider pvd, TagKey<Item> source, Item result, float experience) {
+		unlock(pvd, SimpleCookingRecipeBuilder.blasting(Ingredient.of(source), RecipeCategory.MISC, result, experience, 200)::unlockedBy, result)
+				.save(pvd, getID(result, "_recycle"));
 	}
 
 }

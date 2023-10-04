@@ -99,6 +99,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.CURSED.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Objects.requireNonNull(ForgeRegistries.POTIONS.getValue(new ResourceLocation(L2Complements.MODID, "curse")))), 1, 0, 0.2);
 		add(LHTraits.CURSED.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.05);
 
+		add(LHTraits.DISPELL.get(), new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);
 
 		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getNugget(), 6), 0, 0.1,
 				LootTableTemplate.byPlayer().build(),
@@ -115,6 +116,8 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 				new TraitLootCondition(LHTraits.SPEEDY.get(), 3, 5),
 				new TraitLootCondition(LHTraits.TANK.get(), 3, 5)
 		);
+
+
 	}
 
 	private void add(MobTrait trait, ItemStack stack, int start, double chance, double bonus, int min) {

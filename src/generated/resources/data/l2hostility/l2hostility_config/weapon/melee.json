@@ -1,6 +1,15 @@
 {
   "melee_weapons": [
     {
+      "level": 0,
+      "stack": [
+        {
+          "item": "minecraft:air"
+        }
+      ],
+      "weight": 200
+    },
+    {
       "level": 30,
       "stack": [
         {

@@ -5,8 +5,11 @@ import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.AttackListener;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
+import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
+import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.item.curio.FlamingThorn;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
@@ -42,13 +45,22 @@ public class LHAttackListener implements AttackListener {
 				cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
 			}
 		}
+		if (mob != null && CurioCompat.hasItem(mob, LHItems.FLAMING_THORN.get())) {
+			FlamingThorn.process(mob, cache.getAttackTarget());
+		}
 	}
 
 	@Override
 	public void onCreateSource(CreateSourceEvent event) {
-		if (MobTraitCap.HOLDER.isProper(event.getAttacker())) {
-			MobTraitCap.HOLDER.get(event.getAttacker()).traits
+		LivingEntity mob = event.getAttacker();
+		if (MobTraitCap.HOLDER.isProper(mob)) {
+			MobTraitCap.HOLDER.get(mob).traits
 					.forEach((k, v) -> k.onCreateSource(v, event.getAttacker(), event));
+		}
+		if (CurioCompat.hasItem(mob, LHItems.IMAGINE_BREAKER.get())) {
+			if (event.getResult() == L2DamageTypes.MOB_ATTACK || event.getResult() == L2DamageTypes.PLAYER_ATTACK) {
+				event.enable(DefaultDamageState.BYPASS_MAGIC);
+			}
 		}
 	}
 

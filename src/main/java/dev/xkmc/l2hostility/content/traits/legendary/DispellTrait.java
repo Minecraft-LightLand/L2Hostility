@@ -25,7 +25,8 @@ public class DispellTrait extends LegendaryTrait {
 
 	@Override
 	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {
-		event.enable(DefaultDamageState.BYPASS_MAGIC);
+		if (event.getResult() == L2DamageTypes.MOB_ATTACK)
+			event.enable(DefaultDamageState.BYPASS_MAGIC);
 	}
 
 	@Override

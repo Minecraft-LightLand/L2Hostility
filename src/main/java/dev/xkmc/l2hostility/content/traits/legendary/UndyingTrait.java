@@ -43,7 +43,7 @@ public class UndyingTrait extends LegendaryTrait {
 	}
 
 	public boolean validTarget(LivingEntity le) {
-		if (le instanceof EnderDragon){
+		if (le instanceof EnderDragon) {
 			return false;
 		}
 		return le.canBeAffected(new MobEffectInstance(LCEffects.CURSE.get(), 100));

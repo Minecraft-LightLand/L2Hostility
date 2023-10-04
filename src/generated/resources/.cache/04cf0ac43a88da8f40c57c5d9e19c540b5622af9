@@ -1,4 +1,4 @@
-// 1.20.1	2023-09-19T14:17:45.092083	L2Hostility Config
+// 1.20.1	2023-10-03T15:56:44.760283	L2Hostility Config
 cc60113e53b38f8ea4dbd7b841f48d9676e7d21e data/l2hostility/l2damagetracker_config/armor/equipments.json
 0d0dd29a0d3d593d0f01c9f47dc364309fe4f58d data/l2hostility/l2hostility_config/difficulty/end.json
 a7eea3f1b7bbacf4fe14aaf21abc23af93abb723 data/l2hostility/l2hostility_config/difficulty/nether.json
@@ -27,5 +27,5 @@ ec32ab9851bcf549f9d66de79348da06c471fd10 data/l2hostility/l2hostility_config/tra
 e28cf86b3e8f6fe1189a601061eaef1f49a375e0 data/l2hostility/l2hostility_config/trait/undying.json
 c765a1912d569b4c5a1c75860a55e1c0dbbc60e1 data/l2hostility/l2hostility_config/trait/weakness.json
 38f1969463d3d9adbc84965876e39445a0438c89 data/l2hostility/l2hostility_config/trait/wither.json
-1f523c8024b86d5adee492e40c5d6e8d442c3395 data/l2hostility/l2hostility_config/weapon/melee.json
+375422179ccc94d819b862ac6c7f8824aeca8ce4 data/l2hostility/l2hostility_config/weapon/melee.json
 f66e2b9cc259e0a96a0be32c79b84cf451327363 data/twilightforest/l2hostility_config/entity/bosses.json

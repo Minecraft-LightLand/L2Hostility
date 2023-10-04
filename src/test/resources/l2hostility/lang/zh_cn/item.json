@@ -18,7 +18,12 @@
 	"curse_of_wrath": "暴怒诅咒",
 	"ring_of_ocean": "深海加护之戒",
 	"ring_of_life": "屹立不倒之戒",
-	"ring_of_divinity": "圣光守护之戒"
+	"ring_of_divinity": "圣光守护之戒",
+	"chaos_ingot": "混沌锭",
+	"flaming_thorn": "魔焰荆棘",
+	"imagine_breaker": "幻想杀手",
+	"ring_of_reflection": "诅咒扭曲之戒",
+	"witch_wand": "混乱魔药法杖"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"

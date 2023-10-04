@@ -131,9 +131,6 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				TraitManager.postFill(this, mob);
 				traits.forEach((k, v) -> k.postInit(mob, v));
 				mob.setHealth(mob.getMaxHealth());
-				if (lv > 0 && LHConfig.COMMON.addLevelToName.get()) {
-					mob.setCustomName(mob.getName().copy().append(" Lv." + lv));
-				}
 				syncToClient(mob);
 			}
 		}
