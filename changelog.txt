@@ -1,11 +1,11 @@
-2.4.7-pre5
+2.4.8
 - Add 4 rings
 - add 2 hand curio
 - add witch wand
 - no longer add level to name
 - Make mobs drop more exp
 
-2.4.7-pre3
+2.4.7
 - Add bottle of curse and bottle of sanity
 - Add curse of 7 sins (7 items)
 - Add patchouli for items

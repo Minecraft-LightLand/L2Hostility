@@ -79,7 +79,7 @@ public class LHItems {
 			TagKey<Item> chaos = TagGen.CHAOS_CURIO;
 
 			WITCH_WAND = L2Hostility.REGISTRATE.item("witch_wand", p -> new WitchWand(p
-							.durability(300).rarity(Rarity.EPIC).stacksTo(1).fireResistant()))
+							.durability(300).rarity(Rarity.EPIC).fireResistant()))
 					.model((ctx, pvd) -> pvd.handheld(ctx)).tag(chaos).register();
 
 
