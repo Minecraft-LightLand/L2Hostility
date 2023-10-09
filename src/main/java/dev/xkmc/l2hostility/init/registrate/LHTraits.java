@@ -9,10 +9,7 @@ import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
 import dev.xkmc.l2hostility.content.traits.base.TargetEffectTrait;
 import dev.xkmc.l2hostility.content.traits.common.*;
 import dev.xkmc.l2hostility.content.traits.goals.EnderTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.DementorTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.DispellTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.RepellingTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.UndyingTrait;
+import dev.xkmc.l2hostility.content.traits.legendary.*;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.base.L2Registrate;
@@ -42,6 +39,8 @@ public class LHTraits {
 	public static final RegistryEntry<UndyingTrait> UNDYING;
 	public static final RegistryEntry<RepellingTrait> REPELLING;
 	public static final RegistryEntry<EnderTrait> ENDER;
+	public static final RegistryEntry<CorrosionTrait> CORROSION;
+	public static final RegistryEntry<ErosionTrait> EROSION;
 
 	static {
 		// no desc
@@ -99,7 +98,7 @@ public class LHTraits {
 					.lang("Dementor").register();
 			DISPELL = L2Hostility.REGISTRATE.regTrait("dispell", () -> new DispellTrait(ChatFormatting.DARK_PURPLE),
 							() -> new TraitConfig(100, 50, 3, 150))
-					.desc("Immune to magic damage. Damage bypass magical protections. Randomly picks an enchanted equipment and disable enchantments on them for %s seconds.")
+					.desc("Immune to magic damage. Damage bypass magical protections. Randomly picks %s enchanted equipment and disable enchantments on them for %s seconds.")
 					.lang("Dispell").register();
 			UNDYING = L2Hostility.REGISTRATE.regTrait("undying", () -> new UndyingTrait(ChatFormatting.DARK_BLUE),
 							() -> new TraitConfig(150, 100, 1, 150))
@@ -118,6 +117,18 @@ public class LHTraits {
 							))
 					.desc("Mob will push away entities hostile to it within %s blocks, and immune to projectiles.")
 					.lang("Repelling").register();
+
+
+			CORROSION = L2Hostility.REGISTRATE.regTrait("corrosion", () -> new CorrosionTrait(ChatFormatting.DARK_RED),
+							() -> new TraitConfig(50, 50, 3, 200))
+					.desc("When hit target, randomly picks %s equipments and increase their durability loss by %s. When there aren't enough equipments to corrode, increase damage by %s per piece")
+					.lang("Corrosion").register();
+
+			EROSION = L2Hostility.REGISTRATE.regTrait("erosion", () -> new ErosionTrait(ChatFormatting.DARK_BLUE),
+							() -> new TraitConfig(50, 50, 3, 200))
+					.desc("When hit target, randomly picks %s equipments and reduce their durability by %s. When there aren't enough equipments to corrode, increase damage by %s per piece")
+					.lang("Erosion").register();
+
 		}
 
 		// effects

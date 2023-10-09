@@ -34,7 +34,7 @@
 	"dementor": "摄魂",
 	"dementor.desc": "免疫物理伤害，伤害穿透护甲",
 	"dispell": "破魔",
-	"dispell.desc": "免疫魔法伤害。伤害穿透魔法保护。攻击时随机选中一个附魔的装备并将其附魔封印%s秒",
+	"dispell.desc": "免疫魔法伤害。伤害穿透魔法保护。攻击时随机选中%s个附魔的装备并将其附魔封印%s秒",
 	"invisible": "隐身",
 	"protection": "保护",
 	"reflect": "反射",
@@ -60,6 +60,10 @@
 	"teleport": "传送",
 	"teleport.desc": "怪物会通过传送躲避伤害和追踪目标",
 	"undying": "不死",
-	"undying.desc": "怪物死亡时满血复活"
+	"undying.desc": "怪物死亡时满血复活",
+	"trait.l2hostility.corrosion": "腐蚀",
+	"trait.l2hostility.corrosion.desc": "击中目标时，随机选中%s个装备，消耗等同于其损失的耐久的%s。如果装备不够，每少一件增加%s伤害。",
+	"trait.l2hostility.erosion": "风蚀",
+	"trait.l2hostility.erosion.desc": "击中目标时，随机选中%s个装备，消耗当前耐久的%s。如果装备不够，每少一件增加%s伤害。"
   }
 }

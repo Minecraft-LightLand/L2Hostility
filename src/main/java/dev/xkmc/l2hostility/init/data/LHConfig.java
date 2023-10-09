@@ -93,6 +93,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue repellRange;
 		public final ForgeConfigSpec.DoubleValue corrosionFactor;
 		public final ForgeConfigSpec.DoubleValue erosionFactor;
+		public final ForgeConfigSpec.DoubleValue corrosionDamage;
+		public final ForgeConfigSpec.DoubleValue erosionDamage;
 
 		public final ForgeConfigSpec.DoubleValue ringOfLifeMaxDamage;
 		public final ForgeConfigSpec.IntValue flameThornTime;
@@ -255,8 +257,12 @@ public class LHConfig {
 
 				corrosionFactor = builder.comment("Fraction of remaining durability to corrode, per trait rank")
 						.defineInRange("corrosionFactor", 0.1, 0, 1);
+				corrosionDamage = builder.comment("Damage bonus when nothing to corrode")
+						.defineInRange("corrosionDamage", 0.5, 0, 1);
 				erosionFactor = builder.comment("Fraction of lost durability to erode, per trait rank")
 						.defineInRange("erosionFactor", 0.3, 0, 1);
+				erosionDamage = builder.comment("Damage bonus when nothing to erode")
+						.defineInRange("erosionDamage", 0.5, 0, 1);
 
 			}
 			builder.pop();

@@ -1,7 +1,7 @@
-// 1.20.1	2023-10-03T19:21:50.207727	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-10-09T15:34:20.177173	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-9cdc56b3646d97c2c3856e27dfc80aaa364b56c5 assets/l2hostility/lang/en_ud.json
-291362b9363da94a1eeb2cbc2030be130dd82ad9 assets/l2hostility/lang/en_us.json
+66a07ad591e5320e85e18c5c8cb6902dcb6d312e assets/l2hostility/lang/en_ud.json
+4fecb85bc15381a5d8f25e0f8f6e2175328c6345 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -12,6 +12,7 @@ fb67e1e3e8e35bbee363f44ee5412f7371478aa6 assets/l2hostility/models/item/blindnes
 68d41070d34ebc05ec1870aed6e0e53e40d12147 assets/l2hostility/models/item/bottle_of_curse.json
 38ebdcb219de6ddebd2181e8c53d6c00711a4b1f assets/l2hostility/models/item/bottle_of_sanity.json
 e16e74a184b0503c495c91a1ccb4a10449fd94c3 assets/l2hostility/models/item/chaos_ingot.json
+8929653e2f9f77f063308ca2e61e9842035bdbab assets/l2hostility/models/item/corrosion.json
 7909e1656814009b9422ca65329ddf5bedf29177 assets/l2hostility/models/item/curse_of_envy.json
 0c0cb3d3751e09832f0065fe9d48f94149ec6933 assets/l2hostility/models/item/curse_of_gluttony.json
 c57e5a2e58572c7df99be031ba81fa38357bdda8 assets/l2hostility/models/item/curse_of_greed.json
@@ -24,6 +25,7 @@ e03c67c42220f6df8ddd1ce5d593aad8c3e4a36b assets/l2hostility/models/item/dementor
 0f51d8c6b255ece00b8e0e60f0f90a4a748106f2 assets/l2hostility/models/item/detector_glasses.json
 59cb4fa0cfbf0011729aad0443b08304fb1e72b2 assets/l2hostility/models/item/dispell.json
 31eb768e73a9e25dd120627d1792a0fc4b23a659 assets/l2hostility/models/item/equipment_wand.json
+ba10bd05afb0ca599cf53a0e912f83d76397ae5f assets/l2hostility/models/item/erosion.json
 f117d90bc61f2d6aeb5834aebc1586489852df9b assets/l2hostility/models/item/fiery.json
 486bcda4c01e8ae8b7959d490d5130004407a696 assets/l2hostility/models/item/flaming_thorn.json
 e7e55f331359b1db7239fd6e4832bd09872690b7 assets/l2hostility/models/item/freezing.json

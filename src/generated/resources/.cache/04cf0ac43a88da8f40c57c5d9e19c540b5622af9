@@ -1,4 +1,4 @@
-// 1.20.1	2023-10-03T15:56:44.760283	L2Hostility Config
+// 1.20.1	2023-10-09T15:34:20.179779	L2Hostility Config
 cc60113e53b38f8ea4dbd7b841f48d9676e7d21e data/l2hostility/l2damagetracker_config/armor/equipments.json
 0d0dd29a0d3d593d0f01c9f47dc364309fe4f58d data/l2hostility/l2hostility_config/difficulty/end.json
 a7eea3f1b7bbacf4fe14aaf21abc23af93abb723 data/l2hostility/l2hostility_config/difficulty/nether.json
@@ -6,9 +6,11 @@ a7eea3f1b7bbacf4fe14aaf21abc23af93abb723 data/l2hostility/l2hostility_config/dif
 7388dad77fdc3ae9daeecf238dc6827c81d8e9c2 data/l2hostility/l2hostility_config/entity/bosses.json
 22c3942eda6d44c8e951ea9bb0faf38337912f82 data/l2hostility/l2hostility_config/trait/adaptive.json
 c1e6c2e6bdaf71e3f4c285714bacfdc05aeb05bf data/l2hostility/l2hostility_config/trait/blindness.json
+d5da0188d07a970af6db69e5024942c53142554c data/l2hostility/l2hostility_config/trait/corrosion.json
 15d3175267bae6cae30d98989b0c8817bcbd9949 data/l2hostility/l2hostility_config/trait/cursed.json
 77efd59dcbfd399cf81971eca98507eb1c149343 data/l2hostility/l2hostility_config/trait/dementor.json
 3d825969f0106d1d4c8597551868f429c55420fc data/l2hostility/l2hostility_config/trait/dispell.json
+d5da0188d07a970af6db69e5024942c53142554c data/l2hostility/l2hostility_config/trait/erosion.json
 8f7d3d8e56325911302b3e5647062a6225c77a87 data/l2hostility/l2hostility_config/trait/fiery.json
 7c5fa9ee5ed86512efafd3a828752e0c64398673 data/l2hostility/l2hostility_config/trait/freezing.json
 6edcebaf4723d1fec18aa6501c7ac0c72be277be data/l2hostility/l2hostility_config/trait/invisible.json

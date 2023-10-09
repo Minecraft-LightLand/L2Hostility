@@ -98,6 +98,8 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.FREEZING.get(), new ItemStack(LCItems.HARD_ICE, 2), 1, 0, 0.1);
 		add(LHTraits.CURSED.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Objects.requireNonNull(ForgeRegistries.POTIONS.getValue(new ResourceLocation(L2Complements.MODID, "curse")))), 1, 0, 0.2);
 		add(LHTraits.CURSED.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.05);
+		add(LHTraits.CORROSION.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.1);
+		add(LHTraits.EROSION.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.1);
 
 		add(LHTraits.DISPELL.get(), new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);
 

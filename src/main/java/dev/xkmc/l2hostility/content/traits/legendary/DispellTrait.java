@@ -40,9 +40,12 @@ public class DispellTrait extends LegendaryTrait {
 			}
 		}
 		if (list.size() == 0) return;
-		int index = attacker.getRandom().nextInt(list.size());
 		int time = LHConfig.COMMON.dispellTime.get() * level;
-		EnchantmentDisabler.disableEnchantment(attacker.level(), list.get(index), time);
+		int count = Math.min(level, list.size());
+		for (int i = 0; i < count; i++) {
+			int index = attacker.getRandom().nextInt(list.size());
+			EnchantmentDisabler.disableEnchantment(attacker.level(), list.remove(index), time);
+		}
 	}
 
 	@Override
@@ -57,6 +60,8 @@ public class DispellTrait extends LegendaryTrait {
 	@Override
 	public void addDetail(List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
+						mapLevel(i -> Component.literal(i + "")
+								.withStyle(ChatFormatting.AQUA)),
 						mapLevel(i -> Component.literal(LHConfig.COMMON.dispellTime.get() * i / 20 + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
