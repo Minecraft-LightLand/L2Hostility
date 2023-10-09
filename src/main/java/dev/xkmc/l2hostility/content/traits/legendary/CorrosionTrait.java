@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.content.traits.legendary;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.item.traits.DurabilityEater;
+import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -13,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CorrosionTrait extends LegendaryTrait {
+public class CorrosionTrait extends MobTrait {
 
 	public CorrosionTrait(ChatFormatting format) {
 		super(format);

@@ -1,0 +1,16 @@
+{
+  "name": "风蚀",
+  "icon": "l2hostility:erosion",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:erosion",
+	  "text": "有这个词条的怪物可以大幅消耗攻击目标的装备耐久，特别是装备耐久高的时候"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "对付有这个词条的怪物时，最好确保你有恢复或者维持装备耐久的方法，例如硬化附魔。$(br2)你也可以使用生命修补+保险附魔的组合来保证装备不会轻易损坏"
+	}
+  ]
+}

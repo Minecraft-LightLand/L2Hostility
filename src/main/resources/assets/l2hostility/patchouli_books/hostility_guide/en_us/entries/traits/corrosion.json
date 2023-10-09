@@ -1,0 +1,16 @@
+{
+  "name": "Corrosion",
+  "icon": "l2hostility:corrosion",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:corrosion",
+	  "text": "Mobs with this trait can damage equipments, especially when equipments have low durability."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To deal with mobs with this trait, make sure you always have your equipments at high durability.$(br2)You can use enchantments such as Hardened or Life Mending to maintain full equipment durability easily."
+	}
+  ]
+}

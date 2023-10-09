@@ -1,0 +1,16 @@
+{
+  "name": "Erosion",
+  "icon": "l2hostility:erosion",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:erosion",
+	  "text": "Mobs with this trait can damage equipments, especially when equipments have high durability."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To deal with mobs with this trait, make sure you have ways to restore or preserve durability for your equipments, such as Hardened or Life Mending.$(br2)You can also use Life Mending with Safeguard, which saves your equipments under most circumstances."
+	}
+  ]
+}

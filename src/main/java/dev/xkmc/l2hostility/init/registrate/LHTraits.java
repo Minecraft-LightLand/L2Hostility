@@ -88,6 +88,16 @@ public class LHTraits {
 					.desc("Reflect direct physical damage as %s%% magical damage")
 					.lang("Reflect").register();
 
+			CORROSION = L2Hostility.REGISTRATE.regTrait("corrosion", () -> new CorrosionTrait(ChatFormatting.DARK_RED),
+							() -> new TraitConfig(50, 50, 3, 200))
+					.desc("When hit target, randomly picks %s equipments and increase their durability loss by %s. When there aren't enough equipments, increase damage by %s per piece")
+					.lang("Corrosion").register();
+
+			EROSION = L2Hostility.REGISTRATE.regTrait("erosion", () -> new ErosionTrait(ChatFormatting.DARK_BLUE),
+							() -> new TraitConfig(50, 50, 3, 200))
+					.desc("When hit target, randomly picks %s equipments and reduce their durability by %s. When there aren't enough equipments, increase damage by %s per piece")
+					.lang("Erosion").register();
+
 		}
 
 		//legendary
@@ -117,17 +127,6 @@ public class LHTraits {
 							))
 					.desc("Mob will push away entities hostile to it within %s blocks, and immune to projectiles.")
 					.lang("Repelling").register();
-
-
-			CORROSION = L2Hostility.REGISTRATE.regTrait("corrosion", () -> new CorrosionTrait(ChatFormatting.DARK_RED),
-							() -> new TraitConfig(50, 50, 3, 200))
-					.desc("When hit target, randomly picks %s equipments and increase their durability loss by %s. When there aren't enough equipments to corrode, increase damage by %s per piece")
-					.lang("Corrosion").register();
-
-			EROSION = L2Hostility.REGISTRATE.regTrait("erosion", () -> new ErosionTrait(ChatFormatting.DARK_BLUE),
-							() -> new TraitConfig(50, 50, 3, 200))
-					.desc("When hit target, randomly picks %s equipments and reduce their durability by %s. When there aren't enough equipments to corrode, increase damage by %s per piece")
-					.lang("Erosion").register();
 
 		}
 
