@@ -1,5 +1,6 @@
-package dev.xkmc.l2hostility.content.item.curio;
+package dev.xkmc.l2hostility.content.item.curio.curse;
 
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
@@ -11,22 +12,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class CurseOfEnvy extends CurseCurioItem {
+public class CurseOfLust extends CurseCurioItem {
 
-	public CurseOfEnvy(Properties props) {
+	public CurseOfLust(Properties props) {
 		super(props);
 	}
 
 	@Override
 	public int getExtraLevel(ItemStack stack) {
-		return LHConfig.COMMON.envyExtraLevel.get();
+		return LHConfig.COMMON.lustExtraLevel.get();
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		int rate = (int) Math.round(100 * LHConfig.COMMON.envyDropRate.get());
-		int lv = LHConfig.COMMON.envyExtraLevel.get();
-		list.add(LangData.ITEM_CHARM_ENVY.get(rate).withStyle(ChatFormatting.GOLD));
+		int lv = LHConfig.COMMON.lustExtraLevel.get();
+		list.add(LangData.ITEM_CHARM_LUST.get().withStyle(ChatFormatting.GOLD));
 		list.add(LangData.ITEM_CHARM_ADD_LEVEL.get(lv).withStyle(ChatFormatting.RED));
 	}
 

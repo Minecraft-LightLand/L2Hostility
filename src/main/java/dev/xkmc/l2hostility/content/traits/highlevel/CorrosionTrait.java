@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.traits.legendary;
+package dev.xkmc.l2hostility.content.traits.highlevel;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
@@ -46,7 +46,7 @@ public class CorrosionTrait extends MobTrait {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
 						mapLevel(i -> Component.literal(i + "")
 								.withStyle(ChatFormatting.AQUA)),
-						mapLevel(i -> Component.literal(Math.round(LHConfig.COMMON.corrosionFactor.get() * i * 100) + "%")
+						mapLevel(i -> Component.literal(Math.round(LHConfig.COMMON.corrosionDurability.get() * i * 100) + "%")
 								.withStyle(ChatFormatting.AQUA)),
 						mapLevel(i -> Component.literal(Math.round(LHConfig.COMMON.corrosionDamage.get() * i * 100) + "%")
 								.withStyle(ChatFormatting.AQUA)))

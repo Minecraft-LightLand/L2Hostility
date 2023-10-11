@@ -9,8 +9,7 @@ import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.item.curio.FlamingThorn;
-import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
@@ -33,20 +32,10 @@ public class LHAttackListener implements AttackListener {
 			}
 			cap.traits.forEach((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache));
 		}
-		if (mob != null && CurioCompat.hasItem(mob, LHItems.CURSE_PRIDE.get())) {
-			int level = DifficultyLevel.ofAny(mob);
-			double rate = LHConfig.COMMON.prideDamageBonus.get();
-			cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
-		}
-		if (mob != null && CurioCompat.hasItem(mob, LHItems.CURSE_WRATH.get())) {
-			int level = DifficultyLevel.ofAny(cache.getAttackTarget()) - DifficultyLevel.ofAny(mob);
-			if (level > 0) {
-				double rate = LHConfig.COMMON.wrathDamageBonus.get();
-				cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
+		if (mob != null) {
+			for (var e : CurseCurioItem.getFromPlayer(mob)) {
+				e.item().onHurtTarget(e.stack(), mob, cache);
 			}
-		}
-		if (mob != null && CurioCompat.hasItem(mob, LHItems.FLAMING_THORN.get())) {
-			FlamingThorn.process(mob, cache.getAttackTarget());
 		}
 	}
 

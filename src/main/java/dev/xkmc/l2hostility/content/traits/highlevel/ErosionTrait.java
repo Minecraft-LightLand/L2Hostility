@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.traits.legendary;
+package dev.xkmc.l2hostility.content.traits.highlevel;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
@@ -45,7 +45,7 @@ public class ErosionTrait extends MobTrait {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
 						mapLevel(i -> Component.literal(i + "")
 								.withStyle(ChatFormatting.AQUA)),
-						mapLevel(i -> Component.literal(Math.round(LHConfig.COMMON.erosionFactor.get() * i * 100) + "%")
+						mapLevel(i -> Component.literal(Math.round(LHConfig.COMMON.erosionDurability.get() * i * 100) + "%")
 								.withStyle(ChatFormatting.AQUA)),
 						mapLevel(i -> Component.literal(Math.round(LHConfig.COMMON.erosionDamage.get() * i * 100) + "%")
 								.withStyle(ChatFormatting.AQUA)))

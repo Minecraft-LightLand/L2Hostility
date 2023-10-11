@@ -91,8 +91,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue teleportDuration;
 		public final ForgeConfigSpec.IntValue teleportRange;
 		public final ForgeConfigSpec.IntValue repellRange;
-		public final ForgeConfigSpec.DoubleValue corrosionFactor;
-		public final ForgeConfigSpec.DoubleValue erosionFactor;
+		public final ForgeConfigSpec.DoubleValue corrosionDurability;
+		public final ForgeConfigSpec.DoubleValue erosionDurability;
 		public final ForgeConfigSpec.DoubleValue corrosionDamage;
 		public final ForgeConfigSpec.DoubleValue erosionDamage;
 
@@ -100,6 +100,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue flameThornTime;
 		public final ForgeConfigSpec.IntValue ringOfReflectionRadius;
 		public final ForgeConfigSpec.IntValue witchWandFactor;
+		public final ForgeConfigSpec.DoubleValue ringOfCorrosionFactor;
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("scaling");
@@ -173,11 +174,14 @@ public class LHConfig {
 				flameThornTime = builder.comment("Time in ticks of Soul Flame to inflict")
 						.defineInRange("flameThornTime", 100, 1, 10000);
 
-				ringOfReflectionRadius = builder.comment("Radius in blicks for Ring of Reflection to work")
+				ringOfReflectionRadius = builder.comment("Radius in blocks for Ring of Reflection to work")
 						.defineInRange("ringOfReflectionRadius", 16, 1, 256);
 
 				witchWandFactor = builder.comment("Factor of effect duration for witch wand, to make up for splash decay")
 						.defineInRange("witchWandFactor", 4, 1, 100);
+
+				ringOfCorrosionFactor = builder.comment("Factor of maximum durability to cost for ring of corrosion")
+						.defineInRange("ringOfCorrosionFactor", 0.2, 0, 1);
 
 				// curse
 				{
@@ -255,12 +259,12 @@ public class LHConfig {
 				repellRange = builder.comment("Range in blocks for Repell")
 						.defineInRange("repellRange", 10, 0, 64);
 
-				corrosionFactor = builder.comment("Fraction of remaining durability to corrode, per trait rank")
-						.defineInRange("corrosionFactor", 0.1, 0, 1);
+				corrosionDurability = builder.comment("Fraction of remaining durability to corrode, per trait rank")
+						.defineInRange("corrosionDurability", 0.3, 0, 1);
 				corrosionDamage = builder.comment("Damage bonus when nothing to corrode")
 						.defineInRange("corrosionDamage", 0.25, 0, 1);
-				erosionFactor = builder.comment("Fraction of lost durability to erode, per trait rank")
-						.defineInRange("erosionFactor", 0.3, 0, 1);
+				erosionDurability = builder.comment("Fraction of lost durability to erode, per trait rank")
+						.defineInRange("erosionDurability", 0.1, 0, 1);
 				erosionDamage = builder.comment("Damage bonus when nothing to erode")
 						.defineInRange("erosionDamage", 0.25, 0, 1);
 

@@ -9,6 +9,8 @@ import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
 import dev.xkmc.l2hostility.content.traits.base.TargetEffectTrait;
 import dev.xkmc.l2hostility.content.traits.common.*;
 import dev.xkmc.l2hostility.content.traits.goals.EnderTrait;
+import dev.xkmc.l2hostility.content.traits.highlevel.CorrosionTrait;
+import dev.xkmc.l2hostility.content.traits.highlevel.ErosionTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.*;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;

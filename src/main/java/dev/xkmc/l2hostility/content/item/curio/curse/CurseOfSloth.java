@@ -1,7 +1,8 @@
-package dev.xkmc.l2hostility.content.item.curio;
+package dev.xkmc.l2hostility.content.item.curio.curse;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

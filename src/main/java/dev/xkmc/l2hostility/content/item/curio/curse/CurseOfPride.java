@@ -1,7 +1,11 @@
-package dev.xkmc.l2hostility.content.item.curio;
+package dev.xkmc.l2hostility.content.item.curio.curse;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.ICapItem;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -29,6 +33,13 @@ public class CurseOfPride extends CurseCurioItem implements ICapItem<CurseOfPrid
 
 	public CurseOfPride(Properties props) {
 		super(props);
+	}
+
+	@Override
+	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {
+		int level = DifficultyLevel.ofAny(user);
+		double rate = LHConfig.COMMON.prideDamageBonus.get();
+		cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
 	}
 
 	@Override

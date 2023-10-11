@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:teleport"
+    },
+    "B": {
+      "item": "l2hostility:adaptive"
+    },
+    "D": {
+      "item": "l2hostility:undying"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "III",
+    "DID"
+  ],
+  "result": {
+    "item": "l2hostility:infinity_glove"
+  },
+  "show_notification": true
+}

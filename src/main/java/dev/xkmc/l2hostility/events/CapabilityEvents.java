@@ -4,7 +4,7 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficultyCap;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
-import dev.xkmc.l2hostility.content.item.curio.ICapItem;
+import dev.xkmc.l2hostility.content.item.curio.core.ICapItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;

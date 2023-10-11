@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.item.curio;
+package dev.xkmc.l2hostility.content.item.curio.core;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;

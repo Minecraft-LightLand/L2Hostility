@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
-import dev.xkmc.l2hostility.content.item.curio.CurseCurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

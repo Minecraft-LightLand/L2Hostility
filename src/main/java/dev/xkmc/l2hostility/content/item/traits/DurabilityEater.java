@@ -7,22 +7,30 @@ import net.minecraft.world.item.ItemStack;
 
 public class DurabilityEater {
 
-	public static void corrosion(LivingEntity user, EquipmentSlot slot) {
-		ItemStack stack = user.getItemBySlot(slot);
+	public static void corrosion(LivingEntity target, EquipmentSlot slot) {
+		ItemStack stack = target.getItemBySlot(slot);
 		if (!stack.isDamageableItem()) return;
-		double factor = LHConfig.COMMON.corrosionFactor.get();
+		double factor = LHConfig.COMMON.corrosionDurability.get();
 		int add = (int) (stack.getDamageValue() * factor);
 		if (add <= 0) return;
-		stack.hurtAndBreak(add, user, e -> e.broadcastBreakEvent(slot));
+		stack.hurtAndBreak(add, target, e -> e.broadcastBreakEvent(slot));
 	}
 
-	public static void erosion(LivingEntity user, EquipmentSlot slot) {
-		ItemStack stack = user.getItemBySlot(slot);
+	public static void erosion(LivingEntity target, EquipmentSlot slot) {
+		ItemStack stack = target.getItemBySlot(slot);
 		if (!stack.isDamageableItem()) return;
-		double factor = LHConfig.COMMON.erosionFactor.get();
+		double factor = LHConfig.COMMON.erosionDurability.get();
 		int add = (int) ((stack.getMaxDamage() - stack.getDamageValue()) * factor);
 		if (add <= 0) return;
-		stack.hurtAndBreak(add, user, e -> e.broadcastBreakEvent(slot));
+		stack.hurtAndBreak(add, target, e -> e.broadcastBreakEvent(slot));
+	}
+
+	public static void flat(LivingEntity target, EquipmentSlot slot, double factor) {
+		ItemStack stack = target.getItemBySlot(slot);
+		if (!stack.isDamageableItem()) return;
+		int add = (int) (stack.getMaxDamage() * factor);
+		if (add <= 0) return;
+		stack.hurtAndBreak(add, target, e -> e.broadcastBreakEvent(slot));
 	}
 
 }

@@ -1,6 +1,8 @@
-package dev.xkmc.l2hostility.content.item.curio;
+package dev.xkmc.l2hostility.content.item.curio.misc;
 
 import dev.xkmc.l2complements.init.registrate.LCEffects;
+import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2library.base.effects.EffectUtil;
@@ -15,17 +17,23 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FlamingThorn extends CurioItem {
+public class FlamingThorn extends CurseCurioItem {
 
 	public static void process(LivingEntity user, LivingEntity le) {
-		int size = le.getActiveEffectsMap().size();
-		if (size == 0) return;
-		int time = LHConfig.COMMON.flameThornTime.get();
-		EffectUtil.addEffect(le, new MobEffectInstance(LCEffects.FLAME.get(), time, size - 1), EffectUtil.AddReason.NONE, user);
 	}
 
 	public FlamingThorn(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {
+		LivingEntity target = cache.getAttackTarget();
+		int size = target.getActiveEffectsMap().size();
+		if (size == 0) return;
+		int time = LHConfig.COMMON.flameThornTime.get();
+		EffectUtil.addEffect(target, new MobEffectInstance(LCEffects.FLAME.get(), time, size - 1), EffectUtil.AddReason.NONE, user);
+
 	}
 
 	@Override

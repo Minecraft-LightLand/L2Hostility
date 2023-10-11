@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:slowness"
+    },
+    "B": {
+      "item": "l2complements:blackstone_core"
+    },
+    "D": {
+      "item": "l2hostility:freezing"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "DID",
+    "BAB"
+  ],
+  "result": {
+    "item": "l2hostility:ring_of_incarceration"
+  },
+  "show_notification": true
+}

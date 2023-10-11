@@ -1,10 +1,17 @@
 package dev.xkmc.l2hostility.init.registrate;
 
+import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import com.tterrag.registrate.util.nullness.NonNullFunction;
 import dev.xkmc.l2hostility.content.item.consumable.BottleOfCurse;
 import dev.xkmc.l2hostility.content.item.consumable.BottleOfSanity;
 import dev.xkmc.l2hostility.content.item.consumable.HostilityOrb;
-import dev.xkmc.l2hostility.content.item.curio.*;
+import dev.xkmc.l2hostility.content.item.curio.curse.*;
+import dev.xkmc.l2hostility.content.item.curio.misc.FlamingThorn;
+import dev.xkmc.l2hostility.content.item.curio.misc.ImagineBreaker;
+import dev.xkmc.l2hostility.content.item.curio.misc.InfinityGlove;
+import dev.xkmc.l2hostility.content.item.curio.misc.OddeyesGlasses;
+import dev.xkmc.l2hostility.content.item.curio.ring.*;
 import dev.xkmc.l2hostility.content.item.tool.DetectorGlasses;
 import dev.xkmc.l2hostility.content.item.tool.WitchWand;
 import dev.xkmc.l2hostility.content.item.wand.AiConfigWand;
@@ -44,8 +51,12 @@ public class LHItems {
 	public static final ItemEntry<RingOfLife> RING_LIFE;
 	public static final ItemEntry<RingOfDivinity> RING_DIVINITY;
 	public static final ItemEntry<RingOfReflection> RING_REFLECTION;
+	public static final ItemEntry<RingOfIncarceration> RING_INCARCERATION;
+	public static final ItemEntry<RingOfCorrosion> RING_CORROSION;
 	public static final ItemEntry<FlamingThorn> FLAMING_THORN;
 	public static final ItemEntry<ImagineBreaker> IMAGINE_BREAKER;
+	public static final ItemEntry<InfinityGlove> INFINITY_GLOVE;
+	public static final ItemEntry<OddeyesGlasses> ODDEYES_GLASSES;
 
 	public static final ItemEntry<TraitAdderWand> ADDER;
 	public static final ItemEntry<TargetSelectWand> TARGET;
@@ -69,12 +80,14 @@ public class LHItems {
 
 		// equipments
 		{
+
+			TagKey<Item> head = ItemTags.create(new ResourceLocation("curios", "head"));
+
 			DETECTOR = L2Hostility.REGISTRATE.item(
 					"hostility_detector", p -> new Item(p.stacksTo(1))).register();
 			DETECTOR_GLASSES = L2Hostility.REGISTRATE.item(
 							"detector_glasses", p -> new DetectorGlasses(p.stacksTo(1)))
-					.tag(ItemTags.create(new ResourceLocation("curios", "head")))
-					.register();
+					.tag(head).register();
 
 			TagKey<Item> chaos = TagGen.CHAOS_CURIO;
 
@@ -87,52 +100,31 @@ public class LHItems {
 
 			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
 
-			CURSE_ENVY = L2Hostility.REGISTRATE.item("curse_of_envy", CurseOfEnvy::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, charm).register();
-			CURSE_GLUTTONY = L2Hostility.REGISTRATE.item("curse_of_gluttony", CurseOfGluttony::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, charm).register();
-			CURSE_GREED = L2Hostility.REGISTRATE.item("curse_of_greed", CurseOfGreed::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, charm).register();
-			CURSE_LUST = L2Hostility.REGISTRATE.item("curse_of_lust", CurseOfLust::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, charm).register();
-			CURSE_PRIDE = L2Hostility.REGISTRATE.item("curse_of_pride", CurseOfPride::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, charm).register();
-			CURSE_SLOTH = L2Hostility.REGISTRATE.item("curse_of_sloth", CurseOfSloth::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, charm).register();
-			CURSE_WRATH = L2Hostility.REGISTRATE.item("curse_of_wrath", CurseOfWrath::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, charm).register();
+			CURSE_ENVY = curio("curse_of_envy", CurseOfEnvy::new).tag(chaos, charm).register();
+			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm).register();
+			CURSE_GREED = curio("curse_of_greed", CurseOfGreed::new).tag(chaos, charm).register();
+			CURSE_LUST = curio("curse_of_lust", CurseOfLust::new).tag(chaos, charm).register();
+			CURSE_PRIDE = curio("curse_of_pride", CurseOfPride::new).tag(chaos, charm).register();
+			CURSE_SLOTH = curio("curse_of_sloth", CurseOfSloth::new).tag(chaos, charm).register();
+			CURSE_WRATH = curio("curse_of_wrath", CurseOfWrath::new).tag(chaos, charm).register();
 
 			TagKey<Item> ring = ItemTags.create(new ResourceLocation("curios", "ring"));
 
-			RING_OCEAN = L2Hostility.REGISTRATE.item("ring_of_ocean", RingOfOcean::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, ring).register();
-			RING_LIFE = L2Hostility.REGISTRATE.item("ring_of_life", RingOfLife::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, ring).register();
-			RING_DIVINITY = L2Hostility.REGISTRATE.item("ring_of_divinity", RingOfDivinity::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, ring).register();
-			RING_REFLECTION = L2Hostility.REGISTRATE.item("ring_of_reflection", RingOfReflection::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, ring).register();
+			RING_OCEAN = curio("ring_of_ocean", RingOfOcean::new).tag(chaos, ring).register();
+			RING_LIFE = curio("ring_of_life", RingOfLife::new).tag(chaos, ring).register();
+			RING_DIVINITY = curio("ring_of_divinity", RingOfDivinity::new).tag(chaos, ring).register();
+			RING_REFLECTION = curio("ring_of_reflection", RingOfReflection::new).tag(chaos, ring).register();
+			RING_INCARCERATION = curio("ring_of_incarceration", RingOfIncarceration::new).tag(chaos, ring).register();
+			RING_CORROSION = curio("ring_of_corrosion", RingOfCorrosion::new).tag(chaos, ring).register();
 
 			TagKey<Item> hand = ItemTags.create(new ResourceLocation("curios", "hands"));
 
-			FLAMING_THORN = L2Hostility.REGISTRATE.item("flaming_thorn", FlamingThorn::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, hand).register();
+			FLAMING_THORN = curio("flaming_thorn", FlamingThorn::new).tag(chaos, hand).register();
+			IMAGINE_BREAKER = curio("imagine_breaker", ImagineBreaker::new).tag(chaos, hand).register();
+			INFINITY_GLOVE = curio("infinity_glove", InfinityGlove::new).tag(chaos, hand).register();
 
-			IMAGINE_BREAKER = L2Hostility.REGISTRATE.item("imagine_breaker", ImagineBreaker::new)
-					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())))
-					.tag(chaos, hand).register();
+			ODDEYES_GLASSES = curio("oddeyes_glasses", OddeyesGlasses::new).tag(chaos, head).register();
+
 		}
 
 		// wands
@@ -150,6 +142,11 @@ public class LHItems {
 							"equipment_wand", p -> new EquipmentWand(p.stacksTo(1)))
 					.model((ctx, pvd) -> pvd.handheld(ctx)).register();
 		}
+	}
+
+	private static <T extends Item> ItemBuilder<T, ?> curio(String str, NonNullFunction<Item.Properties, T> factory) {
+		return L2Hostility.REGISTRATE.item(str, factory)
+				.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())));
 	}
 
 	public static void register() {

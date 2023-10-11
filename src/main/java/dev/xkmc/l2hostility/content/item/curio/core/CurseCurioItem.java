@@ -1,10 +1,11 @@
-package dev.xkmc.l2hostility.content.item.curio;
+package dev.xkmc.l2hostility.content.item.curio.core;
 
+import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2library.util.code.GenericItemStack;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class CurseCurioItem extends CurioItem {
 
-	public static List<GenericItemStack<CurseCurioItem>> getFromPlayer(Player player) {
+	public static List<GenericItemStack<CurseCurioItem>> getFromPlayer(LivingEntity player) {
 		var list = CurioCompat.getItems(player, e -> e.getItem() instanceof CurseCurioItem);
 		List<GenericItemStack<CurseCurioItem>> ans = new ArrayList<>();
 		for (var e : list) {
@@ -37,6 +38,10 @@ public class CurseCurioItem extends CurioItem {
 
 	public double getGrowFactor(ItemStack stack, PlayerDifficulty player, MobTraitCap mob) {
 		return 1;
+	}
+
+	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {
+
 	}
 
 }

@@ -1,6 +1,8 @@
-package dev.xkmc.l2hostility.content.item.curio;
+package dev.xkmc.l2hostility.content.item.curio.ring;
 
 import dev.xkmc.l2complements.init.registrate.LCEffects;
+import dev.xkmc.l2hostility.content.item.curio.core.CurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.ICapItem;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import net.minecraft.ChatFormatting;

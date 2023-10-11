@@ -4,7 +4,7 @@ import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.InfoRequestToServer;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.item.curio.CurseCurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.LevelEditor;

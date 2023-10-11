@@ -1,7 +1,11 @@
-package dev.xkmc.l2hostility.content.item.curio;
+package dev.xkmc.l2hostility.content.item.curio.curse;
 
+import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
 import dev.xkmc.l2damagetracker.init.data.L2DTLangData;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
+import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
@@ -9,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -39,6 +44,15 @@ public class CurseOfWrath extends CurseCurioItem {
 		ResourceLocation id = ForgeRegistries.ITEMS.getKey(this);
 		assert id != null;
 		addTooltip(list, ArmorEffectConfig.get().getImmunity(id.toString()));
+	}
+
+	@Override
+	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {
+		int level = DifficultyLevel.ofAny(cache.getAttackTarget()) - DifficultyLevel.ofAny(user);
+		if (level > 0) {
+			double rate = LHConfig.COMMON.wrathDamageBonus.get();
+			cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
+		}
 	}
 
 	private void addTooltip(List<Component> list, Set<MobEffect> set) {

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "l2hostility:dispell"
+    },
+    "2": {
+      "item": "l2hostility:dementor"
+    },
+    "A": {
+      "item": "l2hostility:teleport"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    " A ",
+    "1I2"
+  ],
+  "result": {
+    "item": "l2hostility:oddeyes_glasses"
+  },
+  "show_notification": true
+}

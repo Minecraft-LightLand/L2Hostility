@@ -1,5 +1,6 @@
-package dev.xkmc.l2hostility.content.item.curio;
+package dev.xkmc.l2hostility.content.item.curio.ring;
 
+import dev.xkmc.l2hostility.content.item.curio.core.CurioItem;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
