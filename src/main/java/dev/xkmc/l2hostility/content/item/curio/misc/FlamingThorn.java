@@ -19,9 +19,6 @@ import java.util.List;
 
 public class FlamingThorn extends CurseCurioItem {
 
-	public static void process(LivingEntity user, LivingEntity le) {
-	}
-
 	public FlamingThorn(Properties properties) {
 		super(properties);
 	}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "minecraft:banners"
+    },
+    "E": {
+      "item": "l2hostility:teleport"
+    },
+    "F": {
+      "item": "l2complements:resonant_feather"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "EIE",
+    "CCC",
+    "FFF"
+  ],
+  "result": {
+    "item": "l2hostility:triple_strip_cape"
+  },
+  "show_notification": true
+}

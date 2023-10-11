@@ -7,10 +7,7 @@ import dev.xkmc.l2hostility.content.item.consumable.BottleOfCurse;
 import dev.xkmc.l2hostility.content.item.consumable.BottleOfSanity;
 import dev.xkmc.l2hostility.content.item.consumable.HostilityOrb;
 import dev.xkmc.l2hostility.content.item.curio.curse.*;
-import dev.xkmc.l2hostility.content.item.curio.misc.FlamingThorn;
-import dev.xkmc.l2hostility.content.item.curio.misc.ImagineBreaker;
-import dev.xkmc.l2hostility.content.item.curio.misc.InfinityGlove;
-import dev.xkmc.l2hostility.content.item.curio.misc.OddeyesGlasses;
+import dev.xkmc.l2hostility.content.item.curio.misc.*;
 import dev.xkmc.l2hostility.content.item.curio.ring.*;
 import dev.xkmc.l2hostility.content.item.tool.DetectorGlasses;
 import dev.xkmc.l2hostility.content.item.tool.WitchWand;
@@ -57,6 +54,7 @@ public class LHItems {
 	public static final ItemEntry<ImagineBreaker> IMAGINE_BREAKER;
 	public static final ItemEntry<InfinityGlove> INFINITY_GLOVE;
 	public static final ItemEntry<OddeyesGlasses> ODDEYES_GLASSES;
+	public static final ItemEntry<TripleStripCape> TRIPLE_STRIP_CAPE;
 
 	public static final ItemEntry<TraitAdderWand> ADDER;
 	public static final ItemEntry<TargetSelectWand> TARGET;
@@ -123,7 +121,10 @@ public class LHItems {
 			IMAGINE_BREAKER = curio("imagine_breaker", ImagineBreaker::new).tag(chaos, hand).register();
 			INFINITY_GLOVE = curio("infinity_glove", InfinityGlove::new).tag(chaos, hand).register();
 
+			TagKey<Item> back = ItemTags.create(new ResourceLocation("curios", "back"));
+
 			ODDEYES_GLASSES = curio("oddeyes_glasses", OddeyesGlasses::new).tag(chaos, head).register();
+			TRIPLE_STRIP_CAPE = curio("triple_strip_cape", TripleStripCape::new).tag(chaos, back).register();
 
 		}
 

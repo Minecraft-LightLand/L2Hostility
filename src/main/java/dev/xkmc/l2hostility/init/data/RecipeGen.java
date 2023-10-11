@@ -15,6 +15,7 @@ import dev.xkmc.l2library.serial.ingredients.EnchantmentIngredient;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -245,6 +246,14 @@ public class RecipeGen {
 					.define('A', LHTraits.ENDER.get().asItem())
 					.define('1', LHTraits.DISPELL.get().asItem())
 					.define('2', LHTraits.DEMENTOR.get().asItem())
+					.save(pvd);
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.TRIPLE_STRIP_CAPE.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("EIE").pattern("CCC").pattern("FFF")
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('C', ItemTags.BANNERS)
+					.define('E', LHTraits.ENDER.get().asItem())
+					.define('F', LCItems.RESONANT_FEATHER.get())
 					.save(pvd);
 
 			recycle(pvd, TagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);

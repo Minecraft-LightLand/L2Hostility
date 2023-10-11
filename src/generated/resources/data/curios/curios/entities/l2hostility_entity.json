@@ -1,4 +1,5 @@
 {
+  "conditions": [],
   "entities": [
     "minecraft:player"
   ],
