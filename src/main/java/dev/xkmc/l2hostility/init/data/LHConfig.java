@@ -1,10 +1,15 @@
 package dev.xkmc.l2hostility.init.data;
 
+import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.IConfigSpec;
 import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 public class LHConfig {
 
@@ -101,6 +106,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue ringOfReflectionRadius;
 		public final ForgeConfigSpec.IntValue witchWandFactor;
 		public final ForgeConfigSpec.DoubleValue ringOfCorrosionFactor;
+
+		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("scaling");
@@ -268,6 +275,13 @@ public class LHConfig {
 				erosionDamage = builder.comment("Damage bonus when nothing to erode")
 						.defineInRange("erosionDamage", 0.25, 0, 1);
 
+			}
+			builder.pop();
+
+			builder.push("Trait toggle");
+			LHTraits.register();
+			for (var e : L2Hostility.REGISTRATE.getList()) {
+				map.put(e, builder.define("allow_" + e, true));
 			}
 			builder.pop();
 		}

@@ -14,7 +14,11 @@ public class LegendaryTrait extends MobTrait {
 
 	@Override
 	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
-		return LHConfig.COMMON.allowLegendary.get() && maxModLv > TraitManager.getMaxLevel() && super.allow(le, difficulty, maxModLv);
+		return maxModLv > TraitManager.getMaxLevel() && super.allow(le, difficulty, maxModLv);
 	}
 
+	@Override
+	public boolean isBanned() {
+		return !LHConfig.COMMON.allowLegendary.get() || super.isBanned();
+	}
 }

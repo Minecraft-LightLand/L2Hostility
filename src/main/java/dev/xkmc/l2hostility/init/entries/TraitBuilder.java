@@ -22,17 +22,19 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 public class TraitBuilder<T extends MobTrait, P> extends AbstractBuilder<MobTrait, T, P, TraitBuilder<T, P>> {
 
 	private final NonNullSupplier<T> sup;
 
 	public TraitBuilder(LHRegistrate owner, P parent, String name, BuilderCallback callback,
-						NonNullSupplier<T> sup, Supplier<TraitConfig> config) {
+						NonNullSupplier<T> sup, Function<ResourceLocation, TraitConfig> config) {
 		super(owner, parent, name, callback, LHTraits.TRAITS.key());
 		this.sup = sup;
-		LHConfigGen.LIST.add(e -> e.add(L2Hostility.TRAIT, new ResourceLocation(getOwner().getModid(), getName()), config.get()));
+		ResourceLocation rl = new ResourceLocation(getOwner().getModid(), getName());
+		var entry = config.apply(rl);
+		LHConfigGen.LIST.add(e -> e.add(L2Hostility.TRAIT, rl, entry));
 	}
 
 	@Override
@@ -46,7 +48,8 @@ public class TraitBuilder<T extends MobTrait, P> extends AbstractBuilder<MobTrai
 
 	public <I extends TraitSymbol> ItemBuilder<I, TraitBuilder<T, P>> item(NonNullFunction<Item.Properties, I> sup) {
 		return getOwner().item(this, getName(), sup)
-				.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/trait/" + ctx.getName())))
+				.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/bg"),
+						pvd.modLoc("item/trait/" + ctx.getName())))
 				.setData(ProviderType.LANG, NonNullBiConsumer.noop());
 	}
 

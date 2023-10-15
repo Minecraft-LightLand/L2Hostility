@@ -5,6 +5,7 @@ import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
 import net.minecraft.ChatFormatting;
@@ -54,15 +55,12 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	}
 
 	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
+		if (isBanned()) return false;
 		TraitConfig config = getConfig();
 		if (difficulty < config.min_level) return false;
 		if (difficulty < config.cost) return false;
 		if (!EntityConfig.allow(le.getType(), this)) return false;
-		if (config.blacklist.contains(le.getType())) return false;
-		if (!config.whitelist.isEmpty()) {
-			return config.whitelist.contains(le.getType());
-		}
-		return true;
+		return config.allows(le.getType());
 	}
 
 	public void initialize(LivingEntity mob, int level) {
@@ -121,6 +119,13 @@ public class MobTrait extends NamedEntry<MobTrait> {
 			item = Items.AIR;
 		}
 		return item;
+	}
+
+	public boolean isBanned() {
+		if (LHConfig.COMMON.map.containsKey(getRegistryName().getPath())) {
+			return !LHConfig.COMMON.map.get(getRegistryName().getPath()).get();
+		}
+		return false;
 	}
 
 }

@@ -11,6 +11,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.Consumer;
+
 public class TagGen {
 
 	public static final TagKey<Item> CHAOS_CURIO = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "chaos_equipment"));
@@ -21,6 +26,8 @@ public class TagGen {
 
 	public static final TagKey<EntityType<?>> ARMOR_TARGET = createEntityTag("armor_target");
 	public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
+
+	public static final Map<ResourceLocation, Consumer<RegistrateTagsProvider.IntrinsicImpl<EntityType<?>>>> ENTITY_TAG_BUILDER = new TreeMap<>();
 
 	public static void onBlockTagGen(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {
 	}
@@ -45,6 +52,7 @@ public class TagGen {
 				EntityType.WITHER_SKELETON, EntityType.VINDICATOR
 		);
 
+		ENTITY_TAG_BUILDER.values().forEach(e -> e.accept(pvd));
 	}
 
 	public static TagKey<EntityType<?>> createEntityTag(String id) {

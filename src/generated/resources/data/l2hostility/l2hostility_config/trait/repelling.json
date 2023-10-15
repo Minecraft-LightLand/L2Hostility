@@ -1,17 +1,6 @@
 {
-  "blacklist": [],
   "cost": 50,
   "max_rank": 1,
   "min_level": 100,
-  "weight": 100,
-  "whitelist": [
-    "minecraft:skeleton",
-    "minecraft:stray",
-    "minecraft:pillager",
-    "minecraft:evoker",
-    "minecraft:witch",
-    "minecraft:guardian",
-    "minecraft:elder_guardian",
-    "minecraft:wither"
-  ]
+  "weight": 100
 }
