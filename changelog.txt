@@ -1,3 +1,10 @@
+2.4.9
+- bosses will no longer have undead trait
+- now trait whitelist/blacklist are all tag based
+- allow config to disable all individual traits
+- display spawn requirement
+- improve texture
+
 2.4.8
 - Add 4 rings
 - add 2 hand curio
