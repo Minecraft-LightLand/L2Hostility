@@ -9,10 +9,15 @@ import net.minecraft.network.chat.MutableComponent;
 import java.util.Locale;
 
 public enum LangData {
+	SHIFT("tooltip.shift", "Press SHIFT to show spawn condition", 0),
 	TOOLTIP_DISABLE("tooltip.disable", "%s enchantments disabled for %ss. Any new enchantment will vanish.", 2),
 	TOOLTIP_SELF_EFFECT("tooltip.self_effect", "Mob gains continuous effect: ", 0),
 	TOOLTIP_TARGET_EFFECT("tooltip.target_effect", "Mob inflict effect on hit: ", 0),
 	TOOLTIP_LEGENDARY("tooltip.legendary", "Legendary", 0),
+	TOOLTIP_MIN_LEVEL("tooltip.min_level", "Minimum mob level: %s", 1),
+	TOOLTIP_LEVEL_COST("tooltip.level_cost", "Mob level cost: %s", 1),
+	TOOLTIP_WEIGHT("tooltip.weight", "Weight: %s", 1),
+	TOOLTIP_BANNED("tooltip.banned", "This trait is disabled.", 0),
 
 	ITEM_WAND_AI("item.wand.ai", "Right click to remove or restore mob AI.", 0),
 	ITEM_WAND_EQUIPMENT("item.wand.equipment", "Right click to open mob equipment menu.", 0),

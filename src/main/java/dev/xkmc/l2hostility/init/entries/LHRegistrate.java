@@ -8,7 +8,8 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2library.base.L2Registrate;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.function.Supplier;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LHRegistrate extends L2Registrate {
 
@@ -16,8 +17,15 @@ public class LHRegistrate extends L2Registrate {
 		super(modid);
 	}
 
+	private final List<String> LIST = new ArrayList<>();
+
 	public final <T extends MobTrait> TraitBuilder<T, LHRegistrate> regTrait(String id, NonNullSupplier<T> sup, NonNullFunction<ResourceLocation, TraitConfig> config) {
+		LIST.add(id);
 		return this.entry(id, cb -> new TraitBuilder<>(this, this, id, cb, sup, config)).item(TraitSymbol::new).build();
+	}
+
+	public List<String> getList() {
+		return LIST;
 	}
 
 }

@@ -23,7 +23,12 @@
 	  "disable": "%s个附魔被抑制了，剩余%s秒。任何新附魔将会被抹消",
 	  "self_effect": "怪物获得常驻效果：",
 	  "target_effect": "怪物攻击将会施加：",
-	  "legendary": "传奇词条"
+	  "legendary": "传奇词条",
+	  "level_cost": "怪物等级消耗: %s",
+	  "min_level": "最低怪物等级: %s",
+	  "shift": "按SHIFT显示生成要求",
+	  "weight": "权重: %s",
+	  "banned": "这个词条被禁用了"
 	},
 	"item": {
 	  "wand": {

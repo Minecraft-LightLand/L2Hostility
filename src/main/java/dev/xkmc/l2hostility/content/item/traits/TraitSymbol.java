@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -80,10 +81,22 @@ public class TraitSymbol extends Item {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(get().getFullDesc(null));
+		if (get().isBanned()) {
+			list.add(LangData.TOOLTIP_BANNED.get().withStyle(ChatFormatting.RED));
+			return;
+		}
 		if (get() instanceof LegendaryTrait) {
 			list.add(LangData.TOOLTIP_LEGENDARY.get().withStyle(ChatFormatting.GOLD));
 		}
-		get().addDetail(list);
+		if (Screen.hasShiftDown()) {
+			var config = get().getConfig();
+			list.add(LangData.TOOLTIP_MIN_LEVEL.get(Component.literal(config.min_level + "").withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.GRAY));
+			list.add(LangData.TOOLTIP_LEVEL_COST.get(Component.literal(config.cost + "").withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.GRAY));
+			list.add(LangData.TOOLTIP_WEIGHT.get(Component.literal(config.weight + "").withStyle(ChatFormatting.DARK_AQUA)).withStyle(ChatFormatting.DARK_GRAY));
+		} else {
+			get().addDetail(list);
+			list.add(LangData.SHIFT.get().withStyle(ChatFormatting.GRAY));
+		}
 	}
 
 }
