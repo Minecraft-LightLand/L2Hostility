@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
@@ -30,8 +29,7 @@ public class DispellTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
-		LivingEntity target = cache.getAttackTarget();
+	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
 		List<ItemStack> list = new ArrayList<>();
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			ItemStack stack = target.getItemBySlot(slot);

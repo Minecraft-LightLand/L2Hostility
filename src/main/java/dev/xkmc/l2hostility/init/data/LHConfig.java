@@ -100,6 +100,10 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue erosionDurability;
 		public final ForgeConfigSpec.DoubleValue corrosionDamage;
 		public final ForgeConfigSpec.DoubleValue erosionDamage;
+		public final ForgeConfigSpec.IntValue ragnarokTime;
+		public final ForgeConfigSpec.IntValue killerAuraDamage;
+		public final ForgeConfigSpec.IntValue killerAuraRange;
+		public final ForgeConfigSpec.IntValue killerAuraInterval;
 
 		public final ForgeConfigSpec.DoubleValue ringOfLifeMaxDamage;
 		public final ForgeConfigSpec.IntValue flameThornTime;
@@ -274,6 +278,14 @@ public class LHConfig {
 						.defineInRange("erosionDurability", 0.1, 0, 1);
 				erosionDamage = builder.comment("Damage bonus when nothing to erode")
 						.defineInRange("erosionDamage", 0.25, 0, 1);
+				ragnarokTime = builder.comment("Seal time per level for Ragnarok")
+						.defineInRange("ragnarokTime", 20, 1, 1000);
+				killerAuraDamage = builder.comment("Damage for killer aura")
+						.defineInRange("killerAuraDamage", 10, 1, 10000);
+				killerAuraRange = builder.comment("Range for for killer aura")
+						.defineInRange("killerAuraRange", 6, 1, 32);
+				killerAuraInterval = builder.comment("Interval for for killer aura")
+						.defineInRange("killerAuraInterval", 120, 1, 10000);
 
 			}
 			builder.pop();

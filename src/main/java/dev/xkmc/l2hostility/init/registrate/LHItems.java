@@ -11,6 +11,7 @@ import dev.xkmc.l2hostility.content.item.curio.misc.*;
 import dev.xkmc.l2hostility.content.item.curio.ring.*;
 import dev.xkmc.l2hostility.content.item.tool.DetectorGlasses;
 import dev.xkmc.l2hostility.content.item.tool.WitchWand;
+import dev.xkmc.l2hostility.content.item.traits.SealedItem;
 import dev.xkmc.l2hostility.content.item.wand.AiConfigWand;
 import dev.xkmc.l2hostility.content.item.wand.EquipmentWand;
 import dev.xkmc.l2hostility.content.item.wand.TargetSelectWand;
@@ -60,6 +61,8 @@ public class LHItems {
 	public static final ItemEntry<TargetSelectWand> TARGET;
 	public static final ItemEntry<AiConfigWand> AI;
 	public static final ItemEntry<EquipmentWand> EQUIPMENT;
+
+	public static final ItemEntry<SealedItem> SEAL;
 
 
 	static {
@@ -143,6 +146,9 @@ public class LHItems {
 							"equipment_wand", p -> new EquipmentWand(p.stacksTo(1)))
 					.model((ctx, pvd) -> pvd.handheld(ctx)).register();
 		}
+
+		SEAL = L2Hostility.REGISTRATE.item("sealed_item", p -> new SealedItem(p.stacksTo(1).fireResistant()))
+				.removeTab(LHBlocks.TAB.getKey()).register();
 	}
 
 	private static <T extends Item> ItemBuilder<T, ?> curio(String str, NonNullFunction<Item.Properties, T> factory) {

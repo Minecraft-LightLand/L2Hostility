@@ -25,8 +25,12 @@ public class FieryTrait extends SelfEffectTrait {
 
 	@Override
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
-		if (cache.getLivingHurtEvent().getSource().getDirectEntity() instanceof LivingEntity le)
-			le.setSecondsOnFire(LHConfig.COMMON.fieryTime.get());
+		assert cache.getLivingHurtEvent() != null;
+		if (cache.getLivingHurtEvent().getAmount() > 0) {
+			if (cache.getLivingHurtEvent().getSource().getDirectEntity() instanceof LivingEntity le) {
+				le.setSecondsOnFire(LHConfig.COMMON.fieryTime.get());
+			}
+		}
 	}
 
 	@Override

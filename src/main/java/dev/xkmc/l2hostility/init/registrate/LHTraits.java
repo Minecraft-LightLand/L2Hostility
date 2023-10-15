@@ -11,6 +11,8 @@ import dev.xkmc.l2hostility.content.traits.common.*;
 import dev.xkmc.l2hostility.content.traits.goals.EnderTrait;
 import dev.xkmc.l2hostility.content.traits.highlevel.CorrosionTrait;
 import dev.xkmc.l2hostility.content.traits.highlevel.ErosionTrait;
+import dev.xkmc.l2hostility.content.traits.highlevel.KillerAuraTrait;
+import dev.xkmc.l2hostility.content.traits.highlevel.RagnarokTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.DementorTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.DispellTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.RepellingTrait;
@@ -47,6 +49,8 @@ public class LHTraits {
 	public static final RegistryEntry<EnderTrait> ENDER;
 	public static final RegistryEntry<CorrosionTrait> CORROSION;
 	public static final RegistryEntry<ErosionTrait> EROSION;
+	public static final RegistryEntry<KillerAuraTrait> AURA;
+	public static final RegistryEntry<RagnarokTrait> RAGNAROK;
 
 	static {
 		// no desc
@@ -103,6 +107,16 @@ public class LHTraits {
 							rl -> new TraitConfig(rl, 50, 50, 3, 200))
 					.desc("When hit target, randomly picks %s equipments and reduce their durability by %s. When there aren't enough equipments, increase damage by %s per piece")
 					.lang("Erosion").register();
+
+			AURA = L2Hostility.REGISTRATE.regTrait("killer_aura", () -> new KillerAuraTrait(ChatFormatting.DARK_RED),
+							rl -> new TraitConfig(rl, 100, 50, 3, 300))
+					.desc("Deal %s magic damage to players and entities targeting it within %s blocks and apply trait effects for every %ss")
+					.lang("Killer Aura").register();
+
+			RAGNAROK = L2Hostility.REGISTRATE.regTrait("ragnarok", () -> new RagnarokTrait(ChatFormatting.DARK_BLUE),
+							rl -> new TraitConfig(rl, 100, 50, 3, 400))
+					.desc("When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.")
+					.lang("Ragnarok").register();
 
 		}
 

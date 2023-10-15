@@ -18,6 +18,8 @@ public enum LangData {
 	TOOLTIP_LEVEL_COST("tooltip.level_cost", "Mob level cost: %s", 1),
 	TOOLTIP_WEIGHT("tooltip.weight", "Weight: %s", 1),
 	TOOLTIP_BANNED("tooltip.banned", "This trait is disabled.", 0),
+	TOOLTIP_SEAL_DATA("tooltip.sealed_item", "Item sealed within:", 0),
+	TOOLTIP_SEAL_TIME("tooltip.seal_time", "Hold use to unseal. Takes %ss.", 1),
 
 	ITEM_WAND_AI("item.wand.ai", "Right click to remove or restore mob AI.", 0),
 	ITEM_WAND_EQUIPMENT("item.wand.equipment", "Right click to open mob equipment menu.", 0),
@@ -110,6 +112,8 @@ public enum LangData {
 			pvd.add(L2Hostility.MODID + "." + id.id, id.def);
 		}
 		pvd.add("config.jade.plugin_l2hostility.mob", "L2Hostility");
+		pvd.add("death.attack.killer_aura", "%s was killed by killer aura");
+		pvd.add("death.attack.killer_aura.player", "%s was killed by %s's killer aura");
 		PatchouliLang.genLang(pvd);
 	}
 

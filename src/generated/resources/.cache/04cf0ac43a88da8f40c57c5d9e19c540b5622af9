@@ -1,4 +1,4 @@
-// 1.20.1	2023-10-14T23:23:14.372514	L2Hostility Config
+// 1.20.1	2023-10-15T18:02:31.979507	L2Hostility Config
 cc60113e53b38f8ea4dbd7b841f48d9676e7d21e data/l2hostility/l2damagetracker_config/armor/equipments.json
 0d0dd29a0d3d593d0f01c9f47dc364309fe4f58d data/l2hostility/l2hostility_config/difficulty/end.json
 a7eea3f1b7bbacf4fe14aaf21abc23af93abb723 data/l2hostility/l2hostility_config/difficulty/nether.json
@@ -14,10 +14,12 @@ e71fda2038819845ac1530f06170c95cd094c91c data/l2hostility/l2hostility_config/tra
 b2da176f740424016f59e65faa82f917c39f1315 data/l2hostility/l2hostility_config/trait/fiery.json
 40e03a5bbbf4b95fe434b8fcbf59a8bf07ca3bc0 data/l2hostility/l2hostility_config/trait/freezing.json
 0df251b1a3a3f0131d2a65f40f3a3b15e1b5b95b data/l2hostility/l2hostility_config/trait/invisible.json
+0334cb012b737b23fb3400e8381125015fe10c8b data/l2hostility/l2hostility_config/trait/killer_aura.json
 866521eb64a5cefcb6debecb647c2bab982dcf6e data/l2hostility/l2hostility_config/trait/levitation.json
 92849de55c76809f5c427900586c72179d32b83a data/l2hostility/l2hostility_config/trait/nausea.json
 25bb9714d08a38b6ec478ff1594ece717f817455 data/l2hostility/l2hostility_config/trait/poison.json
 88fb964759d4b52a4e26fcc6fabeefa88ccd2611 data/l2hostility/l2hostility_config/trait/protection.json
+c51e5f2ab9e1b76a263979fc5baf8b83197a53dd data/l2hostility/l2hostility_config/trait/ragnarok.json
 3d06e92c3fdbfbb56e1c98ce99c04ce93a64fcd9 data/l2hostility/l2hostility_config/trait/reflect.json
 9cdd49d5441604ccfbad2dcd9e326e028d4d731e data/l2hostility/l2hostility_config/trait/regenerate.json
 5055dc50e07878d408b53231e6f69886b21438e7 data/l2hostility/l2hostility_config/trait/repelling.json

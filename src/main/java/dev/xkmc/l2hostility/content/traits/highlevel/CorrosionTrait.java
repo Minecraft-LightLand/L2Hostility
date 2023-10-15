@@ -3,18 +3,15 @@ package dev.xkmc.l2hostility.content.traits.highlevel;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.item.traits.DurabilityEater;
-import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class CorrosionTrait extends MobTrait {
+public class CorrosionTrait extends SlotIterateDamageTrait {
 
 	public CorrosionTrait(ChatFormatting format) {
 		super(format);
@@ -22,23 +19,15 @@ public class CorrosionTrait extends MobTrait {
 
 	@Override
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
-		LivingEntity target = cache.getAttackTarget();
-		List<EquipmentSlot> list = new ArrayList<>();
-		for (EquipmentSlot slot : EquipmentSlot.values()) {
-			ItemStack stack = target.getItemBySlot(slot);
-			if (stack.isDamageableItem()) {
-				list.add(slot);
-			}
-		}
-		if (list.size() == 0) return;
-		int count = Math.min(level, list.size());
-		for (int i = 0; i < count; i++) {
-			int index = attacker.getRandom().nextInt(list.size());
-			DurabilityEater.corrosion(target, list.remove(index));
-		}
+		int count = process(level, attacker, cache.getAttackTarget());
 		if (count < level) {
 			cache.addHurtModifier(DamageModifier.multTotal((float) (LHConfig.COMMON.corrosionDamage.get() * level * (level - count))));
 		}
+	}
+
+	@Override
+	protected void perform(LivingEntity target, EquipmentSlot slot) {
+		DurabilityEater.corrosion(target, slot);
 	}
 
 	@Override

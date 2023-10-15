@@ -105,6 +105,7 @@ public class L2Hostility {
 		gen.addProvider(server, new LHConfigGen(gen));
 		gen.addProvider(server, new TraitGLMProvider(gen));
 		gen.addProvider(server, new SlotGen(gen));
+		new DamageTypeGen(output, pvd, helper).generate(server, gen);
 	}
 
 	public static void toTrackingChunk(LevelChunk chunk, SerialPacketBase packet) {

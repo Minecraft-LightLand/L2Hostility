@@ -5,6 +5,7 @@ import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.DamageTypeGen;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
@@ -74,6 +75,15 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	}
 
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
+		var e = cache.getLivingHurtEvent();
+		assert e != null;
+		if (e.getAmount() > 0 && !e.getSource().is(DamageTypeGen.KILLER_AURA)) {
+			postHurt(level, attacker, cache.getAttackTarget());
+		}
+	}
+
+	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
+
 	}
 
 	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {

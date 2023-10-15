@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -27,19 +26,16 @@ public class TargetEffectTrait extends MobTrait {
 	}
 
 	@Override
-	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
-		if (cache.getLivingHurtEvent().getAmount() > 0) {
-			LivingEntity target = cache.getAttackTarget();
-			if (CurioCompat.hasItem(target, LHItems.RING_REFLECTION.get())) {
-				int radius = LHConfig.COMMON.ringOfReflectionRadius.get();
-				for (var e : target.level().getEntities(target, target.getBoundingBox().inflate(radius))) {
-					if (!(e instanceof Mob mob)) continue;
-					if (mob.distanceTo(target) > radius) continue;
-					EffectUtil.addEffect(mob, func.apply(level), EffectUtil.AddReason.NONE, attacker);
-				}
-			} else {
-				EffectUtil.addEffect(target, func.apply(level), EffectUtil.AddReason.NONE, attacker);
+	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
+		if (CurioCompat.hasItem(target, LHItems.RING_REFLECTION.get())) {
+			int radius = LHConfig.COMMON.ringOfReflectionRadius.get();
+			for (var e : target.level().getEntities(target, target.getBoundingBox().inflate(radius))) {
+				if (!(e instanceof Mob mob)) continue;
+				if (mob.distanceTo(target) > radius) continue;
+				EffectUtil.addEffect(mob, func.apply(level), EffectUtil.AddReason.NONE, attacker);
 			}
+		} else {
+			EffectUtil.addEffect(target, func.apply(level), EffectUtil.AddReason.NONE, attacker);
 		}
 	}
 

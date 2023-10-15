@@ -1,7 +1,7 @@
-// 1.20.1	2023-10-14T23:23:14.36752	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-10-15T18:02:31.974888	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-ab4c0c64455389e39b30dd98420a1dc5b057a616 assets/l2hostility/lang/en_ud.json
-81a248839a87e7de7db7adc873f233d477182f2d assets/l2hostility/lang/en_us.json
+c5e23fd3187d26722d4e53ee4e93cd9a536adb62 assets/l2hostility/lang/en_ud.json
+16975af85262b75b367200b697e23c12bf90c1fb assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -35,11 +35,13 @@ ba69cec47e6a481ee3a839b4b203736c07085f0e assets/l2hostility/models/item/hostilit
 f6a296c6a2848206b754d5a73a1bac29a584877d assets/l2hostility/models/item/imagine_breaker.json
 311422d8040181f622d8c0ddaa82f6e38fe6987d assets/l2hostility/models/item/infinity_glove.json
 58b06d8bf23062bfe4c6b14c92f5711eee66cb1b assets/l2hostility/models/item/invisible.json
+3ddab52c8faefddb808553cf6792661ae82231fa assets/l2hostility/models/item/killer_aura.json
 43c4e173ed5bf8b1b6a1a2a3c295bfee364b6cef assets/l2hostility/models/item/levitation.json
 63c7d15ce82bfc9c7841fcf40dcdd0951a18cc4d assets/l2hostility/models/item/nausea.json
 372f7e41bb394908ff62c74511a96f134e6c6b93 assets/l2hostility/models/item/oddeyes_glasses.json
 d6f0641018234ca1b5984f6501c165892d066091 assets/l2hostility/models/item/poison.json
 f39de621f7fb9484531ccbb1c2afa815ee4d9a96 assets/l2hostility/models/item/protection.json
+a05bb7b11be51e5184811d6a39397b6abb39aa49 assets/l2hostility/models/item/ragnarok.json
 9415fa390a57282395b635a1ae13894a7909b52d assets/l2hostility/models/item/reflect.json
 e492c947eea653cdc2c213d0dd2fd5d4fa69ad9d assets/l2hostility/models/item/regenerate.json
 ed1fb7ba55e7622b7a62b825755729bfa23468fb assets/l2hostility/models/item/repelling.json
@@ -49,6 +51,7 @@ db80edbe1ea395595d7176e5ff85813bcf2b951e assets/l2hostility/models/item/ring_of_
 f928384379d5ad5842826ea0664b052490e32012 assets/l2hostility/models/item/ring_of_life.json
 09e165575a74e763d341022dac9e89bd5f305920 assets/l2hostility/models/item/ring_of_ocean.json
 5cd7b230dff136fccfeda175ccb8a92bfeb51ee0 assets/l2hostility/models/item/ring_of_reflection.json
+f110d14173cc70205619c756e215533ab4e6718a assets/l2hostility/models/item/sealed_item.json
 017032b777ebc6a76cb09c6e097a335ebf5ec84a assets/l2hostility/models/item/slowness.json
 787903b9f0311061258da774b1ca33e23307b88a assets/l2hostility/models/item/soul_burner.json
 aa8aac690c3ed7ba60e12b9deb043759f3a3c4ab assets/l2hostility/models/item/speedy.json
@@ -143,6 +146,8 @@ edf64deed56924f50118492f25104511eb052cab data/l2hostility/tags/entity_types/blac
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/freezing_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/invisible_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/invisible_whitelist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/killer_aura_blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/killer_aura_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/levitation_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/levitation_whitelist.json
 a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/melee_weapon_target.json
@@ -154,6 +159,8 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/mele
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/poison_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/protection_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/protection_whitelist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/ragnarok_blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/ragnarok_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reflect_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reflect_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/regenerate_blacklist.json

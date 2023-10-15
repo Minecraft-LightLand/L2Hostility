@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModList;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,17 @@ public class CurioCompat {
 		return ans;
 	}
 
+	public static List<EntitySlotAccess> getItemAccess(LivingEntity player) {
+		List<EntitySlotAccess> ans = new ArrayList<>();
+		for (EquipmentSlot e : EquipmentSlot.values()) {
+			ans.add(new EquipmentSlotAccess(player, e));
+		}
+		if (ModList.get().isLoaded(CuriosApi.MODID)) {
+			getItemAccessImpl(ans, player);
+		}
+		return ans;
+	}
+
 	private static boolean hasItemImpl(LivingEntity player, Item item) {
 		var opt = CuriosApi.getCuriosInventory(player);
 		if (opt.resolve().isEmpty()) {
@@ -67,6 +79,32 @@ public class CurioCompat {
 				}
 			}
 		}
+	}
+
+	private static void getItemAccessImpl(List<EntitySlotAccess> list, LivingEntity player) {
+		var opt = CuriosApi.getCuriosInventory(player);
+		if (opt.resolve().isEmpty()) {
+			return;
+		}
+		for (var e : opt.resolve().get().getCurios().values()) {
+			for (int i = 0; i < e.getStacks().getSlots(); i++) {
+				list.add(new CurioSlotAccess(e.getStacks(), i));
+			}
+		}
+	}
+
+	private record CurioSlotAccess(IDynamicStackHandler handler, int slot) implements EntitySlotAccess {
+
+		@Override
+		public ItemStack get() {
+			return handler.getStackInSlot(slot);
+		}
+
+		@Override
+		public void set(ItemStack stack) {
+			handler.setStackInSlot(slot, stack);
+		}
+
 	}
 
 }
