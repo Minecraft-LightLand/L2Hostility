@@ -58,11 +58,7 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		if (difficulty < config.min_level) return false;
 		if (difficulty < config.cost) return false;
 		if (!EntityConfig.allow(le.getType(), this)) return false;
-		if (config.blacklist.contains(le.getType())) return false;
-		if (!config.whitelist.isEmpty()) {
-			return config.whitelist.contains(le.getType());
-		}
-		return true;
+		return config.allows(le.getType());
 	}
 
 	public void initialize(LivingEntity mob, int level) {

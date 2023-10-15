@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.init.data;
 
 import dev.xkmc.l2library.compat.curios.CurioEntityBuilder;
+import dev.xkmc.l2library.compat.curios.SlotCondition;
 import dev.xkmc.l2library.serial.config.RecordDataProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +20,8 @@ public class SlotGen extends RecordDataProvider {
 	public void add(BiConsumer<String, Record> map) {
 		map.accept("curios/curios/entities/l2hostility_entity", new CurioEntityBuilder(
 				new ArrayList<>(List.of(new ResourceLocation("player"))),
-				new ArrayList<>(List.of("head", "charm", "ring", "hands"))
+				new ArrayList<>(List.of("head", "charm", "ring", "hands")),
+				SlotCondition.of()
 		));
 	}
 }

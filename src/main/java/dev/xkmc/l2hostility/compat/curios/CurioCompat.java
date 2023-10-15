@@ -40,7 +40,7 @@ public class CurioCompat {
 	}
 
 	private static boolean hasItemImpl(LivingEntity player, Item item) {
-		var opt = CuriosApi.getCuriosHelper().getCuriosHandler(player);
+		var opt = CuriosApi.getCuriosInventory(player);
 		if (opt.resolve().isEmpty()) {
 			return false;
 		}
@@ -55,7 +55,7 @@ public class CurioCompat {
 	}
 
 	private static void getItemImpl(List<ItemStack> list, LivingEntity player, Predicate<ItemStack> pred) {
-		var opt = CuriosApi.getCuriosHelper().getCuriosHandler(player);
+		var opt = CuriosApi.getCuriosInventory(player);
 		if (opt.resolve().isEmpty()) {
 			return;
 		}

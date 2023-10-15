@@ -1,40 +1,86 @@
 package dev.xkmc.l2hostility.content.config;
 
+import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2library.serial.config.BaseConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.function.Consumer;
 
 @SerialClass
 public class TraitConfig extends BaseConfig {
 
-	public static final TraitConfig DEFAULT = new TraitConfig(10, 100, 1, 10);
+	public static final TraitConfig DEFAULT = new TraitConfig(
+			new ResourceLocation(L2Hostility.MODID, "default"),
+			10, 100, 1, 10);
 
 	@SerialClass.SerialField
 	public int min_level, cost, max_rank, weight;
-
-	@SerialClass.SerialField
-	public LinkedHashSet<EntityType<?>> blacklist = new LinkedHashSet<>();
-
-	@SerialClass.SerialField
-	public LinkedHashSet<EntityType<?>> whitelist = new LinkedHashSet<>();
 
 	@Deprecated
 	public TraitConfig() {
 	}
 
-	public TraitConfig(int cost, int weight, int maxRank, int minLevel) {
+	public TraitConfig(ResourceLocation rl, int cost, int weight, int maxRank, int minLevel) {
+		this.id = rl;
 		this.cost = cost;
 		this.weight = weight;
 		this.max_rank = maxRank;
 		this.min_level = minLevel;
+		addBlacklist(e -> {
+		});
+		addWhitelist(e -> {
+		});
 	}
 
-	public TraitConfig whitelist(EntityType<?>... types) {
-		whitelist.addAll(Arrays.asList(types));
+	@Nullable
+	private TagKey<EntityType<?>> getBlacklistTag() {
+		if (id == null) return null;
+		ResourceLocation tag = new ResourceLocation(id.getNamespace(), id.getPath() + "_blacklist");
+		return TagKey.create(Registries.ENTITY_TYPE, tag);
+	}
+
+	@Nullable
+	private TagKey<EntityType<?>> getWhitelistTag() {
+		if (id == null) return null;
+		ResourceLocation tag = new ResourceLocation(id.getNamespace(), id.getPath() + "_whitelist");
+		return TagKey.create(Registries.ENTITY_TYPE, tag);
+	}
+
+	public TraitConfig addWhitelist(Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<EntityType<?>>> pvd) {
+		var tag = getWhitelistTag();
+		assert tag != null;
+		TagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
 		return this;
+	}
+
+	public TraitConfig addBlacklist(Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<EntityType<?>>> pvd) {
+		var tag = getBlacklistTag();
+		assert tag != null;
+		TagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
+		return this;
+	}
+
+	public boolean allows(EntityType<?> type) {
+		var blacklist = getBlacklistTag();
+		var whitelist = getWhitelistTag();
+		if (blacklist != null && type.is(blacklist)) return false;
+		if (whitelist != null) {
+			var manager = ForgeRegistries.ENTITY_TYPES.tags();
+			if (manager != null) {
+				if (!manager.getTag(whitelist).isEmpty()) {
+					return type.is(whitelist);
+				}
+			}
+		}
+		return true;
 	}
 
 }
