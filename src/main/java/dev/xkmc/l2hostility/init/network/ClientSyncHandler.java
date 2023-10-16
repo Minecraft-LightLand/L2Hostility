@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.init.network;
 
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import net.minecraft.client.Minecraft;
@@ -14,6 +15,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class ClientSyncHandler {
 
@@ -53,6 +55,25 @@ public class ClientSyncHandler {
 				lv.addParticle(ParticleTypes.HAPPY_VILLAGER, dx, dy, dz, 0, 0, 0);
 			}
 			lv.playLocalSound(x + 8, y + 8, z + 8, SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 1.0F, 1.0F, false);
+		}
+	}
+
+	public static void triggerAura(TraitEffectToClient packet) {
+		if (Proxy.getClientWorld() != null && packet.id >= 0 && Proxy.getClientWorld().getEntity(packet.id) instanceof LivingEntity entity) {
+			Level level = Proxy.getClientWorld();
+			double radius = LHConfig.COMMON.killerAuraRange.get();
+			Vec3 center = entity.position();
+			for (int i = 0; i < 100; i++) {
+				float tpi = (float) (Math.PI * 2);
+				Vec3 v0 = new Vec3(0, radius, 0);
+				v0 = v0.xRot(tpi / 4).yRot(level.getRandom().nextFloat() * tpi);
+				level.addAlwaysVisibleParticle(ParticleTypes.FLAME,
+						center.x + v0.x,
+						center.y + v0.y + 0.5f,
+						center.z + v0.z, 0, 0, 0);
+			}
+			entity.level().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRECHARGE_USE,
+					entity.getSoundSource(), 3, 1.0F, false);
 		}
 	}
 

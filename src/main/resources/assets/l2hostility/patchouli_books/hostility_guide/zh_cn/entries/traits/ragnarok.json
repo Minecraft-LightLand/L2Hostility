@@ -1,16 +1,16 @@
 {
-  "name": "Ragnarok",
+  "name": "诸神黄昏",
   "icon": "l2hostility:ragnarok",
   "category": "l2hostility:traits",
   "pages": [
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:ragnarok",
-	  "text": "Mobs with this trait can seal equipments and curios. To unseal them, take them down and use them for several seconds.$(br2)It only appears at very high level, so don't worry too much."
+	  "text": "持有者个词条的怪物在击中玩家时可以封印玩家身上的装备武器和饰品。解锁它们需要拿在手上啃几秒。$(br2)只在非常高等级的怪物身上出现，前期别担心。"
 	},
 	{
 	  "type": "patchouli:text",
-	  "text": "To deal with mobs with this trait, you need to have ways to swap important equipments quickly, or avoid reaching levels that would spawn this trait."
+	  "text": "对付持有这个词条的怪物没有什么特别好的方法，只能尽量远程无伤击杀。"
 	}
   ]
 }

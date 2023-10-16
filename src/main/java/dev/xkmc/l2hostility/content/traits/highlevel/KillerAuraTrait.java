@@ -2,15 +2,20 @@ package dev.xkmc.l2hostility.content.traits.highlevel;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.DamageTypeGen;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
+import dev.xkmc.l2hostility.init.network.TraitEffects;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
@@ -25,7 +30,7 @@ public class KillerAuraTrait extends MobTrait {
 		int itv = LHConfig.COMMON.killerAuraInterval.get() / level;
 		int damage = LHConfig.COMMON.killerAuraDamage.get() * level;
 		int range = LHConfig.COMMON.killerAuraRange.get();
-		if (mob.tickCount % itv == 0) {
+		if (!mob.level().isClientSide() && mob.tickCount % itv == 0) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			AABB box = mob.getBoundingBox().inflate(range);
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
@@ -36,6 +41,17 @@ public class KillerAuraTrait extends MobTrait {
 							mob, null), damage);
 				}
 			}
+			L2Hostility.HANDLER.toTrackingPlayers(new TraitEffectToClient(mob, this, TraitEffects.AURA), mob);
+		}
+		if (mob.level().isClientSide()) {
+			Vec3 center = mob.position();
+			float tpi = (float) (Math.PI * 2);
+			Vec3 v0 = new Vec3(0, range, 0);
+			v0 = v0.xRot(tpi / 4).yRot(mob.getRandom().nextFloat() * tpi);
+			mob.level().addAlwaysVisibleParticle(ParticleTypes.FLAME,
+					center.x + v0.x,
+					center.y + v0.y + 0.5f,
+					center.z + v0.z, 0, 0, 0);
 		}
 	}
 

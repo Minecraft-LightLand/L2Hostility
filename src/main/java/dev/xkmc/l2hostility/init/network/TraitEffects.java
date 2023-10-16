@@ -5,7 +5,9 @@ import java.util.function.Supplier;
 
 public enum TraitEffects {
 	UNDYING(() -> ClientSyncHandler::triggerUndying),
-	CLEAR(() -> ClientSyncHandler::triggerClear);
+	CLEAR(() -> ClientSyncHandler::triggerClear),
+	AURA(() -> ClientSyncHandler::triggerAura),
+	;
 
 	public final Supplier<Consumer<TraitEffectToClient>> func;
 
