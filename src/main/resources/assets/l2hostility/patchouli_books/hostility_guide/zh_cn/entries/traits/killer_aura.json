@@ -1,0 +1,16 @@
+{
+  "name": "Killer Aura",
+  "icon": "l2hostility:killer_aura",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:killer_aura",
+	  "text": "Mobs with this trait can deal magic damage when you approach it. Even when you are immune to the damage, other attack trait effects would still apply.$(br2)It only appears at very high level, so don't worry too much."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To deal with mobs with this trait, kill it using ranged weapon, or be prepared of its damage and effects."
+	}
+  ]
+}

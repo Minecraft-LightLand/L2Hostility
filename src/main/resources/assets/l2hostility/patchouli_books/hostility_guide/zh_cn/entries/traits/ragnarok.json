@@ -1,0 +1,16 @@
+{
+  "name": "Ragnarok",
+  "icon": "l2hostility:ragnarok",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:ragnarok",
+	  "text": "Mobs with this trait can seal equipments and curios. To unseal them, take them down and use them for several seconds.$(br2)It only appears at very high level, so don't worry too much."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To deal with mobs with this trait, you need to have ways to swap important equipments quickly, or avoid reaching levels that would spawn this trait."
+	}
+  ]
+}

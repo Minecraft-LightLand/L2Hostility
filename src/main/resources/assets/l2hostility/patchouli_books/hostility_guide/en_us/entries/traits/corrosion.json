@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:corrosion",
-	  "text": "Mobs with this trait can damage equipments, especially when equipments have low durability."
+	  "text": "Mobs with this trait can damage equipments, especially when equipments have low durability.$(br2)It only appears at very high level, so don't worry too much."
 	},
 	{
 	  "type": "patchouli:text",

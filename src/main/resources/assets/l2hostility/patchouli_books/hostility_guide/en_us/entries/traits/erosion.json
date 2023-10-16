@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:erosion",
-	  "text": "Mobs with this trait can damage equipments, especially when equipments have high durability."
+	  "text": "Mobs with this trait can damage equipments, especially when equipments have high durability.$(br2)It only appears at very high level, so don't worry too much."
 	},
 	{
 	  "type": "patchouli:text",

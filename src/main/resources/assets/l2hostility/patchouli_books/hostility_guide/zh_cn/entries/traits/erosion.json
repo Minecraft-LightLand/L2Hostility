@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:erosion",
-	  "text": "有这个词条的怪物可以大幅消耗攻击目标的装备耐久，特别是装备耐久高的时候"
+	  "text": "有这个词条的怪物可以大幅消耗攻击目标的装备耐久，特别是装备耐久高的时候$(br2)非常高等级的怪物才会有这个词条，前期别太担心"
 	},
 	{
 	  "type": "patchouli:text",

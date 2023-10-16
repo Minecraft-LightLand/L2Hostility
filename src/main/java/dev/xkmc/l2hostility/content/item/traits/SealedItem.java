@@ -46,6 +46,7 @@ public class SealedItem extends Item {
 
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+		user.stopUsingItem();
 		return ItemStack.of(stack.getOrCreateTag().getCompound(DATA));
 	}
 

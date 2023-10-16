@@ -1,3 +1,8 @@
+2.4.10
+- add 2 rings
+- add 3 slot-adding curios
+- add 4 traits
+
 2.4.9
 - bosses will no longer have undead trait
 - now trait whitelist/blacklist are all tag based
