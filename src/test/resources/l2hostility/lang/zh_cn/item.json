@@ -28,7 +28,8 @@
 	"witch_wand": "混乱魔药法杖",
 	"infinity_glove": "无限手套",
 	"oddeyes_glasses": "异色眼镜",
-	"triple_strip_cape": "三色披风"
+	"triple_strip_cape": "三色披风",
+	"sealed_item": "被封印的物品"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"
@@ -69,6 +70,10 @@
 	"corrosion": "腐蚀",
 	"corrosion.desc": "击中目标时，随机选中%s个装备，消耗等同于其损失的耐久的%s。如果装备不够，每少一件增加%s伤害。",
 	"erosion": "风蚀",
-	"erosion.desc": "击中目标时，随机选中%s个装备，消耗当前耐久的%s。如果装备不够，每少一件增加%s伤害。"
+	"erosion.desc": "击中目标时，随机选中%s个装备，消耗当前耐久的%s。如果装备不够，每少一件增加%s伤害。",
+	"killer_aura": "杀戮光环",
+	"killer_aura.desc": "每%3$s对%2$s格内的玩家和对自己有敌意的生物造成%1$s魔法伤害并施加词条效果",
+	"ragnarok": "诸神黄昏",
+	"ragnarok.desc": "When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal."
   }
 }

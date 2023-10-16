@@ -3,6 +3,8 @@
   "config.jade.plugin_l2hostility.mob": "莱特兰·恶意",
   "patchouli.l2hostility.landing": "了解难度机制和怪物词条，以更好地应对它们",
   "patchouli.l2hostility.title": "莱特兰恶意教程",
+  "death.attack.killer_aura": "%s was killed by killer aura",
+  "death.attack.killer_aura.player": "%s was killed by %s's killer aura",
   "l2hostility": {
 	"command": {
 	  "player": {
@@ -28,7 +30,9 @@
 	  "min_level": "最低怪物等级: %s",
 	  "shift": "按SHIFT显示生成要求",
 	  "weight": "权重: %s",
-	  "banned": "这个词条被禁用了"
+	  "banned": "这个词条被禁用了",
+	  "seal_time": "持续使用%s秒来破除封印",
+	  "sealed_item": "被封印的物品："
 	},
 	"item": {
 	  "wand": {

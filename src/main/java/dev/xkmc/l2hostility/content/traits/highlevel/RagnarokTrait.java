@@ -10,6 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RagnarokTrait extends MobTrait {
@@ -20,8 +21,8 @@ public class RagnarokTrait extends MobTrait {
 
 	@Override
 	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
-		List<EntitySlotAccess> list = CurioCompat.getItemAccess(target)
-				.stream().filter(e -> !e.get().isEmpty() && !e.get().is(LHItems.SEAL.get())).toList();
+		List<EntitySlotAccess> list = new ArrayList<>(CurioCompat.getItemAccess(target)
+				.stream().filter(e -> !e.get().isEmpty() && !e.get().is(LHItems.SEAL.get())).toList());
 		int count = Math.min(level, list.size());
 		int time = LHConfig.COMMON.ragnarokTime.get() * level;
 		for (int i = 0; i < count; i++) {
