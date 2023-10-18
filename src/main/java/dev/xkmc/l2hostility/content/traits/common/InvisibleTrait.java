@@ -27,7 +27,9 @@ public class InvisibleTrait extends SelfEffectTrait {
 		for (var e : EquipmentSlot.values()) {
 			ItemStack stack = mob.getItemBySlot(e);
 			if (!stack.isEmpty()) {
-				stack.enchant(LCEnchantments.SHULKER_ARMOR.get(), 1);
+				if (stack.getEnchantmentLevel(LCEnchantments.SHULKER_ARMOR.get()) == 0) {
+					stack.enchant(LCEnchantments.SHULKER_ARMOR.get(), 1);
+				}
 			}
 		}
 	}

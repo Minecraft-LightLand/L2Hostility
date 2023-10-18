@@ -3,6 +3,11 @@
 - add 3 slot-adding curios
 - add 4 traits
 
+2.4.10
+- Fix regen calling potion test every tick
+- Fix Invisible apply effects repeatedly
+- Fix name plates being rendered from very far away
+
 2.4.9
 - bosses will no longer have undead trait
 - now trait whitelist/blacklist are all tag based
