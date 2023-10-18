@@ -14,7 +14,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -59,7 +58,8 @@ public class ClientEvents {
 	protected static void renderNameTag(RenderNameTagEvent event, Component text, PoseStack pose, float offset, Font.DisplayMode mode) {
 		var dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
 		double d0 = dispatcher.distanceToSqr(event.getEntity());
-		if (ForgeHooksClient.isNameplateInRenderDistance(event.getEntity(), d0)) {
+		int max = LHConfig.CLIENT.overHeadRenderDistance.get();
+		if (d0 < max * max) {
 			float f = event.getEntity().getNameTagOffsetY() + offset;
 			pose.pushPose();
 			pose.translate(0.0F, f, 0.0F);

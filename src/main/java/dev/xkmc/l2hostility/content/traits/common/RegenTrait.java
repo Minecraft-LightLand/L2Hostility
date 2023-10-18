@@ -20,9 +20,9 @@ public class RegenTrait extends MobTrait {
 	@Override
 	public void tick(LivingEntity mob, int level) {
 		if (mob.level().isClientSide()) return;
-		if (!validTarget(mob)) return;
 
 		if (mob.tickCount % 20 == 0) {
+			if (!validTarget(mob)) return;
 			mob.heal((float) (mob.getMaxHealth() * LHConfig.COMMON.regen.get() * level));
 		}
 	}
