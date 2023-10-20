@@ -25,7 +25,8 @@ public class LHBlocks {
 
 	static {
 		BURST_SPAWNER = L2Hostility.REGISTRATE.block("hostility_spawner", p ->
-						DelegateBlock.newBaseBlock(BlockBehaviour.Properties.copy(Blocks.SPAWNER),
+						DelegateBlock.newBaseBlock(BlockBehaviour.Properties.copy(Blocks.SPAWNER)
+										.strength(50.0F, 1200.0F),
 								TraitSpawnerBlock.BASE, TraitSpawnerBlock.CLICK,
 								TraitSpawnerBlock.BURST, TraitSpawnerBlock.BE_BURST))
 				.blockstate((ctx, pvd) ->
