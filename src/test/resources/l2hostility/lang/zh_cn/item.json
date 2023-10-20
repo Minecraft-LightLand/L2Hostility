@@ -29,7 +29,8 @@
 	"infinity_glove": "无限手套",
 	"oddeyes_glasses": "异色眼镜",
 	"triple_strip_cape": "三色披风",
-	"sealed_item": "被封印的物品"
+	"sealed_item": "被封印的物品",
+	"ring_of_healing": "再生之戒"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"

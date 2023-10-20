@@ -175,6 +175,14 @@ public class RecipeGen {
 						.define('D', LHTraits.REPELLING.get().asItem())
 						.save(pvd);
 
+				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.RING_HEALING.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+						.pattern("BAB").pattern("DID").pattern("BAB")
+						.define('I', LHItems.CHAOS_INGOT.get())
+						.define('A', Items.GHAST_TEAR)
+						.define('B', LCMats.TOTEMIC_GOLD.getIngot())
+						.define('D', LHTraits.REGEN.get().asItem())
+						.save(pvd);
+
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.RING_DIVINITY.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 						.pattern("BAB").pattern("DID").pattern("BAB")
 						.define('I', LHItems.CHAOS_INGOT.get())

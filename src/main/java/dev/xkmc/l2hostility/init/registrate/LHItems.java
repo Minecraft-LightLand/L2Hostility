@@ -51,6 +51,7 @@ public class LHItems {
 	public static final ItemEntry<RingOfReflection> RING_REFLECTION;
 	public static final ItemEntry<RingOfIncarceration> RING_INCARCERATION;
 	public static final ItemEntry<RingOfCorrosion> RING_CORROSION;
+	public static final ItemEntry<RingOfHealing> RING_HEALING;
 	public static final ItemEntry<FlamingThorn> FLAMING_THORN;
 	public static final ItemEntry<ImagineBreaker> IMAGINE_BREAKER;
 	public static final ItemEntry<InfinityGlove> INFINITY_GLOVE;
@@ -117,6 +118,7 @@ public class LHItems {
 			RING_REFLECTION = curio("ring_of_reflection", RingOfReflection::new).tag(chaos, ring).register();
 			RING_INCARCERATION = curio("ring_of_incarceration", RingOfIncarceration::new).tag(chaos, ring).register();
 			RING_CORROSION = curio("ring_of_corrosion", RingOfCorrosion::new).tag(chaos, ring).register();
+			RING_HEALING = curio("ring_of_healing", RingOfHealing::new).tag(chaos, ring).register();
 
 			TagKey<Item> hand = ItemTags.create(new ResourceLocation("curios", "hands"));
 

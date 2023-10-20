@@ -1,7 +1,7 @@
-// 1.20.1	2023-10-15T18:02:31.974888	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-10-20T16:28:26.561572	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-c5e23fd3187d26722d4e53ee4e93cd9a536adb62 assets/l2hostility/lang/en_ud.json
-16975af85262b75b367200b697e23c12bf90c1fb assets/l2hostility/lang/en_us.json
+787227e482a3545d1ed421fc293899225e404b22 assets/l2hostility/lang/en_ud.json
+47f277b9df498289e46f3c7bc8429c8376075cf8 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -47,6 +47,7 @@ e492c947eea653cdc2c213d0dd2fd5d4fa69ad9d assets/l2hostility/models/item/regenera
 ed1fb7ba55e7622b7a62b825755729bfa23468fb assets/l2hostility/models/item/repelling.json
 719e3776a98f50754ab21bebed88ac0fecffb41e assets/l2hostility/models/item/ring_of_corrosion.json
 834aa04dbe72188d793d95bf1242cc676e0055f2 assets/l2hostility/models/item/ring_of_divinity.json
+5e3ead5ca77215d340c3e087e2232bbcb5890baa assets/l2hostility/models/item/ring_of_healing.json
 db80edbe1ea395595d7176e5ff85813bcf2b951e assets/l2hostility/models/item/ring_of_incarceration.json
 f928384379d5ad5842826ea0664b052490e32012 assets/l2hostility/models/item/ring_of_life.json
 09e165575a74e763d341022dac9e89bd5f305920 assets/l2hostility/models/item/ring_of_ocean.json
@@ -68,7 +69,7 @@ e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.j
 d71f7aad9c585bef4ff66b28cd3e1655ff90070b data/curios/tags/items/charm.json
 a7abb7fcb160c29506cfc852194c5c3aaaf0060d data/curios/tags/items/hands.json
 63302afd6032fba91cf0e46be0c7c05285866cb9 data/curios/tags/items/head.json
-005a9a7e1335c1104f7df647d012a728a33f634a data/curios/tags/items/ring.json
+07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/items/ring.json
 5390655f853ac0e38d158b122b4c3c492de4ea81 data/l2hostility/advancements/recipes/misc/bottle_of_curse.json
 d89c5a52d1a034bbf27d94dfc6d88aefda4c5e53 data/l2hostility/advancements/recipes/misc/bottle_of_sanity_craft.json
 e3f2e16976b94317d9840442c2d815c84db5003c data/l2hostility/advancements/recipes/misc/bottle_of_sanity_renew.json
@@ -89,6 +90,7 @@ ea1d1829f63f15c21378af0c479cb1aa4f41faef data/l2hostility/advancements/recipes/m
 0a9726691dbf35d83d068d801119480ee1c42fce data/l2hostility/advancements/recipes/misc/oddeyes_glasses.json
 621d20d74f7c23aea3b24ed830816cf0183493ec data/l2hostility/advancements/recipes/misc/ring_of_corrosion.json
 e1290a09ffca7dedc0b86647e86a2e726610e17b data/l2hostility/advancements/recipes/misc/ring_of_divinity.json
+cf001d91755048631987520a699e0b8e9b9a8473 data/l2hostility/advancements/recipes/misc/ring_of_healing.json
 c84e2bbe22331e9803a40c67a272b31a224362c7 data/l2hostility/advancements/recipes/misc/ring_of_incarceration.json
 9946066493eb5bc748b6efaf32a295ebfbd02744 data/l2hostility/advancements/recipes/misc/ring_of_life.json
 f8096b5a017b8f2dd4e906cf9cda01361e6be998 data/l2hostility/advancements/recipes/misc/ring_of_ocean.json
@@ -116,6 +118,7 @@ e6340c32bec0cc4b97a645f6094cb422e18b392e data/l2hostility/recipes/infinity_glove
 12302dd6c971abe986dd150f6b9189fbdeceb7d3 data/l2hostility/recipes/oddeyes_glasses.json
 9c077c79bbd5b51ca436baf1f1ae33bdfe20d196 data/l2hostility/recipes/ring_of_corrosion.json
 b0cd6cb0a949303611453553f2089191102e4424 data/l2hostility/recipes/ring_of_divinity.json
+4dee05804c241f8b40cdabd6f5c6f0a7c3f4aff6 data/l2hostility/recipes/ring_of_healing.json
 dd023e19f8d0b39f15a94c631b024d0f280fbb95 data/l2hostility/recipes/ring_of_incarceration.json
 ab7d5325b5f812e70a745c856d154020f81c5fd3 data/l2hostility/recipes/ring_of_life.json
 758d7de93711b59e054a6247360496277c827e4b data/l2hostility/recipes/ring_of_ocean.json
@@ -183,5 +186,5 @@ a37c8a7cf9e25ba9178196b0552e6c5e79567ffa data/l2hostility/tags/entity_types/undy
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/weakness_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
-7577c7316ff8df91f08e3f9d8d00cecf3a828ff2 data/l2hostility/tags/items/chaos_equipment.json
+d4cef9e3f70679f44d73ba76d5b777c60857acf5 data/l2hostility/tags/items/chaos_equipment.json
 e7bd765cf86b012712df42659c7ff073ed8568a2 data/minecraft/tags/blocks/mineable/pickaxe.json

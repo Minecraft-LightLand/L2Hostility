@@ -113,6 +113,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue ringOfReflectionRadius;
 		public final ForgeConfigSpec.IntValue witchWandFactor;
 		public final ForgeConfigSpec.DoubleValue ringOfCorrosionFactor;
+		public final ForgeConfigSpec.DoubleValue ringOfHealingRate;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
 
@@ -196,6 +197,9 @@ public class LHConfig {
 
 				ringOfCorrosionFactor = builder.comment("Factor of maximum durability to cost for ring of corrosion")
 						.defineInRange("ringOfCorrosionFactor", 0.2, 0, 1);
+
+				ringOfHealingRate = builder.comment("Percentage of health to heal every second")
+						.defineInRange("ringOfHealingRate", 0.05, 0, 1);
 
 				// curse
 				{
