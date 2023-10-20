@@ -9,6 +9,7 @@ import dev.xkmc.l2hostility.init.L2HostilityClient;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2tabs.tabs.contents.BaseTextScreen;
 import dev.xkmc.l2tabs.tabs.core.TabManager;
+import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -27,7 +28,7 @@ public class DifficultyScreen extends BaseTextScreen {
 
 	public void init() {
 		super.init();
-		new TabManager(this).init(this::addRenderableWidget, L2HostilityClient.TAB_DIFFICULTY);
+		new TabManager<>(this, new InvTabData()).init(this::addRenderableWidget, L2HostilityClient.TAB_DIFFICULTY);
 	}
 
 	public void render(GuiGraphics g, int mx, int my, float ptick) {
