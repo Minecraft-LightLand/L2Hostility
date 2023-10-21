@@ -1,0 +1,30 @@
+{
+  "list": [
+    {
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 50,
+        "min": 200,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "cataclysm:the_leviathan"
+      ],
+      "traits": [
+        {
+          "free": 2,
+          "min": 2,
+          "trait": "l2hostility:reflect"
+        },
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:freezing"
+        }
+      ]
+    }
+  ]
+}

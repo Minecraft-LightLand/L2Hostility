@@ -1,5 +1,7 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.github.L_Ender.cataclysm.Cataclysm;
+import com.github.L_Ender.cataclysm.init.ModEntities;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
@@ -13,10 +15,12 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.RegistryObject;
 import twilightforest.TwilightForestMod;
 import twilightforest.init.TFEntities;
 
@@ -94,41 +98,74 @@ public class LHConfigGen extends ConfigDataProvider {
 		);
 
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
-			collector.add(L2Hostility.ENTITY, new ResourceLocation(TwilightForestMod.ID, "bosses"), new EntityConfig()
-					.putEntity(50, 20, 0, 0, List.of(TFEntities.NAGA.get()), List.of(
-							new EntityConfig.TraitBase(LHTraits.SPEEDY.get(), 1, 2),
-							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 0, 1)
-					))
-					.putEntity(100, 30, 0, 0, List.of(TFEntities.LICH.get()), List.of(
-							new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 2, 3),
-							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-					))
-					.putEntity(100, 30, 0, 0, List.of(TFEntities.MINOSHROOM.get()), List.of(
-							new EntityConfig.TraitBase(LHTraits.TANK.get(), 0, 3),
-							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-					))
-					.putEntity(100, 30, 0, 0, List.of(TFEntities.ALPHA_YETI.get()), List.of(
-							new EntityConfig.TraitBase(LHTraits.REGEN.get(), 1, 1),
-							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-					))
-					.putEntity(150, 50, 0, 0, List.of(TFEntities.HYDRA.get()), List.of(
-							new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 1, 1),
-							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-					))
-					.putEntity(150, 50, 0, 0, List.of(TFEntities.KNIGHT_PHANTOM.get()), List.of(
-							new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 0, 1),
-							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-					))
-					.putEntity(150, 50, 0, 0, List.of(TFEntities.SNOW_QUEEN.get()), List.of(
-							new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 1, 1),
-							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-					))
-					.putEntity(150, 50, 0, 0, List.of(TFEntities.UR_GHAST.get()), List.of(
-							new EntityConfig.TraitBase(LHTraits.WITHER.get(), 1, 1),
-							new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-					))
+			addEntity(collector, 50, 20, TFEntities.NAGA,
+					new EntityConfig.TraitBase(LHTraits.SPEEDY.get(), 1, 2),
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 0, 1)
+			);
+			addEntity(collector, 100, 30, TFEntities.LICH,
+					new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 2, 3),
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+			);
+			addEntity(collector, 100, 30, TFEntities.MINOSHROOM,
+					new EntityConfig.TraitBase(LHTraits.TANK.get(), 0, 3),
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+			);
+			addEntity(collector, 100, 30, TFEntities.ALPHA_YETI,
+					new EntityConfig.TraitBase(LHTraits.REGEN.get(), 1, 1),
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+			);
+			addEntity(collector, 150, 50, TFEntities.HYDRA,
+					new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 1, 1),
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+			);
+			addEntity(collector, 150, 50, TFEntities.KNIGHT_PHANTOM,
+					new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 0, 1),
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+			);
+			addEntity(collector, 150, 50, TFEntities.SNOW_QUEEN,
+					new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 1, 1),
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+			);
+			addEntity(collector, 150, 50, TFEntities.UR_GHAST,
+					new EntityConfig.TraitBase(LHTraits.WITHER.get(), 1, 1),
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
 			);
 		}
+
+		if (ModList.get().isLoaded(Cataclysm.MODID)) {
+			addEntity(collector, 200, 50, ModEntities.ENDER_GUARDIAN,
+					new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
+					new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 3, 5)
+			);
+			addEntity(collector, 200, 50, ModEntities.NETHERITE_MONSTROSITY,
+					new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
+					new EntityConfig.TraitBase(LHTraits.SLOWNESS.get(), 3, 5)
+			);
+			addEntity(collector, 200, 50, ModEntities.IGNIS,
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
+					new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 2, 3)
+			);
+			addEntity(collector, 200, 50, ModEntities.THE_HARBINGER,
+					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
+					new EntityConfig.TraitBase(LHTraits.WITHER.get(), 2, 3)
+			);
+			addEntity(collector, 200, 50, ModEntities.THE_LEVIATHAN,
+					new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 2, 2),
+					new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 2, 3)
+			);
+			addEntity(collector, 100, 30, ModEntities.ENDER_GOLEM,
+					new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 0, 1),
+					new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 0, 1)
+			);
+			addEntity(collector, 100, 30, ModEntities.AMETHYST_CRAB,
+					new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 0, 1),
+					new EntityConfig.TraitBase(LHTraits.POISON.get(), 0, 1)
+			);
+		}
+	}
+
+	private static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, RegistryObject<EntityType<T>> obj, EntityConfig.TraitBase... traits) {
+		collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntity(min, base, 0, 0, List.of(obj.get()), List.of(traits)));
 	}
 
 }
