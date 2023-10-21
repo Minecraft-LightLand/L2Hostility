@@ -1,5 +1,5 @@
 2.4.10
-- add 2 rings
+- add 3 rings
 - add 3 slot-adding curios
 - add 4 traits
 

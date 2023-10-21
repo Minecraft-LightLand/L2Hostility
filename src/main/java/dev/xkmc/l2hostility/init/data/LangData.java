@@ -52,7 +52,7 @@ public enum LangData {
 	ITEM_WITCH_WAND("item.equipment.witch_wand", "Throw random splash potions on right click. Types selected from random potion traits.", 0),
 	ITEM_RING_CORROSION("item.equipment.ring_of_corrosion", "When you deal damage, damage all their equipments by %s%% of their max durability.", 1),
 	ITEM_RING_INCARCERATION("item.equipment.ring_of_incarceration", "When sneaking, apply Incarceration effect on you and all mobs within your attack range.", 0),
-	ITEM_RING_HEALING("item.equipment.ring_of_healing", "Heals %s%% of max health every second.", 0),
+	ITEM_RING_HEALING("item.equipment.ring_of_healing", "Heals %s%% of max health every second.", 1),
 
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),
