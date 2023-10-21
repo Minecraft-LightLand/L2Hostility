@@ -155,17 +155,18 @@ repositories {
         dirs 'libs'
     }
     maven {
-        // Location of the maven that hosts JEI files (and TiC)
-        name 'Progwml6 maven'
-        url 'https://dvs1.progwml6.com/files/maven'
-    }
-    maven { // Registrate
-        url "https://maven.tterrag.com/"
-    }
-    maven {
         // Location of the maven for vazkii's mods
         name 'blamejared'
         url 'https://maven.blamejared.com'
+        content {
+            includeGroup "mezz.jei"
+        }
+    }
+    maven { // Registrate
+        url "https://maven.tterrag.com/"
+        content {
+            includeGroup "com.tterrag.registrate"
+        }
     }
     maven {
         url 'https://www.cursemaven.com'
@@ -175,8 +176,16 @@ repositories {
     }
     maven {
         url = "https://maven.theillusivec4.top/"
+        content {
+            includeGroup "top.theillusivec4.curios"
+        }
     }
-    maven { url 'https://jitpack.io' }
+    maven {
+        url 'https://jitpack.io'
+        content {
+            includeGroup "com.github.llamalad7.mixinextras"
+        }
+    }
 }
 
 dependencies {
@@ -201,6 +210,8 @@ dependencies {
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     implementation fg.deobf("curse.maven:the-twilight-forest-227639:4635921")
     implementation fg.deobf("curse.maven:jade-324717:4654448")
+    implementation fg.deobf("curse.maven:l_ender-s-cataclysm-551586:4778613")
+    implementation fg.deobf("curse.maven:citadel-331936:4786380")
 
     runtimeOnly fg.deobf("curse.maven:attributefix-280510:4588114")
     runtimeOnly fg.deobf("curse.maven:bookshelf-228525:4581675")

@@ -10,7 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
@@ -40,30 +39,26 @@ public class TraitConfig extends BaseConfig {
 		});
 	}
 
-	@Nullable
-	private TagKey<EntityType<?>> getBlacklistTag() {
-		if (id == null) return null;
+	public TagKey<EntityType<?>> getBlacklistTag() {
+		assert id != null;
 		ResourceLocation tag = new ResourceLocation(id.getNamespace(), id.getPath() + "_blacklist");
 		return TagKey.create(Registries.ENTITY_TYPE, tag);
 	}
 
-	@Nullable
-	private TagKey<EntityType<?>> getWhitelistTag() {
-		if (id == null) return null;
+	public TagKey<EntityType<?>> getWhitelistTag() {
+		assert id != null;
 		ResourceLocation tag = new ResourceLocation(id.getNamespace(), id.getPath() + "_whitelist");
 		return TagKey.create(Registries.ENTITY_TYPE, tag);
 	}
 
 	public TraitConfig addWhitelist(Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<EntityType<?>>> pvd) {
 		var tag = getWhitelistTag();
-		assert tag != null;
 		TagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
 		return this;
 	}
 
 	public TraitConfig addBlacklist(Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<EntityType<?>>> pvd) {
 		var tag = getBlacklistTag();
-		assert tag != null;
 		TagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
 		return this;
 	}
