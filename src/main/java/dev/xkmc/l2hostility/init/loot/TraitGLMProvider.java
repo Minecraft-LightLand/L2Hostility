@@ -102,6 +102,8 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.EROSION.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 1, 0, 0.1);
 		add(LHTraits.AURA.get(), new ItemStack(LCItems.EMERALD, 1), 1, 0, 0.02);
 		add(LHTraits.RAGNAROK.get(), new ItemStack(LCItems.BLACKSTONE_CORE, 1), 1, 0, 0.05);
+		add(LHTraits.SHULKER.get(), new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.2);
+		add(LHTraits.GRENADE.get(), new ItemStack(LCItems.STORM_CORE, 1), 1, 0.1, 0.05);
 
 		add(LHTraits.DISPELL.get(), new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);
 

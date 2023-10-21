@@ -1,7 +1,7 @@
 2.4.11
 - add 3 rings
 - add 3 slot-adding curios
-- add 4 traits
+- add 6 traits
 
 2.4.10
 - Fix regen calling potion test every tick

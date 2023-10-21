@@ -107,6 +107,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue killerAuraDamage;
 		public final ForgeConfigSpec.IntValue killerAuraRange;
 		public final ForgeConfigSpec.IntValue killerAuraInterval;
+		public final ForgeConfigSpec.IntValue shulkerInterval;
+		public final ForgeConfigSpec.IntValue grenadeInterval;
 
 		public final ForgeConfigSpec.DoubleValue ringOfLifeMaxDamage;
 		public final ForgeConfigSpec.IntValue flameThornTime;
@@ -293,6 +295,11 @@ public class LHConfig {
 						.defineInRange("killerAuraRange", 6, 1, 32);
 				killerAuraInterval = builder.comment("Interval for for killer aura")
 						.defineInRange("killerAuraInterval", 120, 1, 10000);
+
+				shulkerInterval = builder.comment("Interval for for shulker")
+						.defineInRange("shulkerInterval", 40, 1, 10000);
+				grenadeInterval = builder.comment("Interval for for explode shulker")
+						.defineInRange("explodeShulkerInterval", 60, 1, 10000);
 
 			}
 			builder.pop();

@@ -1,0 +1,12 @@
+{
+  "name": "潜影",
+  "icon": "l2hostility:shulker",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:shulker",
+	  "text": "发射潜影子弹。子弹自身不会携带漂浮效果，但是如果怪物有药水词条，会携带哪些词条的效果"
+	}
+  ]
+}

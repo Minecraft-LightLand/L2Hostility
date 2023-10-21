@@ -75,6 +75,10 @@
 	"killer_aura": "杀戮光环",
 	"killer_aura.desc": "每%3$s对%2$s格内的玩家和对自己有敌意的生物造成%1$s魔法伤害并施加词条效果",
 	"ragnarok": "诸神黄昏",
-	"ragnarok.desc": "击中目标时，随机选中%s个装备/饰品，并封印它们。右键使用%s秒来解封"
+	"ragnarok.desc": "击中目标时，随机选中%s个装备/饰品，并封印它们。右键使用%s秒来解封",
+	"grenade": "榴弹",
+	"grenade.desc": "每%s秒发射会爆炸的潜影榴弹，不会破坏方块",
+	"shulker": "潜影",
+	"shulker.desc": "每%s秒发射潜影子弹"
   }
 }

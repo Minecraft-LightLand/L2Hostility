@@ -19,11 +19,6 @@ public class FieryTrait extends SelfEffectTrait {
 	}
 
 	@Override
-	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
-		return super.allow(le, difficulty, maxModLv) && !le.fireImmune();
-	}
-
-	@Override
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
 		assert cache.getLivingHurtEvent() != null;
 		if (cache.getLivingHurtEvent().getAmount() > 0) {

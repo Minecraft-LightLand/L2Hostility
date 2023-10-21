@@ -1,7 +1,7 @@
-// 1.20.1	2023-10-21T17:00:43.621864	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-10-21T20:32:31.514072	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-787227e482a3545d1ed421fc293899225e404b22 assets/l2hostility/lang/en_ud.json
-47f277b9df498289e46f3c7bc8429c8376075cf8 assets/l2hostility/lang/en_us.json
+a088fd560cb006deef9f47dabf28dc7b36e2aef4 assets/l2hostility/lang/en_ud.json
+1b34392a4f049843b59840098b8a52aed1d11da6 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -29,6 +29,7 @@ a7e2d8292fc281adc07394f2043952d89b2af88a assets/l2hostility/models/item/erosion.
 7254b8c02f97ba2b16d796f5956e3013ac1dc6fd assets/l2hostility/models/item/fiery.json
 486bcda4c01e8ae8b7959d490d5130004407a696 assets/l2hostility/models/item/flaming_thorn.json
 34541cd9ec24fc8e46831a3cd9690cfb5e24e3f5 assets/l2hostility/models/item/freezing.json
+d720e288311376eb0f4708a50573f9e2bb4ff090 assets/l2hostility/models/item/grenade.json
 20e51dcb17187561c46bfd411cd6733de2bb0a06 assets/l2hostility/models/item/hostility_detector.json
 6e3e167f1b7742efa394e5ab17725dc3cdd953cb assets/l2hostility/models/item/hostility_orb.json
 ba69cec47e6a481ee3a839b4b203736c07085f0e assets/l2hostility/models/item/hostility_spawner.json
@@ -53,6 +54,7 @@ f928384379d5ad5842826ea0664b052490e32012 assets/l2hostility/models/item/ring_of_
 09e165575a74e763d341022dac9e89bd5f305920 assets/l2hostility/models/item/ring_of_ocean.json
 5cd7b230dff136fccfeda175ccb8a92bfeb51ee0 assets/l2hostility/models/item/ring_of_reflection.json
 f110d14173cc70205619c756e215533ab4e6718a assets/l2hostility/models/item/sealed_item.json
+63173022972aed0b9d311865794c2510e3bebe77 assets/l2hostility/models/item/shulker.json
 017032b777ebc6a76cb09c6e097a335ebf5ec84a assets/l2hostility/models/item/slowness.json
 787903b9f0311061258da774b1ca33e23307b88a assets/l2hostility/models/item/soul_burner.json
 aa8aac690c3ed7ba60e12b9deb043759f3a3c4ab assets/l2hostility/models/item/speedy.json
@@ -70,6 +72,7 @@ d71f7aad9c585bef4ff66b28cd3e1655ff90070b data/curios/tags/items/charm.json
 a7abb7fcb160c29506cfc852194c5c3aaaf0060d data/curios/tags/items/hands.json
 63302afd6032fba91cf0e46be0c7c05285866cb9 data/curios/tags/items/head.json
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/items/ring.json
+771fa99152eee7e2f4ebc822461b903a784b06b3 data/forge/tags/entity_types/bosses.json
 5390655f853ac0e38d158b122b4c3c492de4ea81 data/l2hostility/advancements/recipes/misc/bottle_of_curse.json
 d89c5a52d1a034bbf27d94dfc6d88aefda4c5e53 data/l2hostility/advancements/recipes/misc/bottle_of_sanity_craft.json
 e3f2e16976b94317d9840442c2d815c84db5003c data/l2hostility/advancements/recipes/misc/bottle_of_sanity_renew.json
@@ -135,7 +138,7 @@ edf64deed56924f50118492f25104511eb052cab data/l2hostility/tags/entity_types/blac
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/corrosion_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/cursed_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/cursed_whitelist.json
-771fa99152eee7e2f4ebc822461b903a784b06b3 data/l2hostility/tags/entity_types/default_blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/default_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/default_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/dementor_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/dementor_whitelist.json
@@ -147,7 +150,9 @@ edf64deed56924f50118492f25104511eb052cab data/l2hostility/tags/entity_types/blac
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/fiery_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/freezing_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/freezing_whitelist.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/invisible_blacklist.json
+a37c8a7cf9e25ba9178196b0552e6c5e79567ffa data/l2hostility/tags/entity_types/grenade_blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/grenade_whitelist.json
+a37c8a7cf9e25ba9178196b0552e6c5e79567ffa data/l2hostility/tags/entity_types/invisible_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/invisible_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/killer_aura_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/killer_aura_whitelist.json
@@ -170,6 +175,8 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/mele
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/regenerate_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/repelling_blacklist.json
 778fdb4a5208400e8f9b783e17704df130baf07b data/l2hostility/tags/entity_types/repelling_whitelist.json
+a37c8a7cf9e25ba9178196b0552e6c5e79567ffa data/l2hostility/tags/entity_types/shulker_blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/shulker_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/slowness_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/slowness_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/soul_burner_blacklist.json

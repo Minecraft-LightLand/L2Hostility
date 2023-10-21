@@ -5,13 +5,13 @@ import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -58,7 +58,7 @@ public class TagGen {
 		ENTITY_TAG_BUILDER.values().forEach(e -> e.accept(pvd));
 
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
-			pvd.addTag(LHTraits.UNDYING.get().getConfig().getBlacklistTag())
+			pvd.addTag(Tags.EntityTypes.BOSSES)
 					.addOptional(ModEntities.ENDER_GOLEM.getId())
 					.addOptional(ModEntities.ENDER_GUARDIAN.getId())
 					.addOptional(ModEntities.NETHERITE_MONSTROSITY.getId())

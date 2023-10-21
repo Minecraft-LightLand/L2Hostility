@@ -5,6 +5,7 @@
   "patchouli.l2hostility.title": "莱特兰恶意教程",
   "death.attack.killer_aura": "%s被杀戮光环杀死了",
   "death.attack.killer_aura.player": "%s被%s被杀戮光环杀死了",
+  "entity.l2hostility.hostility_bullet": "恶意子弹",
   "l2hostility": {
 	"command": {
 	  "player": {

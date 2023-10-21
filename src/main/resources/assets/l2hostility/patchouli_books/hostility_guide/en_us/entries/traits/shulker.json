@@ -1,0 +1,12 @@
+{
+  "name": "Shulker",
+  "icon": "l2hostility:shulker",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:shulker",
+	  "text": "Shoot bullets. The bullet will not inflict levitation by default, but when the mod has other effect traits, the bullet will carry effects of those traits."
+	}
+  ]
+}

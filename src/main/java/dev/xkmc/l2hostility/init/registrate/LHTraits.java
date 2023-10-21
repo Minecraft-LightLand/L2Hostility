@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.init.registrate;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.entity.BulletType;
 import dev.xkmc.l2hostility.content.traits.base.AttributeTrait;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
@@ -38,6 +39,7 @@ public class LHTraits {
 			WEAKNESS, SLOWNESS, POISON, WITHER, BLIND, CONFUSION, LEVITATION,
 			SOUL_BURNER, FREEZING, CURSED;
 	public static final RegistryEntry<InvisibleTrait> INVISIBLE;
+	public static final RegistryEntry<ShulkerTrait> SHULKER, GRENADE;
 	public static final RegistryEntry<FieryTrait> FIERY;
 	public static final RegistryEntry<RegenTrait> REGEN;
 	public static final RegistryEntry<DementorTrait> DEMENTOR;
@@ -74,8 +76,11 @@ public class LHTraits {
 			PROTECTION = L2Hostility.REGISTRATE.regTrait("protection",
 					() -> new SelfEffectTrait(() -> MobEffects.DAMAGE_RESISTANCE),
 					rl -> new TraitConfig(rl, 30, 100, 4, 50)).lang("Protected").register();
+
 			INVISIBLE = L2Hostility.REGISTRATE.regTrait("invisible", InvisibleTrait::new,
-					rl -> new TraitConfig(rl, 30, 100, 1, 50)).lang("Invisible").register();
+							rl -> new TraitConfig(rl, 30, 100, 1, 50)
+									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
+					.lang("Invisible").register();
 
 		}
 
@@ -97,6 +102,20 @@ public class LHTraits {
 							rl -> new TraitConfig(rl, 80, 50, 5, 100))
 					.desc("Reflect direct physical damage as %s%% magical damage")
 					.lang("Reflect").register();
+
+			SHULKER = L2Hostility.REGISTRATE.regTrait("shulker", () -> new ShulkerTrait(ChatFormatting.LIGHT_PURPLE,
+									LHConfig.COMMON.shulkerInterval::get, BulletType.PLAIN, 0),
+							rl -> new TraitConfig(rl, 30, 100, 1, 70)
+									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
+					.desc("Shoot bullets every %s seconds")
+					.lang("Shulker").register();
+
+			GRENADE = L2Hostility.REGISTRATE.regTrait("grenade", () -> new ShulkerTrait(ChatFormatting.RED,
+									LHConfig.COMMON.grenadeInterval::get, BulletType.EXPLODE, 15),
+							rl -> new TraitConfig(rl, 50, 100, 5, 100)
+									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
+					.desc("Shoot explosive bullets every %s seconds")
+					.lang("Grenade").register();
 
 			CORROSION = L2Hostility.REGISTRATE.regTrait("corrosion", () -> new CorrosionTrait(ChatFormatting.DARK_RED),
 							rl -> new TraitConfig(rl, 50, 50, 3, 200))

@@ -1,0 +1,12 @@
+{
+  "name": "Grenade",
+  "icon": "l2hostility:grenade",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:grenade",
+	  "text": "Shoot explosive bullets. Cause fireball/creeper/TNT/bed/end crystal explosions that won't destroy blocks for trait rank 1/2/3/4/5."
+	}
+  ]
+}

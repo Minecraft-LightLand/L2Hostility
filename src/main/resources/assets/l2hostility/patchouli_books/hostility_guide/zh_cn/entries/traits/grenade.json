@@ -1,0 +1,12 @@
+{
+  "name": "榴弹",
+  "icon": "l2hostility:grenade",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:grenade",
+	  "text": "发射会爆炸的潜影子弹。对于1/2/3/4/5级词条，造成火球/爬行者/TNT/床/末地水晶等级的爆炸，但是不会破坏方块"
+	}
+  ]
+}
