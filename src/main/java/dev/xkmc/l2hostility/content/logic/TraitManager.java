@@ -53,69 +53,6 @@ public class TraitManager {
 		}
 	}
 
-	private static void generateTraits(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
-		var config = L2Hostility.ENTITY.getMerged().get(le.getType());
-
-		var rand = le.getRandom();
-		int level = lv;
-
-		if (config != null) {
-			for (var base : config.traits()) {
-				MobTrait e = base.trait();
-				if (!e.allow(le, lv, ins.getMaxTraitLevel())) continue;
-				int upper = base.free() + level / e.getCost(ins.trait_cost);
-				int lower = Math.min(upper, base.min());
-				int max = Math.min(ins.getMaxTraitLevel(), e.getMaxLevel());
-				int rank = Math.min(max, rand.nextInt(lower, upper + 1));
-				if (rank == 0) continue;
-				if (rank > base.free()) {
-					level -= (rank - base.free()) * e.getCost(ins.trait_cost);
-				}
-				traits.put(e, rank);
-			}
-		}
-
-		List<MobTrait> list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
-				!traits.containsKey(e) && e.allow(le, lv, ins.getMaxTraitLevel())).toList());
-		int weights = 0;
-		for (var e : list) {
-			weights += e.getConfig().weight;
-		}
-		while (level > 0) {
-			if (list.size() == 0) break;
-			int val = rand.nextInt(weights);
-			MobTrait e = list.get(0);
-			for (var x : list) {
-				val -= x.getConfig().weight;
-				if (val <= 0) {
-					e = x;
-					break;
-				}
-			}
-			weights -= e.getConfig().weight;
-			list.remove(e);
-			int cost = e.getCost(ins.trait_cost);
-			if (cost > level) {
-				level--;
-				continue;
-			}
-			int maxLv = Math.min(Math.min(ins.getMaxTraitLevel(),
-					rand.nextInt(level / cost) + 1), e.getMaxLevel());
-			if (maxLv == 0) {
-				level--;
-				continue;
-			}
-			level -= maxLv * cost;
-			traits.put(e, maxLv);
-			if (!ins.isFullChance() && rand.nextDouble() < LHConfig.COMMON.globalTraitSuppression.get()) {
-				break;
-			}
-		}
-		for (var e : traits.entrySet()) {
-			e.getKey().initialize(le, e.getValue());
-		}
-	}
-
 	public static int fill(LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
 		int lv = ins.getDifficulty(le.getRandom());
 		int ans = 0;
@@ -136,7 +73,7 @@ public class TraitManager {
 		// add traits
 		if (ins.trait_chance() >= le.getRandom().nextDouble()) {
 			if (!le.getType().is(TagGen.NO_TRAIT)) {
-				generateTraits(le, lv, traits, ins);
+				TraitGenerator.generateTraits(le, lv, traits, ins);
 			}
 			ans = lv;
 		}
