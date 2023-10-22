@@ -1,0 +1,11 @@
+{
+  "type": "l2hostility:caves",
+  "generator": {
+	"type": "minecraft:noise",
+	"biome_source": {
+	  "type": "minecraft:fixed",
+	  "biome": "l2hostility:caves"
+	},
+	"settings": "l2hostility:caves"
+  }
+}
