@@ -4,8 +4,8 @@
 	"type": "minecraft:noise",
 	"biome_source": {
 	  "type": "minecraft:fixed",
-	  "biome": "l2hostility:caves"
+	  "biome": "cave_test:caves"
 	},
-	"settings": "l2hostility:caves"
+	"settings": "cave_test:caves"
   }
 }
