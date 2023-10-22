@@ -1,6 +1,6 @@
 {
   "type": "l2hostility:trait_scaled",
-  "chance": 0.0,
+  "chance": 0.25,
   "conditions": [
     {
       "condition": "minecraft:killed_by_player"
@@ -8,14 +8,14 @@
     {
       "condition": "l2hostility:trait_and_level",
       "maxLevel": 5,
-      "minLevel": 3,
+      "minLevel": 5,
       "trait": "l2hostility:grenade"
     }
   ],
-  "rankBonus": 0.1,
+  "rankBonus": 0.0,
   "result": {
     "Count": 1,
-    "id": "l2complements:storm_core"
+    "id": "minecraft:creeper_head"
   },
   "trait": "l2hostility:grenade"
 }

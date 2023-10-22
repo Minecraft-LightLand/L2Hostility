@@ -2,6 +2,8 @@
 - add 3 rings
 - add 3 slot-adding curios
 - add 6 traits
+- make fiery trait more lenient
+- make Cataclysm bosses treated as bosses
 
 2.4.10
 - Fix regen calling potion test every tick

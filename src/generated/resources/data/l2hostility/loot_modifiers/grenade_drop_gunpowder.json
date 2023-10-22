@@ -8,14 +8,14 @@
     {
       "condition": "l2hostility:trait_and_level",
       "maxLevel": 5,
-      "minLevel": 3,
+      "minLevel": 1,
       "trait": "l2hostility:grenade"
     }
   ],
   "rankBonus": 0.1,
   "result": {
-    "Count": 1,
-    "id": "l2complements:storm_core"
+    "Count": 4,
+    "id": "minecraft:gunpowder"
   },
   "trait": "l2hostility:grenade"
 }
