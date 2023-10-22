@@ -5,6 +5,10 @@
 - make fiery trait more lenient
 - make Cataclysm bosses treated as bosses
 
+TODO
+- exponential health/damage
+- disable orb
+
 2.4.10
 - Fix regen calling potion test every tick
 - Fix Invisible apply effects repeatedly
