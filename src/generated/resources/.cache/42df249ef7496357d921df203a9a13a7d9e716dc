@@ -1,7 +1,7 @@
-// 1.20.1	2023-10-21T20:32:31.514072	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-10-25T08:53:31.831533	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-a088fd560cb006deef9f47dabf28dc7b36e2aef4 assets/l2hostility/lang/en_ud.json
-1b34392a4f049843b59840098b8a52aed1d11da6 assets/l2hostility/lang/en_us.json
+d329950ed2470132d7b71dcc3ff425995199c876 assets/l2hostility/lang/en_ud.json
+82e445be0925b584e1d1e9add52c18f6a97fcb9a assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -122,7 +122,7 @@ e6340c32bec0cc4b97a645f6094cb422e18b392e data/l2hostility/recipes/infinity_glove
 9c077c79bbd5b51ca436baf1f1ae33bdfe20d196 data/l2hostility/recipes/ring_of_corrosion.json
 b0cd6cb0a949303611453553f2089191102e4424 data/l2hostility/recipes/ring_of_divinity.json
 4dee05804c241f8b40cdabd6f5c6f0a7c3f4aff6 data/l2hostility/recipes/ring_of_healing.json
-dd023e19f8d0b39f15a94c631b024d0f280fbb95 data/l2hostility/recipes/ring_of_incarceration.json
+2e451682f5a0431e29787a580b468feb7ee0c138 data/l2hostility/recipes/ring_of_incarceration.json
 ab7d5325b5f812e70a745c856d154020f81c5fd3 data/l2hostility/recipes/ring_of_life.json
 758d7de93711b59e054a6247360496277c827e4b data/l2hostility/recipes/ring_of_ocean.json
 843586a56e80b067d53eb5bab46550c8eb9376ae data/l2hostility/recipes/ring_of_reflection.json

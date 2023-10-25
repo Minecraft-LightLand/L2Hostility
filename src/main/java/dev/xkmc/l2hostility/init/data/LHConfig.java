@@ -45,7 +45,9 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue playerDeathDecay;
 
 		public final ForgeConfigSpec.DoubleValue healthFactor;
+		public final ForgeConfigSpec.BooleanValue exponentialHealth;
 		public final ForgeConfigSpec.DoubleValue damageFactor;
+		public final ForgeConfigSpec.BooleanValue exponentialDamage;
 		public final ForgeConfigSpec.DoubleValue expDropFactor;
 		public final ForgeConfigSpec.IntValue armorFactor;
 		public final ForgeConfigSpec.DoubleValue enchantmentFactor;
@@ -57,6 +59,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue allowLegendary;
 		public final ForgeConfigSpec.BooleanValue allowSectionDifficulty;
 		public final ForgeConfigSpec.BooleanValue allowBypassMinimum;
+		public final ForgeConfigSpec.BooleanValue allowHostilityOrb;
+		public final ForgeConfigSpec.BooleanValue allowHostilitySpawner;
 		public final ForgeConfigSpec.IntValue defaultLevelBase;
 		public final ForgeConfigSpec.DoubleValue defaultLevelVar;
 		public final ForgeConfigSpec.DoubleValue defaultLevelScale;
@@ -115,6 +119,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue ringOfReflectionRadius;
 		public final ForgeConfigSpec.IntValue witchWandFactor;
 		public final ForgeConfigSpec.DoubleValue ringOfCorrosionFactor;
+		public final ForgeConfigSpec.DoubleValue ringOfCorrosionPenalty;
 		public final ForgeConfigSpec.DoubleValue ringOfHealingRate;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
@@ -124,8 +129,12 @@ public class LHConfig {
 			{
 				healthFactor = builder.comment("Health factor per level")
 						.defineInRange("healthFactor", 0.03, 0, 1000);
+				exponentialHealth = builder.comment("Use exponential health")
+						.define("exponentialHealth", false);
 				damageFactor = builder.comment("Damage factor per level")
 						.defineInRange("damageFactor", 0.02, 0, 1000);
+				exponentialDamage = builder.comment("Use exponential damage")
+						.define("exponentialDamage", false);
 				expDropFactor = builder.comment("Experience drop factor per level")
 						.defineInRange("expDropFactor", 0.05, 0, 1000);
 				armorFactor = builder.comment("Armor rank per n level")
@@ -153,6 +162,10 @@ public class LHConfig {
 						.define("allowSectionDifficulty", true);
 				allowBypassMinimum = builder.comment("Allow difficulty clearing bypass mob minimum level")
 						.define("allowBypassMinimum", true);
+				allowHostilityOrb = builder.comment("Allow to use hostility orb")
+						.define("allowHostilityOrb", true);
+				allowHostilitySpawner = builder.comment("Allow to use hostility spawner")
+						.define("allowHostilitySpawner", true);
 				defaultLevelBase = builder.comment("Default dimension base difficulty for mod dimensions")
 						.defineInRange("defaultLevelBase", 20, 0, 1000);
 				defaultLevelVar = builder.comment("Default dimension difficulty variation for mod dimensions")
@@ -199,6 +212,9 @@ public class LHConfig {
 
 				ringOfCorrosionFactor = builder.comment("Factor of maximum durability to cost for ring of corrosion")
 						.defineInRange("ringOfCorrosionFactor", 0.2, 0, 1);
+
+				ringOfCorrosionPenalty = builder.comment("Penalty of maximum durability to cost for ring of corrosion")
+						.defineInRange("ringOfCorrosionPenalty", 0.1, 0, 1);
 
 				ringOfHealingRate = builder.comment("Percentage of health to heal every second")
 						.defineInRange("ringOfHealingRate", 0.05, 0, 1);

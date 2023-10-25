@@ -3,9 +3,6 @@
 - add 3 slot-adding curios
 - add 6 traits
 - make fiery trait more lenient
-- make Cataclysm bosses treated as bosses
-
-TODO
 - exponential health/damage
 - disable orb
 

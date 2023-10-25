@@ -211,11 +211,12 @@ public class RecipeGen {
 						.save(pvd);
 
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.RING_INCARCERATION.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
-						.pattern("BAB").pattern("DID").pattern("BAB")
+						.pattern("BAB").pattern("1I2").pattern("BAB")
 						.define('I', LHItems.CHAOS_INGOT.get())
-						.define('A', LHTraits.SLOWNESS.get().asItem())
+						.define('1', LHTraits.SLOWNESS.get().asItem())
+						.define('2', LHTraits.FREEZING.get().asItem())
+						.define('A', LHTraits.AURA.get().asItem())
 						.define('B', LCItems.BLACKSTONE_CORE.get())
-						.define('D', LHTraits.FREEZING.get().asItem())
 						.save(pvd);
 			}
 

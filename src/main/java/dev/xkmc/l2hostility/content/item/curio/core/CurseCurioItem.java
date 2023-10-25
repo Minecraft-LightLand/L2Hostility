@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,9 @@ public class CurseCurioItem extends CurioItem {
 	}
 
 	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {
+	}
 
+	public void onDamage(ItemStack stack, LivingEntity user, LivingDamageEvent event) {
 	}
 
 }

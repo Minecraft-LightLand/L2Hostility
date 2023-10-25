@@ -3,10 +3,8 @@ package dev.xkmc.l2hostility.content.logic;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
-import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
-import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.util.math.MathHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -21,9 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class TraitManager {
 
@@ -61,8 +57,13 @@ public class TraitManager {
 		}
 		// add attributes
 		if (!le.getType().is(TagGen.NO_SCALING)) {
-			addAttribute(le, Attributes.MAX_HEALTH, "hostility_health",
-					lv * LHConfig.COMMON.healthFactor.get(),
+			double factor;
+			if (LHConfig.COMMON.exponentialHealth.get()) {
+				factor = Math.pow(1 + LHConfig.COMMON.healthFactor.get(), lv) - 1;
+			} else {
+				factor = lv * LHConfig.COMMON.healthFactor.get();
+			}
+			addAttribute(le, Attributes.MAX_HEALTH, "hostility_health", factor,
 					AttributeModifier.Operation.MULTIPLY_TOTAL);
 			ans = lv;
 		}

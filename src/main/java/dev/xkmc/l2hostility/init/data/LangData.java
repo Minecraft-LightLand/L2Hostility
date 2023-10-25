@@ -50,7 +50,8 @@ public enum LangData {
 	ITEM_FLAME_THORN("item.equipment.flame_thorn", "When you damage a mob, inflict Soul Flame with level equals to total number of effects that mob has, for %ss", 1),
 	ITEM_IMAGINE_BREAKER("item.equipment.imagine_breaker", "All your melee damage bypass magical protection.", 0),
 	ITEM_WITCH_WAND("item.equipment.witch_wand", "Throw random splash potions on right click. Types selected from random potion traits.", 0),
-	ITEM_RING_CORROSION("item.equipment.ring_of_corrosion", "When you deal damage, damage all their equipments by %s%% of their max durability.", 1),
+	ITEM_RING_CORROSION("item.equipment.ring_of_corrosion", "When you deal damage, damage all their equipments by %s%% of max durability.", 1),
+	ITEM_RING_CORROSION_NEG("item.equipment.ring_of_corrosion_neg", "When you take damage, damage all your equipments by %s%% of max durability.", 1),
 	ITEM_RING_INCARCERATION("item.equipment.ring_of_incarceration", "When sneaking, apply Incarceration effect on you and all mobs within your attack range.", 0),
 	ITEM_RING_HEALING("item.equipment.ring_of_healing", "Heals %s%% of max health every second.", 1),
 

@@ -68,6 +68,7 @@
 		"witch_wand": "投掷随机喷溅药水，种类从药水词条中随机选择",
 		"ring_of_incarceration": "潜行时，对你和你攻击范围内所有生物施加禁锢",
 		"ring_of_corrosion": "造成伤害时，目标所有装备耐久下降总耐久的%s%%",
+		"ring_of_corrosion_neg": "受到伤害时，你所有装备耐久下降总耐久的%s%%",
 		"ring_of_healing": "每秒回复总血量的%s%%"
 	  },
 	  "spawner": "召唤强力怪物。击败它们能让当前子区块变得安全"

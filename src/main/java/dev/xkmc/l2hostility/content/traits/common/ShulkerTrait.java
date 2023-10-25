@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 import java.util.List;
 import java.util.function.IntSupplier;
@@ -27,6 +28,11 @@ public class ShulkerTrait extends MobTrait {
 	}
 
 	@Override
+	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
+		type.onAttackedByOthers(level, entity, event);
+	}
+
+	@Override
 	public void tick(LivingEntity e, int level) {
 		if (e.level().isClientSide()) return;
 		if (e instanceof Mob mob) {
@@ -38,7 +44,6 @@ public class ShulkerTrait extends MobTrait {
 						(mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);
 			}
 		}
-
 	}
 
 	@Override

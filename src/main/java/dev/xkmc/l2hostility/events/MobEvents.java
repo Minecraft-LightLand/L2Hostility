@@ -5,6 +5,7 @@ import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
@@ -65,14 +66,9 @@ public class MobEvents {
 
 	@SubscribeEvent
 	public static void onDamage(LivingDamageEvent event) {
-		boolean bypassInvul = event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY);
-		boolean bypassMagic = event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS);
-		if (!bypassInvul && !bypassMagic) {
-			if (CurioCompat.hasItem(event.getEntity(), LHItems.RING_LIFE.get())) {
-				float damage = event.getAmount();
-				float maxHealth = event.getEntity().getMaxHealth();
-				damage = Math.min(damage, (float) (maxHealth * LHConfig.COMMON.ringOfLifeMaxDamage.get()));
-				event.setAmount(damage);
+		for (var e : CurioCompat.getItems(event.getEntity(), e -> e.getItem() instanceof CurseCurioItem)) {
+			if (e.getItem() instanceof CurseCurioItem curse) {
+				curse.onDamage(e, event.getEntity(), event);
 			}
 		}
 	}
@@ -148,17 +144,18 @@ public class MobEvents {
 
 	private static final List<Runnable> TASKS = new ArrayList<>();
 
-	public static void schedule(Runnable runnable) {
+	public static synchronized void schedule(Runnable runnable) {
 		TASKS.add(runnable);
 	}
 
 	@SubscribeEvent
 	public static void onTick(TickEvent.ServerTickEvent event) {
-		for (var e : TASKS) {
+		if (TASKS.isEmpty()) return;
+		var temp = new ArrayList<>(TASKS);
+		TASKS.clear();
+		for (var e : temp) {
 			e.run();
 		}
-		TASKS.clear();
 	}
-
 
 }

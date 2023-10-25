@@ -28,7 +28,14 @@ public class LHAttackListener implements AttackListener {
 		if (mob != null && MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			if (!mob.getType().is(TagGen.NO_SCALING)) {
-				cache.addHurtModifier(DamageModifier.multTotal(1 + (float) (cap.getLevel() * LHConfig.COMMON.damageFactor.get())));
+				int lv = cap.getLevel();
+				double factor;
+				if (LHConfig.COMMON.exponentialDamage.get()) {
+					factor = Math.pow(1 + LHConfig.COMMON.damageFactor.get(), lv);
+				} else {
+					factor = 1 + lv * LHConfig.COMMON.damageFactor.get();
+				}
+				cache.addHurtModifier(DamageModifier.multTotal((float) factor));
 			}
 			cap.traits.forEach((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache));
 		}
