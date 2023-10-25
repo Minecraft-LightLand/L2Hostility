@@ -1,0 +1,16 @@
+{
+  "name": "分裂",
+  "icon": "l2hostility:split",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:split",
+	  "text": "只对简单怪物有效。怪物被杀死时会分裂成2个，等级减半，继承所有词条。这个词条在分裂时等级-1。$(br2)分裂出来的怪物不会掉落任何东西。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "这个词条存在时，不死词条不会触发，但是会被继承。不再能分裂后，不死词条正常触发。"
+	}
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "key": {
+    "1": {
+      "item": "l2hostility:tank"
+    },
+    "2": {
+      "item": "l2hostility:cursed"
+    },
+    "A": {
+      "item": "twilightforest:raw_meef"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    },
+    "T": {
+      "item": "twilightforest:minoshroom_trophy"
+    }
+  },
+  "pattern": [
+    "1I2",
+    "ITI",
+    "AIA"
+  ],
+  "result": {
+    "count": 4,
+    "item": "twilightforest:minoshroom_boss_spawner"
+  },
+  "show_notification": true
+}

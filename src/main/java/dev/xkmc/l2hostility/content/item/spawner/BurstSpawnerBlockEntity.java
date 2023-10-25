@@ -91,6 +91,7 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 					if (MobTraitCap.HOLDER.isProper(le)) {
 						MobTraitCap cap = MobTraitCap.HOLDER.get(le);
 						cap.summoned = true;
+						cap.noDrop = true;
 						cap.pos = getBlockPos();
 						cap.init(level, le, (a, b) -> {
 							cdcap.get().modifyInstance(a, b);

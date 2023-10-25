@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.github.L_Ender.cataclysm.Cataclysm;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -7,6 +8,8 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
+import dev.xkmc.l2hostility.compat.data.CataclysmData;
+import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
@@ -23,7 +26,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
+import twilightforest.TwilightForestMod;
 
 import java.util.function.BiFunction;
 
@@ -269,6 +274,14 @@ public class RecipeGen {
 
 		}
 
+		// compat
+		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
+			TFData.genRecipe(pvd);
+		}
+		if (ModList.get().isLoaded(Cataclysm.MODID)) {
+			CataclysmData.genRecipe(pvd);
+		}
+
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -282,8 +295,8 @@ public class RecipeGen {
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	private static ResourceLocation getID(Item item) {
-		return new ResourceLocation(L2Hostility.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item).getPath());
+	public static ResourceLocation getID(ItemLike item) {
+		return new ResourceLocation(L2Hostility.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item.asItem()).getPath());
 	}
 
 	@SuppressWarnings("ConstantConditions")

@@ -16,7 +16,7 @@
       "traits": [
         {
           "free": 1,
-          "min": 1,
+          "min": 2,
           "trait": "l2hostility:regenerate"
         },
         {

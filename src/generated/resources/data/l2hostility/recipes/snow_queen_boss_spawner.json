@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "key": {
+    "1": {
+      "item": "l2hostility:freezing"
+    },
+    "2": {
+      "item": "l2hostility:cursed"
+    },
+    "A": {
+      "item": "twilightforest:ice_bomb"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    },
+    "T": {
+      "item": "twilightforest:snow_queen_trophy"
+    }
+  },
+  "pattern": [
+    "1I2",
+    "ITI",
+    "AIA"
+  ],
+  "result": {
+    "count": 4,
+    "item": "twilightforest:snow_queen_boss_spawner"
+  },
+  "show_notification": true
+}

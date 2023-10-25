@@ -79,6 +79,10 @@
 	"grenade": "榴弹",
 	"grenade.desc": "每%s秒发射会爆炸的潜影榴弹，不会破坏方块",
 	"shulker": "潜影",
-	"shulker.desc": "每%s秒发射潜影子弹"
+	"shulker.desc": "每%s秒发射潜影子弹",
+	"growth": "生长",
+	"growth.desc": "史莱姆自动获得再生词条，满血时长大",
+	"split": "分裂",
+	"split.desc": "怪物死亡时分裂，等级减半并继承所有词条。本词条分裂时等级-1"
   }
 }

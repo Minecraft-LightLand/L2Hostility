@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.traits.base;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.logic.InheritContext;
@@ -141,7 +142,7 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		return false;
 	}
 
-	public int inherited(int rank, InheritContext ctx) {
+	public int inherited(MobTraitCap mobTraitCap, int rank, InheritContext ctx) {
 		return rank;
 	}
 

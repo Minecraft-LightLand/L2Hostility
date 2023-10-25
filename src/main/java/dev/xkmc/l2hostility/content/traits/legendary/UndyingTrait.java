@@ -28,6 +28,9 @@ public class UndyingTrait extends LegendaryTrait {
 		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
 			return;
 		}
+		if (MobTraitCap.HOLDER.get(entity).traits.containsKey(LHTraits.SPLIT.get())) {
+			return;
+		}
 		if (!validTarget(entity)) {
 			return;
 		}
@@ -41,8 +44,7 @@ public class UndyingTrait extends LegendaryTrait {
 
 	@Override
 	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
-		return validTarget(le) && super.allow(le, difficulty, maxModLv) &&
-				!MobTraitCap.HOLDER.get(le).traits.containsKey(LHTraits.SPLIT.get());
+		return validTarget(le) && super.allow(le, difficulty, maxModLv);
 	}
 
 	public boolean validTarget(LivingEntity le) {

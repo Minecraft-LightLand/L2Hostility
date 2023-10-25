@@ -92,7 +92,7 @@ public class MobEvents {
 	public static void onMobDrop(LivingDropsEvent event) {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			var cap = MobTraitCap.HOLDER.get(event.getEntity());
-			if (cap.summoned) {
+			if (cap.noDrop) {
 				event.setCanceled(true);
 				return;
 			}
@@ -104,7 +104,7 @@ public class MobEvents {
 	public static void onExpDrop(LivingExperienceDropEvent event) {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			var cap = MobTraitCap.HOLDER.get(event.getEntity());
-			if (cap.summoned) {
+			if (cap.noDrop) {
 				event.setCanceled(true);
 				return;
 			}

@@ -1,9 +1,11 @@
 package dev.xkmc.l2hostility.content.traits.highlevel;
 
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.InheritContext;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.events.MiscHandlers;
 import net.minecraft.ChatFormatting;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -21,6 +23,12 @@ public class SplitTrait extends MobTrait {
 
 	@Override
 	public void onDeath(int lv, LivingEntity entity, LivingDeathEvent event) {
+		if (entity.level().isClientSide()) {
+			return;
+		}
+		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+			return;
+		}
 		add(entity);
 		add(entity);
 	}
@@ -35,7 +43,9 @@ public class SplitTrait extends MobTrait {
 	}
 
 	@Override
-	public int inherited(int rank, InheritContext ctx) {
+	public int inherited(MobTraitCap cap, int rank, InheritContext ctx) {
+		cap.lv /= 2;
+		cap.noDrop = true;
 		return rank - 1;
 	}
 

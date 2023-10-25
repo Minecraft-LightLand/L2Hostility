@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "key": {
+    "1": {
+      "item": "l2hostility:wither"
+    },
+    "2": {
+      "item": "l2hostility:cursed"
+    },
+    "A": {
+      "item": "twilightforest:fiery_tears"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    },
+    "T": {
+      "item": "twilightforest:ur_ghast_trophy"
+    }
+  },
+  "pattern": [
+    "1I2",
+    "ITI",
+    "AIA"
+  ],
+  "result": {
+    "count": 4,
+    "item": "twilightforest:ur_ghast_boss_spawner"
+  },
+  "show_notification": true
+}

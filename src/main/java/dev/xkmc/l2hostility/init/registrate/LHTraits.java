@@ -137,12 +137,12 @@ public class LHTraits {
 					.lang("Ragnarok").register();
 
 			GROWTH = L2Hostility.REGISTRATE.regTrait("growth", () -> new GrowthTrait(ChatFormatting.DARK_GREEN),
-							rl -> new TraitConfig(rl, 60, 300, 3, 150))
+							rl -> new TraitConfig(rl, 60, 300, 3, 100))
 					.desc("Slime will grow larger when at full health. Automatically gain Regenerate trait.")
 					.lang("Growth").register();
 
 			SPLIT = L2Hostility.REGISTRATE.regTrait("split", () -> new SplitTrait(ChatFormatting.GREEN),
-							rl -> new TraitConfig(rl, 100, 100, 3, 200)
+							rl -> new TraitConfig(rl, 50, 100, 3, 120)
 									.addWhitelist(e -> e.add(
 											EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
 											EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.HUSK,

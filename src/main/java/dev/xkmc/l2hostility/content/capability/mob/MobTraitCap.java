@@ -59,13 +59,13 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	private Stage stage = Stage.PRE_INIT;
 
 	@SerialClass.SerialField(toClient = true)
-	private int lv;
+	public int lv;
 
 	@SerialClass.SerialField
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
 	@SerialClass.SerialField(toClient = true)
-	public boolean summoned = false;
+	public boolean summoned = false, noDrop = false;
 
 	@Nullable
 	@SerialClass.SerialField
@@ -114,15 +114,16 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public void copyFrom(LivingEntity par, LivingEntity child, MobTraitCap parent) {
 		InheritContext ctx = new InheritContext(par, parent, child, this, !parent.inherited);
 		parent.inherited = true;
+		lv = parent.lv;
+		summoned = parent.summoned;
+		noDrop = parent.noDrop;
 		for (var ent : parent.traits.entrySet()) {
-			int rank = ent.getKey().inherited(ent.getValue(), ctx);
+			int rank = ent.getKey().inherited(this, ent.getValue(), ctx);
 			if (rank > 0) {
 				traits.put(ent.getKey(), rank);
 			}
 		}
-		traits.putAll(parent.traits);
-		lv = parent.lv;
-		summoned = parent.summoned;
+		TraitManager.fill(child, traits, MobDifficultyCollector.noTrait(lv));
 		stage = Stage.INIT;
 	}
 

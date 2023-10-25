@@ -39,7 +39,7 @@ public class GrowthTrait extends MobTrait {
 	}
 
 	@Override
-	public int inherited(int rank, InheritContext ctx) {
+	public int inherited(MobTraitCap mobTraitCap, int rank, InheritContext ctx) {
 		return ctx.isPrimary() ? rank - 1 : 0;
 	}
 
