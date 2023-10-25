@@ -4,6 +4,7 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
+import dev.xkmc.l2hostility.content.logic.InheritContext;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
@@ -73,6 +74,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	@Nullable
 	private TraitSpawnerBlockEntity summoner = null;
 
+	private boolean inherited = false;
+
 	public MobTraitCap() {
 	}
 
@@ -106,6 +109,21 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		lv = skip ? 0 : TraitManager.fill(le, traits, instance);
 		stage = Stage.INIT;
 		syncToClient(le);
+	}
+
+	public void copyFrom(LivingEntity par, LivingEntity child, MobTraitCap parent) {
+		InheritContext ctx = new InheritContext(par, parent, child, this, !parent.inherited);
+		parent.inherited = true;
+		for (var ent : parent.traits.entrySet()) {
+			int rank = ent.getKey().inherited(ent.getValue(), ctx);
+			if (rank > 0) {
+				traits.put(ent.getKey(), rank);
+			}
+		}
+		traits.putAll(parent.traits);
+		lv = parent.lv;
+		summoned = parent.summoned;
+		stage = Stage.INIT;
 	}
 
 	public int getEnchantBonus() {

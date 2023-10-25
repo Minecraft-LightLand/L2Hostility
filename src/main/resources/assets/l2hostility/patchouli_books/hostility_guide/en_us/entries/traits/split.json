@@ -1,0 +1,16 @@
+{
+  "name": "Killer Aura",
+  "icon": "l2hostility:killer_aura",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:killer_aura",
+	  "text": "Mobs eoo much."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "Toeffects."
+	}
+  ]
+}

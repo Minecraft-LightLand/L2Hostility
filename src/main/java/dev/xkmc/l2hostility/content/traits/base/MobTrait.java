@@ -4,6 +4,8 @@ import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.logic.InheritContext;
+import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.DamageTypeGen;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -64,11 +66,14 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		return config.allows(le.getType());
 	}
 
+	public final boolean allow(LivingEntity le) {
+		return allow(le, Integer.MAX_VALUE, TraitManager.getMaxLevel() + 1);
+	}
+
 	public void initialize(LivingEntity mob, int level) {
 	}
 
 	public void postInit(LivingEntity mob, int lv) {
-
 	}
 
 	public void tick(LivingEntity mob, int level) {
@@ -83,7 +88,6 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	}
 
 	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
-
 	}
 
 	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
@@ -96,7 +100,6 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	}
 
 	public void onDeath(int level, LivingEntity entity, LivingDeathEvent event) {
-
 	}
 
 	public MutableComponent getFullDesc(@Nullable Integer value) {
@@ -136,6 +139,10 @@ public class MobTrait extends NamedEntry<MobTrait> {
 			return !LHConfig.COMMON.map.get(getRegistryName().getPath()).get();
 		}
 		return false;
+	}
+
+	public int inherited(int rank, InheritContext ctx) {
+		return rank;
 	}
 
 }

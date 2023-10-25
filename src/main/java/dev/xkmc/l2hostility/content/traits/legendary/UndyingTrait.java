@@ -1,9 +1,11 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
 import dev.xkmc.l2complements.init.registrate.LCEffects;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffects;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -39,7 +41,8 @@ public class UndyingTrait extends LegendaryTrait {
 
 	@Override
 	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
-		return validTarget(le) && super.allow(le, difficulty, maxModLv);
+		return validTarget(le) && super.allow(le, difficulty, maxModLv) &&
+				!MobTraitCap.HOLDER.get(le).traits.containsKey(LHTraits.SPLIT.get());
 	}
 
 	public boolean validTarget(LivingEntity le) {

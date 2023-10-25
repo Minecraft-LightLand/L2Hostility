@@ -10,10 +10,7 @@ import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
 import dev.xkmc.l2hostility.content.traits.base.TargetEffectTrait;
 import dev.xkmc.l2hostility.content.traits.common.*;
 import dev.xkmc.l2hostility.content.traits.goals.EnderTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.CorrosionTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.ErosionTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.KillerAuraTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.RagnarokTrait;
+import dev.xkmc.l2hostility.content.traits.highlevel.*;
 import dev.xkmc.l2hostility.content.traits.legendary.DementorTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.DispellTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.RepellingTrait;
@@ -53,6 +50,8 @@ public class LHTraits {
 	public static final RegistryEntry<ErosionTrait> EROSION;
 	public static final RegistryEntry<KillerAuraTrait> AURA;
 	public static final RegistryEntry<RagnarokTrait> RAGNAROK;
+	public static final RegistryEntry<GrowthTrait> GROWTH;
+	public static final RegistryEntry<SplitTrait> SPLIT;
 
 	static {
 		// no desc
@@ -136,6 +135,24 @@ public class LHTraits {
 							rl -> new TraitConfig(rl, 100, 50, 3, 400))
 					.desc("When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.")
 					.lang("Ragnarok").register();
+
+			GROWTH = L2Hostility.REGISTRATE.regTrait("growth", () -> new GrowthTrait(ChatFormatting.DARK_GREEN),
+							rl -> new TraitConfig(rl, 60, 300, 3, 150))
+					.desc("Slime will grow larger when at full health. Automatically gain Regenerate trait.")
+					.lang("Growth").register();
+
+			SPLIT = L2Hostility.REGISTRATE.regTrait("split", () -> new SplitTrait(ChatFormatting.GREEN),
+							rl -> new TraitConfig(rl, 100, 100, 3, 200)
+									.addWhitelist(e -> e.add(
+											EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
+											EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.HUSK,
+											EntityType.SKELETON, EntityType.WITHER_SKELETON, EntityType.STRAY,
+											EntityType.SPIDER, EntityType.CAVE_SPIDER,
+											EntityType.CREEPER, EntityType.VEX,
+											EntityType.SILVERFISH, EntityType.ENDERMITE
+									)))
+					.desc("When mob dies, it will split into 2 of itself with half levels but same trait. This trait reduce by 1 when split.")
+					.lang("Split").register();
 
 		}
 

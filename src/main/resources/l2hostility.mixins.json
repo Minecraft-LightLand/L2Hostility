@@ -8,7 +8,8 @@
 	"EntityMixin",
 	"ForgeInternalHandlerAccessor",
 	"ItemStackMixin",
-	"MobMixin"
+	"MobMixin",
+	"SlimeMixin"
   ],
   "client": [
   ],

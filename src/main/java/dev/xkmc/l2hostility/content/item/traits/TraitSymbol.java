@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -46,7 +45,7 @@ public class TraitSymbol extends Item {
 		if (MobTraitCap.HOLDER.isProper(target)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(target);
 			MobTrait trait = get();
-			if (!trait.allow(target, Integer.MAX_VALUE, TraitManager.getMaxLevel() + 1)) {
+			if (!trait.allow(target)) {
 				if (player instanceof ServerPlayer sp) {
 					sp.sendSystemMessage(LangData.MSG_ERR_DISALLOW.get().withStyle(ChatFormatting.RED), true);
 				}
