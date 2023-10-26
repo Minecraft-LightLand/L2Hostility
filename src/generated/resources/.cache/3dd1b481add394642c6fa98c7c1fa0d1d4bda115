@@ -1,7 +1,7 @@
-// 1.20.1	2023-10-26T14:14:05.834936	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (traits)]
+// 1.20.1	2023-10-26T22:09:46.402027	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (traits)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-35451f1f74145b49d1e012816822ad311a87c2d2 assets/l2hostility/lang/en_ud.json
-17a9c67d7fed3841d7d8b569005231f72dcb3bb4 assets/l2hostility/lang/en_us.json
+844b5b0eb8264c8da662b68ba2403cc1f66d1c0b assets/l2hostility/lang/en_ud.json
+8297696b689eaf5b7f8a409acb86a70116cba639 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -9,6 +9,7 @@ de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostili
 1739df0d5d6c03e3738f188a9606b095b5198c01 assets/l2hostility/models/item/adaptive.json
 47b1669ffc91d13e17f5d08ed2a34cd11ddeaaf9 assets/l2hostility/models/item/ai_config_wand.json
 291d5c9c188c77b48c0262fc633a1388130afe97 assets/l2hostility/models/item/blindness.json
+c3e83e5767641301057986ee59bc7154e2749bb3 assets/l2hostility/models/item/booster_potion.json
 68d41070d34ebc05ec1870aed6e0e53e40d12147 assets/l2hostility/models/item/bottle_of_curse.json
 38ebdcb219de6ddebd2181e8c53d6c00711a4b1f assets/l2hostility/models/item/bottle_of_sanity.json
 e16e74a184b0503c495c91a1ccb4a10449fd94c3 assets/l2hostility/models/item/chaos_ingot.json
@@ -27,6 +28,7 @@ ffd80ef17e54fcd7ef3e1d11a93804e50b6aa529 assets/l2hostility/models/item/cursed.j
 daf50b250dc8c7ce6cb12a093b0dd1993c52e64f assets/l2hostility/models/item/drain.json
 31eb768e73a9e25dd120627d1792a0fc4b23a659 assets/l2hostility/models/item/equipment_wand.json
 a7e2d8292fc281adc07394f2043952d89b2af88a assets/l2hostility/models/item/erosion.json
+1c382bb0d8644df336397d268287756f29a126e4 assets/l2hostility/models/item/eternal_witch_charge.json
 7254b8c02f97ba2b16d796f5956e3013ac1dc6fd assets/l2hostility/models/item/fiery.json
 486bcda4c01e8ae8b7959d490d5130004407a696 assets/l2hostility/models/item/flaming_thorn.json
 34541cd9ec24fc8e46831a3cd9690cfb5e24e3f5 assets/l2hostility/models/item/freezing.json
@@ -68,6 +70,8 @@ d05297a99d447dde61132c58d8095fa3f73ff84a assets/l2hostility/models/item/tank.jso
 096d3a2d94e6111fc301d99e0c8a1c8bd11e08a7 assets/l2hostility/models/item/triple_strip_cape.json
 0ccaf1b8a833e0813771253fba066ba18b372c80 assets/l2hostility/models/item/undying.json
 d77ade334e7a963054ed571b2c9aae1fa3f61f4b assets/l2hostility/models/item/weakness.json
+9afeaa99a5ad5e82b0d3cf603151a8ef52bb5e43 assets/l2hostility/models/item/witch_charge.json
+347b84c3484867babce110b45aa6a175fc13feb4 assets/l2hostility/models/item/witch_droplet.json
 d69681b4cb7544b64e002366a0e64e7a6402cdc8 assets/l2hostility/models/item/witch_wand.json
 e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.json
 7942255280f4ee1f25a76cfb178597324d566c77 data/curios/tags/items/back.json
@@ -77,6 +81,7 @@ a7abb7fcb160c29506cfc852194c5c3aaaf0060d data/curios/tags/items/hands.json
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/items/ring.json
 771fa99152eee7e2f4ebc822461b903a784b06b3 data/forge/tags/entity_types/bosses.json
 222c64446f0b832417d2140022f08d9f8f1b3d78 data/l2hostility/advancements/recipes/misc/alpha_yeti_boss_spawner.json
+2fc4decfd7e0bd3895f939688c8fc1240a02b23a data/l2hostility/advancements/recipes/misc/booster_potion.json
 5390655f853ac0e38d158b122b4c3c492de4ea81 data/l2hostility/advancements/recipes/misc/bottle_of_curse.json
 d89c5a52d1a034bbf27d94dfc6d88aefda4c5e53 data/l2hostility/advancements/recipes/misc/bottle_of_sanity_craft.json
 e3f2e16976b94317d9840442c2d815c84db5003c data/l2hostility/advancements/recipes/misc/bottle_of_sanity_renew.json
@@ -90,6 +95,7 @@ c5786f8f742ce83d45b8d06d00a4eabbd9b17ab6 data/l2hostility/advancements/recipes/m
 ac3fcb78410c9a8b9404e5c30fe64b0eaf5a3922 data/l2hostility/advancements/recipes/misc/curse_of_sloth.json
 3468728ffd2ebe4423d26cb0b12c131121542a18 data/l2hostility/advancements/recipes/misc/curse_of_wrath.json
 9e6346b13a1f33fa5711f6b97bbc1e33269d1242 data/l2hostility/advancements/recipes/misc/detector_glasses.json
+4617b1e7a728434a32da34e132abaeba3c25b497 data/l2hostility/advancements/recipes/misc/eternal_witch_charge.json
 e81214de614b130996ec1b3dd0ec846559a7e731 data/l2hostility/advancements/recipes/misc/flaming_thorn.json
 ea1d1829f63f15c21378af0c479cb1aa4f41faef data/l2hostility/advancements/recipes/misc/hostility_detector.json
 5d6cd682359617ff4fa7d1c3ea2f1a5a46ec6053 data/l2hostility/advancements/recipes/misc/hostility_spawner.json
@@ -110,9 +116,11 @@ c61e47cea11e64db05e15c1008f845a19fc27f1d data/l2hostility/advancements/recipes/m
 6d062a0ffc9c6faf93fc1f791e29489b39d96a98 data/l2hostility/advancements/recipes/misc/snow_queen_boss_spawner.json
 5bf1e98f1e968516178742c2ed2d6664f29e1093 data/l2hostility/advancements/recipes/misc/triple_strip_cape.json
 5be11d03ec236773c7456b5e487feee32365407e data/l2hostility/advancements/recipes/misc/ur_ghast_boss_spawner.json
+ed187b733e29a0537bd09187af3f24e4d84ee0f8 data/l2hostility/advancements/recipes/misc/witch_charge.json
 800fac7edf1d0211423ca8f018b3725eaea70b1b data/l2hostility/advancements/recipes/misc/witch_wand.json
 e03c87788865e847130c7b79b3808e7b7b41742a data/l2hostility/loot_tables/blocks/hostility_spawner.json
 1318c59b3a2c6e12ed1e51136ed5bee0ff48ca77 data/l2hostility/recipes/alpha_yeti_boss_spawner.json
+e292543acc9f1ed6ece2a359b4cfe0a31cc011a7 data/l2hostility/recipes/booster_potion.json
 60c0e3fa2d2d35bfa50213c01d769d1255c740e2 data/l2hostility/recipes/bottle_of_curse.json
 a7dbfd4231a99589de68224a4d6929be82619a43 data/l2hostility/recipes/bottle_of_sanity_craft.json
 7120f3e81e10b72bf570e7f49f3851882ffa6c2f data/l2hostility/recipes/bottle_of_sanity_renew.json
@@ -126,7 +134,8 @@ e758c88114a7110e4ad8580a7af3c4d352c40585 data/l2hostility/recipes/curse_of_pride
 b0970cccd70b2a153c47f162f42797a0c3fdf191 data/l2hostility/recipes/curse_of_sloth.json
 d8d0f13faa331fded6b4ad24cb7293bf6d4740ed data/l2hostility/recipes/curse_of_wrath.json
 6f12c1410d67fe2c5bedf69e36fc24290e49d245 data/l2hostility/recipes/detector_glasses.json
-c274d6058a0b4cee65df9e41b39eb4fc0b86ff39 data/l2hostility/recipes/flaming_thorn.json
+81a5b201001aed5ff28db21672efaa689b6576aa data/l2hostility/recipes/eternal_witch_charge.json
+a62e9e04b96e4a630b0967197090962a43da1170 data/l2hostility/recipes/flaming_thorn.json
 9980fd7cbfd6d6b8dcb0978baaada8db79f94847 data/l2hostility/recipes/hostility_detector.json
 9d69a4fe6460f801733a68acad83c2003651a129 data/l2hostility/recipes/hostility_spawner.json
 a786b1c0a44eabab6950341033e867d5ba5f2151 data/l2hostility/recipes/hydra_boss_spawner.json
@@ -146,6 +155,7 @@ ab7d5325b5f812e70a745c856d154020f81c5fd3 data/l2hostility/recipes/ring_of_life.j
 2c6fa8d8d17a3d83a6392616abe2011608603203 data/l2hostility/recipes/snow_queen_boss_spawner.json
 af2f53095f3b443587a4e114dc817cbcce818117 data/l2hostility/recipes/triple_strip_cape.json
 05554481822736579b77129e856e79c0a8ef96ec data/l2hostility/recipes/ur_ghast_boss_spawner.json
+acc7a68fd78965e3a3b5bf36a3839d7b3ff4df7a data/l2hostility/recipes/witch_charge.json
 0692d7fc2ec445309e367634fee532b74dfa573e data/l2hostility/recipes/witch_wand.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_whitelist.json

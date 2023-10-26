@@ -174,7 +174,7 @@ public class LHTraits {
 
 			DRAIN = L2Hostility.REGISTRATE.regTrait("drain", () -> new DrainTrait(ChatFormatting.LIGHT_PURPLE),
 							rl -> new TraitConfig(rl, 80, 100, 3, 100))
-					.desc("Grants a random potion trait with same level. When hit target, remove %s positive effects, deal %s more damage for every negative effects, and increase their duration by %s. At most increase %ss.")
+					.desc("Grants a random potion trait with same level. When hit target, remove %s beneficial effects, deal %s more damage for every harmful effects, and increase their duration by %s. At most increase to %ss.")
 					.lang("Drain").register();
 
 		}

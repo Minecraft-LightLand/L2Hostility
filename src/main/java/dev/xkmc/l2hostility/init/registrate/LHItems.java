@@ -3,9 +3,8 @@ package dev.xkmc.l2hostility.init.registrate;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
-import dev.xkmc.l2hostility.content.item.consumable.BottleOfCurse;
-import dev.xkmc.l2hostility.content.item.consumable.BottleOfSanity;
-import dev.xkmc.l2hostility.content.item.consumable.HostilityOrb;
+import dev.xkmc.l2hostility.content.entity.ChargeType;
+import dev.xkmc.l2hostility.content.item.consumable.*;
 import dev.xkmc.l2hostility.content.item.curio.curse.*;
 import dev.xkmc.l2hostility.content.item.curio.misc.*;
 import dev.xkmc.l2hostility.content.item.curio.ring.*;
@@ -17,7 +16,10 @@ import dev.xkmc.l2hostility.content.item.wand.EquipmentWand;
 import dev.xkmc.l2hostility.content.item.wand.TargetSelectWand;
 import dev.xkmc.l2hostility.content.item.wand.TraitAdderWand;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.data.TagGen;
+import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -33,6 +35,9 @@ public class LHItems {
 	public static final ItemEntry<HostilityOrb> HOSTILITY_ORB;
 	public static final ItemEntry<BottleOfCurse> BOTTLE_CURSE;
 	public static final ItemEntry<BottleOfSanity> BOTTLE_SANITY;
+	public static final ItemEntry<Item> WITCH_DROPLET;
+	public static final ItemEntry<EffectBoosterBottle> BOOSTER_POTION;
+	public static final ItemEntry<HostilityChargeItem> WITCH_CHARGE, ETERNAL_WITCH_CHARGE;
 
 	public static final ItemEntry<Item> DETECTOR;
 	public static final ItemEntry<DetectorGlasses> DETECTOR_GLASSES;
@@ -78,6 +83,28 @@ public class LHItems {
 			BOTTLE_SANITY = L2Hostility.REGISTRATE.item(
 					"bottle_of_sanity", p -> new BottleOfSanity(p.stacksTo(16).rarity(Rarity.RARE)
 							.craftRemainder(Items.GLASS_BOTTLE))).register();
+
+			WITCH_DROPLET = L2Hostility.REGISTRATE.item("witch_droplet", Item::new).register();
+
+			BOOSTER_POTION = L2Hostility.REGISTRATE.item("booster_potion",
+					p -> new EffectBoosterBottle(p.stacksTo(16).rarity(Rarity.RARE)
+							.craftRemainder(Items.GLASS_BOTTLE))).register();
+
+			WITCH_CHARGE = L2Hostility.REGISTRATE.item("witch_charge",
+					p -> new HostilityChargeItem(p, ChargeType.BOOST, () ->
+							LangData.TOOLTIP_WITCH_CHARGE.get(
+									LHConfig.COMMON.witchChargeMinDuration.get(),
+									LHConfig.COMMON.drainDuration.get(),
+									LHConfig.COMMON.drainDurationMax.get()
+							).withStyle(ChatFormatting.GRAY))
+			).register();
+
+			ETERNAL_WITCH_CHARGE = L2Hostility.REGISTRATE.item("eternal_witch_charge",
+					p -> new HostilityChargeItem(p, ChargeType.ETERNAL, () ->
+							LangData.TOOLTIP_WITCH_ETERNAL.get(
+									LHConfig.COMMON.witchChargeMinDuration.get()
+							).withStyle(ChatFormatting.GRAY))
+			).register();
 		}
 
 		// equipments

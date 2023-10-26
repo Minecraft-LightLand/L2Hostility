@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.entity;
 
+import dev.xkmc.l2hostility.init.registrate.LHEntities;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +25,7 @@ public class HostilityBullet extends ShulkerBullet {
 	}
 
 	public HostilityBullet(Level level, LivingEntity owner, Entity target, Direction.Axis direction, BulletType type, int lv) {
-		this(LHMiscs.BULLET.get(), level);
+		this(LHEntities.BULLET.get(), level);
 		this.setOwner(owner);
 		BlockPos blockpos = owner.blockPosition();
 		double d0 = (double) blockpos.getX() + 0.5D;

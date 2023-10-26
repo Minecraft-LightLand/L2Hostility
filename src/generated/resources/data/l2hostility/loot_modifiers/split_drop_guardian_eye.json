@@ -1,0 +1,21 @@
+{
+  "type": "l2hostility:trait_scaled",
+  "chance": 0.0,
+  "conditions": [
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "condition": "l2hostility:trait_and_level",
+      "maxLevel": 5,
+      "minLevel": 1,
+      "trait": "l2hostility:split"
+    }
+  ],
+  "rankBonus": 0.05,
+  "result": {
+    "Count": 1,
+    "id": "l2complements:guardian_eye"
+  },
+  "trait": "l2hostility:split"
+}

@@ -79,6 +79,8 @@
   "trait.l2hostility.growth.desc": "史莱姆自动获得再生词条，满血时长大",
   "trait.l2hostility.split": "分裂",
   "trait.l2hostility.split.desc": "怪物死亡时分裂，等级减半并继承所有词条。本词条分裂时等级-1",
+  "trait.l2hostility.drain": "嗜魔",
+  "trait.l2hostility.drain.desc": "怪物获得相同等级的随机药水词条。怪物击中目标时，随机移除目标身上%s个正面效果，目标身上每有一个负面效果伤害上升%s，并且所有负面效果时间延长%s，最高延长至%s秒",
   "itemGroup.l2library.hostility": "莱特兰·恶意",
   "config.jade.plugin_l2hostility.mob": "莱特兰·恶意",
   "patchouli.l2hostility.landing": "了解难度机制和怪物词条，以更好地应对它们",

@@ -77,6 +77,22 @@ public class RecipeGen {
 					.requires(LCItems.CURSED_DROPLET).requires(Items.GLASS_BOTTLE, 3)
 					.save(pvd);
 
+			unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LHItems.BOOSTER_POTION.get(), 1)::unlockedBy, LHItems.WITCH_DROPLET.get())
+					.requires(LHItems.WITCH_DROPLET).requires(LHItems.BOTTLE_SANITY).requires(LCItems.LIFE_ESSENCE)
+					.save(pvd);
+
+			unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LHItems.WITCH_CHARGE.get(), 1)::unlockedBy, LHItems.WITCH_DROPLET.get())
+					.requires(LHItems.WITCH_DROPLET).requires(LCItems.CURSED_DROPLET).requires(Items.GUNPOWDER).requires(Items.BLAZE_POWDER)
+					.save(pvd);
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.ETERNAL_WITCH_CHARGE.get(), 1)::unlockedBy, LHItems.WITCH_DROPLET.get())
+					.pattern("ABA").pattern("BCB").pattern("DBD")
+					.define('A', Items.GUNPOWDER)
+					.define('D', Items.BLAZE_POWDER)
+					.define('B', LCItems.BLACKSTONE_CORE.get())
+					.define('C', LHItems.WITCH_DROPLET)
+					.save(pvd);
+
 		}
 
 		//curio
@@ -228,7 +244,7 @@ public class RecipeGen {
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.FLAMING_THORN.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("BAB").pattern("DID").pattern("BAB")
 					.define('I', LHItems.CHAOS_INGOT.get())
-					.define('A', LCItems.SOUL_FLAME.get())
+					.define('A', LHTraits.DRAIN.get().asItem())
 					.define('B', LCItems.WARDEN_BONE_SHARD.get())
 					.define('D', LHTraits.SOUL_BURNER.get().asItem())
 					.save(pvd);

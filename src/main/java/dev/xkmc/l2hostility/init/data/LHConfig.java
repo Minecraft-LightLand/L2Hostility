@@ -124,6 +124,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue ringOfCorrosionFactor;
 		public final ForgeConfigSpec.DoubleValue ringOfCorrosionPenalty;
 		public final ForgeConfigSpec.DoubleValue ringOfHealingRate;
+		public final ForgeConfigSpec.IntValue witchChargeMinDuration;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
 
@@ -200,6 +201,9 @@ public class LHConfig {
 			{
 				bottleOfCurseLevel = builder.comment("Number of level to add when using bottle of curse")
 						.defineInRange("bottleOfCurseLevel", 50, 1, 1000);
+
+				witchChargeMinDuration = builder.comment("Minimum duration for witch charge to be effective, in ticks")
+						.defineInRange("witchChargeMinDuration", 200, 20, 10000);
 
 				ringOfLifeMaxDamage = builder.comment("Max percentage of max health a damage can hurt wearer of Ring of Life")
 						.defineInRange("ringOfLifeMaxDamage", 0.9, 0, 1);
