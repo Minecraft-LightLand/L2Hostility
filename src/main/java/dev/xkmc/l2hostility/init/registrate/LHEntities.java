@@ -32,7 +32,7 @@ public class LHEntities {
 						.register();
 
 		CHARGE = REGISTRATE
-				.<HostilityCharge>entity("eternal_charge", HostilityCharge::new, MobCategory.MISC)
+				.<HostilityCharge>entity("hostility_charge", HostilityCharge::new, MobCategory.MISC)
 				.properties(e -> e.sized(1f, 1f).clientTrackingRange(4).updateInterval(10))
 				.renderer(() -> LHEntities::addRenderer)
 				.defaultLang().register();

@@ -18,10 +18,7 @@ import dev.xkmc.l2hostility.init.entries.LHRegistrate;
 import dev.xkmc.l2hostility.init.loot.TraitGLMProvider;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
-import dev.xkmc.l2hostility.init.registrate.LHBlocks;
-import dev.xkmc.l2hostility.init.registrate.LHItems;
-import dev.xkmc.l2hostility.init.registrate.LHMiscs;
-import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import dev.xkmc.l2hostility.init.registrate.*;
 import dev.xkmc.l2library.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
 import dev.xkmc.l2serial.network.SerialPacketBase;
@@ -65,6 +62,7 @@ public class L2Hostility {
 		LHBlocks.register();
 		LHItems.register();
 		LHTraits.register();
+		LHEntities.register();
 		LHMiscs.register();
 		LHConfig.init();
 

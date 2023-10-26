@@ -20,9 +20,9 @@ public enum LangData {
 	TOOLTIP_BANNED("tooltip.banned", "This trait is disabled.", 0),
 	TOOLTIP_SEAL_DATA("tooltip.sealed_item", "Item sealed within:", 0),
 	TOOLTIP_SEAL_TIME("tooltip.seal_time", "Hold use to unseal. Takes %ss.", 1),
-	TOOLTIP_WITCH_CHARGE("tooltip.witch_charge", "Right click to fire. When hit entity, increase duration of all harmful effects longer than %ss by %s. At most increase to %ss.", 3),
+	TOOLTIP_WITCH_CHARGE("tooltip.witch_charge", "Right click to fire. When hit entity, increase duration of all harmful effects longer than %ss by %s%%. At most increase to %ss.", 3),
 	TOOLTIP_WITCH_ETERNAL("tooltip.witch_eternal", "Right click to fire. When hit entity, all harmful effects longer than %ss becomes infinite duration.", 1),
-	TOOLTIP_WITCH_BOTTLE("tooltip.witch_bottle", "Increase duration of all effects longer than %ss by %s. At most increase to %ss.", 3),
+	TOOLTIP_WITCH_BOTTLE("tooltip.witch_bottle", "Increase duration of all effects longer than %ss by %s%%. At most increase to %ss.", 3),
 
 	ITEM_WAND_AI("item.wand.ai", "Right click to remove or restore mob AI.", 0),
 	ITEM_WAND_EQUIPMENT("item.wand.equipment", "Right click to open mob equipment menu.", 0),

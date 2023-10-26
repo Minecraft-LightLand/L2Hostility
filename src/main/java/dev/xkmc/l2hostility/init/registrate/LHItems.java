@@ -93,16 +93,16 @@ public class LHItems {
 			WITCH_CHARGE = L2Hostility.REGISTRATE.item("witch_charge",
 					p -> new HostilityChargeItem(p, ChargeType.BOOST, () ->
 							LangData.TOOLTIP_WITCH_CHARGE.get(
-									LHConfig.COMMON.witchChargeMinDuration.get(),
-									LHConfig.COMMON.drainDuration.get(),
-									LHConfig.COMMON.drainDurationMax.get()
+									LHConfig.COMMON.witchChargeMinDuration.get() / 20,
+									Math.round(100 * LHConfig.COMMON.drainDuration.get()),
+									LHConfig.COMMON.drainDurationMax.get() / 20
 							).withStyle(ChatFormatting.GRAY))
 			).register();
 
 			ETERNAL_WITCH_CHARGE = L2Hostility.REGISTRATE.item("eternal_witch_charge",
 					p -> new HostilityChargeItem(p, ChargeType.ETERNAL, () ->
 							LangData.TOOLTIP_WITCH_ETERNAL.get(
-									LHConfig.COMMON.witchChargeMinDuration.get()
+									LHConfig.COMMON.witchChargeMinDuration.get() / 20
 							).withStyle(ChatFormatting.GRAY))
 			).register();
 		}

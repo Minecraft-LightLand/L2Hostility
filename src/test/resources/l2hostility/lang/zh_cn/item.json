@@ -30,7 +30,11 @@
 	"infinity_glove": "无限手套",
 	"oddeyes_glasses": "异色眼镜",
 	"triple_strip_cape": "三色披风",
-	"sealed_item": "被封印的物品"
+	"sealed_item": "被封印的物品",
+	"booster_potion": "药水增幅药剂",
+	"eternal_witch_charge": "永恒嗜魔弹",
+	"witch_charge": "嗜魔弹",
+	"witch_droplet": "女巫浓缩凝露"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"
