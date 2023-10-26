@@ -79,6 +79,7 @@ public class L2Hostility {
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, TagGen::onBlockTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, TagGen::onItemTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, TagGen::onEntityTagGen);
+		REGISTRATE.addDataGenerator(LHTraits.TRAIT_TAGS, TagGen::onTraitTagGen);
 	}
 
 	public L2Hostility() {

@@ -118,6 +118,8 @@
   "trait.l2hostility.dementor.desc": "Immune to physical damage. Damage bypass armor.",
   "trait.l2hostility.dispell": "Dispell",
   "trait.l2hostility.dispell.desc": "Immune to magic damage. Damage bypass magical protections. Randomly picks %s enchanted equipment and disable enchantments on them for %s seconds.",
+  "trait.l2hostility.drain": "Drain",
+  "trait.l2hostility.drain.desc": "Grants a random potion trait with same level. When hit target, remove %s positive effects, deal %s more damage for every negative effects, and increase their duration by %s. At most increase %ss.",
   "trait.l2hostility.erosion": "Erosion",
   "trait.l2hostility.erosion.desc": "When hit target, randomly picks %s equipments and reduce their durability by %s. When there aren't enough equipments, increase damage by %s per piece",
   "trait.l2hostility.fiery": "Fiery",

@@ -1,7 +1,7 @@
-// 1.20.1	2023-10-25T18:54:03.445507	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2023-10-26T14:14:05.834936	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (traits)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-36b1b760ec05f9d6b476946447d15bb850df0d42 assets/l2hostility/lang/en_ud.json
-25d08c3514b1277a5895928ad1351bad2491f4d8 assets/l2hostility/lang/en_us.json
+35451f1f74145b49d1e012816822ad311a87c2d2 assets/l2hostility/lang/en_ud.json
+17a9c67d7fed3841d7d8b569005231f72dcb3bb4 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -24,6 +24,7 @@ ffd80ef17e54fcd7ef3e1d11a93804e50b6aa529 assets/l2hostility/models/item/cursed.j
 35c86995f5f78475515fc173c46a04ba4f24b41c assets/l2hostility/models/item/dementor.json
 0f51d8c6b255ece00b8e0e60f0f90a4a748106f2 assets/l2hostility/models/item/detector_glasses.json
 68e7d5144c357b421964b2c26ba688790126b811 assets/l2hostility/models/item/dispell.json
+daf50b250dc8c7ce6cb12a093b0dd1993c52e64f assets/l2hostility/models/item/drain.json
 31eb768e73a9e25dd120627d1792a0fc4b23a659 assets/l2hostility/models/item/equipment_wand.json
 a7e2d8292fc281adc07394f2043952d89b2af88a assets/l2hostility/models/item/erosion.json
 7254b8c02f97ba2b16d796f5956e3013ac1dc6fd assets/l2hostility/models/item/fiery.json
@@ -162,6 +163,8 @@ edf64deed56924f50118492f25104511eb052cab data/l2hostility/tags/entity_types/blac
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/dementor_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/dispell_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/dispell_whitelist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/drain_blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/drain_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/erosion_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/erosion_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/fiery_blacklist.json
@@ -216,4 +219,5 @@ a37c8a7cf9e25ba9178196b0552e6c5e79567ffa data/l2hostility/tags/entity_types/undy
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
 d4cef9e3f70679f44d73ba76d5b777c60857acf5 data/l2hostility/tags/items/chaos_equipment.json
+e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
 e7bd765cf86b012712df42659c7ff073ed8568a2 data/minecraft/tags/blocks/mineable/pickaxe.json

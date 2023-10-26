@@ -113,6 +113,9 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue killerAuraInterval;
 		public final ForgeConfigSpec.IntValue shulkerInterval;
 		public final ForgeConfigSpec.IntValue grenadeInterval;
+		public final ForgeConfigSpec.DoubleValue drainDamage;
+		public final ForgeConfigSpec.DoubleValue drainDuration;
+		public final ForgeConfigSpec.IntValue drainDurationMax;
 
 		public final ForgeConfigSpec.DoubleValue ringOfLifeMaxDamage;
 		public final ForgeConfigSpec.IntValue flameThornTime;
@@ -316,6 +319,12 @@ public class LHConfig {
 						.defineInRange("shulkerInterval", 40, 1, 10000);
 				grenadeInterval = builder.comment("Interval for for explode shulker")
 						.defineInRange("explodeShulkerInterval", 60, 1, 10000);
+				drainDamage = builder.comment("Damage bonus for each negative effects")
+						.defineInRange("drainDamage", 0.1, 0, 100);
+				drainDuration = builder.comment("Duration boost for negative effects")
+						.defineInRange("drainDuration", 0.50, 0, 100);
+				drainDurationMax = builder.comment("Max duration boost for negative effects")
+						.defineInRange("drainDurationMax", 1200, 0, 10000);
 
 			}
 			builder.pop();
