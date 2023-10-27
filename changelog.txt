@@ -1,7 +1,8 @@
 2.4.11
 - add 3 rings
 - add 3 slot-adding curios
-- add 8 traits
+- add 9 traits
+- add witch droplet, booster potion, witch charge, eternal witch charge
 - make fiery trait more lenient
 - add config to allow exponential health/damage
 - add config to allow disabling orb

@@ -51,7 +51,7 @@ public class TraitSymbol extends Item {
 				}
 				return InteractionResult.FAIL;
 			}
-			if (cap.traits.getOrDefault(trait, 0) >= trait.getMaxLevel()) {
+			if (cap.getTraitLevel(trait) >= trait.getMaxLevel()) {
 				if (player instanceof ServerPlayer sp) {
 					sp.sendSystemMessage(LangData.MSG_ERR_MAX.get().withStyle(ChatFormatting.RED), true);
 				}

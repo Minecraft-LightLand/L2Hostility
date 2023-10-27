@@ -28,7 +28,7 @@ public class UndyingTrait extends LegendaryTrait {
 		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
 			return;
 		}
-		if (MobTraitCap.HOLDER.get(entity).traits.containsKey(LHTraits.SPLIT.get())) {
+		if (MobTraitCap.HOLDER.get(entity).hasTrait(LHTraits.SPLIT.get())) {
 			return;
 		}
 		if (!validTarget(entity)) {

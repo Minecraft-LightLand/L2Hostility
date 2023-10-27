@@ -30,8 +30,8 @@ public class DrainTrait extends MobTrait {
 			var opt = manager.getTag(LHTraits.POTION).getRandomElement(mob.getRandom());
 			if (opt.isEmpty()) continue;
 			var trait = opt.get();
-			if (trait.allow(mob) && cap.traits.getOrDefault(trait, 0) == 0) {
-				cap.traits.put(trait, lv);
+			if (trait.allow(mob) && !cap.hasTrait(trait)) {
+				cap.setTrait(trait, lv);
 				return;
 			}
 		}

@@ -43,16 +43,14 @@ public class MobEvents {
 			}
 		}
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			MobTraitCap.HOLDER.get(event.getEntity()).traits
-					.forEach((k, v) -> k.onAttackedByOthers(v, event.getEntity(), event));
+			MobTraitCap.HOLDER.get(event.getEntity()).traitEvent((k, v) -> k.onAttackedByOthers(v, event.getEntity(), event));
 		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void onMobHurt(LivingHurtEvent event) {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			MobTraitCap.HOLDER.get(event.getEntity()).traits
-					.forEach((k, v) -> k.onHurtByOthers(v, event.getEntity(), event));
+			MobTraitCap.HOLDER.get(event.getEntity()).traitEvent((k, v) -> k.onHurtByOthers(v, event.getEntity(), event));
 		} else if (event.getEntity() instanceof Player player &&
 				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
 				!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
@@ -83,8 +81,7 @@ public class MobEvents {
 			}
 		}
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			MobTraitCap.HOLDER.get(event.getEntity()).traits
-					.forEach((k, v) -> k.onDeath(v, event.getEntity(), event));
+			MobTraitCap.HOLDER.get(event.getEntity()).traitEvent((k, v) -> k.onDeath(v, event.getEntity(), event));
 		}
 	}
 

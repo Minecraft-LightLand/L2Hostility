@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.capability.mob;
 
+import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 @SerialClass
@@ -75,6 +77,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	private TraitSpawnerBlockEntity summoner = null;
 
 	private boolean inherited = false;
+
+	private final ArrayList<Pair<MobTrait, Integer>> pending = new ArrayList<>();
 
 	public MobTraitCap() {
 	}
@@ -139,6 +143,22 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		return stage != Stage.PRE_INIT;
 	}
 
+	public int getTraitLevel(MobTrait trait) {
+		return traits.getOrDefault(trait, 0);
+	}
+
+	public boolean hasTrait(MobTrait trait) {
+		return getTraitLevel(trait) > 0;
+	}
+
+	public void traitEvent(BiConsumer<MobTrait, Integer> cons) {
+		traits.forEach(cons);
+	}
+
+	public void setTrait(MobTrait trait, int lv) {
+		pending.add(Pair.of(trait, lv));
+	}
+
 	public void tick(LivingEntity mob) {
 		if (!mob.level().isClientSide()) {
 			if (!isInitialized()) {
@@ -149,6 +169,17 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				stage = Stage.POST_INIT;
 				TraitManager.postFill(this, mob);
 				traits.forEach((k, v) -> k.postInit(mob, v));
+				while (!pending.isEmpty()) {
+					var temp = new ArrayList<>(pending);
+					for (var pair : pending) {
+						traits.put(pair.getFirst(), pair.getSecond());
+					}
+					pending.clear();
+					for (var pair : temp) {
+						pair.getFirst().initialize(mob, pair.getSecond());
+						pair.getFirst().postInit(mob, pair.getSecond());
+					}
+				}
 				mob.setHealth(mob.getMaxHealth());
 				syncToClient(mob);
 			}

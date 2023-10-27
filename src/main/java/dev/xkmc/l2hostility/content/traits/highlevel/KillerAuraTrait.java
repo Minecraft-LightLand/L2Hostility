@@ -36,7 +36,7 @@ public class KillerAuraTrait extends MobTrait {
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
 				if (e instanceof Player || e instanceof Mob target && target.getTarget() == mob) {
 					if (e.distanceTo(mob) > range) continue;
-					cap.traits.forEach((k, v) -> k.postHurt(v, mob, e));
+					cap.traitEvent((k, v) -> k.postHurt(v, mob, e));
 					e.hurt(new DamageSource(DamageTypeGen.forKey(mob.level(), DamageTypeGen.KILLER_AURA),
 							mob, null), damage);
 				}

@@ -26,7 +26,6 @@ public class HostilityCharge extends BaseFireball<HostilityCharge> {
 		if (target instanceof LivingEntity le && getItem().getItem() instanceof HostilityChargeItem charge) {
 			charge.getType().onHit(le);
 		}
-		target.hurt(level().damageSources().fireball(this, getOwner()), 6.0F);
 	}
 
 }

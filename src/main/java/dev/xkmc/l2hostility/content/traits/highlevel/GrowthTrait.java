@@ -28,8 +28,8 @@ public class GrowthTrait extends MobTrait {
 	public void postInit(LivingEntity mob, int lv) {
 		var cap = MobTraitCap.HOLDER.get(mob);
 		var regen = LHTraits.REGEN.get();
-		if (regen.allow(mob) && cap.traits.getOrDefault(regen, 0) < lv) {
-			cap.traits.put(regen, lv);
+		if (regen.allow(mob) && cap.getTraitLevel(regen) < lv) {
+			cap.setTrait(regen, lv);
 		}
 	}
 

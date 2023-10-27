@@ -51,7 +51,7 @@ public class TraitLootModifier extends LootModifier {
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
-				if (cap.traits.containsKey(trait)) {
+				if (cap.hasTrait(trait)) {
 					double factor = 1;
 					if (context.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) {
 						Player player = context.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
@@ -60,7 +60,7 @@ public class TraitLootModifier extends LootModifier {
 							factor *= stack.item().getLootFactor(stack.stack(), pl, cap);
 						}
 					}
-					int lv = cap.traits.get(trait);
+					int lv = cap.getTraitLevel(trait);
 					double rate = chance + lv * rankBonus;
 					int count = 0;
 					for (int i = 0; i < result.getCount() * factor; i++) {

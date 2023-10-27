@@ -38,6 +38,7 @@ public class EffectBooster {
 				if (max > current) {
 					new EffectBuilder(e).setDuration(max);
 				}
+				target.forceAddEffect(e, null);
 			}
 		}
 	}
@@ -49,6 +50,7 @@ public class EffectBooster {
 				int current = e.getDuration();
 				if (current < min) continue;
 				new EffectBuilder(e).setDuration(MobEffectInstance.INFINITE_DURATION);
+				target.forceAddEffect(e, null);
 			}
 		}
 	}
