@@ -19,18 +19,22 @@
 	"ring_of_ocean": "深海加护之戒",
 	"ring_of_life": "屹立不倒之戒",
 	"ring_of_divinity": "圣光守护之戒",
-	"ring_of_incarceration": "禁锢戒指",
-	"ring_of_corrosion": "腐蚀戒指",
+	"ring_of_incarceration": "禁锢诅咒之戒",
+	"ring_of_corrosion": "丑恶诅咒之戒",
+	"ring_of_reflection": "诅咒扭曲之戒",
+	"ring_of_healing": "再生之戒",
 	"chaos_ingot": "混沌锭",
 	"flaming_thorn": "魔焰荆棘",
 	"imagine_breaker": "幻想杀手",
-	"ring_of_reflection": "诅咒扭曲之戒",
 	"witch_wand": "混乱魔药法杖",
 	"infinity_glove": "无限手套",
 	"oddeyes_glasses": "异色眼镜",
 	"triple_strip_cape": "三色披风",
 	"sealed_item": "被封印的物品",
-	"ring_of_healing": "再生之戒"
+	"booster_potion": "药水增幅药剂",
+	"eternal_witch_charge": "永恒嗜魔弹",
+	"witch_charge": "嗜魔弹",
+	"witch_droplet": "女巫浓缩凝露"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"
@@ -79,6 +83,12 @@
 	"grenade": "榴弹",
 	"grenade.desc": "每%s秒发射会爆炸的潜影榴弹，不会破坏方块",
 	"shulker": "潜影",
-	"shulker.desc": "每%s秒发射潜影子弹"
+	"shulker.desc": "每%s秒发射潜影子弹",
+	"growth": "生长",
+	"growth.desc": "史莱姆自动获得再生词条，满血时长大",
+	"split": "分裂",
+	"split.desc": "怪物死亡时分裂，等级减半并继承所有词条。本词条分裂时等级-1",
+	"drain": "嗜魔",
+	"drain.desc": "怪物获得相同等级的随机药水词条。怪物击中目标时，随机移除目标身上%s个正面效果，目标身上每有一个负面效果伤害上升%s，并且所有负面效果时间延长%s，最高延长至%s秒"
   }
 }

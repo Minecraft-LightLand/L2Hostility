@@ -1,9 +1,11 @@
 package dev.xkmc.l2hostility.content.capability.mob;
 
+import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
+import dev.xkmc.l2hostility.content.logic.InheritContext;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
@@ -34,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 @SerialClass
@@ -58,13 +61,13 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	private Stage stage = Stage.PRE_INIT;
 
 	@SerialClass.SerialField(toClient = true)
-	private int lv;
+	public int lv;
 
 	@SerialClass.SerialField
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
 	@SerialClass.SerialField(toClient = true)
-	public boolean summoned = false;
+	public boolean summoned = false, noDrop = false;
 
 	@Nullable
 	@SerialClass.SerialField
@@ -72,6 +75,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	@Nullable
 	private TraitSpawnerBlockEntity summoner = null;
+
+	private boolean inherited = false;
+
+	private final ArrayList<Pair<MobTrait, Integer>> pending = new ArrayList<>();
 
 	public MobTraitCap() {
 	}
@@ -108,6 +115,22 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		syncToClient(le);
 	}
 
+	public void copyFrom(LivingEntity par, LivingEntity child, MobTraitCap parent) {
+		InheritContext ctx = new InheritContext(par, parent, child, this, !parent.inherited);
+		parent.inherited = true;
+		lv = parent.lv;
+		summoned = parent.summoned;
+		noDrop = parent.noDrop;
+		for (var ent : parent.traits.entrySet()) {
+			int rank = ent.getKey().inherited(this, ent.getValue(), ctx);
+			if (rank > 0) {
+				traits.put(ent.getKey(), rank);
+			}
+		}
+		TraitManager.fill(child, traits, MobDifficultyCollector.noTrait(lv));
+		stage = Stage.INIT;
+	}
+
 	public int getEnchantBonus() {
 		return (int) (lv * LHConfig.COMMON.enchantmentFactor.get());
 	}
@@ -120,6 +143,22 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		return stage != Stage.PRE_INIT;
 	}
 
+	public int getTraitLevel(MobTrait trait) {
+		return traits.getOrDefault(trait, 0);
+	}
+
+	public boolean hasTrait(MobTrait trait) {
+		return getTraitLevel(trait) > 0;
+	}
+
+	public void traitEvent(BiConsumer<MobTrait, Integer> cons) {
+		traits.forEach(cons);
+	}
+
+	public void setTrait(MobTrait trait, int lv) {
+		pending.add(Pair.of(trait, lv));
+	}
+
 	public void tick(LivingEntity mob) {
 		if (!mob.level().isClientSide()) {
 			if (!isInitialized()) {
@@ -130,6 +169,17 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				stage = Stage.POST_INIT;
 				TraitManager.postFill(this, mob);
 				traits.forEach((k, v) -> k.postInit(mob, v));
+				while (!pending.isEmpty()) {
+					var temp = new ArrayList<>(pending);
+					for (var pair : pending) {
+						traits.put(pair.getFirst(), pair.getSecond());
+					}
+					pending.clear();
+					for (var pair : temp) {
+						pair.getFirst().initialize(mob, pair.getSecond());
+						pair.getFirst().postInit(mob, pair.getSecond());
+					}
+				}
 				mob.setHealth(mob.getMaxHealth());
 				syncToClient(mob);
 			}

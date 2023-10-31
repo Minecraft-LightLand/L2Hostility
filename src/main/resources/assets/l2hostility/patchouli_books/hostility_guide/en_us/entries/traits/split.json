@@ -1,0 +1,16 @@
+{
+  "name": "Split",
+  "icon": "l2hostility:split",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:split",
+	  "text": "Only applicable to simple mobs. Mobs with this trait will split into 2 when killed, each with half mob level and same trait / trait level, except this trait will be 1 level lower.$(br2)Mobs spawned will not drop anything."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "When this trait is present, Undying trait will not trigger. However, the spawned mobs will inherit the undying trait, which will trigger when the mobs can no longer split."
+	}
+  ]
+}

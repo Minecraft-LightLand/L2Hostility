@@ -1,5 +1,7 @@
 package dev.xkmc.l2hostility.init.registrate;
 
+import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
@@ -10,28 +12,40 @@ import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
 import dev.xkmc.l2hostility.content.traits.base.TargetEffectTrait;
 import dev.xkmc.l2hostility.content.traits.common.*;
 import dev.xkmc.l2hostility.content.traits.goals.EnderTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.CorrosionTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.ErosionTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.KillerAuraTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.RagnarokTrait;
+import dev.xkmc.l2hostility.content.traits.highlevel.*;
 import dev.xkmc.l2hostility.content.traits.legendary.DementorTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.DispellTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.RepellingTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.UndyingTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2library.base.L2Registrate;
 import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.RegistryBuilder;
 
 public class LHTraits {
 
-	public static final L2Registrate.RegistryInstance<MobTrait> TRAITS = L2Hostility.REGISTRATE.newRegistry("trait", MobTrait.class);
+	public static final L2Registrate.RegistryInstance<MobTrait> TRAITS = L2Hostility.REGISTRATE.newRegistry("trait", MobTrait.class, RegistryBuilder::hasTags);
+
+	public static final ProviderType<RegistrateTagsProvider.IntrinsicImpl<MobTrait>> TRAIT_TAGS =
+			ProviderType.register("tags/trait", type -> (p, e) ->
+					new RegistrateTagsProvider.IntrinsicImpl<>(p, type, "traits",
+							e.getGenerator().getPackOutput(),
+							LHTraits.TRAITS.key(),
+							e.getLookupProvider(),
+							reg -> ResourceKey.create(LHTraits.TRAITS.key(), reg.getRegistryName()),
+							e.getExistingFileHelper()));
+
+	public static final TagKey<MobTrait> POTION = TagGen.createTraitTag("potion_trait");
 
 	public static final RegistryEntry<AttributeTrait> TANK, SPEEDY;
 	public static final RegistryEntry<SelfEffectTrait> PROTECTION;
@@ -53,6 +67,9 @@ public class LHTraits {
 	public static final RegistryEntry<ErosionTrait> EROSION;
 	public static final RegistryEntry<KillerAuraTrait> AURA;
 	public static final RegistryEntry<RagnarokTrait> RAGNAROK;
+	public static final RegistryEntry<GrowthTrait> GROWTH;
+	public static final RegistryEntry<SplitTrait> SPLIT;
+	public static final RegistryEntry<DrainTrait> DRAIN;
 
 	static {
 		// no desc
@@ -137,6 +154,29 @@ public class LHTraits {
 					.desc("When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.")
 					.lang("Ragnarok").register();
 
+			GROWTH = L2Hostility.REGISTRATE.regTrait("growth", () -> new GrowthTrait(ChatFormatting.DARK_GREEN),
+							rl -> new TraitConfig(rl, 60, 300, 3, 100))
+					.desc("Slime will grow larger when at full health. Automatically gain Regenerate trait.")
+					.lang("Growth").register();
+
+			SPLIT = L2Hostility.REGISTRATE.regTrait("split", () -> new SplitTrait(ChatFormatting.GREEN),
+							rl -> new TraitConfig(rl, 50, 100, 3, 120)
+									.addWhitelist(e -> e.add(
+											EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
+											EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.HUSK,
+											EntityType.SKELETON, EntityType.WITHER_SKELETON, EntityType.STRAY,
+											EntityType.SPIDER, EntityType.CAVE_SPIDER,
+											EntityType.CREEPER, EntityType.VEX,
+											EntityType.SILVERFISH, EntityType.ENDERMITE
+									)))
+					.desc("When mob dies, it will split into 2 of itself with half levels but same trait. This trait reduce by 1 when split.")
+					.lang("Split").register();
+
+			DRAIN = L2Hostility.REGISTRATE.regTrait("drain", () -> new DrainTrait(ChatFormatting.LIGHT_PURPLE),
+							rl -> new TraitConfig(rl, 80, 100, 3, 100))
+					.desc("Grants a random potion trait with same level. When hit target, remove %s beneficial effects, deal %s more damage for every harmful effects, and increase their duration by %s. At most increase to %ss.")
+					.lang("Drain").register();
+
 		}
 
 		//legendary
@@ -174,34 +214,44 @@ public class LHTraits {
 		{
 			WEAKNESS = L2Hostility.REGISTRATE.regTrait("weakness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.WEAKNESS, LHConfig.COMMON.weakTime.get(), lv - 1)),
-					rl -> new TraitConfig(rl, 25, 50, 5, 40)).lang("Weakener").register();
+					rl -> new TraitConfig(rl, 25, 50, 5, 40)
+			).tag(TRAIT_TAGS, POTION).lang("Weakener").register();
 			SLOWNESS = L2Hostility.REGISTRATE.regTrait("slowness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, LHConfig.COMMON.slowTime.get(), lv)),
-					rl -> new TraitConfig(rl, 10, 100, 5, 20)).lang("Stray").register();
+					rl -> new TraitConfig(rl, 10, 100, 5, 20)
+			).tag(TRAIT_TAGS, POTION).lang("Stray").register();
 			POISON = L2Hostility.REGISTRATE.regTrait("poison", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.POISON, LHConfig.COMMON.poisonTime.get() * lv)),
-					rl -> new TraitConfig(rl, 15, 100, 3, 20)).lang("Poisonous").register();
+					rl -> new TraitConfig(rl, 15, 100, 3, 20)
+			).tag(TRAIT_TAGS, POTION).lang("Poisonous").register();
 			WITHER = L2Hostility.REGISTRATE.regTrait("wither", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.WITHER, LHConfig.COMMON.witherTime.get(), lv - 1)),
-					rl -> new TraitConfig(rl, 15, 50, 3, 20)).lang("Withering").register();
+					rl -> new TraitConfig(rl, 15, 50, 3, 20)
+			).tag(TRAIT_TAGS, POTION).lang("Withering").register();
 			LEVITATION = L2Hostility.REGISTRATE.regTrait("levitation", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.LEVITATION, LHConfig.COMMON.levitationTime.get() * lv)),
-					rl -> new TraitConfig(rl, 25, 25, 3, 40)).lang("Levitater").register();
+					rl -> new TraitConfig(rl, 25, 25, 3, 40)
+			).tag(TRAIT_TAGS, POTION).lang("Levitater").register();
 			BLIND = L2Hostility.REGISTRATE.regTrait("blindness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.BLINDNESS, LHConfig.COMMON.blindTime.get() * lv)),
-					rl -> new TraitConfig(rl, 30, 50, 3, 40)).lang("Blinder").register();
+					rl -> new TraitConfig(rl, 30, 50, 3, 40)
+			).tag(TRAIT_TAGS, POTION).lang("Blinder").register();
 			CONFUSION = L2Hostility.REGISTRATE.regTrait("nausea", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.CONFUSION, LHConfig.COMMON.confusionTime.get() * lv)),
-					rl -> new TraitConfig(rl, 30, 25, 3, 40)).lang("Distorter").register();
+					rl -> new TraitConfig(rl, 30, 25, 3, 40)
+			).tag(TRAIT_TAGS, POTION).lang("Distorter").register();
 			SOUL_BURNER = L2Hostility.REGISTRATE.regTrait("soul_burner", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.FLAME.get(), LHConfig.COMMON.soulBurnerTime.get(), lv - 1)),
-					rl -> new TraitConfig(rl, 50, 50, 3, 70)).lang("Soul Burner").register();
+					rl -> new TraitConfig(rl, 50, 50, 3, 70)
+			).tag(TRAIT_TAGS, POTION).lang("Soul Burner").register();
 			FREEZING = L2Hostility.REGISTRATE.regTrait("freezing", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.ICE.get(), LHConfig.COMMON.freezingTime.get() * lv)),
-					rl -> new TraitConfig(rl, 30, 50, 3, 50)).lang("Freezing").register();
+					rl -> new TraitConfig(rl, 30, 50, 3, 50)
+			).tag(TRAIT_TAGS, POTION).lang("Freezing").register();
 			CURSED = L2Hostility.REGISTRATE.regTrait("cursed", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.CURSE.get(), LHConfig.COMMON.curseTime.get() * lv)),
-					rl -> new TraitConfig(rl, 20, 100, 3, 20)).lang("Cursed").register();
+					rl -> new TraitConfig(rl, 20, 100, 3, 20)
+			).tag(TRAIT_TAGS, POTION).lang("Cursed").register();
 		}
 	}
 

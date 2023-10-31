@@ -2,18 +2,25 @@ package dev.xkmc.l2hostility.content.traits.base;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.logic.InheritContext;
+import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.DamageTypeGen;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
+import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -64,11 +71,14 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		return config.allows(le.getType());
 	}
 
+	public final boolean allow(LivingEntity le) {
+		return allow(le, Integer.MAX_VALUE, TraitManager.getMaxLevel() + 1);
+	}
+
 	public void initialize(LivingEntity mob, int level) {
 	}
 
 	public void postInit(LivingEntity mob, int lv) {
-
 	}
 
 	public void tick(LivingEntity mob, int level) {
@@ -83,7 +93,6 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	}
 
 	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
-
 	}
 
 	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
@@ -96,7 +105,6 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	}
 
 	public void onDeath(int level, LivingEntity entity, LivingDeathEvent event) {
-
 	}
 
 	public MutableComponent getFullDesc(@Nullable Integer value) {
@@ -136,6 +144,10 @@ public class MobTrait extends NamedEntry<MobTrait> {
 			return !LHConfig.COMMON.map.get(getRegistryName().getPath()).get();
 		}
 		return false;
+	}
+
+	public int inherited(MobTraitCap mobTraitCap, int rank, InheritContext ctx) {
+		return rank;
 	}
 
 }

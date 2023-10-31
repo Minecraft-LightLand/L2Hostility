@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.github.L_Ender.cataclysm.Cataclysm;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
@@ -7,6 +8,8 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
+import dev.xkmc.l2hostility.compat.data.CataclysmData;
+import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
@@ -23,7 +26,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
+import twilightforest.TwilightForestMod;
 
 import java.util.function.BiFunction;
 
@@ -70,6 +75,22 @@ public class RecipeGen {
 
 			unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LHItems.BOTTLE_CURSE.get(), 3)::unlockedBy, LCItems.CURSED_DROPLET.get())
 					.requires(LCItems.CURSED_DROPLET).requires(Items.GLASS_BOTTLE, 3)
+					.save(pvd);
+
+			unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LHItems.BOOSTER_POTION.get(), 1)::unlockedBy, LHItems.WITCH_DROPLET.get())
+					.requires(LHItems.WITCH_DROPLET).requires(LHItems.BOTTLE_SANITY).requires(LCItems.LIFE_ESSENCE)
+					.save(pvd);
+
+			unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LHItems.WITCH_CHARGE.get(), 1)::unlockedBy, LHItems.WITCH_DROPLET.get())
+					.requires(LHItems.WITCH_DROPLET).requires(LCItems.CURSED_DROPLET).requires(Items.GUNPOWDER).requires(Items.BLAZE_POWDER)
+					.save(pvd);
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.ETERNAL_WITCH_CHARGE.get(), 1)::unlockedBy, LHItems.WITCH_DROPLET.get())
+					.pattern("ABA").pattern("BCB").pattern("DBD")
+					.define('A', Items.GUNPOWDER)
+					.define('D', Items.BLAZE_POWDER)
+					.define('B', LCItems.BLACKSTONE_CORE.get())
+					.define('C', LHItems.WITCH_DROPLET)
 					.save(pvd);
 
 		}
@@ -211,18 +232,19 @@ public class RecipeGen {
 						.save(pvd);
 
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.RING_INCARCERATION.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
-						.pattern("BAB").pattern("DID").pattern("BAB")
+						.pattern("BAB").pattern("1I2").pattern("BAB")
 						.define('I', LHItems.CHAOS_INGOT.get())
-						.define('A', LHTraits.SLOWNESS.get().asItem())
+						.define('1', LHTraits.SLOWNESS.get().asItem())
+						.define('2', LHTraits.FREEZING.get().asItem())
+						.define('A', LHTraits.AURA.get().asItem())
 						.define('B', LCItems.BLACKSTONE_CORE.get())
-						.define('D', LHTraits.FREEZING.get().asItem())
 						.save(pvd);
 			}
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.FLAMING_THORN.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("BAB").pattern("DID").pattern("BAB")
 					.define('I', LHItems.CHAOS_INGOT.get())
-					.define('A', LCItems.SOUL_FLAME.get())
+					.define('A', LHTraits.DRAIN.get().asItem())
 					.define('B', LCItems.WARDEN_BONE_SHARD.get())
 					.define('D', LHTraits.SOUL_BURNER.get().asItem())
 					.save(pvd);
@@ -268,6 +290,14 @@ public class RecipeGen {
 
 		}
 
+		// compat
+		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
+			TFData.genRecipe(pvd);
+		}
+		if (ModList.get().isLoaded(Cataclysm.MODID)) {
+			CataclysmData.genRecipe(pvd);
+		}
+
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -281,8 +311,8 @@ public class RecipeGen {
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	private static ResourceLocation getID(Item item) {
-		return new ResourceLocation(L2Hostility.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item).getPath());
+	public static ResourceLocation getID(ItemLike item) {
+		return new ResourceLocation(L2Hostility.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item.asItem()).getPath());
 	}
 
 	@SuppressWarnings("ConstantConditions")

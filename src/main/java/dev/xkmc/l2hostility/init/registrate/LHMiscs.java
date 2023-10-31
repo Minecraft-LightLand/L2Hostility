@@ -20,12 +20,6 @@ public class LHMiscs {
 			REGISTRATE.menu("equipments", EquipmentsMenu::fromNetwork, () -> EquipmentsScreen::new)
 					.register();
 
-	public static final EntityEntry<HostilityBullet> BULLET =
-			REGISTRATE.<HostilityBullet>entity("hostility_bullet", HostilityBullet::new, MobCategory.MISC)
-					.properties(e -> e.sized(0.3125F, 0.3125F).clientTrackingRange(8))
-					.renderer(() -> BulletRenderer::new)
-					.register();
-
 	private static <A extends RecipeSerializer<?>> RegistryEntry<A> reg(String id, NonNullSupplier<A> sup) {
 		return REGISTRATE.simple(id, ForgeRegistries.Keys.RECIPE_SERIALIZERS, sup);
 	}

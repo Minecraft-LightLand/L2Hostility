@@ -20,6 +20,9 @@ public enum LangData {
 	TOOLTIP_BANNED("tooltip.banned", "This trait is disabled.", 0),
 	TOOLTIP_SEAL_DATA("tooltip.sealed_item", "Item sealed within:", 0),
 	TOOLTIP_SEAL_TIME("tooltip.seal_time", "Hold use to unseal. Takes %ss.", 1),
+	TOOLTIP_WITCH_CHARGE("tooltip.witch_charge", "Right click to fire. When hit entity, increase duration of all harmful effects longer than %ss by %s%%. At most increase to %ss.", 3),
+	TOOLTIP_WITCH_ETERNAL("tooltip.witch_eternal", "Right click to fire. When hit entity, all harmful effects longer than %ss becomes infinite duration.", 1),
+	TOOLTIP_WITCH_BOTTLE("tooltip.witch_bottle", "Increase duration of all effects longer than %ss by %s%%. At most increase to %ss.", 3),
 
 	ITEM_WAND_AI("item.wand.ai", "Right click to remove or restore mob AI.", 0),
 	ITEM_WAND_EQUIPMENT("item.wand.equipment", "Right click to open mob equipment menu.", 0),
@@ -50,7 +53,8 @@ public enum LangData {
 	ITEM_FLAME_THORN("item.equipment.flame_thorn", "When you damage a mob, inflict Soul Flame with level equals to total number of effects that mob has, for %ss", 1),
 	ITEM_IMAGINE_BREAKER("item.equipment.imagine_breaker", "All your melee damage bypass magical protection.", 0),
 	ITEM_WITCH_WAND("item.equipment.witch_wand", "Throw random splash potions on right click. Types selected from random potion traits.", 0),
-	ITEM_RING_CORROSION("item.equipment.ring_of_corrosion", "When you deal damage, damage all their equipments by %s%% of their max durability.", 1),
+	ITEM_RING_CORROSION("item.equipment.ring_of_corrosion", "When you deal damage, damage all their equipments by %s%% of max durability.", 1),
+	ITEM_RING_CORROSION_NEG("item.equipment.ring_of_corrosion_neg", "When you take damage, damage all your equipments by %s%% of max durability.", 1),
 	ITEM_RING_INCARCERATION("item.equipment.ring_of_incarceration", "When sneaking, apply Incarceration effect on you and all mobs within your attack range.", 0),
 	ITEM_RING_HEALING("item.equipment.ring_of_healing", "Heals %s%% of max health every second.", 1),
 

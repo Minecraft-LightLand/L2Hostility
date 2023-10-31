@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class RingOfCorrosion extends CurseCurioItem {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.ITEM_RING_CORROSION.get(Math.round(LHConfig.COMMON.ringOfCorrosionFactor.get() * 100)).withStyle(ChatFormatting.GOLD));
+		list.add(LangData.ITEM_RING_CORROSION_NEG.get(Math.round(LHConfig.COMMON.ringOfCorrosionFactor.get() * 100)).withStyle(ChatFormatting.RED));
 	}
 
 	@Override
@@ -32,6 +34,13 @@ public class RingOfCorrosion extends CurseCurioItem {
 		LivingEntity target = cache.getAttackTarget();
 		for (EquipmentSlot e : EquipmentSlot.values()) {
 			DurabilityEater.flat(target, e, LHConfig.COMMON.ringOfCorrosionFactor.get());
+		}
+	}
+
+	@Override
+	public void onDamage(ItemStack stack, LivingEntity user, LivingDamageEvent event) {
+		for (EquipmentSlot e : EquipmentSlot.values()) {
+			DurabilityEater.flat(user, e, LHConfig.COMMON.ringOfCorrosionPenalty.get());
 		}
 	}
 

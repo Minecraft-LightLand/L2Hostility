@@ -15,7 +15,7 @@
       ],
       "traits": [
         {
-          "free": 0,
+          "free": 1,
           "min": 3,
           "trait": "l2hostility:tank"
         },

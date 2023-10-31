@@ -2,14 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
+    "1": {
       "item": "l2hostility:slowness"
+    },
+    "2": {
+      "item": "l2hostility:freezing"
+    },
+    "A": {
+      "item": "l2hostility:killer_aura"
     },
     "B": {
       "item": "l2complements:blackstone_core"
-    },
-    "D": {
-      "item": "l2hostility:freezing"
     },
     "I": {
       "item": "l2hostility:chaos_ingot"
@@ -17,7 +20,7 @@
   },
   "pattern": [
     "BAB",
-    "DID",
+    "1I2",
     "BAB"
   ],
   "result": {

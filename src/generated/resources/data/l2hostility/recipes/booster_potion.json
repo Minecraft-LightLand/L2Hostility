@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "l2hostility:witch_droplet"
+    },
+    {
+      "item": "l2hostility:bottle_of_sanity"
+    },
+    {
+      "item": "l2complements:life_essence"
+    }
+  ],
+  "result": {
+    "item": "l2hostility:booster_potion"
+  }
+}

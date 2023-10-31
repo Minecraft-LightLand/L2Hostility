@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:gunpowder"
+    },
+    "B": {
+      "item": "l2complements:blackstone_core"
+    },
+    "C": {
+      "item": "l2hostility:witch_droplet"
+    },
+    "D": {
+      "item": "minecraft:blaze_powder"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "DBD"
+  ],
+  "result": {
+    "item": "l2hostility:eternal_witch_charge"
+  },
+  "show_notification": true
+}

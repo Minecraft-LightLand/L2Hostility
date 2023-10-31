@@ -1,0 +1,16 @@
+{
+  "name": "生长",
+  "icon": "l2hostility:growth",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:growth",
+	  "text": "只对史莱姆类怪物有效。史莱姆会自动获得相同等级的再生词条。满血时，史莱姆会长大一点，词条等级决定了最大体积。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "被杀死时，只有一只史莱姆会继承此词条，并且词条等级-1"
+	}
+  ]
+}

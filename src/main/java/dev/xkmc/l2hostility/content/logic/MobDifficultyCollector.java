@@ -7,6 +7,13 @@ import net.minecraft.util.RandomSource;
 
 public class MobDifficultyCollector {
 
+	public static MobDifficultyCollector noTrait(int lv) {
+		var ans = new MobDifficultyCollector();
+		ans.trait_chance = 0;
+		ans.base = lv;
+		return ans;
+	}
+
 	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel() + 1;
 	public double scale, varSq, apply_chance, trait_chance, trait_cost;
 
@@ -53,7 +60,7 @@ public class MobDifficultyCollector {
 	public int getDifficulty(RandomSource random) {
 		double mean = base + difficulty * scale;
 		if (count > 0) {
-			mean += random.nextGaussian() * Math.sqrt(varSq / count);
+			mean += random.nextGaussian() * Math.sqrt(varSq);
 		}
 		return Math.round((int) Mth.clamp(mean, min, cap));
 	}

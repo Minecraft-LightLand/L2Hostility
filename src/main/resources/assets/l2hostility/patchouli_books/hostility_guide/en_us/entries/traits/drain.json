@@ -1,0 +1,16 @@
+{
+  "name": "Drain",
+  "icon": "l2hostility:drain",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:drain",
+	  "text": "When mob hits target, remove random beneficial effects, and increase duration of all harmful effects. Damage increased by number of harmful effects on target."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "To fight mobs with this trait, find ways to get rid of effects or be immune to them. Using Ring of Dinvinity, Ring of Reflection, Curse of Wrath, or wear Sculkium armor would help a lot."
+	}
+  ]
+}

@@ -193,7 +193,7 @@ dependencies {
     implementation fg.deobf("dev.xkmc.l2serial:l2serial:1.2.0")
     implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.1.5")
     implementation fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.1.6")
-    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.4.19-slim")
+    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.4.20-slim")
     implementation fg.deobf("dev.xkmc.l2weaponry:l2weaponry:2.4.18")
     implementation(jarJar(fg.deobf("dev.xkmc.l2modularblock:l2modularblock:1.1.0"))) {
         transitive = false

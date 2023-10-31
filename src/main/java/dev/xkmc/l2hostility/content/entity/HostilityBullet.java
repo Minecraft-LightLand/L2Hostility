@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.entity;
 
+import dev.xkmc.l2hostility.init.registrate.LHEntities;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -7,6 +8,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -22,7 +25,7 @@ public class HostilityBullet extends ShulkerBullet {
 	}
 
 	public HostilityBullet(Level level, LivingEntity owner, Entity target, Direction.Axis direction, BulletType type, int lv) {
-		this(LHMiscs.BULLET.get(), level);
+		this(LHEntities.BULLET.get(), level);
 		this.setOwner(owner);
 		BlockPos blockpos = owner.blockPosition();
 		double d0 = (double) blockpos.getX() + 0.5D;
@@ -41,7 +44,10 @@ public class HostilityBullet extends ShulkerBullet {
 		Entity target = result.getEntity();
 		Entity owner = this.getOwner();
 		LivingEntity leowner = owner instanceof LivingEntity ? (LivingEntity) owner : null;
-		target.hurt(this.damageSources().mobProjectile(this, leowner), type.getDamage(lv));
+		float damage = type.getDamage(lv);
+		if (damage > 0) {
+			target.hurt(this.damageSources().mobProjectile(this, leowner), damage);
+		}
 		type.onHit(this, result, lv);
 	}
 
@@ -65,4 +71,18 @@ public class HostilityBullet extends ShulkerBullet {
 		lv = tag.getInt("BulletLevel");
 	}
 
+	public boolean isTarget(Entity e) {
+		if (e instanceof Player) return true;
+		if (e == finalTarget) return true;
+		if (e instanceof Mob target) {
+			var owner = getOwner();
+			if (owner != null) {
+				if (target.getTarget() == owner) return true;
+				if (owner instanceof Mob mob) {
+					if (mob.getTarget() == e) return true;
+				}
+			}
+		}
+		return false;
+	}
 }

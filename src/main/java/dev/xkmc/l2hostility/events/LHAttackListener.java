@@ -28,9 +28,16 @@ public class LHAttackListener implements AttackListener {
 		if (mob != null && MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			if (!mob.getType().is(TagGen.NO_SCALING)) {
-				cache.addHurtModifier(DamageModifier.multTotal(1 + (float) (cap.getLevel() * LHConfig.COMMON.damageFactor.get())));
+				int lv = cap.getLevel();
+				double factor;
+				if (LHConfig.COMMON.exponentialDamage.get()) {
+					factor = Math.pow(1 + LHConfig.COMMON.damageFactor.get(), lv);
+				} else {
+					factor = 1 + lv * LHConfig.COMMON.damageFactor.get();
+				}
+				cache.addHurtModifier(DamageModifier.multTotal((float) factor));
 			}
-			cap.traits.forEach((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache));
+			cap.traitEvent((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache));
 		}
 		if (mob != null) {
 			for (var e : CurseCurioItem.getFromPlayer(mob)) {
@@ -43,8 +50,7 @@ public class LHAttackListener implements AttackListener {
 	public void onCreateSource(CreateSourceEvent event) {
 		LivingEntity mob = event.getAttacker();
 		if (MobTraitCap.HOLDER.isProper(mob)) {
-			MobTraitCap.HOLDER.get(mob).traits
-					.forEach((k, v) -> k.onCreateSource(v, event.getAttacker(), event));
+			MobTraitCap.HOLDER.get(mob).traitEvent((k, v) -> k.onCreateSource(v, event.getAttacker(), event));
 		}
 		if (CurioCompat.hasItem(mob, LHItems.IMAGINE_BREAKER.get())) {
 			if (event.getResult() == L2DamageTypes.MOB_ATTACK || event.getResult() == L2DamageTypes.PLAYER_ATTACK) {

@@ -6,6 +6,7 @@
   "death.attack.killer_aura": "%s被杀戮光环杀死了",
   "death.attack.killer_aura.player": "%s被%s被杀戮光环杀死了",
   "entity.l2hostility.hostility_bullet": "恶意子弹",
+  "entity.l2hostility.hostility_charge": "恶意弹",
   "l2hostility": {
 	"command": {
 	  "player": {
@@ -33,7 +34,10 @@
 	  "weight": "权重: %s",
 	  "banned": "这个词条被禁用了",
 	  "seal_time": "持续使用%s秒来破除封印",
-	  "sealed_item": "被封印的物品："
+	  "sealed_item": "被封印的物品：",
+	  "witch_bottle": "所有超过%s秒的药水效果时间增加%s%%。最多增加至%s秒",
+	  "witch_charge": "右键发射。击中的目标的所有超过%s秒的负面效果时间增加%s%%。最多增加至%s秒",
+	  "witch_eternal": "右键发射。击中的目标的所有超过%s秒的负面效果时间变为无限"
 	},
 	"item": {
 	  "wand": {
@@ -68,6 +72,7 @@
 		"witch_wand": "投掷随机喷溅药水，种类从药水词条中随机选择",
 		"ring_of_incarceration": "潜行时，对你和你攻击范围内所有生物施加禁锢",
 		"ring_of_corrosion": "造成伤害时，目标所有装备耐久下降总耐久的%s%%",
+		"ring_of_corrosion_neg": "受到伤害时，你所有装备耐久下降总耐久的%s%%",
 		"ring_of_healing": "每秒回复总血量的%s%%"
 	  },
 	  "spawner": "召唤强力怪物。击败它们能让当前子区块变得安全"

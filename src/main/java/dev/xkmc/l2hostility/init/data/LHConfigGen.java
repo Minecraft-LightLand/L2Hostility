@@ -4,6 +4,8 @@ import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
+import dev.xkmc.l2hostility.compat.data.CataclysmData;
+import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
@@ -97,74 +99,16 @@ public class LHConfigGen extends ConfigDataProvider {
 				.putMeleeWeapon(70, 100, Items.NETHERITE_AXE, Items.NETHERITE_SWORD)
 		);
 
-		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
-			addEntity(collector, 50, 20, TFEntities.NAGA,
-					new EntityConfig.TraitBase(LHTraits.SPEEDY.get(), 1, 2),
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 0, 1)
-			);
-			addEntity(collector, 100, 30, TFEntities.LICH,
-					new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 2, 3),
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-			);
-			addEntity(collector, 100, 30, TFEntities.MINOSHROOM,
-					new EntityConfig.TraitBase(LHTraits.TANK.get(), 0, 3),
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-			);
-			addEntity(collector, 100, 30, TFEntities.ALPHA_YETI,
-					new EntityConfig.TraitBase(LHTraits.REGEN.get(), 1, 1),
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-			);
-			addEntity(collector, 150, 50, TFEntities.HYDRA,
-					new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 1, 1),
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-			);
-			addEntity(collector, 150, 50, TFEntities.KNIGHT_PHANTOM,
-					new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 0, 1),
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-			);
-			addEntity(collector, 150, 50, TFEntities.SNOW_QUEEN,
-					new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 1, 1),
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-			);
-			addEntity(collector, 150, 50, TFEntities.UR_GHAST,
-					new EntityConfig.TraitBase(LHTraits.WITHER.get(), 1, 1),
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
-			);
-		}
 
+		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
+			TFData.genConfig(collector);
+		}
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
-			addEntity(collector, 200, 50, ModEntities.ENDER_GUARDIAN,
-					new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
-					new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 3, 5)
-			);
-			addEntity(collector, 200, 50, ModEntities.NETHERITE_MONSTROSITY,
-					new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
-					new EntityConfig.TraitBase(LHTraits.SLOWNESS.get(), 3, 5)
-			);
-			addEntity(collector, 200, 50, ModEntities.IGNIS,
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
-					new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 2, 3)
-			);
-			addEntity(collector, 200, 50, ModEntities.THE_HARBINGER,
-					new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
-					new EntityConfig.TraitBase(LHTraits.WITHER.get(), 2, 3)
-			);
-			addEntity(collector, 200, 50, ModEntities.THE_LEVIATHAN,
-					new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 2, 2),
-					new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 2, 3)
-			);
-			addEntity(collector, 100, 30, ModEntities.ENDER_GOLEM,
-					new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 0, 1),
-					new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 0, 1)
-			);
-			addEntity(collector, 100, 30, ModEntities.AMETHYST_CRAB,
-					new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 0, 1),
-					new EntityConfig.TraitBase(LHTraits.POISON.get(), 0, 1)
-			);
+			CataclysmData.genConfig(collector);
 		}
 	}
 
-	private static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, RegistryObject<EntityType<T>> obj, EntityConfig.TraitBase... traits) {
+	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, RegistryObject<EntityType<T>> obj, EntityConfig.TraitBase... traits) {
 		collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntity(min, base, 0, 0, List.of(obj.get()), List.of(traits)));
 	}
 

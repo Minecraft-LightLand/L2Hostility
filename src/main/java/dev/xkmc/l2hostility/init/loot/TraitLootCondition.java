@@ -39,8 +39,8 @@ public class TraitLootCondition implements LootItemCondition {
 		if (lootContext.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
-				if (!cap.traits.containsKey(trait)) return false;
-				int lv = cap.traits.get(trait);
+				if (!cap.hasTrait(trait)) return false;
+				int lv = cap.getTraitLevel(trait);
 				return lv >= minLevel && lv <= maxLevel;
 			}
 		}

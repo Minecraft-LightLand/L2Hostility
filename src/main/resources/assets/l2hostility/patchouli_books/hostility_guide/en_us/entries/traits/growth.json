@@ -1,0 +1,16 @@
+{
+  "name": "Growth",
+  "icon": "l2hostility:growth",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:growth",
+	  "text": "Only applicable to Slime. Slime with this trait will gain Regenerate trait with the same level. Slimes at full health will grow bigger. Trait level decides maximum size."
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "When killed, only one slime will inherit this trait, and level will decrease by 1."
+	}
+  ]
+}
