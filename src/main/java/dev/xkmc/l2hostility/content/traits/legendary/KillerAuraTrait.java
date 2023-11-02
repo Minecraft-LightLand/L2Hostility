@@ -1,7 +1,7 @@
-package dev.xkmc.l2hostility.content.traits.highlevel;
+package dev.xkmc.l2hostility.content.traits.legendary;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.DamageTypeGen;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class KillerAuraTrait extends MobTrait {
+public class KillerAuraTrait extends LegendaryTrait {
 
 	public KillerAuraTrait(ChatFormatting format) {
 		super(format);
@@ -34,9 +34,11 @@ public class KillerAuraTrait extends MobTrait {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			AABB box = mob.getBoundingBox().inflate(range);
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
-				if (e instanceof Player || e instanceof Mob target && target.getTarget() == mob) {
+				if (e instanceof Player pl && !pl.getAbilities().instabuild ||
+						e instanceof Mob target && target.getTarget() == mob) {
 					if (e.distanceTo(mob) > range) continue;
-					cap.traitEvent((k, v) -> k.postHurt(v, mob, e));
+					TraitEffectCache cache = new TraitEffectCache(e);
+					cap.traitEvent((k, v) -> k.postHurtPlayer(v, mob, cache));
 					e.hurt(new DamageSource(DamageTypeGen.forKey(mob.level(), DamageTypeGen.KILLER_AURA),
 							mob, null), damage);
 				}

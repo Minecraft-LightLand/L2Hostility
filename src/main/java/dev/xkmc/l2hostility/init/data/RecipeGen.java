@@ -286,6 +286,20 @@ public class RecipeGen {
 					.define('F', LCItems.RESONANT_FEATHER.get())
 					.save(pvd);
 
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.ABRAHADABRA.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("AIA").pattern("IOI").pattern("AIA")
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('O', LHItems.RING_REFLECTION.get())
+					.define('A', LHTraits.RAGNAROK.get().asItem())
+					.save(pvd);
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.NIDHOGGUR.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("AIA").pattern("IOI").pattern("AIA")
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('O', LHItems.CURSE_GREED.get())
+					.define('A', LHTraits.RAGNAROK.get().asItem())
+					.save(pvd);
+
 			recycle(pvd, TagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
 
 		}

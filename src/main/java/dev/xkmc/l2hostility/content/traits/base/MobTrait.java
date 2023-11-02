@@ -6,21 +6,19 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.logic.InheritContext;
+import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.DamageTypeGen;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
-import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -84,15 +82,25 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	public void tick(LivingEntity mob, int level) {
 	}
 
-	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
+	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache, TraitEffectCache traitCache) {
 		var e = cache.getLivingHurtEvent();
 		assert e != null;
 		if (e.getAmount() > 0 && !e.getSource().is(DamageTypeGen.KILLER_AURA)) {
-			postHurt(level, attacker, cache.getAttackTarget());
+			postHurtPlayer(level, attacker, traitCache);
 		}
 	}
 
-	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
+	public void postHurtPlayer(int level, LivingEntity attacker, TraitEffectCache traitCache) {
+		if (traitCache.reflectTrait(this)) {
+			for (var e : traitCache.getTargets()) {
+				postHurtImpl(level, attacker, e);
+			}
+		} else {
+			postHurtImpl(level, attacker, traitCache.target);
+		}
+	}
+
+	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
 	}
 
 	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
@@ -148,6 +156,10 @@ public class MobTrait extends NamedEntry<MobTrait> {
 
 	public int inherited(MobTraitCap mobTraitCap, int rank, InheritContext ctx) {
 		return rank;
+	}
+
+	public boolean is(TagKey<MobTrait> tag) {
+		return LHTraits.TRAITS.get().tags().getTag(tag).contains(this);
 	}
 
 }

@@ -70,6 +70,9 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue greedExtraLevel;
 		public final ForgeConfigSpec.IntValue lustExtraLevel;
 		public final ForgeConfigSpec.IntValue wrathExtraLevel;
+		public final ForgeConfigSpec.IntValue abrahadabraExtraLevel;
+		public final ForgeConfigSpec.IntValue nidhoggurExtraLevel;
+		public final ForgeConfigSpec.DoubleValue nidhoggurDropFactor;
 		public final ForgeConfigSpec.DoubleValue greedDropFactor;
 		public final ForgeConfigSpec.DoubleValue envyDropRate;
 		public final ForgeConfigSpec.DoubleValue gluttonyDropRate;
@@ -252,6 +255,14 @@ public class LHConfig {
 					prideTraitFactor = builder.comment("Trait cost multiplier when using Curse of Pride")
 							.defineInRange("prideTraitFactor", 0.5, 0.01, 1);
 				}
+
+
+				abrahadabraExtraLevel = builder.comment("Number of level to add when using Abrahadabra")
+						.defineInRange("abrahadabraExtraLevel", 100, 0, 1000);
+				nidhoggurExtraLevel = builder.comment("Number of level to add when using Greed of Nidhoggur")
+						.defineInRange("nidhoggurExtraLevel", 100, 0, 1000);
+				nidhoggurDropFactor = builder.comment("All loot drop factor when using Greed of Nidhoggur")
+						.defineInRange("nidhoggurDropFactor", 0.01, 0, 10);
 			}
 			builder.pop();
 

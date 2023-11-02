@@ -29,7 +29,7 @@ public class DispellTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
+	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
 		List<ItemStack> list = new ArrayList<>();
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			ItemStack stack = target.getItemBySlot(slot);

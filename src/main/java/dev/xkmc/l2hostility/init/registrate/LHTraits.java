@@ -13,10 +13,7 @@ import dev.xkmc.l2hostility.content.traits.base.TargetEffectTrait;
 import dev.xkmc.l2hostility.content.traits.common.*;
 import dev.xkmc.l2hostility.content.traits.goals.EnderTrait;
 import dev.xkmc.l2hostility.content.traits.highlevel.*;
-import dev.xkmc.l2hostility.content.traits.legendary.DementorTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.DispellTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.RepellingTrait;
-import dev.xkmc.l2hostility.content.traits.legendary.UndyingTrait;
+import dev.xkmc.l2hostility.content.traits.legendary.*;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
@@ -144,16 +141,6 @@ public class LHTraits {
 					.desc("When hit target, randomly picks %s equipments and reduce their durability by %s. When there aren't enough equipments, increase damage by %s per piece")
 					.lang("Erosion").register();
 
-			AURA = L2Hostility.REGISTRATE.regTrait("killer_aura", () -> new KillerAuraTrait(ChatFormatting.DARK_RED),
-							rl -> new TraitConfig(rl, 100, 50, 3, 300))
-					.desc("Deal %s magic damage to players and entities targeting it within %s blocks and apply trait effects for every %ss")
-					.lang("Killer Aura").register();
-
-			RAGNAROK = L2Hostility.REGISTRATE.regTrait("ragnarok", () -> new RagnarokTrait(ChatFormatting.DARK_BLUE),
-							rl -> new TraitConfig(rl, 100, 50, 3, 400))
-					.desc("When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.")
-					.lang("Ragnarok").register();
-
 			GROWTH = L2Hostility.REGISTRATE.regTrait("growth", () -> new GrowthTrait(ChatFormatting.DARK_GREEN),
 							rl -> new TraitConfig(rl, 60, 300, 3, 100))
 					.desc("Slime will grow larger when at full health. Automatically gain Regenerate trait.")
@@ -207,6 +194,16 @@ public class LHTraits {
 											EntityType.WITHER)))
 					.desc("Mob will push away entities hostile to it within %s blocks, and immune to projectiles.")
 					.lang("Repelling").register();
+
+			AURA = L2Hostility.REGISTRATE.regTrait("killer_aura", () -> new KillerAuraTrait(ChatFormatting.DARK_RED),
+							rl -> new TraitConfig(rl, 100, 50, 3, 300))
+					.desc("Deal %s magic damage to players and entities targeting it within %s blocks and apply trait effects for every %ss")
+					.lang("Killer Aura").register();
+
+			RAGNAROK = L2Hostility.REGISTRATE.regTrait("ragnarok", () -> new RagnarokTrait(ChatFormatting.DARK_BLUE),
+							rl -> new TraitConfig(rl, 200, 50, 3, 600))
+					.desc("When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.")
+					.lang("Ragnarok").register();
 
 		}
 

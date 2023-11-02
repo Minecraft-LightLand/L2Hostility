@@ -62,6 +62,8 @@ public class LHItems {
 	public static final ItemEntry<InfinityGlove> INFINITY_GLOVE;
 	public static final ItemEntry<OddeyesGlasses> ODDEYES_GLASSES;
 	public static final ItemEntry<TripleStripCape> TRIPLE_STRIP_CAPE;
+	public static final ItemEntry<Abrahadabra> ABRAHADABRA;
+	public static final ItemEntry<GreedOfNidhoggur> NIDHOGGUR;
 
 	public static final ItemEntry<TraitAdderWand> ADDER;
 	public static final ItemEntry<TargetSelectWand> TARGET;
@@ -157,6 +159,9 @@ public class LHItems {
 
 			ODDEYES_GLASSES = curio("oddeyes_glasses", OddeyesGlasses::new).tag(chaos, head).register();
 			TRIPLE_STRIP_CAPE = curio("triple_strip_cape", TripleStripCape::new).tag(chaos, back).register();
+
+			ABRAHADABRA = curio("abrahadabra", Abrahadabra::new).tag(chaos, charm).register();
+			NIDHOGGUR = curio("greed_of_nidhoggur", GreedOfNidhoggur::new).tag(chaos, charm).register();
 
 		}
 

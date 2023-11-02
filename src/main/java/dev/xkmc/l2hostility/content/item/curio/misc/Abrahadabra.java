@@ -1,9 +1,9 @@
-package dev.xkmc.l2hostility.content.item.curio.ring;
+package dev.xkmc.l2hostility.content.item.curio.misc;
 
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -13,20 +13,27 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RingOfReflection extends CurseCurioItem {
+public class Abrahadabra extends CurseCurioItem {
 
-	public RingOfReflection(Properties properties) {
+	public Abrahadabra(Properties properties) {
 		super(properties);
 	}
 
 	@Override
+	public int getExtraLevel(ItemStack stack) {
+		return LHConfig.COMMON.abrahadabraExtraLevel.get();
+	}
+
+	@Override
 	public boolean reflectTrait(MobTrait trait) {
-		return trait.is(LHTraits.POTION);
+		return true;
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.ITEM_RING_REFLECTION.get().withStyle(ChatFormatting.GOLD));
+		list.add(LangData.ABRAHADABRA.get().withStyle(ChatFormatting.GOLD));
+		int lv = LHConfig.COMMON.abrahadabraExtraLevel.get();
+		list.add(LangData.ITEM_CHARM_ADD_LEVEL.get(lv).withStyle(ChatFormatting.RED));
 	}
 
 }

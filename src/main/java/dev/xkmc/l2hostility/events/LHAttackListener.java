@@ -10,6 +10,7 @@ import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
+import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
@@ -37,7 +38,8 @@ public class LHAttackListener implements AttackListener {
 				}
 				cache.addHurtModifier(DamageModifier.multTotal((float) factor));
 			}
-			cap.traitEvent((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache));
+			TraitEffectCache traitCache = new TraitEffectCache(cache.getAttackTarget());
+			cap.traitEvent((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache, traitCache));
 		}
 		if (mob != null) {
 			for (var e : CurseCurioItem.getFromPlayer(mob)) {

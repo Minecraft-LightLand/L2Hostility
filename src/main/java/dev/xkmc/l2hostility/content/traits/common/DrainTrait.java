@@ -4,6 +4,7 @@ import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.traits.EffectBooster;
+import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
@@ -38,8 +39,8 @@ public class DrainTrait extends MobTrait {
 	}
 
 	@Override
-	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
-		super.onHurtTarget(level, attacker, cache);
+	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache, TraitEffectCache traitCache) {
+		super.onHurtTarget(level, attacker, cache, traitCache);
 		LivingEntity target = cache.getAttackTarget();
 		var neg = target.getActiveEffects().stream()
 				.filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL)
@@ -49,7 +50,7 @@ public class DrainTrait extends MobTrait {
 	}
 
 	@Override
-	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
+	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
 		var pos = new ArrayList<>(target.getActiveEffects().stream()
 				.filter(e -> e.getEffect().getCategory() == MobEffectCategory.BENEFICIAL)
 				.toList());

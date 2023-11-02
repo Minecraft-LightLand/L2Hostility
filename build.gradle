@@ -201,7 +201,7 @@ dependencies {
     }
 
     runtimeOnly fg.deobf("dev.xkmc.l2screentracker:l2screentracker:0.1.3")
-    runtimeOnly fg.deobf("dev.xkmc.l2itemselector:l2itemselector:0.1.6")
+    runtimeOnly fg.deobf("dev.xkmc.l2itemselector:l2itemselector:0.1.7")
     runtimeOnly fg.deobf("dev.xkmc.l2backpack:l2backpack:2.4.9-slim")
     runtimeOnly fg.deobf("dev.xkmc.modulargolems:modulargolems:2.4.19-slim")
     runtimeOnly fg.deobf("dev.xkmc.l2archery:l2archery:2.4.7")

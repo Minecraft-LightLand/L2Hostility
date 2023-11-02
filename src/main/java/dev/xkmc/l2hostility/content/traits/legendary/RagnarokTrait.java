@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.traits.highlevel;
+package dev.xkmc.l2hostility.content.traits.legendary;
 
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.compat.curios.EntitySlotAccess;
@@ -13,14 +13,14 @@ import net.minecraft.world.entity.LivingEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RagnarokTrait extends MobTrait {
+public class RagnarokTrait extends LegendaryTrait {
 
 	public RagnarokTrait(ChatFormatting format) {
 		super(format);
 	}
 
 	@Override
-	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
+	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
 		List<EntitySlotAccess> list = new ArrayList<>(CurioCompat.getItemAccess(target)
 				.stream().filter(e -> !e.get().isEmpty() && !e.get().is(LHItems.SEAL.get())).toList());
 		int count = Math.min(level, list.size());

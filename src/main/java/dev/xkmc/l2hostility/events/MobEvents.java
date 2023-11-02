@@ -6,6 +6,7 @@ import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
+import dev.xkmc.l2hostility.content.item.wand.IMobClickItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
@@ -20,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -93,7 +95,16 @@ public class MobEvents {
 				event.setCanceled(true);
 				return;
 			}
-			// TODO drop multiply
+			LivingEntity killer = event.getEntity().getKillCredit();
+			if (killer != null && CurioCompat.hasItem(killer, LHItems.NIDHOGGUR.get())) {
+				double val = LHConfig.COMMON.nidhoggurDropFactor.get() * cap.getLevel();
+				int count = (int) val;
+				if (event.getEntity().getRandom().nextDouble() < val - count) count++;
+				count++;
+				for (var stack : event.getDrops()) {
+					stack.getItem().setCount(stack.getItem().getCount() * count);
+				}
+			}
 		}
 	}
 
@@ -138,6 +149,19 @@ public class MobEvents {
 			L2Hostility.HANDLER.toClientPlayer(packet, event.getPlayer());
 		}
 	}
+
+
+	@SubscribeEvent
+	public static void onTargetCardClick(PlayerInteractEvent.EntityInteract event) {
+		if (event.getItemStack().getItem() instanceof IMobClickItem) {
+			if (event.getTarget() instanceof LivingEntity le) {
+				event.setCancellationResult(event.getItemStack().interactLivingEntity(event.getEntity(),
+						le, event.getHand()));
+				event.setCanceled(true);
+			}
+		}
+	}
+
 
 	private static final List<Runnable> TASKS = new ArrayList<>();
 

@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.traits.common;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
@@ -19,7 +20,7 @@ public class FieryTrait extends SelfEffectTrait {
 	}
 
 	@Override
-	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache) {
+	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache, TraitEffectCache traitCache) {
 		assert cache.getLivingHurtEvent() != null;
 		if (cache.getLivingHurtEvent().getAmount() > 0) {
 			if (cache.getLivingHurtEvent().getSource().getDirectEntity() instanceof LivingEntity le) {

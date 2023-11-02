@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:ragnarok"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    },
+    "O": {
+      "item": "l2hostility:ring_of_reflection"
+    }
+  },
+  "pattern": [
+    "AIA",
+    "IOI",
+    "AIA"
+  ],
+  "result": {
+    "item": "l2hostility:abrahadabra"
+  },
+  "show_notification": true
+}

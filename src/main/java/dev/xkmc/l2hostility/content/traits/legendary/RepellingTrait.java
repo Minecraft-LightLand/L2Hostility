@@ -28,8 +28,9 @@ public class RepellingTrait extends LegendaryTrait {
 					mob.getBoundingBox().inflate(r), e -> e.isLocalPlayer() && !e.getAbilities().instabuild);
 		} else {
 			list = mob.level().getEntities(EntityTypeTest.forClass(LivingEntity.class),
-					mob.getBoundingBox().inflate(r), e -> e instanceof Player ||
-							e instanceof Mob m && m.getTarget() == mob);
+					mob.getBoundingBox().inflate(r), e ->
+							e instanceof Player pl && !pl.getAbilities().instabuild ||
+									e instanceof Mob m && m.getTarget() == mob);
 		}
 		for (var e : list) {
 			double dist = mob.distanceTo(e) / r;

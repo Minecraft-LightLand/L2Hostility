@@ -19,7 +19,7 @@ public abstract class SlotIterateDamageTrait extends MobTrait {
 	}
 
 	@Override
-	public void postHurt(int level, LivingEntity attacker, LivingEntity target) {
+	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
 		process(level, attacker, target);
 	}
 

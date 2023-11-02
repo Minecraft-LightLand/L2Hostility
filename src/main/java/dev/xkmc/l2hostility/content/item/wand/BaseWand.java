@@ -11,7 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public abstract class BaseWand extends Item implements IGlowingTarget {
+public abstract class BaseWand extends Item implements IGlowingTarget, IMobClickItem {
 
 	public BaseWand(Properties properties) {
 		super(properties);

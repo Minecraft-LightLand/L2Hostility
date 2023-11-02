@@ -4,6 +4,7 @@ import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -39,6 +40,10 @@ public class CurseCurioItem extends CurioItem {
 
 	public double getGrowFactor(ItemStack stack, PlayerDifficulty player, MobTraitCap mob) {
 		return 1;
+	}
+
+	public boolean reflectTrait(MobTrait trait) {
+		return false;
 	}
 
 	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {

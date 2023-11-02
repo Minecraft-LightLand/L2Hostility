@@ -34,7 +34,9 @@
 	"booster_potion": "药水增幅药剂",
 	"eternal_witch_charge": "永恒嗜魔弹",
 	"witch_charge": "嗜魔弹",
-	"witch_droplet": "女巫浓缩凝露"
+	"witch_droplet": "女巫浓缩凝露",
+	"abrahadabra": "以雷霆赐汝一死",
+	"greed_of_nidhoggur": "尼德霍格之欲"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"
