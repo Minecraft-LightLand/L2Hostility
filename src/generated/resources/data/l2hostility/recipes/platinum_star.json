@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "l2hostility:killer_aura"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    },
+    "S": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "BIB",
+    "ISI",
+    "BIB"
+  ],
+  "result": {
+    "item": "l2hostility:platinum_star"
+  },
+  "show_notification": true
+}

@@ -300,6 +300,13 @@ public class RecipeGen {
 					.define('A', LHTraits.RAGNAROK.get().asItem())
 					.save(pvd);
 
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.PLATINUM_STAR.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("BIB").pattern("ISI").pattern("BIB")
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('B', LHTraits.AURA.get().asItem())
+					.define('S', Items.NETHER_STAR)
+					.save(pvd);
+
 			recycle(pvd, TagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
 
 		}

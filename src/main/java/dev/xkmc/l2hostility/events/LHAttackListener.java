@@ -11,6 +11,7 @@ import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
+import dev.xkmc.l2hostility.init.data.HostilityDamageState;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
@@ -57,6 +58,12 @@ public class LHAttackListener implements AttackListener {
 		if (CurioCompat.hasItem(mob, LHItems.IMAGINE_BREAKER.get())) {
 			if (event.getResult() == L2DamageTypes.MOB_ATTACK || event.getResult() == L2DamageTypes.PLAYER_ATTACK) {
 				event.enable(DefaultDamageState.BYPASS_MAGIC);
+			}
+		}
+
+		if (CurioCompat.hasItem(mob, LHItems.PLATINUM_STAR.get())) {
+			if (event.getResult() == L2DamageTypes.MOB_ATTACK || event.getResult() == L2DamageTypes.PLAYER_ATTACK) {
+				event.enable(HostilityDamageState.BYPASS_COOLDOWN);
 			}
 		}
 	}

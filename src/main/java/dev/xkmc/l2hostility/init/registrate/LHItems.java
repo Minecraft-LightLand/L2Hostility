@@ -59,6 +59,7 @@ public class LHItems {
 	public static final ItemEntry<RingOfHealing> RING_HEALING;
 	public static final ItemEntry<FlamingThorn> FLAMING_THORN;
 	public static final ItemEntry<ImagineBreaker> IMAGINE_BREAKER;
+	public static final ItemEntry<PlatinumStar> PLATINUM_STAR;
 	public static final ItemEntry<InfinityGlove> INFINITY_GLOVE;
 	public static final ItemEntry<OddeyesGlasses> ODDEYES_GLASSES;
 	public static final ItemEntry<TripleStripCape> TRIPLE_STRIP_CAPE;
@@ -153,6 +154,7 @@ public class LHItems {
 
 			FLAMING_THORN = curio("flaming_thorn", FlamingThorn::new).tag(chaos, hand).register();
 			IMAGINE_BREAKER = curio("imagine_breaker", ImagineBreaker::new).tag(chaos, hand).register();
+			PLATINUM_STAR = curio("platinum_star", PlatinumStar::new).tag(chaos, hand, charm).register();
 			INFINITY_GLOVE = curio("infinity_glove", InfinityGlove::new).tag(chaos, hand).register();
 
 			TagKey<Item> back = ItemTags.create(new ResourceLocation("curios", "back"));
