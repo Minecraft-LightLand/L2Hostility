@@ -37,7 +37,7 @@ public class ShulkerTrait extends MobTrait {
 		if (e.level().isClientSide()) return;
 		if (e instanceof Mob mob) {
 			if ((e.tickCount + offset) % interval.getAsInt() != 0) return;
-			if (mob.getTarget() != null) {
+			if (mob.getTarget() != null && mob.getTarget().isAlive()) {
 				mob.level().addFreshEntity(new HostilityBullet(mob.level(), mob, mob.getTarget(),
 						Direction.Axis.Y, type, level));
 				mob.playSound(SoundEvents.SHULKER_SHOOT, 2.0F,

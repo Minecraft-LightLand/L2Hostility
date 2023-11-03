@@ -130,14 +130,14 @@ public class LHItems {
 			CHAOS_INGOT = L2Hostility.REGISTRATE.item("chaos_ingot", p -> new Item(p.rarity(Rarity.EPIC).fireResistant())).register();
 
 			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
-
-			CURSE_ENVY = curio("curse_of_envy", CurseOfEnvy::new).tag(chaos, charm).register();
-			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm).register();
-			CURSE_GREED = curio("curse_of_greed", CurseOfGreed::new).tag(chaos, charm).register();
-			CURSE_LUST = curio("curse_of_lust", CurseOfLust::new).tag(chaos, charm).register();
-			CURSE_PRIDE = curio("curse_of_pride", CurseOfPride::new).tag(chaos, charm).register();
-			CURSE_SLOTH = curio("curse_of_sloth", CurseOfSloth::new).tag(chaos, charm).register();
-			CURSE_WRATH = curio("curse_of_wrath", CurseOfWrath::new).tag(chaos, charm).register();
+			TagKey<Item> curse = TagGen.CURSE_SLOT;
+			CURSE_ENVY = curio("curse_of_envy", CurseOfEnvy::new).tag(chaos, charm, curse).register();
+			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm, curse).register();
+			CURSE_GREED = curio("curse_of_greed", CurseOfGreed::new).tag(chaos, charm, curse).register();
+			CURSE_LUST = curio("curse_of_lust", CurseOfLust::new).tag(chaos, charm, curse).register();
+			CURSE_PRIDE = curio("curse_of_pride", CurseOfPride::new).tag(chaos, charm, curse).register();
+			CURSE_SLOTH = curio("curse_of_sloth", CurseOfSloth::new).tag(chaos, charm, curse).register();
+			CURSE_WRATH = curio("curse_of_wrath", CurseOfWrath::new).tag(chaos, charm, curse).register();
 
 			TagKey<Item> ring = ItemTags.create(new ResourceLocation("curios", "ring"));
 
@@ -160,8 +160,8 @@ public class LHItems {
 			ODDEYES_GLASSES = curio("oddeyes_glasses", OddeyesGlasses::new).tag(chaos, head).register();
 			TRIPLE_STRIP_CAPE = curio("triple_strip_cape", TripleStripCape::new).tag(chaos, back).register();
 
-			ABRAHADABRA = curio("abrahadabra", Abrahadabra::new).tag(chaos, charm).register();
-			NIDHOGGUR = curio("greed_of_nidhoggur", GreedOfNidhoggur::new).tag(chaos, charm).register();
+			ABRAHADABRA = curio("abrahadabra", Abrahadabra::new).tag(chaos, curse).register();
+			NIDHOGGUR = curio("greed_of_nidhoggur", GreedOfNidhoggur::new).tag(chaos, curse).register();
 
 		}
 

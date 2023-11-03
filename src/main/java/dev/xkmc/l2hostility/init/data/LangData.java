@@ -122,6 +122,7 @@ public enum LangData {
 		pvd.add("config.jade.plugin_l2hostility.mob", "L2Hostility");
 		pvd.add("death.attack.killer_aura", "%s was killed by killer aura");
 		pvd.add("death.attack.killer_aura.player", "%s was killed by %s's killer aura");
+		pvd.add("curios.identifier.hostility_curse", "L2Hostility - Curse");
 		PatchouliLang.genLang(pvd);
 	}
 

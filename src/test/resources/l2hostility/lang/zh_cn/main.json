@@ -7,6 +7,7 @@
   "death.attack.killer_aura.player": "%s被%s被杀戮光环杀死了",
   "entity.l2hostility.hostility_bullet": "恶意子弹",
   "entity.l2hostility.hostility_charge": "恶意弹",
+  "curios.identifier.hostility_curse": "恶意-诅咒",
   "l2hostility": {
 	"command": {
 	  "player": {
