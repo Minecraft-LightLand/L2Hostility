@@ -111,6 +111,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue corrosionDamage;
 		public final ForgeConfigSpec.DoubleValue erosionDamage;
 		public final ForgeConfigSpec.IntValue ragnarokTime;
+		public final ForgeConfigSpec.BooleanValue ragnarokSealBackpack;
+		public final ForgeConfigSpec.BooleanValue ragnarokSealSlotAdder;
 		public final ForgeConfigSpec.IntValue killerAuraDamage;
 		public final ForgeConfigSpec.IntValue killerAuraRange;
 		public final ForgeConfigSpec.IntValue killerAuraInterval;
@@ -323,6 +325,10 @@ public class LHConfig {
 						.defineInRange("erosionDamage", 0.25, 0, 1);
 				ragnarokTime = builder.comment("Seal time per level for Ragnarok")
 						.defineInRange("ragnarokTime", 20, 1, 1000);
+				ragnarokSealBackpack = builder.comment("Allow Ragnarok to seal items with Backpack in its id")
+						.define("ragnarokSealBackpack", false);
+				ragnarokSealSlotAdder = builder.comment("Allow Ragnarok to seal curios items that adds curios slot")
+						.define("ragnarokSealSlotAdder", false);
 				killerAuraDamage = builder.comment("Damage for killer aura")
 						.defineInRange("killerAuraDamage", 10, 1, 10000);
 				killerAuraRange = builder.comment("Range for for killer aura")

@@ -9,8 +9,8 @@ import dev.xkmc.l2hostility.content.logic.InheritContext;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2hostility.init.data.DamageTypeGen;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHDamageTypes;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
 import net.minecraft.ChatFormatting;
@@ -85,7 +85,7 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache, TraitEffectCache traitCache) {
 		var e = cache.getLivingHurtEvent();
 		assert e != null;
-		if (e.getAmount() > 0 && !e.getSource().is(DamageTypeGen.KILLER_AURA)) {
+		if (e.getAmount() > 0 && !e.getSource().is(LHDamageTypes.KILLER_AURA)) {
 			postHurtPlayer(level, attacker, traitCache);
 		}
 	}
