@@ -29,13 +29,18 @@ public class EnderTrait extends LegendaryTrait {
 		if (mob.level().isClientSide()) return;
 		int duration = LHConfig.COMMON.teleportDuration.get();
 		if (mob.tickCount % duration == 0 && mob instanceof Mob m && m.getTarget() != null) {
+			Vec3 old = mob.position();
 			Vec3 target = m.getTarget().position();
+			mob.teleportTo(target.x(), target.y(), target.z());
+			if (!mob.level().noCollision(mob)) {
+				mob.teleportTo(old.x(), old.y(), old.z());
+				return;
+			}
 			mob.level().gameEvent(GameEvent.TELEPORT, m.position(), GameEvent.Context.of(mob));
 			if (!mob.isSilent()) {
 				mob.level().playSound(null, mob.xo, mob.yo, mob.zo, SoundEvents.ENDERMAN_TELEPORT, mob.getSoundSource(), 1.0F, 1.0F);
 				mob.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
 			}
-			mob.teleportTo(target.x(), target.y(), target.z());
 		}
 	}
 
@@ -52,7 +57,7 @@ public class EnderTrait extends LegendaryTrait {
 
 	private static boolean teleport(LivingEntity entity) {
 		int r = LHConfig.COMMON.teleportRange.get();
-		if (!entity.level().isClientSide() && entity.isAlive()) {
+		if (!entity.level().isClientSide() && entity.isAlive() && r > 0) {
 			double d0 = entity.getX() + (entity.getRandom().nextDouble() - 0.5D) * r * 2;
 			double d1 = entity.getY() + (double) (entity.getRandom().nextInt(r * 2) - r);
 			double d2 = entity.getZ() + (entity.getRandom().nextDouble() - 0.5D) * r * 2;

@@ -55,17 +55,18 @@ public class LHAttackListener implements AttackListener {
 		if (MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap.HOLDER.get(mob).traitEvent((k, v) -> k.onCreateSource(v, event.getAttacker(), event));
 		}
-		if (CurioCompat.hasItem(mob, LHItems.IMAGINE_BREAKER.get())) {
-			if (event.getResult() == L2DamageTypes.MOB_ATTACK || event.getResult() == L2DamageTypes.PLAYER_ATTACK) {
+		var type = event.getResult();
+		if (type == null) return;
+		var root = type.toRoot();
+		if (root == L2DamageTypes.MOB_ATTACK || root == L2DamageTypes.PLAYER_ATTACK) {
+			if (CurioCompat.hasItem(mob, LHItems.IMAGINE_BREAKER.get())) {
 				event.enable(DefaultDamageState.BYPASS_MAGIC);
 			}
-		}
-
-		if (CurioCompat.hasItem(mob, LHItems.PLATINUM_STAR.get())) {
-			if (event.getResult() == L2DamageTypes.MOB_ATTACK || event.getResult() == L2DamageTypes.PLAYER_ATTACK) {
+			if (CurioCompat.hasItem(mob, LHItems.PLATINUM_STAR.get())) {
 				event.enable(HostilityDamageState.BYPASS_COOLDOWN);
 			}
 		}
+
 	}
 
 }
