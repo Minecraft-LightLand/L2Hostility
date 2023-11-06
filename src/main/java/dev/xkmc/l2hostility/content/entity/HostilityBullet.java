@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.content.entity;
 
 import dev.xkmc.l2hostility.init.registrate.LHEntities;
-import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -79,7 +78,7 @@ public class HostilityBullet extends ShulkerBullet {
 			if (owner != null) {
 				if (target.getTarget() == owner) return true;
 				if (owner instanceof Mob mob) {
-					if (mob.getTarget() == e) return true;
+					return mob.getTarget() == e;
 				}
 			}
 		}

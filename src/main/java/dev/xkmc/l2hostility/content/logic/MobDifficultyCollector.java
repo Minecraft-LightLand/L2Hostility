@@ -77,8 +77,8 @@ public class MobDifficultyCollector {
 		return fullChance ? 1 : apply_chance;
 	}
 
-	public double trait_chance() {
-		return fullChance ? 1 : trait_chance;
+	public double trait_chance(int lv) {
+		return fullChance ? 1 : trait_chance * Math.min(1, lv * LHConfig.COMMON.initialTraitChanceSlope.get());
 	}
 
 	public int getBase() {

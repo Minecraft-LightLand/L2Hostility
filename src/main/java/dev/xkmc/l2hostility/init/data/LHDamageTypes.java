@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.init.data;
 
-import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2damagetracker.contents.damage.DamageTypeRoot;
 import dev.xkmc.l2damagetracker.contents.damage.DamageTypeWrapper;
 import dev.xkmc.l2damagetracker.contents.damage.DamageWrapperTagProvider;

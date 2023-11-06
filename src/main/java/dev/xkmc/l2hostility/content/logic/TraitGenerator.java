@@ -36,7 +36,6 @@ public class TraitGenerator {
 		rand = entity.getRandom();
 		level = mobLevel;
 
-
 		var config = L2Hostility.ENTITY.getMerged().get(entity.getType());
 		if (config != null) {
 			for (var base : config.traits()) {

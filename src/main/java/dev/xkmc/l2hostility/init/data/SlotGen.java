@@ -11,7 +11,6 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.stream.Stream;
 
 public class SlotGen extends RecordDataProvider {
 
@@ -26,7 +25,7 @@ public class SlotGen extends RecordDataProvider {
 						"slot/empty_hostility_slot").toString()));
 		map.accept("curios/curios/entities/l2hostility_entity", new CurioEntityBuilder(
 				new ArrayList<>(List.of(new ResourceLocation("player"))),
-				new ArrayList<>(List.of("head", "charm", "ring", "hands","hostility_curse")),
+				new ArrayList<>(List.of("head", "charm", "ring", "hands", "hostility_curse")),
 				SlotCondition.of()
 		));
 	}

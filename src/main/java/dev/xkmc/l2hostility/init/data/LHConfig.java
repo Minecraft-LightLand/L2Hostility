@@ -64,6 +64,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue defaultLevelBase;
 		public final ForgeConfigSpec.DoubleValue defaultLevelVar;
 		public final ForgeConfigSpec.DoubleValue defaultLevelScale;
+		public final ForgeConfigSpec.DoubleValue initialTraitChanceSlope;
 
 		public final ForgeConfigSpec.IntValue bottleOfCurseLevel;
 		public final ForgeConfigSpec.IntValue envyExtraLevel;
@@ -181,6 +182,10 @@ public class LHConfig {
 						.defineInRange("defaultLevelVar", 16d, 0, 1000);
 				defaultLevelScale = builder.comment("Default dimension difficulty scale for mod dimensions")
 						.defineInRange("defaultLevelScale", 1.5, 0, 10);
+				initialTraitChanceSlope = builder.comment("Mobs at Lv.N will have N x k% chance to have trait")
+						.comment("Default k% = 0.01, so Lv.N mobs with have N% chance to have trait")
+						.comment("Mobs with entity config and trait chance of 1 will not be affected")
+						.defineInRange("initialTraitChanceSlope", 0.01, 0, 1);
 			}
 			builder.pop();
 

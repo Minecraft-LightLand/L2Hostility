@@ -2,6 +2,7 @@
 - add 9 curio items
 - add 9 traits
 - add witch droplet, booster potion, witch charge, eternal witch charge
+- mobs at Lv.x will have only x% chance to have traits
 - make fiery trait more lenient
 - Repelling not targeting creative
 - add config to allow exponential health/damage

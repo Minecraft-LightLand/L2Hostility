@@ -72,7 +72,8 @@ public class TraitManager {
 			populateArmors(le, lv);
 		}
 		// add traits
-		if (ins.trait_chance() >= le.getRandom().nextDouble()) {
+
+		if (ins.trait_chance(lv) >= le.getRandom().nextDouble()) {
 			if (!le.getType().is(TagGen.NO_TRAIT)) {
 				TraitGenerator.generateTraits(le, lv, traits, ins);
 			}

@@ -26,7 +26,7 @@ public class RagnarokTrait extends LegendaryTrait {
 			if (rl.toString().contains("backpack")) return false;
 		}
 		if (!LHConfig.COMMON.ragnarokSealSlotAdder.get()) {
-			if (CurioCompat.isSlotAdder(access)) return false;
+			return !CurioCompat.isSlotAdder(access);
 		}
 		return true;
 	}
