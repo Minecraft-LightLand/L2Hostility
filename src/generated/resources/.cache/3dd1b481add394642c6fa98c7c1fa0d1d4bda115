@@ -1,7 +1,7 @@
-// 1.20.1	2023-11-03T10:47:12.556449	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (traits)]
+// 1.20.1	2023-11-07T12:56:44.334227	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (traits)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-4782675133aaf31d0642c7bbcb8a6702973c8d3e assets/l2hostility/lang/en_ud.json
-7a8f72bbab4bde040362bdbbbd074359d73d1f61 assets/l2hostility/lang/en_us.json
+cd7bcd378f3534c68aaaad358183b2f70ec363ac assets/l2hostility/lang/en_ud.json
+6efbb1d7506d89b1b8a9974ce0f1c0a3bf01ed07 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -84,6 +84,26 @@ be1e21b3352daa0055d3ada3f9fd8b7fcab5f887 data/curios/tags/items/charm.json
 8915eecfcc4909e4a2e1bdf379cd07febb03baf3 data/curios/tags/items/hostility_curse.json
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/items/ring.json
 771fa99152eee7e2f4ebc822461b903a784b06b3 data/forge/tags/entity_types/bosses.json
+b1f0948dec552920468cd47e2f8a8f99123aa9ad data/l2hostility/advancements/hostility/breed.json
+5438d24ee2cef442d96f87c920c8557262290d37 data/l2hostility/advancements/hostility/detector.json
+07d2da43bbabb3ee80134db5ec6ff28f6619ec3f data/l2hostility/advancements/hostility/effect_kill_adaptive.json
+da9567fd96408a91bee83e232a1a65a45aeb5c0f data/l2hostility/advancements/hostility/effect_kill_regen.json
+f302318634a394cdc70d48db79a842e228214880 data/l2hostility/advancements/hostility/effect_kill_teleport.json
+b92c3095b89153af553ac9224e512ea7f8c7c504 data/l2hostility/advancements/hostility/effect_kill_undead.json
+e86e8550e4768829374b1fa8343fdf11062c5445 data/l2hostility/advancements/hostility/envy.json
+db08e068803b8fe13bfe2d1f9f25f7f4a8eb99d0 data/l2hostility/advancements/hostility/glasses.json
+41a6d0ca12241fccdcc42cc6853b702811672f3b data/l2hostility/advancements/hostility/ingot.json
+6ffaedae1d6fff1e1b23692b12a93b1baf928b21 data/l2hostility/advancements/hostility/kill_10_traits.json
+850fd8a3c22eac0528dad54d24650648c35a1f9b data/l2hostility/advancements/hostility/kill_5_traits.json
+4e6aebfa20cb9811f8877ed25c84a7a01c948917 data/l2hostility/advancements/hostility/kill_adaptive.json
+7551450f0413a612f81a14cc3b2c81c17c2f800e data/l2hostility/advancements/hostility/kill_dementor.json
+74eccc578fc614ec5c3d3a99af5917805470e3f9 data/l2hostility/advancements/hostility/kill_first.json
+f1532713ec8fed457714ef89f3fac30faf4bd6c7 data/l2hostility/advancements/hostility/kill_ragnarok.json
+386d24df22acbcc97bf37b92dc270092c67c3603 data/l2hostility/advancements/hostility/kill_tanky.json
+a6ebd2bfb4189ee606f957662e07cc24d4e4f0e8 data/l2hostility/advancements/hostility/patchouli.json
+f4b56cdcdb4dfd5e4d1dad450adde8c5c524f42b data/l2hostility/advancements/hostility/root.json
+abd1685a4b815faeeda3c739ba5bfbebbc103837 data/l2hostility/advancements/hostility/sloth.json
+188d1cee312ca567062fe72de134c5d33cc02565 data/l2hostility/advancements/hostility/trait.json
 48fe5e76156944f793f7aad5f95972ebf4dd0a49 data/l2hostility/advancements/recipes/misc/abrahadabra.json
 222c64446f0b832417d2140022f08d9f8f1b3d78 data/l2hostility/advancements/recipes/misc/alpha_yeti_boss_spawner.json
 2fc4decfd7e0bd3895f939688c8fc1240a02b23a data/l2hostility/advancements/recipes/misc/booster_potion.json
@@ -126,6 +146,7 @@ c61e47cea11e64db05e15c1008f845a19fc27f1d data/l2hostility/advancements/recipes/m
 ed187b733e29a0537bd09187af3f24e4d84ee0f8 data/l2hostility/advancements/recipes/misc/witch_charge.json
 800fac7edf1d0211423ca8f018b3725eaea70b1b data/l2hostility/advancements/recipes/misc/witch_wand.json
 e03c87788865e847130c7b79b3808e7b7b41742a data/l2hostility/loot_tables/blocks/hostility_spawner.json
+301ae5a77539f7351a9f537d49491fab91bf387b data/l2hostility/loot_tables/hostility_guide.json
 ff5cd6c878f8942f64e006720b5d925ec73dc48a data/l2hostility/recipes/abrahadabra.json
 1318c59b3a2c6e12ed1e51136ed5bee0ff48ca77 data/l2hostility/recipes/alpha_yeti_boss_spawner.json
 e292543acc9f1ed6ece2a359b4cfe0a31cc011a7 data/l2hostility/recipes/booster_potion.json
@@ -239,5 +260,6 @@ a37c8a7cf9e25ba9178196b0552e6c5e79567ffa data/l2hostility/tags/entity_types/undy
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
 50cbc9948d6c82b5b627ae08b27595db9fbd33b6 data/l2hostility/tags/items/chaos_equipment.json
+f6a1a81258c04b5d4cb074ffa2b3904b772ec91f data/l2hostility/tags/items/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
 e7bd765cf86b012712df42659c7ff073ed8568a2 data/minecraft/tags/blocks/mineable/pickaxe.json

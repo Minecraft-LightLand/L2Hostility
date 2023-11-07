@@ -1,0 +1,33 @@
+{
+  "parent": "l2hostility:hostility/effect_kill_undead",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "effect": "l2complements:stone_cage",
+        "trait": "l2hostility:teleport"
+      },
+      "trigger": "l2hostility:trait_effect"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2hostility.advancements.hostility.effect_kill_teleport.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "l2hostility:teleport"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2hostility.advancements.hostility.effect_kill_teleport.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

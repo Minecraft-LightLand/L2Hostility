@@ -1,0 +1,38 @@
+{
+  "parent": "l2hostility:hostility/root",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2hostility:hostility_detector"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2hostility.advancements.hostility.detector.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "l2hostility:hostility_detector"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2hostility.advancements.hostility.detector.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -14,6 +14,7 @@ import dev.xkmc.l2hostility.content.item.traits.TraitSymbol;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfigGen;
+import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
 import dev.xkmc.l2serial.util.Wrappers;
@@ -50,7 +51,8 @@ public class TraitBuilder<T extends MobTrait, P> extends AbstractBuilder<MobTrai
 		return getOwner().item(this, getName(), sup)
 				.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/bg"),
 						pvd.modLoc("item/trait/" + ctx.getName())))
-				.setData(ProviderType.LANG, NonNullBiConsumer.noop());
+				.setData(ProviderType.LANG, NonNullBiConsumer.noop())
+				.tag(TagGen.TRAIT_ITEM);
 	}
 
 	@NonnullType

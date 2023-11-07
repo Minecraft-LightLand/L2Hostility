@@ -1,0 +1,38 @@
+{
+  "parent": "l2hostility:hostility/kill_first",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2hostility:chaos_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2hostility.advancements.hostility.ingot.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "l2hostility:chaos_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2hostility.advancements.hostility.ingot.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

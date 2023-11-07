@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.init.data;
 
 import com.github.L_Ender.cataclysm.Cataclysm;
-import com.github.L_Ender.cataclysm.init.ModEntities;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
@@ -24,7 +23,6 @@ import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import twilightforest.TwilightForestMod;
-import twilightforest.init.TFEntities;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -67,6 +68,7 @@ public class TraitSymbol extends Item {
 			target.setHealth(target.getMaxHealth());
 			if (player instanceof ServerPlayer sp) {
 				sp.sendSystemMessage(LangData.MSG_SET_TRAIT.get(trait.getDesc(), target.getDisplayName(), val), true);
+				CriteriaTriggers.CONSUME_ITEM.trigger(sp, stack);
 			}
 			if (!player.getAbilities().instabuild) {
 				stack.shrink(1);

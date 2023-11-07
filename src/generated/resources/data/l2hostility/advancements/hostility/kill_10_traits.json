@@ -1,0 +1,33 @@
+{
+  "parent": "l2hostility:hostility/kill_5_traits",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "count": 10
+      },
+      "trigger": "l2hostility:trait_count"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2hostility.advancements.hostility.kill_10_traits.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:netherite_sword",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2hostility.advancements.hostility.kill_10_traits.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

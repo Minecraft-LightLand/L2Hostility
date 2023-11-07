@@ -13,6 +13,7 @@ import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.events.LHAttackListener;
+import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.*;
 import dev.xkmc.l2hostility.init.entries.LHRegistrate;
 import dev.xkmc.l2hostility.init.loot.TraitGLMProvider;
@@ -73,12 +74,15 @@ public class L2Hostility {
 		ChunkDifficulty.register();
 		PlayerDifficulty.register();
 
+		HostilityTriggers.register();
+
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, TagGen::onBlockTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, TagGen::onItemTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, TagGen::onEntityTagGen);
 		REGISTRATE.addDataGenerator(LHTraits.TRAIT_TAGS, TagGen::onTraitTagGen);
+		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 	}
 
 	public L2Hostility() {

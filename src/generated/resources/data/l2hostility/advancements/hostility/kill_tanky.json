@@ -1,0 +1,35 @@
+{
+  "parent": "l2hostility:hostility/kill_first",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "traits": [
+          "l2hostility:protection",
+          "l2hostility:tank"
+        ]
+      },
+      "trigger": "l2hostility:kill_trait"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2hostility.advancements.hostility.kill_tanky.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "l2hostility:protection"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2hostility.advancements.hostility.kill_tanky.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "l2hostility:hostility/kill_dementor",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "traits": [
+          "l2hostility:killer_aura",
+          "l2hostility:ragnarok"
+        ]
+      },
+      "trigger": "l2hostility:kill_trait"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.l2hostility.advancements.hostility.kill_ragnarok.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "l2hostility:ragnarok"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.l2hostility.advancements.hostility.kill_ragnarok.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

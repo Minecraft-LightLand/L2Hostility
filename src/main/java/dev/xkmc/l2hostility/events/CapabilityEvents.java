@@ -105,7 +105,7 @@ public class CapabilityEvents {
 		if (MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			if (killer != null) {
-				cap.onKilled(mob);
+				cap.onKilled(mob, player);
 			}
 			if (player != null) {
 				PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);

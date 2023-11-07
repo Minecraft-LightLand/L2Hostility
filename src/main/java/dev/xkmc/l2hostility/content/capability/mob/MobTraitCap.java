@@ -10,6 +10,7 @@ import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
@@ -200,9 +201,16 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		}
 	}
 
-	public void onKilled(LivingEntity mob) {
+	public void onKilled(LivingEntity mob, @Nullable Player player) {
 		if (summoner != null && !summoner.isRemoved()) {
 			summoner.data.onDeath(mob);
+		}
+		if (player instanceof ServerPlayer sp) {
+			HostilityTriggers.TRAIT_LEVEL.trigger(sp, this);
+			HostilityTriggers.TRAIT_COUNT.trigger(sp, this);
+			HostilityTriggers.KILL_TRAITS.trigger(sp, this);
+			HostilityTriggers.TRAIT_FLAME.trigger(sp, mob, this);
+			HostilityTriggers.TRAIT_EFFECT.trigger(sp, mob, this);
 		}
 	}
 
