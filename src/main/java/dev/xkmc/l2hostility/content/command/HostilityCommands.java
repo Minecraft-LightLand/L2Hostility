@@ -16,6 +16,7 @@ public class HostilityCommands {
 	public static void register(RegisterCommandsEvent event) {
 		event.getDispatcher().register(literal("hostility")
 				.then(LHPlayerCommands.build())
+				.then(LHRegionCommands.build())
 		);
 	}
 

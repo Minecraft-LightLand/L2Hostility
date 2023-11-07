@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
-import dev.xkmc.l2hostility.compat.patchouli.PatchouliLang;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -94,6 +93,15 @@ public enum LangData {
 	COMMAND_PLAYER_GET_DIM("command.player.get_dim", "%s has visited %s dimensions", 2),
 	COMMAND_PLAYER_GET_TRAIT_CAP("command.player.trait_cap", "The max rank %s has killed is rank %s", 2),
 
+	COMMAND_REGION_SUCCEED("command.region.success", "Action Succeed", 0),
+	COMMAND_REGION_LOCAL_OFF("command.region.local_off", "Section difficulty is turned off", 0),
+	COMMAND_REGION_COUNT("command.region.count", "Performed Actions for %s chunk sections", 1),
+	COMMAND_REGION_GET_BASE("command.region.get_base", "Target section has base difficulty level %s", 1),
+	COMMAND_REGION_GET_TOTAL("command.region.get_total", "Target section has total difficulty level %s", 1),
+	COMMAND_REGION_GET_SCALE("command.region.get_scale", "Target section has difficulty scale %s", 1),
+	COMMAND_REGION_CLEAR("command.region.clear", "Section Cleared", 0),
+	COMMAND_REGION_NOT_CLEAR("command.region.not_clear", "Section Not Cleared", 0),
+
 	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
 	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0),
 	;
@@ -124,7 +132,6 @@ public enum LangData {
 		pvd.add("death.attack.killer_aura", "%s was killed by killer aura");
 		pvd.add("death.attack.killer_aura.player", "%s was killed by %s's killer aura");
 		pvd.add("curios.identifier.hostility_curse", "L2Hostility - Curse");
-		PatchouliLang.genLang(pvd);
 	}
 
 	public static String asId(String name) {

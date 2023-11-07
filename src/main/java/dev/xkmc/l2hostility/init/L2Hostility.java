@@ -20,11 +20,13 @@ import dev.xkmc.l2hostility.init.loot.TraitGLMProvider;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.registrate.*;
+import dev.xkmc.l2library.compat.patchouli.PatchouliHelper;
 import dev.xkmc.l2library.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
 import dev.xkmc.l2serial.network.SerialPacketBase;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -83,6 +85,15 @@ public class L2Hostility {
 		REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, TagGen::onEntityTagGen);
 		REGISTRATE.addDataGenerator(LHTraits.TRAIT_TAGS, TagGen::onTraitTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
+
+
+		new PatchouliHelper(REGISTRATE, "hostility_guide")
+				.buildModel().buildShapelessRecipe(e -> e
+								.requires(Items.BOOK).requires(Items.ROTTEN_FLESH).requires(Items.BONE),
+						() -> Items.BOOK)
+				.buildBook("L2Hostility Guide",
+						"Find out the mechanics and mob traits to know what to prepare for",
+						1, LHBlocks.TAB.getKey());
 	}
 
 	public L2Hostility() {

@@ -1,9 +1,7 @@
 package dev.xkmc.l2hostility.content.capability.chunk;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
-import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
@@ -72,15 +70,7 @@ public class ChunkDifficulty implements RegionalDifficultyModifier {
 
 	public void modifyInstance(BlockPos pos, MobDifficultyCollector instance) {
 		check();
-		var levelDiff = L2Hostility.DIFFICULTY.getMerged()
-				.levelMap.get(chunk.getLevel().dimensionTypeId().location());
-		if (levelDiff == null) {
-			levelDiff = WorldDifficultyConfig.defaultLevel();
-		}
-		instance.acceptConfig(levelDiff);
-		getSection(pos.getY()).modifyInstance(chunk.getLevel().getBiome(pos), instance);
-		instance.acceptBonusLevel((int) Math.round(LHConfig.COMMON.distanceFactor.get() *
-				Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ())));
+		getSection(pos.getY()).modifyInstance(chunk.getLevel(), pos, instance);
 	}
 
 	public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {

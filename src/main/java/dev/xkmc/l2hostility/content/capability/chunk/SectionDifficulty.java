@@ -1,7 +1,9 @@
 package dev.xkmc.l2hostility.content.capability.chunk;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
+import dev.xkmc.l2hostility.content.logic.LevelEditor;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -43,27 +45,64 @@ public class SectionDifficulty {
 
 	LevelChunkSection section;
 
-	public void modifyInstance(Holder<Biome> biome, MobDifficultyCollector instance) {
-		biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location())).ifPresent(instance::acceptConfig);
+	public void modifyInstance(Level level, BlockPos pos, MobDifficultyCollector instance) {
+		modifyInstanceInternal(level, pos, instance);
 		if (LHConfig.COMMON.allowSectionDifficulty.get())
-			instance.acceptBonus(difficulty);
+			instance.acceptBonusLevel(difficulty.getLevel());
 		if (stage == SectionStage.CLEARED) {
 			instance.setCap(0);
 		}
+	}
+
+	private void modifyInstanceInternal(Level level, BlockPos pos, MobDifficultyCollector instance) {
+		var levelDiff = L2Hostility.DIFFICULTY.getMerged()
+				.levelMap.get(level.dimensionTypeId().location());
+		if (levelDiff == null) {
+			levelDiff = WorldDifficultyConfig.defaultLevel();
+		}
+		instance.acceptConfig(levelDiff);
+		Holder<Biome> biome = level.getBiome(pos);
+		biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location())).ifPresent(instance::acceptConfig);
+		instance.acceptBonusLevel((int) Math.round(LHConfig.COMMON.distanceFactor.get() *
+				Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ())));
 	}
 
 	public boolean isCleared() {
 		return stage == SectionStage.CLEARED;
 	}
 
-	public void setClear(ChunkDifficulty chunk, BlockPos pos) {
+	public boolean setClear(ChunkDifficulty chunk, BlockPos pos) {
+		if (stage == SectionStage.CLEARED) return false;
 		stage = SectionStage.CLEARED;
 		L2Hostility.toTrackingChunk(chunk.chunk, new TraitEffectToClient(pos, TraitEffects.CLEAR));
 		chunk.chunk.setUnsaved(true);
+		return true;
+	}
+
+	public boolean setUnclear(ChunkDifficulty chunk, BlockPos pos) {
+		if (stage == SectionStage.INIT) return false;
+		stage = SectionStage.INIT;
+		L2Hostility.toTrackingChunk(chunk.chunk, new TraitEffectToClient(pos, TraitEffects.CLEAR));
+		chunk.chunk.setUnsaved(true);
+		return true;
 	}
 
 	public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {
 		difficulty.grow(1, cap);
+	}
+
+	public LevelEditor getLevelEditor(Level level, BlockPos pos) {
+		MobDifficultyCollector col = new MobDifficultyCollector();
+		modifyInstanceInternal(level, pos, col);
+		var diff = LHConfig.COMMON.allowSectionDifficulty.get() ?
+				difficulty : new DifficultyLevel();
+		return new LevelEditor(diff, col.getBase());
+	}
+
+	public double getScale(Level level, BlockPos pos) {
+		MobDifficultyCollector col = new MobDifficultyCollector();
+		modifyInstanceInternal(level, pos, col);
+		return col.scale;
 	}
 
 }
