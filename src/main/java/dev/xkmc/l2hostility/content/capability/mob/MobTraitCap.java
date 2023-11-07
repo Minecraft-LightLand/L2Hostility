@@ -95,6 +95,21 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public static void register() {
 	}
 
+	public void deinit() {
+		traits.clear();
+		lv = 0;
+		stage = Stage.PRE_INIT;
+	}
+
+	public boolean reinit(LivingEntity mob, int level, boolean max) {
+		deinit();
+		init(mob.level(), mob, (pos, ins) -> {
+			ins.base = level;
+			if (max) ins.setFullChance();
+		});
+		return true;
+	}
+
 	public void init(Level level, LivingEntity le, RegionalDifficultyModifier difficulty) {
 		boolean skip = false;
 		MobDifficultyCollector instance = new MobDifficultyCollector();

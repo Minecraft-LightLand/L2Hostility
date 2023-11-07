@@ -86,6 +86,7 @@
   "item.l2hostility.witch_wand": "puɐM ɥɔʇıM",
   "itemGroup.l2library.hostility": "ʎʇıןıʇsoHᄅꞀ",
   "l2hostility.boss_event": "%s/%s :ssǝɹboɹԀ buıɹɐǝןƆ ʎʇıןıʇsoH",
+  "l2hostility.command.mob.success": "sqoɯ %s uo suoıʇɔɐ pǝɯɹoɟɹǝԀ",
   "l2hostility.command.player.fail": "ʇɔǝɟɟǝ ou ɹo ʇǝbɹɐʇ ou sɐɥ puɐɯɯoƆ",
   "l2hostility.command.player.get_base": "%s ןǝʌǝן ʎʇןnɔıɟɟıp ǝsɐq sɐɥ %s",
   "l2hostility.command.player.get_dim": "suoısuǝɯıp %s pǝʇısıʌ sɐɥ %s",

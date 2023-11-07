@@ -102,6 +102,8 @@ public enum LangData {
 	COMMAND_REGION_CLEAR("command.region.clear", "Section Cleared", 0),
 	COMMAND_REGION_NOT_CLEAR("command.region.not_clear", "Section Not Cleared", 0),
 
+	COMMAND_MOB_SUCCEED("command.mob.success", "Performed actions on %s mobs", 1),
+
 	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
 	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0),
 	;

@@ -10,6 +10,7 @@
   "curios.identifier.hostility_curse": "恶意-诅咒",
   "l2hostility": {
 	"command": {
+	  "mob.success": "指令已对%s个怪物起效",
 	  "player": {
 		"fail": "指令无目标或者无效",
 		"get_base": "%s的基础难度等级位Lv.%s",
@@ -17,6 +18,16 @@
 		"get_total": "%s综合难度等级为Lv.%s",
 		"success": "指令已对%s个玩家起效",
 		"trait_cap": "%s击杀的最高阶级词条为阶级%s"
+	  },
+	  "region": {
+		"clear": "子区块难度已净化",
+		"count": "指令已对%s个子区块起效",
+		"get_base": "目标子区块的累积难度为%s",
+		"get_scale": "目标子区块的难度倍率为%s",
+		"get_total": "目标子区块的总难度为%s",
+		"local_off": "子区块难度积累已禁用",
+		"not_clear": "子区块难度还未净化",
+		"success": "指令已生效"
 	  }
 	},
 	"patchouli": {
