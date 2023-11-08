@@ -43,6 +43,9 @@ public class LHConfig {
 
 		public final ForgeConfigSpec.IntValue killsPerLevel;
 		public final ForgeConfigSpec.DoubleValue playerDeathDecay;
+		public final ForgeConfigSpec.BooleanValue keepInventoryRuleKeepDifficulty;
+		public final ForgeConfigSpec.BooleanValue deathDecayDimension;
+		public final ForgeConfigSpec.BooleanValue deathDecayTraitCap;
 
 		public final ForgeConfigSpec.DoubleValue healthFactor;
 		public final ForgeConfigSpec.BooleanValue exponentialHealth;
@@ -195,6 +198,12 @@ public class LHConfig {
 						.defineInRange("killsPerLevel", 30, 1, 10000);
 				playerDeathDecay = builder.comment("Decay in player difficulty on death")
 						.defineInRange("playerDeathDecay", 0.8, 0, 2);
+				keepInventoryRuleKeepDifficulty = builder.comment("Allow KeepInventory to keep difficulty as well")
+						.define("keepInventoryRuleKeepDifficulty", false);
+				deathDecayDimension = builder.comment("On player death, clear dimension penalty")
+						.define("deathDecayDimension", true);
+				deathDecayTraitCap = builder.comment("On player death, reduce max trait spawned by 1")
+						.define("deathDecayTraitCap", true);
 			}
 			builder.pop();
 

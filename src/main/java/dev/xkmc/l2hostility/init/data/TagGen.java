@@ -26,6 +26,7 @@ public class TagGen {
 	public static final TagKey<Item> CHAOS_CURIO = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "chaos_equipment"));
 	public static final TagKey<Item> CURSE_SLOT = ItemTags.create(new ResourceLocation("curios", "hostility_curse"));
 	public static final TagKey<Item> TRAIT_ITEM = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "trait_item"));
+	public static final TagKey<Item> NO_SEAL = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "no_seal"));
 
 	public static final TagKey<EntityType<?>> BLACKLIST = createEntityTag("blacklist");
 	public static final TagKey<EntityType<?>> NO_SCALING = createEntityTag("no_scaling");

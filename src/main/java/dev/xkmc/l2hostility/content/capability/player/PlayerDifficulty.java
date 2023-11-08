@@ -19,6 +19,7 @@ import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.GameRules;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -56,9 +57,16 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public void onClone(boolean isWasDeath) {
-		if (isWasDeath) {
-			difficulty.decay();
+		if (!isWasDeath) return;
+		if (LHConfig.COMMON.keepInventoryRuleKeepDifficulty.get() &&
+				world.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+			return;
 		}
+		if (LHConfig.COMMON.deathDecayDimension.get())
+			dimensions.clear();
+		if (LHConfig.COMMON.deathDecayTraitCap.get())
+			if (maxRankKilled > 0) maxRankKilled--;
+		difficulty.decay();
 	}
 
 	public void tick() {
