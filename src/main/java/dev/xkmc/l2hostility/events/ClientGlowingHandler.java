@@ -40,8 +40,8 @@ public class ClientGlowingHandler {
 			boolean glow = entity.isInvisible() || entity.isInvisibleTo(player);
 			glow |= player.hasEffect(MobEffects.BLINDNESS);
 			glow |= player.hasEffect(MobEffects.DARKNESS);
-			int hidden = LHConfig.CLIENT.glowingRangeHidden.get();
-			int near = LHConfig.CLIENT.glowingRangeNear.get();
+			float hidden = LHConfig.CLIENT.glowingRangeHidden.get() + entity.getBbWidth() * 2;
+			float near = LHConfig.CLIENT.glowingRangeNear.get() + entity.getBbWidth() * 2;
 			double distSqr = entity.distanceToSqr(player);
 			return distSqr <= near * near || glow && distSqr <= hidden * hidden;
 		}

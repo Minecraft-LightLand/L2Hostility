@@ -86,6 +86,9 @@ public enum LangData {
 	LOOT_MIN_LEVEL("jei.min_level", "Drops on mobs with level %s or higher", 1),
 	LOOT_OTHER_TRAIT("jei.other_trait", "Requires %s at rank %s", 2),
 
+	TOOLTIP_JEI_ENVY("jei.envy", "Drops when you equips Curse of Envy while killing mobs of this trait", 0),
+	TOOLTIP_JEI_GLUTTONY("jei.gluttony", "Drops when you equips Curse of Gluttony while killing mobs with levels", 0),
+
 	COMMAND_PLAYER_SUCCEED("command.player.success", "Performed actions on %s players", 1),
 	COMMAND_PLAYER_FAIL("command.player.fail", "Command has no target or no effect", 0),
 	COMMAND_PLAYER_GET_BASE("command.player.get_base", "%s has base difficulty level %s", 2),

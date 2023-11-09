@@ -142,6 +142,8 @@
   "l2hostility.item.wand.ai": "Right click to remove or restore mob AI.",
   "l2hostility.item.wand.equipment": "Right click to open mob equipment menu.",
   "l2hostility.item.wand.target": "Right click 2 mobs to make them fight each other.",
+  "l2hostility.jei.envy": "Drops when you equips Curse of Envy while killing mobs of this trait",
+  "l2hostility.jei.gluttony": "Drops when you equips Curse of Gluttony while killing mobs with levels",
   "l2hostility.jei.loot_chance": "%s chance for %s rank %s",
   "l2hostility.jei.loot_title": "Trait Loot",
   "l2hostility.jei.min_level": "Drops on mobs with level %s or higher",

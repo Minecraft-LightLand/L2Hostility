@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.init.network;
 
+import dev.xkmc.l2hostility.compat.jei.ITraitLootRecipe;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2serial.network.SerialPacketBase;
 import dev.xkmc.l2serial.serialization.SerialClass;
@@ -14,7 +15,7 @@ import java.util.List;
 @SerialClass
 public class LootDataToClient extends SerialPacketBase {
 
-	public static List<TraitLootModifier> LIST_CACHE = new ArrayList<>();
+	public static List<ITraitLootRecipe> LIST_CACHE = new ArrayList<>();
 
 	@SerialClass.SerialField
 	public ArrayList<CompoundTag> list = new ArrayList<>();

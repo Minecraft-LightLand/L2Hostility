@@ -47,9 +47,9 @@ public class TagGen {
 	}
 
 	public static void onEntityTagGen(RegistrateTagsProvider.IntrinsicImpl<EntityType<?>> pvd) {
-		pvd.addTag(BLACKLIST).add(EntityType.ENDERMITE);
+		pvd.addTag(BLACKLIST);
 		pvd.addTag(NO_SCALING).addTag(BLACKLIST);
-		pvd.addTag(NO_TRAIT).addTag(BLACKLIST);
+		pvd.addTag(NO_TRAIT).addTag(BLACKLIST).add(EntityType.ENDERMITE);
 
 		pvd.addTag(ARMOR_TARGET).add(
 				EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,

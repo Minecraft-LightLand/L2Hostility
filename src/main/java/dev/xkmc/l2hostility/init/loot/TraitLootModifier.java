@@ -2,12 +2,16 @@ package dev.xkmc.l2hostility.init.loot;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.xkmc.l2hostility.compat.jei.ITraitLootRecipe;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +21,12 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
 
-public class TraitLootModifier extends LootModifier {
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+public class TraitLootModifier extends LootModifier implements ITraitLootRecipe {
 
 	public static final Codec<TraitLootModifier> CODEC = RecordCodecBuilder.create(i -> codecStart(i).and(i.group(
 					LHTraits.TRAITS.get().getCodec().fieldOf("trait").forGetter(e -> e.trait),
@@ -86,6 +95,70 @@ public class TraitLootModifier extends LootModifier {
 
 	public LootItemCondition[] getConditions() {
 		return conditions;
+	}
+
+	@Override
+	public List<ItemStack> getResults() {
+		return List.of(result);
+	}
+
+	@Override
+	public List<ItemStack> getInputs() {
+		Set<MobTrait> set = new LinkedHashSet<>();
+		set.add(trait);
+		for (var c : getConditions()) {
+			if (c instanceof TraitLootCondition cl) {
+				set.add(cl.trait);
+			}
+		}
+		List<ItemStack> ans = new ArrayList<>();
+		for (var e : set) {
+			ans.add(e.asItem().getDefaultInstance());
+		}
+		return ans;
+	}
+
+	@Override
+	public void addTooltip(List<Component> list) {
+		int max = trait.getConfig().max_rank;
+		int min = 1;
+		int minLevel = 0;
+		List<TraitLootCondition> other = new ArrayList<>();
+		for (var c : getConditions()) {
+			if (c instanceof TraitLootCondition cl) {
+				if (cl.trait == trait) {
+					max = Math.min(max, cl.maxLevel);
+					min = Math.max(min, cl.minLevel);
+				} else {
+					other.add(cl);
+				}
+			} else if (c instanceof MobCapLootCondition cl) {
+				minLevel = cl.minLevel;
+			}
+		}
+		if (minLevel > 0) {
+			list.add(LangData.LOOT_MIN_LEVEL.get(Component.literal(minLevel + "").withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.LIGHT_PURPLE));
+		}
+		for (int lv = min; lv <= max; lv++) {
+			list.add(LangData.LOOT_CHANCE.get(
+							Component.literal(Math.round((chance + rankBonus * lv) * 100) + "%")
+									.withStyle(ChatFormatting.AQUA),
+							trait.getDesc().withStyle(ChatFormatting.GOLD),
+							Component.literal(lv + "").withStyle(ChatFormatting.AQUA))
+					.withStyle(ChatFormatting.GRAY));
+		}
+		for (var c : other) {
+			int cmin = Math.max(c.minLevel, 1);
+			int cmax = Math.min(c.maxLevel, c.trait.getMaxLevel());
+			String str = cmax == cmin ?
+					cmin + "" :
+					cmax >= c.trait.getMaxLevel() ?
+							cmin + "+" :
+							cmin + "-" + cmax;
+			list.add(LangData.LOOT_OTHER_TRAIT.get(c.trait.getDesc().withStyle(ChatFormatting.GOLD),
+							Component.literal(str).withStyle(ChatFormatting.AQUA))
+					.withStyle(ChatFormatting.RED));
+		}
 	}
 
 }

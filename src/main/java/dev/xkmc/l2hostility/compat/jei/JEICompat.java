@@ -10,6 +10,8 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.List;
+
 @JeiPlugin
 public class JEICompat implements IModPlugin {
 
@@ -31,6 +33,7 @@ public class JEICompat implements IModPlugin {
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
+		registration.addRecipes(LOOT.getRecipeType(), List.of(new EnvyLootRecipe(), new GluttonyLootRecipe()));
 		registration.addRecipes(LOOT.getRecipeType(), LootDataToClient.LIST_CACHE);
 	}
 

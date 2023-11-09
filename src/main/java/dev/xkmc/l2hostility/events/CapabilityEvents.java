@@ -35,22 +35,6 @@ import java.util.Objects;
 public class CapabilityEvents {
 
 	@SubscribeEvent
-	public static void onAttachItemCap(AttachCapabilitiesEvent<ItemStack> event) {
-		ItemStack stack = event.getObject();
-		if (!(stack.getItem() instanceof ICapItem<?> item))
-			return;
-		final LazyOptional<ICurio> stats = LazyOptional.of(() -> item.create(stack));
-		event.addCapability(CuriosCapability.ID_ITEM, new ICapabilityProvider() {
-			@Nonnull
-			public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-				return CuriosCapability.ITEM.orEmpty(cap, stats);
-			}
-		});
-		Objects.requireNonNull(stats);
-		event.addListener(stats::invalidate);
-	}
-
-	@SubscribeEvent
 	public static void onAttachChunkCapabilities(AttachCapabilitiesEvent<LevelChunk> event) {
 		event.addCapability(new ResourceLocation(L2Hostility.MODID, "difficulty"),
 				new ChunkDifficultyCap(event.getObject()));

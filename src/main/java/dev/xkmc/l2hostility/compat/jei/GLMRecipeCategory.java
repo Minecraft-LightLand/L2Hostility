@@ -25,12 +25,12 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class GLMRecipeCategory extends BaseRecipeCategory<TraitLootModifier, GLMRecipeCategory> {
+public class GLMRecipeCategory extends BaseRecipeCategory<ITraitLootRecipe, GLMRecipeCategory> {
 
 	protected static final ResourceLocation BG = new ResourceLocation(L2Complements.MODID, "textures/jei/background.png");
 
 	public GLMRecipeCategory() {
-		super(new ResourceLocation(L2Hostility.MODID, "loot"), TraitLootModifier.class);
+		super(new ResourceLocation(L2Hostility.MODID, "loot"), ITraitLootRecipe.class);
 	}
 
 	public GLMRecipeCategory init(IGuiHelper guiHelper) {
@@ -45,67 +45,10 @@ public class GLMRecipeCategory extends BaseRecipeCategory<TraitLootModifier, GLM
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, TraitLootModifier recipe, IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addItemStacks(getTraits(recipe));
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 1).addItemStack(recipe.result)
-				.addTooltipCallback((v, l) -> addTooltip(v, l, recipe));
-	}
-
-	private List<ItemStack> getTraits(TraitLootModifier recipe) {
-		Set<MobTrait> set = new LinkedHashSet<>();
-		set.add(recipe.trait);
-		for (var c : recipe.getConditions()) {
-			if (c instanceof TraitLootCondition cl) {
-				set.add(cl.trait);
-			}
-		}
-		List<ItemStack> ans = new ArrayList<>();
-		for (var e : set) {
-			ans.add(e.asItem().getDefaultInstance());
-		}
-		return ans;
-	}
-
-	private void addTooltip(IRecipeSlotView view, List<Component> list, TraitLootModifier recipe) {
-		int max = recipe.trait.getConfig().max_rank;
-		int min = 1;
-		int minLevel = 0;
-		List<TraitLootCondition> other = new ArrayList<>();
-		for (var c : recipe.getConditions()) {
-			if (c instanceof TraitLootCondition cl) {
-				if (cl.trait == recipe.trait) {
-					max = Math.min(max, cl.maxLevel);
-					min = Math.max(min, cl.minLevel);
-				} else {
-					other.add(cl);
-				}
-			} else if (c instanceof MobCapLootCondition cl) {
-				minLevel = cl.minLevel;
-			}
-		}
-		if (minLevel > 0) {
-			list.add(LangData.LOOT_MIN_LEVEL.get(Component.literal(minLevel + "").withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.LIGHT_PURPLE));
-		}
-		for (int lv = min; lv <= max; lv++) {
-			list.add(LangData.LOOT_CHANCE.get(
-							Component.literal(Math.round((recipe.chance + recipe.rankBonus * lv) * 100) + "%")
-									.withStyle(ChatFormatting.AQUA),
-							recipe.trait.getDesc().withStyle(ChatFormatting.GOLD),
-							Component.literal(lv + "").withStyle(ChatFormatting.AQUA))
-					.withStyle(ChatFormatting.GRAY));
-		}
-		for (var c : other) {
-			int cmin = Math.max(c.minLevel, 1);
-			int cmax = Math.min(c.maxLevel, c.trait.getMaxLevel());
-			String str = cmax == cmin ?
-					cmin + "" :
-					cmax >= c.trait.getMaxLevel() ?
-							cmin + "+" :
-							cmin + "-" + cmax;
-			list.add(LangData.LOOT_OTHER_TRAIT.get(c.trait.getDesc().withStyle(ChatFormatting.GOLD),
-							Component.literal(str).withStyle(ChatFormatting.AQUA))
-					.withStyle(ChatFormatting.RED));
-		}
+	public void setRecipe(IRecipeLayoutBuilder builder, ITraitLootRecipe recipe, IFocusGroup focuses) {
+		builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addItemStacks(recipe.getInputs());
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 1).addItemStacks(recipe.getResults())
+				.addTooltipCallback((v, l) -> recipe.addTooltip(l));
 	}
 
 }
