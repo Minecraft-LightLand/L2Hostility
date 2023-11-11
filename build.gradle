@@ -205,6 +205,7 @@ dependencies {
     runtimeOnly fg.deobf("dev.xkmc.l2backpack:l2backpack:2.4.9-slim")
     runtimeOnly fg.deobf("dev.xkmc.modulargolems:modulargolems:2.4.19-slim")
     runtimeOnly fg.deobf("dev.xkmc.l2archery:l2archery:2.4.7")
+    runtimeOnly fg.deobf("dev.xkmc.l2artifacts:l2artifacts:2.4.12-slim")
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
@@ -220,6 +221,7 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:4599236")
     runtimeOnly fg.deobf("curse.maven:inventory-sorter-240633:4655091")
+    runtimeOnly fg.deobf("zip.local:iceandfire:2.1.13-1.20.1+build.2.1.13-alpha-6")
 
     //runtimeOnly fg.deobf("curse.maven:lightmans-currency-472521:4813507")
     //runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:4581240")

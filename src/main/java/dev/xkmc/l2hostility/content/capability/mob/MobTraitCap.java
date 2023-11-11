@@ -49,7 +49,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public static final GeneralCapabilityHolder<LivingEntity, MobTraitCap> HOLDER =
 			new GeneralCapabilityHolder<>(new ResourceLocation(L2Hostility.MODID, "traits"),
 					CAPABILITY, MobTraitCap.class, MobTraitCap::new, LivingEntity.class, (e) ->
-					e instanceof Enemy && !e.getType().is(TagGen.BLACKLIST));
+					e.getType().is(TagGen.WHITELIST) ||
+							e instanceof Enemy && !e.getType().is(TagGen.BLACKLIST));
 
 	public enum Stage {
 		PRE_INIT, INIT, POST_INIT
@@ -197,6 +198,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 					}
 				}
 				mob.setHealth(mob.getMaxHealth());
+				syncToClient(mob);
+			}
+			if (traits.size() > 0 && mob instanceof OwnableEntity own && own.getOwner() instanceof Player) {
+				traits.clear();
 				syncToClient(mob);
 			}
 		}

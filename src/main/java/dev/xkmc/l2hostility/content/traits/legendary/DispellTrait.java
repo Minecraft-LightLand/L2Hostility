@@ -33,7 +33,7 @@ public class DispellTrait extends LegendaryTrait {
 		List<ItemStack> list = new ArrayList<>();
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			ItemStack stack = target.getItemBySlot(slot);
-			if (stack.isEnchanted()) {
+			if (stack.isEnchanted() && !(stack.getOrCreateTag().contains("l2hostility_enchantment"))) {
 				list.add(stack);
 			}
 		}

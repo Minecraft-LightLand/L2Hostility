@@ -2,16 +2,22 @@ package dev.xkmc.l2hostility.init.data;
 
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.init.ModEntities;
+import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
+import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
@@ -23,12 +29,24 @@ import java.util.function.Consumer;
 
 public class TagGen {
 
+	public static final ProviderType<RegistrateTagsProvider.IntrinsicImpl<Enchantment>> ENCH_TAGS =
+			ProviderType.register("tags/enchantment",
+					type -> (p, e) -> new RegistrateTagsProvider.IntrinsicImpl<>(p, type, "enchantments",
+							e.getGenerator().getPackOutput(), Registries.ENCHANTMENT, e.getLookupProvider(),
+							ench -> ResourceKey.create(ForgeRegistries.ENCHANTMENTS.getRegistryKey(),
+									ForgeRegistries.ENCHANTMENTS.getKey(ench)),
+							e.getExistingFileHelper()));
+
 	public static final TagKey<Item> CHAOS_CURIO = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "chaos_equipment"));
 	public static final TagKey<Item> CURSE_SLOT = ItemTags.create(new ResourceLocation("curios", "hostility_curse"));
 	public static final TagKey<Item> TRAIT_ITEM = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "trait_item"));
 	public static final TagKey<Item> NO_SEAL = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "no_seal"));
 
+	public static final TagKey<Enchantment> NO_DISPELL = TagKey.create(Registries.ENCHANTMENT,
+			new ResourceLocation(L2Hostility.MODID, "no_dispell"));
+
 	public static final TagKey<EntityType<?>> BLACKLIST = createEntityTag("blacklist");
+	public static final TagKey<EntityType<?>> WHITELIST = createEntityTag("whitelist");
 	public static final TagKey<EntityType<?>> NO_SCALING = createEntityTag("no_scaling");
 	public static final TagKey<EntityType<?>> NO_TRAIT = createEntityTag("no_trait");
 
@@ -40,6 +58,16 @@ public class TagGen {
 	public static void onBlockTagGen(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {
 	}
 
+	public static void onEnchTagGen(RegistrateTagsProvider.IntrinsicImpl<Enchantment> pvd) {
+		pvd.addTag(NO_DISPELL).add(Enchantments.UNBREAKING,
+				LCEnchantments.LIFE_SYNC.get(),
+				LCEnchantments.HARDENED.get(),
+				LCEnchantments.SAFEGUARD.get(),
+				LCEnchantments.ETERNAL.get(),
+				LCEnchantments.DURABLE_ARMOR.get()
+		);
+	}
+
 	public static void onItemTagGen(RegistrateItemTagsProvider pvd) {
 	}
 
@@ -48,6 +76,7 @@ public class TagGen {
 
 	public static void onEntityTagGen(RegistrateTagsProvider.IntrinsicImpl<EntityType<?>> pvd) {
 		pvd.addTag(BLACKLIST);
+		pvd.addTag(WHITELIST);
 		pvd.addTag(NO_SCALING).addTag(BLACKLIST);
 		pvd.addTag(NO_TRAIT).addTag(BLACKLIST).add(EntityType.ENDERMITE);
 
