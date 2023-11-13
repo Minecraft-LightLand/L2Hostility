@@ -1,17 +1,23 @@
 package dev.xkmc.l2hostility.content.traits.common;
 
+import dev.xkmc.l2hostility.content.capability.mob.CapStorageData;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.entity.BulletType;
 import dev.xkmc.l2hostility.content.entity.HostilityBullet;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.function.IntSupplier;
 
 public class ShulkerTrait extends MobTrait {
@@ -36,10 +42,22 @@ public class ShulkerTrait extends MobTrait {
 	public void tick(LivingEntity e, int level) {
 		if (e.level().isClientSide()) return;
 		if (e instanceof Mob mob) {
-			if ((e.tickCount + offset) % interval.getAsInt() != 0) return;
+			var cap = MobTraitCap.HOLDER.get(mob);
+			var data = cap.getOrCreateData(getRegistryName(), Data::new);
+			if (data.uuid == null) data.tickCount++;
+			if (data.tickCount < interval.getAsInt()) return;
+			if ((mob.tickCount + offset) % interval.getAsInt() != 0) return;
 			if (mob.getTarget() != null && mob.getTarget().isAlive()) {
-				mob.level().addFreshEntity(new HostilityBullet(mob.level(), mob, mob.getTarget(),
-						Direction.Axis.Y, type, level));
+				if (data.uuid != null &&
+						mob.level() instanceof ServerLevel sl &&
+						sl.getEntity(data.uuid) instanceof ShulkerBullet)
+					return;
+				var bullet = new HostilityBullet(mob.level(), mob, mob.getTarget(),
+						Direction.Axis.Y, type, level);
+				data.tickCount = 0;
+				if (type.limit())
+					data.uuid = bullet.getUUID();
+				mob.level().addFreshEntity(bullet);
 				mob.playSound(SoundEvents.SHULKER_SHOOT, 2.0F,
 						(mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);
 			}
@@ -51,6 +69,21 @@ public class ShulkerTrait extends MobTrait {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
 				Component.literal(interval.getAsInt() / 20d + "")
 						.withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.GRAY));
+	}
+
+	@SerialClass
+	public static class Data extends CapStorageData {
+
+		@SerialClass.SerialField
+		public int tickCount;
+
+		@SerialClass.SerialField
+		public UUID uuid;
+
+		public Data() {
+
+		}
+
 	}
 
 }

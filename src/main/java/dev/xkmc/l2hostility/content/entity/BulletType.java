@@ -13,12 +13,14 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public enum BulletType {
-	PLAIN(4), EXPLODE(4);
+	PLAIN(4, false), EXPLODE(4, true);
 
 	private final float damage;
+	private final boolean limit;
 
-	BulletType(float damage) {
+	BulletType(float damage, boolean limit) {
 		this.damage = damage;
+		this.limit = limit;
 	}
 
 	public float getDamage(int level) {
@@ -45,6 +47,10 @@ public enum BulletType {
 				event.setCanceled(true);
 			}
 		}
+	}
+
+	public boolean limit() {
+		return limit;
 	}
 
 }

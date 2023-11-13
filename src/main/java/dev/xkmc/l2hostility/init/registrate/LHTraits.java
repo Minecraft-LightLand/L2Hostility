@@ -131,7 +131,7 @@ public class LHTraits {
 									LHConfig.COMMON.grenadeInterval::get, BulletType.EXPLODE, 15),
 							rl -> new TraitConfig(rl, 50, 100, 5, 100)
 									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
-					.desc("Shoot explosive bullets every %s seconds")
+					.desc("Shoot explosive bullets every %s seconds after the previous bullet disappears.")
 					.lang("Grenade").register();
 
 			CORROSION = L2Hostility.REGISTRATE.regTrait("corrosion", () -> new CorrosionTrait(ChatFormatting.DARK_RED),
