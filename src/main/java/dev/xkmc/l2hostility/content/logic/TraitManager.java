@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.content.logic;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2library.util.math.MathHelper;
@@ -16,10 +17,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class TraitManager {
 
@@ -98,13 +101,44 @@ public class TraitManager {
 		// enchant
 		for (var e : EquipmentSlot.values()) {
 			ItemStack stack = le.getItemBySlot(e);
-			if (!stack.isEnchanted() && stack.isEnchantable()) {
+			if (!stack.isEnchantable()) continue;
+			if (!stack.isEnchanted()) {
 				float lvl = Mth.clamp(cap.getLevel() * 0.02f, 0, 1) *
 						r.nextInt(30) +
 						cap.getEnchantBonus();
-				le.setItemSlot(e, EnchantmentHelper.enchantItem(r, stack, (int) lvl, false));
+				stack = EnchantmentHelper.enchantItem(r, stack, (int) lvl, false);
+			}
+			fillEnch(cap.getLevel(), le.getRandom(), stack, e);
+			le.setItemSlot(e, stack);
+		}
+	}
+
+	public static void fillEnch(int level, RandomSource source, ItemStack stack, EquipmentSlot slot) {
+		var config = L2Hostility.WEAPON.getMerged();
+		if (slot == EquipmentSlot.OFFHAND) return;
+		var list = slot == EquipmentSlot.MAINHAND ?
+				config.weapon_enchantments : config.armor_enchantments;
+		var map = stack.getAllEnchantments();
+		for (var e : list) {
+			int elv = e.level() <= 0 ? 1 : e.level();
+			if (elv > level) continue;
+			for (var ench : e.enchantments()) {
+				if (e.chance() < source.nextDouble()) continue;
+				if (!stack.canApplyAtEnchantingTable(ench)) continue;
+				if (!isValid(map.keySet(), ench)) continue;
+				int max = Math.min(level / elv, ench.getMaxLevel());
+				map.put(ench, max);
 			}
 		}
+		EnchantmentHelper.setEnchantments(map, stack);
+	}
+
+	private static boolean isValid(Set<Enchantment> old, Enchantment ench) {
+		for (var other : old) {
+			if (!ench.isCompatibleWith(other))
+				return false;
+		}
+		return true;
 	}
 
 	public static int getMaxLevel() {

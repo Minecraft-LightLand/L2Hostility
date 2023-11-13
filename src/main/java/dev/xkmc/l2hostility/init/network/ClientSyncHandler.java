@@ -36,6 +36,7 @@ public class ClientSyncHandler {
 	}
 
 	public static void triggerUndying(TraitEffectToClient packet) {
+		if (!LHConfig.CLIENT.showUndyingParticles.get()) return;
 		if (Proxy.getClientWorld() != null && packet.id >= 0 && Proxy.getClientWorld().getEntity(packet.id) instanceof LivingEntity entity) {
 			Minecraft.getInstance().particleEngine.createTrackingEmitter(entity, ParticleTypes.TOTEM_OF_UNDYING, 30);
 			entity.level().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.TOTEM_USE, entity.getSoundSource(), 1.0F, 1.0F, false);

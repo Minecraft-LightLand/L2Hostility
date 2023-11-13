@@ -1,4 +1,3 @@
-- add config option to determine if death would reduce difficulty when keep inventory is true TODO
 
 2.4.11
 - add 9 curio items
@@ -7,10 +6,15 @@
 - mobs at Lv.x will have only x% chance to have traits
 - add region difficulty commands
 - add mob trait commands
+- add difficulty related enchantments generation
 - make fiery trait more lenient
 - Repelling not targeting creative
 - add config to allow exponential health/damage
 - add config to allow disabling orbs
+- add config to disable undying particles
+- add config option to determine if death would reduce difficulty when keep inventory is true
+- add dispell trait whitelist
+- add trait candidate white list for non-enemies
 - fix ender trait throwing error when teleport distance is 0
 - fix ender trait teleporting to invalid position
 

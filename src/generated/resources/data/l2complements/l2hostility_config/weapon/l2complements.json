@@ -1,0 +1,26 @@
+{
+  "armor_enchantments": [
+    {
+      "chance": 0.02,
+      "enchantments": [
+        "l2complements:ice_thorn",
+        "l2complements:soul_flame_thorn",
+        "l2complements:safeguard"
+      ],
+      "level": 100
+    }
+  ],
+  "melee_weapons": [],
+  "weapon_enchantments": [
+    {
+      "chance": 0.02,
+      "enchantments": [
+        "l2complements:cursed_blade",
+        "l2complements:sharp_blade",
+        "l2complements:soul_flame_blade",
+        "l2complements:ice_blade"
+      ],
+      "level": 100
+    }
+  ]
+}

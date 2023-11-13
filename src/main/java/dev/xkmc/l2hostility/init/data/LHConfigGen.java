@@ -1,6 +1,8 @@
 package dev.xkmc.l2hostility.init.data;
 
 import com.github.L_Ender.cataclysm.Cataclysm;
+import dev.xkmc.l2complements.init.L2Complements;
+import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
@@ -18,6 +20,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraftforge.fml.ModList;
@@ -90,11 +93,40 @@ public class LHConfigGen extends ConfigDataProvider {
 				.putEntity(100, 50, 1, 0, List.of(EntityType.ENDER_DRAGON), List.of())
 		);
 
-		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Hostility.MODID, "melee"), new WeaponConfig()
+		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Hostility.MODID, "vanilla"), new WeaponConfig()
 				.putMeleeWeapon(0, 200, Items.AIR)
 				.putMeleeWeapon(30, 100, Items.IRON_AXE, Items.IRON_SWORD)
 				.putMeleeWeapon(50, 100, Items.DIAMOND_AXE, Items.DIAMOND_SWORD)
 				.putMeleeWeapon(70, 100, Items.NETHERITE_AXE, Items.NETHERITE_SWORD)
+				.putWeaponEnch(30, 0.5f,
+						Enchantments.SHARPNESS,
+						Enchantments.POWER_ARROWS
+				)
+				.putWeaponEnch(50, 0.1f,
+						Enchantments.FIRE_ASPECT,
+						Enchantments.FLAMING_ARROWS
+				)
+				.putArmorEnch(30, 0.5f, Enchantments.ALL_DAMAGE_PROTECTION)
+				.putArmorEnch(30, 0.2f,
+						Enchantments.PROJECTILE_PROTECTION,
+						Enchantments.BLAST_PROTECTION,
+						Enchantments.FIRE_PROTECTION,
+						Enchantments.FALL_PROTECTION
+				)
+		);
+
+		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Complements.MODID, "l2complements"), new WeaponConfig()
+				.putWeaponEnch(100, 0.02f,
+						LCEnchantments.CURSE_BLADE.get(),
+						LCEnchantments.SHARP_BLADE.get(),
+						LCEnchantments.FLAME_BLADE.get(),
+						LCEnchantments.ICE_BLADE.get()
+				)
+				.putArmorEnch(100, 0.02f,
+						LCEnchantments.ICE_THORN.get(),
+						LCEnchantments.FLAME_THORN.get(),
+						LCEnchantments.SAFEGUARD.get()
+				)
 		);
 
 

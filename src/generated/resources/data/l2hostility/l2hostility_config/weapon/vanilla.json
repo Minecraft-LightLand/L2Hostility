@@ -1,4 +1,23 @@
 {
+  "armor_enchantments": [
+    {
+      "chance": 0.5,
+      "enchantments": [
+        "minecraft:protection"
+      ],
+      "level": 30
+    },
+    {
+      "chance": 0.2,
+      "enchantments": [
+        "minecraft:projectile_protection",
+        "minecraft:blast_protection",
+        "minecraft:fire_protection",
+        "minecraft:feather_falling"
+      ],
+      "level": 30
+    }
+  ],
   "melee_weapons": [
     {
       "level": 0,
@@ -50,6 +69,24 @@
         }
       ],
       "weight": 100
+    }
+  ],
+  "weapon_enchantments": [
+    {
+      "chance": 0.5,
+      "enchantments": [
+        "minecraft:sharpness",
+        "minecraft:power"
+      ],
+      "level": 30
+    },
+    {
+      "chance": 0.1,
+      "enchantments": [
+        "minecraft:fire_aspect",
+        "minecraft:flame"
+      ],
+      "level": 50
     }
   ]
 }

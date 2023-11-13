@@ -21,6 +21,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue showOnlyWhenHovered;
 		public final ForgeConfigSpec.IntValue glowingRangeHidden;
 		public final ForgeConfigSpec.IntValue glowingRangeNear;
+		public final ForgeConfigSpec.BooleanValue showUndyingParticles;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			showTraitOverHead = builder.comment("Render Traits in name plate form")
@@ -35,6 +36,8 @@ public class LHConfig {
 					.defineInRange("glowingRangeHidden", 32, 1, 256);
 			glowingRangeNear = builder.comment("Detector Glasses glowing range for nearby mobs")
 					.defineInRange("glowingRangeNear", 16, 1, 256);
+			showUndyingParticles = builder.comment("Render undying particles")
+					.define("showUndyingParticles", true);
 		}
 
 	}
