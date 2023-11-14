@@ -108,7 +108,8 @@ public class TraitManager {
 						cap.getEnchantBonus();
 				stack = EnchantmentHelper.enchantItem(r, stack, (int) lvl, false);
 			}
-			fillEnch(cap.getLevel(), le.getRandom(), stack, e);
+			if (LHConfig.COMMON.allowExtraEnchantments.get())
+				fillEnch(cap.getLevel(), le.getRandom(), stack, e);
 			le.setItemSlot(e, stack);
 		}
 	}
@@ -127,13 +128,17 @@ public class TraitManager {
 				if (!stack.canApplyAtEnchantingTable(ench)) continue;
 				if (!isValid(map.keySet(), ench)) continue;
 				int max = Math.min(level / elv, ench.getMaxLevel());
-				map.put(ench, max);
+				map.put(ench, Math.max(max, map.getOrDefault(ench, 0)));
 			}
 		}
 		EnchantmentHelper.setEnchantments(map, stack);
 	}
 
 	private static boolean isValid(Set<Enchantment> old, Enchantment ench) {
+		for (var other : old) {
+			if (ench == other)
+				return true;
+		}
 		for (var other : old) {
 			if (!ench.isCompatibleWith(other))
 				return false;

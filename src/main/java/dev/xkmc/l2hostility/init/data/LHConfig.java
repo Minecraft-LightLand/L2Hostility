@@ -67,6 +67,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue allowBypassMinimum;
 		public final ForgeConfigSpec.BooleanValue allowHostilityOrb;
 		public final ForgeConfigSpec.BooleanValue allowHostilitySpawner;
+		public final ForgeConfigSpec.BooleanValue allowExtraEnchantments;
 		public final ForgeConfigSpec.IntValue defaultLevelBase;
 		public final ForgeConfigSpec.DoubleValue defaultLevelVar;
 		public final ForgeConfigSpec.DoubleValue defaultLevelScale;
@@ -178,6 +179,8 @@ public class LHConfig {
 						.define("allowSectionDifficulty", true);
 				allowBypassMinimum = builder.comment("Allow difficulty clearing bypass mob minimum level")
 						.define("allowBypassMinimum", true);
+				allowExtraEnchantments = builder.comment("Allow level-related extra enchantment spawning")
+						.define("allowExtraEnchantments", true);
 				allowHostilityOrb = builder.comment("Allow to use hostility orb")
 						.define("allowHostilityOrb", true);
 				allowHostilitySpawner = builder.comment("Allow to use hostility spawner")

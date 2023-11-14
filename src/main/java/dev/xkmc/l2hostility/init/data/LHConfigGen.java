@@ -102,6 +102,10 @@ public class LHConfigGen extends ConfigDataProvider {
 						Enchantments.SHARPNESS,
 						Enchantments.POWER_ARROWS
 				)
+				.putWeaponEnch(40, 0.2f,
+						Enchantments.KNOCKBACK,
+						Enchantments.PUNCH_ARROWS
+				)
 				.putWeaponEnch(50, 0.1f,
 						Enchantments.FIRE_ASPECT,
 						Enchantments.FLAMING_ARROWS
@@ -113,6 +117,7 @@ public class LHConfigGen extends ConfigDataProvider {
 						Enchantments.FIRE_PROTECTION,
 						Enchantments.FALL_PROTECTION
 				)
+				.putArmorEnch(70, 0.3f, Enchantments.BINDING_CURSE)
 		);
 
 		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Complements.MODID, "l2complements"), new WeaponConfig()
@@ -121,6 +126,10 @@ public class LHConfigGen extends ConfigDataProvider {
 						LCEnchantments.SHARP_BLADE.get(),
 						LCEnchantments.FLAME_BLADE.get(),
 						LCEnchantments.ICE_BLADE.get()
+				)
+				.putArmorEnch(70, 0.2f,
+						LCEnchantments.STABLE_BODY.get(),
+						LCEnchantments.SNOW_WALKER.get()
 				)
 				.putArmorEnch(100, 0.02f,
 						LCEnchantments.ICE_THORN.get(),

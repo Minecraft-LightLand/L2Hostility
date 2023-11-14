@@ -44,14 +44,14 @@ public class ShulkerTrait extends MobTrait {
 		if (e instanceof Mob mob) {
 			var cap = MobTraitCap.HOLDER.get(mob);
 			var data = cap.getOrCreateData(getRegistryName(), Data::new);
-			if (data.uuid == null) data.tickCount++;
+			if (data.uuid != null &&
+					mob.level() instanceof ServerLevel sl &&
+					sl.getEntity(data.uuid) instanceof ShulkerBullet)
+				return;
+			data.tickCount++;
 			if (data.tickCount < interval.getAsInt()) return;
 			if ((mob.tickCount + offset) % interval.getAsInt() != 0) return;
 			if (mob.getTarget() != null && mob.getTarget().isAlive()) {
-				if (data.uuid != null &&
-						mob.level() instanceof ServerLevel sl &&
-						sl.getEntity(data.uuid) instanceof ShulkerBullet)
-					return;
 				var bullet = new HostilityBullet(mob.level(), mob, mob.getTarget(),
 						Direction.Axis.Y, type, level);
 				data.tickCount = 0;

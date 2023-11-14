@@ -1,4 +1,9 @@
 
+- fix grenade
+- add ench
+- add undying option
+
+
 2.4.11
 - add 9 curio items
 - add 9 traits
