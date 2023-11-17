@@ -27,6 +27,8 @@ public class LHAttackListener implements AttackListener {
 		if (event.getSource().is(DamageTypeGen.SOUL_FLAME))
 			return;
 		LivingEntity mob = cache.getAttacker();
+		if (mob == cache.getAttackTarget())
+			return;
 		if (mob != null && MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			if (!mob.getType().is(TagGen.NO_SCALING)) {
@@ -40,7 +42,7 @@ public class LHAttackListener implements AttackListener {
 				cache.addHurtModifier(DamageModifier.multTotal((float) factor));
 			}
 			TraitEffectCache traitCache = new TraitEffectCache(cache.getAttackTarget());
-			cap.traitEvent((k, v) -> k.onHurtTarget(v, cache.getAttacker(), cache, traitCache));
+			cap.traitEvent((k, v) -> k.onHurtTarget(v, mob, cache, traitCache));
 		}
 		if (mob != null) {
 			for (var e : CurseCurioItem.getFromPlayer(mob)) {
