@@ -1,6 +1,14 @@
 {
   "armor_enchantments": [
     {
+      "chance": 0.2,
+      "enchantments": [
+        "l2complements:stable_body",
+        "l2complements:snow_walker"
+      ],
+      "level": 70
+    },
+    {
       "chance": 0.02,
       "enchantments": [
         "l2complements:ice_thorn",

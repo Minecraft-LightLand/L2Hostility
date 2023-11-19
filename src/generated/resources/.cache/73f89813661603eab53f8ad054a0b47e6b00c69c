@@ -1,7 +1,7 @@
-// 1.20.1	2023-11-14T01:20:58.652544	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2023-11-19T23:19:33.100778	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-5a913823d87677b1e296d9e438c0725b970b4e2a assets/l2hostility/lang/en_ud.json
-d07a2e895f2d6bed50f7bbe04830ab15d95a60c3 assets/l2hostility/lang/en_us.json
+083b1c18f30ff3bc2dccdcdbb689702b0e475702 assets/l2hostility/lang/en_ud.json
+3b93cadfe40fffd3a36fa596ee0a522cee9d2a35 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -85,6 +85,10 @@ be1e21b3352daa0055d3ada3f9fd8b7fcab5f887 data/curios/tags/items/charm.json
 8915eecfcc4909e4a2e1bdf379cd07febb03baf3 data/curios/tags/items/hostility_curse.json
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/items/ring.json
 771fa99152eee7e2f4ebc822461b903a784b06b3 data/forge/tags/entity_types/bosses.json
+7f023bf109082ebf55ad3663e54042a3328cf855 data/l2complements/advancements/recipes/enchantments/insulator.json
+eeb5dfe27aa3ee65994aff79ec5a5e4b8f247be2 data/l2complements/advancements/recipes/enchantments/split_suppressor.json
+3cb03479ced0e3e569205d00a508b371857ae43c data/l2complements/recipes/insulator.json
+ba3ab31380936befeac911288e49c75f8d40113a data/l2complements/recipes/split_suppressor.json
 b1f0948dec552920468cd47e2f8a8f99123aa9ad data/l2hostility/advancements/hostility/breed.json
 5438d24ee2cef442d96f87c920c8557262290d37 data/l2hostility/advancements/hostility/detector.json
 07d2da43bbabb3ee80134db5ec6ff28f6619ec3f data/l2hostility/advancements/hostility/effect_kill_adaptive.json

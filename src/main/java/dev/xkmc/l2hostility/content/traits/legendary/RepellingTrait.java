@@ -1,12 +1,14 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -35,7 +37,12 @@ public class RepellingTrait extends LegendaryTrait {
 		for (var e : list) {
 			double dist = mob.distanceTo(e) / r;
 			if (dist > 1) return;
-			Vec3 vec = e.position().subtract(mob.position()).normalize().scale((1 - dist) * 0.2);
+			double strength = LHConfig.COMMON.repellStrength.get();
+			int lv = EnchantmentHelper.getEnchantmentLevel(LHEnchantments.INSULATOR.get(), e);
+			if (lv > 0) {
+				strength *= Math.pow(LHConfig.COMMON.insulatorFactor.get(), lv);
+			}
+			Vec3 vec = e.position().subtract(mob.position()).normalize().scale((1 - dist) * strength);
 			e.push(vec.x, vec.y, vec.z);
 		}
 	}

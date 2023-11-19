@@ -69,6 +69,7 @@ public class L2Hostility {
 		LHMiscs.register();
 		LHConfig.init();
 		LHDamageTypes.register();
+		LHEnchantments.register();
 
 		TraitGLMProvider.register();
 

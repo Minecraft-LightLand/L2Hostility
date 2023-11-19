@@ -193,7 +193,7 @@ dependencies {
     implementation fg.deobf("dev.xkmc.l2serial:l2serial:1.2.0")
     implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.1.5")
     implementation fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.1.6")
-    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.4.20-slim")
+    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.4.21-slim")
     implementation fg.deobf("dev.xkmc.l2weaponry:l2weaponry:2.4.18")
     implementation(jarJar(fg.deobf("dev.xkmc.l2modularblock:l2modularblock:1.1.0"))) {
         transitive = false
@@ -204,7 +204,7 @@ dependencies {
     runtimeOnly fg.deobf("dev.xkmc.l2itemselector:l2itemselector:0.1.7")
     runtimeOnly fg.deobf("dev.xkmc.l2backpack:l2backpack:2.4.9-slim")
     runtimeOnly fg.deobf("dev.xkmc.modulargolems:modulargolems:2.4.19-slim")
-    runtimeOnly fg.deobf("dev.xkmc.l2archery:l2archery:2.4.7")
+    runtimeOnly fg.deobf("dev.xkmc.l2archery:l2archery:2.4.11")
     runtimeOnly fg.deobf("dev.xkmc.l2artifacts:l2artifacts:2.4.12-slim")
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")

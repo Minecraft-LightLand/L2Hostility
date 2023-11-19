@@ -29,7 +29,7 @@ public class FlamingThorn extends CurseCurioItem {
 		int size = target.getActiveEffectsMap().size();
 		if (size == 0) return;
 		int time = LHConfig.COMMON.flameThornTime.get();
-		EffectUtil.addEffect(target, new MobEffectInstance(LCEffects.FLAME.get(), time, size - 1), EffectUtil.AddReason.NONE, user);
+		EffectUtil.addEffect(target, new MobEffectInstance(LCEffects.FLAME.get(), time, size - 1), EffectUtil.AddReason.FORCE, user);
 
 	}
 

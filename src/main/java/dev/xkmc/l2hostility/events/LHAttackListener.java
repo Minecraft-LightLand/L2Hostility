@@ -9,6 +9,7 @@ import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.enchantments.HitTargetEnchantment;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.data.HostilityDamageState;
@@ -27,8 +28,17 @@ public class LHAttackListener implements AttackListener {
 		if (event.getSource().is(DamageTypeGen.SOUL_FLAME))
 			return;
 		LivingEntity mob = cache.getAttacker();
-		if (mob == cache.getAttackTarget())
+		var target = cache.getAttackTarget();
+		if (mob == target)
 			return;
+		if (MobTraitCap.HOLDER.isProper(target)) {
+			MobTraitCap cap = MobTraitCap.HOLDER.get(target);
+			for (var e : weapon.getAllEnchantments().entrySet()){
+				if (e.getKey() instanceof HitTargetEnchantment ench){
+					ench.hitMob(target, cap, e.getValue(), cache);
+				}
+			}
+		}
 		if (mob != null && MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			if (!mob.getType().is(TagGen.NO_SCALING)) {
@@ -41,7 +51,7 @@ public class LHAttackListener implements AttackListener {
 				}
 				cache.addHurtModifier(DamageModifier.multTotal((float) factor));
 			}
-			TraitEffectCache traitCache = new TraitEffectCache(cache.getAttackTarget());
+			TraitEffectCache traitCache = new TraitEffectCache(target);
 			cap.traitEvent((k, v) -> k.onHurtTarget(v, mob, cache, traitCache));
 		}
 		if (mob != null) {

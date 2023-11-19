@@ -93,5 +93,12 @@
 	"split.desc": "怪物死亡时分裂，等级减半并继承所有词条。本词条分裂时等级-1",
 	"drain": "嗜魔",
 	"drain.desc": "怪物获得相同等级的随机药水词条。怪物击中目标时，随机移除目标身上%s个正面效果，目标身上每有一个负面效果伤害上升%s，并且所有负面效果时间延长%s，最高延长至%s秒"
+  },
+
+  "enchantment.l2hostility": {
+	"insulator": "绝缘",
+	"insulator.desc": "减少词条效果对你施加的推挤或者拉扯",
+	"split_suppressor": "分裂抑制",
+	"split_suppressor.desc": "击中目标时删除分裂词条"
   }
 }

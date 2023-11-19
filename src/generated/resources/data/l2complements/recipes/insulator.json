@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "l2complements:force_field"
+    },
+    "B": {
+      "item": "minecraft:book"
+    },
+    "C": {
+      "item": "l2hostility:bottle_of_sanity"
+    },
+    "D": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "AIA",
+    "DBD",
+    "ACA"
+  ],
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "nbt": {
+      "StoredEnchantments": [
+        {
+          "id": "l2hostility:insulator",
+          "lvl": 1
+        }
+      ]
+    }
+  }
+}

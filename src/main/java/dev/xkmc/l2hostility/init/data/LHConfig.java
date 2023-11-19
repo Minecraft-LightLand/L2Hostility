@@ -114,6 +114,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue teleportDuration;
 		public final ForgeConfigSpec.IntValue teleportRange;
 		public final ForgeConfigSpec.IntValue repellRange;
+		public final ForgeConfigSpec.DoubleValue repellStrength;
 		public final ForgeConfigSpec.DoubleValue corrosionDurability;
 		public final ForgeConfigSpec.DoubleValue erosionDurability;
 		public final ForgeConfigSpec.DoubleValue corrosionDamage;
@@ -138,6 +139,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue ringOfCorrosionPenalty;
 		public final ForgeConfigSpec.DoubleValue ringOfHealingRate;
 		public final ForgeConfigSpec.IntValue witchChargeMinDuration;
+
+		public final ForgeConfigSpec.DoubleValue insulatorFactor;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
 
@@ -285,6 +288,9 @@ public class LHConfig {
 						.defineInRange("nidhoggurExtraLevel", 100, 0, 1000);
 				nidhoggurDropFactor = builder.comment("All loot drop factor when using Greed of Nidhoggur")
 						.defineInRange("nidhoggurDropFactor", 0.01, 0, 10);
+
+				insulatorFactor = builder.comment("Insulator Enchantment factor for reducing pushing")
+						.defineInRange("insulatorFactor", 0.8, 0, 1);
 			}
 			builder.pop();
 
@@ -334,6 +340,8 @@ public class LHConfig {
 						.defineInRange("teleportRange", 16, 0, 64);
 				repellRange = builder.comment("Range in blocks for Repell")
 						.defineInRange("repellRange", 10, 0, 64);
+				repellStrength = builder.comment("Repell force strength, default is 0.2")
+						.defineInRange("repellStrength", 0.2, 0, 1);
 
 				corrosionDurability = builder.comment("Fraction of remaining durability to corrode, per trait rank")
 						.defineInRange("corrosionDurability", 0.3, 0, 1);

@@ -40,7 +40,7 @@ public class KillerAuraTrait extends LegendaryTrait {
 					TraitEffectCache cache = new TraitEffectCache(e);
 					cap.traitEvent((k, v) -> k.postHurtPlayer(v, mob, cache));
 					e.hurt(new DamageSource(LHDamageTypes.forKey(mob.level(), LHDamageTypes.KILLER_AURA),
-							mob, null), damage);
+							null, mob), damage);
 				}
 			}
 			L2Hostility.HANDLER.toTrackingPlayers(new TraitEffectToClient(mob, this, TraitEffects.AURA), mob);

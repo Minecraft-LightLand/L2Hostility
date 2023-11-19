@@ -11,6 +11,7 @@
 - mobs at Lv.x will have only x% chance to have traits
 - add region difficulty commands
 - add mob trait commands
+- add 2 enchantments for Repell trait and Split trait
 - add difficulty related enchantments generation
 - make fiery trait more lenient
 - Repelling not targeting creative

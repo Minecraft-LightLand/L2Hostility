@@ -6,12 +6,14 @@ import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import dev.xkmc.l2complements.content.enchantment.core.EnchantmentRecipeBuilder;
 import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
 import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
+import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.serial.ingredients.EnchantmentIngredient;
@@ -309,6 +311,27 @@ public class RecipeGen {
 
 			recycle(pvd, TagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
 
+		}
+
+		// ench
+		{
+			unlock(pvd, new EnchantmentRecipeBuilder(LHEnchantments.INSULATOR.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("AIA").pattern("DBD").pattern("ACA")
+					.define('B', Items.BOOK)
+					.define('D', Items.LAPIS_LAZULI)
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('A', LCItems.FORCE_FIELD.get())
+					.define('C', LHItems.BOTTLE_SANITY.get())
+					.save(pvd);
+
+			unlock(pvd, new EnchantmentRecipeBuilder(LHEnchantments.SPLIT_SUPPRESS.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("AIA").pattern("DBD").pattern("ACA")
+					.define('B', Items.BOOK)
+					.define('D', Items.LAPIS_LAZULI)
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('A', LCItems.GUARDIAN_EYE.get())
+					.define('C', LHItems.BOTTLE_SANITY.get())
+					.save(pvd);
 		}
 
 		// compat
