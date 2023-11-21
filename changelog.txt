@@ -1,8 +1,10 @@
-
-- fix grenade
-- add ench
-- add undying option
-
+2.4.12
+- Heavy Trait
+- Gravity Trait
+- Moonwalk Trait
+- Counter Strike Trait
+- Conceal Trait
+- Alex cave compat
 
 2.4.11
 - add 9 curio items

@@ -108,7 +108,7 @@ public class MobEvents {
 		}
 	}
 
-	@SubscribeEvent()
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onExpDrop(LivingExperienceDropEvent event) {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			var cap = MobTraitCap.HOLDER.get(event.getEntity());
