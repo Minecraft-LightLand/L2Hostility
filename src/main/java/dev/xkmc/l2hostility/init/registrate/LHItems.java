@@ -65,6 +65,7 @@ public class LHItems {
 	public static final ItemEntry<TripleStripCape> TRIPLE_STRIP_CAPE;
 	public static final ItemEntry<Abrahadabra> ABRAHADABRA;
 	public static final ItemEntry<GreedOfNidhoggur> NIDHOGGUR;
+	public static final ItemEntry<PocketOfRestoration> RESTORATION;
 
 	public static final ItemEntry<TraitAdderWand> ADDER;
 	public static final ItemEntry<TargetSelectWand> TARGET;
@@ -133,11 +134,11 @@ public class LHItems {
 			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
 			TagKey<Item> curse = TagGen.CURSE_SLOT;
 			CURSE_ENVY = curio("curse_of_envy", CurseOfEnvy::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
-			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm, curse).register();
-			CURSE_GREED = curio("curse_of_greed", CurseOfGreed::new).tag(chaos, charm, curse).register();
-			CURSE_LUST = curio("curse_of_lust", CurseOfLust::new).tag(chaos, charm, curse).register();
+			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
+			CURSE_GREED = curio("curse_of_greed", CurseOfGreed::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
+			CURSE_LUST = curio("curse_of_lust", CurseOfLust::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
 			CURSE_PRIDE = curio("curse_of_pride", CurseOfPride::new).tag(chaos, charm, curse).register();
-			CURSE_SLOTH = curio("curse_of_sloth", CurseOfSloth::new).tag(chaos, charm, curse).register();
+			CURSE_SLOTH = curio("curse_of_sloth", CurseOfSloth::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
 			CURSE_WRATH = curio("curse_of_wrath", CurseOfWrath::new).tag(chaos, charm, curse).register();
 
 			TagKey<Item> ring = ItemTags.create(new ResourceLocation("curios", "ring"));
@@ -164,6 +165,9 @@ public class LHItems {
 
 			ABRAHADABRA = curio("abrahadabra", Abrahadabra::new).tag(chaos, curse, TagGen.NO_SEAL).register();
 			NIDHOGGUR = curio("greed_of_nidhoggur", GreedOfNidhoggur::new).tag(chaos, curse, TagGen.NO_SEAL).register();
+
+			RESTORATION = curio("pocket_of_restoration", p -> new PocketOfRestoration(p, 128))
+					.tag(charm, TagGen.NO_SEAL).register();
 
 		}
 

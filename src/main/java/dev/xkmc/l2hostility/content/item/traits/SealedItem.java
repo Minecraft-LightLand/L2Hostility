@@ -20,7 +20,7 @@ import java.util.List;
 
 public class SealedItem extends Item {
 
-	private static final String TIME = "sealTime", DATA = "sealedItem";
+	public static final String TIME = "sealTime", DATA = "sealedItem";
 
 	public static ItemStack sealItem(ItemStack stack, int time) {
 		if (stack.is(LHItems.SEAL.get())) {

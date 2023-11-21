@@ -6,6 +6,11 @@
 - Conceal Trait
 - Alex cave compat
 
+2.4.12
+- add Pocket of Restoration
+- add Soul Bound to dispell whitelist
+- add Envy, Greed, Sloth, Lust, Gluttony to Ragnarok whitelist
+
 2.4.11
 - add 9 curio items
 - add 9 traits

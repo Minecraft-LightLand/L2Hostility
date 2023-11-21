@@ -19,6 +19,10 @@ public class CurioItem extends Item {
 		super(properties.stacksTo(1).fireResistant().rarity(Rarity.EPIC));
 	}
 
+	public CurioItem(Properties properties, int durability) {
+		super(properties.durability(durability).fireResistant().rarity(Rarity.EPIC));
+	}
+
 	@Override
 	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
 		if (this instanceof ICapItem<?> item) {

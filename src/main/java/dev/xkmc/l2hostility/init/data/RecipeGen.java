@@ -309,6 +309,13 @@ public class RecipeGen {
 					.define('S', Items.NETHER_STAR)
 					.save(pvd);
 
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.RESTORATION.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("BIB").pattern("ISI").pattern("BIB")
+					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('B', LCItems.BLACKSTONE_CORE.get())
+					.define('S', LHTraits.DISPELL.get().asItem())
+					.save(pvd);
+
 			recycle(pvd, TagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
 
 		}

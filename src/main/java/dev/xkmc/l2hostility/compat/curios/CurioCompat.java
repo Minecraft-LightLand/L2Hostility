@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModList;
+import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotAttribute;
 import top.theillusivec4.curios.api.SlotContext;
@@ -55,6 +56,21 @@ public class CurioCompat {
 			getItemAccessImpl(ans, player);
 		}
 		return ans;
+	}
+
+	@Nullable
+	public static EntitySlotAccess decode(String id, LivingEntity le) {
+		var strs = id.split("/");
+		if (strs[0].equals("equipment")) {
+			return new EquipmentSlotAccess(le, EquipmentSlot.byName(strs[1]));
+		} else {
+
+			var opt = CuriosApi.getCuriosInventory(le).resolve();
+			if (opt.isEmpty()) return null;
+			var handler = opt.get().getStacksHandler(strs[1]);
+			if (handler.isEmpty()) return null;
+			return new CurioSlotAccess(le, handler.get().getStacks(), Integer.parseInt(strs[2]), strs[1]);
+		}
 	}
 
 	private static boolean hasItemImpl(LivingEntity player, Item item) {
@@ -126,6 +142,11 @@ public class CurioCompat {
 		@Override
 		public void set(ItemStack stack) {
 			handler.setStackInSlot(slot, stack);
+		}
+
+		@Override
+		public String getID() {
+			return "curios/" + id + "/" + slot;
 		}
 
 	}

@@ -14,4 +14,6 @@ public interface EntitySlotAccess {
 		set(func.apply(get()));
 	}
 
+	String getID();
+
 }

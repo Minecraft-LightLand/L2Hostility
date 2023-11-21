@@ -16,4 +16,8 @@ public record EquipmentSlotAccess(LivingEntity le, EquipmentSlot slot) implement
 		le.setItemSlot(slot, stack);
 	}
 
+	@Override
+	public String getID() {
+		return "equipment/" + slot.getName();
+	}
 }

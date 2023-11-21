@@ -64,7 +64,8 @@ public class TagGen {
 				LCEnchantments.HARDENED.get(),
 				LCEnchantments.SAFEGUARD.get(),
 				LCEnchantments.ETERNAL.get(),
-				LCEnchantments.DURABLE_ARMOR.get()
+				LCEnchantments.DURABLE_ARMOR.get(),
+				LCEnchantments.SOUL_BOUND.get()
 		);
 	}
 

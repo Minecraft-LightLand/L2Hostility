@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "l2complements:blackstone_core"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    },
+    "S": {
+      "item": "l2hostility:dispell"
+    }
+  },
+  "pattern": [
+    "BIB",
+    "ISI",
+    "BIB"
+  ],
+  "result": {
+    "item": "l2hostility:pocket_of_restoration"
+  },
+  "show_notification": true
+}
