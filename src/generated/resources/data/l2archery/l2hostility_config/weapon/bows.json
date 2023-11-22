@@ -1,0 +1,61 @@
+{
+  "armor_enchantments": [],
+  "melee_weapons": [],
+  "ranged_weapons": [
+    {
+      "level": 50,
+      "stack": [
+        {
+          "item": "l2archery:starter_bow",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 10
+    },
+    {
+      "level": 70,
+      "stack": [
+        {
+          "item": "l2archery:iron_bow",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "l2archery:master_bow",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 5
+    },
+    {
+      "level": 100,
+      "stack": [
+        {
+          "item": "l2archery:flame_bow",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "l2archery:slow_bow",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "l2archery:turtle_bow",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "l2archery:eagle_bow",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "l2archery:explosion_bow",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "l2archery:froze_bow",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 2
+    }
+  ],
+  "weapon_enchantments": []
+}

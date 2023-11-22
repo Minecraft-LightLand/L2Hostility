@@ -52,6 +52,7 @@ public class TagGen {
 
 	public static final TagKey<EntityType<?>> ARMOR_TARGET = createEntityTag("armor_target");
 	public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
+	public static final TagKey<EntityType<?>> RANGED_WEAPON_TARGET = createEntityTag("ranged_weapon_target");
 
 	public static final Map<ResourceLocation, Consumer<RegistrateTagsProvider.IntrinsicImpl<EntityType<?>>>> ENTITY_TAG_BUILDER = new TreeMap<>();
 
@@ -91,6 +92,10 @@ public class TagGen {
 				EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
 				EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN_BRUTE,
 				EntityType.WITHER_SKELETON, EntityType.VINDICATOR
+		);
+
+		pvd.addTag(RANGED_WEAPON_TARGET).add(
+				EntityType.SKELETON, EntityType.STRAY
 		);
 
 		ENTITY_TAG_BUILDER.values().forEach(e -> e.accept(pvd));

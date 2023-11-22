@@ -14,12 +14,12 @@ public class GravityEffect extends InherentEffect implements ForceEffect {
 	public GravityEffect(MobEffectCategory category, int color) {
 		super(category, color);
 		addAttributeModifier(ForgeMod.ENTITY_GRAVITY.get(), MathHelper.getUUIDFromString("gravity").toString(),
-				FACTOR, AttributeModifier.Operation.MULTIPLY_BASE);
+				FACTOR, AttributeModifier.Operation.MULTIPLY_TOTAL);
 	}
 
 	@Override
 	public double getAttributeModifierValue(int lv, AttributeModifier op) {
-		return Math.pow(FACTOR, lv + 1);
+		return Math.pow(FACTOR, lv + 1) - 1;
 	}
 
 }

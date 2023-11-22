@@ -52,6 +52,24 @@ public class TraitManager {
 		}
 	}
 
+	private static void populateWeapons(LivingEntity le, MobTraitCap cap, RandomSource r) {
+		var manager = ForgeRegistries.ITEMS.tags();
+		if (manager == null) return;
+		if (le.getType().is(TagGen.MELEE_WEAPON_TARGET)) {
+			if (le.getMainHandItem().isEmpty()) {
+				ItemStack stack = WeaponConfig.getRandomMeleeWeapon(cap.getLevel(), r);
+				if (!stack.isEmpty()) {
+					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+				}
+			}
+		} else if (le.getType().is(TagGen.RANGED_WEAPON_TARGET)) {
+			ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r);
+			if (!stack.isEmpty()) {
+				le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+			}
+		}
+	}
+
 	public static int fill(LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
 		int lv = ins.getDifficulty(le.getRandom());
 		int ans = 0;
@@ -89,15 +107,7 @@ public class TraitManager {
 	public static void postFill(MobTraitCap cap, LivingEntity le) {
 		// add weapon
 		RandomSource r = le.getRandom();
-		if (le.getType().is(TagGen.MELEE_WEAPON_TARGET)) {
-			var manager = ForgeRegistries.ITEMS.tags();
-			if (manager != null && le.getMainHandItem().isEmpty()) {
-				ItemStack stack = WeaponConfig.getRandomWeapon(cap.getLevel(), r);
-				if (!stack.isEmpty()) {
-					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
-				}
-			}
-		}
+		populateWeapons(le, cap, r);
 		// enchant
 		for (var e : EquipmentSlot.values()) {
 			ItemStack stack = le.getItemBySlot(e);

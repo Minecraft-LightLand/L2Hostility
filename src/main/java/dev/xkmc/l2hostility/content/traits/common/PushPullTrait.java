@@ -1,0 +1,52 @@
+package dev.xkmc.l2hostility.content.traits.common;
+
+import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
+import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.entity.EntityTypeTest;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.List;
+
+public abstract class PushPullTrait extends LegendaryTrait {
+
+	public PushPullTrait(ChatFormatting style) {
+		super(style);
+	}
+
+	protected abstract int getRange();
+
+	protected abstract double getStrength(double dist);
+
+	@Override
+	public void tick(LivingEntity mob, int level) {
+		int r = getRange();
+		List<? extends LivingEntity> list;
+		if (mob.level().isClientSide()) {
+			list = mob.level().getEntities(EntityTypeTest.forClass(Player.class),
+					mob.getBoundingBox().inflate(r), e -> e.isLocalPlayer() && !e.getAbilities().instabuild);
+		} else {
+			list = mob.level().getEntities(EntityTypeTest.forClass(LivingEntity.class),
+					mob.getBoundingBox().inflate(r), e ->
+							e instanceof Player pl && !pl.getAbilities().instabuild ||
+									e instanceof Mob m && m.getTarget() == mob);
+		}
+		for (var e : list) {
+			double dist = mob.distanceTo(e) / r;
+			if (dist > 1) return;
+			double strength = getStrength(dist);
+			int lv = EnchantmentHelper.getEnchantmentLevel(LHEnchantments.INSULATOR.get(), e);
+			if (lv > 0) {
+				strength *= Math.pow(LHConfig.COMMON.insulatorFactor.get(), lv);
+			}
+			Vec3 vec = e.position().subtract(mob.position()).normalize().scale(strength);
+			e.push(vec.x, vec.y, vec.z);
+		}
+	}
+
+}

@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-22T10:24:39.445795	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2023-11-22T12:40:17.811375	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 bcb63897d5ddde5805463941ed9cd18ca8546272 assets/l2hostility/lang/en_ud.json
 609e23e0a88de6606408ee5bd8212cf15cece1c4 assets/l2hostility/lang/en_us.json
@@ -254,6 +254,7 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/mele
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/protection_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/ragnarok_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/ragnarok_whitelist.json
+52c5dc3bb3cd7549415d3f88963c61fcecbe268d data/l2hostility/tags/entity_types/ranged_weapon_target.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reflect_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reflect_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/regenerate_blacklist.json

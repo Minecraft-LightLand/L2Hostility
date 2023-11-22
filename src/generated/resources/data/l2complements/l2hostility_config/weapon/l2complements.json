@@ -19,6 +19,7 @@
     }
   ],
   "melee_weapons": [],
+  "ranged_weapons": [],
   "weapon_enchantments": [
     {
       "chance": 0.02,

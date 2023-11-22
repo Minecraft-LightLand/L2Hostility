@@ -1,6 +1,8 @@
 package dev.xkmc.l2hostility.init.data;
 
 import com.github.L_Ender.cataclysm.Cataclysm;
+import dev.xkmc.l2archery.init.L2Archery;
+import dev.xkmc.l2archery.init.registrate.ArcheryItems;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
@@ -98,6 +100,9 @@ public class LHConfigGen extends ConfigDataProvider {
 				.putMeleeWeapon(30, 100, Items.IRON_AXE, Items.IRON_SWORD)
 				.putMeleeWeapon(50, 100, Items.DIAMOND_AXE, Items.DIAMOND_SWORD)
 				.putMeleeWeapon(70, 100, Items.NETHERITE_AXE, Items.NETHERITE_SWORD)
+				.putRangedWeapon(0, 100,
+						Items.AIR
+				)
 				.putWeaponEnch(30, 0.5f,
 						Enchantments.SHARPNESS,
 						Enchantments.POWER_ARROWS
@@ -138,6 +143,23 @@ public class LHConfigGen extends ConfigDataProvider {
 				)
 		);
 
+		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Archery.MODID, "bows"), new WeaponConfig()
+				.putRangedWeapon(50, 10,
+						ArcheryItems.STARTER_BOW.get()
+				)
+				.putRangedWeapon(70, 5,
+						ArcheryItems.IRON_BOW.get(),
+						ArcheryItems.MASTER_BOW.get()
+				)
+				.putRangedWeapon(100, 2,
+						ArcheryItems.FLAME_BOW.get(),
+						ArcheryItems.BLACKSTONE_BOW.get(),
+						ArcheryItems.TURTLE_BOW.get(),
+						ArcheryItems.EAGLE_BOW.get(),
+						ArcheryItems.EXPLOSION_BOW.get(),
+						ArcheryItems.FROZE_BOW.get()
+				)
+		);
 
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
 			TFData.genConfig(collector);

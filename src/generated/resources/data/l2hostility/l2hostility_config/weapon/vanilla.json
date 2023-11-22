@@ -78,6 +78,17 @@
       "weight": 100
     }
   ],
+  "ranged_weapons": [
+    {
+      "level": 0,
+      "stack": [
+        {
+          "item": "minecraft:air"
+        }
+      ],
+      "weight": 100
+    }
+  ],
   "weapon_enchantments": [
     {
       "chance": 0.5,

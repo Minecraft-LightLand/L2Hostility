@@ -17,11 +17,20 @@ import java.util.List;
 @SerialClass
 public class WeaponConfig extends BaseConfig {
 
-	public static ItemStack getRandomWeapon(int level, RandomSource r) {
+	public static ItemStack getRandomMeleeWeapon(int level, RandomSource r) {
 		WeaponConfig config = L2Hostility.WEAPON.getMerged();
+		return getRandomWeapon(config.melee_weapons, level, r);
+	}
+
+	public static ItemStack getRandomRangedWeapon(int level, RandomSource r) {
+		WeaponConfig config = L2Hostility.WEAPON.getMerged();
+		return getRandomWeapon(config.ranged_weapons, level, r);
+	}
+
+	private static ItemStack getRandomWeapon(ArrayList<ItemConfig> entries, int level, RandomSource r) {
 		int total = 0;
-		List<MeleeConfig> list = new ArrayList<>();
-		for (var e : config.melee_weapons) {
+		List<ItemConfig> list = new ArrayList<>();
+		for (var e : entries) {
 			if (e.level <= level) {
 				list.add(e);
 				total += e.weight();
@@ -41,7 +50,11 @@ public class WeaponConfig extends BaseConfig {
 
 	@SerialClass.SerialField
 	@ConfigCollect(CollectType.COLLECT)
-	public final ArrayList<MeleeConfig> melee_weapons = new ArrayList<>();
+	public final ArrayList<ItemConfig> melee_weapons = new ArrayList<>();
+
+	@SerialClass.SerialField
+	@ConfigCollect(CollectType.COLLECT)
+	public final ArrayList<ItemConfig> ranged_weapons = new ArrayList<>();
 
 	@SerialClass.SerialField
 	@ConfigCollect(CollectType.COLLECT)
@@ -56,7 +69,16 @@ public class WeaponConfig extends BaseConfig {
 		for (var e : items) {
 			list.add(e.getDefaultInstance());
 		}
-		melee_weapons.add(new MeleeConfig(list, level, weight));
+		melee_weapons.add(new ItemConfig(list, level, weight));
+		return this;
+	}
+
+	public WeaponConfig putRangedWeapon(int level, int weight, Item... items) {
+		ArrayList<ItemStack> list = new ArrayList<>();
+		for (var e : items) {
+			list.add(e.getDefaultInstance());
+		}
+		ranged_weapons.add(new ItemConfig(list, level, weight));
 		return this;
 	}
 
@@ -73,7 +95,7 @@ public class WeaponConfig extends BaseConfig {
 		return this;
 	}
 
-	public record MeleeConfig(ArrayList<ItemStack> stack, int level, int weight) {
+	public record ItemConfig(ArrayList<ItemStack> stack, int level, int weight) {
 
 	}
 
