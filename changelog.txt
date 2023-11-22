@@ -5,6 +5,8 @@
 - Gravity Trait
 - Moonwalk Trait
 - Counter Strike Trait
+- Pulling Trait
+- Reprint Trait TODO patchouli
 - add Soul Bound to dispell whitelist
 - add Envy, Greed, Sloth, Lust, Gluttony to Ragnarok whitelist
 - add Alex Caves compat

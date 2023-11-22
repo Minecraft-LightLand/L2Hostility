@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.traits.common;
+package dev.xkmc.l2hostility.content.traits.legendary;
 
 import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;

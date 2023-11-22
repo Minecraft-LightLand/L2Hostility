@@ -31,7 +31,7 @@ public class AuraEffectTrait extends MobTrait {
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
 				if (!(e instanceof Player pl) || !pl.getAbilities().instabuild) {
 					if (e.distanceTo(mob) > range) continue;
-					EffectUtil.refreshEffect(e, new MobEffectInstance(eff.get(), 40, level - 1),
+					EffectUtil.refreshEffect(e, new MobEffectInstance(eff.get(), 40, level - 1, false, false, false),
 							EffectUtil.AddReason.FORCE, mob);
 				}
 			}

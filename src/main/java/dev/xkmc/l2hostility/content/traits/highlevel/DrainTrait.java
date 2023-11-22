@@ -1,4 +1,4 @@
-package dev.xkmc.l2hostility.content.traits.common;
+package dev.xkmc.l2hostility.content.traits.highlevel;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;

@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-22T15:49:39.578233	L2Hostility Config
+// 1.20.1	2023-11-22T23:05:00.651446	L2Hostility Config
 19428794144d113e63e86b94f242f249a8b97545 data/cataclysm/l2hostility_config/entity/amethyst_crab.json
 a0e6cb6eee5bf90863ccca60fcd2d017e2ac3b13 data/cataclysm/l2hostility_config/entity/ender_golem.json
 cb6ef4a3231ec56985a8058b1a0ed8c265c45683 data/cataclysm/l2hostility_config/entity/ender_guardian.json
@@ -39,6 +39,7 @@ bf37960f3f954fb85ad4623f124ddc083e5f65be data/l2hostility/l2hostility_config/tra
 3d06e92c3fdbfbb56e1c98ce99c04ce93a64fcd9 data/l2hostility/l2hostility_config/trait/reflect.json
 9cdd49d5441604ccfbad2dcd9e326e028d4d731e data/l2hostility/l2hostility_config/trait/regenerate.json
 5055dc50e07878d408b53231e6f69886b21438e7 data/l2hostility/l2hostility_config/trait/repelling.json
+073e341d2ac84a182a61164dca7789be6eb87634 data/l2hostility/l2hostility_config/trait/reprint.json
 ee5ec0768418ef7fa27bb8c29d0453f1315e9d2c data/l2hostility/l2hostility_config/trait/shulker.json
 abed79cc8e21cbed566f6a26676d07bb086cc2fe data/l2hostility/l2hostility_config/trait/slowness.json
 429784fe7cf9fd6efe300a1cdc9b2d2635813ae1 data/l2hostility/l2hostility_config/trait/soul_burner.json

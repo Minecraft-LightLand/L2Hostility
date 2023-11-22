@@ -228,6 +228,8 @@
   "trait.l2hostility.regenerate.desc": "Heals %s%% of full health every second.",
   "trait.l2hostility.repelling": "Repelling",
   "trait.l2hostility.repelling.desc": "Mob will push away entities hostile to it within %s blocks, and immune to projectiles.",
+  "trait.l2hostility.reprint": "Reprint",
+  "trait.l2hostility.reprint.desc": "Mob will copy target enchantments, and deal %s more damage per enchantment point",
   "trait.l2hostility.shulker": "Shulker",
   "trait.l2hostility.shulker.desc": "Shoot bullets every %s seconds",
   "trait.l2hostility.slowness": "Stray",

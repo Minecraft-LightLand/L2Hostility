@@ -1,12 +1,8 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
-import dev.xkmc.l2hostility.content.traits.common.PushPullTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 import java.util.List;
 

@@ -1,0 +1,12 @@
+{
+  "name": "Reprint",
+  "icon": "l2hostility:reprint",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:reprint",
+	  "text": "Mobs with this trait will increase damage based on target equipment enchantments, and can copy target enchantments when hit directly.$(br2)Damage is increased by a fixed percentage per enchantment points, where Lv.x enchantment has 2^x enchantment points."
+	}
+  ]
+}

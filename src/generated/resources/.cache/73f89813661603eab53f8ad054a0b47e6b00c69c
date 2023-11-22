@@ -1,7 +1,7 @@
-// 1.20.1	2023-11-22T15:49:39.566303	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (mob_effects), Tags (traits), Patchouli Provider]
+// 1.20.1	2023-11-22T23:05:00.647361	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-80f7faf16d30104216038d3be4b419b07031ab61 assets/l2hostility/lang/en_ud.json
-0a69d7495c03d0c51ba8bfb34074f6a13b3d6737 assets/l2hostility/lang/en_us.json
+72e1058900aa58e79ae105a4ae76e2390fadb41c assets/l2hostility/lang/en_ud.json
+a05053e6efbc8b825ae2ce1b5594dc946092be37 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -59,6 +59,7 @@ a05bb7b11be51e5184811d6a39397b6abb39aa49 assets/l2hostility/models/item/ragnarok
 9415fa390a57282395b635a1ae13894a7909b52d assets/l2hostility/models/item/reflect.json
 e492c947eea653cdc2c213d0dd2fd5d4fa69ad9d assets/l2hostility/models/item/regenerate.json
 ed1fb7ba55e7622b7a62b825755729bfa23468fb assets/l2hostility/models/item/repelling.json
+062bef7e8d1e8a9056203bb9ae7fe8ad284fa392 assets/l2hostility/models/item/reprint.json
 719e3776a98f50754ab21bebed88ac0fecffb41e assets/l2hostility/models/item/ring_of_corrosion.json
 834aa04dbe72188d793d95bf1242cc676e0055f2 assets/l2hostility/models/item/ring_of_divinity.json
 5e3ead5ca77215d340c3e087e2232bbcb5890baa assets/l2hostility/models/item/ring_of_healing.json
@@ -263,6 +264,8 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/mele
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/regenerate_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/repelling_blacklist.json
 778fdb4a5208400e8f9b783e17704df130baf07b data/l2hostility/tags/entity_types/repelling_whitelist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_whitelist.json
 c3eb392d55e61ea2002cb572e409e051cdc33c1c data/l2hostility/tags/entity_types/semiboss.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_types/shulker_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/shulker_whitelist.json
@@ -287,6 +290,6 @@ c3eb392d55e61ea2002cb572e409e051cdc33c1c data/l2hostility/tags/entity_types/semi
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
 50cbc9948d6c82b5b627ae08b27595db9fbd33b6 data/l2hostility/tags/items/chaos_equipment.json
 e697de08d680463d2fe72277d6fdce509883578c data/l2hostility/tags/items/no_seal.json
-152f2b8ff866d5d0af65abf6fe35d3410079d43f data/l2hostility/tags/items/trait_item.json
+37a56614aa0f31579fd6e01028556bbb8e26ae2c data/l2hostility/tags/items/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
 e7bd765cf86b012712df42659c7ff073ed8568a2 data/minecraft/tags/blocks/mineable/pickaxe.json

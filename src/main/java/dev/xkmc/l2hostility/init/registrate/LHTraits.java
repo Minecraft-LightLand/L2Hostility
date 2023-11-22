@@ -13,10 +13,7 @@ import dev.xkmc.l2hostility.content.traits.base.TargetEffectTrait;
 import dev.xkmc.l2hostility.content.traits.common.*;
 import dev.xkmc.l2hostility.content.traits.goals.CounterStrikeTrait;
 import dev.xkmc.l2hostility.content.traits.goals.EnderTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.CorrosionTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.ErosionTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.GrowthTrait;
-import dev.xkmc.l2hostility.content.traits.highlevel.SplitTrait;
+import dev.xkmc.l2hostility.content.traits.highlevel.*;
 import dev.xkmc.l2hostility.content.traits.legendary.*;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -71,6 +68,7 @@ public class LHTraits {
 	public static final RegistryEntry<GrowthTrait> GROWTH;
 	public static final RegistryEntry<SplitTrait> SPLIT;
 	public static final RegistryEntry<DrainTrait> DRAIN;
+	public static final RegistryEntry<ReprintTrait> REPRINT;
 	public static final RegistryEntry<CounterStrikeTrait> STRIKE;
 	public static final RegistryEntry<AuraEffectTrait> GRAVITY, MOONWALK;
 
@@ -221,6 +219,11 @@ public class LHTraits {
 									.addWhitelist(e -> e.addTag(TagGen.MELEE_WEAPON_TARGET)))
 					.desc("Mob will pull entities hostile to it within %s blocks.")
 					.lang("Pulling").register();
+
+			REPRINT = L2Hostility.REGISTRATE.regTrait("reprint", () -> new ReprintTrait(ChatFormatting.LIGHT_PURPLE),
+							rl -> new TraitConfig(rl, 100, 100, 1, 100))
+					.desc("Mob will copy target enchantments, and deal %s more damage per enchantment point")
+					.lang("Reprint").register();
 
 			AURA = L2Hostility.REGISTRATE.regTrait("killer_aura", () -> new KillerAuraTrait(ChatFormatting.DARK_RED),
 							rl -> new TraitConfig(rl, 100, 50, 3, 300))

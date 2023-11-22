@@ -135,6 +135,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue areaEffectRange;
 		public final ForgeConfigSpec.IntValue pullingRange;
 		public final ForgeConfigSpec.DoubleValue pullingStrength;
+		public final ForgeConfigSpec.DoubleValue reprintDamage;
+		public final ForgeConfigSpec.IntValue reprintBypass;
 
 		public final ForgeConfigSpec.DoubleValue ringOfLifeMaxDamage;
 		public final ForgeConfigSpec.IntValue flameThornTime;
@@ -391,6 +393,10 @@ public class LHConfig {
 						.defineInRange("pullingRange", 10, 0, 64);
 				pullingStrength = builder.comment("Pulling force strength, default is 0.2")
 						.defineInRange("pullingStrength", 0.2, 0, 10);
+				reprintDamage = builder.comment("Reprint damage factor per enchantment point")
+						.defineInRange("reprintDamage", 0.02, 0, 1);
+				reprintBypass = builder.comment("Reprint will gain Void Touch 20 and Vanishing Curse when it hits a mob with max Enchantment level of X or higher")
+						.defineInRange("reprintBypass", 10, 0, 10000);
 
 			}
 			builder.pop();

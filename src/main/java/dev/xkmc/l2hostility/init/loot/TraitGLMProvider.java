@@ -101,7 +101,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.CORROSION.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 1, 0, 0.1);
 		add(LHTraits.EROSION.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 1, 0, 0.1);
 		add(LHTraits.AURA.get(), new ItemStack(LCItems.EMERALD, 1), 1, 0, 0.02);
-		add(LHTraits.RAGNAROK.get(), new ItemStack(LCItems.BLACKSTONE_CORE, 1), 1, 0, 0.05);
+		add(LHTraits.RAGNAROK.get(), new ItemStack(LCMats.ETERNIUM.getNugget(), 4), 1, 0, 0.1);
 		add(LHTraits.SHULKER.get(), new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.2);
 		add(LHTraits.GRENADE.get(), new ItemStack(LCItems.STORM_CORE, 1), 3, 0, 0.1);
 		add(LHTraits.GRENADE.get(), new ItemStack(Items.GUNPOWDER, 4), 1, 0, 0.1);
@@ -112,6 +112,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.GRAVITY.get(), new ItemStack(Items.IRON_INGOT, 8), 1, 0, 0.1);
 		add(LHTraits.MOONWALK.get(), new ItemStack(Items.PHANTOM_MEMBRANE, 4), 1, 0, 0.1);
 		add(LHTraits.STRIKE.get(), new ItemStack(LCItems.EXPLOSION_SHARD, 1), 1, 0, 0.1);
+		add(LHTraits.PULLING.get(), new ItemStack(LCItems.BLACKSTONE_CORE, 1), 1, 0, 0.05);
 
 		add(LHTraits.DISPELL.get(), new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);
 

@@ -101,7 +101,9 @@
 	"gravity": "重力",
 	"gravity.desc": "增加周围区域重力",
 	"moonwalk": "月步",
-	"moonwalk.desc": "减少周围区域重力"
+	"moonwalk.desc": "减少周围区域重力",
+	"reprint": "复印",
+	"reprint.desc": "目标装备附魔点数每有1点，怪物伤害提升%s。近战复制所有装备附魔。x级附魔提供2^x附魔点数"
   },
   "effect.l2hostility": {
 	"gravity": "重力",

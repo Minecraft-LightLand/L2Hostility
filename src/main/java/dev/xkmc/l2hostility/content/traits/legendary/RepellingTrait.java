@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
-import dev.xkmc.l2hostility.content.traits.common.PushPullTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
