@@ -212,7 +212,7 @@ dependencies {
     implementation fg.deobf("curse.maven:the-twilight-forest-227639:4635921")
     implementation fg.deobf("curse.maven:jade-324717:4654448")
     implementation fg.deobf("curse.maven:l_ender-s-cataclysm-551586:4778613")
-    implementation fg.deobf("curse.maven:citadel-331936:4786380")
+    implementation fg.deobf("curse.maven:citadel-331936:4848887")
 
     runtimeOnly fg.deobf("curse.maven:attributefix-280510:4588114")
     runtimeOnly fg.deobf("curse.maven:bookshelf-228525:4581675")

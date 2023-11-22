@@ -2,6 +2,10 @@ package dev.xkmc.l2hostility.init.data;
 
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.init.ModEntities;
+import com.github.alexmodguy.alexscaves.AlexsCaves;
+import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
+import com.github.alexthe666.iceandfire.IceAndFire;
+import com.github.alexthe666.iceandfire.entity.IafEntityRegistry;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
@@ -49,6 +53,8 @@ public class TagGen {
 	public static final TagKey<EntityType<?>> WHITELIST = createEntityTag("whitelist");
 	public static final TagKey<EntityType<?>> NO_SCALING = createEntityTag("no_scaling");
 	public static final TagKey<EntityType<?>> NO_TRAIT = createEntityTag("no_trait");
+
+	public static final TagKey<EntityType<?>> SEMIBOSS = createEntityTag("semiboss");
 
 	public static final TagKey<EntityType<?>> ARMOR_TARGET = createEntityTag("armor_target");
 	public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
@@ -100,8 +106,11 @@ public class TagGen {
 
 		ENTITY_TAG_BUILDER.values().forEach(e -> e.accept(pvd));
 
+		pvd.addTag(SEMIBOSS).addTag(Tags.EntityTypes.BOSSES)
+				.add(EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER);
+
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
-			pvd.addTag(Tags.EntityTypes.BOSSES)
+			pvd.addTag(SEMIBOSS)
 					.addOptional(ModEntities.ENDER_GOLEM.getId())
 					.addOptional(ModEntities.ENDER_GUARDIAN.getId())
 					.addOptional(ModEntities.NETHERITE_MONSTROSITY.getId())
@@ -109,6 +118,36 @@ public class TagGen {
 					.addOptional(ModEntities.THE_HARBINGER.getId())
 					.addOptional(ModEntities.THE_LEVIATHAN.getId())
 					.addOptional(ModEntities.AMETHYST_CRAB.getId());
+		}
+
+		if (ModList.get().isLoaded(IceAndFire.MODID)) {
+			pvd.addTag(SEMIBOSS)
+					.addOptional(IafEntityRegistry.ICE_DRAGON.getId())
+					.addOptional(IafEntityRegistry.FIRE_DRAGON.getId())
+					.addOptional(IafEntityRegistry.LIGHTNING_DRAGON.getId())
+					.addOptional(IafEntityRegistry.DEATH_WORM.getId())
+					.addOptional(IafEntityRegistry.SEA_SERPENT.getId());
+
+			pvd.addTag(WHITELIST)
+					.addOptional(IafEntityRegistry.ICE_DRAGON.getId())
+					.addOptional(IafEntityRegistry.FIRE_DRAGON.getId())
+					.addOptional(IafEntityRegistry.LIGHTNING_DRAGON.getId())
+					.addOptional(IafEntityRegistry.DEATH_WORM.getId())
+					.addOptional(IafEntityRegistry.SEA_SERPENT.getId());
+		}
+
+
+		if (ModList.get().isLoaded(AlexsCaves.MODID)) {
+			pvd.addTag(SEMIBOSS)
+					.addOptional(ACEntityRegistry.HULLBREAKER.getId());
+
+			pvd.addTag(WHITELIST)
+					.addOptional(ACEntityRegistry.HULLBREAKER.getId())
+					.addOptional(ACEntityRegistry.VALLUMRAPTOR.getId())
+					.addOptional(ACEntityRegistry.GROTTOCERATOPS.getId())
+					.addOptional(ACEntityRegistry.RELICHEIRUS.getId())
+					.addOptional(ACEntityRegistry.SUBTERRANODON.getId())
+					.addOptional(ACEntityRegistry.TREMORSAURUS.getId());
 		}
 	}
 

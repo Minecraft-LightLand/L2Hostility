@@ -99,7 +99,7 @@ public class LHTraits {
 
 			INVISIBLE = L2Hostility.REGISTRATE.regTrait("invisible", InvisibleTrait::new,
 							rl -> new TraitConfig(rl, 30, 100, 1, 50)
-									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
+									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
 					.lang("Invisible").register();
 
 		}
@@ -126,14 +126,14 @@ public class LHTraits {
 			SHULKER = L2Hostility.REGISTRATE.regTrait("shulker", () -> new ShulkerTrait(ChatFormatting.LIGHT_PURPLE,
 									LHConfig.COMMON.shulkerInterval::get, BulletType.PLAIN, 0),
 							rl -> new TraitConfig(rl, 30, 100, 1, 70)
-									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
+									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
 					.desc("Shoot bullets every %s seconds")
 					.lang("Shulker").register();
 
 			GRENADE = L2Hostility.REGISTRATE.regTrait("grenade", () -> new ShulkerTrait(ChatFormatting.RED,
 									LHConfig.COMMON.grenadeInterval::get, BulletType.EXPLODE, 15),
 							rl -> new TraitConfig(rl, 50, 100, 5, 100)
-									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
+									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
 					.desc("Shoot explosive bullets every %s seconds after the previous bullet disappears.")
 					.lang("Grenade").register();
 
@@ -172,7 +172,7 @@ public class LHTraits {
 
 			STRIKE = L2Hostility.REGISTRATE.regTrait("counter_strike", () -> new CounterStrikeTrait(ChatFormatting.WHITE),
 							rl -> new TraitConfig(rl, 50, 100, 1, 60)
-									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
+									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
 					.desc("After attacked, it will attempt to perform a counter strike.")
 					.lang("Counter Strike").register();
 
@@ -198,7 +198,7 @@ public class LHTraits {
 					.lang("Dispell").register();
 			UNDYING = L2Hostility.REGISTRATE.regTrait("undying", () -> new UndyingTrait(ChatFormatting.DARK_BLUE),
 							rl -> new TraitConfig(rl, 150, 100, 1, 150)
-									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
+									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
 					.desc("Mob will heal to full health every time it dies.")
 					.lang("Undying").register();
 			ENDER = L2Hostility.REGISTRATE.regTrait("teleport", () -> new EnderTrait(ChatFormatting.DARK_PURPLE),
