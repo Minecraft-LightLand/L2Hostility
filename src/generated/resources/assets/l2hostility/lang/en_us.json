@@ -218,6 +218,8 @@
   "trait.l2hostility.nausea": "Distorter",
   "trait.l2hostility.poison": "Poisonous",
   "trait.l2hostility.protection": "Protected",
+  "trait.l2hostility.pulling": "Pulling",
+  "trait.l2hostility.pulling.desc": "Mob will pull entities hostile to it within %s blocks.",
   "trait.l2hostility.ragnarok": "Ragnarok",
   "trait.l2hostility.ragnarok.desc": "When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.",
   "trait.l2hostility.reflect": "Reflect",

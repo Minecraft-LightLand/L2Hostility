@@ -40,7 +40,10 @@ public abstract class PushPullTrait extends LegendaryTrait {
 			double dist = mob.distanceTo(e) / r;
 			if (dist > 1) return;
 			double strength = getStrength(dist);
-			int lv = EnchantmentHelper.getEnchantmentLevel(LHEnchantments.INSULATOR.get(), e);
+			int lv = 0;
+			for (var armor : e.getArmorSlots()){
+				lv += armor.getEnchantmentLevel(LHEnchantments.INSULATOR.get());
+			}
 			if (lv > 0) {
 				strength *= Math.pow(LHConfig.COMMON.insulatorFactor.get(), lv);
 			}

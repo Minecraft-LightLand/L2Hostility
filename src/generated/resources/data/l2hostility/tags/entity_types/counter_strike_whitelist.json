@@ -1,3 +1,6 @@
 {
-  "values": []
+  "values": [
+    "#l2hostility:melee_weapon_target",
+    "minecraft:warden"
+  ]
 }

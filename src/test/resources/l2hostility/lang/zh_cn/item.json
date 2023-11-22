@@ -72,6 +72,8 @@
 	"wither": "凋零",
 	"repelling": "排斥",
 	"repelling.desc": "怪物会推开%s格内对自己有敌意的生物，并且免疫弹射物",
+	"pulling": "吸引",
+	"pulling.desc": "怪物会吸引%s格内对自己有敌意的生物",
 	"teleport": "传送",
 	"teleport.desc": "怪物会通过传送躲避伤害和追踪目标",
 	"undying": "不死",

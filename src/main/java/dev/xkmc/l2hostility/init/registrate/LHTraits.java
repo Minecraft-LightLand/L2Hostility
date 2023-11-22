@@ -30,7 +30,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.RegistryBuilder;
 
 public class LHTraits {
@@ -63,6 +62,7 @@ public class LHTraits {
 	public static final RegistryEntry<ReflectTrait> REFLECT;
 	public static final RegistryEntry<UndyingTrait> UNDYING;
 	public static final RegistryEntry<RepellingTrait> REPELLING;
+	public static final RegistryEntry<PullingTrait> PULLING;
 	public static final RegistryEntry<EnderTrait> ENDER;
 	public static final RegistryEntry<CorrosionTrait> CORROSION;
 	public static final RegistryEntry<ErosionTrait> EROSION;
@@ -172,7 +172,8 @@ public class LHTraits {
 
 			STRIKE = L2Hostility.REGISTRATE.regTrait("counter_strike", () -> new CounterStrikeTrait(ChatFormatting.WHITE),
 							rl -> new TraitConfig(rl, 50, 100, 1, 60)
-									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
+									.addWhitelist(e -> e.addTag(TagGen.MELEE_WEAPON_TARGET)
+											.add(EntityType.WARDEN)))
 					.desc("After attacked, it will attempt to perform a counter strike.")
 					.lang("Counter Strike").register();
 
@@ -214,6 +215,12 @@ public class LHTraits {
 											EntityType.WITHER)))
 					.desc("Mob will push away entities hostile to it within %s blocks, and immune to projectiles.")
 					.lang("Repelling").register();
+
+			PULLING = L2Hostility.REGISTRATE.regTrait("pulling", () -> new PullingTrait(ChatFormatting.DARK_BLUE),
+							rl -> new TraitConfig(rl, 50, 100, 1, 100)
+									.addWhitelist(e -> e.addTag(TagGen.MELEE_WEAPON_TARGET)))
+					.desc("Mob will pull entities hostile to it within %s blocks.")
+					.lang("Pulling").register();
 
 			AURA = L2Hostility.REGISTRATE.regTrait("killer_aura", () -> new KillerAuraTrait(ChatFormatting.DARK_RED),
 							rl -> new TraitConfig(rl, 100, 50, 3, 300))

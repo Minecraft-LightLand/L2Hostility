@@ -1,0 +1,12 @@
+{
+  "name": "吸引",
+  "icon": "l2hostility:pulling",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:pulling",
+	  "text": "具有此词条的怪物可以不断吸引身边的玩家和敌对生物。"
+	}
+  ]
+}

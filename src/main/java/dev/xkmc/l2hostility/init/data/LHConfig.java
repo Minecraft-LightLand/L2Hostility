@@ -133,6 +133,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue counterStrikeDuration;
 		public final ForgeConfigSpec.IntValue counterStrikeRange;
 		public final ForgeConfigSpec.IntValue areaEffectRange;
+		public final ForgeConfigSpec.IntValue pullingRange;
+		public final ForgeConfigSpec.DoubleValue pullingStrength;
 
 		public final ForgeConfigSpec.DoubleValue ringOfLifeMaxDamage;
 		public final ForgeConfigSpec.IntValue flameThornTime;
@@ -384,6 +386,11 @@ public class LHConfig {
 						.defineInRange("counterStrikeRange", 6, 0, 64);
 				areaEffectRange = builder.comment("Range in blocks for Gravity and Moonwalk")
 						.defineInRange("areaEffectRange", 10, 0, 64);
+
+				pullingRange = builder.comment("Range in blocks for Pulling")
+						.defineInRange("pullingRange", 10, 0, 64);
+				pullingStrength = builder.comment("Pulling force strength, default is 0.2")
+						.defineInRange("pullingStrength", 0.2, 0, 10);
 
 			}
 			builder.pop();

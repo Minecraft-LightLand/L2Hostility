@@ -67,6 +67,8 @@
   "trait.l2hostility.wither": "凋零",
   "trait.l2hostility.repelling": "排斥",
   "trait.l2hostility.repelling.desc": "怪物会推开%s格内对自己有敌意的生物，并且免疫弹射物",
+  "trait.l2hostility.pulling": "吸引",
+  "trait.l2hostility.pulling.desc": "怪物会吸引%s格内对自己有敌意的生物",
   "trait.l2hostility.teleport": "传送",
   "trait.l2hostility.teleport.desc": "怪物会通过传送躲避伤害和追踪目标",
   "trait.l2hostility.undying": "不死",

@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-22T13:31:14.537767	L2Hostility Config
+// 1.20.1	2023-11-22T15:49:39.578233	L2Hostility Config
 19428794144d113e63e86b94f242f249a8b97545 data/cataclysm/l2hostility_config/entity/amethyst_crab.json
 a0e6cb6eee5bf90863ccca60fcd2d017e2ac3b13 data/cataclysm/l2hostility_config/entity/ender_golem.json
 cb6ef4a3231ec56985a8058b1a0ed8c265c45683 data/cataclysm/l2hostility_config/entity/ender_guardian.json
@@ -34,6 +34,7 @@ fb2a0b674d3456d44f001e052e6137333d3d08aa data/l2hostility/l2hostility_config/tra
 bf37960f3f954fb85ad4623f124ddc083e5f65be data/l2hostility/l2hostility_config/trait/nausea.json
 25bb9714d08a38b6ec478ff1594ece717f817455 data/l2hostility/l2hostility_config/trait/poison.json
 88fb964759d4b52a4e26fcc6fabeefa88ccd2611 data/l2hostility/l2hostility_config/trait/protection.json
+5055dc50e07878d408b53231e6f69886b21438e7 data/l2hostility/l2hostility_config/trait/pulling.json
 0d2219b2ff0b21ffc7fb65ad2f4ec186f3706608 data/l2hostility/l2hostility_config/trait/ragnarok.json
 3d06e92c3fdbfbb56e1c98ce99c04ce93a64fcd9 data/l2hostility/l2hostility_config/trait/reflect.json
 9cdd49d5441604ccfbad2dcd9e326e028d4d731e data/l2hostility/l2hostility_config/trait/regenerate.json
