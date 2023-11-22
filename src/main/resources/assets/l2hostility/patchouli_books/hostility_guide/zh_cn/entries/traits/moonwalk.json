@@ -1,0 +1,12 @@
+{
+  "name": "月步",
+  "icon": "l2hostility:moonwalk",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:moonwalk",
+	  "text": "持有这个词条的怪物会降低周围的重力，幅度取决于等级。"
+	}
+  ]
+}

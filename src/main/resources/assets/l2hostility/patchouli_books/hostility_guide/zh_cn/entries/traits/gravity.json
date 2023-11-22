@@ -1,0 +1,12 @@
+{
+  "name": "重力",
+  "icon": "l2hostility:gravity",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:gravity",
+	  "text": "持有这个词条的怪物会增加周围的重力，幅度取决于等级。"
+	}
+  ]
+}

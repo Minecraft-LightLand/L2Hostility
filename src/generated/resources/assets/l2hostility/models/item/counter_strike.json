@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "l2hostility:item/bg",
+    "layer1": "l2hostility:item/trait/counter_strike"
+  }
+}

@@ -130,6 +130,9 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue drainDamage;
 		public final ForgeConfigSpec.DoubleValue drainDuration;
 		public final ForgeConfigSpec.IntValue drainDurationMax;
+		public final ForgeConfigSpec.IntValue counterStrikeDuration;
+		public final ForgeConfigSpec.IntValue counterStrikeRange;
+		public final ForgeConfigSpec.IntValue areaEffectRange;
 
 		public final ForgeConfigSpec.DoubleValue ringOfLifeMaxDamage;
 		public final ForgeConfigSpec.IntValue flameThornTime;
@@ -374,6 +377,13 @@ public class LHConfig {
 						.defineInRange("drainDuration", 0.50, 0, 100);
 				drainDurationMax = builder.comment("Max duration boost for negative effects")
 						.defineInRange("drainDurationMax", 1200, 0, 10000);
+
+				counterStrikeDuration = builder.comment("Interval in ticks for Counter Strike")
+						.defineInRange("counterStrikeDuration", 100, 0, 3000);
+				counterStrikeRange = builder.comment("Range in blocks for Counter Strike")
+						.defineInRange("counterStrikeRange", 6, 0, 64);
+				areaEffectRange = builder.comment("Range in blocks for Gravity and Moonwalk")
+						.defineInRange("areaEffectRange", 10, 0, 64);
 
 			}
 			builder.pop();

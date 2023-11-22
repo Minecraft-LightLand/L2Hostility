@@ -109,6 +109,9 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.DRAIN.get(), new ItemStack(LHItems.WITCH_DROPLET, 1), 1, 0, 0.1);
 		add(LHTraits.GROWTH.get(), new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 1), 1, 0, 0.02);
 		add(LHTraits.SPLIT.get(), new ItemStack(LCItems.GUARDIAN_EYE, 1), 1, 0, 0.05);
+		add(LHTraits.GRAVITY.get(), new ItemStack(Items.IRON_INGOT, 8), 1, 0, 0.1);
+		add(LHTraits.MOONWALK.get(), new ItemStack(Items.PHANTOM_MEMBRANE, 4), 1, 0, 0.1);
+		add(LHTraits.STRIKE.get(), new ItemStack(LCItems.EXPLOSION_SHARD, 1), 1, 0, 0.1);
 
 		add(LHTraits.DISPELL.get(), new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);
 

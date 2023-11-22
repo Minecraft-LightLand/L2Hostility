@@ -29,11 +29,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
@@ -61,7 +59,8 @@ public class L2Hostility {
 	public static final ConfigTypeEntry<WeaponConfig> WEAPON = new ConfigTypeEntry<>(HANDLER, "weapon", WeaponConfig.class);
 	public static final ConfigTypeEntry<EntityConfig> ENTITY = new ConfigTypeEntry<>(HANDLER, "entity", EntityConfig.class);
 
-	private static void registerRegistrates(IEventBus bus) {
+	public L2Hostility() {
+
 		LHBlocks.register();
 		LHItems.register();
 		LHTraits.register();
@@ -70,6 +69,7 @@ public class L2Hostility {
 		LHConfig.init();
 		LHDamageTypes.register();
 		LHEnchantments.register();
+		LHEffects.register();
 
 		TraitGLMProvider.register();
 
@@ -96,12 +96,6 @@ public class L2Hostility {
 				.buildBook("L2Hostility Guide",
 						"Find out the mechanics and mob traits to know what to prepare for",
 						1, LHBlocks.TAB.getKey());
-	}
-
-	public L2Hostility() {
-		FMLJavaModLoadingContext ctx = FMLJavaModLoadingContext.get();
-		IEventBus bus = ctx.getModEventBus();
-		registerRegistrates(bus);
 		AttackEventHandler.register(4500, new LHAttackListener());
 	}
 

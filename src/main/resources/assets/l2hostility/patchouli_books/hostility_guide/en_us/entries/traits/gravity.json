@@ -1,0 +1,12 @@
+{
+  "name": "Gravity",
+  "icon": "l2hostility:gravity",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:gravity",
+	  "text": "Mobs with this trait will increase gravity in a region around it. Higher level will further increase gravity."
+	}
+  ]
+}

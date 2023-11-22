@@ -1,13 +1,11 @@
-2.4.12
-- Heavy Trait
-- Gravity Trait
-- Moonwalk Trait
-- Counter Strike Trait
 - Conceal Trait
 - Alex cave compat
 
 2.4.12
 - add Pocket of Restoration
+- Gravity Trait
+- Moonwalk Trait
+- Counter Strike Trait
 - add Soul Bound to dispell whitelist
 - add Envy, Greed, Sloth, Lust, Gluttony to Ragnarok whitelist
 

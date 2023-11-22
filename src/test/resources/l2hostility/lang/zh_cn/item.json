@@ -93,9 +93,20 @@
 	"split": "分裂",
 	"split.desc": "怪物死亡时分裂，等级减半并继承所有词条。本词条分裂时等级-1",
 	"drain": "嗜魔",
-	"drain.desc": "怪物获得相同等级的随机药水词条。怪物击中目标时，随机移除目标身上%s个正面效果，目标身上每有一个负面效果伤害上升%s，并且所有负面效果时间延长%s，最高延长至%s秒"
+	"drain.desc": "怪物获得相同等级的随机药水词条。怪物击中目标时，随机移除目标身上%s个正面效果，目标身上每有一个负面效果伤害上升%s，并且所有负面效果时间延长%s，最高延长至%s秒",
+	"counter_strike": "反击",
+	"counter_strike.desc": "被攻击后会试图冲刺反击",
+	"gravity": "重力",
+	"gravity.desc": "增加周围区域重力",
+	"moonwalk": "月步",
+	"moonwalk.desc": "减少周围区域重力"
   },
-
+  "effect.l2hostility": {
+	"gravity": "重力",
+	"gravity.description": "增加生物重力",
+	"moonwalk": "月步",
+	"moonwalk.description": "减少生物重力"
+  },
   "enchantment.l2hostility": {
 	"insulator": "绝缘",
 	"insulator.desc": "减少词条效果对你施加的推挤或者拉扯",

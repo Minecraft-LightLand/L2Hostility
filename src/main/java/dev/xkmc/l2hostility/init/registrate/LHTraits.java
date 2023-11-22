@@ -11,6 +11,7 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
 import dev.xkmc.l2hostility.content.traits.base.TargetEffectTrait;
 import dev.xkmc.l2hostility.content.traits.common.*;
+import dev.xkmc.l2hostility.content.traits.goals.CounterStrikeTrait;
 import dev.xkmc.l2hostility.content.traits.goals.EnderTrait;
 import dev.xkmc.l2hostility.content.traits.highlevel.CorrosionTrait;
 import dev.xkmc.l2hostility.content.traits.highlevel.ErosionTrait;
@@ -70,6 +71,8 @@ public class LHTraits {
 	public static final RegistryEntry<GrowthTrait> GROWTH;
 	public static final RegistryEntry<SplitTrait> SPLIT;
 	public static final RegistryEntry<DrainTrait> DRAIN;
+	public static final RegistryEntry<CounterStrikeTrait> STRIKE;
+	public static final RegistryEntry<AuraEffectTrait> GRAVITY, MOONWALK;
 
 	static {
 		// no desc
@@ -167,6 +170,20 @@ public class LHTraits {
 					.desc("Grants a random potion trait with same level. When hit target, remove %s beneficial effects, deal %s more damage for every harmful effects, and increase their duration by %s. At most increase to %ss.")
 					.lang("Drain").register();
 
+			STRIKE = L2Hostility.REGISTRATE.regTrait("counter_strike", () -> new CounterStrikeTrait(ChatFormatting.WHITE),
+							rl -> new TraitConfig(rl, 50, 100, 1, 60)
+									.addBlacklist(e -> e.addTag(Tags.EntityTypes.BOSSES)))
+					.desc("After attacked, it will attempt to perform a counter strike.")
+					.lang("Counter Strike").register();
+
+			GRAVITY = L2Hostility.REGISTRATE.regTrait("gravity", () -> new AuraEffectTrait(LHEffects.GRAVITY::get),
+							rl -> new TraitConfig(rl, 50, 100, 3, 80))
+					.desc("Increase gravity for mobs around it").lang("Gravity").register();
+
+			MOONWALK = L2Hostility.REGISTRATE.regTrait("moonwalk", () -> new AuraEffectTrait(LHEffects.MOONWALK::get),
+							rl -> new TraitConfig(rl, 50, 100, 3, 80))
+					.desc("Decrease gravity for mobs around it").lang("Moonwalk").register();
+
 		}
 
 		//legendary
@@ -230,7 +247,7 @@ public class LHTraits {
 			).tag(TRAIT_TAGS, POTION).lang("Withering").register();
 			LEVITATION = L2Hostility.REGISTRATE.regTrait("levitation", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.LEVITATION, LHConfig.COMMON.levitationTime.get() * lv)),
-					rl -> new TraitConfig(rl, 25, 25, 3, 40)
+					rl -> new TraitConfig(rl, 25, 50, 3, 40)
 			).tag(TRAIT_TAGS, POTION).lang("Levitater").register();
 			BLIND = L2Hostility.REGISTRATE.regTrait("blindness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.BLINDNESS, LHConfig.COMMON.blindTime.get() * lv)),
@@ -238,11 +255,11 @@ public class LHTraits {
 			).tag(TRAIT_TAGS, POTION).lang("Blinder").register();
 			CONFUSION = L2Hostility.REGISTRATE.regTrait("nausea", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.CONFUSION, LHConfig.COMMON.confusionTime.get() * lv)),
-					rl -> new TraitConfig(rl, 30, 25, 3, 40)
+					rl -> new TraitConfig(rl, 30, 50, 3, 40)
 			).tag(TRAIT_TAGS, POTION).lang("Distorter").register();
 			SOUL_BURNER = L2Hostility.REGISTRATE.regTrait("soul_burner", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.FLAME.get(), LHConfig.COMMON.soulBurnerTime.get(), lv - 1)),
-					rl -> new TraitConfig(rl, 50, 50, 3, 70)
+					rl -> new TraitConfig(rl, 50, 100, 3, 70)
 			).tag(TRAIT_TAGS, POTION).lang("Soul Burner").register();
 			FREEZING = L2Hostility.REGISTRATE.regTrait("freezing", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.ICE.get(), LHConfig.COMMON.freezingTime.get() * lv)),
