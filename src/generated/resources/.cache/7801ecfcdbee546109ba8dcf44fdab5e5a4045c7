@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-22T23:05:00.647361	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2023-11-24T10:03:25.259005	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (mob_effects), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 72e1058900aa58e79ae105a4ae76e2390fadb41c assets/l2hostility/lang/en_ud.json
 a05053e6efbc8b825ae2ce1b5594dc946092be37 assets/l2hostility/lang/en_us.json
@@ -289,7 +289,7 @@ c3eb392d55e61ea2002cb572e409e051cdc33c1c data/l2hostility/tags/entity_types/semi
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
 50cbc9948d6c82b5b627ae08b27595db9fbd33b6 data/l2hostility/tags/items/chaos_equipment.json
-e697de08d680463d2fe72277d6fdce509883578c data/l2hostility/tags/items/no_seal.json
+f538ea746269beb31905effc875a0139e8ee4df3 data/l2hostility/tags/items/no_seal.json
 37a56614aa0f31579fd6e01028556bbb8e26ae2c data/l2hostility/tags/items/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
 e7bd765cf86b012712df42659c7ff073ed8568a2 data/minecraft/tags/blocks/mineable/pickaxe.json

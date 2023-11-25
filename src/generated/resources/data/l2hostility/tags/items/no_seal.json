@@ -9,6 +9,14 @@
     "l2hostility:abrahadabra",
     "l2hostility:greed_of_nidhoggur",
     "l2hostility:pocket_of_restoration",
-    "l2hostility:sealed_item"
+    "l2hostility:sealed_item",
+    {
+      "id": "enigmaticlegacy:curse_transposer",
+      "required": false
+    },
+    {
+      "id": "moonstone:sevencurse",
+      "required": false
+    }
   ]
 }

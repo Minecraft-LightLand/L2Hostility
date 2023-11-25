@@ -35,7 +35,7 @@ public class DifficultyLevel {
 	}
 
 	public void grow(double growFactor, MobTraitCap cap) {
-		exp += growFactor * cap.getLevel() * cap.getLevel();
+		exp += (int) (growFactor * cap.getLevel() * cap.getLevel());
 		int factor = LHConfig.COMMON.killsPerLevel.get();
 		while (exp >= level * level * factor) {
 			exp -= level * level * factor;
@@ -44,7 +44,10 @@ public class DifficultyLevel {
 	}
 
 	public void decay() {
-		level = Math.max(0, level - Math.max(1, (int) Math.ceil(level * (1 - LHConfig.COMMON.playerDeathDecay.get()))));
+		double rate = LHConfig.COMMON.playerDeathDecay.get();
+		if (rate < 1) {
+			level = Math.max(0, level - Math.max(1, (int) Math.ceil(level * (1 - rate))));
+		}
 		exp = 0;
 	}
 

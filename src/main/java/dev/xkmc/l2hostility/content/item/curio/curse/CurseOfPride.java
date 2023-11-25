@@ -78,7 +78,7 @@ public class CurseOfPride extends CurseCurioItem implements ICapItem<CurseOfPrid
 			int level = wearer == null ? 0 : DifficultyLevel.ofAny(wearer);
 			if (level > 0) {
 				double rate = LHConfig.COMMON.prideHealthBonus.get() * level;
-				ans.put(Attributes.MAX_HEALTH, new AttributeModifier(ID, NAME, rate, AttributeModifier.Operation.MULTIPLY_BASE));
+				ans.put(Attributes.MAX_HEALTH, new AttributeModifier(uuid, NAME, rate, AttributeModifier.Operation.MULTIPLY_BASE));
 			}
 			return ans;
 		}

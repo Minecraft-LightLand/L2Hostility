@@ -19,12 +19,6 @@ import java.util.List;
 
 public class ReprintTrait extends MobTrait {
 
-	private static float limit(float v, int exp) {
-		if (Float.isNaN(v)) v = 1;
-		double ans = v * Math.pow(2d, Math.min(127, exp));
-		return (float) Math.min(Float.MAX_VALUE / 2f, ans);
-	}
-
 	public ReprintTrait(ChatFormatting format) {
 		super(format);
 	}
@@ -41,7 +35,7 @@ public class ReprintTrait extends MobTrait {
 			for (var e : targetEnch.entrySet()) {
 				int lv = e.getValue();
 				maxLv = Math.max(maxLv, lv);
-				if (lv > 30) {
+				if (lv >= 30) {
 					total = -1;
 				} else if (total >= 0) {
 					total += 1L << lv;
@@ -63,12 +57,8 @@ public class ReprintTrait extends MobTrait {
 				}
 			}
 		}
-		if (total >= 0)
-			cache.addHurtModifier(DamageModifier.multTotal(1 + (float) (LHConfig.COMMON.reprintDamage.get() * total)));
-		else {
-			int finalMaxLv = maxLv;
-			cache.addHurtModifier(DamageModifier.nonlinearFinal(0, v -> limit(v, finalMaxLv)));
-		}
+		float factor = total >= 0 ? total : (float) Math.pow(2, maxLv);
+		cache.addHurtModifier(DamageModifier.multTotal(1 + (float) (LHConfig.COMMON.reprintDamage.get() * factor)));
 	}
 
 	@Override
