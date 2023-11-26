@@ -1,7 +1,7 @@
-// 1.20.1	2023-11-24T10:03:25.259005	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (mob_effects), Tags (traits), Patchouli Provider]
+// 1.20.1	2023-11-26T20:17:12.351644	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-72e1058900aa58e79ae105a4ae76e2390fadb41c assets/l2hostility/lang/en_ud.json
-a05053e6efbc8b825ae2ce1b5594dc946092be37 assets/l2hostility/lang/en_us.json
+ceea415a2edd5b29858d28e83a03a313dad571f8 assets/l2hostility/lang/en_ud.json
+0db5fabd6d9323d6a6969d7e1e242fb11281ce32 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -11,6 +11,8 @@ de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostili
 47b1669ffc91d13e17f5d08ed2a34cd11ddeaaf9 assets/l2hostility/models/item/ai_config_wand.json
 291d5c9c188c77b48c0262fc633a1388130afe97 assets/l2hostility/models/item/blindness.json
 8e5cf690e2a91a6fa73a816dd34900f8a2c705f0 assets/l2hostility/models/item/book.json
+b5fae17e61c9b2b9cd9b1ba115630551feae2d7d assets/l2hostility/models/item/book_of_omniscience.json
+9ce59a57081ef1aafb0ec7f5be6a3e5114e127df assets/l2hostility/models/item/book_of_reprint.json
 c3e83e5767641301057986ee59bc7154e2749bb3 assets/l2hostility/models/item/booster_potion.json
 68d41070d34ebc05ec1870aed6e0e53e40d12147 assets/l2hostility/models/item/bottle_of_curse.json
 38ebdcb219de6ddebd2181e8c53d6c00711a4b1f assets/l2hostility/models/item/bottle_of_sanity.json
@@ -117,6 +119,7 @@ abd1685a4b815faeeda3c739ba5bfbebbc103837 data/l2hostility/advancements/hostility
 8676bbf06536d279776e501562b0c6c7cda8f19e data/l2hostility/advancements/recipes/book.json
 48fe5e76156944f793f7aad5f95972ebf4dd0a49 data/l2hostility/advancements/recipes/misc/abrahadabra.json
 222c64446f0b832417d2140022f08d9f8f1b3d78 data/l2hostility/advancements/recipes/misc/alpha_yeti_boss_spawner.json
+f820a5edd8e0efa290e5c360426ca9a095cb3475 data/l2hostility/advancements/recipes/misc/book_of_omniscience.json
 2fc4decfd7e0bd3895f939688c8fc1240a02b23a data/l2hostility/advancements/recipes/misc/booster_potion.json
 5390655f853ac0e38d158b122b4c3c492de4ea81 data/l2hostility/advancements/recipes/misc/bottle_of_curse.json
 d89c5a52d1a034bbf27d94dfc6d88aefda4c5e53 data/l2hostility/advancements/recipes/misc/bottle_of_sanity_craft.json
@@ -163,6 +166,7 @@ f6009a80ac850edcce17fbdf3199e5ca3bbf5879 data/l2hostility/patchouli_books/hostil
 ff5cd6c878f8942f64e006720b5d925ec73dc48a data/l2hostility/recipes/abrahadabra.json
 1318c59b3a2c6e12ed1e51136ed5bee0ff48ca77 data/l2hostility/recipes/alpha_yeti_boss_spawner.json
 5cd5726acdcf48b51a89646f5005069e1cc4c02b data/l2hostility/recipes/book.json
+071db20218fa8b3a9584245e3ee36effedbcb3d8 data/l2hostility/recipes/book_of_omniscience.json
 e292543acc9f1ed6ece2a359b4cfe0a31cc011a7 data/l2hostility/recipes/booster_potion.json
 60c0e3fa2d2d35bfa50213c01d769d1255c740e2 data/l2hostility/recipes/bottle_of_curse.json
 a7dbfd4231a99589de68224a4d6929be82619a43 data/l2hostility/recipes/bottle_of_sanity_craft.json
@@ -289,7 +293,7 @@ c3eb392d55e61ea2002cb572e409e051cdc33c1c data/l2hostility/tags/entity_types/semi
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
 50cbc9948d6c82b5b627ae08b27595db9fbd33b6 data/l2hostility/tags/items/chaos_equipment.json
-f538ea746269beb31905effc875a0139e8ee4df3 data/l2hostility/tags/items/no_seal.json
+27fc1ba0c5625affe2f4ff3f4cfb929a8ccaf064 data/l2hostility/tags/items/no_seal.json
 37a56614aa0f31579fd6e01028556bbb8e26ae2c data/l2hostility/tags/items/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
 e7bd765cf86b012712df42659c7ff073ed8568a2 data/minecraft/tags/blocks/mineable/pickaxe.json

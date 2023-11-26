@@ -95,6 +95,13 @@ public class RecipeGen {
 					.define('C', LHItems.WITCH_DROPLET)
 					.save(pvd);
 
+			unlock(pvd, new ShapelessRecipeBuilder(RecipeCategory.MISC, LHItems.BOOK_OMNISCIENCE.get(), 1)::unlockedBy, LHItems.BOOK_COPY.get())
+					.requires(LHItems.BOOK_COPY.get())
+					.requires(LHTraits.REPRINT.get().asItem())
+					.requires(LHTraits.SPLIT.get().asItem())
+					.requires(LCMats.ETERNIUM.getIngot())
+					.save(pvd);
+
 		}
 
 		//curio

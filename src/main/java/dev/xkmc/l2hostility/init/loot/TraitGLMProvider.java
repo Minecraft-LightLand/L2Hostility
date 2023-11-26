@@ -114,6 +114,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.STRIKE.get(), new ItemStack(LCItems.EXPLOSION_SHARD, 1), 1, 0, 0.1);
 		add(LHTraits.PULLING.get(), new ItemStack(LCItems.BLACKSTONE_CORE, 1), 1, 0, 0.05);
 
+		add(LHTraits.REPRINT.get(), new ItemStack(LHItems.BOOK_COPY.get()), 1, 1, 0);
 		add(LHTraits.DISPELL.get(), new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);
 
 		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getNugget(), 6), 0, 0.1,

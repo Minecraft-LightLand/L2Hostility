@@ -42,6 +42,8 @@ public class LHItems {
 	public static final ItemEntry<Item> DETECTOR;
 	public static final ItemEntry<DetectorGlasses> DETECTOR_GLASSES;
 	public static final ItemEntry<WitchWand> WITCH_WAND;
+	public static final ItemEntry<BookCopy> BOOK_COPY;
+	public static final ItemEntry<BookEverything> BOOK_OMNISCIENCE;
 	public static final ItemEntry<Item> CHAOS_INGOT;
 	public static final ItemEntry<CurseOfEnvy> CURSE_ENVY;
 	public static final ItemEntry<CurseOfGluttony> CURSE_GLUTTONY;
@@ -109,6 +111,12 @@ public class LHItems {
 									LHConfig.COMMON.witchChargeMinDuration.get() / 20
 							).withStyle(ChatFormatting.GRAY))
 			).register();
+
+			BOOK_COPY = L2Hostility.REGISTRATE.item("book_of_reprint",
+					BookCopy::new).register();
+
+			BOOK_OMNISCIENCE = L2Hostility.REGISTRATE.item("book_of_omniscience",
+					BookEverything::new).register();
 		}
 
 		// equipments

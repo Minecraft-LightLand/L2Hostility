@@ -91,6 +91,14 @@
 		"platinum_star": "你所有的近战伤害无视伤害冷却",
 		"pocket_of_restoration": "自动收纳被封印的物品，将其解除封印后放回原位"
 	  },
+	  "book": {
+		"copy": "在铁砧中和附魔书结合来复印",
+		"everything_forbidden": "%s不可获取",
+		"everything_invalid": "当前物品名字不是附魔ID",
+		"everything_ready": "产出%s消耗%s级经验",
+		"everything_shift": "手持这个物品潜行右键把这个物品变成包含所有可以从附魔台中产出的附魔的附魔书",
+		"everything_use": "把这个物品重命名成可以从附魔台中产出的附魔的ID，然后手持右键消耗经验产出该附魔"
+	  },
 	  "spawner": "召唤强力怪物。击败它们能让当前子区块变得安全"
 	},
 	"msg": {

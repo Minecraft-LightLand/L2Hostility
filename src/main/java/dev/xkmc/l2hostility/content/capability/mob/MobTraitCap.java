@@ -200,7 +200,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				mob.setHealth(mob.getMaxHealth());
 				syncToClient(mob);
 			}
-			if (traits.size() > 0 && mob instanceof OwnableEntity own && own.getOwner() instanceof Player) {
+			if (!traits.isEmpty() && mob instanceof OwnableEntity own && own.getOwner() instanceof Player) {
 				traits.clear();
 				syncToClient(mob);
 			}

@@ -33,6 +33,12 @@ public enum LangData {
 	ITEM_ORB("item.consumable.orb", "Make a chunk section safe. Useful when building your base. Use wisely.", 0),
 	ITEM_BOTTLE_CURSE("item.consumable.bottle_of_curse", "Increase player difficulty by %s", 1),
 	ITEM_BOTTLE_SANITY("item.consumable.bottle_of_sanity", "Clear all base player difficulty", 0),
+	ITEM_BOOK_COPY("item.book.copy", "Merge it with enchanted book in anvil to copy.", 0),
+	ITEM_BOOK_EVERYTHING_SHIFT("item.book.everything_shift", "Shift right click with it to turn it into a book with all enchantments obtainable from enchantment table.", 0),
+	ITEM_BOOK_EVERYTHING_USE("item.book.everything_use", "Rename this item with ID of an enchantment obtainable from enchantment table, then right click to generate a book of that enchantment, costing player experience.", 0),
+	ITEM_BOOK_EVERYTHING_INVALID("item.book.everything_invalid", "Name is not ID of an enchantment", 0),
+	ITEM_BOOK_EVERYTHING_READY("item.book.everything_ready", "Enchantment %s cost %s levels", 2),
+	ITEM_BOOK_EVERYTHING_FORBIDDEN("item.book.everything_forbidden", "%s is not obtainable", 1),
 
 	ITEM_CHARM_ENVY("item.equipment.curse_of_envy", "Get trait items when you kill mobs with traits, with a chance of %s%% per trait rank", 1),
 	ITEM_CHARM_GLUTTONY("item.equipment.curse_of_gluttony", "Get Bottle of Curse when you kill mobs with level, with a chance of %s%% per level", 1),

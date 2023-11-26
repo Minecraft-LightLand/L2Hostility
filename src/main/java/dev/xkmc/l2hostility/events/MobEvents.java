@@ -150,19 +150,6 @@ public class MobEvents {
 		}
 	}
 
-
-	@SubscribeEvent
-	public static void onTargetCardClick(PlayerInteractEvent.EntityInteract event) {
-		if (event.getItemStack().getItem() instanceof IMobClickItem) {
-			if (event.getTarget() instanceof LivingEntity le) {
-				event.setCancellationResult(event.getItemStack().interactLivingEntity(event.getEntity(),
-						le, event.getHand()));
-				event.setCanceled(true);
-			}
-		}
-	}
-
-
 	private static final List<Runnable> TASKS = new ArrayList<>();
 
 	public static synchronized void schedule(Runnable runnable) {

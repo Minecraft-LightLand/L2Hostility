@@ -1,0 +1,21 @@
+{
+  "type": "l2hostility:trait_scaled",
+  "chance": 1.0,
+  "conditions": [
+    {
+      "condition": "minecraft:killed_by_player"
+    },
+    {
+      "condition": "l2hostility:trait_and_level",
+      "maxLevel": 5,
+      "minLevel": 1,
+      "trait": "l2hostility:reprint"
+    }
+  ],
+  "rankBonus": 0.0,
+  "result": {
+    "Count": 1,
+    "id": "l2hostility:book_of_reprint"
+  },
+  "trait": "l2hostility:reprint"
+}

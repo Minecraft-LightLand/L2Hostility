@@ -78,7 +78,7 @@ public class TagGen {
 
 	public static void onItemTagGen(RegistrateItemTagsProvider pvd) {
 		pvd.addTag(NO_SEAL)
-				.addOptional(new ResourceLocation("enigmaticlegacy:curse_transposer"))
+				.addOptional(new ResourceLocation("enigmaticlegacy:curse_ring"))
 				.addOptional(new ResourceLocation("moonstone:sevencurse"));
 	}
 
