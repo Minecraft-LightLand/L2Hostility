@@ -245,7 +245,7 @@ public class RecipeGen {
 						.define('I', LHItems.CHAOS_INGOT.get())
 						.define('1', LHTraits.SLOWNESS.get().asItem())
 						.define('2', LHTraits.FREEZING.get().asItem())
-						.define('A', LHTraits.AURA.get().asItem())
+						.define('A', LHTraits.KILLER_AURA.get().asItem())
 						.define('B', LCItems.BLACKSTONE_CORE.get())
 						.save(pvd);
 			}
@@ -312,7 +312,7 @@ public class RecipeGen {
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.PLATINUM_STAR.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("BIB").pattern("ISI").pattern("BIB")
 					.define('I', LHItems.CHAOS_INGOT.get())
-					.define('B', LHTraits.AURA.get().asItem())
+					.define('B', LHTraits.KILLER_AURA.get().asItem())
 					.define('S', Items.NETHER_STAR)
 					.save(pvd);
 

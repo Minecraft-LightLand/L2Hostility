@@ -15,7 +15,7 @@
   "rankBonus": 0.1,
   "result": {
     "Count": 1,
-    "id": "l2complements:explosion_shard"
+    "id": "minecraft:shulker_shell"
   },
   "trait": "l2hostility:protection"
 }

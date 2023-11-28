@@ -62,7 +62,7 @@ public class AdvGen {
 				.type(FrameType.CHALLENGE)
 				.create("kill_ragnarok", LHTraits.RAGNAROK.get().asItem(),
 						CriterionBuilder.one(KillTraitsTrigger.ins(
-								LHTraits.AURA.get(), LHTraits.RAGNAROK.get())),
+								LHTraits.KILLER_AURA.get(), LHTraits.RAGNAROK.get())),
 						"The Final Battle", "Kill a mob with Killer Aura and Ragnarok Trait")
 				.type(FrameType.CHALLENGE)
 				.root().enter().create("effect_kill_regen", LHTraits.REGEN.get().asItem(),

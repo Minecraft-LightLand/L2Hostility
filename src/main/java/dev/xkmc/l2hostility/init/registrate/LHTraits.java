@@ -63,7 +63,7 @@ public class LHTraits {
 	public static final RegistryEntry<EnderTrait> ENDER;
 	public static final RegistryEntry<CorrosionTrait> CORROSION;
 	public static final RegistryEntry<ErosionTrait> EROSION;
-	public static final RegistryEntry<KillerAuraTrait> AURA;
+	public static final RegistryEntry<KillerAuraTrait> KILLER_AURA;
 	public static final RegistryEntry<RagnarokTrait> RAGNAROK;
 	public static final RegistryEntry<GrowthTrait> GROWTH;
 	public static final RegistryEntry<SplitTrait> SPLIT;
@@ -225,7 +225,7 @@ public class LHTraits {
 					.desc("Mob will copy target enchantments, and deal %s more damage per enchantment point")
 					.lang("Reprint").register();
 
-			AURA = L2Hostility.REGISTRATE.regTrait("killer_aura", () -> new KillerAuraTrait(ChatFormatting.DARK_RED),
+			KILLER_AURA = L2Hostility.REGISTRATE.regTrait("killer_aura", () -> new KillerAuraTrait(ChatFormatting.DARK_RED),
 							rl -> new TraitConfig(rl, 100, 50, 3, 300))
 					.desc("Deal %s magic damage to players and entities targeting it within %s blocks and apply trait effects for every %ss")
 					.lang("Killer Aura").register();

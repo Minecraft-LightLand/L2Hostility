@@ -9,13 +9,13 @@
       "condition": "l2hostility:trait_and_level",
       "maxLevel": 5,
       "minLevel": 1,
-      "trait": "l2hostility:moonwalk"
+      "trait": "l2hostility:gravity"
     }
   ],
   "rankBonus": 0.1,
   "result": {
     "Count": 4,
-    "id": "minecraft:phantom_membrane"
+    "id": "minecraft:dragon_breath"
   },
-  "trait": "l2hostility:moonwalk"
+  "trait": "l2hostility:gravity"
 }

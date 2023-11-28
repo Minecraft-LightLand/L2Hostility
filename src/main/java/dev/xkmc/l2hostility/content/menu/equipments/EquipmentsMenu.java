@@ -42,7 +42,9 @@ public class EquipmentsMenu extends BaseContainerMenu<EquipmentsMenu> {
 		if (golem == null || !stillValid(inventory.player)) {
 			return false;
 		}
-		return LivingEntity.getEquipmentSlotForItem(stack) == slot;
+		EquipmentSlot exp = LivingEntity.getEquipmentSlotForItem(stack);
+		if (exp == slot) return true;
+		return !exp.isArmor();
 	}
 
 	@Override
