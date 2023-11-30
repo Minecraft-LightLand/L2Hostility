@@ -6,11 +6,13 @@
 - Moonwalk Trait
 - Counter Strike Trait
 - Pulling Trait
-- Reprint Trait TODO patchouli
+- Reprint Trait
+- make hostility orb to 5x5x5
 - add Soul Bound to dispell whitelist
 - add Envy, Greed, Sloth, Lust, Gluttony to Ragnarok whitelist
 - add Alex Caves compat
 - add Ice and Fire compat
+- Thorn no longer inflict trait effects
 
 2.4.11
 - add 9 curio items

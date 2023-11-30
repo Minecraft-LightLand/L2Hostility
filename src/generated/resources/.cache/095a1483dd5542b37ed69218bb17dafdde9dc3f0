@@ -1,5 +1,6 @@
-// 1.20.1	2023-11-03T10:38:59.307455	Tags for minecraft:damage_type mod id l2hostility
+// 1.20.1	2023-11-29T19:26:30.828469	Tags for minecraft:damage_type mod id l2hostility
 4ecf5c12e1c8d9a3c82275c97ec043b63b2e0dca data/forge/tags/damage_type/is_magic.json
+8acd4a025d25e030b3c8c4e78a90be553156894b data/l2hostility/tags/damage_type/ignore_scaling.json
 36b1d888c182cc25536d00d1f6ec89f0399f1b17 data/minecraft/tags/damage_type/bypasses_armor.json
 52bfca60524a3594b6770f82bc033579a60fd822 data/minecraft/tags/damage_type/bypasses_cooldown.json
 7ed18f00a61a0ff92e78d80f878de4aa4923de01 data/minecraft/tags/damage_type/bypasses_effects.json

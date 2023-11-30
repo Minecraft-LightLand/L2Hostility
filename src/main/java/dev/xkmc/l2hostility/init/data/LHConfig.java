@@ -146,8 +146,9 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue ringOfCorrosionPenalty;
 		public final ForgeConfigSpec.DoubleValue ringOfHealingRate;
 		public final ForgeConfigSpec.IntValue witchChargeMinDuration;
-
 		public final ForgeConfigSpec.DoubleValue insulatorFactor;
+
+		public final ForgeConfigSpec.IntValue orbRadius;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
 
@@ -191,10 +192,6 @@ public class LHConfig {
 						.define("allowBypassMinimum", true);
 				allowExtraEnchantments = builder.comment("Allow level-related extra enchantment spawning")
 						.define("allowExtraEnchantments", true);
-				allowHostilityOrb = builder.comment("Allow to use hostility orb")
-						.define("allowHostilityOrb", true);
-				allowHostilitySpawner = builder.comment("Allow to use hostility spawner")
-						.define("allowHostilitySpawner", true);
 				defaultLevelBase = builder.comment("Default dimension base difficulty for mod dimensions")
 						.defineInRange("defaultLevelBase", 20, 0, 1000);
 				defaultLevelVar = builder.comment("Default dimension difficulty variation for mod dimensions")
@@ -223,8 +220,15 @@ public class LHConfig {
 			}
 			builder.pop();
 
-			builder.push("spawner");
+			builder.push("orb_and_spawner");
 			{
+				allowHostilityOrb = builder.comment("Allow to use hostility orb")
+						.define("allowHostilityOrb", true);
+				orbRadius = builder.comment("Radius for Hostility Orb to take effect.")
+						.comment("0 means 1x1x1 section, 1 means 3x3x3 sections, 2 means 5x5x5 sections")
+						.defineInRange("orbRadius", 2, 0, 10);
+				allowHostilitySpawner = builder.comment("Allow to use hostility spawner")
+						.define("allowHostilitySpawner", true);
 				hostilitySpawnCount = builder.comment("Number of mobs to spawn in Hostility Spawner")
 						.defineInRange("hostilitySpawnCount", 16, 1, 64);
 				hostilitySpawnLevelBonus = builder.comment("Level bonus for mobs to spawn in Hostility Spawner")

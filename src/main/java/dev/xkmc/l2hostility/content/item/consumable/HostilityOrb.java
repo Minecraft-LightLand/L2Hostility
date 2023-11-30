@@ -5,6 +5,7 @@ import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -31,13 +32,26 @@ public class HostilityOrb extends Item {
 		if (!LHConfig.COMMON.allowHostilityOrb.get())
 			return InteractionResultHolder.pass(stack);
 		if (!level.isClientSide()) {
-			var opt = ChunkDifficulty.at(level, player.blockPosition());
-			if (opt.isPresent()) {
-				var sec = opt.get().getSection(player.blockPosition().getY());
-				if (!sec.isCleared()) {
-					stack.shrink(1);
-					sec.setClear(opt.get(), player.blockPosition());
+			boolean success = false;
+			int r = LHConfig.COMMON.orbRadius.get();
+			for (int x = -r; x <= r; x++) {
+				for (int y = -r; y <= r; y++) {
+					for (int z = -r; z <= r; z++) {
+						BlockPos pos = player.blockPosition().offset(x * 16, y * 16, z * 16);
+						if (level.isOutsideBuildHeight(pos)) continue;
+						var opt = ChunkDifficulty.at(level, pos);
+						if (opt.isPresent()) {
+							var sec = opt.get().getSection(pos.getY());
+							if (!sec.isCleared()) {
+								success = true;
+								sec.setClear(opt.get(), pos);
+							}
+						}
+					}
 				}
+			}
+			if (success) {
+				stack.shrink(1);
 			}
 		} else {
 			PlayerDifficulty.HOLDER.get(player).updateChunkFlag = true;
@@ -48,7 +62,8 @@ public class HostilityOrb extends Item {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		if (!LHConfig.COMMON.allowHostilityOrb.get()) list.add(BANNED.get());
-		list.add(LangData.ITEM_ORB.get().withStyle(ChatFormatting.GRAY));
+		int r = LHConfig.COMMON.orbRadius.get() * 2 + 1;
+		list.add(LangData.ITEM_ORB.get(r, r, r).withStyle(ChatFormatting.GRAY));
 	}
 
 }

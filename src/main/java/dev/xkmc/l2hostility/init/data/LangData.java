@@ -29,8 +29,8 @@ public enum LangData {
 	ITEM_WAND_ADDER("item.wand.adder", "Right click blocks to select trait. Right click mobs to select trait rank. Press shift to select in opposite direction.", 0),
 
 	ITEM_GLASSES("item.equipment.glasses", "Allow you to see invisible mobs, and see mobs when you have blindness or darkness effects", 0),
-	ITEM_SPAWNER("item.spawner", "Summon strong mobs. Kill them all to make a chunk section safe", 0),
-	ITEM_ORB("item.consumable.orb", "Make a chunk section safe. Useful when building your base. Use wisely.", 0),
+	ITEM_SPAWNER("item.spawner", "Summon strong mobs. Kill them all to make a chunk section no longer spawn mobs with levels", 0),
+	ITEM_ORB("item.consumable.orb", "Make %sx%sx%s chunk sections no longer spawn mobs with levels.", 3),
 	ITEM_BOTTLE_CURSE("item.consumable.bottle_of_curse", "Increase player difficulty by %s", 1),
 	ITEM_BOTTLE_SANITY("item.consumable.bottle_of_sanity", "Clear all base player difficulty", 0),
 	ITEM_BOOK_COPY("item.book.copy", "Merge it with enchanted book in anvil to copy.", 0),

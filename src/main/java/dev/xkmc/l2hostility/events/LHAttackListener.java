@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.events;
 
-import dev.xkmc.l2complements.init.data.DamageTypeGen;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.AttackListener;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
@@ -14,6 +13,7 @@ import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.data.HostilityDamageState;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHDamageTypes;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +25,7 @@ public class LHAttackListener implements AttackListener {
 	public void onHurt(AttackCache cache, ItemStack weapon) {
 		var event = cache.getLivingHurtEvent();
 		assert event != null;
-		if (event.getSource().is(DamageTypeGen.SOUL_FLAME))
+		if (event.getSource().is(LHDamageTypes.IGNORE_SCALING))
 			return;
 		LivingEntity mob = cache.getAttacker();
 		var target = cache.getAttackTarget();
@@ -33,8 +33,8 @@ public class LHAttackListener implements AttackListener {
 			return;
 		if (MobTraitCap.HOLDER.isProper(target)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(target);
-			for (var e : weapon.getAllEnchantments().entrySet()){
-				if (e.getKey() instanceof HitTargetEnchantment ench){
+			for (var e : weapon.getAllEnchantments().entrySet()) {
+				if (e.getKey() instanceof HitTargetEnchantment ench) {
 					ench.hitMob(target, cap, e.getValue(), cache);
 				}
 			}
