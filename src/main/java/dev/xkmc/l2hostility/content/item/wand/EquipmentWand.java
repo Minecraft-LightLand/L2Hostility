@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.item.wand;
 
+import dev.xkmc.l2hostility.compat.curios.EntityCuriosMenuPvd;
 import dev.xkmc.l2hostility.content.menu.equipments.EquipmentsMenuPvd;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
@@ -24,7 +25,11 @@ public class EquipmentWand extends BaseWand {
 	@Override
 	public void clickTarget(ItemStack stack, Player player, LivingEntity entity) {
 		if (entity instanceof Mob mob) {
-			new EquipmentsMenuPvd(mob).open((ServerPlayer) player);
+			if (player.isShiftKeyDown()) {
+				new EntityCuriosMenuPvd(mob, 0).open((ServerPlayer) player);
+			} else {
+				new EquipmentsMenuPvd(mob).open((ServerPlayer) player);
+			}
 		}
 	}
 

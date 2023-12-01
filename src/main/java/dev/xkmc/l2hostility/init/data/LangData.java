@@ -24,7 +24,7 @@ public enum LangData {
 	TOOLTIP_WITCH_BOTTLE("tooltip.witch_bottle", "Increase duration of all effects longer than %ss by %s%%. At most increase to %ss.", 3),
 
 	ITEM_WAND_AI("item.wand.ai", "Right click to remove or restore mob AI.", 0),
-	ITEM_WAND_EQUIPMENT("item.wand.equipment", "Right click to open mob equipment menu.", 0),
+	ITEM_WAND_EQUIPMENT("item.wand.equipment", "Right click to open mob equipment menu. Shift right click to open mob curios menu.", 0),
 	ITEM_WAND_TARGET("item.wand.target", "Right click 2 mobs to make them fight each other.", 0),
 	ITEM_WAND_ADDER("item.wand.adder", "Right click blocks to select trait. Right click mobs to select trait rank. Press shift to select in opposite direction.", 0),
 
