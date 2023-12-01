@@ -13,6 +13,48 @@
       "entities": [
         "cataclysm:ignis"
       ],
+      "items": [
+        {
+          "chance": 1.0,
+          "entries": [
+            {
+              "stack": {
+                "item": "cataclysm:the_incinerator",
+                "nbt": "{Enchantments:[{id:\"l2complements:void_touch\",lvl:10s},{id:\"minecraft:vanishing_curse\",lvl:1s}]}"
+              },
+              "weight": 100
+            }
+          ],
+          "level": 400,
+          "slot": "equipment/mainhand"
+        },
+        {
+          "chance": 1.0,
+          "entries": [
+            {
+              "stack": {
+                "item": "l2hostility:ring_of_divinity"
+              },
+              "weight": 100
+            }
+          ],
+          "level": 400,
+          "slot": "curios/ring"
+        },
+        {
+          "chance": 1.0,
+          "entries": [
+            {
+              "stack": {
+                "item": "l2hostility:imagine_breaker"
+              },
+              "weight": 100
+            }
+          ],
+          "level": 400,
+          "slot": "curios/hands"
+        }
+      ],
       "traits": [
         {
           "free": 1,

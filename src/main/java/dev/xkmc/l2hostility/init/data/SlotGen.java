@@ -1,5 +1,7 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.github.L_Ender.cataclysm.Cataclysm;
+import dev.xkmc.l2hostility.compat.data.CataclysmData;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2library.compat.curios.CurioEntityBuilder;
 import dev.xkmc.l2library.compat.curios.CurioSlotBuilder;
@@ -7,6 +9,7 @@ import dev.xkmc.l2library.compat.curios.SlotCondition;
 import dev.xkmc.l2library.serial.config.RecordDataProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,5 +31,8 @@ public class SlotGen extends RecordDataProvider {
 				new ArrayList<>(List.of("head", "charm", "ring", "hands", "hostility_curse")),
 				SlotCondition.of()
 		));
+		if (ModList.get().isLoaded(Cataclysm.MODID)){
+			CataclysmData.genSlot(map);
+		}
 	}
 }

@@ -1,0 +1,14 @@
+{
+  "conditions": [],
+  "entities": [
+    "cataclysm:ender_guardian",
+    "cataclysm:netherite_monstrosity",
+    "cataclysm:ignis",
+    "cataclysm:the_harbinger",
+    "cataclysm:the_leviathan"
+  ],
+  "slots": [
+    "ring",
+    "hands"
+  ]
+}

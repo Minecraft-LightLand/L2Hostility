@@ -7,6 +7,7 @@ import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -56,6 +57,9 @@ public class EntityConfig extends BaseConfig {
 		private WorldDifficultyConfig.DifficultyConfig difficulty =
 				new WorldDifficultyConfig.DifficultyConfig(0, 0, 0, 0, 1, 1);
 
+		@SerialClass.SerialField
+		public final ArrayList<ItemPool> items = new ArrayList<>();
+
 		@Deprecated
 		public Config() {
 
@@ -63,10 +67,12 @@ public class EntityConfig extends BaseConfig {
 
 		public Config(List<EntityType<?>> entities,
 					  List<TraitBase> traits,
-					  WorldDifficultyConfig.DifficultyConfig difficulty) {
+					  WorldDifficultyConfig.DifficultyConfig difficulty,
+					  List<ItemPool> items) {
 			this.entities.addAll(entities);
 			this.traits.addAll(traits);
 			this.difficulty = difficulty;
+			this.items.addAll(items);
 		}
 
 		public Set<MobTrait> blacklist() {
@@ -83,14 +89,32 @@ public class EntityConfig extends BaseConfig {
 
 	}
 
+
+	public record ItemEntry(int weight, ItemStack stack) {
+
+	}
+
+	public record ItemPool(int level, float chance, String slot, ArrayList<ItemEntry> entries) {
+
+	}
+
 	public record TraitBase(MobTrait trait, int free, int min) {
 
 	}
 
 	public final EntityConfig putEntity(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits) {
+		return putEntityAndItem(min, base, var, scale, keys, traits, List.of());
+	}
+
+	public final EntityConfig putEntityAndItem(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits, List<ItemPool> items) {
 		list.add(new Config(new ArrayList<>(keys), new ArrayList<>(traits),
-				new WorldDifficultyConfig.DifficultyConfig(min, base, var, scale, 1, 1)));
+				new WorldDifficultyConfig.DifficultyConfig(min, base, var, scale, 1, 1),
+				items));
 		return this;
+	}
+
+	public static ItemPool simplePool(int level, String slot, ItemStack stack) {
+		return new ItemPool(level, 1, slot, new ArrayList<>(List.of(new ItemEntry(100, stack))));
 	}
 
 }

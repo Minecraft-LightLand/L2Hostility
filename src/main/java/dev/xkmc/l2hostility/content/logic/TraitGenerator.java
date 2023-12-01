@@ -90,7 +90,7 @@ public class TraitGenerator {
 	}
 
 	private void generate() {
-		while (level > 0 && traitPool.size() > 0) {
+		while (level > 0 && !traitPool.isEmpty()) {
 			MobTrait e = pop();
 			int cost = e.getCost(ins.trait_cost);
 			if (cost > level) {

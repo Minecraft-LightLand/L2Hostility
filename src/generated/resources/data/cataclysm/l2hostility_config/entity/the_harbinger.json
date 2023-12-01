@@ -13,6 +13,21 @@
       "entities": [
         "cataclysm:the_harbinger"
       ],
+      "items": [
+        {
+          "chance": 1.0,
+          "entries": [
+            {
+              "stack": {
+                "item": "l2hostility:ring_of_divinity"
+              },
+              "weight": 100
+            }
+          ],
+          "level": 400,
+          "slot": "curios/ring"
+        }
+      ],
       "traits": [
         {
           "free": 1,

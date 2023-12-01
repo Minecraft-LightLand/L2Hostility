@@ -60,17 +60,22 @@ public class CurioCompat {
 
 	@Nullable
 	public static EntitySlotAccess decode(String id, LivingEntity le) {
-		var strs = id.split("/");
-		if (strs[0].equals("equipment")) {
-			return new EquipmentSlotAccess(le, EquipmentSlot.byName(strs[1]));
-		} else {
+		try {
+			var strs = id.split("/");
+			if (strs[0].equals("equipment")) {
+				return new EquipmentSlotAccess(le, EquipmentSlot.byName(strs[1]));
+			} else if (strs[0].equals("curios")) {
+				var opt = CuriosApi.getCuriosInventory(le).resolve();
+				if (opt.isEmpty()) return null;
+				var handler = opt.get().getStacksHandler(strs[1]);
+				if (handler.isEmpty()) return null;
+				int index = strs.length == 2 ? 0 : Integer.parseInt(strs[2]);
+				return new CurioSlotAccess(le, handler.get().getStacks(), index, strs[1]);
+			}
+		} catch (Exception ignored) {
 
-			var opt = CuriosApi.getCuriosInventory(le).resolve();
-			if (opt.isEmpty()) return null;
-			var handler = opt.get().getStacksHandler(strs[1]);
-			if (handler.isEmpty()) return null;
-			return new CurioSlotAccess(le, handler.get().getStacks(), Integer.parseInt(strs[2]), strs[1]);
 		}
+		return null;
 	}
 
 	private static boolean hasItemImpl(LivingEntity player, Item item) {

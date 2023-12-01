@@ -6,6 +6,7 @@ import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.InheritContext;
+import dev.xkmc.l2hostility.content.logic.ItemPopulator;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
@@ -184,7 +185,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			}
 			if (stage == Stage.INIT) {
 				stage = Stage.POST_INIT;
-				TraitManager.postFill(this, mob);
+				ItemPopulator.postFill(this, mob);
 				traits.forEach((k, v) -> k.postInit(mob, v));
 				while (!pending.isEmpty()) {
 					var temp = new ArrayList<>(pending);
@@ -205,7 +206,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				syncToClient(mob);
 			}
 		}
-		if (isInitialized()) {
+		if (isInitialized() && !traits.isEmpty()) {
 			traits.keySet().removeIf(MobTrait::isBanned);
 			traits.forEach((k, v) -> k.tick(mob, v));
 		}
