@@ -1,13 +1,11 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
-import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.Vec3;
 
@@ -41,7 +39,7 @@ public abstract class PushPullTrait extends LegendaryTrait {
 			if (dist > 1) return;
 			double strength = getStrength(dist);
 			int lv = 0;
-			for (var armor : e.getArmorSlots()){
+			for (var armor : e.getArmorSlots()) {
 				lv += armor.getEnchantmentLevel(LHEnchantments.INSULATOR.get());
 			}
 			if (lv > 0) {

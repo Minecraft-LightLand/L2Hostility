@@ -2,7 +2,6 @@ package dev.xkmc.l2hostility.content.capability.chunk;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
-import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;

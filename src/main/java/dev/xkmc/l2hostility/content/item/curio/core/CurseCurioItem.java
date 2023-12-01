@@ -6,18 +6,10 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2library.util.code.GenericItemStack;
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import org.jetbrains.annotations.Nullable;
-import top.theillusivec4.curios.api.CuriosCapability;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 

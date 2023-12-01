@@ -1,29 +1,17 @@
 package dev.xkmc.l2hostility.compat.jei;
 
 import dev.xkmc.l2complements.init.L2Complements;
-import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2hostility.init.loot.MobCapLootCondition;
-import dev.xkmc.l2hostility.init.loot.TraitLootCondition;
-import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2library.serial.recipe.BaseRecipeCategory;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 public class GLMRecipeCategory extends BaseRecipeCategory<ITraitLootRecipe, GLMRecipeCategory> {
 

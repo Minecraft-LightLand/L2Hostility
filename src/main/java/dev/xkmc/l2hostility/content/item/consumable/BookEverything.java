@@ -36,9 +36,7 @@ public class BookEverything extends Item {
 	public static boolean allow(Enchantment ench) {
 		if (ench.isTreasureOnly() || !ench.isAllowedOnBooks())
 			return false;
-		if (ench.getMaxCost(ench.getMaxLevel()) < ench.getMinCost(ench.getMaxLevel()))
-			return false;
-		return true;
+		return ench.getMaxCost(ench.getMaxLevel()) >= ench.getMinCost(ench.getMaxLevel());
 	}
 
 	public static int cost(Enchantment ench) {

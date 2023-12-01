@@ -31,7 +31,7 @@ public class SlotGen extends RecordDataProvider {
 				new ArrayList<>(List.of("head", "charm", "ring", "hands", "hostility_curse")),
 				SlotCondition.of()
 		));
-		if (ModList.get().isLoaded(Cataclysm.MODID)){
+		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genSlot(map);
 		}
 	}

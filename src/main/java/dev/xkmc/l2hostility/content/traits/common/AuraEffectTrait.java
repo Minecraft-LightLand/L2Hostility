@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.content.traits.common;
 
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
-import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
@@ -33,8 +32,8 @@ public class AuraEffectTrait extends MobTrait {
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
 				if (!(e instanceof Player pl) || !pl.getAbilities().instabuild) {
 					if (e.distanceTo(mob) > range) continue;
-					if (CurioCompat.hasItem(e, LHItems.RING_REFLECTION.get()))continue;
-					if (CurioCompat.hasItem(e, LHItems.ABRAHADABRA.get()))continue;
+					if (CurioCompat.hasItem(e, LHItems.RING_REFLECTION.get())) continue;
+					if (CurioCompat.hasItem(e, LHItems.ABRAHADABRA.get())) continue;
 					EffectUtil.refreshEffect(e, new MobEffectInstance(eff.get(), 40, level - 1, false, false, false),
 							EffectUtil.AddReason.FORCE, mob);
 				}
