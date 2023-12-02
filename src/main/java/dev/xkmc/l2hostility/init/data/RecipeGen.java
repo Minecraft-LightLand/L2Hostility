@@ -172,7 +172,7 @@ public class RecipeGen {
 						.define('1', LHTraits.FIERY.get().asItem())
 						.define('2', LHTraits.SOUL_BURNER.get().asItem())
 						.define('B', LCMats.SCULKIUM.getIngot())
-						.define('C', LHTraits.ENDER.get().asItem())
+						.define('C', LHTraits.STRIKE.get().asItem())
 						.define('D', LHTraits.REFLECT.get().asItem())
 						.save(pvd);
 
@@ -274,24 +274,23 @@ public class RecipeGen {
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.INFINITY_GLOVE.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("BAB").pattern("III").pattern("DID")
 					.define('I', LHItems.CHAOS_INGOT.get())
-					.define('A', LHTraits.ENDER.get().asItem())
-					.define('B', LHTraits.ADAPTIVE.get().asItem())
-					.define('D', LHTraits.UNDYING.get().asItem())
+					.define('A', LHTraits.SPLIT.get().asItem())
+					.define('B', LHTraits.ENDER.get().asItem())
+					.define('D', LHTraits.PULLING.get().asItem())
 					.save(pvd);
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.ODDEYES_GLASSES.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern(" A ").pattern("1I2")
 					.define('I', LHItems.CHAOS_INGOT.get())
-					.define('A', LHTraits.ENDER.get().asItem())
-					.define('1', LHTraits.DISPELL.get().asItem())
-					.define('2', LHTraits.DEMENTOR.get().asItem())
+					.define('A', Items.GOLD_INGOT)
+					.define('1', Items.CYAN_STAINED_GLASS_PANE)
+					.define('2', Items.MAGENTA_STAINED_GLASS_PANE)
 					.save(pvd);
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.TRIPLE_STRIP_CAPE.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
-					.pattern("EIE").pattern("CCC").pattern("FFF")
+					.pattern(" I ").pattern("CCC").pattern("FFF")
 					.define('I', LHItems.CHAOS_INGOT.get())
 					.define('C', ItemTags.BANNERS)
-					.define('E', LHTraits.ENDER.get().asItem())
 					.define('F', LCItems.RESONANT_FEATHER.get())
 					.save(pvd);
 

@@ -132,7 +132,6 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue drainDurationMax;
 		public final ForgeConfigSpec.IntValue counterStrikeDuration;
 		public final ForgeConfigSpec.IntValue counterStrikeRange;
-		public final ForgeConfigSpec.IntValue areaEffectRange;
 		public final ForgeConfigSpec.IntValue pullingRange;
 		public final ForgeConfigSpec.DoubleValue pullingStrength;
 		public final ForgeConfigSpec.DoubleValue reprintDamage;
@@ -151,6 +150,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue orbRadius;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
+		public final Map<String, ForgeConfigSpec.IntValue> range = new TreeMap<>();
 
 		Common(ForgeConfigSpec.Builder builder) {
 			builder.push("scaling");
@@ -305,6 +305,8 @@ public class LHConfig {
 			}
 			builder.pop();
 
+			LHTraits.register();
+
 			builder.push("traits");
 			{
 				tankHealth = builder.comment("Health bonus for Tank trait per level")
@@ -390,8 +392,6 @@ public class LHConfig {
 						.defineInRange("counterStrikeDuration", 100, 0, 3000);
 				counterStrikeRange = builder.comment("Range in blocks for Counter Strike")
 						.defineInRange("counterStrikeRange", 6, 0, 64);
-				areaEffectRange = builder.comment("Range in blocks for Gravity and Moonwalk")
-						.defineInRange("areaEffectRange", 10, 0, 64);
 
 				pullingRange = builder.comment("Range in blocks for Pulling")
 						.defineInRange("pullingRange", 10, 0, 64);
@@ -402,15 +402,24 @@ public class LHConfig {
 				reprintBypass = builder.comment("Reprint will gain Void Touch 20 and Vanishing Curse when it hits a mob with max Enchantment level of X or higher")
 						.defineInRange("reprintBypass", 10, 0, 10000);
 
+				effectAura(builder, "gravity", 10);
+				effectAura(builder, "moonwalk", 10);
+				effectAura(builder, "arena", 24);
+
+
 			}
 			builder.pop();
 
 			builder.push("Trait toggle");
-			LHTraits.register();
 			for (var e : L2Hostility.REGISTRATE.getList()) {
 				map.put(e, builder.define("allow_" + e, true));
 			}
 			builder.pop();
+		}
+
+		private void effectAura(ForgeConfigSpec.Builder builder, String str, int def) {
+			range.put(str, builder.comment("Effect range for trait " + str)
+					.defineInRange(str + "Range", def, 0, 100));
 		}
 
 	}

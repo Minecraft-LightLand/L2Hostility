@@ -152,7 +152,7 @@
   "l2hostility.tooltip.witch_eternal": "右键发射。击中的目标的所有超过%s秒的负面效果时间变为无限",
   "l2hostility.item.wand.adder": "右键方块选择词条。右键生物调整词条等级。按住Shift切换选择方向",
   "l2hostility.item.wand.ai": "右键怪物移除或者恢复怪物AI",
-  "l2hostility.item.wand.equipment": "右键怪物打开怪物装备栏",
+  "l2hostility.item.wand.equipment": "右键怪物打开怪物装备栏，潜行右键打开怪物饰品栏",
   "l2hostility.item.wand.target": "右键2个怪物让它们互相攻击",
   "l2hostility.item.consumable.orb": "让%sx%sx%s的子区块不再生成有等级的怪物",
   "l2hostility.item.consumable.bottle_of_curse": "玩家难度等级提升%s",
@@ -166,7 +166,7 @@
   "l2hostility.item.equipment.curse_of_lust": "击杀怪物掉落所有装备",
   "l2hostility.item.equipment.curse_of_pride": "根据玩家难度每级获得%s%%血量上限和%s%%伤害提升",
   "l2hostility.item.equipment.curse_of_sloth": "击杀生物不再提升难度",
-  "l2hostility.item.equipment.curse_of_wrath": "攻击等级比自己高的怪物时伤害提升%s%%",
+  "l2hostility.item.equipment.curse_of_wrath": "攻击等级比自己高的怪物时每级等级差伤害提升%s%%",
   "l2hostility.item.equipment.curse_trait_cheap": "怪物词条总量+%s%%",
   "l2hostility.item.equipment.ring_of_ocean": "玩家永远湿润",
   "l2hostility.item.equipment.ring_of_life": "玩家一次损失血量不会超过总血量的%s%%",
@@ -251,5 +251,9 @@
   "advancements.l2hostility.advancements.hostility.sloth.description": "获得怠惰诅咒",
   "advancements.l2hostility.advancements.hostility.sloth.title": "我想休息一下",
   "advancements.l2hostility.advancements.hostility.trait.description": "获得一个词条物品",
-  "advancements.l2hostility.advancements.hostility.trait.title": "新世界的大门"
+  "advancements.l2hostility.advancements.hostility.trait.title": "新世界的大门",
+  "effect.l2hostility.antibuild": "Antibuild",
+  "effect.l2hostility.antibuild.description": "Make player cannot place block.",
+  "trait.l2hostility.arena": "Arena",
+  "trait.l2hostility.arena.desc": "Players around it cannot place blocks"
 }

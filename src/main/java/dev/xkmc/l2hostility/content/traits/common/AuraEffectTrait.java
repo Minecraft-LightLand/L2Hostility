@@ -26,7 +26,7 @@ public class AuraEffectTrait extends MobTrait {
 
 	@Override
 	public void tick(LivingEntity mob, int level) {
-		int range = LHConfig.COMMON.killerAuraRange.get();
+		int range = LHConfig.COMMON.range.get(getRegistryName().getPath()).get();
 		if (!mob.level().isClientSide()) {
 			AABB box = mob.getBoundingBox().inflate(range);
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {

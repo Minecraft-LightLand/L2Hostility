@@ -5,9 +5,6 @@
     "C": {
       "tag": "minecraft:banners"
     },
-    "E": {
-      "item": "l2hostility:teleport"
-    },
     "F": {
       "item": "l2complements:resonant_feather"
     },
@@ -16,7 +13,7 @@
     }
   },
   "pattern": [
-    "EIE",
+    " I ",
     "CCC",
     "FFF"
   ],

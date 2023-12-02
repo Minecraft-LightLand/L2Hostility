@@ -4,9 +4,14 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.consumable.BookCopy;
 import dev.xkmc.l2hostility.content.item.wand.IMobClickItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -51,6 +56,14 @@ public class MiscHandlers {
 			event.setMaterialCost(book.getCount());
 			event.setCost(cost);
 		}
+	}
+
+	public static boolean useOnSkip(UseOnContext ctx, Item item) {
+		Player player = ctx.getPlayer();
+		if (player == null) return false;
+		if (!(item instanceof BlockItem block)) return false;
+		if (!ctx.getPlayer().hasEffect(LHEffects.ANTIBUILD.get())) return false;
+		return true;
 	}
 
 }

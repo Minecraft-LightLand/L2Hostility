@@ -1,7 +1,7 @@
-// 1.20.1	2023-11-29T19:41:17.888752	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2023-12-02T15:27:56.408882	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-73e2090e77a878558fa908dd8ba49bc35fe2380e assets/l2hostility/lang/en_ud.json
-72d61e0edef306c7827600ab304a6c4ed5f938ee assets/l2hostility/lang/en_us.json
+fe4504f66cc7a30e5d83e28b8930be3cd98a714f assets/l2hostility/lang/en_ud.json
+18a85dad54cc76b1f6c436e473939dd5e9eab480 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -9,6 +9,7 @@ de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostili
 7d8b0f65a6ba1d0b1a18204037efe8aae9c0d3bc assets/l2hostility/models/item/abrahadabra.json
 1739df0d5d6c03e3738f188a9606b095b5198c01 assets/l2hostility/models/item/adaptive.json
 47b1669ffc91d13e17f5d08ed2a34cd11ddeaaf9 assets/l2hostility/models/item/ai_config_wand.json
+79df8d7f57c20e395ef38ac80ae4f5c351e3823c assets/l2hostility/models/item/arena.json
 291d5c9c188c77b48c0262fc633a1388130afe97 assets/l2hostility/models/item/blindness.json
 8e5cf690e2a91a6fa73a816dd34900f8a2c705f0 assets/l2hostility/models/item/book.json
 b5fae17e61c9b2b9cd9b1ba115630551feae2d7d assets/l2hostility/models/item/book_of_omniscience.json
@@ -179,7 +180,7 @@ aee9f7b2d428709b097b8936ff2c29573d3e79d2 data/l2hostility/recipes/chaos_ingot.js
 b77a9834afbb0867132459dfcca7c4c9f0e7bf58 data/l2hostility/recipes/curse_of_lust.json
 e758c88114a7110e4ad8580a7af3c4d352c40585 data/l2hostility/recipes/curse_of_pride.json
 b0970cccd70b2a153c47f162f42797a0c3fdf191 data/l2hostility/recipes/curse_of_sloth.json
-d8d0f13faa331fded6b4ad24cb7293bf6d4740ed data/l2hostility/recipes/curse_of_wrath.json
+d53c42ef795499350fff68a42b3404eeb954d18d data/l2hostility/recipes/curse_of_wrath.json
 6f12c1410d67fe2c5bedf69e36fc24290e49d245 data/l2hostility/recipes/detector_glasses.json
 81a5b201001aed5ff28db21672efaa689b6576aa data/l2hostility/recipes/eternal_witch_charge.json
 a62e9e04b96e4a630b0967197090962a43da1170 data/l2hostility/recipes/flaming_thorn.json
@@ -187,12 +188,12 @@ bffdb84c7d25d59b8eabcafb7aacaa779ea42ca2 data/l2hostility/recipes/greed_of_nidho
 9980fd7cbfd6d6b8dcb0978baaada8db79f94847 data/l2hostility/recipes/hostility_detector.json
 9d69a4fe6460f801733a68acad83c2003651a129 data/l2hostility/recipes/hostility_spawner.json
 a786b1c0a44eabab6950341033e867d5ba5f2151 data/l2hostility/recipes/hydra_boss_spawner.json
-e6340c32bec0cc4b97a645f6094cb422e18b392e data/l2hostility/recipes/infinity_glove.json
+8a928cd9bdb29af2520696a66ff673212133c04b data/l2hostility/recipes/infinity_glove.json
 155ab3a2031caaa18fcc302a7b8c3c50458ffe05 data/l2hostility/recipes/knight_phantom_boss_spawner.json
 838568c47c6a80ac96f039d19257b951ca3960e3 data/l2hostility/recipes/lich_boss_spawner.json
 1d277c0322502a5d1670daa3cca282b146344c7f data/l2hostility/recipes/minoshroom_boss_spawner.json
 c32e216d5041f6d16aaf5fac44285186e514306b data/l2hostility/recipes/naga_boss_spawner.json
-12302dd6c971abe986dd150f6b9189fbdeceb7d3 data/l2hostility/recipes/oddeyes_glasses.json
+18afd1470d191072f7a9758fabc35b286263c79d data/l2hostility/recipes/oddeyes_glasses.json
 3abe29433bbe45f9ab28f44b522d35870da0a70d data/l2hostility/recipes/platinum_star.json
 38d73118e8b75bceacad775048aeb3953b4cdb27 data/l2hostility/recipes/pocket_of_restoration.json
 9c077c79bbd5b51ca436baf1f1ae33bdfe20d196 data/l2hostility/recipes/ring_of_corrosion.json
@@ -203,13 +204,15 @@ ab7d5325b5f812e70a745c856d154020f81c5fd3 data/l2hostility/recipes/ring_of_life.j
 758d7de93711b59e054a6247360496277c827e4b data/l2hostility/recipes/ring_of_ocean.json
 843586a56e80b067d53eb5bab46550c8eb9376ae data/l2hostility/recipes/ring_of_reflection.json
 2c6fa8d8d17a3d83a6392616abe2011608603203 data/l2hostility/recipes/snow_queen_boss_spawner.json
-af2f53095f3b443587a4e114dc817cbcce818117 data/l2hostility/recipes/triple_strip_cape.json
+07d2cb590aaf9787a2b8b5358b59d2af5384bd14 data/l2hostility/recipes/triple_strip_cape.json
 05554481822736579b77129e856e79c0a8ef96ec data/l2hostility/recipes/ur_ghast_boss_spawner.json
 acc7a68fd78965e3a3b5bf36a3839d7b3ff4df7a data/l2hostility/recipes/witch_charge.json
 0692d7fc2ec445309e367634fee532b74dfa573e data/l2hostility/recipes/witch_wand.json
 5d1e2ebb64aacfef2ec58d20bbf318100b796670 data/l2hostility/tags/enchantment/no_dispell.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_whitelist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/arena_blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/arena_whitelist.json
 24bfb5e024a004de204f60dbcc7e5c67a4ad17a3 data/l2hostility/tags/entity_types/armor_target.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/blindness_blacklist.json
@@ -294,6 +297,6 @@ c3eb392d55e61ea2002cb572e409e051cdc33c1c data/l2hostility/tags/entity_types/semi
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
 50cbc9948d6c82b5b627ae08b27595db9fbd33b6 data/l2hostility/tags/items/chaos_equipment.json
 27fc1ba0c5625affe2f4ff3f4cfb929a8ccaf064 data/l2hostility/tags/items/no_seal.json
-37a56614aa0f31579fd6e01028556bbb8e26ae2c data/l2hostility/tags/items/trait_item.json
+d27d9636bed88bf7eceb3cf1e97db21e63f16803 data/l2hostility/tags/items/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
 e7bd765cf86b012712df42659c7ff073ed8568a2 data/minecraft/tags/blocks/mineable/pickaxe.json

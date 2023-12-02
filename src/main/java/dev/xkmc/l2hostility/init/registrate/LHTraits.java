@@ -70,7 +70,7 @@ public class LHTraits {
 	public static final RegistryEntry<DrainTrait> DRAIN;
 	public static final RegistryEntry<ReprintTrait> REPRINT;
 	public static final RegistryEntry<CounterStrikeTrait> STRIKE;
-	public static final RegistryEntry<AuraEffectTrait> GRAVITY, MOONWALK;
+	public static final RegistryEntry<AuraEffectTrait> GRAVITY, MOONWALK, ARENA;
 
 	static {
 		// no desc
@@ -182,6 +182,10 @@ public class LHTraits {
 			MOONWALK = L2Hostility.REGISTRATE.regTrait("moonwalk", () -> new AuraEffectTrait(LHEffects.MOONWALK::get),
 							rl -> new TraitConfig(rl, 50, 100, 3, 80))
 					.desc("Decrease gravity for mobs around it").lang("Moonwalk").register();
+
+			ARENA = L2Hostility.REGISTRATE.regTrait("arena", () -> new AuraEffectTrait(LHEffects.ANTIBUILD::get),
+							rl -> new TraitConfig(rl, 100, 1, 1, 200))
+					.desc("Players around it cannot place blocks").lang("Arena").register();
 
 		}
 

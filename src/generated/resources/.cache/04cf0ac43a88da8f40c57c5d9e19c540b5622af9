@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-01T16:00:35.867429	L2Hostility Config
+// 1.20.1	2023-12-02T15:27:56.415342	L2Hostility Config
 12f6956b55f6b95815aa7227d910259f9cc6cfcc data/cataclysm/l2hostility_config/entity/amethyst_crab.json
 a9e054ad97c2d6e1b2b3fa92d249422019ce80c3 data/cataclysm/l2hostility_config/entity/ender_golem.json
 31637ce9511cc3d980dcdd4b0319b4e8fd27685b data/cataclysm/l2hostility_config/entity/ender_guardian.json
@@ -14,6 +14,7 @@ a7eea3f1b7bbacf4fe14aaf21abc23af93abb723 data/l2hostility/l2hostility_config/dif
 5d62d0961f22262e8fcaca6fcfbed04a354c2fb7 data/l2hostility/l2hostility_config/difficulty/overworld.json
 ae86f6a6ae4ab25093aa5855eb60feb7f5d036c4 data/l2hostility/l2hostility_config/entity/bosses.json
 3d06e92c3fdbfbb56e1c98ce99c04ce93a64fcd9 data/l2hostility/l2hostility_config/trait/adaptive.json
+6c725496eaacd5619bb61f8a6b604cd2efc93d65 data/l2hostility/l2hostility_config/trait/arena.json
 bf37960f3f954fb85ad4623f124ddc083e5f65be data/l2hostility/l2hostility_config/trait/blindness.json
 73daf5fcc4aad23590cbac15273db250e7ea62c6 data/l2hostility/l2hostility_config/trait/corrosion.json
 9eb05913fbb2da0c71f56f55db27964c27d43361 data/l2hostility/l2hostility_config/trait/counter_strike.json

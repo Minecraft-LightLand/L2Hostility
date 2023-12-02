@@ -21,4 +21,5 @@ public class LegendaryTrait extends MobTrait {
 	public boolean isBanned() {
 		return !LHConfig.COMMON.allowLegendary.get() || super.isBanned();
 	}
+
 }
