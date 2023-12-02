@@ -72,6 +72,9 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	@SerialClass.SerialField(toClient = true)
 	public boolean summoned = false, noDrop = false;
 
+	@SerialClass.SerialField
+	public double dropRate = 1;
+
 	@Nullable
 	@SerialClass.SerialField
 	public BlockPos pos = null;
@@ -139,6 +142,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		lv = parent.lv;
 		summoned = parent.summoned;
 		noDrop = parent.noDrop;
+		dropRate = parent.dropRate * LHConfig.COMMON.splitDropRateFactor.get();
 		for (var ent : parent.traits.entrySet()) {
 			int rank = ent.getKey().inherited(this, ent.getValue(), ctx);
 			if (rank > 0) {

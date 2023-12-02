@@ -4,12 +4,12 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.consumable.BookCopy;
 import dev.xkmc.l2hostility.content.item.wand.IMobClickItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.TagGen;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.EnchantedBookItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -58,12 +58,11 @@ public class MiscHandlers {
 		}
 	}
 
-	public static boolean useOnSkip(UseOnContext ctx, Item item) {
+	public static boolean useOnSkip(UseOnContext ctx, ItemStack stack) {
 		Player player = ctx.getPlayer();
 		if (player == null) return false;
-		if (!(item instanceof BlockItem block)) return false;
 		if (!ctx.getPlayer().hasEffect(LHEffects.ANTIBUILD.get())) return false;
-		return true;
+		return stack.getItem() instanceof BlockItem || stack.is(TagGen.ANTIBUILD_BAN);
 	}
 
 }

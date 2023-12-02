@@ -45,6 +45,7 @@ public class TagGen {
 	public static final TagKey<Item> CURSE_SLOT = ItemTags.create(new ResourceLocation("curios", "hostility_curse"));
 	public static final TagKey<Item> TRAIT_ITEM = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "trait_item"));
 	public static final TagKey<Item> NO_SEAL = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "no_seal"));
+	public static final TagKey<Item> ANTIBUILD_BAN = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "antibuild_ban"));
 
 	public static final TagKey<Enchantment> NO_DISPELL = TagKey.create(Registries.ENCHANTMENT,
 			new ResourceLocation(L2Hostility.MODID, "no_dispell"));
@@ -80,6 +81,8 @@ public class TagGen {
 		pvd.addTag(NO_SEAL)
 				.addOptional(new ResourceLocation("enigmaticlegacy:curse_ring"))
 				.addOptional(new ResourceLocation("moonstone:sevencurse"));
+		pvd.addTag(ANTIBUILD_BAN)
+				.addOptional(new ResourceLocation("enigmaticlegacy:extradimensional_eye"));
 	}
 
 	public static void onTraitTagGen(RegistrateTagsProvider.IntrinsicImpl<MobTrait> pvd) {

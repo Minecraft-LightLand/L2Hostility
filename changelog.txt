@@ -7,12 +7,19 @@
 - Counter Strike Trait
 - Pulling Trait
 - Reprint Trait
+- Arena Trait
 - make hostility orb to 5x5x5
+- Equipment wand can open curios page as well
 - add Soul Bound to dispell whitelist
 - add Envy, Greed, Sloth, Lust, Gluttony to Ragnarok whitelist
 - add Alex Caves compat
 - add Ice and Fire compat
 - Thorn no longer inflict trait effects
+- Slimes reduce hostility loot drop rate when split
+- Cataclysm mobs have default curios now
+- Add individual range config for area effect traits
+- Make some recipes cheaper
+
 
 2.4.11
 - add 9 curio items

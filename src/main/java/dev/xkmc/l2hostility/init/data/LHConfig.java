@@ -146,8 +146,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue ringOfHealingRate;
 		public final ForgeConfigSpec.IntValue witchChargeMinDuration;
 		public final ForgeConfigSpec.DoubleValue insulatorFactor;
-
 		public final ForgeConfigSpec.IntValue orbRadius;
+		public final ForgeConfigSpec.DoubleValue splitDropRateFactor;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
 		public final Map<String, ForgeConfigSpec.IntValue> range = new TreeMap<>();
@@ -202,6 +202,8 @@ public class LHConfig {
 						.comment("Default k% = 0.01, so Lv.N mobs with have N% chance to have trait")
 						.comment("Mobs with entity config and trait chance of 1 will not be affected")
 						.defineInRange("initialTraitChanceSlope", 0.01, 0, 1);
+				splitDropRateFactor = builder.comment("Slimes hostility loot drop rate decay per split")
+						.defineInRange("splitDropRateFactor", 0.5d, 0, 1);
 			}
 			builder.pop();
 

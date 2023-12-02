@@ -28,7 +28,7 @@ public class GluttonyLootModifier extends LootModifier {
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
-				double chance = cap.getLevel() * LHConfig.COMMON.gluttonyDropRate.get();
+				double chance = cap.getLevel() * LHConfig.COMMON.gluttonyDropRate.get() * cap.dropRate;
 				if (context.getRandom().nextDouble() < chance) {
 					list.add(LHItems.BOTTLE_CURSE.asStack());
 				}

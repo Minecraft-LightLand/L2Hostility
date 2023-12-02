@@ -61,7 +61,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
 				if (cap.hasTrait(trait)) {
-					double factor = 1;
+					double factor = cap.dropRate;
 					if (context.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) {
 						Player player = context.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
 						var pl = PlayerDifficulty.HOLDER.get(player);

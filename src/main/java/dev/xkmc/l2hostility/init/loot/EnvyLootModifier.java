@@ -30,7 +30,7 @@ public class EnvyLootModifier extends LootModifier {
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
-				double factor = 1;
+				double factor = cap.dropRate;
 				if (context.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) {
 					Player player = context.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
 					var pl = PlayerDifficulty.HOLDER.get(player);
