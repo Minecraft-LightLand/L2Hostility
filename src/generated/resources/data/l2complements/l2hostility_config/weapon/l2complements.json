@@ -30,6 +30,13 @@
         "l2complements:ice_blade"
       ],
       "level": 100
+    },
+    {
+      "chance": 0.01,
+      "enchantments": [
+        "l2complements:void_touch"
+      ],
+      "level": 200
     }
   ]
 }

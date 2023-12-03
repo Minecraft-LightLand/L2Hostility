@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-02T15:27:56.415342	L2Hostility Config
+// 1.20.1	2023-12-03T14:21:03.29383	L2Hostility Config
 12f6956b55f6b95815aa7227d910259f9cc6cfcc data/cataclysm/l2hostility_config/entity/amethyst_crab.json
 a9e054ad97c2d6e1b2b3fa92d249422019ce80c3 data/cataclysm/l2hostility_config/entity/ender_golem.json
 31637ce9511cc3d980dcdd4b0319b4e8fd27685b data/cataclysm/l2hostility_config/entity/ender_guardian.json
@@ -7,7 +7,7 @@ a9e054ad97c2d6e1b2b3fa92d249422019ce80c3 data/cataclysm/l2hostility_config/entit
 1bbb07831287d1319920148322afe62b2fea9593 data/cataclysm/l2hostility_config/entity/the_harbinger.json
 ba28dd871468acc7d76dc54d3a612b300b25e106 data/cataclysm/l2hostility_config/entity/the_leviathan.json
 1d1cbac166c312f2a4775ddf18952468add75051 data/l2archery/l2hostility_config/weapon/bows.json
-52ccedeb5c77256d30eaf862beaf4574a189d330 data/l2complements/l2hostility_config/weapon/l2complements.json
+983ac9deb94092a7542fef91d974311f8d3af413 data/l2complements/l2hostility_config/weapon/l2complements.json
 cc60113e53b38f8ea4dbd7b841f48d9676e7d21e data/l2hostility/l2damagetracker_config/armor/equipments.json
 0d0dd29a0d3d593d0f01c9f47dc364309fe4f58d data/l2hostility/l2hostility_config/difficulty/end.json
 a7eea3f1b7bbacf4fe14aaf21abc23af93abb723 data/l2hostility/l2hostility_config/difficulty/nether.json
@@ -52,6 +52,7 @@ bf4591d8f26ef6e0e9bc3769af4b9ac263344d96 data/l2hostility/l2hostility_config/tra
 561e10062b77e36c90d9697679284c3347e8d5f3 data/l2hostility/l2hostility_config/trait/weakness.json
 fe58efe1b38328837aa9e3fb8f79ad12f309fa47 data/l2hostility/l2hostility_config/trait/wither.json
 b533001586d4486e63372df10763ef8b9afe9731 data/l2hostility/l2hostility_config/weapon/vanilla.json
+d4cf99849e2326ee7d390f7e5bafd503c3bcebb1 data/l2weaponry/l2hostility_config/weapon/weapons.json
 f6ec1fe36ac5e28bb5f0e40981e1497b4a38d685 data/twilightforest/l2hostility_config/entity/alpha_yeti.json
 71ab9236be9cd4c4d50477691a54e01b86565ecb data/twilightforest/l2hostility_config/entity/hydra.json
 81be3a65fab705c98345f7d698b7d3c1da1e5dc9 data/twilightforest/l2hostility_config/entity/knight_phantom.json

@@ -16,6 +16,8 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.serial.config.ConfigDataProvider;
+import dev.xkmc.l2weaponry.init.L2Weaponry;
+import dev.xkmc.l2weaponry.init.registrate.LWItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
@@ -132,6 +134,9 @@ public class LHConfigGen extends ConfigDataProvider {
 						LCEnchantments.FLAME_BLADE.get(),
 						LCEnchantments.ICE_BLADE.get()
 				)
+				.putWeaponEnch(200, 0.01f,
+						LCEnchantments.VOID_TOUCH.get()
+				)
 				.putArmorEnch(70, 0.2f,
 						LCEnchantments.STABLE_BODY.get(),
 						LCEnchantments.SNOW_WALKER.get()
@@ -140,6 +145,24 @@ public class LHConfigGen extends ConfigDataProvider {
 						LCEnchantments.ICE_THORN.get(),
 						LCEnchantments.FLAME_THORN.get(),
 						LCEnchantments.SAFEGUARD.get()
+				)
+		);
+
+
+		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Weaponry.MODID, "weapons"), new WeaponConfig()
+				.putMeleeWeapon(200, 10,
+						LWItems.STORM_JAVELIN.get(),
+						LWItems.FLAME_AXE.get(),
+						LWItems.FROZEN_SPEAR.get()
+				)
+				.putMeleeWeapon(300, 5,
+						LWItems.ABYSS_MACHETE.get(),
+						LWItems.HOLY_AXE.get(),
+						LWItems.BLACK_AXE.get()
+				)
+				.putMeleeWeapon(400, 2,
+						LWItems.CHEATER_CLAW.get(),
+						LWItems.CHEATER_MACHETE.get()
 				)
 		);
 
