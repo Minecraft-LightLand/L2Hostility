@@ -7,17 +7,21 @@ import dev.xkmc.l2hostility.content.logic.LevelEditor;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffects;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 
+import java.util.List;
 import java.util.Optional;
 
 @SerialClass
@@ -65,6 +69,26 @@ public class SectionDifficulty {
 		biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location())).ifPresent(instance::acceptConfig);
 		instance.acceptBonusLevel((int) Math.round(LHConfig.COMMON.distanceFactor.get() *
 				Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ())));
+	}
+
+	public List<Component> getSectionDifficultyDetail(Player player) {
+		if (isCleared()) return List.of();
+		var levelDiff = L2Hostility.DIFFICULTY.getMerged()
+				.levelMap.get(player.level().dimensionTypeId().location());
+		int dim = levelDiff == null ? WorldDifficultyConfig.defaultLevel().base() : levelDiff.base();
+		BlockPos pos = player.blockPosition();
+		Holder<Biome> biome = player.level().getBiome(pos);
+		int bio = biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location()))
+				.map(WorldDifficultyConfig.DifficultyConfig::base).orElse(0);
+		int dist = (int) Math.round(LHConfig.COMMON.distanceFactor.get() *
+				Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ()));
+		int adaptive = difficulty.getLevel();
+		return List.of(
+				LangData.INFO_SECTION_DIM_LEVEL.get(dim).withStyle(ChatFormatting.GRAY),
+				LangData.INFO_SECTION_BIOME_LEVEL.get(bio).withStyle(ChatFormatting.GRAY),
+				LangData.INFO_SECTION_DISTANCE_LEVEL.get(dist).withStyle(ChatFormatting.GRAY),
+				LangData.INFO_SECTION_ADAPTIVE_LEVEL.get(adaptive).withStyle(ChatFormatting.GRAY)
+		);
 	}
 
 	public boolean isCleared() {

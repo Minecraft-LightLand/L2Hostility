@@ -119,7 +119,19 @@
 	  "player_level": "玩家难度等级：%s",
 	  "title": "难度信息",
 	  "clear": "子区块难度已清除",
-	  "reward": "已获得%s个奖励"
+	  "reward": "已获得%s个奖励",
+	  "player_detail": {
+		"adaptive": "动态等级: %s",
+		"dim": "到访维度数量加成: %s",
+		"external": "外部加成: %s",
+		"item": "物品加成: %s"
+	  },
+	  "section_detail": {
+		"adaptive": "动态等级: %s",
+		"biome": "生物群系基础等级: %s",
+		"dim": "维度基础等级: %s",
+		"distance": "距离加成: %s"
+	  }
 	},
 	"jei": {
 	  "loot_chance": "%3$s阶%2$s词条%1$s概率掉落",

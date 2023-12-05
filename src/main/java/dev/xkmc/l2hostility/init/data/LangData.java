@@ -85,6 +85,16 @@ public enum LangData {
 	INFO_CHUNK_CLEAR("info.clear", "Chunk Section difficulty cleared", 0),
 	INFO_TAB_TITLE("info.title", "Difficulty Information", 0),
 	INFO_REWARD("info.reward", "Obtained %s rewards", 1),
+	INFO_PLAYER_ADAPTIVE_LEVEL("info.player_detail.adaptive", "Adaptive level: %s", 1),
+	INFO_PLAYER_DIM_LEVEL("info.player_detail.dim", "Visited dimension bonus: %s", 1),
+	INFO_PLAYER_ITEM_LEVEL("info.player_detail.item", "Item bonus: %s", 1),
+	INFO_PLAYER_EXT_LEVEL("info.player_detail.external", "External difficulty: %s", 1),
+
+	INFO_SECTION_DIM_LEVEL("info.section_detail.dim", "Dimension level: %s", 1),
+	INFO_SECTION_BIOME_LEVEL("info.section_detail.biome", "Biome level: %s", 1),
+	INFO_SECTION_ADAPTIVE_LEVEL("info.section_detail.adaptive", "Adaptive level: %s", 1),
+	INFO_SECTION_DISTANCE_LEVEL("info.section_detail.distance", "Distance bonus: %s", 1),
+
 
 	BOSS_EVENT("boss_event", "Hostility Clearing Progress: %s/%s", 2),
 

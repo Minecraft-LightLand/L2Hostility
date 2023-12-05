@@ -72,7 +72,7 @@ public class CataclysmData {
 	}
 
 	public static void genSlot(BiConsumer<String, Record> map) {
-		map.accept("curios/curios/entities/l2hostility_cataclysm", new CurioEntityBuilder(
+		map.accept("l2hostility/curios/entities/l2hostility_cataclysm", new CurioEntityBuilder(
 				new ArrayList<>(List.of(
 						ModEntities.ENDER_GUARDIAN.getId(),
 						ModEntities.NETHERITE_MONSTROSITY.getId(),

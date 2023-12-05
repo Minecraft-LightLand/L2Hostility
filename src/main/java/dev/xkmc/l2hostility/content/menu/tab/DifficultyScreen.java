@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.menu.tab;
 
+import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.SectionDifficulty;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class DifficultyScreen extends BaseTextScreen {
 
@@ -34,43 +36,53 @@ public class DifficultyScreen extends BaseTextScreen {
 		super.render(g, mx, my, ptick);
 		int x = this.leftPos + 8;
 		int y = this.topPos + 6;
-		List<Component> list = new ArrayList<>();
+		List<Pair<Component, Supplier<List<Component>>>> list = new ArrayList<>();
 		addDifficultyInfo(list, ChatFormatting.DARK_RED, ChatFormatting.DARK_GREEN, ChatFormatting.DARK_PURPLE);
 		addRewardInfo(list);
-		for (Component c : list) {
-			g.drawString(this.font, c, x, y += 10, 0, false);
+		List<Component> tooltip = null;
+		for (var c : list) {
+			if (mx >= x && mx <= x + font.width(c.getFirst()) && my >= y && my <= y + 10) {
+				tooltip = c.getSecond() == null ? null : c.getSecond().get();
+			}
+			g.drawString(this.font, c.getFirst(), x, y, 0, false);
+			y += 10;
+		}
+		if (tooltip != null && !tooltip.isEmpty()) {
+			g.renderComponentTooltip(this.font, tooltip, mx, my);
 		}
 	}
 
-	public static void addRewardInfo(List<Component> list) {
+	public static void addRewardInfo(List<Pair<Component, Supplier<List<Component>>>> list) {
 		Player player = Minecraft.getInstance().player;
 		assert player != null;
 		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
-		list.add(LangData.INFO_REWARD.get(cap.getRewardCount()).withStyle(ChatFormatting.DARK_GREEN));
+		list.add(Pair.of(LangData.INFO_REWARD.get(cap.getRewardCount()).withStyle(ChatFormatting.DARK_GREEN), List::of));
 	}
 
-	public static void addDifficultyInfo(List<Component> list, ChatFormatting... formats) {// red, green, gold
+	public static void addDifficultyInfo(List<Pair<Component, Supplier<List<Component>>>> list, ChatFormatting... formats) {// red, green, gold
 		Player player = Minecraft.getInstance().player;
 		assert player != null;
 		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
 		cap.updateChunkFlag = true;
-		list.add(LangData.INFO_PLAYER_LEVEL.get(cap.getLevel().getLevel()));
+		list.add(Pair.of(LangData.INFO_PLAYER_LEVEL.get(cap.getLevel().getStr()),
+				cap::getPlayerDifficultyDetail));
 		int perc = Math.round(100f * cap.getLevel().getExp() / cap.getLevel().getMaxExp());
-		list.add(LangData.INFO_PLAYER_EXP.get(perc));
+		list.add(Pair.of(LangData.INFO_PLAYER_EXP.get(perc), List::of));
 		int maxCap = cap.getRankCap();
-		list.add(LangData.INFO_PLAYER_CAP.get(maxCap > TraitManager.getMaxLevel() ?
-				LangData.TOOLTIP_LEGENDARY.get().withStyle(formats[2]) : maxCap));
+		list.add(Pair.of(LangData.INFO_PLAYER_CAP.get(maxCap > TraitManager.getMaxLevel() ?
+				LangData.TOOLTIP_LEGENDARY.get().withStyle(formats[2]) : maxCap), List::of));
 		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 		if (opt.isPresent()) {
 			ChunkDifficulty chunk = opt.get();
 			SectionDifficulty sec = chunk.getSection(player.blockPosition().getY());
 			if (sec.isCleared()) {
-				list.add(LangData.INFO_CHUNK_CLEAR.get().withStyle(formats[1]));
+				list.add(Pair.of(LangData.INFO_CHUNK_CLEAR.get().withStyle(formats[1]), List::of));
 			} else {
 				MobDifficultyCollector ins = new MobDifficultyCollector();
 				chunk.modifyInstance(player.blockPosition(), ins);
-				list.add(LangData.INFO_CHUNK_LEVEL.get(ins.getBase()).withStyle(formats[0]));
-				list.add(LangData.INFO_CHUNK_SCALE.get(ins.scale).withStyle(formats[0]));
+				list.add(Pair.of(LangData.INFO_CHUNK_LEVEL.get(ins.getBase()).withStyle(formats[0]),
+						() -> sec.getSectionDifficultyDetail(player)));
+				list.add(Pair.of(LangData.INFO_CHUNK_SCALE.get(ins.scale).withStyle(formats[0]), List::of));
 			}
 		}
 	}

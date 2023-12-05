@@ -11,10 +11,10 @@ import net.minecraft.world.entity.player.Player;
 public class DifficultyLevel {
 
 	@SerialClass.SerialField
-	protected int level, exp;
+	public int level, exp;
 
 	@SerialClass.SerialField
-	protected int extraLevel;
+	public int extraLevel;
 
 	public static DifficultyLevel merge(DifficultyLevel difficulty, int extraLevel) {
 		DifficultyLevel ans = new DifficultyLevel();
@@ -64,4 +64,7 @@ public class DifficultyLevel {
 		return exp;
 	}
 
+	public String getStr() {
+		return extraLevel == 0 ? "" + level : extraLevel > 0 ? level + "+" + extraLevel : level + "" + extraLevel;
+	}
 }

@@ -1,5 +1,3 @@
-- Conceal Trait
-
 2.4.12
 - add Pocket of Restoration
 - Gravity Trait
@@ -10,6 +8,8 @@
 - Arena Trait
 - make hostility orb to 5x5x5
 - Equipment wand can open curios page as well
+- Fix difficulty calculation
+- Improve difficulty display: add tooltip detail
 - add Soul Bound to dispell whitelist
 - add Envy, Greed, Sloth, Lust, Gluttony to Ragnarok whitelist
 - add Alex Caves compat
@@ -19,7 +19,6 @@
 - Cataclysm mobs have default curios now
 - Add individual range config for area effect traits
 - Make some recipes cheaper
-
 
 2.4.11
 - add 9 curio items

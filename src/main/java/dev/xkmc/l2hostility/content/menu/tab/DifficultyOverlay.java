@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.menu.tab;
 
+import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.base.overlay.InfoSideBar;
 import dev.xkmc.l2library.base.overlay.SideBar;
@@ -11,6 +12,7 @@ import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class DifficultyOverlay extends InfoSideBar<SideBar.IntSignature> {
 
@@ -20,10 +22,10 @@ public class DifficultyOverlay extends InfoSideBar<SideBar.IntSignature> {
 
 	@Override
 	protected List<Component> getText() {
-		List<Component> comp = new ArrayList<>();
+		List<Pair<Component, Supplier<List<Component>>>> comp = new ArrayList<>();
 		DifficultyScreen.addDifficultyInfo(comp,
 				ChatFormatting.RED, ChatFormatting.GREEN, ChatFormatting.GOLD);
-		return comp;
+		return comp.stream().map(Pair::getFirst).toList();
 	}
 
 	@Override

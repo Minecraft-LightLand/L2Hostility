@@ -12,11 +12,14 @@ import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameRules;
@@ -25,6 +28,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.TreeSet;
 
 @SerialClass
@@ -114,7 +118,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public void apply(MobDifficultyCollector instance) {
-		instance.acceptBonus(difficulty);
+		instance.acceptBonus(getLevel());
 		instance.setTraitCap(getRankCap());
 		if (CurioCompat.hasItem(player, LHItems.CURSE_PRIDE.get())) {
 			instance.traitCostFactor(LHConfig.COMMON.prideTraitFactor.get());
@@ -150,14 +154,31 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		return DifficultyLevel.merge(difficulty, getExtraLevel());
 	}
 
+	private int getDimCount() {
+		return Math.max(0, dimensions.size() - 1);
+	}
+
 	private int getExtraLevel() {
 		int ans = 0;
-		int count = Math.max(0, dimensions.size() - 1);
-		ans += count * LHConfig.COMMON.dimensionFactor.get();
+		ans += getDimCount() * LHConfig.COMMON.dimensionFactor.get();
 		for (var stack : CurseCurioItem.getFromPlayer(player)) {
 			ans += stack.item().getExtraLevel(stack.stack());
 		}
 		return ans;
+	}
+
+	public List<Component> getPlayerDifficultyDetail() {
+		int item = 0;
+		for (var stack : CurseCurioItem.getFromPlayer(player)) {
+			item += stack.item().getExtraLevel(stack.stack());
+		}
+		int dim = getDimCount() * LHConfig.COMMON.dimensionFactor.get();
+		return List.of(
+				LangData.INFO_PLAYER_ADAPTIVE_LEVEL.get(difficulty.level).withStyle(ChatFormatting.GRAY),
+				LangData.INFO_PLAYER_ITEM_LEVEL.get(item).withStyle(ChatFormatting.GRAY),
+				LangData.INFO_PLAYER_DIM_LEVEL.get(dim).withStyle(ChatFormatting.GRAY),
+				LangData.INFO_PLAYER_EXT_LEVEL.get(difficulty.extraLevel).withStyle(ChatFormatting.GRAY)
+		);
 	}
 
 	public LevelEditor getLevelEditor() {
