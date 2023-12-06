@@ -5,7 +5,7 @@ public record LevelEditor(DifficultyLevel difficulty, int extra) {
 	public boolean setBase(int level) {
 		int old = difficulty().level;
 		difficulty().level = level;
-		difficulty().exp = 0;
+		difficulty().experience = 0;
 		return level != old;
 	}
 
@@ -13,7 +13,7 @@ public record LevelEditor(DifficultyLevel difficulty, int extra) {
 		int old = difficulty().level;
 		difficulty().level = Math.max(0, difficulty().level + level);
 		if (level < 0) {
-			difficulty().exp = 0;
+			difficulty().experience = 0;
 		}
 		return difficulty().level != old;
 	}

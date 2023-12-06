@@ -45,6 +45,7 @@ public class LHConfig {
 	public static class Common {
 
 		public final ForgeConfigSpec.IntValue killsPerLevel;
+		public final ForgeConfigSpec.IntValue maxPlayerLevel;
 		public final ForgeConfigSpec.DoubleValue playerDeathDecay;
 		public final ForgeConfigSpec.BooleanValue keepInventoryRuleKeepDifficulty;
 		public final ForgeConfigSpec.BooleanValue deathDecayDimension;
@@ -209,8 +210,10 @@ public class LHConfig {
 
 			builder.push("difficulty");
 			{
+				maxPlayerLevel = builder.comment("Max player adaptive level")
+						.defineInRange("maxPlayerLevel", 2000, 600, 100000);
 				killsPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
-						.defineInRange("killsPerLevel", 30, 1, 10000);
+						.defineInRange("killsPerLevel", 30, 1, 100000);
 				playerDeathDecay = builder.comment("Decay in player difficulty on death")
 						.defineInRange("playerDeathDecay", 0.8, 0, 2);
 				keepInventoryRuleKeepDifficulty = builder.comment("Allow KeepInventory to keep difficulty as well")

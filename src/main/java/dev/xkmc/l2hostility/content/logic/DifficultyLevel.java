@@ -11,7 +11,9 @@ import net.minecraft.world.entity.player.Player;
 public class DifficultyLevel {
 
 	@SerialClass.SerialField
-	public int level, exp;
+	public int level;
+
+	protected long experience;
 
 	@SerialClass.SerialField
 	public int extraLevel;
@@ -19,7 +21,7 @@ public class DifficultyLevel {
 	public static DifficultyLevel merge(DifficultyLevel difficulty, int extraLevel) {
 		DifficultyLevel ans = new DifficultyLevel();
 		ans.level = difficulty.level;
-		ans.exp = difficulty.exp;
+		ans.experience = difficulty.experience;
 		ans.extraLevel = difficulty.extraLevel + extraLevel;
 		return ans;
 	}
@@ -35,10 +37,10 @@ public class DifficultyLevel {
 	}
 
 	public void grow(double growFactor, MobTraitCap cap) {
-		exp += (int) (growFactor * cap.getLevel() * cap.getLevel());
+		experience += (int) (growFactor * cap.getLevel() * cap.getLevel());
 		int factor = LHConfig.COMMON.killsPerLevel.get();
-		while (exp >= level * level * factor) {
-			exp -= level * level * factor;
+		while (experience >= (long) level * level * factor) {
+			experience -= (long) level * level * factor;
 			level++;
 		}
 	}
@@ -48,20 +50,20 @@ public class DifficultyLevel {
 		if (rate < 1) {
 			level = Math.max(0, level - Math.max(1, (int) Math.ceil(level * (1 - rate))));
 		}
-		exp = 0;
+		experience = 0;
 	}
 
-	public int getMaxExp() {
+	public long getMaxExp() {
 		int factor = LHConfig.COMMON.killsPerLevel.get();
-		return Math.max(1, level * level * factor);
+		return Math.max(1L, (long) level * level * factor);
 	}
 
 	public int getLevel() {
 		return Math.max(0, level + extraLevel);
 	}
 
-	public int getExp() {
-		return exp;
+	public long getExp() {
+		return experience;
 	}
 
 	public String getStr() {

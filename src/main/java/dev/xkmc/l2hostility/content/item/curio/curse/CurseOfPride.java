@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
-import dev.xkmc.l2hostility.content.item.curio.core.ICapItem;
+import dev.xkmc.l2hostility.content.item.curio.core.ISimpleCapItem;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -21,12 +21,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import java.util.List;
 import java.util.UUID;
 
-public class CurseOfPride extends CurseCurioItem implements ICapItem<CurseOfPride.PrideCap> {
+public class CurseOfPride extends CurseCurioItem implements ISimpleCapItem {
 
 	private static final String NAME = "l2hostility:pride";
 	private static final UUID ID = MathHelper.getUUIDFromString(NAME);
@@ -52,37 +51,23 @@ public class CurseOfPride extends CurseCurioItem implements ICapItem<CurseOfPrid
 	}
 
 	@Override
-	public PrideCap create(ItemStack stack) {
-		return new PrideCap(stack);
+	public void curioTick(ItemStack stack, SlotContext slotContext) {
+		LivingEntity wearer = slotContext.entity();
+		if (wearer == null) return;
+		int level = DifficultyLevel.ofAny(wearer);
+		stack.getOrCreateTag().putInt(NAME, level);
 	}
 
-	public record PrideCap(ItemStack stack) implements ICurio {
-
-		@Override
-		public ItemStack getStack() {
-			return stack;
+	@Override
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
+		Multimap<Attribute, AttributeModifier> ans = HashMultimap.create();
+		LivingEntity wearer = slotContext.entity();
+		int level = wearer == null ? 0 : DifficultyLevel.ofAny(wearer);
+		if (level > 0) {
+			double rate = LHConfig.COMMON.prideHealthBonus.get() * level;
+			ans.put(Attributes.MAX_HEALTH, new AttributeModifier(uuid, NAME, rate, AttributeModifier.Operation.MULTIPLY_BASE));
 		}
-
-		@Override
-		public void curioTick(SlotContext slotContext) {
-			LivingEntity wearer = slotContext.entity();
-			if (wearer == null) return;
-			int level = DifficultyLevel.ofAny(wearer);
-			stack.getOrCreateTag().putInt(NAME, level);
-		}
-
-		@Override
-		public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
-			Multimap<Attribute, AttributeModifier> ans = HashMultimap.create();
-			LivingEntity wearer = slotContext.entity();
-			int level = wearer == null ? 0 : DifficultyLevel.ofAny(wearer);
-			if (level > 0) {
-				double rate = LHConfig.COMMON.prideHealthBonus.get() * level;
-				ans.put(Attributes.MAX_HEALTH, new AttributeModifier(uuid, NAME, rate, AttributeModifier.Operation.MULTIPLY_BASE));
-			}
-			return ans;
-		}
-
+		return ans;
 	}
 
 }
