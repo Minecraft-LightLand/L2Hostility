@@ -9,11 +9,14 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.TagGen;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -51,6 +54,12 @@ public class ItemPopulator {
 			ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r);
 			if (!stack.isEmpty()) {
 				le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+			}
+		}
+		if (le instanceof Drowned && le.getMainHandItem().isEmpty()) {
+			double factor = cap.getLevel() / 16d / LHConfig.COMMON.armorFactor.get();
+			if (factor > le.getRandom().nextDouble()) {
+				le.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.TRIDENT));
 			}
 		}
 	}

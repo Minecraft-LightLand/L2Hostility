@@ -27,6 +27,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SimpleFoiledItem;
 
 @SuppressWarnings({"unsafe"})
 @MethodsReturnNonnullByDefault
@@ -45,6 +46,7 @@ public class LHItems {
 	public static final ItemEntry<BookCopy> BOOK_COPY;
 	public static final ItemEntry<BookEverything> BOOK_OMNISCIENCE;
 	public static final ItemEntry<Item> CHAOS_INGOT;
+	public static final ItemEntry<SimpleFoiledItem> HOSTILITY_ESSENCE, MIRACLE_POWDER, MIRACLE_INGOT;
 	public static final ItemEntry<CurseOfEnvy> CURSE_ENVY;
 	public static final ItemEntry<CurseOfGluttony> CURSE_GLUTTONY;
 	public static final ItemEntry<CurseOfGreed> CURSE_GREED;
@@ -138,6 +140,9 @@ public class LHItems {
 
 
 			CHAOS_INGOT = L2Hostility.REGISTRATE.item("chaos_ingot", p -> new Item(p.rarity(Rarity.EPIC).fireResistant())).register();
+			HOSTILITY_ESSENCE = L2Hostility.REGISTRATE.item("hostility_essence", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
+			MIRACLE_POWDER = L2Hostility.REGISTRATE.item("miracle_powder", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
+			MIRACLE_INGOT = L2Hostility.REGISTRATE.item("miracle_ingot", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
 
 			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
 			TagKey<Item> curse = TagGen.CURSE_SLOT;

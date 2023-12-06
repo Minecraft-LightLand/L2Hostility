@@ -3,10 +3,13 @@ package dev.xkmc.l2hostility.init.loot;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -28,7 +31,16 @@ public class GluttonyLootModifier extends LootModifier {
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
-				double chance = cap.getLevel() * LHConfig.COMMON.gluttonyDropRate.get() * cap.dropRate;
+				double factor = cap.dropRate;
+				if (context.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) {
+					Player player = context.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
+					var pl = PlayerDifficulty.HOLDER.get(player);
+					for (var stack : CurseCurioItem.getFromPlayer(player)) {
+						factor *= stack.item().getLootFactor(stack.stack(), pl, cap);
+					}
+				}
+
+				double chance = factor * cap.getLevel() * LHConfig.COMMON.gluttonyDropRate.get();
 				int base = (int) chance;
 				if (context.getRandom().nextDouble() < chance - base) {
 					base++;

@@ -204,7 +204,7 @@ public class LHConfig {
 						.comment("Mobs with entity config and trait chance of 1 will not be affected")
 						.defineInRange("initialTraitChanceSlope", 0.01, 0, 1);
 				splitDropRateFactor = builder.comment("Slimes hostility loot drop rate decay per split")
-						.defineInRange("splitDropRateFactor", 0.5d, 0, 1);
+						.defineInRange("splitDropRateFactor", 0.25d, 0, 1);
 			}
 			builder.pop();
 

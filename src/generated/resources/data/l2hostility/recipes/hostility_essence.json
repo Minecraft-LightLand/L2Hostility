@@ -1,0 +1,10 @@
+{
+  "type": "l2complements:burnt",
+  "chance": 1024,
+  "ingredient": {
+    "item": "l2hostility:bottle_of_curse"
+  },
+  "result": {
+    "item": "l2hostility:hostility_essence"
+  }
+}

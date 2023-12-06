@@ -6,16 +6,19 @@
       "item": "l2complements:blackstone_core"
     },
     "I": {
-      "item": "l2hostility:chaos_ingot"
+      "item": "l2hostility:miracle_ingot"
+    },
+    "L": {
+      "item": "l2hostility:moonwalk"
     },
     "S": {
       "item": "l2hostility:dispell"
     }
   },
   "pattern": [
-    "BIB",
-    "ISI",
-    "BIB"
+    "BLB",
+    "SIS",
+    "BLB"
   ],
   "result": {
     "item": "l2hostility:pocket_of_restoration"

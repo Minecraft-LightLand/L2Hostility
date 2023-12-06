@@ -7,6 +7,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2complements.content.enchantment.core.EnchantmentRecipeBuilder;
+import dev.xkmc.l2complements.content.recipe.BurntRecipeBuilder;
 import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
@@ -116,6 +117,18 @@ public class RecipeGen {
 					.define('4', LCItems.CAPTURED_WIND.get())
 					.save(pvd);
 
+
+			convert(pvd, LHItems.BOTTLE_CURSE.get(), LHItems.HOSTILITY_ESSENCE.get(), 1024);
+			recycle(pvd, TagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
+			recycle(pvd, TagGen.TRAIT_ITEM, LHItems.MIRACLE_POWDER.get(), 1f);
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.MIRACLE_INGOT.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+					.pattern("ABA").pattern("ACA").pattern("ABA")
+					.define('C', LHItems.CHAOS_INGOT.get())
+					.define('B', LHItems.HOSTILITY_ESSENCE.get())
+					.define('A', LHItems.MIRACLE_POWDER.get())
+					.save(pvd);
+
 			// curse
 			{
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.CURSE_SLOTH.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
@@ -171,7 +184,7 @@ public class RecipeGen {
 						.define('I', LHItems.CHAOS_INGOT.get())
 						.define('1', LHTraits.FIERY.get().asItem())
 						.define('2', LHTraits.SOUL_BURNER.get().asItem())
-						.define('B', LCMats.SCULKIUM.getIngot())
+						.define('B', LHItems.HOSTILITY_ESSENCE.get())
 						.define('C', LHTraits.STRIKE.get().asItem())
 						.define('D', LHTraits.REFLECT.get().asItem())
 						.save(pvd);
@@ -181,7 +194,7 @@ public class RecipeGen {
 						.define('I', LHItems.CHAOS_INGOT.get())
 						.define('1', LHTraits.WEAKNESS.get().asItem())
 						.define('2', LHTraits.PROTECTION.get().asItem())
-						.define('B', LCMats.ETERNIUM.getIngot())
+						.define('B', LHItems.HOSTILITY_ESSENCE.get())
 						.define('C', LHTraits.DEMENTOR.get().asItem())
 						.define('D', LHTraits.ADAPTIVE.get().asItem())
 						.save(pvd);
@@ -296,14 +309,14 @@ public class RecipeGen {
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.ABRAHADABRA.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("AIA").pattern("IOI").pattern("AIA")
-					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('I', LHItems.MIRACLE_INGOT.get())
 					.define('O', LHItems.RING_REFLECTION.get())
 					.define('A', LHTraits.RAGNAROK.get().asItem())
 					.save(pvd);
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.NIDHOGGUR.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("AIA").pattern("IOI").pattern("AIA")
-					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('I', LHItems.MIRACLE_INGOT.get())
 					.define('O', LHItems.CURSE_GREED.get())
 					.define('A', LHTraits.RAGNAROK.get().asItem())
 					.save(pvd);
@@ -316,13 +329,12 @@ public class RecipeGen {
 					.save(pvd);
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.RESTORATION.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
-					.pattern("BIB").pattern("ISI").pattern("BIB")
-					.define('I', LHItems.CHAOS_INGOT.get())
+					.pattern("BLB").pattern("SIS").pattern("BLB")
+					.define('I', LHItems.MIRACLE_INGOT.get())
 					.define('B', LCItems.BLACKSTONE_CORE.get())
 					.define('S', LHTraits.DISPELL.get().asItem())
+					.define('L', LHTraits.MOONWALK.get().asItem())
 					.save(pvd);
-
-			recycle(pvd, TagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
 
 		}
 
@@ -410,6 +422,10 @@ public class RecipeGen {
 	public static void blasting(RegistrateRecipeProvider pvd, Item source, Item result, float experience) {
 		unlock(pvd, SimpleCookingRecipeBuilder.blasting(Ingredient.of(source), RecipeCategory.MISC, result, experience, 200)::unlockedBy, source)
 				.save(pvd, getID(source));
+	}
+
+	private static void convert(RegistrateRecipeProvider pvd, Item in, Item out, int count) {
+		unlock(pvd, new BurntRecipeBuilder(Ingredient.of(in), out.getDefaultInstance(), count)::unlockedBy, in).save(pvd, getID(out));
 	}
 
 	public static void recycle(RegistrateRecipeProvider pvd, TagKey<Item> source, Item result, float experience) {

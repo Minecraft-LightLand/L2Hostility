@@ -40,7 +40,10 @@
 	"platinum_star": "白金之星",
 	"pocket_of_restoration": "解咒口袋",
 	"book_of_omniscience": "全知之书",
-	"book_of_reprint": "附魔影本"
+	"book_of_reprint": "附魔影本",
+	"hostility_essence": "恶意精华",
+	"miracle_ingot": "奇迹锭",
+	"miracle_powder": "奇迹粉末"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"

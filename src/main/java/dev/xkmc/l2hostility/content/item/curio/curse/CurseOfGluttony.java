@@ -21,15 +21,9 @@ public class CurseOfGluttony extends CurseCurioItem {
 	}
 
 	@Override
-	public double getLootFactor(ItemStack stack, PlayerDifficulty player, MobTraitCap mob) {
-		return 0;
-	}
-
-	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		int rate = (int) Math.round(100 * LHConfig.COMMON.gluttonyDropRate.get());
 		list.add(LangData.ITEM_CHARM_GLUTTONY.get(rate).withStyle(ChatFormatting.GOLD));
-		list.add(LangData.ITEM_CHARM_NO_DROP.get().withStyle(ChatFormatting.RED));
 	}
 
 }
