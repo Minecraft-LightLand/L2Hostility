@@ -10,8 +10,11 @@
 - Equipment wand can open curios page as well
 - Fix difficulty calculation
 - Improve difficulty display: add tooltip detail
+- Curse of Gluttony drops multiple bottles now
 - add Soul Bound to dispell whitelist
 - add Envy, Greed, Sloth, Lust, Gluttony to Ragnarok whitelist
+- add max level for players
+- all curio items cannot have duplicates equipped
 - add Alex Caves compat
 - add Ice and Fire compat
 - Thorn no longer inflict trait effects

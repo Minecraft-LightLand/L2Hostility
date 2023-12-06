@@ -37,11 +37,20 @@ public class DifficultyLevel {
 	}
 
 	public void grow(double growFactor, MobTraitCap cap) {
+		if (level >= LHConfig.COMMON.maxPlayerLevel.get()) {
+			level = LHConfig.COMMON.maxPlayerLevel.get();
+			experience = 0;
+			return;
+		}
 		experience += (int) (growFactor * cap.getLevel() * cap.getLevel());
 		int factor = LHConfig.COMMON.killsPerLevel.get();
 		while (experience >= (long) level * level * factor) {
 			experience -= (long) level * level * factor;
 			level++;
+		}
+		if (level >= LHConfig.COMMON.maxPlayerLevel.get()) {
+			level = LHConfig.COMMON.maxPlayerLevel.get();
+			experience = 0;
 		}
 	}
 
