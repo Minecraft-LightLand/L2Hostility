@@ -14,7 +14,7 @@ import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.data.HostilityDamageState;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHDamageTypes;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -41,7 +41,7 @@ public class LHAttackListener implements AttackListener {
 		}
 		if (mob != null && MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
-			if (!mob.getType().is(TagGen.NO_SCALING)) {
+			if (!mob.getType().is(LHTagGen.NO_SCALING)) {
 				int lv = cap.getLevel();
 				double factor;
 				if (LHConfig.COMMON.exponentialDamage.get()) {

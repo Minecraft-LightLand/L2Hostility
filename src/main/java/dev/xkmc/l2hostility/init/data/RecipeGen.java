@@ -119,8 +119,8 @@ public class RecipeGen {
 
 
 			convert(pvd, LHItems.BOTTLE_CURSE.get(), LHItems.HOSTILITY_ESSENCE.get(), 1024);
-			recycle(pvd, TagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
-			recycle(pvd, TagGen.TRAIT_ITEM, LHItems.MIRACLE_POWDER.get(), 1f);
+			recycle(pvd, LHTagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
+			recycle(pvd, LHTagGen.TRAIT_ITEM, LHItems.MIRACLE_POWDER.get(), 1f);
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.MIRACLE_INGOT.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("ABA").pattern("ACA").pattern("ABA")

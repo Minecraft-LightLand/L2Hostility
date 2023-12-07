@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -43,7 +43,7 @@ public class EnchantmentDisabler {
 		if (!(e instanceof CompoundTag c)) return false;
 		var id = new ResourceLocation(c.getString("id"));
 		return ForgeRegistries.ENCHANTMENTS.tags()
-				.getTag(TagGen.NO_DISPELL)
+				.getTag(LHTagGen.NO_DISPELL)
 				.contains(ForgeRegistries.ENCHANTMENTS.getValue(id));
 	}
 

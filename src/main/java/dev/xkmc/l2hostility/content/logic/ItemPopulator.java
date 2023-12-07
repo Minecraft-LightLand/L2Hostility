@@ -6,7 +6,7 @@ import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -43,23 +43,23 @@ public class ItemPopulator {
 	static void populateWeapons(LivingEntity le, MobTraitCap cap, RandomSource r) {
 		var manager = ForgeRegistries.ITEMS.tags();
 		if (manager == null) return;
-		if (le.getType().is(TagGen.MELEE_WEAPON_TARGET)) {
+		if (le instanceof Drowned && le.getMainHandItem().isEmpty()) {
+			double factor = cap.getLevel() / 16d / LHConfig.COMMON.armorFactor.get();
+			if (factor > le.getRandom().nextDouble()) {
+				le.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.TRIDENT));
+			}
+		}
+		if (le.getType().is(LHTagGen.MELEE_WEAPON_TARGET)) {
 			if (le.getMainHandItem().isEmpty()) {
 				ItemStack stack = WeaponConfig.getRandomMeleeWeapon(cap.getLevel(), r);
 				if (!stack.isEmpty()) {
 					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
 				}
 			}
-		} else if (le.getType().is(TagGen.RANGED_WEAPON_TARGET)) {
+		} else if (le.getType().is(LHTagGen.RANGED_WEAPON_TARGET)) {
 			ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r);
 			if (!stack.isEmpty()) {
 				le.setItemSlot(EquipmentSlot.MAINHAND, stack);
-			}
-		}
-		if (le instanceof Drowned && le.getMainHandItem().isEmpty()) {
-			double factor = cap.getLevel() / 16d / LHConfig.COMMON.armorFactor.get();
-			if (factor > le.getRandom().nextDouble()) {
-				le.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.TRIDENT));
 			}
 		}
 	}

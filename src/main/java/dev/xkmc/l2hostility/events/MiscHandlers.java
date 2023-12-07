@@ -4,7 +4,7 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.consumable.BookCopy;
 import dev.xkmc.l2hostility.content.item.wand.IMobClickItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -62,7 +62,7 @@ public class MiscHandlers {
 		Player player = ctx.getPlayer();
 		if (player == null) return false;
 		if (!ctx.getPlayer().hasEffect(LHEffects.ANTIBUILD.get())) return false;
-		return stack.getItem() instanceof BlockItem || stack.is(TagGen.ANTIBUILD_BAN);
+		return stack.getItem() instanceof BlockItem || stack.is(LHTagGen.ANTIBUILD_BAN);
 	}
 
 }

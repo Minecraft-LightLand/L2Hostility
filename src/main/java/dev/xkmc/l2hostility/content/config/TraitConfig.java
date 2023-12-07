@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.content.config;
 
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2library.serial.config.BaseConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.registries.Registries;
@@ -53,13 +53,13 @@ public class TraitConfig extends BaseConfig {
 
 	public TraitConfig addWhitelist(Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<EntityType<?>>> pvd) {
 		var tag = getWhitelistTag();
-		TagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
+		LHTagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
 		return this;
 	}
 
 	public TraitConfig addBlacklist(Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<EntityType<?>>> pvd) {
 		var tag = getBlacklistTag();
-		TagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
+		LHTagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
 		return this;
 	}
 

@@ -17,7 +17,7 @@ import dev.xkmc.l2hostility.content.traits.highlevel.*;
 import dev.xkmc.l2hostility.content.traits.legendary.*;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2library.base.L2Registrate;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceKey;
@@ -42,7 +42,7 @@ public class LHTraits {
 							reg -> ResourceKey.create(LHTraits.TRAITS.key(), reg.getRegistryName()),
 							e.getExistingFileHelper()));
 
-	public static final TagKey<MobTrait> POTION = TagGen.createTraitTag("potion_trait");
+	public static final TagKey<MobTrait> POTION = LHTagGen.createTraitTag("potion_trait");
 
 	public static final RegistryEntry<AttributeTrait> TANK, SPEEDY;
 	public static final RegistryEntry<SelfEffectTrait> PROTECTION;
@@ -98,7 +98,7 @@ public class LHTraits {
 
 			INVISIBLE = L2Hostility.REGISTRATE.regTrait("invisible", InvisibleTrait::new,
 							rl -> new TraitConfig(rl, 30, 100, 1, 50)
-									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
+									.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS)))
 					.lang("Invisible").register();
 
 		}
@@ -125,14 +125,14 @@ public class LHTraits {
 			SHULKER = L2Hostility.REGISTRATE.regTrait("shulker", () -> new ShulkerTrait(ChatFormatting.LIGHT_PURPLE,
 									LHConfig.COMMON.shulkerInterval::get, BulletType.PLAIN, 0),
 							rl -> new TraitConfig(rl, 30, 100, 1, 70)
-									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
+									.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS)))
 					.desc("Shoot bullets every %s seconds")
 					.lang("Shulker").register();
 
 			GRENADE = L2Hostility.REGISTRATE.regTrait("grenade", () -> new ShulkerTrait(ChatFormatting.RED,
 									LHConfig.COMMON.grenadeInterval::get, BulletType.EXPLODE, 15),
 							rl -> new TraitConfig(rl, 50, 100, 5, 100)
-									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
+									.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS)))
 					.desc("Shoot explosive bullets every %s seconds after the previous bullet disappears.")
 					.lang("Grenade").register();
 
@@ -171,7 +171,7 @@ public class LHTraits {
 
 			STRIKE = L2Hostility.REGISTRATE.regTrait("counter_strike", () -> new CounterStrikeTrait(ChatFormatting.WHITE),
 							rl -> new TraitConfig(rl, 50, 100, 1, 60)
-									.addWhitelist(e -> e.addTag(TagGen.MELEE_WEAPON_TARGET)
+									.addWhitelist(e -> e.addTag(LHTagGen.MELEE_WEAPON_TARGET)
 											.add(EntityType.WARDEN)))
 					.desc("After attacked, it will attempt to perform a counter strike.")
 					.lang("Counter Strike").register();
@@ -203,7 +203,7 @@ public class LHTraits {
 					.lang("Dispell").register();
 			UNDYING = L2Hostility.REGISTRATE.regTrait("undying", () -> new UndyingTrait(ChatFormatting.DARK_BLUE),
 							rl -> new TraitConfig(rl, 150, 100, 1, 150)
-									.addBlacklist(e -> e.addTag(TagGen.SEMIBOSS)))
+									.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS)))
 					.desc("Mob will heal to full health every time it dies.")
 					.lang("Undying").register();
 			ENDER = L2Hostility.REGISTRATE.regTrait("teleport", () -> new EnderTrait(ChatFormatting.DARK_PURPLE),
@@ -222,7 +222,7 @@ public class LHTraits {
 
 			PULLING = L2Hostility.REGISTRATE.regTrait("pulling", () -> new PullingTrait(ChatFormatting.DARK_BLUE),
 							rl -> new TraitConfig(rl, 50, 100, 1, 100)
-									.addWhitelist(e -> e.addTag(TagGen.MELEE_WEAPON_TARGET)))
+									.addWhitelist(e -> e.addTag(LHTagGen.MELEE_WEAPON_TARGET)))
 					.desc("Mob will pull entities hostile to it within %s blocks.")
 					.lang("Pulling").register();
 

@@ -2,7 +2,7 @@ package dev.xkmc.l2hostility.content.logic;
 
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2library.util.math.MathHelper;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -30,7 +30,7 @@ public class TraitManager {
 			return ans;
 		}
 		// add attributes
-		if (!le.getType().is(TagGen.NO_SCALING)) {
+		if (!le.getType().is(LHTagGen.NO_SCALING)) {
 			double factor;
 			if (LHConfig.COMMON.exponentialHealth.get()) {
 				factor = Math.pow(1 + LHConfig.COMMON.healthFactor.get(), lv) - 1;
@@ -42,13 +42,13 @@ public class TraitManager {
 			ans = lv;
 		}
 		// armor
-		if (le.getType().is(TagGen.ARMOR_TARGET)) {
+		if (le.getType().is(LHTagGen.ARMOR_TARGET)) {
 			ItemPopulator.populateArmors(le, lv);
 		}
 		// add traits
 
 		if (ins.trait_chance(lv) >= le.getRandom().nextDouble()) {
-			if (!le.getType().is(TagGen.NO_TRAIT)) {
+			if (!le.getType().is(LHTagGen.NO_TRAIT)) {
 				TraitGenerator.generateTraits(le, lv, traits, ins);
 			}
 			ans = lv;

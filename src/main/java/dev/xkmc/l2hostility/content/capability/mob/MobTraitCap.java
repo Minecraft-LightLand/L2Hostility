@@ -13,7 +13,7 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
 import dev.xkmc.l2serial.serialization.SerialClass;
@@ -50,8 +50,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public static final GeneralCapabilityHolder<LivingEntity, MobTraitCap> HOLDER =
 			new GeneralCapabilityHolder<>(new ResourceLocation(L2Hostility.MODID, "traits"),
 					CAPABILITY, MobTraitCap.class, MobTraitCap::new, LivingEntity.class, (e) ->
-					e.getType().is(TagGen.WHITELIST) ||
-							e instanceof Enemy && !e.getType().is(TagGen.BLACKLIST));
+					e.getType().is(LHTagGen.WHITELIST) ||
+							e instanceof Enemy && !e.getType().is(LHTagGen.BLACKLIST));
 
 	public enum Stage {
 		PRE_INIT, INIT, POST_INIT

@@ -102,11 +102,11 @@ public class AdvGen {
 						"I want that!", "Obtain Curse of Envy")
 				.type(FrameType.GOAL)
 				.create("trait", LHTraits.TANK.get().asItem(),
-						CriterionBuilder.item(TagGen.TRAIT_ITEM),
+						CriterionBuilder.item(LHTagGen.TRAIT_ITEM),
 						"Gate to the New World", "Obtain a trait item")
 				.create("breed", LHTraits.REGEN.get().asItem(),
 						CriterionBuilder.one(ConsumeItemTrigger.TriggerInstance.usedItem(
-								ItemPredicate.Builder.item().of(TagGen.TRAIT_ITEM).build())),
+								ItemPredicate.Builder.item().of(LHTagGen.TRAIT_ITEM).build())),
 						"Breeding Mobs", "Use a trait item on mobs")
 				.finish();
 

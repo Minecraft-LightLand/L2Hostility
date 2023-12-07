@@ -4,7 +4,7 @@ import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.compat.curios.EntitySlotAccess;
 import dev.xkmc.l2hostility.content.item.traits.SealedItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -21,7 +21,7 @@ public class RagnarokTrait extends LegendaryTrait {
 		ItemStack stack = access.get();
 		if (stack.isEmpty()) return false;
 		if (stack.is(LHItems.SEAL.get())) return false;
-		if (stack.is(TagGen.NO_SEAL)) return false;
+		if (stack.is(LHTagGen.NO_SEAL)) return false;
 		if (!LHConfig.COMMON.ragnarokSealBackpack.get()) {
 			var rl = ForgeRegistries.ITEMS.getKey(stack.getItem());
 			if (rl == null) return false;

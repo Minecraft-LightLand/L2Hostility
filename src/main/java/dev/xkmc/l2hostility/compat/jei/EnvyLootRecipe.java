@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.compat.jei;
 
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -18,7 +18,7 @@ public record EnvyLootRecipe() implements ITraitLootRecipe {
 		var manager = ForgeRegistries.ITEMS.tags();
 		if (manager == null) return List.of();
 		ArrayList<ItemStack> ans = new ArrayList<>();
-		for (var e : manager.getTag(TagGen.TRAIT_ITEM)) {
+		for (var e : manager.getTag(LHTagGen.TRAIT_ITEM)) {
 			ans.add(e.getDefaultInstance());
 		}
 		return ans;

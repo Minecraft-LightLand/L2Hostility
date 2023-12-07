@@ -18,7 +18,7 @@ import dev.xkmc.l2hostility.content.item.wand.TraitAdderWand;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -132,7 +132,7 @@ public class LHItems {
 							"detector_glasses", p -> new DetectorGlasses(p.stacksTo(1)))
 					.tag(head).register();
 
-			TagKey<Item> chaos = TagGen.CHAOS_CURIO;
+			TagKey<Item> chaos = LHTagGen.CHAOS_CURIO;
 
 			WITCH_WAND = L2Hostility.REGISTRATE.item("witch_wand", p -> new WitchWand(p
 							.durability(300).rarity(Rarity.EPIC).fireResistant()))
@@ -145,13 +145,13 @@ public class LHItems {
 			MIRACLE_INGOT = L2Hostility.REGISTRATE.item("miracle_ingot", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
 
 			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
-			TagKey<Item> curse = TagGen.CURSE_SLOT;
-			CURSE_ENVY = curio("curse_of_envy", CurseOfEnvy::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
-			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
-			CURSE_GREED = curio("curse_of_greed", CurseOfGreed::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
-			CURSE_LUST = curio("curse_of_lust", CurseOfLust::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
+			TagKey<Item> curse = LHTagGen.CURSE_SLOT;
+			CURSE_ENVY = curio("curse_of_envy", CurseOfEnvy::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
+			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
+			CURSE_GREED = curio("curse_of_greed", CurseOfGreed::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
+			CURSE_LUST = curio("curse_of_lust", CurseOfLust::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
 			CURSE_PRIDE = curio("curse_of_pride", CurseOfPride::new).tag(chaos, charm, curse).register();
-			CURSE_SLOTH = curio("curse_of_sloth", CurseOfSloth::new).tag(chaos, charm, curse, TagGen.NO_SEAL).register();
+			CURSE_SLOTH = curio("curse_of_sloth", CurseOfSloth::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
 			CURSE_WRATH = curio("curse_of_wrath", CurseOfWrath::new).tag(chaos, charm, curse).register();
 
 			TagKey<Item> ring = ItemTags.create(new ResourceLocation("curios", "ring"));
@@ -167,7 +167,7 @@ public class LHItems {
 			TagKey<Item> hand = ItemTags.create(new ResourceLocation("curios", "hands"));
 
 			FLAMING_THORN = curio("flaming_thorn", FlamingThorn::new).tag(chaos, hand).register();
-			IMAGINE_BREAKER = curio("imagine_breaker", ImagineBreaker::new).tag(chaos, hand, TagGen.NO_SEAL).register();
+			IMAGINE_BREAKER = curio("imagine_breaker", ImagineBreaker::new).tag(chaos, hand, LHTagGen.NO_SEAL).register();
 			PLATINUM_STAR = curio("platinum_star", PlatinumStar::new).tag(chaos, hand, charm).register();
 			INFINITY_GLOVE = curio("infinity_glove", InfinityGlove::new).tag(chaos, hand).register();
 
@@ -176,11 +176,11 @@ public class LHItems {
 			ODDEYES_GLASSES = curio("oddeyes_glasses", OddeyesGlasses::new).tag(chaos, head).register();
 			TRIPLE_STRIP_CAPE = curio("triple_strip_cape", TripleStripCape::new).tag(chaos, back).register();
 
-			ABRAHADABRA = curio("abrahadabra", Abrahadabra::new).tag(chaos, curse, TagGen.NO_SEAL).register();
-			NIDHOGGUR = curio("greed_of_nidhoggur", GreedOfNidhoggur::new).tag(chaos, curse, TagGen.NO_SEAL).register();
+			ABRAHADABRA = curio("abrahadabra", Abrahadabra::new).tag(chaos, curse, LHTagGen.NO_SEAL).register();
+			NIDHOGGUR = curio("greed_of_nidhoggur", GreedOfNidhoggur::new).tag(chaos, curse, LHTagGen.NO_SEAL).register();
 
 			RESTORATION = curio("pocket_of_restoration", p -> new PocketOfRestoration(p, 128))
-					.tag(charm, TagGen.NO_SEAL).register();
+					.tag(charm, LHTagGen.NO_SEAL).register();
 
 		}
 
@@ -201,7 +201,7 @@ public class LHItems {
 		}
 
 		SEAL = L2Hostility.REGISTRATE.item("sealed_item", p -> new SealedItem(p.stacksTo(1).fireResistant()))
-				.removeTab(LHBlocks.TAB.getKey()).tag(TagGen.NO_SEAL).register();
+				.removeTab(LHBlocks.TAB.getKey()).tag(LHTagGen.NO_SEAL).register();
 	}
 
 	private static <T extends Item> ItemBuilder<T, ?> curio(String str, NonNullFunction<Item.Properties, T> factory) {

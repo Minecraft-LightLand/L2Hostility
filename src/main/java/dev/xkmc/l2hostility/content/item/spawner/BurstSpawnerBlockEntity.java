@@ -5,7 +5,7 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2hostility.init.data.TagGen;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -81,7 +81,7 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 			);
 			var e = mobsAt(sl, MobCategory.MONSTER, pos).getRandom(level.getRandom());
 			if (e.isPresent()) {
-				if (e.get().type.is(TagGen.NO_SCALING) || e.get().type.is(TagGen.NO_TRAIT)) {
+				if (e.get().type.is(LHTagGen.NO_SCALING) || e.get().type.is(LHTagGen.NO_TRAIT)) {
 					continue;
 				}
 				Entity entity = e.get().type.create(sl);

@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.init;
 
 import com.tterrag.registrate.providers.ProviderType;
+import dev.xkmc.l2complements.init.data.TagGen;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
 import dev.xkmc.l2hostility.content.capability.chunk.CapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
@@ -81,11 +82,12 @@ public class L2Hostility {
 
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
-		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, TagGen::onBlockTagGen);
-		REGISTRATE.addDataGenerator(TagGen.ENCH_TAGS, TagGen::onEnchTagGen);
-		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, TagGen::onItemTagGen);
-		REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, TagGen::onEntityTagGen);
-		REGISTRATE.addDataGenerator(LHTraits.TRAIT_TAGS, TagGen::onTraitTagGen);
+		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LHTagGen::onBlockTagGen);
+		REGISTRATE.addDataGenerator(LHTagGen.ENCH_TAGS, LHTagGen::onEnchTagGen);
+		REGISTRATE.addDataGenerator(TagGen.EFF_TAGS, LHTagGen::onEffTagGen);
+		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, LHTagGen::onItemTagGen);
+		REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, LHTagGen::onEntityTagGen);
+		REGISTRATE.addDataGenerator(LHTraits.TRAIT_TAGS, LHTagGen::onTraitTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 
 

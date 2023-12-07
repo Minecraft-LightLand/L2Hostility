@@ -1,6 +1,8 @@
 
 2.4.13
 - TODO arena patchouli
+- TODO update arena desc
+- Drowned has higher chance to wield trident
 
 2.4.12
 - add Pocket of Restoration

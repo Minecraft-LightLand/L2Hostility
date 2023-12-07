@@ -9,15 +9,18 @@ import com.github.alexthe666.iceandfire.entity.IafEntityRegistry;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
+import dev.xkmc.l2complements.init.data.TagGen;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -31,7 +34,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Consumer;
 
-public class TagGen {
+public class LHTagGen {
 
 	public static final ProviderType<RegistrateTagsProvider.IntrinsicImpl<Enchantment>> ENCH_TAGS =
 			ProviderType.register("tags/enchantment",
@@ -165,4 +168,7 @@ public class TagGen {
 		return TagKey.create(LHTraits.TRAITS.key(), new ResourceLocation(L2Hostility.MODID, id));
 	}
 
+	public static void onEffTagGen(RegistrateTagsProvider.IntrinsicImpl<MobEffect> pvd) {
+		pvd.addTag(TagGen.SKILL_EFFECT).add(LHEffects.ANTIBUILD.get());
+	}
 }
