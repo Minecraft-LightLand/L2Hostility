@@ -5,7 +5,6 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -29,8 +28,8 @@ public class RingOfLife extends CurseCurioItem {
 
 	@Override
 	public void onDamage(ItemStack stack, LivingEntity user, LivingDamageEvent event) {
-		boolean bypassInvul = event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY);
-		boolean bypassMagic = event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS);
+		boolean bypassInvul = event.getSource().isBypassInvul();
+		boolean bypassMagic = event.getSource().isBypassMagic();
 		if (!bypassInvul && !bypassMagic) {
 			float damage = event.getAmount();
 			float maxHealth = event.getEntity().getMaxHealth();

@@ -44,7 +44,7 @@ public class TraitEffectCache {
 		if (reflectedTargets == null) {
 			reflectedTargets = new ArrayList<>();
 			int radius = LHConfig.COMMON.ringOfReflectionRadius.get();
-			for (var e : target.level().getEntities(target, target.getBoundingBox().inflate(radius))) {
+			for (var e : target.level.getEntities(target, target.getBoundingBox().inflate(radius))) {
 				if (!(e instanceof Mob mob)) continue;
 				if (!MobTraitCap.HOLDER.isProper(mob)) continue;
 				if (mob.distanceTo(target) > radius) continue;

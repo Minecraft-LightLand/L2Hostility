@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.init.loot;
 
 import com.mojang.serialization.Codec;
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
@@ -9,8 +8,9 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2library.util.data.LootTableTemplate;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -32,14 +32,15 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 
 
 	static {
+		//TODO check if it works
 		TRAIT_AND_LEVEL = L2Hostility.REGISTRATE.simple("trait_and_level",
-				Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(
+				Registry.LOOT_ITEM_REGISTRY, () -> new LootItemConditionType(
 						new TraitSerializer<>(TraitLootCondition.class)));
 		MOB_LEVEL = L2Hostility.REGISTRATE.simple("mob_level",
-				Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(
+				Registry.LOOT_ITEM_REGISTRY, () -> new LootItemConditionType(
 						new TraitSerializer<>(MobCapLootCondition.class)));
 		HAS_ITEM = L2Hostility.REGISTRATE.simple("player_has_item",
-				Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(
+				Registry.LOOT_ITEM_REGISTRY, () -> new LootItemConditionType(
 						new TraitSerializer<>(PlayerHasItemCondition.class)));
 
 		TRAIT_SCALED = L2Hostility.REGISTRATE.simple("trait_scaled",
@@ -56,7 +57,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 	}
 
 	public TraitGLMProvider(DataGenerator gen) {
-		super(gen.getPackOutput(), L2Hostility.MODID);
+		super(gen, L2Hostility.MODID);
 	}
 
 	@Override
@@ -69,7 +70,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.TANK.get(), new ItemStack(Items.DIAMOND, 4), 1, 0, 0.1);
 		add(LHTraits.TANK.get(), new ItemStack(Items.NETHERITE_SCRAP, 1), 3, 0, 0.1);
 		add(LHTraits.SPEEDY.get(), new ItemStack(Items.RABBIT_FOOT, 2), 1, 0, 0.1);
-		add(LHTraits.SPEEDY.get(), new ItemStack(LCItems.CAPTURED_WIND, 1), 3, 0, 0.1, 50);
+		add(LHTraits.SPEEDY.get(), new ItemStack(LCItems.CAPTURED_WIND.get(), 1), 3, 0, 0.1, 50);
 		add(LHTraits.PROTECTION.get(), new ItemStack(Items.SCUTE, 4), 1, 0, 0.1);
 		add(LHTraits.PROTECTION.get(), new ItemStack(Items.SHULKER_SHELL, 1), 3, 0, 0.1);
 		add(LHTraits.INVISIBLE.get(), new ItemStack(Items.PHANTOM_MEMBRANE, 4), 1, 0.25, 0);
@@ -91,28 +92,28 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.POISON.get(), new ItemStack(Items.SPIDER_EYE, 8), 1, 0, 0.1);
 		add(LHTraits.WITHER.get(), new ItemStack(Items.WITHER_ROSE, 8), 1, 0, 0.1);
 		add(LHTraits.WITHER.get(), new ItemStack(Items.WITHER_SKELETON_SKULL, 1), 3, 0, 0.1);
-		add(LHTraits.LEVITATION.get(), new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.1);
+		add(LHTraits.LEVITATION.get(), new ItemStack(LCItems.CAPTURED_BULLET.get(), 1), 1, 0, 0.1);
 		add(LHTraits.BLIND.get(), new ItemStack(Items.INK_SAC, 8), 1, 0, 0.1);
 		add(LHTraits.CONFUSION.get(), new ItemStack(Items.PUFFERFISH, 4), 1, 0, 0.1);
-		add(LHTraits.SOUL_BURNER.get(), new ItemStack(LCItems.SOUL_FLAME, 2), 1, 0, 0.1);
-		add(LHTraits.FREEZING.get(), new ItemStack(LCItems.HARD_ICE, 2), 1, 0, 0.1);
+		add(LHTraits.SOUL_BURNER.get(), new ItemStack(LCItems.SOUL_FLAME.get(), 2), 1, 0, 0.1);
+		add(LHTraits.FREEZING.get(), new ItemStack(LCItems.HARD_ICE.get(), 2), 1, 0, 0.1);
 		add(LHTraits.CURSED.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Objects.requireNonNull(ForgeRegistries.POTIONS.getValue(new ResourceLocation(L2Complements.MODID, "curse")))), 1, 0, 0.2);
-		add(LHTraits.CURSED.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.05);
-		add(LHTraits.CORROSION.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 1, 0, 0.1);
-		add(LHTraits.EROSION.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 1, 0, 0.1);
-		add(LHTraits.KILLER_AURA.get(), new ItemStack(LCItems.EMERALD, 1), 1, 0, 0.02);
+		add(LHTraits.CURSED.get(), new ItemStack(LCItems.CURSED_DROPLET.get(), 1), 3, 0, 0.05);
+		add(LHTraits.CORROSION.get(), new ItemStack(LCItems.CURSED_DROPLET.get(), 1), 1, 0, 0.1);
+		add(LHTraits.EROSION.get(), new ItemStack(LCItems.CURSED_DROPLET.get(), 1), 1, 0, 0.1);
+		add(LHTraits.KILLER_AURA.get(), new ItemStack(LCItems.EMERALD.get(), 1), 1, 0, 0.02);
 		add(LHTraits.RAGNAROK.get(), new ItemStack(LCMats.ETERNIUM.getNugget(), 4), 1, 0, 0.1);
-		add(LHTraits.SHULKER.get(), new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.2);
-		add(LHTraits.GRENADE.get(), new ItemStack(LCItems.STORM_CORE, 1), 3, 0, 0.1);
+		add(LHTraits.SHULKER.get(), new ItemStack(LCItems.CAPTURED_BULLET.get(), 1), 1, 0, 0.2);
+		add(LHTraits.GRENADE.get(), new ItemStack(LCItems.STORM_CORE.get(), 1), 3, 0, 0.1);
 		add(LHTraits.GRENADE.get(), new ItemStack(Items.GUNPOWDER, 4), 1, 0, 0.1);
 		add(LHTraits.GRENADE.get(), new ItemStack(Items.CREEPER_HEAD, 1), 5, 0.25, 0);
-		add(LHTraits.DRAIN.get(), new ItemStack(LHItems.WITCH_DROPLET, 1), 1, 0, 0.1);
+		add(LHTraits.DRAIN.get(), new ItemStack(LHItems.WITCH_DROPLET.get(), 1), 1, 0, 0.1);
 		add(LHTraits.GROWTH.get(), new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 1), 1, 0, 0.02);
-		add(LHTraits.SPLIT.get(), new ItemStack(LCItems.GUARDIAN_EYE, 1), 1, 0, 0.05);
+		add(LHTraits.SPLIT.get(), new ItemStack(LCItems.GUARDIAN_EYE.get(), 1), 1, 0, 0.05);
 		add(LHTraits.GRAVITY.get(), new ItemStack(Items.DRAGON_BREATH, 4), 1, 0, 0.1);
 		add(LHTraits.MOONWALK.get(), new ItemStack(Items.DRAGON_BREATH, 4), 1, 0, 0.1);
-		add(LHTraits.STRIKE.get(), new ItemStack(LCItems.EXPLOSION_SHARD, 1), 1, 0, 0.1);
-		add(LHTraits.PULLING.get(), new ItemStack(LCItems.BLACKSTONE_CORE, 1), 1, 0, 0.05);
+		add(LHTraits.STRIKE.get(), new ItemStack(LCItems.EXPLOSION_SHARD.get(), 1), 1, 0, 0.1);
+		add(LHTraits.PULLING.get(), new ItemStack(LCItems.BLACKSTONE_CORE.get(), 1), 1, 0, 0.05);
 
 		add(LHTraits.REPRINT.get(), new ItemStack(LHItems.BOOK_COPY.get()), 1, 1, 0);
 		add(LHTraits.DISPELL.get(), new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);

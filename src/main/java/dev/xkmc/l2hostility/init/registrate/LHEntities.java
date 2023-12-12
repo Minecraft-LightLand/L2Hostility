@@ -1,11 +1,11 @@
 package dev.xkmc.l2hostility.init.registrate;
 
-import com.tterrag.registrate.util.entry.EntityEntry;
 import dev.xkmc.l2complements.content.entity.ISizedItemEntity;
 import dev.xkmc.l2complements.content.entity.SpecialSpriteRenderer;
 import dev.xkmc.l2hostility.content.entity.BulletRenderer;
 import dev.xkmc.l2hostility.content.entity.HostilityBullet;
 import dev.xkmc.l2hostility.content.entity.HostilityCharge;
+import dev.xkmc.l2library.repack.registrate.util.entry.EntityEntry;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.world.entity.Entity;

@@ -1,22 +1,16 @@
 package dev.xkmc.l2hostility.compat.curios;
 
-import com.google.common.collect.Multimap;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotAttribute;
-import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Predicate;
 
 public class CurioCompat {
@@ -65,7 +59,7 @@ public class CurioCompat {
 			if (strs[0].equals("equipment")) {
 				return new EquipmentSlotAccess(le, EquipmentSlot.byName(strs[1]));
 			} else if (strs[0].equals("curios")) {
-				var opt = CuriosApi.getCuriosInventory(le).resolve();
+				var opt = CuriosApi.getCuriosHelper().getCuriosHandler(le).resolve();
 				if (opt.isEmpty()) return null;
 				var handler = opt.get().getStacksHandler(strs[1]);
 				if (handler.isEmpty()) return null;
@@ -79,7 +73,7 @@ public class CurioCompat {
 	}
 
 	private static boolean hasItemImpl(LivingEntity player, Item item) {
-		var opt = CuriosApi.getCuriosInventory(player);
+		var opt = CuriosApi.getCuriosHelper().getCuriosHandler(player);
 		if (opt.resolve().isEmpty()) {
 			return false;
 		}
@@ -94,7 +88,7 @@ public class CurioCompat {
 	}
 
 	private static void getItemImpl(List<ItemStack> list, LivingEntity player, Predicate<ItemStack> pred) {
-		var opt = CuriosApi.getCuriosInventory(player);
+		var opt = CuriosApi.getCuriosHelper().getCuriosHandler(player);
 		if (opt.resolve().isEmpty()) {
 			return;
 		}
@@ -109,7 +103,7 @@ public class CurioCompat {
 	}
 
 	private static void getItemAccessImpl(List<EntitySlotAccess> list, LivingEntity player) {
-		var opt = CuriosApi.getCuriosInventory(player);
+		var opt = CuriosApi.getCuriosHelper().getCuriosHandler(player);
 		if (opt.resolve().isEmpty()) {
 			return;
 		}
@@ -121,18 +115,6 @@ public class CurioCompat {
 	}
 
 	public static boolean isSlotAdder(EntitySlotAccess access) {
-		if (!(access instanceof CurioSlotAccess slot)) return false;
-		ItemStack stack = access.get();
-		var opt = CuriosApi.getCurio(stack).resolve();
-		if (opt.isEmpty()) return false;
-		Multimap<Attribute, AttributeModifier> multimap =
-				CuriosApi.getAttributeModifiers(new SlotContext(slot.id, slot.player, 0, false, true),
-						UUID.randomUUID(), stack);
-		for (var e : multimap.keySet()) {
-			if (e instanceof SlotAttribute) {
-				return true;
-			}
-		}
 		return false;
 	}
 

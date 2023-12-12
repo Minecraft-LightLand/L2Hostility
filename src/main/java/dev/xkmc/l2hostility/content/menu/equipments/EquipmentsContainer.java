@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.content.menu.equipments;
 
-import dev.xkmc.l2library.base.menu.base.BaseContainerMenu;
+import dev.xkmc.l2library.base.menu.BaseContainerMenu;
 import net.minecraft.world.item.ItemStack;
 
 public class EquipmentsContainer extends BaseContainerMenu.BaseContainer<EquipmentsMenu> {

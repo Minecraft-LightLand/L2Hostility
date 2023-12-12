@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.content.capability.chunk;
 
-import dev.xkmc.l2serial.serialization.codec.TagCodec;
-import dev.xkmc.l2serial.util.Wrappers;
+import dev.xkmc.l2library.serial.codec.TagCodec;
+import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.chunk.LevelChunk;

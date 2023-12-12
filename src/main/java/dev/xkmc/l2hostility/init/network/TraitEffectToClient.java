@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.init.network;
 
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
-import dev.xkmc.l2serial.network.SerialPacketBase;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.network.NetworkEvent;

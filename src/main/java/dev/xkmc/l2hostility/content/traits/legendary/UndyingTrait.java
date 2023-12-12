@@ -7,7 +7,6 @@ import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffects;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
@@ -22,10 +21,10 @@ public class UndyingTrait extends LegendaryTrait {
 
 	@Override
 	public void onDeath(int level, LivingEntity entity, LivingDeathEvent event) {
-		if (entity.level().isClientSide()) {
+		if (entity.level.isClientSide()) {
 			return;
 		}
-		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+		if (event.getSource().isBypassInvul()) {
 			return;
 		}
 		if (MobTraitCap.HOLDER.get(entity).hasTrait(LHTraits.SPLIT.get())) {

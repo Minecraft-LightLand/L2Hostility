@@ -1,9 +1,9 @@
 package dev.xkmc.l2hostility.content.item.spawner;
 
-import dev.xkmc.l2complements.init.data.LangData;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2modularblock.mult.OnClickBlockMethod;
-import dev.xkmc.l2modularblock.mult.ToolTipBlockMethod;
+import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
+import dev.xkmc.l2library.block.mult.ToolTipBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -47,7 +47,7 @@ public class ClickTraitMethod implements OnClickBlockMethod, ToolTipBlockMethod 
 	@Override
 	public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter blockGetter, List<Component> list, TooltipFlag tooltipFlag) {
 		if (!LHConfig.COMMON.allowHostilitySpawner.get())
-			list.add(LangData.IDS.BANNED.get());
+			list.add(LangData.BANNED.get());
 	}
 
 }

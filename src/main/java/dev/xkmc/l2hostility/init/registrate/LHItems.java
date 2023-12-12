@@ -1,8 +1,6 @@
 package dev.xkmc.l2hostility.init.registrate;
 
-import com.tterrag.registrate.builders.ItemBuilder;
-import com.tterrag.registrate.util.entry.ItemEntry;
-import com.tterrag.registrate.util.nullness.NonNullFunction;
+
 import dev.xkmc.l2hostility.content.entity.ChargeType;
 import dev.xkmc.l2hostility.content.item.consumable.*;
 import dev.xkmc.l2hostility.content.item.curio.curse.*;
@@ -17,8 +15,11 @@ import dev.xkmc.l2hostility.content.item.wand.TargetSelectWand;
 import dev.xkmc.l2hostility.content.item.wand.TraitAdderWand;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullFunction;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -63,10 +64,11 @@ public class LHItems {
 	public static final ItemEntry<RingOfHealing> RING_HEALING;
 	public static final ItemEntry<FlamingThorn> FLAMING_THORN;
 	public static final ItemEntry<ImagineBreaker> IMAGINE_BREAKER;
-	public static final ItemEntry<PlatinumStar> PLATINUM_STAR;
-	public static final ItemEntry<InfinityGlove> INFINITY_GLOVE;
-	public static final ItemEntry<OddeyesGlasses> ODDEYES_GLASSES;
-	public static final ItemEntry<TripleStripCape> TRIPLE_STRIP_CAPE;
+
+	//public static final ItemEntry<PlatinumStar> PLATINUM_STAR; TODO not working
+	//public static final ItemEntry<InfinityGlove> INFINITY_GLOVE;
+	//public static final ItemEntry<OddeyesGlasses> ODDEYES_GLASSES;
+	//public static final ItemEntry<TripleStripCape> TRIPLE_STRIP_CAPE;
 	public static final ItemEntry<Abrahadabra> ABRAHADABRA;
 	public static final ItemEntry<GreedOfNidhoggur> NIDHOGGUR;
 	public static final ItemEntry<PocketOfRestoration> RESTORATION;
@@ -168,13 +170,13 @@ public class LHItems {
 
 			FLAMING_THORN = curio("flaming_thorn", FlamingThorn::new).tag(chaos, hand).register();
 			IMAGINE_BREAKER = curio("imagine_breaker", ImagineBreaker::new).tag(chaos, hand, LHTagGen.NO_SEAL).register();
-			PLATINUM_STAR = curio("platinum_star", PlatinumStar::new).tag(chaos, hand, charm).register();
-			INFINITY_GLOVE = curio("infinity_glove", InfinityGlove::new).tag(chaos, hand).register();
+			//PLATINUM_STAR = curio("platinum_star", PlatinumStar::new).tag(chaos, hand, charm).register();
+			//INFINITY_GLOVE = curio("infinity_glove", InfinityGlove::new).tag(chaos, hand).register();
 
 			TagKey<Item> back = ItemTags.create(new ResourceLocation("curios", "back"));
 
-			ODDEYES_GLASSES = curio("oddeyes_glasses", OddeyesGlasses::new).tag(chaos, head).register();
-			TRIPLE_STRIP_CAPE = curio("triple_strip_cape", TripleStripCape::new).tag(chaos, back).register();
+			//ODDEYES_GLASSES = curio("oddeyes_glasses", OddeyesGlasses::new).tag(chaos, head).register();
+			//TRIPLE_STRIP_CAPE = curio("triple_strip_cape", TripleStripCape::new).tag(chaos, back).register();
 
 			ABRAHADABRA = curio("abrahadabra", Abrahadabra::new).tag(chaos, curse, LHTagGen.NO_SEAL).register();
 			NIDHOGGUR = curio("greed_of_nidhoggur", GreedOfNidhoggur::new).tag(chaos, curse, LHTagGen.NO_SEAL).register();
@@ -201,7 +203,7 @@ public class LHItems {
 		}
 
 		SEAL = L2Hostility.REGISTRATE.item("sealed_item", p -> new SealedItem(p.stacksTo(1).fireResistant()))
-				.removeTab(LHBlocks.TAB.getKey()).tag(LHTagGen.NO_SEAL).register();
+				.tab(() -> null).tag(LHTagGen.NO_SEAL).register();
 	}
 
 	private static <T extends Item> ItemBuilder<T, ?> curio(String str, NonNullFunction<Item.Properties, T> factory) {

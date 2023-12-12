@@ -17,7 +17,7 @@ import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -74,8 +74,8 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public void tick() {
-		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
-		if (player.level().isClientSide()) {
+		var opt = ChunkDifficulty.at(player.level, player.blockPosition());
+		if (player.level.isClientSide()) {
 			if (updateChunkFlag) {
 				if (pendingFlag) {
 					if (pendingTimeout > 0) {
@@ -101,14 +101,14 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		if (opt.isPresent()) {
 			var sec = opt.get().getSection(player.blockPosition().getY());
 			if (sec.activePos != null) {
-				if (player.level().isLoaded(sec.activePos)) {
-					if (player.level().getBlockEntity(sec.activePos) instanceof TraitSpawnerBlockEntity spawner) {
+				if (player.level.isLoaded(sec.activePos)) {
+					if (player.level.getBlockEntity(sec.activePos) instanceof TraitSpawnerBlockEntity spawner) {
 						spawner.track(player);
 					}
 				}
 			}
 		}
-		if (dimensions.add(player.level().dimension().location())) {
+		if (dimensions.add(player.level.dimension().location())) {
 			sync();
 		}
 	}

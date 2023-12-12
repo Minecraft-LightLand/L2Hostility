@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
-import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
+
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
@@ -10,11 +9,10 @@ import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.LHDamageTypes;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -85,7 +83,7 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache, TraitEffectCache traitCache) {
 		var e = cache.getLivingHurtEvent();
 		assert e != null;
-		if (e.getAmount() > 0 && !e.getSource().is(LHDamageTypes.KILLER_AURA)) {
+		if (e.getAmount() > 0 && !e.getSource().getMsgId().equals("killer_aura")) {
 			postHurtPlayer(level, attacker, traitCache);
 		}
 	}
@@ -109,7 +107,7 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	public void onHurtByOthers(int level, LivingEntity entity, LivingHurtEvent event) {
 	}
 
-	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {
+	public void onCreateSource(int level, LivingEntity attacker, LivingAttackEvent event) {
 	}
 
 	public void onDeath(int level, LivingEntity entity, LivingDeathEvent event) {
@@ -117,7 +115,7 @@ public class MobTrait extends NamedEntry<MobTrait> {
 
 	public MutableComponent getFullDesc(@Nullable Integer value) {
 		var ans = getDesc();
-		if (value != null) ans = ans.append(CommonComponents.SPACE)
+		if (value != null) ans = ans.append(" ")
 				.append(Component.translatable("enchantment.level." + value));
 		return ans.withStyle(Style.EMPTY.withColor(color.getAsInt()));
 	}

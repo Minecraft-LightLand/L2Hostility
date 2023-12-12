@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.menu.tab;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.SectionDifficulty;
@@ -8,11 +9,10 @@ import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.init.L2HostilityClient;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2tabs.tabs.contents.BaseTextScreen;
-import dev.xkmc.l2tabs.tabs.core.TabManager;
+import dev.xkmc.l2library.base.tabs.contents.BaseTextScreen;
+import dev.xkmc.l2library.base.tabs.core.TabManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -32,8 +32,8 @@ public class DifficultyScreen extends BaseTextScreen {
 		new TabManager(this).init(this::addRenderableWidget, L2HostilityClient.TAB_DIFFICULTY);
 	}
 
-	public void render(GuiGraphics g, int mx, int my, float ptick) {
-		super.render(g, mx, my, ptick);
+	public void render(PoseStack pose, int mx, int my, float ptick) {
+		super.render(pose, mx, my, ptick);
 		int x = this.leftPos + 8;
 		int y = this.topPos + 6;
 		List<Pair<Component, Supplier<List<Component>>>> list = new ArrayList<>();
@@ -44,11 +44,11 @@ public class DifficultyScreen extends BaseTextScreen {
 			if (mx >= x && mx <= x + font.width(c.getFirst()) && my >= y && my <= y + 10) {
 				tooltip = c.getSecond() == null ? null : c.getSecond().get();
 			}
-			g.drawString(this.font, c.getFirst(), x, y, 0, false);
+			drawString(pose, this.font, c.getFirst(), x, y, 0);
 			y += 10;
 		}
 		if (tooltip != null && !tooltip.isEmpty()) {
-			g.renderComponentTooltip(this.font, tooltip, mx, my);
+			renderComponentTooltip(pose, tooltip, mx, my);
 		}
 	}
 
@@ -71,7 +71,7 @@ public class DifficultyScreen extends BaseTextScreen {
 		int maxCap = cap.getRankCap();
 		list.add(Pair.of(LangData.INFO_PLAYER_CAP.get(maxCap > TraitManager.getMaxLevel() ?
 				LangData.TOOLTIP_LEGENDARY.get().withStyle(formats[2]) : maxCap), List::of));
-		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
+		var opt = ChunkDifficulty.at(player.level, player.blockPosition());
 		if (opt.isPresent()) {
 			ChunkDifficulty chunk = opt.get();
 			SectionDifficulty sec = chunk.getSection(player.blockPosition().getY());

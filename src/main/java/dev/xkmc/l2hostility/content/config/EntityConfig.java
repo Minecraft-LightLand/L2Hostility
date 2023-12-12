@@ -1,11 +1,12 @@
 package dev.xkmc.l2hostility.content.config;
 
+import dev.xkmc.l2hostility.backport.config.MergableConfig;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2library.serial.config.BaseConfig;
+import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.network.BaseConfig;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 
@@ -13,7 +14,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 @SerialClass
-public class EntityConfig extends BaseConfig {
+public class EntityConfig extends MergableConfig {
 
 	public static boolean allow(EntityType<?> type, MobTrait trait) {
 		Config config = L2Hostility.ENTITY.getMerged().get(type);

@@ -3,7 +3,6 @@ package dev.xkmc.l2hostility.content.traits.legendary;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
@@ -27,9 +26,9 @@ public class RepellingTrait extends PushPullTrait {
 
 	@Override
 	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
-		if (!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				event.getSource().is(DamageTypeTags.IS_PROJECTILE)) {
+		if (!event.getSource().isBypassInvul() &&
+				!event.getSource().isBypassMagic() &&
+				event.getSource().isProjectile()) {
 			event.setCanceled(true);
 		}
 	}

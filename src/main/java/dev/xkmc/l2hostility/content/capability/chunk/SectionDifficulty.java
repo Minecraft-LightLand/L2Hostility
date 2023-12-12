@@ -10,7 +10,7 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffects;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -74,10 +74,10 @@ public class SectionDifficulty {
 	public List<Component> getSectionDifficultyDetail(Player player) {
 		if (isCleared()) return List.of();
 		var levelDiff = L2Hostility.DIFFICULTY.getMerged()
-				.levelMap.get(player.level().dimensionTypeId().location());
+				.levelMap.get(player.level.dimensionTypeId().location());
 		int dim = levelDiff == null ? WorldDifficultyConfig.defaultLevel().base() : levelDiff.base();
 		BlockPos pos = player.blockPosition();
-		Holder<Biome> biome = player.level().getBiome(pos);
+		Holder<Biome> biome = player.level.getBiome(pos);
 		int bio = biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location()))
 				.map(WorldDifficultyConfig.DifficultyConfig::base).orElse(0);
 		int dist = (int) Math.round(LHConfig.COMMON.distanceFactor.get() *

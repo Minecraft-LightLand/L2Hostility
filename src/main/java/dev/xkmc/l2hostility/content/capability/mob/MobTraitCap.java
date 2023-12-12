@@ -1,6 +1,8 @@
 package dev.xkmc.l2hostility.content.capability.mob;
 
 import com.mojang.datafixers.util.Pair;
+import dev.xkmc.l2hostility.backport.entity.GeneralCapabilityHolder;
+import dev.xkmc.l2hostility.backport.entity.GeneralCapabilityTemplate;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
@@ -14,10 +16,8 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
-import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
-import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
-import dev.xkmc.l2serial.serialization.SerialClass;
-import dev.xkmc.l2serial.util.Wrappers;
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -108,7 +108,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	public boolean reinit(LivingEntity mob, int level, boolean max) {
 		deinit();
-		init(mob.level(), mob, (pos, ins) -> {
+		init(mob.level, mob, (pos, ins) -> {
 			ins.base = level;
 			if (max) ins.setFullChance();
 		});
@@ -182,10 +182,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void tick(LivingEntity mob) {
-		if (!mob.level().isClientSide()) {
+		if (!mob.level.isClientSide()) {
 			if (!isInitialized()) {
-				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
-				opt.ifPresent(chunkDifficulty -> init(mob.level(), mob, chunkDifficulty));
+				var opt = ChunkDifficulty.at(mob.level, mob.blockPosition());
+				opt.ifPresent(chunkDifficulty -> init(mob.level, mob, chunkDifficulty));
 			}
 			if (stage == Stage.INIT) {
 				stage = Stage.POST_INIT;
@@ -214,9 +214,9 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			traits.keySet().removeIf(MobTrait::isBanned);
 			traits.forEach((k, v) -> k.tick(mob, v));
 		}
-		if (!mob.level().isClientSide() && pos != null) {
+		if (!mob.level.isClientSide() && pos != null) {
 			if (summoner == null) {
-				if (mob.level().getBlockEntity(pos) instanceof TraitSpawnerBlockEntity be) {
+				if (mob.level.getBlockEntity(pos) instanceof TraitSpawnerBlockEntity be) {
 					summoner = be;
 				}
 			}

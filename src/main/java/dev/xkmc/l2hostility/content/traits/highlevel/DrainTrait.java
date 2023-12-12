@@ -1,13 +1,13 @@
 package dev.xkmc.l2hostility.content.traits.highlevel;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
-import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
+import dev.xkmc.l2hostility.backport.damage.DamageModifier;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.traits.EffectBooster;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -45,8 +45,7 @@ public class DrainTrait extends MobTrait {
 		var neg = target.getActiveEffects().stream()
 				.filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL)
 				.count();
-		cache.addHurtModifier(DamageModifier
-				.multTotal((float) (1 + LHConfig.COMMON.drainDamage.get() * level * neg)));
+		DamageModifier.hurtMultTotal(cache, (float) (1 + LHConfig.COMMON.drainDamage.get() * level * neg));
 	}
 
 	@Override

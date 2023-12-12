@@ -25,7 +25,7 @@ public class TargetSelectWand extends BaseWand {
 	@Override
 	public void clickTarget(ItemStack stack, Player player, LivingEntity entity) {
 		if (stack.getOrCreateTag().contains(KEY)) {
-			Entity other = entity.level().getEntity(stack.getOrCreateTag().getInt(KEY));
+			Entity other = entity.level.getEntity(stack.getOrCreateTag().getInt(KEY));
 			if (other instanceof LivingEntity le && le != entity) {
 				boolean succeed = false;
 				if (entity instanceof Mob mob) {

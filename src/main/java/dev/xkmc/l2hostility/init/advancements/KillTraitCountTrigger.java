@@ -1,17 +1,17 @@
 package dev.xkmc.l2hostility.init.advancements;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2library.serial.advancements.BaseCriterion;
-import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
-import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import dev.xkmc.l2library.base.advancements.BaseCriterion;
+import dev.xkmc.l2library.base.advancements.BaseCriterionInstance;
+import dev.xkmc.l2library.serial.SerialClass;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class KillTraitCountTrigger extends BaseCriterion<KillTraitCountTrigger.Ins, KillTraitCountTrigger> {
 
 	public static Ins ins(int count) {
-		var ans = new Ins(HostilityTriggers.TRAIT_COUNT.getId(), ContextAwarePredicate.ANY);
+		var ans = new Ins(HostilityTriggers.TRAIT_COUNT.getId(), EntityPredicate.Composite.ANY);
 		ans.count = count;
 		return ans;
 	}
@@ -30,7 +30,7 @@ public class KillTraitCountTrigger extends BaseCriterion<KillTraitCountTrigger.I
 		@SerialClass.SerialField
 		public int count;
 
-		public Ins(ResourceLocation id, ContextAwarePredicate player) {
+		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
 			super(id, player);
 		}
 

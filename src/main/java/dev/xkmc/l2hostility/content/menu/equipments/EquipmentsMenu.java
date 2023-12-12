@@ -1,9 +1,9 @@
 package dev.xkmc.l2hostility.content.menu.equipments;
 
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2library.base.menu.base.BaseContainerMenu;
-import dev.xkmc.l2library.base.menu.base.PredSlot;
-import dev.xkmc.l2library.base.menu.base.SpriteManager;
+import dev.xkmc.l2library.base.menu.BaseContainerMenu;
+import dev.xkmc.l2library.base.menu.PredSlot;
+import dev.xkmc.l2library.base.menu.SpriteManager;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
@@ -44,7 +44,7 @@ public class EquipmentsMenu extends BaseContainerMenu<EquipmentsMenu> {
 		}
 		EquipmentSlot exp = LivingEntity.getEquipmentSlotForItem(stack);
 		if (exp == slot) return true;
-		return !exp.isArmor();
+		return exp.getType() != EquipmentSlot.Type.ARMOR;
 	}
 
 	@Override

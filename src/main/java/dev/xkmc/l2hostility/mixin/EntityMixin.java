@@ -3,7 +3,7 @@ package dev.xkmc.l2hostility.mixin;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.events.ClientGlowingHandler;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
-import dev.xkmc.l2serial.util.Wrappers;
+import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;

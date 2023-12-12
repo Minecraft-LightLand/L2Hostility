@@ -3,8 +3,8 @@ package dev.xkmc.l2hostility.init;
 import dev.xkmc.l2hostility.content.menu.tab.DifficultyOverlay;
 import dev.xkmc.l2hostility.content.menu.tab.DifficultyTab;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2tabs.tabs.core.TabRegistry;
-import dev.xkmc.l2tabs.tabs.core.TabToken;
+import dev.xkmc.l2library.base.tabs.core.TabRegistry;
+import dev.xkmc.l2library.base.tabs.core.TabToken;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
@@ -23,7 +23,7 @@ public class L2HostilityClient {
 	@SubscribeEvent
 	public static void client(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
-			TAB_DIFFICULTY = TabRegistry.registerTab(5000, DifficultyTab::new,
+			TAB_DIFFICULTY = TabRegistry.registerTab(DifficultyTab::new,
 					() -> Items.ZOMBIE_HEAD, LangData.INFO_TAB_TITLE.get());
 		});
 	}

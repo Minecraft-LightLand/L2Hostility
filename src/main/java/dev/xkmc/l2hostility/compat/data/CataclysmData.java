@@ -2,19 +2,18 @@ package dev.xkmc.l2hostility.compat.data;
 
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModItems;
-import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.compat.curios.CurioEntityBuilder;
-import dev.xkmc.l2library.compat.curios.SlotCondition;
-import dev.xkmc.l2library.serial.config.ConfigDataProvider;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateRecipeProvider;
+import dev.xkmc.l2library.serial.network.BaseConfig;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 import static dev.xkmc.l2hostility.init.data.LHConfigGen.addEntity;
@@ -25,7 +24,7 @@ public class CataclysmData {
 
 	}
 
-	public static void genConfig(ConfigDataProvider.Collector collector) {
+	public static void genConfig(Map<String, BaseConfig> collector) {
 		int equipLevel = 400;
 		addEntity(collector, 200, 50, ModEntities.ENDER_GUARDIAN, List.of(
 						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
@@ -71,17 +70,4 @@ public class CataclysmData {
 		return stack;
 	}
 
-	public static void genSlot(BiConsumer<String, Record> map) {
-		map.accept("l2hostility/curios/entities/l2hostility_cataclysm", new CurioEntityBuilder(
-				new ArrayList<>(List.of(
-						ModEntities.ENDER_GUARDIAN.getId(),
-						ModEntities.NETHERITE_MONSTROSITY.getId(),
-						ModEntities.IGNIS.getId(),
-						ModEntities.THE_HARBINGER.getId(),
-						ModEntities.THE_LEVIATHAN.getId()
-				)),
-				new ArrayList<>(List.of("ring", "hands")),
-				SlotCondition.of()
-		));
-	}
 }

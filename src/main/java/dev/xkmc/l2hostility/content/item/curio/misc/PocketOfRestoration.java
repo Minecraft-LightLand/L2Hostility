@@ -38,14 +38,14 @@ public class PocketOfRestoration extends CurioItem implements ISimpleCapItem {
 	@Override
 	public void curioTick(ItemStack stack, SlotContext slotContext) {
 		var le = slotContext.entity();
-		if (le.level().isClientSide) return;
+		if (le.level.isClientSide) return;
 		var list = CurioCompat.getItemAccess(le);
 
 		if (stack.getTag() != null && stack.getTag().contains(ROOT)) {
 			var tag = stack.getOrCreateTagElement(ROOT);
 			long time = tag.getLong(START);
 			int dur = tag.getInt(SealedItem.TIME);
-			if (le.level().getGameTime() >= time + dur) {
+			if (le.level.getGameTime() >= time + dur) {
 				ItemStack result = ItemStack.of(tag.getCompound(SealedItem.DATA));
 				EntitySlotAccess slot = CurioCompat.decode(tag.getString(KEY), le);
 				if (slot != null && slot.get().isEmpty()) {
@@ -65,7 +65,7 @@ public class PocketOfRestoration extends CurioItem implements ISimpleCapItem {
 				ItemStack sealed = e.get();
 				e.set(ItemStack.EMPTY);
 				String id = e.getID();
-				long time = le.level().getGameTime();
+				long time = le.level.getGameTime();
 				stack.hurtAndBreak(1, le, x -> {
 				});
 				setData(stack, sealed, id, time);

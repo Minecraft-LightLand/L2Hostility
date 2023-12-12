@@ -2,7 +2,7 @@ package dev.xkmc.l2hostility.mixin;
 
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.events.MiscHandlers;
-import dev.xkmc.l2serial.util.Wrappers;
+import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;

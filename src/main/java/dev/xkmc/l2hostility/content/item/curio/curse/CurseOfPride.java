@@ -2,13 +2,13 @@ package dev.xkmc.l2hostility.content.item.curio.curse;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
-import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
+import dev.xkmc.l2hostility.backport.damage.DamageModifier;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.item.curio.core.ISimpleCapItem;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
 import dev.xkmc.l2library.util.math.MathHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -38,7 +38,7 @@ public class CurseOfPride extends CurseCurioItem implements ISimpleCapItem {
 	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {
 		int level = DifficultyLevel.ofAny(user);
 		double rate = LHConfig.COMMON.prideDamageBonus.get();
-		cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
+		DamageModifier.hurtMultTotal(cache, (float) (1 + level * rate));
 	}
 
 	@Override

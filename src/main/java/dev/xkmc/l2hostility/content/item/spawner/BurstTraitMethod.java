@@ -2,8 +2,8 @@ package dev.xkmc.l2hostility.content.item.spawner;
 
 import dev.xkmc.l2hostility.content.capability.chunk.SectionDifficulty;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2modularblock.mult.PlacementBlockMethod;
-import dev.xkmc.l2modularblock.mult.ToolTipBlockMethod;
+import dev.xkmc.l2library.block.mult.PlacementBlockMethod;
+import dev.xkmc.l2library.block.mult.ToolTipBlockMethod;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;

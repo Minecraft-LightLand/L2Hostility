@@ -1,10 +1,10 @@
 package dev.xkmc.l2hostility.content.item.curio.core;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
 import dev.xkmc.l2library.util.code.GenericItemStack;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

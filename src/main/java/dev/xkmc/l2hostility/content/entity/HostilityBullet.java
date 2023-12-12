@@ -4,6 +4,7 @@ import dev.xkmc.l2hostility.init.registrate.LHEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -45,7 +46,7 @@ public class HostilityBullet extends ShulkerBullet {
 		LivingEntity leowner = owner instanceof LivingEntity ? (LivingEntity) owner : null;
 		float damage = type.getDamage(lv);
 		if (damage > 0) {
-			target.hurt(this.damageSources().mobProjectile(this, leowner), damage);
+			target.hurt(DamageSource.indirectMobAttack(this, leowner), damage);
 		}
 		type.onHit(this, result, lv);
 	}

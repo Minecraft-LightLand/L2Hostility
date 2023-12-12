@@ -1,10 +1,9 @@
 package dev.xkmc.l2hostility.content.entity;
 
-import dev.xkmc.l2library.init.explosion.BaseExplosion;
-import dev.xkmc.l2library.init.explosion.BaseExplosionContext;
-import dev.xkmc.l2library.init.explosion.ExplosionHandler;
-import dev.xkmc.l2library.init.explosion.VanillaExplosionContext;
-import net.minecraft.tags.DamageTypeTags;
+import dev.xkmc.l2hostility.backport.explosion.BaseExplosion;
+import dev.xkmc.l2hostility.backport.explosion.BaseExplosionContext;
+import dev.xkmc.l2hostility.backport.explosion.ExplosionHandler;
+import dev.xkmc.l2hostility.backport.explosion.VanillaExplosionContext;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.level.Explosion;
@@ -31,8 +30,8 @@ public enum BulletType {
 		if (this == EXPLODE) {
 			Vec3 pos = result.getLocation();
 			ExplosionHandler.explode(new BaseExplosion(
-					new BaseExplosionContext(bullet.level(), pos.x, pos.y, pos.z, 1 + level),
-					new VanillaExplosionContext(bullet, null, null, false, Explosion.BlockInteraction.KEEP),
+					new BaseExplosionContext(bullet.level, pos.x, pos.y, pos.z, 1 + level),
+					new VanillaExplosionContext(bullet, null, null, false, Explosion.BlockInteraction.NONE),
 					bullet::isTarget));
 		}
 	}
@@ -43,7 +42,7 @@ public enum BulletType {
 			return;
 		}
 		if (this == EXPLODE) {
-			if (event.getSource().is(DamageTypeTags.IS_EXPLOSION)) {
+			if (event.getSource().isExplosion()) {
 				event.setCanceled(true);
 			}
 		}

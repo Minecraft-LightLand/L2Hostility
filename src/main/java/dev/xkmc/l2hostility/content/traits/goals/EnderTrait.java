@@ -1,13 +1,11 @@
 package dev.xkmc.l2hostility.content.traits.goals;
 
-import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -26,19 +24,19 @@ public class EnderTrait extends LegendaryTrait {
 
 	@Override
 	public void tick(LivingEntity mob, int level) {
-		if (mob.level().isClientSide()) return;
+		if (mob.level.isClientSide()) return;
 		int duration = LHConfig.COMMON.teleportDuration.get();
 		if (mob.tickCount % duration == 0 && mob instanceof Mob m && m.getTarget() != null) {
 			Vec3 old = mob.position();
 			Vec3 target = m.getTarget().position();
 			mob.teleportTo(target.x(), target.y(), target.z());
-			if (!mob.level().noCollision(mob)) {
+			if (!mob.level.noCollision(mob)) {
 				mob.teleportTo(old.x(), old.y(), old.z());
 				return;
 			}
-			mob.level().gameEvent(GameEvent.TELEPORT, m.position(), GameEvent.Context.of(mob));
+			mob.level.gameEvent(GameEvent.TELEPORT, m.position(), GameEvent.Context.of(mob));
 			if (!mob.isSilent()) {
-				mob.level().playSound(null, mob.xo, mob.yo, mob.zo, SoundEvents.ENDERMAN_TELEPORT, mob.getSoundSource(), 1.0F, 1.0F);
+				mob.level.playSound(null, mob.xo, mob.yo, mob.zo, SoundEvents.ENDERMAN_TELEPORT, mob.getSoundSource(), 1.0F, 1.0F);
 				mob.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
 			}
 		}
@@ -46,10 +44,10 @@ public class EnderTrait extends LegendaryTrait {
 
 	@Override
 	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
-		if (!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				!event.getSource().is(L2DamageTypes.MAGIC)) {
-			if (teleport(entity) || event.getSource().is(DamageTypeTags.IS_PROJECTILE)) {
+		if (!event.getSource().isBypassInvul() &&
+				!event.getSource().isBypassMagic() &&
+				!event.getSource().isMagic()) {
+			if (teleport(entity) || event.getSource().isProjectile()) {
 				event.setCanceled(true);
 			}
 		}
@@ -57,7 +55,7 @@ public class EnderTrait extends LegendaryTrait {
 
 	private static boolean teleport(LivingEntity entity) {
 		int r = LHConfig.COMMON.teleportRange.get();
-		if (!entity.level().isClientSide() && entity.isAlive() && r > 0) {
+		if (!entity.level.isClientSide() && entity.isAlive() && r > 0) {
 			double d0 = entity.getX() + (entity.getRandom().nextDouble() - 0.5D) * r * 2;
 			double d1 = entity.getY() + (double) (entity.getRandom().nextInt(r * 2) - r);
 			double d2 = entity.getZ() + (entity.getRandom().nextDouble() - 0.5D) * r * 2;
@@ -69,12 +67,12 @@ public class EnderTrait extends LegendaryTrait {
 
 	private static boolean teleport(LivingEntity entity, double pX, double pY, double pZ) {
 		BlockPos.MutableBlockPos ipos = new BlockPos.MutableBlockPos(pX, pY, pZ);
-		while (ipos.getY() > entity.level().getMinBuildHeight() && !entity.level().getBlockState(ipos).blocksMotion()) {
+		while (ipos.getY() > entity.level.getMinBuildHeight() && !entity.level.getBlockState(ipos).getMaterial().blocksMotion()) {
 			ipos.move(Direction.DOWN);
 		}
 
-		BlockState blockstate = entity.level().getBlockState(ipos);
-		boolean flag = blockstate.blocksMotion();
+		BlockState blockstate = entity.level.getBlockState(ipos);
+		boolean flag = blockstate.getMaterial().blocksMotion();
 		boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
 		if (flag && !flag1) {
 			EntityTeleportEvent.EnderEntity event = ForgeEventFactory.onEnderTeleport(entity, pX, pY, pZ);
@@ -82,9 +80,9 @@ public class EnderTrait extends LegendaryTrait {
 			Vec3 vec3 = entity.position();
 			boolean flag2 = entity.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
 			if (flag2) {
-				entity.level().gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(entity));
+				entity.level.gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(entity));
 				if (!entity.isSilent()) {
-					entity.level().playSound(null, entity.xo, entity.yo, entity.zo, SoundEvents.ENDERMAN_TELEPORT, entity.getSoundSource(), 1.0F, 1.0F);
+					entity.level.playSound(null, entity.xo, entity.yo, entity.zo, SoundEvents.ENDERMAN_TELEPORT, entity.getSoundSource(), 1.0F, 1.0F);
 					entity.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
 				}
 			}

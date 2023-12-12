@@ -1,12 +1,12 @@
 package dev.xkmc.l2hostility.content.traits.highlevel;
 
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
-import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
+import dev.xkmc.l2hostility.backport.damage.DamageModifier;
 import dev.xkmc.l2hostility.content.item.traits.ReprintHandler;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -58,7 +58,7 @@ public class ReprintTrait extends MobTrait {
 			}
 		}
 		float factor = total >= 0 ? total : (float) Math.pow(2, maxLv);
-		cache.addHurtModifier(DamageModifier.multTotal(1 + (float) (LHConfig.COMMON.reprintDamage.get() * factor)));
+		DamageModifier.hurtMultTotal(cache,1 + (float) (LHConfig.COMMON.reprintDamage.get() * factor));
 	}
 
 	@Override

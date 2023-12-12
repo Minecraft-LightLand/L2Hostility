@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.compat.curios;
 
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
-import dev.xkmc.l2tabs.compat.CuriosWrapper;
+import dev.xkmc.l2library.compat.curio.CuriosWrapper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,7 +31,7 @@ public record EntityCuriosMenuPvd(LivingEntity e, int page) implements MenuProvi
 	}
 
 	public void open(ServerPlayer player) {
-		if (CuriosApi.getCuriosInventory(e).resolve().isPresent())
+		if (CuriosApi.getCuriosHelper().getCuriosHandler(e).resolve().isPresent())
 			NetworkHooks.openScreen(player, this, this::writeBuffer);
 	}
 

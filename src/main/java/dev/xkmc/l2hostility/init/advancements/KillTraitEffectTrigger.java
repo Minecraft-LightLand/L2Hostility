@@ -2,10 +2,10 @@ package dev.xkmc.l2hostility.init.advancements;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
-import dev.xkmc.l2library.serial.advancements.BaseCriterion;
-import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
-import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import dev.xkmc.l2library.base.advancements.BaseCriterion;
+import dev.xkmc.l2library.base.advancements.BaseCriterionInstance;
+import dev.xkmc.l2library.serial.SerialClass;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
@@ -14,7 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 public class KillTraitEffectTrigger extends BaseCriterion<KillTraitEffectTrigger.Ins, KillTraitEffectTrigger> {
 
 	public static Ins ins(MobTrait traits, MobEffect effect) {
-		var ans = new Ins(HostilityTriggers.TRAIT_EFFECT.getId(), ContextAwarePredicate.ANY);
+		var ans = new Ins(HostilityTriggers.TRAIT_EFFECT.getId(), EntityPredicate.Composite.ANY);
 		ans.trait = traits;
 		ans.effect = effect;
 		return ans;
@@ -37,7 +37,7 @@ public class KillTraitEffectTrigger extends BaseCriterion<KillTraitEffectTrigger
 		@SerialClass.SerialField
 		public MobEffect effect;
 
-		public Ins(ResourceLocation id, ContextAwarePredicate player) {
+		public Ins(ResourceLocation id, EntityPredicate.Composite player) {
 			super(id, player);
 		}
 

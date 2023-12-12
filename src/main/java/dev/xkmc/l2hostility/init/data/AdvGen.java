@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.init.data;
 
-import com.tterrag.registrate.providers.RegistrateAdvancementProvider;
 import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.advancements.KillTraitCountTrigger;
@@ -9,12 +8,12 @@ import dev.xkmc.l2hostility.init.advancements.KillTraitFlameTrigger;
 import dev.xkmc.l2hostility.init.advancements.KillTraitsTrigger;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.serial.advancements.AdvancementGenerator;
-import dev.xkmc.l2library.serial.advancements.CriterionBuilder;
+import dev.xkmc.l2library.base.advancements.AdvancementGenerator;
+import dev.xkmc.l2library.base.advancements.CriterionBuilder;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateAdvancementProvider;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.ConsumeItemTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
 
@@ -25,9 +24,6 @@ public class AdvGen {
 		gen.new TabBuilder("hostility").root("root", LHTraits.ENDER.get().asItem(),
 						CriterionBuilder.item(LHItems.HOSTILITY_ORB.get()),
 						"Welcome to L2Hostility", "Your survival guide")
-				.root().patchouli(L2Hostility.REGISTRATE, CriterionBuilder.item(LHItems.HOSTILITY_ORB.get()),
-						new ResourceLocation(L2Hostility.MODID, "hostility_guide"),
-						"Intro to L2Hostility", "Read the hostility guide")
 				.root().create("detector", LHItems.DETECTOR.get(),
 						CriterionBuilder.item(LHItems.DETECTOR.get()),
 						"Safety Compass", "Obtain Hostility Detector")

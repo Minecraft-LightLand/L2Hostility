@@ -58,7 +58,7 @@ public class TraitSymbol extends Item {
 				}
 				return InteractionResult.FAIL;
 			}
-			if (player.level().isClientSide()) {
+			if (player.level.isClientSide()) {
 				return InteractionResult.SUCCESS;
 			}
 			int val = cap.traits.compute(trait, (k, v) -> (v == null ? 0 : v) + 1);

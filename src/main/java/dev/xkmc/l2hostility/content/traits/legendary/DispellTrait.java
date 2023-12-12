@@ -1,13 +1,9 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
-import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
-import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
-import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -23,9 +19,8 @@ public class DispellTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {
-		if (event.getResult() == L2DamageTypes.MOB_ATTACK)
-			event.enable(DefaultDamageState.BYPASS_MAGIC);
+	public void onCreateSource(int level, LivingEntity attacker, LivingAttackEvent event) {
+		event.getSource().bypassMagic();
 	}
 
 	@Override
@@ -37,20 +32,20 @@ public class DispellTrait extends LegendaryTrait {
 				list.add(stack);
 			}
 		}
-		if (list.size() == 0) return;
+		if (list.isEmpty()) return;
 		int time = LHConfig.COMMON.dispellTime.get() * level;
 		int count = Math.min(level, list.size());
 		for (int i = 0; i < count; i++) {
 			int index = attacker.getRandom().nextInt(list.size());
-			EnchantmentDisabler.disableEnchantment(attacker.level(), list.remove(index), time);
+			EnchantmentDisabler.disableEnchantment(attacker.level, list.remove(index), time);
 		}
 	}
 
 	@Override
 	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
-		if (!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				event.getSource().is(L2DamageTypes.MAGIC)) {
+		if (!event.getSource().isBypassInvul() &&
+				!event.getSource().isBypassMagic() &&
+				event.getSource().isMagic()) {
 			event.setCanceled(true);
 		}
 	}

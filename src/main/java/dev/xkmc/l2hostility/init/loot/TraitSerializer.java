@@ -3,7 +3,7 @@ package dev.xkmc.l2hostility.init.loot;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import dev.xkmc.l2serial.serialization.codec.JsonCodec;
+import dev.xkmc.l2library.serial.codec.JsonCodec;
 import net.minecraft.world.level.storage.loot.Serializer;
 
 import java.util.Objects;

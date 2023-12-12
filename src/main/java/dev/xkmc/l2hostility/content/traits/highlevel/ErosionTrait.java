@@ -1,10 +1,10 @@
 package dev.xkmc.l2hostility.content.traits.highlevel;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
-import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
+import dev.xkmc.l2hostility.backport.damage.DamageModifier;
 import dev.xkmc.l2hostility.content.item.traits.DurabilityEater;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -22,7 +22,7 @@ public class ErosionTrait extends SlotIterateDamageTrait {
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache, TraitEffectCache traitCache) {
 		int count = process(level, attacker, cache.getAttackTarget());
 		if (count < level) {
-			cache.addHurtModifier(DamageModifier.multTotal((float) (LHConfig.COMMON.erosionDamage.get() * level * (level - count))));
+			DamageModifier.hurtMultTotal(cache, (float) (LHConfig.COMMON.erosionDamage.get() * level * (level - count)));
 		}
 	}
 

@@ -25,11 +25,11 @@ public abstract class PushPullTrait extends LegendaryTrait {
 	public void tick(LivingEntity mob, int level) {
 		int r = getRange();
 		List<? extends LivingEntity> list;
-		if (mob.level().isClientSide()) {
-			list = mob.level().getEntities(EntityTypeTest.forClass(Player.class),
+		if (mob.level.isClientSide()) {
+			list = mob.level.getEntities(EntityTypeTest.forClass(Player.class),
 					mob.getBoundingBox().inflate(r), e -> e.isLocalPlayer() && !e.getAbilities().instabuild);
 		} else {
-			list = mob.level().getEntities(EntityTypeTest.forClass(LivingEntity.class),
+			list = mob.level.getEntities(EntityTypeTest.forClass(LivingEntity.class),
 					mob.getBoundingBox().inflate(r), e ->
 							e instanceof Player pl && !pl.getAbilities().instabuild ||
 									e instanceof Mob m && m.getTarget() == mob);

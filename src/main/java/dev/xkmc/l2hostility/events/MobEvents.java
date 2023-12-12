@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.events;
 
-import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
-import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
+import dev.xkmc.l2complements.network.ArmorEffectConfig;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
@@ -12,7 +11,6 @@ import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.mixin.ForgeInternalHandlerAccessor;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -33,9 +31,9 @@ public class MobEvents {
 
 	@SubscribeEvent
 	public static void onMobAttack(LivingAttackEvent event) {
-		boolean bypassInvul = event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY);
-		boolean bypassMagic = event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS);
-		boolean magic = event.getSource().is(L2DamageTypes.MAGIC);
+		boolean bypassInvul = event.getSource().isBypassInvul();
+		boolean bypassMagic = event.getSource().isBypassMagic();
+		boolean magic = event.getSource().isMagic();
 		if (magic && !bypassInvul && !bypassMagic) {
 			if (CurioCompat.hasItem(event.getEntity(), LHItems.RING_DIVINITY.get())) {
 				event.setCanceled(true);
@@ -52,8 +50,8 @@ public class MobEvents {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			MobTraitCap.HOLDER.get(event.getEntity()).traitEvent((k, v) -> k.onHurtByOthers(v, event.getEntity(), event));
 		} else if (event.getEntity() instanceof Player player &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
+				!event.getSource().isBypassMagic() &&
+				!event.getSource().isBypassInvul() &&
 				CurioCompat.hasItem(player, LHItems.CURSE_PRIDE.get())) {
 			int level = PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
 			double rate = LHConfig.COMMON.prideHealthBonus.get();
@@ -116,7 +114,7 @@ public class MobEvents {
 			}
 			int exp = event.getDroppedExperience();
 			int level = cap.getLevel();
-			exp *= 1 + level * LHConfig.COMMON.expDropFactor.get() * level;
+			exp = (int) (exp * (1 + level * LHConfig.COMMON.expDropFactor.get() * level));
 			event.setDroppedExperience(exp);
 		}
 	}
@@ -125,8 +123,8 @@ public class MobEvents {
 	public static void onPotionTest(MobEffectEvent.Applicable event) {
 		LivingEntity entity = event.getEntity();
 		if (CurioCompat.hasItem(entity, LHItems.CURSE_WRATH.get())) {
-			var config = ArmorEffectConfig.get().getImmunity(LHItems.CURSE_WRATH.getId().toString());
-			if (config.contains(event.getEffectInstance().getEffect())) {
+			var config = ArmorEffectConfig.get().immune.get(LHItems.CURSE_WRATH.getId().toString());
+			if (config != null && config.contains(event.getEffectInstance().getEffect())) {
 				event.setResult(Event.Result.DENY);
 			}
 		}

@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.init.data;
 
-import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -124,6 +124,7 @@ public enum LangData {
 
 	COMMAND_MOB_SUCCEED("command.mob.success", "Performed actions on %s mobs", 1),
 
+	BANNED("tooltip.banned", "This item is banned", 0),
 	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
 	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0),
 	;

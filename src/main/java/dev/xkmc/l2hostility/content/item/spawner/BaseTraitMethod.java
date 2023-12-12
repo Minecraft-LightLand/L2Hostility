@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.content.item.spawner;
 
-import dev.xkmc.l2modularblock.mult.CreateBlockStateBlockMethod;
-import dev.xkmc.l2modularblock.mult.DefaultStateBlockMethod;
-import dev.xkmc.l2modularblock.one.LightBlockMethod;
+import dev.xkmc.l2library.block.mult.CreateBlockStateBlockMethod;
+import dev.xkmc.l2library.block.mult.DefaultStateBlockMethod;
+import dev.xkmc.l2library.block.one.LightBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;

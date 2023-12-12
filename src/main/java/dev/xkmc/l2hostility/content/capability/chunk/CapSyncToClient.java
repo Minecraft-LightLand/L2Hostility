@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.content.capability.chunk;
 
 import dev.xkmc.l2hostility.init.network.ClientSyncHandler;
-import dev.xkmc.l2serial.network.SerialPacketBase;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkEvent;

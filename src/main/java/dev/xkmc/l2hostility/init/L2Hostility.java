@@ -1,8 +1,9 @@
 package dev.xkmc.l2hostility.init;
 
-import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2complements.init.data.TagGen;
-import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
+import dev.xkmc.l2complements.network.ArmorEffectConfig;
+import dev.xkmc.l2complements.network.NetworkManager;
+import dev.xkmc.l2hostility.backport.config.ConfigTypeEntry;
 import dev.xkmc.l2hostility.content.capability.chunk.CapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.InfoRequestToServer;
@@ -21,13 +22,11 @@ import dev.xkmc.l2hostility.init.loot.TraitGLMProvider;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.registrate.*;
-import dev.xkmc.l2library.compat.patchouli.PatchouliHelper;
-import dev.xkmc.l2library.serial.config.ConfigTypeEntry;
-import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
-import dev.xkmc.l2serial.network.SerialPacketBase;
-import net.minecraft.data.PackOutput;
+import dev.xkmc.l2library.init.events.attack.AttackEventHandler;
+import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
+import dev.xkmc.l2library.serial.network.PacketHandlerWithConfig;
+import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -44,8 +43,10 @@ import org.apache.logging.log4j.Logger;
 public class L2Hostility {
 
 	public static final String MODID = "l2hostility";
+
+	private static final String PATH = "l2hostility_config";
 	public static final PacketHandlerWithConfig HANDLER = new PacketHandlerWithConfig(
-			new ResourceLocation(MODID, "main"), 1,
+			new ResourceLocation(MODID, "main"), 1, PATH,
 			e -> e.create(CapSyncPacket.class, NetworkDirection.PLAY_TO_CLIENT),
 			e -> e.create(TraitEffectToClient.class, NetworkDirection.PLAY_TO_CLIENT),
 			e -> e.create(LootDataToClient.class, NetworkDirection.PLAY_TO_CLIENT),
@@ -55,10 +56,12 @@ public class L2Hostility {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final LHRegistrate REGISTRATE = new LHRegistrate(MODID);
 
-	public static final ConfigTypeEntry<WorldDifficultyConfig> DIFFICULTY = new ConfigTypeEntry<>(HANDLER, "difficulty", WorldDifficultyConfig.class);
-	public static final ConfigTypeEntry<TraitConfig> TRAIT = new ConfigTypeEntry<>(HANDLER, "trait", TraitConfig.class);
-	public static final ConfigTypeEntry<WeaponConfig> WEAPON = new ConfigTypeEntry<>(HANDLER, "weapon", WeaponConfig.class);
-	public static final ConfigTypeEntry<EntityConfig> ENTITY = new ConfigTypeEntry<>(HANDLER, "entity", EntityConfig.class);
+	public static final ConfigTypeEntry<WorldDifficultyConfig> DIFFICULTY = new ConfigTypeEntry<>(HANDLER, PATH, "difficulty", WorldDifficultyConfig.class);
+	public static final ConfigTypeEntry<TraitConfig> TRAIT = new ConfigTypeEntry<>(HANDLER, PATH, "trait", TraitConfig.class);
+	public static final ConfigTypeEntry<WeaponConfig> WEAPON = new ConfigTypeEntry<>(HANDLER, PATH, "weapon", WeaponConfig.class);
+	public static final ConfigTypeEntry<EntityConfig> ENTITY = new ConfigTypeEntry<>(HANDLER, PATH, "entity", EntityConfig.class);
+	public static final ConfigTypeEntry<ArmorEffectConfig> ARMOR = new ConfigTypeEntry<>(NetworkManager.HANDLER, "l2complements",
+			NetworkManager.ARMOR.getID(), ArmorEffectConfig.class);
 
 	public L2Hostility() {
 
@@ -68,7 +71,6 @@ public class L2Hostility {
 		LHEntities.register();
 		LHMiscs.register();
 		LHConfig.init();
-		LHDamageTypes.register();
 		LHEnchantments.register();
 		LHEffects.register();
 
@@ -84,21 +86,13 @@ public class L2Hostility {
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LHTagGen::onBlockTagGen);
 		REGISTRATE.addDataGenerator(LHTagGen.ENCH_TAGS, LHTagGen::onEnchTagGen);
-		REGISTRATE.addDataGenerator(TagGen.EFF_TAGS, LHTagGen::onEffTagGen);
+		//TODO REGISTRATE.addDataGenerator(TagGen.EFF_TAGS, LHTagGen::onEffTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, LHTagGen::onItemTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, LHTagGen::onEntityTagGen);
 		REGISTRATE.addDataGenerator(LHTraits.TRAIT_TAGS, LHTagGen::onTraitTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 
-
-		new PatchouliHelper(REGISTRATE, "hostility_guide")
-				.buildModel().buildShapelessRecipe(e -> e
-								.requires(Items.BOOK).requires(Items.ROTTEN_FLESH).requires(Items.BONE),
-						() -> Items.BOOK)
-				.buildBook("L2Hostility Guide",
-						"Find out the mechanics and mob traits to know what to prepare for",
-						1, LHBlocks.TAB.getKey());
-		AttackEventHandler.register(4500, new LHAttackListener());
+		AttackEventHandler.LISTENERS.add(new LHAttackListener());
 	}
 
 	@SubscribeEvent
@@ -111,14 +105,9 @@ public class L2Hostility {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		boolean server = event.includeServer();
-		PackOutput output = event.getGenerator().getPackOutput();
-		var pvd = event.getLookupProvider();
-		var helper = event.getExistingFileHelper();
 		var gen = event.getGenerator();
 		gen.addProvider(server, new LHConfigGen(gen));
 		gen.addProvider(server, new TraitGLMProvider(gen));
-		gen.addProvider(server, new SlotGen(gen));
-		new LHDamageTypes(output, pvd, helper).generate(server, gen);
 	}
 
 	public static void toTrackingChunk(LevelChunk chunk, SerialPacketBase packet) {

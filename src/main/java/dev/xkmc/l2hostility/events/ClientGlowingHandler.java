@@ -27,7 +27,7 @@ public class ClientGlowingHandler {
 				}
 			}
 		}
-		if (le.level().isClientSide()) {
+		if (le.level.isClientSide()) {
 			return isGlowingImpl(le);
 		}
 		return false;

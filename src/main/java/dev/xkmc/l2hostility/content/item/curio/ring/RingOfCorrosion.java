@@ -1,10 +1,10 @@
 package dev.xkmc.l2hostility.content.item.curio.ring;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.item.traits.DurabilityEater;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;

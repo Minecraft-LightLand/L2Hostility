@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.content.item.spawner;
 
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;

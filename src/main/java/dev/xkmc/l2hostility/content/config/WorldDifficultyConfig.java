@@ -1,10 +1,10 @@
 package dev.xkmc.l2hostility.content.config;
 
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2library.serial.config.BaseConfig;
+import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.network.BaseConfig;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;

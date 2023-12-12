@@ -1,11 +1,11 @@
 package dev.xkmc.l2hostility.content.traits.common;
 
-import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.events.MobEvents;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -19,9 +19,9 @@ public class ReflectTrait extends MobTrait {
 
 	@Override
 	public void onHurtByOthers(int level, LivingEntity entity, LivingHurtEvent event) {
-		if (event.getSource().getDirectEntity() instanceof LivingEntity le && !event.getSource().is(L2DamageTypes.MAGIC)) {
+		if (event.getSource().getDirectEntity() instanceof LivingEntity le && !event.getSource().isMagic()) {
 			float factor = (float) (level * LHConfig.COMMON.reflectFactor.get());
-			MobEvents.schedule(() -> le.hurt(entity.level().damageSources().indirectMagic(entity, null), event.getAmount() * factor));
+			MobEvents.schedule(() -> le.hurt(DamageSource.indirectMagic(entity, null), event.getAmount() * factor));
 		}
 	}
 
@@ -32,6 +32,5 @@ public class ReflectTrait extends MobTrait {
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}
-
 
 }

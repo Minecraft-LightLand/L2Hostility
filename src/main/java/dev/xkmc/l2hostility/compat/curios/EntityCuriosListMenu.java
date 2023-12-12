@@ -1,9 +1,9 @@
 package dev.xkmc.l2hostility.compat.curios;
 
+import dev.xkmc.l2library.compat.curio.BaseCuriosListMenu;
+import dev.xkmc.l2library.compat.curio.CuriosEventHandler;
+import dev.xkmc.l2library.compat.curio.CuriosWrapper;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2tabs.compat.BaseCuriosListMenu;
-import dev.xkmc.l2tabs.compat.CuriosEventHandler;
-import dev.xkmc.l2tabs.compat.CuriosWrapper;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,7 +24,7 @@ public class EntityCuriosListMenu extends BaseCuriosListMenu<EntityCuriosListMen
 		ClientLevel level = Proxy.getClientWorld();
 		assert level != null;
 		Entity entity = level.getEntity(id);
-		if (entity instanceof LivingEntity le && CuriosApi.getCuriosInventory(le).resolve().isPresent())
+		if (entity instanceof LivingEntity le && CuriosApi.getCuriosHelper().getCuriosHandler(le).resolve().isPresent())
 			return new EntityCuriosListMenu(type, wid, plInv, new CuriosWrapper(le, page));
 		return null;
 	}
@@ -35,7 +35,7 @@ public class EntityCuriosListMenu extends BaseCuriosListMenu<EntityCuriosListMen
 
 	@Override
 	public void switchPage(ServerPlayer player, int i) {
-		if (CuriosApi.getCuriosInventory(curios.entity).resolve().isPresent()) {
+		if (CuriosApi.getCuriosHelper().getCuriosHandler(curios.entity).resolve().isPresent()) {
 			var pvd = new EntityCuriosMenuPvd(curios.entity, i);
 			CuriosEventHandler.openMenuWrapped(player, () -> NetworkHooks.openScreen(player, pvd, pvd::writeBuffer));
 		}

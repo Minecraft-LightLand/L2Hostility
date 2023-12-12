@@ -27,9 +27,9 @@ public class AuraEffectTrait extends MobTrait {
 	@Override
 	public void tick(LivingEntity mob, int level) {
 		int range = LHConfig.COMMON.range.get(getRegistryName().getPath()).get();
-		if (!mob.level().isClientSide()) {
+		if (!mob.level.isClientSide()) {
 			AABB box = mob.getBoundingBox().inflate(range);
-			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
+			for (var e : mob.level.getEntitiesOfClass(LivingEntity.class, box)) {
 				if (!(e instanceof Player pl) || !pl.getAbilities().instabuild) {
 					if (e.distanceTo(mob) > range) continue;
 					if (CurioCompat.hasItem(e, LHItems.RING_REFLECTION.get())) continue;
@@ -39,13 +39,13 @@ public class AuraEffectTrait extends MobTrait {
 				}
 			}
 		}
-		if (mob.level().isClientSide()) {
+		if (mob.level.isClientSide()) {
 			Vec3 center = mob.position();
 			float tpi = (float) (Math.PI * 2);
 			Vec3 v0 = new Vec3(0, range, 0);
 			v0 = v0.xRot(tpi / 4).yRot(mob.getRandom().nextFloat() * tpi);
 			int k = eff.get().getColor();
-			mob.level().addAlwaysVisibleParticle(ParticleTypes.EFFECT,
+			mob.level.addAlwaysVisibleParticle(ParticleTypes.EFFECT,
 					center.x + v0.x,
 					center.y + v0.y + 0.5f,
 					center.z + v0.z,

@@ -1,11 +1,11 @@
 package dev.xkmc.l2hostility.content.item.curio.misc;
 
 import dev.xkmc.l2complements.init.registrate.LCEffects;
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2library.base.effects.EffectUtil;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;

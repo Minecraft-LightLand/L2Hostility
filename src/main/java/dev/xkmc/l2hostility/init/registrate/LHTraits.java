@@ -1,8 +1,5 @@
 package dev.xkmc.l2hostility.init.registrate;
 
-import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.providers.RegistrateTagsProvider;
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.entity.BulletType;
@@ -19,8 +16,12 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2library.base.L2Registrate;
+import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateTagsProvider;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import net.minecraft.ChatFormatting;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -31,15 +32,16 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 public class LHTraits {
 
-	public static final L2Registrate.RegistryInstance<MobTrait> TRAITS = L2Hostility.REGISTRATE.newRegistry("trait", MobTrait.class, RegistryBuilder::hasTags);
+	public static final L2Registrate.RegistryInstance<MobTrait> TRAITS = L2Hostility.REGISTRATE
+			.newRegistry("trait", MobTrait.class, RegistryBuilder::hasTags);
 
-	public static final ProviderType<RegistrateTagsProvider.IntrinsicImpl<MobTrait>> TRAIT_TAGS =
+	public static final ProviderType<RegistrateTagsProvider<MobTrait>> TRAIT_TAGS =
 			ProviderType.register("tags/trait", type -> (p, e) ->
-					new RegistrateTagsProvider.IntrinsicImpl<>(p, type, "traits",
-							e.getGenerator().getPackOutput(),
-							LHTraits.TRAITS.key(),
-							e.getLookupProvider(),
-							reg -> ResourceKey.create(LHTraits.TRAITS.key(), reg.getRegistryName()),
+					new RegistrateTagsProvider<>(p, type, "traits",
+							e.getGenerator(),
+							LHTraits.TRAITS.get().getSlaveMap(
+									new ResourceLocation("forge", "registry_defaulted_wrapper"),
+									Registry.class),
 							e.getExistingFileHelper()));
 
 	public static final TagKey<MobTrait> POTION = LHTagGen.createTraitTag("potion_trait");

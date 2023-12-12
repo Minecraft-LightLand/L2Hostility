@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.compat.jei;
 
-import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

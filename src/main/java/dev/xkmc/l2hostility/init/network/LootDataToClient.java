@@ -2,8 +2,8 @@ package dev.xkmc.l2hostility.init.network;
 
 import dev.xkmc.l2hostility.compat.jei.ITraitLootRecipe;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
-import dev.xkmc.l2serial.network.SerialPacketBase;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraftforge.common.loot.IGlobalLootModifier;

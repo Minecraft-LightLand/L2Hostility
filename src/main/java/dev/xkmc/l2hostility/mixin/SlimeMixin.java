@@ -3,7 +3,7 @@ package dev.xkmc.l2hostility.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.xkmc.l2hostility.events.MiscHandlers;
-import dev.xkmc.l2serial.util.Wrappers;
+import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.world.entity.monster.Slime;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

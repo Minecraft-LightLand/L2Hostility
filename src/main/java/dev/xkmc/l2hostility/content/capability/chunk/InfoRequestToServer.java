@@ -1,10 +1,10 @@
 package dev.xkmc.l2hostility.content.capability.chunk;
 
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2serial.network.SerialPacketBase;
-import dev.xkmc.l2serial.serialization.SerialClass;
-import dev.xkmc.l2serial.serialization.codec.TagCodec;
-import net.minecraft.core.registries.Registries;
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.serial.codec.TagCodec;
+import dev.xkmc.l2library.serial.network.SerialPacketBase;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -38,9 +38,9 @@ public class InfoRequestToServer extends SerialPacketBase {
 	public void handle(NetworkEvent.Context context) {
 		ServerPlayer player = context.getSender();
 		if (player == null) return;
-		MinecraftServer server = player.level().getServer();
+		MinecraftServer server = player.level.getServer();
 		if (server == null) return;
-		ServerLevel level = server.getLevel(ResourceKey.create(Registries.DIMENSION, this.level));
+		ServerLevel level = server.getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, this.level));
 		if (level == null) return;
 		var cap = ChunkDifficulty.at(level, x, z);
 		if (cap.isEmpty()) return;

@@ -2,8 +2,8 @@ package dev.xkmc.l2hostility.content.item.spawner;
 
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2library.base.tile.BaseBlockEntity;
-import dev.xkmc.l2modularblock.tile_api.TickableBlockEntity;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.block.TickableBlockEntity;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.bossevents.CustomBossEvent;

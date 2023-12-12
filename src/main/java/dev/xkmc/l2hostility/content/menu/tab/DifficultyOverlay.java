@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class DifficultyOverlay extends InfoSideBar<SideBar.IntSignature> {
+public class DifficultyOverlay extends InfoSideBar {
 
 	public DifficultyOverlay() {
 		super(40, 3);
@@ -34,8 +34,8 @@ public class DifficultyOverlay extends InfoSideBar<SideBar.IntSignature> {
 	}
 
 	@Override
-	public IntSignature getSignature() {
-		return new IntSignature(0);
+	public int getSignature() {
+		return 0;
 	}
 
 	@Override

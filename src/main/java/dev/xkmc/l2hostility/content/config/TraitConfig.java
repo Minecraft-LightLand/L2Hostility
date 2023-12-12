@@ -2,10 +2,9 @@ package dev.xkmc.l2hostility.content.config;
 
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
-import dev.xkmc.l2library.serial.config.BaseConfig;
-import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.serial.network.BaseConfig;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -42,24 +41,24 @@ public class TraitConfig extends BaseConfig {
 	public TagKey<EntityType<?>> getBlacklistTag() {
 		assert id != null;
 		ResourceLocation tag = new ResourceLocation(id.getNamespace(), id.getPath() + "_blacklist");
-		return TagKey.create(Registries.ENTITY_TYPE, tag);
+		return TagKey.create(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), tag);
 	}
 
 	public TagKey<EntityType<?>> getWhitelistTag() {
 		assert id != null;
 		ResourceLocation tag = new ResourceLocation(id.getNamespace(), id.getPath() + "_whitelist");
-		return TagKey.create(Registries.ENTITY_TYPE, tag);
+		return TagKey.create(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), tag);
 	}
 
-	public TraitConfig addWhitelist(Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<EntityType<?>>> pvd) {
+	public TraitConfig addWhitelist(Consumer<TagsProvider.TagAppender<EntityType<?>>> pvd) {
 		var tag = getWhitelistTag();
-		LHTagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
+		LHTagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.tag(tag)));
 		return this;
 	}
 
-	public TraitConfig addBlacklist(Consumer<IntrinsicHolderTagsProvider.IntrinsicTagAppender<EntityType<?>>> pvd) {
+	public TraitConfig addBlacklist(Consumer<TagsProvider.TagAppender<EntityType<?>>> pvd) {
 		var tag = getBlacklistTag();
-		LHTagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.addTag(tag)));
+		LHTagGen.ENTITY_TAG_BUILDER.put(tag.location(), e -> pvd.accept(e.tag(tag)));
 		return this;
 	}
 

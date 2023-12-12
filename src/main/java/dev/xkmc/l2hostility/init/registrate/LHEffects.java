@@ -1,13 +1,15 @@
 package dev.xkmc.l2hostility.init.registrate;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2hostility.content.effect.AntiBuildEffect;
 import dev.xkmc.l2hostility.content.effect.GravityEffect;
 import dev.xkmc.l2hostility.content.effect.MoonwalkEffect;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2library.repack.registrate.builders.NoConfigBuilder;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class LHEffects {
 
@@ -20,8 +22,11 @@ public class LHEffects {
 	public static final RegistryEntry<AntiBuildEffect> ANTIBUILD = genEffect("antibuild", () -> new AntiBuildEffect(MobEffectCategory.NEUTRAL, 0xff7f7f),
 			"Make player cannot place block.");
 
-	private static <T extends MobEffect> RegistryEntry<T> genEffect(String name, NonNullSupplier<T> sup, String desc) {
-		return L2Hostility.REGISTRATE.effect(name, sup, desc).lang(MobEffect::getDescriptionId).register();
+	public static <T extends MobEffect> RegistryEntry<T> genEffect(String name, NonNullSupplier<T> sup, String desc) {
+		L2Hostility.REGISTRATE.addRawLang("effect." + L2Hostility.MODID + "." + name + ".description", desc);
+		return L2Hostility.REGISTRATE.entry(name, cb -> new NoConfigBuilder<>(L2Hostility.REGISTRATE,
+						L2Hostility.REGISTRATE, name, cb, ForgeRegistries.Keys.MOB_EFFECTS, sup))
+				.lang(MobEffect::getDescriptionId).register();
 	}
 
 	public static void register() {

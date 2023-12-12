@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.compat.curios;
 
-import dev.xkmc.l2tabs.compat.BaseCuriosListScreen;
+import dev.xkmc.l2library.compat.curio.BaseCuriosListScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 

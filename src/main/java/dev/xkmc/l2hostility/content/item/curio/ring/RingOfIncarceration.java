@@ -35,10 +35,10 @@ public class RingOfIncarceration extends CurioItem implements ISimpleCapItem {
 		LivingEntity wearer = slotContext.entity();
 		if (wearer == null) return;
 		if (!wearer.isShiftKeyDown()) return;
-		var reach = ForgeMod.ENTITY_REACH.get();
+		var reach = ForgeMod.ATTACK_RANGE.get();
 		var attr = wearer.getAttribute(reach);
 		var r = attr == null ? reach.getDefaultValue() : attr.getValue();
-		for (var e : wearer.level().getEntities(EntityTypeTest.forClass(LivingEntity.class),
+		for (var e : wearer.level.getEntities(EntityTypeTest.forClass(LivingEntity.class),
 				wearer.getBoundingBox().inflate(r), e -> wearer.distanceTo(e) < r)) {
 			EffectUtil.refreshEffect(e, new MobEffectInstance(LCEffects.STONE_CAGE.get(), 40),
 					EffectUtil.AddReason.NONE, wearer);

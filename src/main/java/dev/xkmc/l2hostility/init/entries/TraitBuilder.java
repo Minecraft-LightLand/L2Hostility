@@ -1,14 +1,5 @@
 package dev.xkmc.l2hostility.init.entries;
 
-import com.tterrag.registrate.builders.AbstractBuilder;
-import com.tterrag.registrate.builders.BuilderCallback;
-import com.tterrag.registrate.builders.ItemBuilder;
-import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
-import com.tterrag.registrate.util.nullness.NonNullFunction;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import com.tterrag.registrate.util.nullness.NonnullType;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.item.traits.TraitSymbol;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
@@ -17,7 +8,16 @@ import dev.xkmc.l2hostility.init.data.LHConfigGen;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
-import dev.xkmc.l2serial.util.Wrappers;
+import dev.xkmc.l2library.repack.registrate.builders.AbstractBuilder;
+import dev.xkmc.l2library.repack.registrate.builders.BuilderCallback;
+import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
+import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullBiConsumer;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullFunction;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonnullType;
+import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
@@ -35,7 +35,7 @@ public class TraitBuilder<T extends MobTrait, P> extends AbstractBuilder<MobTrai
 		this.sup = sup;
 		ResourceLocation rl = new ResourceLocation(getOwner().getModid(), getName());
 		var entry = config.apply(rl);
-		LHConfigGen.LIST.add(e -> e.add(L2Hostility.TRAIT, rl, entry));
+		LHConfigGen.LIST.add(e -> L2Hostility.TRAIT.add(e, rl, entry));
 	}
 
 	@Override

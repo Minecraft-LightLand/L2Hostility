@@ -14,7 +14,6 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -37,23 +36,6 @@ public class CapabilityEvents {
 		}
 	}
 
-	private static void initMob(LivingEntity mob) {
-		if (MobTraitCap.HOLDER.isProper(mob)) {
-			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
-			if (!mob.level().isClientSide() && !cap.isInitialized()) {
-				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
-				opt.ifPresent(chunkDifficulty -> cap.init(mob.level(), mob, chunkDifficulty));
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public static void onEntitySpawn(MobSpawnEvent.FinalizeSpawn event) {
-		LivingEntity mob = event.getEntity();
-		initMob(mob);
-	}
-
-
 	@SubscribeEvent
 	public static void livingTickEvent(LivingEvent.LivingTickEvent event) {
 		if (Float.isNaN(event.getEntity().getHealth())) {
@@ -69,7 +51,7 @@ public class CapabilityEvents {
 	@SubscribeEvent
 	public static void onEntityDeath(LivingDeathEvent event) {
 		LivingEntity mob = event.getEntity();
-		if (mob.level().isClientSide()) return;
+		if (mob.level.isClientSide()) return;
 		LivingEntity killer = event.getEntity().getKillCredit();
 		Player player = null;
 		if (killer instanceof Player pl) {
@@ -85,7 +67,7 @@ public class CapabilityEvents {
 			if (player != null) {
 				PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
 				playerDiff.addKillCredit(cap);
-				LevelChunk chunk = mob.level().getChunkAt(mob.blockPosition());
+				LevelChunk chunk = mob.level.getChunkAt(mob.blockPosition());
 				var opt = chunk.getCapability(ChunkDifficulty.CAPABILITY);
 				if (opt.resolve().isPresent()) {
 					opt.resolve().get().addKillHistory(player, mob, cap);

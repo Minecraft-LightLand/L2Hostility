@@ -1,11 +1,12 @@
 package dev.xkmc.l2hostility.init.registrate;
 
-import com.tterrag.registrate.builders.EnchantmentBuilder;
-import com.tterrag.registrate.util.entry.RegistryEntry;
+
 import dev.xkmc.l2hostility.content.enchantments.HostilityEnchantment;
 import dev.xkmc.l2hostility.content.enchantments.RemoveTraitEnchantment;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2library.base.L2Registrate;
+import dev.xkmc.l2library.repack.registrate.builders.EnchantmentBuilder;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
@@ -29,7 +30,8 @@ public class LHEnchantments {
 			String id, EnchantmentCategory category,
 			EnchantmentBuilder.EnchantmentFactory<T> fac, String desc
 	) {
-		return L2Hostility.REGISTRATE.enchantment(id, category, fac, desc);
+		L2Hostility.REGISTRATE.addRawLang("enchantment." + L2Hostility.MODID + "." + id + ".desc", desc);
+		return L2Hostility.REGISTRATE.enchantment(id, category, fac);
 	}
 
 	public static void register() {

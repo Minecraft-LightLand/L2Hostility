@@ -18,8 +18,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static dev.xkmc.l2complements.init.data.LangData.IDS.BANNED;
-
 public class HostilityOrb extends Item {
 
 	public HostilityOrb(Properties properties) {
@@ -61,7 +59,7 @@ public class HostilityOrb extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		if (!LHConfig.COMMON.allowHostilityOrb.get()) list.add(BANNED.get());
+		if (!LHConfig.COMMON.allowHostilityOrb.get()) list.add(LangData.BANNED.get());
 		int r = LHConfig.COMMON.orbRadius.get() * 2 + 1;
 		list.add(LangData.ITEM_ORB.get(r, r, r).withStyle(ChatFormatting.GRAY));
 	}

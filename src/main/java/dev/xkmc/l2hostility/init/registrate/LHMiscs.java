@@ -1,12 +1,12 @@
 package dev.xkmc.l2hostility.init.registrate;
 
-import com.tterrag.registrate.util.entry.MenuEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2hostility.compat.curios.EntityCuriosListMenu;
 import dev.xkmc.l2hostility.compat.curios.EntityCuriosListScreen;
 import dev.xkmc.l2hostility.content.menu.equipments.EquipmentsMenu;
 import dev.xkmc.l2hostility.content.menu.equipments.EquipmentsScreen;
+import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.registries.ForgeRegistries;
 

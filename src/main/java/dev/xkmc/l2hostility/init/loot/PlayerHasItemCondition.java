@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.init.loot;
 
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootContext;

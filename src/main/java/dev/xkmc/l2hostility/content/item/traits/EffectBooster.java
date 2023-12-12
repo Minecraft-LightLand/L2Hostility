@@ -4,7 +4,6 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.base.effects.EffectBuilder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Predicate;
@@ -49,7 +48,7 @@ public class EffectBooster {
 			if (e.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
 				int current = e.getDuration();
 				if (current < min) continue;
-				new EffectBuilder(e).setDuration(MobEffectInstance.INFINITE_DURATION);
+				new EffectBuilder(e).setDuration(1728000000);
 				target.forceAddEffect(e, null);
 			}
 		}

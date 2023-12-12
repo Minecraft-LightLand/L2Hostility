@@ -1,13 +1,12 @@
 package dev.xkmc.l2hostility.content.item.curio.curse;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
-import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
-import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
-import dev.xkmc.l2damagetracker.init.data.L2DTLangData;
+import dev.xkmc.l2complements.network.ArmorEffectConfig;
+import dev.xkmc.l2hostility.backport.damage.DamageModifier;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -43,7 +42,9 @@ public class CurseOfWrath extends CurseCurioItem {
 		list.add(LangData.ITEM_CHARM_ADD_LEVEL.get(lv).withStyle(ChatFormatting.RED));
 		ResourceLocation id = ForgeRegistries.ITEMS.getKey(this);
 		assert id != null;
-		addTooltip(list, ArmorEffectConfig.get().getImmunity(id.toString()));
+		var set = ArmorEffectConfig.get().immune.get(id.toString());
+		if (set != null)
+			addTooltip(list, set);
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class CurseOfWrath extends CurseCurioItem {
 		int level = DifficultyLevel.ofAny(cache.getAttackTarget()) - DifficultyLevel.ofAny(user);
 		if (level > 0) {
 			double rate = LHConfig.COMMON.wrathDamageBonus.get();
-			cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
+			DamageModifier.hurtMultTotal(cache, (float) (1 + level * rate));
 		}
 	}
 
@@ -60,7 +61,7 @@ public class CurseOfWrath extends CurseCurioItem {
 		for (MobEffect e : set) {
 			map.put(ForgeRegistries.MOB_EFFECTS.getKey(e), e);
 		}
-		MutableComponent comp = L2DTLangData.ARMOR_IMMUNE.get();
+		MutableComponent comp = dev.xkmc.l2complements.init.data.LangData.IDS.ARMOR_IMMUNE.get();
 		boolean comma = false;
 		for (MobEffect e : map.values()) {
 			if (comma) {

@@ -1,11 +1,11 @@
 package dev.xkmc.l2hostility.init.entries;
 
-import com.tterrag.registrate.util.nullness.NonNullFunction;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.item.traits.TraitSymbol;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2library.base.L2Registrate;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullFunction;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;

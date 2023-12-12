@@ -3,8 +3,8 @@ package dev.xkmc.l2hostility.init.network;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2library.serial.codec.TagCodec;
 import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleTypes;
@@ -39,7 +39,7 @@ public class ClientSyncHandler {
 		if (!LHConfig.CLIENT.showUndyingParticles.get()) return;
 		if (Proxy.getClientWorld() != null && packet.id >= 0 && Proxy.getClientWorld().getEntity(packet.id) instanceof LivingEntity entity) {
 			Minecraft.getInstance().particleEngine.createTrackingEmitter(entity, ParticleTypes.TOTEM_OF_UNDYING, 30);
-			entity.level().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.TOTEM_USE, entity.getSoundSource(), 1.0F, 1.0F, false);
+			entity.level.playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.TOTEM_USE, entity.getSoundSource(), 1.0F, 1.0F, false);
 		}
 	}
 
@@ -73,7 +73,7 @@ public class ClientSyncHandler {
 						center.y + v0.y + 0.5f,
 						center.z + v0.z, 0, 0, 0);
 			}
-			entity.level().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRECHARGE_USE,
+			entity.level.playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRECHARGE_USE,
 					entity.getSoundSource(), 3, 1.0F, false);
 		}
 	}

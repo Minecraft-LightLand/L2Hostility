@@ -3,7 +3,7 @@ package dev.xkmc.l2hostility.compat.jei;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2library.serial.recipe.BaseRecipeCategory;
+import dev.xkmc.l2library.base.recipe.BaseRecipeCategory;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;

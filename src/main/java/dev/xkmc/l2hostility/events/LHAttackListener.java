@@ -1,31 +1,41 @@
 package dev.xkmc.l2hostility.events;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
-import dev.xkmc.l2damagetracker.contents.attack.AttackListener;
-import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
-import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
-import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
-import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
+import dev.xkmc.l2hostility.backport.damage.DamageModifier;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.enchantments.HitTargetEnchantment;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
-import dev.xkmc.l2hostility.init.data.HostilityDamageState;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.LHDamageTypes;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
+import dev.xkmc.l2library.init.events.attack.AttackCache;
+import dev.xkmc.l2library.init.events.attack.AttackListener;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 public class LHAttackListener implements AttackListener {
 
 	@Override
+	public void onAttack(AttackCache cache, ItemStack weapon) {
+		LivingEntity mob = cache.getAttacker();
+		var event = cache.getLivingAttackEvent();
+		if (MobTraitCap.HOLDER.isProper(mob)) {
+			MobTraitCap.HOLDER.get(mob).traitEvent((k, v) -> k.onCreateSource(v, mob, event));
+		}
+		var type = event.getSource().getMsgId();
+		if (type.equals("player") || type.equals("mob")) {
+			if (CurioCompat.hasItem(mob, LHItems.IMAGINE_BREAKER.get())) {
+				event.getSource().bypassMagic();
+			}
+		}
+	}
+
+	@Override
 	public void onHurt(AttackCache cache, ItemStack weapon) {
 		var event = cache.getLivingHurtEvent();
 		assert event != null;
-		if (event.getSource().is(LHDamageTypes.IGNORE_SCALING))
+		if (event.getSource().getMsgId().equals("soul_flame") || event.getSource().getMsgId().equals("thorns"))
 			return;
 		LivingEntity mob = cache.getAttacker();
 		var target = cache.getAttackTarget();
@@ -49,7 +59,7 @@ public class LHAttackListener implements AttackListener {
 				} else {
 					factor = 1 + lv * LHConfig.COMMON.damageFactor.get();
 				}
-				cache.addHurtModifier(DamageModifier.multTotal((float) factor));
+				DamageModifier.hurtMultTotal(cache, (float) factor);
 			}
 			TraitEffectCache traitCache = new TraitEffectCache(target);
 			cap.traitEvent((k, v) -> k.onHurtTarget(v, mob, cache, traitCache));
@@ -59,26 +69,6 @@ public class LHAttackListener implements AttackListener {
 				e.item().onHurtTarget(e.stack(), mob, cache);
 			}
 		}
-	}
-
-	@Override
-	public void onCreateSource(CreateSourceEvent event) {
-		LivingEntity mob = event.getAttacker();
-		if (MobTraitCap.HOLDER.isProper(mob)) {
-			MobTraitCap.HOLDER.get(mob).traitEvent((k, v) -> k.onCreateSource(v, event.getAttacker(), event));
-		}
-		var type = event.getResult();
-		if (type == null) return;
-		var root = type.toRoot();
-		if (root == L2DamageTypes.MOB_ATTACK || root == L2DamageTypes.PLAYER_ATTACK) {
-			if (CurioCompat.hasItem(mob, LHItems.IMAGINE_BREAKER.get())) {
-				event.enable(DefaultDamageState.BYPASS_MAGIC);
-			}
-			if (CurioCompat.hasItem(mob, LHItems.PLATINUM_STAR.get())) {
-				event.enable(HostilityDamageState.BYPASS_COOLDOWN);
-			}
-		}
-
 	}
 
 }

@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.content.item.spawner;
 
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
-import dev.xkmc.l2modularblock.impl.BlockEntityBlockMethodImpl;
+import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 

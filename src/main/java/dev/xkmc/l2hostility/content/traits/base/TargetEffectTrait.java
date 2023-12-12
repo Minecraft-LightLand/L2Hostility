@@ -29,7 +29,7 @@ public class TargetEffectTrait extends MobTrait {
 	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
 		if (CurioCompat.hasItem(target, LHItems.RING_REFLECTION.get())) {
 			int radius = LHConfig.COMMON.ringOfReflectionRadius.get();
-			for (var e : target.level().getEntities(target, target.getBoundingBox().inflate(radius))) {
+			for (var e : target.level.getEntities(target, target.getBoundingBox().inflate(radius))) {
 				if (!(e instanceof Mob mob)) continue;
 				if (mob.distanceTo(target) > radius) continue;
 				EffectUtil.addEffect(mob, func.apply(level), EffectUtil.AddReason.NONE, attacker);
@@ -50,7 +50,7 @@ public class TargetEffectTrait extends MobTrait {
 				ans = Component.translatable("potion.withAmplifier", ans,
 						Component.translatable("potion.potency." + ins.getAmplifier()));
 			}
-			if (!ins.endsWithin(20)) {
+			if (ins.getDuration() >= 20) {
 				ans = Component.translatable("potion.withDuration", ans,
 						MobEffectUtil.formatDuration(ins, 1));
 			}

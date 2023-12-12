@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.content.capability.mob;
 
-import dev.xkmc.l2serial.network.SerialPacketBase;
-import dev.xkmc.l2serial.serialization.SerialClass;
-import dev.xkmc.l2serial.serialization.codec.TagCodec;
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.serial.codec.TagCodec;
+import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.network.NetworkEvent;

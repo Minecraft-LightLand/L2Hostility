@@ -39,7 +39,7 @@ public class AttributeTrait extends MobTrait {
 			list.add(mapLevel(i -> (e.op == AttributeModifier.Operation.ADDITION ?
 					Component.literal("+" + Math.round(e.factor.getAsDouble() * i))
 					: Component.literal("+" + Math.round(e.factor.getAsDouble() * i * 100) + "%"))
-					.withStyle(ChatFormatting.AQUA)).append(CommonComponents.SPACE).append(
+					.withStyle(ChatFormatting.AQUA)).append(" ").append(
 					Component.translatable(e.attribute.get().getDescriptionId()).withStyle(ChatFormatting.BLUE)));
 		}
 	}

@@ -4,10 +4,9 @@ import dev.xkmc.l2hostility.content.capability.mob.CapStorageData;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
@@ -23,8 +22,8 @@ public class AdaptingTrait extends MobTrait {
 
 	@Override
 	public void onHurtByOthers(int level, LivingEntity entity, LivingHurtEvent event) {
-		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
-				event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS))
+		if (event.getSource().isBypassInvul() ||
+				event.getSource().isBypassMagic())
 			return;
 		MobTraitCap cap = MobTraitCap.HOLDER.get(entity);
 		Data data = cap.getOrCreateData(getRegistryName(), Data::new);

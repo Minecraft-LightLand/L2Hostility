@@ -4,7 +4,7 @@ import dev.xkmc.l2hostility.content.capability.mob.CapStorageData;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -21,14 +21,14 @@ public class CounterStrikeTrait extends MobTrait {
 
 	@Override
 	public void tick(LivingEntity le, int level) {
-		if (le.level().isClientSide()) return;
+		if (le.level.isClientSide()) return;
 		var data = MobTraitCap.HOLDER.get(le).getOrCreateData(getRegistryName(), Data::new);
 		if (data.cooldown > 0) {
 			data.cooldown--;
 			return;
 		}
 		if (!(le instanceof Mob mob)) return;
-		if (!le.onGround()) return;
+		if (!le.isOnGround()) return;
 		var target = mob.getTarget();
 		if (target == null || !target.isAlive()) return;
 		if (data.strikeId == null || !data.strikeId.equals(target.getUUID())) return;
@@ -44,7 +44,7 @@ public class CounterStrikeTrait extends MobTrait {
 
 	@Override
 	public void onHurtByOthers(int level, LivingEntity le, LivingHurtEvent event) {
-		if (le.level().isClientSide()) return;
+		if (le.level.isClientSide()) return;
 		var target = event.getSource().getEntity();
 		var data = MobTraitCap.HOLDER.get(le).getOrCreateData(getRegistryName(), Data::new);
 		if (target instanceof LivingEntity && le instanceof Mob mob && mob.getTarget() == target) {
