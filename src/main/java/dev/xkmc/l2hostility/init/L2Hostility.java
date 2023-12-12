@@ -29,9 +29,12 @@ import dev.xkmc.l2library.serial.network.SerialPacketBase;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
@@ -64,6 +67,8 @@ public class L2Hostility {
 			NetworkManager.ARMOR.getID(), ArmorEffectConfig.class);
 
 	public L2Hostility() {
+		FMLJavaModLoadingContext ctx = FMLJavaModLoadingContext.get();
+		IEventBus bus = ctx.getModEventBus();
 
 		LHBlocks.register();
 		LHItems.register();
@@ -74,7 +79,7 @@ public class L2Hostility {
 		LHEnchantments.register();
 		LHEffects.register();
 
-		TraitGLMProvider.register();
+		TraitGLMProvider.register(bus);
 
 		MobTraitCap.register();
 		ChunkDifficulty.register();

@@ -30,6 +30,5 @@
     "recipes": [
       "l2complements:insulator"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

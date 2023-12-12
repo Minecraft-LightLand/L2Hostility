@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "conditions": [
     {
       "type": "forge:mod_loaded",
@@ -32,6 +31,5 @@
   "result": {
     "count": 4,
     "item": "twilightforest:hydra_boss_spawner"
-  },
-  "show_notification": true
+  }
 }

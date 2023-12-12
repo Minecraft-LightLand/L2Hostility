@@ -1,4 +1,4 @@
-// 1.20.1	2023-11-28T20:29:00.55765	Global Loot Modifiers : l2hostility
+// 1.19.2	2023-12-12T15:16:13.056129	Global Loot Modifiers : l2hostility
 8b2a5b6854f05054aff0736d29bc497475d931db data/forge/loot_modifiers/global_loot_modifiers.json
 71c3d84efb2863fa013f196cf603381ee5e4d875 data/l2hostility/loot_modifiers/adaptive_drop_cursed_droplet.json
 9b0c9dca753c5f8f2009e01878642ffb19c51a7f data/l2hostility/loot_modifiers/blindness_drop_ink_sac.json

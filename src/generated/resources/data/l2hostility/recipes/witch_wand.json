@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "1": {
       "item": "l2hostility:poison"
@@ -37,6 +36,5 @@
   ],
   "result": {
     "item": "l2hostility:witch_wand"
-  },
-  "show_notification": true
+  }
 }

@@ -1,4 +1,5 @@
 {
+  "_class": "dev.xkmc.l2hostility.content.config.WeaponConfig",
   "armor_enchantments": [
     {
       "chance": 0.2,
@@ -12,8 +13,7 @@
       "chance": 0.02,
       "enchantments": [
         "l2complements:ice_thorn",
-        "l2complements:soul_flame_thorn",
-        "l2complements:safeguard"
+        "l2complements:soul_flame_thorn"
       ],
       "level": 100
     }

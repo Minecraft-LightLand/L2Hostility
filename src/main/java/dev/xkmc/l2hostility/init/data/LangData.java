@@ -124,7 +124,7 @@ public enum LangData {
 
 	COMMAND_MOB_SUCCEED("command.mob.success", "Performed actions on %s mobs", 1),
 
-	BANNED("tooltip.banned", "This item is banned", 0),
+	BANNED_ITEM("tooltip.ban_item", "This item is banned", 0),
 	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
 	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0),
 	;

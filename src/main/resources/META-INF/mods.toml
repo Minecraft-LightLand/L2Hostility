@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[46,)"
+loaderVersion="[43,)"
 license="All rights reserved"
 [[mods]]
 modId="l2hostility"
@@ -13,35 +13,35 @@ description='''
 [[dependencies.l2hostility]]
     modId="forge"
     mandatory=true
-    versionRange="[47.1.0,)"
+    versionRange="[43.1.0,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.l2hostility]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20.1,1.21)"
+    versionRange="[1.19.2,1.19.3)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.l2hostility]]
     modId="l2library"
     mandatory=true
-    versionRange="[2.4.21,)"
+    versionRange="[1.10.0-pre0,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.l2hostility]]
     modId="l2complements"
     mandatory=true
-    versionRange="[2.4.14,)"
+    versionRange="[1.4.10,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.l2hostility]]
     modId="curios"
     mandatory=true
-    versionRange="[5.3.4,)"
+    versionRange="[1.19.2-5.1.1.0,)"
     side="BOTH"
 [[dependencies.l2hostility]]
     modId="patchouli"
     mandatory=true
-    versionRange="[1.20.1-81-FORGE,)"
+    versionRange="[1.19.2-76,)"
     side="BOTH"
 

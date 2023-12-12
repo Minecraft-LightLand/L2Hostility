@@ -30,6 +30,5 @@
     "recipes": [
       "l2hostility:hostility_essence"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

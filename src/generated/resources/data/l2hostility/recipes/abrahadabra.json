@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "A": {
       "item": "l2hostility:ragnarok"
@@ -19,6 +18,5 @@
   ],
   "result": {
     "item": "l2hostility:abrahadabra"
-  },
-  "show_notification": true
+  }
 }

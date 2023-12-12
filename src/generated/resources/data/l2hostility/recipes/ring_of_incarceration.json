@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "1": {
       "item": "l2hostility:slowness"
@@ -25,6 +24,5 @@
   ],
   "result": {
     "item": "l2hostility:ring_of_incarceration"
-  },
-  "show_notification": true
+  }
 }

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "A": {
       "item": "minecraft:rotten_flesh"
@@ -22,6 +21,5 @@
   ],
   "result": {
     "item": "l2hostility:hostility_detector"
-  },
-  "show_notification": true
+  }
 }

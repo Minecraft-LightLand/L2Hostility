@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "1": {
       "item": "l2hostility:fiery"
@@ -28,6 +27,5 @@
   ],
   "result": {
     "item": "l2hostility:curse_of_wrath"
-  },
-  "show_notification": true
+  }
 }

@@ -59,7 +59,7 @@ public class HostilityOrb extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		if (!LHConfig.COMMON.allowHostilityOrb.get()) list.add(LangData.BANNED.get());
+		if (!LHConfig.COMMON.allowHostilityOrb.get()) list.add(LangData.BANNED_ITEM.get());
 		int r = LHConfig.COMMON.orbRadius.get() * 2 + 1;
 		list.add(LangData.ITEM_ORB.get(r, r, r).withStyle(ChatFormatting.GRAY));
 	}

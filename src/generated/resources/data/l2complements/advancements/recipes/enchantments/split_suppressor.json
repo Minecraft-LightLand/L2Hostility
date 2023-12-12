@@ -30,6 +30,5 @@
     "recipes": [
       "l2complements:split_suppressor"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

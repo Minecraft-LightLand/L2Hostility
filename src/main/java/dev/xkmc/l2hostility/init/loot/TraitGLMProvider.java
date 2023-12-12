@@ -19,29 +19,30 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Objects;
 
 public class TraitGLMProvider extends GlobalLootModifierProvider {
 
-	public static final RegistryEntry<LootItemConditionType> TRAIT_AND_LEVEL, MOB_LEVEL, HAS_ITEM;
+	private static final DeferredRegister<LootItemConditionType> LOOT_ITEM = DeferredRegister.create(Registry.LOOT_ITEM_REGISTRY, L2Hostility.MODID);
+
+	public static final RegistryObject<LootItemConditionType> TRAIT_AND_LEVEL, MOB_LEVEL, HAS_ITEM;
 	public static final RegistryEntry<Codec<TraitLootModifier>> TRAIT_SCALED;
 	public static final RegistryEntry<Codec<EnvyLootModifier>> LOOT_ENVY;
 	public static final RegistryEntry<Codec<GluttonyLootModifier>> LOOT_GLUTTONY;
 
 
 	static {
-		//TODO check if it works
-		TRAIT_AND_LEVEL = L2Hostility.REGISTRATE.simple("trait_and_level",
-				Registry.LOOT_ITEM_REGISTRY, () -> new LootItemConditionType(
-						new TraitSerializer<>(TraitLootCondition.class)));
-		MOB_LEVEL = L2Hostility.REGISTRATE.simple("mob_level",
-				Registry.LOOT_ITEM_REGISTRY, () -> new LootItemConditionType(
-						new TraitSerializer<>(MobCapLootCondition.class)));
-		HAS_ITEM = L2Hostility.REGISTRATE.simple("player_has_item",
-				Registry.LOOT_ITEM_REGISTRY, () -> new LootItemConditionType(
-						new TraitSerializer<>(PlayerHasItemCondition.class)));
+		TRAIT_AND_LEVEL = LOOT_ITEM.register("trait_and_level",
+				() -> new LootItemConditionType(new TraitSerializer<>(TraitLootCondition.class)));
+		MOB_LEVEL = LOOT_ITEM.register("mob_level",
+				() -> new LootItemConditionType(new TraitSerializer<>(MobCapLootCondition.class)));
+		HAS_ITEM = LOOT_ITEM.register("player_has_item",
+				() -> new LootItemConditionType(new TraitSerializer<>(PlayerHasItemCondition.class)));
 
 		TRAIT_SCALED = L2Hostility.REGISTRATE.simple("trait_scaled",
 				ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> TraitLootModifier.CODEC);
@@ -52,8 +53,8 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 
 	}
 
-	public static void register() {
-
+	public static void register(IEventBus bus) {
+		LOOT_ITEM.register(bus);
 	}
 
 	public TraitGLMProvider(DataGenerator gen) {

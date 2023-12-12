@@ -47,7 +47,7 @@ public class ClickTraitMethod implements OnClickBlockMethod, ToolTipBlockMethod 
 	@Override
 	public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter blockGetter, List<Component> list, TooltipFlag tooltipFlag) {
 		if (!LHConfig.COMMON.allowHostilitySpawner.get())
-			list.add(LangData.BANNED.get());
+			list.add(LangData.BANNED_ITEM.get());
 	}
 
 }

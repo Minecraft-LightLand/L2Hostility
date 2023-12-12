@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "A": {
       "item": "l2hostility:undying"
@@ -22,6 +21,5 @@
   ],
   "result": {
     "item": "l2hostility:ring_of_life"
-  },
-  "show_notification": true
+  }
 }
