@@ -151,6 +151,11 @@ public enum LangData {
 			String str = strs[strs.length - 1];
 			pvd.add(L2Hostility.MODID + "." + id.id, id.def);
 		}
+		pvd.add("patchouli.l2hostility.title", "L2Hostility Guide");
+		pvd.add("advancements.l2hostility.advancements.hostility.patchouli.description", "Read the hostility guide");
+		pvd.add("advancements.l2hostility.advancements.hostility.patchouli.title", "Intro to L2Hostility");
+		pvd.add("patchouli.l2hostility.landing", "Find out the mechanics and mob traits to know what to prepare for");
+		pvd.add("itemGroup.l2hostility.hostility", "L2 Hostility");
 		pvd.add("config.jade.plugin_l2hostility.mob", "L2Hostility");
 		pvd.add("death.attack.killer_aura", "%s was killed by killer aura");
 		pvd.add("death.attack.killer_aura.player", "%s was killed by %s's killer aura");

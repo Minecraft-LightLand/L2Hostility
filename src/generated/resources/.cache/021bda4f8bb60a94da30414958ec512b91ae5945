@@ -1,7 +1,7 @@
-// 1.19.2	2023-12-12T15:16:13.048592	Registrate Provider for l2hostility [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (traits)]
+// 1.19.2	2023-12-12T15:39:42.364588	Registrate Provider for l2hostility [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (traits)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-e2a12438fe256b00da313b5433dc2587d80e7625 assets/l2hostility/lang/en_ud.json
-0f27ec43e0ce985e6cfc1a2b60a2cb7e66a24bd5 assets/l2hostility/lang/en_us.json
+848b25237395f0c29a693433c0b0356b56c793b8 assets/l2hostility/lang/en_ud.json
+7f2e6ad66cb6e8b4a3e0f8ccbdc60701b466a66f assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -147,14 +147,14 @@ e6fbcab0d7b10ed95bd3f2a916cfdc78a43811be data/l2hostility/advancements/recipes/l
 5e6e4cc46027f7e12bcf632051d2af125c422a04 data/l2hostility/advancements/recipes/l2hostility.hostility/ring_of_reflection.json
 9b06ea001cfceb063b849f4367bbbe8012c137fd data/l2hostility/advancements/recipes/l2hostility.hostility/witch_charge.json
 bd4594e105cfca964b97217228bf1b36def0b9ae data/l2hostility/advancements/recipes/l2hostility.hostility/witch_wand.json
-319660897eaa3a8286deef190f295e6306270b94 data/l2hostility/advancements/recipes/twilightforest/alpha_yeti_boss_spawner.json
-28c7fea3dbd987aa4769d8b10974dbe604dc2fa4 data/l2hostility/advancements/recipes/twilightforest/hydra_boss_spawner.json
-a984428284bee98f94afa59642fa2b323c039b4b data/l2hostility/advancements/recipes/twilightforest/knight_phantom_boss_spawner.json
-6d9793dc700665ce388f50c045ae29c1dc20e724 data/l2hostility/advancements/recipes/twilightforest/lich_boss_spawner.json
-9b31cc3b77fc9855a1c964de013815d9fb49cd8c data/l2hostility/advancements/recipes/twilightforest/minoshroom_boss_spawner.json
-de99b2256bf1782dabf6895d78b9758e04c0e115 data/l2hostility/advancements/recipes/twilightforest/naga_boss_spawner.json
-f8d022ba1bdfc1837e414de4820bd1a46fa65162 data/l2hostility/advancements/recipes/twilightforest/snow_queen_boss_spawner.json
-08a747264414638c9618f31f9fbbccf0cdfbc438 data/l2hostility/advancements/recipes/twilightforest/ur_ghast_boss_spawner.json
+06e043bae50936335e93e1d603303f2050fa4456 data/l2hostility/advancements/recipes/twilightforest/alpha_yeti_boss_spawner.json
+e86bfdd9b2dca2355b9fddb157a5512700f562b5 data/l2hostility/advancements/recipes/twilightforest/hydra_boss_spawner.json
+3192652fb8d545ea8819a8c9ba10430f9476efe1 data/l2hostility/advancements/recipes/twilightforest/knight_phantom_boss_spawner.json
+68f4b9912b44bec22c65801307695d5c60ed569f data/l2hostility/advancements/recipes/twilightforest/lich_boss_spawner.json
+7731217cde33d03b6a86947e2d2719fc9bca6be6 data/l2hostility/advancements/recipes/twilightforest/minoshroom_boss_spawner.json
+acd1d4c93b9f992272c78de457d51168397ef28b data/l2hostility/advancements/recipes/twilightforest/naga_boss_spawner.json
+d49fafb09fb2aec744af9c8bb51103c184ad7845 data/l2hostility/advancements/recipes/twilightforest/snow_queen_boss_spawner.json
+956a8c0562bd0c40f2c1f2e5226b70df37552b4c data/l2hostility/advancements/recipes/twilightforest/ur_ghast_boss_spawner.json
 25c719b6b207bc24f54cf98abfa574d10e7cfe7c data/l2hostility/loot_tables/blocks/hostility_spawner.json
 52b65f659ad9c41c87d98f680c7b208b1e7fc5d5 data/l2hostility/recipes/abrahadabra.json
 1159f04a6549ccd347a58ebd214395524a2d58e7 data/l2hostility/recipes/alpha_yeti_boss_spawner.json
