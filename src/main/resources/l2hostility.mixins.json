@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "l2hostility.refmap.json",
   "mixins": [
+	"CuriosImplMixinHooksMixin",
 	"EntityMixin",
 	"ForgeInternalHandlerAccessor",
 	"ItemStackMixin",

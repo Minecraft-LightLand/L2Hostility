@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.events;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.consumable.BookCopy;
+import dev.xkmc.l2hostility.content.item.traits.SealedItem;
 import dev.xkmc.l2hostility.content.item.wand.IMobClickItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
@@ -17,6 +18,8 @@ import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotContext;
 
 @Mod.EventBusSubscriber(modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class MiscHandlers {
@@ -63,6 +66,13 @@ public class MiscHandlers {
 		if (player == null) return false;
 		if (!ctx.getPlayer().hasEffect(LHEffects.ANTIBUILD.get())) return false;
 		return stack.getItem() instanceof BlockItem || stack.is(LHTagGen.ANTIBUILD_BAN);
+	}
+
+	public static boolean predicateSlotValid(SlotContext slotContext, ItemStack stack) {
+		if (!stack.hasTag() || stack.getTagElement(SealedItem.DATA) == null) return false;
+		var ctag = stack.getOrCreateTag().getCompound(SealedItem.DATA);
+		ItemStack content = ItemStack.of(ctag);
+		return CuriosApi.isStackValid(slotContext, content);
 	}
 
 }

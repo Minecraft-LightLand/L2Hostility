@@ -60,7 +60,7 @@ public class TraitSpawnerData {
 		@Nullable
 		public LivingEntity getEntity() {
 			if (state != EntityState.ALIVE) return null;
-			return entity == null ? null : entity.isDeadOrDying() ? null : entity;
+			return entity == null ? null : !entity.isAlive() ? null : entity;
 		}
 
 		public void tick() {
@@ -69,7 +69,7 @@ public class TraitSpawnerData {
 				state = EntityState.MISSING;
 				return;
 			}
-			if (entity.isRemoved() || entity.isDeadOrDying()) {
+			if (entity.isRemoved() || !entity.isAlive()) {
 				state = EntityState.MISSING;
 			}
 		}
