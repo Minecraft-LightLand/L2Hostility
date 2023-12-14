@@ -124,6 +124,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 		int min = 1;
 		int minLevel = 0;
 		List<TraitLootCondition> other = new ArrayList<>();
+		List<PlayerHasItemCondition> itemReq = new ArrayList<>();
 		for (var c : getConditions()) {
 			if (c instanceof TraitLootCondition cl) {
 				if (cl.trait == trait) {
@@ -134,10 +135,14 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 				}
 			} else if (c instanceof MobCapLootCondition cl) {
 				minLevel = cl.minLevel;
+			} else if (c instanceof PlayerHasItemCondition cl) {
+				itemReq.add(cl);
 			}
 		}
 		if (minLevel > 0) {
-			list.add(LangData.LOOT_MIN_LEVEL.get(Component.literal(minLevel + "").withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.LIGHT_PURPLE));
+			list.add(LangData.LOOT_MIN_LEVEL.get(Component.literal(minLevel + "")
+							.withStyle(ChatFormatting.AQUA))
+					.withStyle(ChatFormatting.LIGHT_PURPLE));
 		}
 		for (int lv = min; lv <= max; lv++) {
 			list.add(LangData.LOOT_CHANCE.get(
@@ -158,6 +163,10 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 			list.add(LangData.LOOT_OTHER_TRAIT.get(c.trait.getDesc().withStyle(ChatFormatting.GOLD),
 							Component.literal(str).withStyle(ChatFormatting.AQUA))
 					.withStyle(ChatFormatting.RED));
+		}
+		for (var e : itemReq) {
+			var name = e.item.getDescription().copy().withStyle(ChatFormatting.LIGHT_PURPLE);
+			list.add(LangData.TOOLTIP_JEI_REQUIRED.get(name).withStyle(ChatFormatting.YELLOW));
 		}
 	}
 
