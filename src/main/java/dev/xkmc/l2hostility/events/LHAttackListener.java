@@ -18,8 +18,10 @@ public class LHAttackListener implements AttackListener {
 
 	@Override
 	public void onAttack(AttackCache cache, ItemStack weapon) {
-		LivingEntity mob = cache.getAttacker();
 		var event = cache.getLivingAttackEvent();
+		assert event != null;
+		LivingEntity mob = event.getSource().getEntity() instanceof LivingEntity le ? le : null;
+		if (mob == null) return;
 		if (MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap.HOLDER.get(mob).traitEvent((k, v) -> k.onCreateSource(v, mob, event));
 		}

@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.init;
 
-import dev.xkmc.l2complements.init.data.TagGen;
 import dev.xkmc.l2complements.network.ArmorEffectConfig;
 import dev.xkmc.l2complements.network.NetworkManager;
 import dev.xkmc.l2hostility.backport.config.ConfigTypeEntry;
@@ -31,14 +30,17 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(L2Hostility.MODID)
@@ -105,6 +107,16 @@ public class L2Hostility {
 		event.enqueueWork(() -> {
 
 		});
+	}
+
+	@SubscribeEvent
+	public static void sendMessage(final InterModEnqueueEvent event) {
+		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HEAD.getMessageBuilder().build());
+		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.CHARM.getMessageBuilder().size(2).build());
+		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HANDS.getMessageBuilder().size(2).build());
+		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.RING.getMessageBuilder().size(3).build());
+		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("hostility_curse")
+				.priority(-1300).icon(new ResourceLocation(MODID, "slot/empty_hostility_slot")).build());
 	}
 
 	@SubscribeEvent

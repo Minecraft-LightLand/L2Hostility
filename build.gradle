@@ -157,6 +157,9 @@ dependencies {
     implementation fg.deobf("curse.maven:l_ender-s-cataclysm-551586:4777595")
     implementation fg.deobf("curse.maven:jade-324717:4914105")
 
+    runtimeOnly fg.deobf("curse.maven:caelus-308989:3929284")
+    runtimeOnly fg.deobf("curse.maven:elytra-slot-317716:4519258")
+
 
 
 }

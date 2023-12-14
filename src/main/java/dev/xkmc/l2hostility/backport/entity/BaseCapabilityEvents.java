@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.backport.entity;
 
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2library.init.L2Library;
 import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.world.entity.Entity;
@@ -7,7 +8,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = L2Library.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BaseCapabilityEvents {
 
 	@SubscribeEvent
