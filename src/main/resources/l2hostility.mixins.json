@@ -10,6 +10,7 @@
 	"ForgeInternalHandlerAccessor",
 	"ItemStackMixin",
 	"MobMixin",
+	"PlayerMixin",
 	"SlimeMixin"
   ],
   "client": [

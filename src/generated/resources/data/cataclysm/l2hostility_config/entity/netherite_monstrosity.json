@@ -24,7 +24,7 @@
               "weight": 100
             }
           ],
-          "level": 400,
+          "level": 600,
           "slot": "curios/ring"
         },
         {
@@ -37,11 +37,16 @@
               "weight": 100
             }
           ],
-          "level": 400,
+          "level": 600,
           "slot": "curios/hands"
         }
       ],
       "traits": [
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:tank"
+        },
         {
           "free": 2,
           "min": 2,

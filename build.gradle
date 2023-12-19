@@ -220,8 +220,11 @@ dependencies {
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     implementation fg.deobf("curse.maven:the-twilight-forest-227639:4635921")
     implementation fg.deobf("curse.maven:jade-324717:4654448")
-    implementation fg.deobf("curse.maven:l_ender-s-cataclysm-551586:4778613")
+    implementation fg.deobf("curse.maven:l_ender-s-cataclysm-551586:4967633")
     implementation fg.deobf("curse.maven:citadel-331936:4848887")
+    implementation fg.deobf("curse.maven:cloth-config-348521:4633444")
+    implementation fg.deobf("curse.maven:geckolib-388172:4933987")
+    implementation fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")
 
     runtimeOnly fg.deobf("curse.maven:attributefix-280510:4588114")
     runtimeOnly fg.deobf("curse.maven:bookshelf-228525:4581675")

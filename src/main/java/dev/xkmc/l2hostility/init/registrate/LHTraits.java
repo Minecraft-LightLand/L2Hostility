@@ -185,8 +185,9 @@ public class LHTraits {
 					.desc("Decrease gravity for mobs around it").lang("Moonwalk").register();
 
 			ARENA = L2Hostility.REGISTRATE.regTrait("arena", ArenaTrait::new,
-							rl -> new TraitConfig(rl, 100, 1, 1, 200))
-					.desc("Players around it cannot place blocks. Immune damage from entities not affected by this.")
+							rl -> new TraitConfig(rl, 50, 1, 1, 50)
+									.addWhitelist(pvd -> pvd.addTag(LHTagGen.SEMIBOSS)))
+					.desc("Players around it cannot place or break blocks. Immune damage from entities not affected by this.")
 					.lang("Arena").register();
 
 		}
@@ -207,7 +208,8 @@ public class LHTraits {
 					.desc("Mob will heal to full health every time it dies.")
 					.lang("Undying").register();
 			ENDER = L2Hostility.REGISTRATE.regTrait("teleport", () -> new EnderTrait(ChatFormatting.DARK_PURPLE),
-							rl -> new TraitConfig(rl, 120, 100, 1, 150))
+							rl -> new TraitConfig(rl, 120, 100, 1, 150)
+									.addBlacklist(pvd -> pvd.addTag(LHTagGen.SEMIBOSS)))
 					.desc("Mob will attempt to teleport to avoid physical damage and track targets.")
 					.lang("Teleport").register();
 			REPELLING = L2Hostility.REGISTRATE.regTrait("repelling", () -> new RepellingTrait(ChatFormatting.DARK_GREEN),

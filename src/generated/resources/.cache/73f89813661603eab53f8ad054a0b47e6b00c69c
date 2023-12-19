@@ -1,7 +1,7 @@
-// 1.20.1	2023-12-06T17:27:55.098148	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2023-12-19T10:55:37.57726	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-5dffce15a4057c2ea420d7dbe999d2dd736bbfc8 assets/l2hostility/lang/en_ud.json
-8eec26ec0959f84f721bcee754979b4030203632 assets/l2hostility/lang/en_us.json
+ca9b97dbf2d764f8198ba89cba2390884b40601e assets/l2hostility/lang/en_ud.json
+b626327d62162b6938c81204d479835692edb3a3 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -100,6 +100,7 @@ e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.j
 eeb5dfe27aa3ee65994aff79ec5a5e4b8f247be2 data/l2complements/advancements/recipes/enchantments/split_suppressor.json
 3cb03479ced0e3e569205d00a508b371857ae43c data/l2complements/recipes/insulator.json
 ba3ab31380936befeac911288e49c75f8d40113a data/l2complements/recipes/split_suppressor.json
+4b9d05f8d5dca02f6cf4f92c3c35a1a94303ad10 data/l2complements/tags/mob_effect/skill_effect.json
 b1f0948dec552920468cd47e2f8a8f99123aa9ad data/l2hostility/advancements/hostility/breed.json
 5438d24ee2cef442d96f87c920c8557262290d37 data/l2hostility/advancements/hostility/detector.json
 07d2da43bbabb3ee80134db5ec6ff28f6619ec3f data/l2hostility/advancements/hostility/effect_kill_adaptive.json
@@ -282,7 +283,7 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/mele
 778fdb4a5208400e8f9b783e17704df130baf07b data/l2hostility/tags/entity_types/repelling_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_whitelist.json
-c3eb392d55e61ea2002cb572e409e051cdc33c1c data/l2hostility/tags/entity_types/semiboss.json
+ee9718d46d784b36468c53b0a7f82acc6dfc5b70 data/l2hostility/tags/entity_types/semiboss.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_types/shulker_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/shulker_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/slowness_blacklist.json
@@ -295,13 +296,13 @@ c3eb392d55e61ea2002cb572e409e051cdc33c1c data/l2hostility/tags/entity_types/semi
 36e96d72241c888191547a2ddb5604d37a1b092a data/l2hostility/tags/entity_types/split_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/tank_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/tank_whitelist.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/teleport_blacklist.json
+9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_types/teleport_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/teleport_whitelist.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_types/undying_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/undying_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/weakness_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/weakness_whitelist.json
-38faf2f8334b99d30977d23363e9d000ef771deb data/l2hostility/tags/entity_types/whitelist.json
+c61eace0d42617f0e9c82ef998ee1262cce34687 data/l2hostility/tags/entity_types/whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
 406c965f80725c8e6de68d3bdf4488940323728a data/l2hostility/tags/items/antibuild_ban.json

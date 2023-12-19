@@ -11,23 +11,9 @@
         "variation": 0.0
       },
       "entities": [
-        "cataclysm:the_leviathan"
+        "bosses_of_mass_destruction:obsidilith"
       ],
-      "items": [
-        {
-          "chance": 1.0,
-          "entries": [
-            {
-              "stack": {
-                "item": "l2hostility:ring_of_divinity"
-              },
-              "weight": 100
-            }
-          ],
-          "level": 600,
-          "slot": "curios/ring"
-        }
-      ],
+      "items": [],
       "traits": [
         {
           "free": 2,
@@ -36,13 +22,13 @@
         },
         {
           "free": 2,
-          "min": 2,
+          "min": 3,
           "trait": "l2hostility:reflect"
         },
         {
-          "free": 2,
-          "min": 3,
-          "trait": "l2hostility:freezing"
+          "free": 5,
+          "min": 5,
+          "trait": "l2hostility:weakness"
         }
       ]
     }

@@ -7,6 +7,7 @@ import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
+import dev.xkmc.l2hostility.compat.data.BoMDData;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
 import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
@@ -189,6 +190,9 @@ public class LHConfigGen extends ConfigDataProvider {
 		}
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genConfig(collector);
+		}
+		if (ModList.get().isLoaded("bosses_of_mass_destruction")) {
+			BoMDData.genConfig(collector);
 		}
 	}
 

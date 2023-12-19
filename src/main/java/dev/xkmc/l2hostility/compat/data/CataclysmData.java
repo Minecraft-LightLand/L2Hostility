@@ -26,18 +26,21 @@ public class CataclysmData {
 	}
 
 	public static void genConfig(ConfigDataProvider.Collector collector) {
-		int equipLevel = 400;
+		int equipLevel = 600;
 		addEntity(collector, 200, 50, ModEntities.ENDER_GUARDIAN, List.of(
+						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
 						new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 3, 5)),
 				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack()),
 						EntityConfig.simplePool(equipLevel, "curios/hands", LHItems.IMAGINE_BREAKER.asStack())));
 		addEntity(collector, 200, 50, ModEntities.NETHERITE_MONSTROSITY, List.of(
+						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
 						new EntityConfig.TraitBase(LHTraits.SLOWNESS.get(), 3, 5)),
 				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack()),
 						EntityConfig.simplePool(equipLevel, "curios/hands", LHItems.IMAGINE_BREAKER.asStack())));
 		addEntity(collector, 200, 50, ModEntities.IGNIS, List.of(
+						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
 						new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 2, 3)),
 				List.of(
@@ -46,12 +49,20 @@ public class CataclysmData {
 						EntityConfig.simplePool(equipLevel, "curios/hands", LHItems.IMAGINE_BREAKER.asStack())
 				));
 		addEntity(collector, 200, 50, ModEntities.THE_HARBINGER, List.of(
+						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
 						new EntityConfig.TraitBase(LHTraits.WITHER.get(), 2, 3)),
 				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack())));
 		addEntity(collector, 200, 50, ModEntities.THE_LEVIATHAN, List.of(
+						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 2, 2),
 						new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 2, 3)),
+				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack())));
+
+		addEntity(collector, 200, 50, ModEntities.ANCIENT_REMNANT, List.of(
+						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
+						new EntityConfig.TraitBase(LHTraits.REPRINT.get(), 1, 1),
+						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 3)),
 				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack())));
 
 		addEntity(collector, 100, 30, ModEntities.ENDER_GOLEM,

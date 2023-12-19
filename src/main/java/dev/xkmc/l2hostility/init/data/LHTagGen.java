@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.cerbon.bosses_of_mass_destruction.entity.BMDEntities;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.alexmodguy.alexscaves.AlexsCaves;
@@ -126,7 +127,8 @@ public class LHTagGen {
 					.addOptional(ModEntities.IGNIS.getId())
 					.addOptional(ModEntities.THE_HARBINGER.getId())
 					.addOptional(ModEntities.THE_LEVIATHAN.getId())
-					.addOptional(ModEntities.AMETHYST_CRAB.getId());
+					.addOptional(ModEntities.AMETHYST_CRAB.getId())
+					.addOptional(ModEntities.ANCIENT_REMNANT.getId());
 		}
 
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {
@@ -157,6 +159,21 @@ public class LHTagGen {
 					.addOptional(ACEntityRegistry.RELICHEIRUS.getId())
 					.addOptional(ACEntityRegistry.SUBTERRANODON.getId())
 					.addOptional(ACEntityRegistry.TREMORSAURUS.getId());
+		}
+
+		if (ModList.get().isLoaded("bosses_of_mass_destruction")) {
+			pvd.addTag(SEMIBOSS)
+					.addOptional(BMDEntities.LICH.getId())
+					.addOptional(BMDEntities.GAUNTLET.getId())
+					.addOptional(BMDEntities.OBSIDILITH.getId())
+					.addOptional(BMDEntities.VOID_BLOSSOM.getId());
+
+			pvd.addTag(WHITELIST)
+					.addOptional(BMDEntities.LICH.getId())
+					.addOptional(BMDEntities.GAUNTLET.getId())
+					.addOptional(BMDEntities.OBSIDILITH.getId())
+					.addOptional(BMDEntities.VOID_BLOSSOM.getId());
+
 		}
 	}
 
