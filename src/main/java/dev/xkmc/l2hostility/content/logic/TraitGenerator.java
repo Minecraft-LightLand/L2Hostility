@@ -77,8 +77,9 @@ public class TraitGenerator {
 
 	private void genBase(EntityConfig.TraitBase base) {
 		MobTrait e = base.trait();
-		if (!e.allow(entity, mobLevel, ins.getMaxTraitLevel())) return;
-		int max = Math.min(ins.getMaxTraitLevel(), e.getMaxLevel());
+		int maxTrait = TraitManager.getMaxLevel() + 1;
+		if (!e.allow(entity, mobLevel, maxTrait)) return;
+		int max = e.getMaxLevel();// config bypass player trait cap
 		int cost = e.getCost(ins.trait_cost);
 		int old = Math.min(e.getMaxLevel(), Math.max(getRank(e), base.free()));
 		int expected = Math.min(max, Math.max(old, base.min()));

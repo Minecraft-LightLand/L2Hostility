@@ -4,8 +4,8 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -18,6 +18,7 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
@@ -45,8 +46,8 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 		return LHConfig.COMMON.hostilitySpawnCount.get();
 	}
 
-	public static int getBonusLevel() {
-		return LHConfig.COMMON.hostilitySpawnLevelBonus.get();
+	public static double getBonusFactor() {
+		return LHConfig.COMMON.hostilitySpawnLevelFactor.get();
 	}
 
 	public static int getMaxTrials() {
@@ -86,6 +87,7 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 				}
 				Entity entity = e.get().type.create(sl);
 				if (entity == null) continue;
+				if (entity instanceof Creeper) continue;
 				entity.setPos(Vec3.atCenterOf(getBlockPos()));
 				if (entity instanceof LivingEntity le) {
 					if (MobTraitCap.HOLDER.isProper(le)) {
@@ -95,7 +97,7 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 						cap.pos = getBlockPos();
 						cap.init(level, le, (a, b) -> {
 							cdcap.get().modifyInstance(a, b);
-							b.acceptBonusLevel(getBonusLevel());
+							b.acceptBonusFactor(getBonusFactor());
 							b.setFullChance();
 						});
 					}

@@ -32,13 +32,9 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import twilightforest.TwilightForestMod;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class LHConfigGen extends ConfigDataProvider {
-
-	public static final List<Consumer<Collector>> LIST = new ArrayList<>();
 
 	public LHConfigGen(DataGenerator generator) {
 		super(generator, "L2Hostility Config");
@@ -46,7 +42,7 @@ public class LHConfigGen extends ConfigDataProvider {
 
 	@Override
 	public void add(Collector collector) {
-		LIST.forEach(e -> e.accept(collector));
+		L2Hostility.REGISTRATE.CONFIGS.forEach(e -> e.accept(collector));
 
 		collector.add(L2DamageTracker.ARMOR, new ResourceLocation(L2Hostility.MODID, "equipments"), new ArmorEffectConfig()
 				.add(LHItems.CURSE_WRATH.getId().toString(),

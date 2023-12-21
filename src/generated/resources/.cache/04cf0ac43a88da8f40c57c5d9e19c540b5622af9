@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-19T11:12:14.016624	L2Hostility Config
+// 1.20.1	2023-12-21T11:21:23.301829	L2Hostility Config
 5fbad313d5dfcd98f724e819283dca6f274ba601 data/bosses_of_mass_destruction/l2hostility_config/entity/gauntlet.json
 2bb3a06cb2213d14b2ebfbd72e6b12f0e10f757f data/bosses_of_mass_destruction/l2hostility_config/entity/lich.json
 3b17d23d1e4877ba03c865ee4fbc88ba287bf6a5 data/bosses_of_mass_destruction/l2hostility_config/entity/obsidilith.json
@@ -19,7 +19,7 @@ a7eea3f1b7bbacf4fe14aaf21abc23af93abb723 data/l2hostility/l2hostility_config/dif
 5d62d0961f22262e8fcaca6fcfbed04a354c2fb7 data/l2hostility/l2hostility_config/difficulty/overworld.json
 ae86f6a6ae4ab25093aa5855eb60feb7f5d036c4 data/l2hostility/l2hostility_config/entity/bosses.json
 3d06e92c3fdbfbb56e1c98ce99c04ce93a64fcd9 data/l2hostility/l2hostility_config/trait/adaptive.json
-6c725496eaacd5619bb61f8a6b604cd2efc93d65 data/l2hostility/l2hostility_config/trait/arena.json
+19eba386bdfa9e09c07816327b30458e086f510f data/l2hostility/l2hostility_config/trait/arena.json
 bf37960f3f954fb85ad4623f124ddc083e5f65be data/l2hostility/l2hostility_config/trait/blindness.json
 73daf5fcc4aad23590cbac15273db250e7ea62c6 data/l2hostility/l2hostility_config/trait/corrosion.json
 9eb05913fbb2da0c71f56f55db27964c27d43361 data/l2hostility/l2hostility_config/trait/counter_strike.json

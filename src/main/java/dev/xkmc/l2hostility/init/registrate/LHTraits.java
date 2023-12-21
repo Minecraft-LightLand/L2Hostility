@@ -185,7 +185,7 @@ public class LHTraits {
 					.desc("Decrease gravity for mobs around it").lang("Moonwalk").register();
 
 			ARENA = L2Hostility.REGISTRATE.regTrait("arena", ArenaTrait::new,
-							rl -> new TraitConfig(rl, 50, 1, 1, 50)
+							rl -> new TraitConfig(rl, 1000, 1, 1, 50)
 									.addWhitelist(pvd -> pvd.addTag(LHTagGen.SEMIBOSS)))
 					.desc("Players around it cannot place or break blocks. Immune damage from entities not affected by this.")
 					.lang("Arena").register();

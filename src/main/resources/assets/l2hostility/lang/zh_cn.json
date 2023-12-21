@@ -227,6 +227,7 @@
   "l2hostility.jei.other_trait": "同时需要%2$s阶%1$s词条",
   "l2hostility.jei.envy": "装备嫉妒诅咒时击杀有词条的怪物有概率掉落对应词条",
   "l2hostility.jei.gluttony": "装备暴食诅咒时击杀有等级的怪物有概率掉落",
+  "l2hostility.jei.required": "需要佩戴[%s]饰品才能掉落",
   "advancements.l2hostility.advancements.hostility.breed.description": "使用词条物品赋予怪物词条",
   "advancements.l2hostility.advancements.hostility.breed.title": "养虎为患",
   "advancements.l2hostility.advancements.hostility.detector.description": "获得恶意侦测器",

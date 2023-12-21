@@ -105,13 +105,15 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	@Override
 	public List<ItemStack> getInputs() {
 		Set<MobTrait> set = new LinkedHashSet<>();
+		List<ItemStack> ans = new ArrayList<>();
 		set.add(trait);
 		for (var c : getConditions()) {
 			if (c instanceof TraitLootCondition cl) {
 				set.add(cl.trait);
+			} else if (c instanceof PlayerHasItemCondition item) {
+				ans.add(item.item.getDefaultInstance());
 			}
 		}
-		List<ItemStack> ans = new ArrayList<>();
 		for (var e : set) {
 			ans.add(e.asItem().getDefaultInstance());
 		}

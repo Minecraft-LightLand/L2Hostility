@@ -15,7 +15,7 @@ public class MobDifficultyCollector {
 	}
 
 	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel() + 1;
-	public double scale, varSq, apply_chance, trait_chance, trait_cost;
+	public double scale, varSq, apply_chance, trait_chance, trait_cost, finalFactor = 1;
 
 	private boolean fullChance;
 
@@ -44,6 +44,10 @@ public class MobDifficultyCollector {
 		this.base += difficulty;
 	}
 
+	public void acceptBonusFactor(double finalFactor) {
+		this.finalFactor *= finalFactor;
+	}
+
 	public void traitCostFactor(double factor) {
 		trait_cost *= factor;
 	}
@@ -62,7 +66,8 @@ public class MobDifficultyCollector {
 		if (count > 0) {
 			mean += random.nextGaussian() * Math.sqrt(varSq);
 		}
-		return Math.round((int) Mth.clamp(mean, min, cap));
+		mean *= finalFactor;
+		return (int) Math.round(Mth.clamp(mean, min, cap));
 	}
 
 	public void setTraitCap(int cap) {

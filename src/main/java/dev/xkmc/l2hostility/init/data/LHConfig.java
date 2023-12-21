@@ -91,7 +91,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue wrathDamageBonus;
 
 		public final ForgeConfigSpec.IntValue hostilitySpawnCount;
-		public final ForgeConfigSpec.IntValue hostilitySpawnLevelBonus;
+		public final ForgeConfigSpec.IntValue hostilitySpawnLevelFactor;
 
 		public final ForgeConfigSpec.DoubleValue tankHealth;
 		public final ForgeConfigSpec.DoubleValue tankArmor;
@@ -236,8 +236,8 @@ public class LHConfig {
 						.define("allowHostilitySpawner", true);
 				hostilitySpawnCount = builder.comment("Number of mobs to spawn in Hostility Spawner")
 						.defineInRange("hostilitySpawnCount", 16, 1, 64);
-				hostilitySpawnLevelBonus = builder.comment("Level bonus for mobs to spawn in Hostility Spawner")
-						.defineInRange("hostilitySpawnLevelBonus", 100, 1, 10000);
+				hostilitySpawnLevelFactor = builder.comment("Level bonus factor for mobs to spawn in Hostility Spawner")
+						.defineInRange("hostilitySpawnLevelFactor", 2, 1, 10000);
 			}
 			builder.pop();
 

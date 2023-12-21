@@ -105,7 +105,7 @@ public enum LangData {
 
 	TOOLTIP_JEI_ENVY("jei.envy", "Drops when you equips Curse of Envy while killing mobs of this trait", 0),
 	TOOLTIP_JEI_GLUTTONY("jei.gluttony", "Drops when you equips Curse of Gluttony while killing mobs with levels", 0),
-	TOOLTIP_JEI_REQUIRED("jei.required", "Requires you to equip %s while killing mobs", 0),
+	TOOLTIP_JEI_REQUIRED("jei.required", "Requires you to equip %s while killing mobs", 1),
 
 	COMMAND_PLAYER_SUCCEED("command.player.success", "Performed actions on %s players", 1),
 	COMMAND_PLAYER_FAIL("command.player.fail", "Command has no target or no effect", 0),
