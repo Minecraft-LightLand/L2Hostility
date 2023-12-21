@@ -1,7 +1,6 @@
 
 2.4.13
 - TODO arena patchouli
-- TODO update arena desc
 - Fix Drain crash
 - Sealed item can still put on curios slot
 - Drowned has higher chance to wield trident

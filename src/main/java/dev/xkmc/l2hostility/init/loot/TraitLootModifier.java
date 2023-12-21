@@ -20,21 +20,20 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TraitLootModifier extends LootModifier implements ITraitLootRecipe {
 
 	public static final Codec<TraitLootModifier> CODEC = RecordCodecBuilder.create(i -> codecStart(i).and(i.group(
-					LHTraits.TRAITS.get().getCodec().fieldOf("trait").forGetter(e -> e.trait),
+					LHTraits.TRAITS.get().getCodec().optionalFieldOf("trait").forGetter(e -> Optional.ofNullable(e.trait)),
 					Codec.DOUBLE.fieldOf("chance").forGetter(e -> e.chance),
 					Codec.DOUBLE.fieldOf("rankBonus").forGetter(e -> e.rankBonus),
 					ItemStack.CODEC.fieldOf("result").forGetter(e -> e.result)))
 			.apply(i, TraitLootModifier::new));
 
+	@Nullable
 	public final MobTrait trait;
 	public final double chance, rankBonus;
 	public final ItemStack result;
@@ -47,9 +46,9 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 		this.result = result;
 	}
 
-	private TraitLootModifier(LootItemCondition[] conditionsIn, MobTrait trait, double chance, double rankBonus, ItemStack result) {
+	private TraitLootModifier(LootItemCondition[] conditionsIn, Optional<MobTrait> trait, double chance, double rankBonus, ItemStack result) {
 		super(conditionsIn);
-		this.trait = trait;
+		this.trait = trait.orElse(null);
 		this.chance = chance;
 		this.rankBonus = rankBonus;
 		this.result = result;
@@ -60,7 +59,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
-				if (cap.hasTrait(trait)) {
+				if (trait == null || cap.hasTrait(trait)) {
 					double factor = cap.dropRate;
 					if (context.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) {
 						Player player = context.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
@@ -69,7 +68,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 							factor *= stack.item().getLootFactor(stack.stack(), pl, cap);
 						}
 					}
-					int lv = cap.getTraitLevel(trait);
+					int lv = trait == null ? 0 : cap.getTraitLevel(trait);
 					double rate = chance + lv * rankBonus;
 					int count = 0;
 					for (int i = 0; i < result.getCount() * factor; i++) {
@@ -106,7 +105,8 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	public List<ItemStack> getInputs() {
 		Set<MobTrait> set = new LinkedHashSet<>();
 		List<ItemStack> ans = new ArrayList<>();
-		set.add(trait);
+		if (trait != null)
+			set.add(trait);
 		for (var c : getConditions()) {
 			if (c instanceof TraitLootCondition cl) {
 				set.add(cl.trait);
@@ -122,11 +122,12 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 
 	@Override
 	public void addTooltip(List<Component> list) {
-		int max = trait.getConfig().max_rank;
+		int max = trait == null ? 0 : trait.getConfig().max_rank;
 		int min = 1;
 		int minLevel = 0;
 		List<TraitLootCondition> other = new ArrayList<>();
 		List<PlayerHasItemCondition> itemReq = new ArrayList<>();
+		List<MobHealthCondition> health = new ArrayList<>();
 		for (var c : getConditions()) {
 			if (c instanceof TraitLootCondition cl) {
 				if (cl.trait == trait) {
@@ -139,6 +140,8 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 				minLevel = cl.minLevel;
 			} else if (c instanceof PlayerHasItemCondition cl) {
 				itemReq.add(cl);
+			} else if (c instanceof MobHealthCondition cl) {
+				health.add(cl);
 			}
 		}
 		if (minLevel > 0) {
@@ -146,12 +149,24 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 							.withStyle(ChatFormatting.AQUA))
 					.withStyle(ChatFormatting.LIGHT_PURPLE));
 		}
-		for (int lv = min; lv <= max; lv++) {
-			list.add(LangData.LOOT_CHANCE.get(
-							Component.literal(Math.round((chance + rankBonus * lv) * 100) + "%")
-									.withStyle(ChatFormatting.AQUA),
-							trait.getDesc().withStyle(ChatFormatting.GOLD),
-							Component.literal(lv + "").withStyle(ChatFormatting.AQUA))
+		for (var e : health) {
+			list.add(LangData.LOOT_MIN_HEALTH.get(Component.literal(e.minHealth + "")
+							.withStyle(ChatFormatting.AQUA))
+					.withStyle(ChatFormatting.LIGHT_PURPLE));
+		}
+		if (trait != null) {
+			for (int lv = min; lv <= max; lv++) {
+				list.add(LangData.LOOT_CHANCE.get(
+								Component.literal(Math.round((chance + rankBonus * lv) * 100) + "%")
+										.withStyle(ChatFormatting.AQUA),
+								trait.getDesc().withStyle(ChatFormatting.GOLD),
+								Component.literal(lv + "").withStyle(ChatFormatting.AQUA))
+						.withStyle(ChatFormatting.GRAY));
+			}
+		} else {
+
+			list.add(LangData.LOOT_MIN_HEALTH.get(Component.literal(Math.round(chance * 100) + "%")
+							.withStyle(ChatFormatting.AQUA))
 					.withStyle(ChatFormatting.GRAY));
 		}
 		for (var c : other) {
