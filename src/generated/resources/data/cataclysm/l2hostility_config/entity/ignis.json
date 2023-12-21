@@ -20,7 +20,7 @@
             {
               "stack": {
                 "item": "cataclysm:the_incinerator",
-                "nbt": "{Enchantments:[{id:\"l2complements:void_touch\",lvl:10s},{id:\"minecraft:vanishing_curse\",lvl:1s}]}"
+                "nbt": "{Enchantments:[{id:\"l2complements:void_touch\",lvl:10s},{id:\"minecraft:vanishing_curse\",lvl:1s},{id:\"l2hostility:vanish\",lvl:1s}]}"
               },
               "weight": 100
             }
@@ -33,7 +33,8 @@
           "entries": [
             {
               "stack": {
-                "item": "l2hostility:ring_of_divinity"
+                "item": "l2hostility:ring_of_divinity",
+                "nbt": "{Enchantments:[{id:\"minecraft:vanishing_curse\",lvl:1s}]}"
               },
               "weight": 100
             }
@@ -46,7 +47,8 @@
           "entries": [
             {
               "stack": {
-                "item": "l2hostility:imagine_breaker"
+                "item": "l2hostility:imagine_breaker",
+                "nbt": "{Enchantments:[{id:\"minecraft:vanishing_curse\",lvl:1s}]}"
               },
               "weight": 100
             }

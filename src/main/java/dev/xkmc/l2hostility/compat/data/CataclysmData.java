@@ -5,6 +5,7 @@ import com.github.L_Ender.cataclysm.init.ModItems;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
+import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.compat.curios.CurioEntityBuilder;
@@ -31,39 +32,37 @@ public class CataclysmData {
 						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
 						new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 3, 5)),
-				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack()),
-						EntityConfig.simplePool(equipLevel, "curios/hands", LHItems.IMAGINE_BREAKER.asStack())));
+				List.of(divinity(equipLevel), breaker(equipLevel)));
 		addEntity(collector, 200, 50, ModEntities.NETHERITE_MONSTROSITY, List.of(
 						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
 						new EntityConfig.TraitBase(LHTraits.SLOWNESS.get(), 3, 5)),
-				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack()),
-						EntityConfig.simplePool(equipLevel, "curios/hands", LHItems.IMAGINE_BREAKER.asStack())));
+				List.of(divinity(equipLevel), breaker(equipLevel)));
 		addEntity(collector, 200, 50, ModEntities.IGNIS, List.of(
 						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
 						new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 2, 3)),
 				List.of(
 						EntityConfig.simplePool(equipLevel, "equipment/mainhand", getIgnisWeapon()),
-						EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack()),
-						EntityConfig.simplePool(equipLevel, "curios/hands", LHItems.IMAGINE_BREAKER.asStack())
+						divinity(equipLevel), breaker(equipLevel)
 				));
 		addEntity(collector, 200, 50, ModEntities.THE_HARBINGER, List.of(
 						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
 						new EntityConfig.TraitBase(LHTraits.WITHER.get(), 2, 3)),
-				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack())));
+				List.of(divinity(equipLevel)));
+
 		addEntity(collector, 200, 50, ModEntities.THE_LEVIATHAN, List.of(
 						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 2, 2),
 						new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 2, 3)),
-				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack())));
+				List.of(divinity(equipLevel)));
 
 		addEntity(collector, 200, 50, ModEntities.ANCIENT_REMNANT, List.of(
 						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
 						new EntityConfig.TraitBase(LHTraits.REPRINT.get(), 1, 1),
 						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 3)),
-				List.of(EntityConfig.simplePool(equipLevel, "curios/ring", LHItems.RING_DIVINITY.asStack())));
+				List.of(divinity(equipLevel)));
 
 		addEntity(collector, 100, 30, ModEntities.ENDER_GOLEM,
 				new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 0, 1),
@@ -79,7 +78,20 @@ public class CataclysmData {
 		ItemStack stack = ModItems.THE_INCINERATOR.get().getDefaultInstance();
 		stack.enchant(LCEnchantments.VOID_TOUCH.get(), 10);
 		stack.enchant(Enchantments.VANISHING_CURSE, 1);
+		stack.enchant(LHEnchantments.VANISH.get(), 1);
 		return stack;
+	}
+
+	private static EntityConfig.ItemPool divinity(int lv) {
+		ItemStack stack = LHItems.RING_DIVINITY.asStack();
+		stack.enchant(Enchantments.VANISHING_CURSE, 1);
+		return EntityConfig.simplePool(lv, "curios/ring", stack);
+	}
+
+	private static EntityConfig.ItemPool breaker(int lv) {
+		ItemStack stack = LHItems.IMAGINE_BREAKER.asStack();
+		stack.enchant(Enchantments.VANISHING_CURSE, 1);
+		return EntityConfig.simplePool(lv, "curios/hands", stack);
 	}
 
 	public static void genSlot(BiConsumer<String, Record> map) {

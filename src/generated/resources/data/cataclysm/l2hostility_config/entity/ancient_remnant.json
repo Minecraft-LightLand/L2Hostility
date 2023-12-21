@@ -19,7 +19,8 @@
           "entries": [
             {
               "stack": {
-                "item": "l2hostility:ring_of_divinity"
+                "item": "l2hostility:ring_of_divinity",
+                "nbt": "{Enchantments:[{id:\"minecraft:vanishing_curse\",lvl:1s}]}"
               },
               "weight": 100
             }

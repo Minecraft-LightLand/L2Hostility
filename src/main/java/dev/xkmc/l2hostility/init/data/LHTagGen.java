@@ -83,8 +83,7 @@ public class LHTagGen {
 
 	public static void onItemTagGen(RegistrateItemTagsProvider pvd) {
 		pvd.addTag(NO_SEAL)
-				.addOptional(new ResourceLocation("enigmaticlegacy:curse_ring"))
-				.addOptional(new ResourceLocation("moonstone:sevencurse"));
+				.addOptional(new ResourceLocation("enigmaticlegacy:curse_ring"));
 		pvd.addTag(ANTIBUILD_BAN)
 				.addOptional(new ResourceLocation("enigmaticlegacy:extradimensional_eye"));
 	}

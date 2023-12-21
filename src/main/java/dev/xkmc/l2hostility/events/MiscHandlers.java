@@ -7,7 +7,9 @@ import dev.xkmc.l2hostility.content.item.wand.IMobClickItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
+import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.EnchantedBookItem;
@@ -15,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -38,6 +41,15 @@ public class MiscHandlers {
 			if (event.getTarget() instanceof LivingEntity le) {
 				event.setCancellationResult(event.getItemStack().interactLivingEntity(event.getEntity(),
 						le, event.getHand()));
+				event.setCanceled(true);
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
+		if (event.getEntity() instanceof ItemEntity ie) {
+			if (ie.getItem().getEnchantmentLevel(LHEnchantments.VANISH.get()) > 0) {
 				event.setCanceled(true);
 			}
 		}

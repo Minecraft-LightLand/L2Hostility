@@ -124,6 +124,9 @@
 	"insulator": "绝缘",
 	"insulator.desc": "减少词条效果对你施加的推挤或者拉扯",
 	"split_suppressor": "分裂抑制",
-	"split_suppressor.desc": "击中目标时删除分裂词条"
+	"split_suppressor.desc": "击中目标时删除分裂词条",
+	"vanish": "毁灭",
+	"vanish.desc": "掉落或者被生存玩家持有时消失"
+
   }
 }

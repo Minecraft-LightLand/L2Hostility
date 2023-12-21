@@ -64,7 +64,6 @@ public class MobTrait extends NamedEntry<MobTrait> {
 		if (isBanned()) return false;
 		TraitConfig config = getConfig();
 		if (difficulty < config.min_level) return false;
-		if (difficulty < config.cost) return false;
 		if (!EntityConfig.allow(le.getType(), this)) return false;
 		return config.allows(le.getType());
 	}

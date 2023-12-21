@@ -54,6 +54,8 @@
   "enchantment.l2hostility.insulator.desc": "Reduce trait effects that pulls or pushes you",
   "enchantment.l2hostility.split_suppressor": "Split Suppressor",
   "enchantment.l2hostility.split_suppressor.desc": "Disable Split trait on enemies on hit",
+  "enchantment.l2hostility.vanish": "Vanish",
+  "enchantment.l2hostility.vanish.desc": "This item vanishes when on ground or in hand of survival / adventure player",
   "entity.l2hostility.hostility_bullet": "Hostility Bullet",
   "entity.l2hostility.hostility_charge": "Hostility Charge",
   "item.l2hostility.abrahadabra": "Abrahadabra",
