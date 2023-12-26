@@ -165,7 +165,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 			}
 		} else {
 
-			list.add(LangData.LOOT_MIN_HEALTH.get(Component.literal(Math.round(chance * 100) + "%")
+			list.add(LangData.LOOT_NO_TRAIT.get(Component.literal(Math.round(chance * 100) + "%")
 							.withStyle(ChatFormatting.AQUA))
 					.withStyle(ChatFormatting.GRAY));
 		}

@@ -66,16 +66,18 @@ public class TraitConfig extends BaseConfig {
 	public boolean allows(EntityType<?> type) {
 		var blacklist = getBlacklistTag();
 		var whitelist = getWhitelistTag();
-		if (blacklist != null && type.is(blacklist)) return false;
-		if (whitelist != null) {
-			var manager = ForgeRegistries.ENTITY_TYPES.tags();
-			if (manager != null) {
-				if (!manager.getTag(whitelist).isEmpty()) {
-					return type.is(whitelist);
-				}
-			}
+		var manager = ForgeRegistries.ENTITY_TYPES.tags();
+		assert manager != null;
+		boolean def = true;
+		if (!manager.getTag(whitelist).isEmpty()) {
+			if (type.is(whitelist)) return true;
+			def = false;
 		}
-		return true;
+		if (!manager.getTag(blacklist).isEmpty()) {
+			if (type.is(blacklist)) return false;
+			def = true;
+		}
+		return def;
 	}
 
 }

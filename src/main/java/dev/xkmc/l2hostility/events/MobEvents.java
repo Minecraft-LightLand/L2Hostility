@@ -116,7 +116,7 @@ public class MobEvents {
 			}
 			int exp = event.getDroppedExperience();
 			int level = cap.getLevel();
-			exp *= 1 + level * LHConfig.COMMON.expDropFactor.get() * level;
+			exp = (int) (exp * (1 + LHConfig.COMMON.expDropFactor.get() * level));
 			event.setDroppedExperience(exp);
 		}
 	}

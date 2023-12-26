@@ -1,14 +1,18 @@
 
 2.4.13
 - TODO arena patchouli
+- TODO press alt to show blacklist/whitelist
 - Fix Drain crash
 - Sealed item can still put on curios slot
 - Drowned has higher chance to wield trident
+- Fix mob drop insane amount of experience
 - Add new levels of progression
 - Change spawner level bonus from additive to multiplicative
 - Prevent creepers from spawning in hostility spawner
 - Add Ancient remnant compat
 - Add Bosses of Mass Destruction compat
+- Add new loot condition for modpack drop display
+- Allow whitelist and blacklist to be used together
 
 2.4.12
 - add Pocket of Restoration

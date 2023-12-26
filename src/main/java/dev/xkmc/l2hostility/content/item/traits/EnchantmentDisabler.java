@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.item.traits;
 
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -51,7 +52,8 @@ public class EnchantmentDisabler {
 
 	public static void tickStack(Level level, Entity user, ItemStack stack) {
 		if (level.isClientSide()) return;
-		if (user instanceof Player player && !player.getAbilities().instabuild) {
+		if (user instanceof Player player && !player.getAbilities().instabuild &&
+				stack.getEnchantmentLevel(LHEnchantments.VANISH.get()) > 0) {
 			stack.setCount(0);
 			return;
 		}

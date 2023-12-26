@@ -84,6 +84,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	private boolean inherited = false;
 
+	private boolean ticking = false;
+
 	private final ArrayList<Pair<MobTrait, Integer>> pending = new ArrayList<>();
 
 	public MobTraitCap() {
@@ -181,7 +183,32 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		pending.add(Pair.of(trait, lv));
 	}
 
+	public void removeTrait(MobTrait trait) {
+		if (!traits.containsKey(trait)) return;
+		if (ticking) {
+			setTrait(trait, 0);
+		} else {
+			traits.remove(trait);
+		}
+
+	}
+
+	private void clearPending(LivingEntity mob) {
+		while (!pending.isEmpty()) {
+			var temp = new ArrayList<>(pending);
+			for (var pair : pending) {
+				traits.put(pair.getFirst(), pair.getSecond());
+			}
+			pending.clear();
+			for (var pair : temp) {
+				pair.getFirst().initialize(mob, pair.getSecond());
+				pair.getFirst().postInit(mob, pair.getSecond());
+			}
+		}
+	}
+
 	public void tick(LivingEntity mob) {
+		ticking = true;
 		if (!mob.level().isClientSide()) {
 			if (!isInitialized()) {
 				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
@@ -191,17 +218,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				stage = Stage.POST_INIT;
 				ItemPopulator.postFill(this, mob);
 				traits.forEach((k, v) -> k.postInit(mob, v));
-				while (!pending.isEmpty()) {
-					var temp = new ArrayList<>(pending);
-					for (var pair : pending) {
-						traits.put(pair.getFirst(), pair.getSecond());
-					}
-					pending.clear();
-					for (var pair : temp) {
-						pair.getFirst().initialize(mob, pair.getSecond());
-						pair.getFirst().postInit(mob, pair.getSecond());
-					}
-				}
+				clearPending(mob);
 				mob.setHealth(mob.getMaxHealth());
 				syncToClient(mob);
 			}
@@ -213,6 +230,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		if (isInitialized() && !traits.isEmpty()) {
 			traits.keySet().removeIf(MobTrait::isBanned);
 			traits.forEach((k, v) -> k.tick(mob, v));
+			clearPending(mob);
 		}
 		if (!mob.level().isClientSide() && pos != null) {
 			if (summoner == null) {
@@ -224,6 +242,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				mob.discard();
 			}
 		}
+		ticking = false;
 	}
 
 	public void onKilled(LivingEntity mob, @Nullable Player player) {
