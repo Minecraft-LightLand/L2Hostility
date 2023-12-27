@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.init;
 
+import dev.xkmc.l2hostility.content.item.curio.misc.PocketOfRestoration;
 import dev.xkmc.l2hostility.content.menu.tab.DifficultyOverlay;
 import dev.xkmc.l2hostility.content.menu.tab.DifficultyTab;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -25,6 +26,9 @@ public class L2HostilityClient {
 		event.enqueueWork(() -> {
 			TAB_DIFFICULTY = TabRegistry.registerTab(DifficultyTab::new,
 					() -> Items.ZOMBIE_HEAD, LangData.INFO_TAB_TITLE.get());
+
+			ItemProperties.register(LHItems.RESTORATION.get(), new ResourceLocation(L2Hostility.MODID, "filled"),
+					(stack, level, entity, i) -> stack.getTagElement(PocketOfRestoration.ROOT) == null ? 0 : 1);
 		});
 	}
 

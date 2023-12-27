@@ -1,5 +1,13 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "l2hostility:item/pocket_of_restoration_full",
+      "predicate": {
+        "l2hostility:filled": 0.5
+      }
+    }
+  ],
   "textures": {
     "layer0": "l2hostility:item/curio/pocket_of_restoration"
   }
