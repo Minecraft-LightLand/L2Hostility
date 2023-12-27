@@ -23,6 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.common.CuriosHelper;
 
 @Mod.EventBusSubscriber(modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class MiscHandlers {
@@ -84,7 +85,7 @@ public class MiscHandlers {
 		if (!stack.hasTag() || stack.getTagElement(SealedItem.DATA) == null) return false;
 		var ctag = stack.getOrCreateTag().getCompound(SealedItem.DATA);
 		ItemStack content = ItemStack.of(ctag);
-		return CuriosApi.isStackValid(slotContext, content);
+		return CuriosApi.getCuriosHelper().isStackValid(slotContext, content);
 	}
 
 }

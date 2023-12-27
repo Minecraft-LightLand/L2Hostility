@@ -116,7 +116,7 @@ public class L2Hostility {
 		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.HANDS.getMessageBuilder().size(2).build());
 		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.RING.getMessageBuilder().size(3).build());
 		InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("hostility_curse")
-				.priority(-1300).icon(new ResourceLocation(MODID, "slot/empty_hostility_slot")).build());
+				.priority(-1300).icon(new ResourceLocation("curios", "slot/empty_hostility_slot")).build());
 	}
 
 	@SubscribeEvent

@@ -8,14 +8,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.mixin.CuriosImplMixinHooks;
+import top.theillusivec4.curios.common.CuriosHelper;
 
-@Mixin(CuriosImplMixinHooks.class)
+@Mixin(CuriosHelper.class)
 public class CuriosImplMixinHooksMixin {
 
 	@Inject(at = @At("HEAD"), method = "isStackValid", cancellable = true, remap = false)
-	private static void l2hostility$isStackValid$makeValid(SlotContext slotContext, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-		if (stack.is(LHItems.SEAL.asItem())) {
+	private void l2hostility$isStackValid$makeValid(SlotContext slotContext, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+		if (stack.is(LHItems.SEAL.get())) {
 			cir.setReturnValue(MiscHandlers.predicateSlotValid(slotContext, stack));
 		}
 	}

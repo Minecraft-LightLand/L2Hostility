@@ -36,15 +36,13 @@ import java.util.function.Consumer;
 
 public class LHConfigGen extends ConfigDataProvider {
 
-	public static final List<Consumer<Map<String, BaseConfig>>> LIST = new ArrayList<>();
-
 	public LHConfigGen(DataGenerator generator) {
 		super(generator, "data/", "L2Hostility Config");
 	}
 
 	@Override
 	public void add(Map<String, BaseConfig> collector) {
-		LIST.forEach(e -> e.accept(collector));
+		L2Hostility.REGISTRATE.CONFIGS.forEach(e -> e.accept(collector));
 		var config = new ArmorEffectConfig();
 		config.immune.put(LHItems.CURSE_WRATH.getId().toString(), new LinkedHashSet<>(Set.of(
 				MobEffects.BLINDNESS, MobEffects.DARKNESS, MobEffects.CONFUSION,

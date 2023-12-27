@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.init.registrate;
 
 
+import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2hostility.content.enchantments.HostilityEnchantment;
 import dev.xkmc.l2hostility.content.enchantments.RemoveTraitEnchantment;
 import dev.xkmc.l2hostility.content.enchantments.VanishEnchantment;

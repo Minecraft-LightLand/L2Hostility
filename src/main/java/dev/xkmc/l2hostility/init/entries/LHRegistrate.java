@@ -6,10 +6,12 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullFunction;
 import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
+import dev.xkmc.l2library.serial.network.BaseConfig;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class LHRegistrate extends L2Registrate {
@@ -20,7 +22,7 @@ public class LHRegistrate extends L2Registrate {
 
 	private final List<String> LIST = new ArrayList<>();
 
-	public final List<Consumer<ConfigDataProvider.Collector>> CONFIGS = new ArrayList<>();
+	public final List<Consumer<Map<String, BaseConfig>>> CONFIGS = new ArrayList<>();
 
 	public final <T extends MobTrait> TraitBuilder<T, LHRegistrate> regTrait(String id, NonNullSupplier<T> sup, NonNullFunction<ResourceLocation, TraitConfig> config) {
 		LIST.add(id);
@@ -31,7 +33,7 @@ public class LHRegistrate extends L2Registrate {
 		return LIST;
 	}
 
-	public void addTraitConfig(Consumer<ConfigDataProvider.Collector> cons) {
+	public void addTraitConfig(Consumer<Map<String, BaseConfig>> cons) {
 		CONFIGS.add(cons);
 	}
 

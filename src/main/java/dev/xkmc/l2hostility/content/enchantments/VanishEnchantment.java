@@ -17,8 +17,4 @@ public class VanishEnchantment extends UnobtainableEnchantment {
 		return ChatFormatting.RED;
 	}
 
-	@Override
-	public Set<Integer> getCraftableLevels() {
-		return Set.of();
-	}
 }

@@ -4,7 +4,6 @@ import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.item.traits.TraitSymbol;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2hostility.init.data.LHConfigGen;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.base.NamedEntry;
@@ -35,8 +34,7 @@ public class TraitBuilder<T extends MobTrait, P> extends AbstractBuilder<MobTrai
 		this.sup = sup;
 		ResourceLocation rl = new ResourceLocation(getOwner().getModid(), getName());
 		var entry = config.apply(rl);
-		LHConfigGen.LIST.add(e -> L2Hostility.TRAIT.add(e, rl, entry));
-		owner.addTraitConfig(e -> e.add(L2Hostility.TRAIT, rl, entry));//FIXME
+		owner.addTraitConfig(e -> L2Hostility.TRAIT.add(e, rl, entry));
 	}
 
 	@Override
