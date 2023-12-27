@@ -25,9 +25,9 @@
 	"ring_of_healing": "再生之戒",
 	"chaos_ingot": "混沌锭",
 	"flaming_thorn": "魔焰荆棘",
-	"imagine_breaker": "幻想杀手",
+	"imagine_breaker": "破咒遗骨",
 	"witch_wand": "混乱魔药法杖",
-	"infinity_glove": "无限手套",
+	"infinity_glove": "宝石手套",
 	"oddeyes_glasses": "异色眼镜",
 	"triple_strip_cape": "三色披风",
 	"sealed_item": "被封印的物品",
@@ -35,9 +35,9 @@
 	"eternal_witch_charge": "永恒嗜魔弹",
 	"witch_charge": "嗜魔弹",
 	"witch_droplet": "女巫浓缩凝露",
-	"abrahadabra": "以雷霆赐汝一死",
+	"abrahadabra": "扭曲之魂",
 	"greed_of_nidhoggur": "尼德霍格之欲",
-	"platinum_star": "白金之星",
+	"platinum_star": "破风拳套",
 	"pocket_of_restoration": "解咒口袋",
 	"book_of_omniscience": "全知之书",
 	"book_of_reprint": "附魔影本",
@@ -110,7 +110,7 @@
 	"reprint": "复印",
 	"reprint.desc": "目标装备附魔点数每有1点，怪物伤害提升%s。近战复制所有装备附魔。x级附魔提供2^x附魔点数",
 	"arena": "领域",
-	"arena.desc": "区域内玩家无法放置方块"
+	"arena.desc": "区域内玩家无法放置和破坏方块，免疫来自区域外的生物的伤害"
   },
   "effect.l2hostility": {
 	"gravity": "重力",
@@ -124,6 +124,9 @@
 	"insulator": "绝缘",
 	"insulator.desc": "减少词条效果对你施加的推挤或者拉扯",
 	"split_suppressor": "分裂抑制",
-	"split_suppressor.desc": "击中目标时删除分裂词条"
+	"split_suppressor.desc": "击中目标时删除分裂词条",
+	"vanish": "毁灭",
+	"vanish.desc": "掉落或者被生存玩家持有时消失"
+
   }
 }

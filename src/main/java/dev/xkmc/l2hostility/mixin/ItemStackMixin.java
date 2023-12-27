@@ -19,7 +19,7 @@ public abstract class ItemStackMixin {
 
 	@Inject(at = @At("HEAD"), method = "inventoryTick")
 	public void l2hostility_stackTick(Level level, Entity user, int slot, boolean selected, CallbackInfo ci) {
-		EnchantmentDisabler.tickStack(level, Wrappers.cast(this));
+		EnchantmentDisabler.tickStack(level, user, Wrappers.cast(this));
 	}
 
 	@Inject(at = @At("HEAD"), method = "useOn", cancellable = true)

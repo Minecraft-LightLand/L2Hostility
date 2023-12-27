@@ -20,7 +20,7 @@ public class RemoveTraitEnchantment extends HostilityEnchantment implements HitT
 
 	@Override
 	public void hitMob(LivingEntity target, MobTraitCap cap, Integer value, AttackCache cache) {
-		cap.traits.remove(sup.get());
+		cap.removeTrait(sup.get());
 		cap.syncToClient(target);
 	}
 

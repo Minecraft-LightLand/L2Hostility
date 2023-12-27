@@ -6,6 +6,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class EffectBooster {
@@ -29,7 +30,8 @@ public class EffectBooster {
 	}
 
 	private static void boost(LivingEntity target, Predicate<MobEffect> pred, int min, double factor, int maxTime) {
-		for (var e : target.getActiveEffects()) {
+		var list = new ArrayList<>(target.getActiveEffects());
+		for (var e : list) {
 			if (pred.test(e.getEffect())) {
 				int current = e.getDuration();
 				if (current < min) continue;
@@ -44,7 +46,8 @@ public class EffectBooster {
 
 	public static void boostInfinite(LivingEntity target) {
 		int min = LHConfig.COMMON.witchChargeMinDuration.get();
-		for (var e : target.getActiveEffects()) {
+		var list = new ArrayList<>(target.getActiveEffects());
+		for (var e : list) {
 			if (e.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
 				int current = e.getDuration();
 				if (current < min) continue;

@@ -36,6 +36,7 @@ public class TraitBuilder<T extends MobTrait, P> extends AbstractBuilder<MobTrai
 		ResourceLocation rl = new ResourceLocation(getOwner().getModid(), getName());
 		var entry = config.apply(rl);
 		LHConfigGen.LIST.add(e -> L2Hostility.TRAIT.add(e, rl, entry));
+		owner.addTraitConfig(e -> e.add(L2Hostility.TRAIT, rl, entry));//FIXME
 	}
 
 	@Override

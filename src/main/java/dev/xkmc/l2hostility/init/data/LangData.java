@@ -101,10 +101,13 @@ public enum LangData {
 	LOOT_TITLE("jei.loot_title", "Trait Loot", 0),
 	LOOT_CHANCE("jei.loot_chance", "%s chance for %s rank %s", 3),
 	LOOT_MIN_LEVEL("jei.min_level", "Drops on mobs with level %s or higher", 1),
+	LOOT_MIN_HEALTH("jei.min_health", "Drops on mobs with %s or higher max health", 1),
+	LOOT_NO_TRAIT("jei.no_trait", "%s chance to drop when conditions met", 1),
 	LOOT_OTHER_TRAIT("jei.other_trait", "Requires %s at rank %s", 2),
 
 	TOOLTIP_JEI_ENVY("jei.envy", "Drops when you equips Curse of Envy while killing mobs of this trait", 0),
 	TOOLTIP_JEI_GLUTTONY("jei.gluttony", "Drops when you equips Curse of Gluttony while killing mobs with levels", 0),
+	TOOLTIP_JEI_REQUIRED("jei.required", "Requires you to equip %s while killing mobs", 1),
 
 	COMMAND_PLAYER_SUCCEED("command.player.success", "Performed actions on %s players", 1),
 	COMMAND_PLAYER_FAIL("command.player.fail", "Command has no target or no effect", 0),

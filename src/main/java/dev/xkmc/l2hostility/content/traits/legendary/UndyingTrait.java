@@ -35,7 +35,7 @@ public class UndyingTrait extends LegendaryTrait {
 		}
 		float health = ForgeEventFactory.onLivingHeal(entity, entity.getMaxHealth());
 		entity.setHealth(health);
-		if (!entity.isDeadOrDying()) {
+		if (entity.isAlive()) {
 			event.setCanceled(true);
 			L2Hostility.HANDLER.toTrackingPlayers(new TraitEffectToClient(entity, this, TraitEffects.UNDYING), entity);
 		}

@@ -9,6 +9,8 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -47,8 +49,13 @@ public class EnchantmentDisabler {
 				.contains(ForgeRegistries.ENCHANTMENTS.getValue(id));
 	}
 
-	public static void tickStack(Level level, ItemStack stack) {
+	public static void tickStack(Level level, Entity user, ItemStack stack) {
 		if (level.isClientSide()) return;
+		if (user instanceof Player player && !player.getAbilities().instabuild &&
+				stack.getEnchantmentLevel(LHEnchantments.VANISH.get()) > 0) {
+			stack.setCount(0);
+			return;
+		}
 		if (stack.getTag() == null || !stack.getTag().contains(ROOT, Tag.TAG_COMPOUND)) return;
 		CompoundTag root = stack.getOrCreateTag();
 		CompoundTag tag = stack.getOrCreateTagElement(ROOT);

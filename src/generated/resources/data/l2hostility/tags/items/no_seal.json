@@ -13,10 +13,6 @@
     {
       "id": "enigmaticlegacy:curse_ring",
       "required": false
-    },
-    {
-      "id": "moonstone:sevencurse",
-      "required": false
     }
   ]
 }

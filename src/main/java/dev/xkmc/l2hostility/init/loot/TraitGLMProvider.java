@@ -30,7 +30,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 
 	private static final DeferredRegister<LootItemConditionType> LOOT_ITEM = DeferredRegister.create(Registry.LOOT_ITEM_REGISTRY, L2Hostility.MODID);
 
-	public static final RegistryObject<LootItemConditionType> TRAIT_AND_LEVEL, MOB_LEVEL, HAS_ITEM;
+	public static final RegistryObject<LootItemConditionType> TRAIT_AND_LEVEL, MOB_LEVEL, HAS_ITEM,MIN_HEALTH;
 	public static final RegistryEntry<Codec<TraitLootModifier>> TRAIT_SCALED;
 	public static final RegistryEntry<Codec<EnvyLootModifier>> LOOT_ENVY;
 	public static final RegistryEntry<Codec<GluttonyLootModifier>> LOOT_GLUTTONY;
@@ -43,6 +43,9 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 				() -> new LootItemConditionType(new TraitSerializer<>(MobCapLootCondition.class)));
 		HAS_ITEM = LOOT_ITEM.register("player_has_item",
 				() -> new LootItemConditionType(new TraitSerializer<>(PlayerHasItemCondition.class)));
+		MIN_HEALTH = L2Hostility.REGISTRATE.simple("min_health",
+				Registries.LOOT_CONDITION_TYPE, () -> new LootItemConditionType(
+						new TraitSerializer<>(MobHealthCondition.class)));
 
 		TRAIT_SCALED = L2Hostility.REGISTRATE.simple("trait_scaled",
 				ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, () -> TraitLootModifier.CODEC);

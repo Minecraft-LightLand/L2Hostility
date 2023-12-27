@@ -1,0 +1,36 @@
+{
+  "list": [
+    {
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 50,
+        "min": 200,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "bosses_of_mass_destruction:gauntlet"
+      ],
+      "items": [],
+      "traits": [
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:tank"
+        },
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:reflect"
+        },
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:soul_burner"
+        }
+      ]
+    }
+  ]
+}

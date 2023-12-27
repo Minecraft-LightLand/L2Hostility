@@ -1,0 +1,36 @@
+{
+  "list": [
+    {
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 50,
+        "min": 200,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "bosses_of_mass_destruction:lich"
+      ],
+      "items": [],
+      "traits": [
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:tank"
+        },
+        {
+          "free": 1,
+          "min": 1,
+          "trait": "l2hostility:reprint"
+        },
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:freezing"
+        }
+      ]
+    }
+  ]
+}

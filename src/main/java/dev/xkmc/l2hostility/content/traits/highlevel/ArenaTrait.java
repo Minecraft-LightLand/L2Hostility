@@ -24,4 +24,6 @@ public class ArenaTrait extends AuraEffectTrait {
 		event.setCanceled(true);
 	}
 
+
+
 }
