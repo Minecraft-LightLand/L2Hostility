@@ -5,8 +5,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-import java.util.Set;
-
 public class VanishEnchantment extends UnobtainableEnchantment {
 
 	public VanishEnchantment(Rarity pRarity, EnchantmentCategory pCategory, EquipmentSlot[] pApplicableSlots) {

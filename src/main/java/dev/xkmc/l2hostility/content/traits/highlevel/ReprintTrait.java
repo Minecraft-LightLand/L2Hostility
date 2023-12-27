@@ -58,7 +58,7 @@ public class ReprintTrait extends MobTrait {
 			}
 		}
 		float factor = total >= 0 ? total : (float) Math.pow(2, maxLv);
-		DamageModifier.hurtMultTotal(cache,1 + (float) (LHConfig.COMMON.reprintDamage.get() * factor));
+		DamageModifier.hurtMultTotal(cache, 1 + (float) (LHConfig.COMMON.reprintDamage.get() * factor));
 	}
 
 	@Override

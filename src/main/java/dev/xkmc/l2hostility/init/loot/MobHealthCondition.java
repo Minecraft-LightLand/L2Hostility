@@ -30,9 +30,7 @@ public class MobHealthCondition implements LootItemCondition {
 	@Override
 	public boolean test(LootContext lootContext) {
 		if (lootContext.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
-			if (le.getMaxHealth() >= minHealth) {
-				return true;
-			}
+			return le.getMaxHealth() >= minHealth;
 		}
 		return false;
 	}

@@ -31,8 +31,10 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import twilightforest.TwilightForestMod;
 
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class LHConfigGen extends ConfigDataProvider {
 

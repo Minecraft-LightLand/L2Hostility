@@ -40,7 +40,7 @@ public class GeneralCapabilityHolder<E extends ICapabilityProvider, T extends Ge
 		return e.getCapability(capability).resolve().get().check();
 	}
 
-	public boolean shouldHaveCap(E entity){
+	public boolean shouldHaveCap(E entity) {
 		return pred.test(entity);
 	}
 

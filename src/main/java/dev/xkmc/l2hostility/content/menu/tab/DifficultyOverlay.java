@@ -3,7 +3,6 @@ package dev.xkmc.l2hostility.content.menu.tab;
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.base.overlay.InfoSideBar;
-import dev.xkmc.l2library.base.overlay.SideBar;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;

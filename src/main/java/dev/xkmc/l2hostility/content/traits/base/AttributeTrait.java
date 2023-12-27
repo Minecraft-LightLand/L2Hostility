@@ -2,7 +2,6 @@ package dev.xkmc.l2hostility.content.traits.base;
 
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;

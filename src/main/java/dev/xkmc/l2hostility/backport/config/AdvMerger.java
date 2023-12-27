@@ -14,7 +14,7 @@ public class AdvMerger<T extends BaseConfig> extends ConfigMerger<T> {
 	@Override
 	public T merge(Stream<Map.Entry<String, BaseConfig>> s) throws Exception {
 		T ans = super.merge(s);
-		if (ans instanceof MergableConfig c){
+		if (ans instanceof MergableConfig c) {
 			c.postMerge();
 		}
 		return ans;

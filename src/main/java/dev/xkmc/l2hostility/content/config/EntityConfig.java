@@ -6,7 +6,6 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
-import dev.xkmc.l2library.serial.network.BaseConfig;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 
