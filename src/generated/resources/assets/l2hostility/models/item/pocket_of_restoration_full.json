@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "l2hostility:item/curio/pocket_of_restoration_full"
+  }
+}

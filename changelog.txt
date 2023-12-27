@@ -1,7 +1,7 @@
-
-2.4.13
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
+
+2.4.13
 - Fix Drain crash
 - Sealed item can still put on curios slot
 - Drowned has higher chance to wield trident

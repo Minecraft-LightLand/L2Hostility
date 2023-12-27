@@ -19,7 +19,7 @@ import java.util.List;
 
 public class PocketOfRestoration extends CurioItem implements ISimpleCapItem {
 
-	private static final String ROOT = "UnsealRoot", KEY = "SealedSlotKey", START = "UnsealStartTime";
+	public static final String ROOT = "UnsealRoot", KEY = "SealedSlotKey", START = "UnsealStartTime";
 
 	public static void setData(ItemStack stack, ItemStack sealed, String id, long time) {
 		var data = sealed.getOrCreateTag().get(SealedItem.DATA);

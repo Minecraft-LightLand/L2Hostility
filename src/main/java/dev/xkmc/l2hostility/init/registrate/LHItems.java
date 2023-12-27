@@ -17,8 +17,8 @@ import dev.xkmc.l2hostility.content.item.wand.TargetSelectWand;
 import dev.xkmc.l2hostility.content.item.wand.TraitAdderWand;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -28,6 +28,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SimpleFoiledItem;
+import net.minecraftforge.client.model.generators.ModelFile;
 
 @SuppressWarnings({"unsafe"})
 @MethodsReturnNonnullByDefault
@@ -179,7 +180,12 @@ public class LHItems {
 			ABRAHADABRA = curio("abrahadabra", Abrahadabra::new).tag(chaos, curse, LHTagGen.NO_SEAL).register();
 			NIDHOGGUR = curio("greed_of_nidhoggur", GreedOfNidhoggur::new).tag(chaos, curse, LHTagGen.NO_SEAL).register();
 
-			RESTORATION = curio("pocket_of_restoration", p -> new PocketOfRestoration(p, 128))
+			RESTORATION = L2Hostility.REGISTRATE.item("pocket_of_restoration", p -> new PocketOfRestoration(p, 128))
+					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())).override()
+							.predicate(new ResourceLocation(L2Hostility.MODID, "filled"), 0.5f)
+							.model(pvd.getBuilder(ctx.getName() + "_full")
+									.parent(new ModelFile.UncheckedModelFile("item/generated"))
+									.texture("layer0", "item/curio/" + ctx.getName() + "_full")))
 					.tag(charm, LHTagGen.NO_SEAL).register();
 
 		}

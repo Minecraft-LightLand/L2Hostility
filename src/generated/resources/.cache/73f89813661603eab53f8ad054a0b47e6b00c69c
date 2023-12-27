@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-21T19:28:01.072297	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2023-12-27T20:34:14.602475	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 6bc447139ea57af12a41af6672594e6fe0142e59 assets/l2hostility/lang/en_ud.json
 2d98dad3d86e8c0288cad5f3c55b57a4536bcec9 assets/l2hostility/lang/en_us.json
@@ -57,7 +57,8 @@ f6895697bdab127d46712e9c9ad3aa07e2c99c38 assets/l2hostility/models/item/moonwalk
 63c7d15ce82bfc9c7841fcf40dcdd0951a18cc4d assets/l2hostility/models/item/nausea.json
 372f7e41bb394908ff62c74511a96f134e6c6b93 assets/l2hostility/models/item/oddeyes_glasses.json
 984bdc7a6ac93701654b7066774b15af9ddaf530 assets/l2hostility/models/item/platinum_star.json
-8a2891694652e5effc3e34542396a4d511959a5b assets/l2hostility/models/item/pocket_of_restoration.json
+4134ac5251d68544bec6319e644c29862dc8e65e assets/l2hostility/models/item/pocket_of_restoration.json
+902ebe9cdd4b28476be6b2bcf5fd168f6e76f6b2 assets/l2hostility/models/item/pocket_of_restoration_full.json
 d6f0641018234ca1b5984f6501c165892d066091 assets/l2hostility/models/item/poison.json
 f39de621f7fb9484531ccbb1c2afa815ee4d9a96 assets/l2hostility/models/item/protection.json
 663f51ab17e0a6f8d3a46a646bbe61f145eb213c assets/l2hostility/models/item/pulling.json
