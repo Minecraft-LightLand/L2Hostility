@@ -190,7 +190,7 @@
   "l2hostility.msg.target_record": "Recorded %s",
   "l2hostility.patchouli.landing": "Welcome to Champion-like difficulty scaling mod",
   "l2hostility.patchouli.title": "L2Hostility Guide",
-  "l2hostility.tooltip.ban_item": "This item is banned",
+  "l2hostility.tooltip.ban_item": "This item is disabled in config",
   "l2hostility.tooltip.banned": "This trait is disabled.",
   "l2hostility.tooltip.disable": "%s enchantments disabled for %ss. Any new enchantment will vanish.",
   "l2hostility.tooltip.legendary": "Legendary",

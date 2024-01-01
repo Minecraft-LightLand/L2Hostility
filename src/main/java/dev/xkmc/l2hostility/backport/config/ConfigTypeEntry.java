@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.backport.config;
 
-import dev.xkmc.l2library.serial.config.ConfigMerger;
 import dev.xkmc.l2library.serial.network.BaseConfig;
 import dev.xkmc.l2library.serial.network.PacketHandlerWithConfig;
 import dev.xkmc.l2library.util.code.Wrappers;
@@ -17,7 +16,7 @@ public record ConfigTypeEntry<T extends BaseConfig>(PacketHandlerWithConfig chan
 		this.name = name;
 		this.cls = cls;
 		this.path = path;
-		channel.addCachedConfig(name, new ConfigMerger<>(cls));
+		channel.addCachedConfig(name, new AdvMerger<>(cls));
 	}
 
 	public String asPath(ResourceLocation rl) {

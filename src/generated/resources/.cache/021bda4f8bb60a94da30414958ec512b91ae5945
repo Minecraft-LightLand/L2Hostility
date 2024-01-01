@@ -1,7 +1,7 @@
-// 1.19.2	2023-12-27T19:59:45.083626	Registrate Provider for l2hostility [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (traits)]
+// 1.19.2	2024-01-01T13:39:23.688325	Registrate Provider for l2hostility [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (traits)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-fb53097efaa89b54305a71fa288c09970384da51 assets/l2hostility/lang/en_ud.json
-d20211bf9676f3eabf4a83d6ee7ef579c47ade5f assets/l2hostility/lang/en_us.json
+e720a0aaa452f3ea49fe2b878cff0a6d9aea96e6 assets/l2hostility/lang/en_ud.json
+e4d4ab6a0acaf8571db962c90ae4e111e1f73201 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -53,7 +53,8 @@ f6a296c6a2848206b754d5a73a1bac29a584877d assets/l2hostility/models/item/imagine_
 425e908f5a3fc8b410d194df746f6245c6a9680c assets/l2hostility/models/item/miracle_powder.json
 f6895697bdab127d46712e9c9ad3aa07e2c99c38 assets/l2hostility/models/item/moonwalk.json
 63c7d15ce82bfc9c7841fcf40dcdd0951a18cc4d assets/l2hostility/models/item/nausea.json
-8a2891694652e5effc3e34542396a4d511959a5b assets/l2hostility/models/item/pocket_of_restoration.json
+4134ac5251d68544bec6319e644c29862dc8e65e assets/l2hostility/models/item/pocket_of_restoration.json
+902ebe9cdd4b28476be6b2bcf5fd168f6e76f6b2 assets/l2hostility/models/item/pocket_of_restoration_full.json
 d6f0641018234ca1b5984f6501c165892d066091 assets/l2hostility/models/item/poison.json
 f39de621f7fb9484531ccbb1c2afa815ee4d9a96 assets/l2hostility/models/item/protection.json
 663f51ab17e0a6f8d3a46a646bbe61f145eb213c assets/l2hostility/models/item/pulling.json
@@ -263,7 +264,7 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/mele
 778fdb4a5208400e8f9b783e17704df130baf07b data/l2hostility/tags/entity_types/repelling_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_whitelist.json
-a17e7885f13e56d4165bc9f317415b829b4cf8ac data/l2hostility/tags/entity_types/semiboss.json
+3acd85f45d63f36965f244bcfff99856c9380aac data/l2hostility/tags/entity_types/semiboss.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_types/shulker_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/shulker_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/slowness_blacklist.json

@@ -1,5 +1,7 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.github.L_Ender.cataclysm.cataclysm;
+import com.github.L_Ender.cataclysm.init.ModEntities;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -18,6 +20,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Map;
@@ -106,18 +109,19 @@ public class LHTagGen {
 		pvd.tag(SEMIBOSS).addTag(Tags.EntityTypes.BOSSES)
 				.add(EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER);
 
-		/*TODO compat entity tag
-				if (ModList.get().isLoaded(Cataclysm.MODID)) {
-					pvd.tag(SEMIBOSS)
-							.addOptional(ModEntities.ENDER_GOLEM.getId())
-							.addOptional(ModEntities.ENDER_GUARDIAN.getId())
-							.addOptional(ModEntities.NETHERITE_MONSTROSITY.getId())
-							.addOptional(ModEntities.IGNIS.getId())
-							.addOptional(ModEntities.THE_HARBINGER.getId())
-							.addOptional(ModEntities.THE_LEVIATHAN.getId())
-							.addOptional(ModEntities.AMETHYST_CRAB.getId());
-				}
+		if (ModList.get().isLoaded(cataclysm.MODID)) {
+			pvd.tag(SEMIBOSS)
+					.addOptional(ModEntities.ENDER_GOLEM.getId())
+					.addOptional(ModEntities.ENDER_GUARDIAN.getId())
+					.addOptional(ModEntities.NETHERITE_MONSTROSITY.getId())
+					.addOptional(ModEntities.IGNIS.getId())
+					.addOptional(ModEntities.THE_HARBINGER.getId())
+					.addOptional(ModEntities.THE_LEVIATHAN.getId())
+					.addOptional(ModEntities.AMETHYST_CRAB.getId());
+		}
 
+
+		/*TODO compat entity tag
 				if (ModList.get().isLoaded(IceAndFire.MODID)) {
 					pvd.tag(SEMIBOSS)
 							.addOptional(IafEntityRegistry.ICE_DRAGON.getId())
