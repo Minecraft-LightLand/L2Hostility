@@ -24,7 +24,7 @@ import java.util.function.Supplier;
 public class DifficultyScreen extends BaseTextScreen {
 
 	protected DifficultyScreen(Component title) {
-		super(title, new ResourceLocation("l2tabs:textures/gui/empty.png"));
+		super(title, new ResourceLocation("l2library:textures/gui/empty.png"));
 	}
 
 	public void init() {

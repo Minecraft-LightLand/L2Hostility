@@ -1,6 +1,14 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+1.0.4
+- Fix patchouli book
+- Fix difficulty screen
+
+1.0.3
+- Fix trait blacklist and whitelist
+- Fix entity config not working
+
 2.4.13
 - Fix Drain crash
 - Sealed item can still put on curios slot
