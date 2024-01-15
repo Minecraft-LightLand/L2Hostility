@@ -4,6 +4,9 @@
     "B": {
       "item": "l2complements:blackstone_core"
     },
+    "G": {
+      "item": "l2hostility:gravity"
+    },
     "I": {
       "item": "l2hostility:miracle_ingot"
     },
@@ -17,7 +20,7 @@
   "pattern": [
     "BLB",
     "SIS",
-    "BLB"
+    "BGB"
   ],
   "result": {
     "item": "l2hostility:pocket_of_restoration"

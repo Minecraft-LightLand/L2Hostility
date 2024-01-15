@@ -84,7 +84,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue nidhoggurDropFactor;
 		public final ForgeConfigSpec.DoubleValue greedDropFactor;
 		public final ForgeConfigSpec.DoubleValue envyDropRate;
-		public final ForgeConfigSpec.DoubleValue gluttonyDropRate;
+		public final ForgeConfigSpec.DoubleValue gluttonyBottleDropRate;
 		public final ForgeConfigSpec.DoubleValue prideDamageBonus;
 		public final ForgeConfigSpec.DoubleValue prideHealthBonus;
 		public final ForgeConfigSpec.DoubleValue prideTraitFactor;
@@ -287,8 +287,8 @@ public class LHConfig {
 							.defineInRange("greedDropFactor", 2d, 1, 10);
 					envyDropRate = builder.comment("Trait item drop rate per rank when using Curse of Envy")
 							.defineInRange("envyDropRate", 0.02, 0, 1);
-					gluttonyDropRate = builder.comment("Bottle of Curse drop rate per level when using Curse of Gluttony")
-							.defineInRange("gluttonyDropRate", 0.01, 0, 1);
+					gluttonyBottleDropRate = builder.comment("Bottle of Curse drop rate per level when using Curse of Gluttony")
+							.defineInRange("gluttonyBottleDropRate", 0.02, 0, 1);
 					wrathDamageBonus = builder.comment("Damage bonus per level difference when using Curse of Wrath")
 							.defineInRange("wrathDamageBonus", 0.05, 0, 1);
 					prideDamageBonus = builder.comment("Damage bonus per level when using Curse of Pride")
