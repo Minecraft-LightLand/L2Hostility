@@ -1,4 +1,4 @@
-// 1.19.2	2024-01-01T13:39:23.688325	Registrate Provider for l2hostility [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (traits)]
+// 1.19.2	2024-01-15T12:01:41.892944	Registrate Provider for l2hostility [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (traits)]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 e720a0aaa452f3ea49fe2b878cff0a6d9aea96e6 assets/l2hostility/lang/en_ud.json
 e4d4ab6a0acaf8571db962c90ae4e111e1f73201 assets/l2hostility/lang/en_us.json
@@ -157,9 +157,9 @@ acd1d4c93b9f992272c78de457d51168397ef28b data/l2hostility/advancements/recipes/t
 d49fafb09fb2aec744af9c8bb51103c184ad7845 data/l2hostility/advancements/recipes/twilightforest/snow_queen_boss_spawner.json
 956a8c0562bd0c40f2c1f2e5226b70df37552b4c data/l2hostility/advancements/recipes/twilightforest/ur_ghast_boss_spawner.json
 25c719b6b207bc24f54cf98abfa574d10e7cfe7c data/l2hostility/loot_tables/blocks/hostility_spawner.json
-52b65f659ad9c41c87d98f680c7b208b1e7fc5d5 data/l2hostility/recipes/abrahadabra.json
+de13c3d1eadb160adf9cb1fdbebea7458a7ce72f data/l2hostility/recipes/abrahadabra.json
 1159f04a6549ccd347a58ebd214395524a2d58e7 data/l2hostility/recipes/alpha_yeti_boss_spawner.json
-e38b2f1b6d9ec25a72141f293982c5a7c963025e data/l2hostility/recipes/book_of_omniscience.json
+d003b8b03636559575b0c65ea95ded161e19393f data/l2hostility/recipes/book_of_omniscience.json
 082d5b0e58c78cde537e482633806986bde10213 data/l2hostility/recipes/booster_potion.json
 0b69edd5e66e905af4672de263faa2fb54aaf34f data/l2hostility/recipes/bottle_of_curse.json
 387d170231359eacdae0a4ad09d337f93ad0e4cb data/l2hostility/recipes/bottle_of_sanity_craft.json
@@ -170,15 +170,15 @@ bac320ff370e35a560a565be9c495538fa56fe80 data/l2hostility/recipes/chaos_ingot_re
 df835b70fff35a2011ff9a289b3fb8b6ef38a63c data/l2hostility/recipes/curse_of_gluttony.json
 936ade37bc28502e97b77ecf47ed1804c3734fc6 data/l2hostility/recipes/curse_of_greed.json
 2e89c76326a47bdbc1303b3f5ed41ca9d5e8b169 data/l2hostility/recipes/curse_of_lust.json
-e5cd3a7d1ca8762840703661dca494a3eb989073 data/l2hostility/recipes/curse_of_pride.json
+38a23c5db3708a022ed32e53255bdacf6be4eea3 data/l2hostility/recipes/curse_of_pride.json
 fb3bf4a572d6859ca48e9d71b95cf39c7f515d05 data/l2hostility/recipes/curse_of_sloth.json
-7e216b419edf3859b42f46ffe56e4c33a1837f74 data/l2hostility/recipes/curse_of_wrath.json
+98dcf479a54803b382dbf5e70f89657f83a368a5 data/l2hostility/recipes/curse_of_wrath.json
 5cac54be88ef24785c1e65d976ad37eb9fa52e9a data/l2hostility/recipes/detector_glasses.json
 d8528ed9824428e2fa2b9635e8dacd25f54fe44c data/l2hostility/recipes/eternal_witch_charge.json
 e09f972610267f9575fbd74ff58dded2718bb792 data/l2hostility/recipes/flaming_thorn.json
-a0ae318cc456390566f6e4473363b0855d7f38b4 data/l2hostility/recipes/greed_of_nidhoggur.json
+0a4c6839dadbde8bf7e55b39a2edd7d0d71cb099 data/l2hostility/recipes/greed_of_nidhoggur.json
 a5af7e3847c219751c28b116b06d21d916ae3271 data/l2hostility/recipes/hostility_detector.json
-9e54686b3bca516541732a2aa0498b78ad698d59 data/l2hostility/recipes/hostility_essence.json
+8bab461c0d52f463ada8717d6c6cc629bff84f9f data/l2hostility/recipes/hostility_essence.json
 b1bc07f3d0dc7e2694d448af130a164d35bdbbd9 data/l2hostility/recipes/hostility_spawner.json
 92c421e8ebbfe17bbdc597bb139445452494ab1e data/l2hostility/recipes/hydra_boss_spawner.json
 a630665df95fe1cd5bcccff2634c247f9f8206c6 data/l2hostility/recipes/knight_phantom_boss_spawner.json
@@ -187,7 +187,7 @@ a630665df95fe1cd5bcccff2634c247f9f8206c6 data/l2hostility/recipes/knight_phantom
 39d2714c650c6d1d352a2554e1056715fd7a973d data/l2hostility/recipes/miracle_ingot.json
 291a7d549791f8813aadea4e802d24eac1761896 data/l2hostility/recipes/miracle_powder_recycle.json
 51622984c65be21269941cc82eba5b522d2088dd data/l2hostility/recipes/naga_boss_spawner.json
-7fb89591821d8191b328587cfee1b206c2bf6eb7 data/l2hostility/recipes/pocket_of_restoration.json
+18cb45b8550b0c437f50be80d90a59a866114617 data/l2hostility/recipes/pocket_of_restoration.json
 a1a5568dc1139ef0127d1d0678608eca90be4449 data/l2hostility/recipes/ring_of_corrosion.json
 3ad554d46e21c1dc28ac4bd103976ec32c19ccf3 data/l2hostility/recipes/ring_of_divinity.json
 78afa2e9b59b1a93921d1a8bfb302d2480455569 data/l2hostility/recipes/ring_of_healing.json

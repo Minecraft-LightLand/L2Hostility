@@ -1,4 +1,4 @@
-// 1.19.2	2024-01-15T10:52:32.081804	L2Hostility Config
+// 1.19.2	2024-01-15T12:01:41.89778	L2Hostility Config
 30f8a0c0efd10ba7e90e127a072337eae4dd25e2 data/cataclysm/l2hostility_config/entity/amethyst_crab.json
 35d91dd759b9f185c9cb0836cb075045aacdc3ca data/cataclysm/l2hostility_config/entity/ender_golem.json
 757db545763a27c0ce6c631dbfe9226aab41394c data/cataclysm/l2hostility_config/entity/ender_guardian.json
@@ -8,7 +8,7 @@ d49efdd8c2836ffbbcb46e82775764ccf3400801 data/cataclysm/l2hostility_config/entit
 58ef84928ad091a5f15c9a501d7d7f9623ce8cb3 data/cataclysm/l2hostility_config/entity/the_leviathan.json
 c37bcf36df1b9e32be9b4c470ffe6295a5880f07 data/l2archery/l2hostility_config/weapon/bows.json
 72bd16f1eed0234955b95ab22b2f2425cc5da8bb data/l2complements/l2hostility_config/weapon/l2complements.json
-a26525b92cad44ce2602bab9bfc07d49dad1ccfa data/l2hostility/l2complements/armor/equipments.json
+ee56662f4d4856973b1096d215904a6194727e5a data/l2hostility/l2complements/armor/equipments.json
 7cffcb6dc35ee83078bc0864137a791cbfcd4ac3 data/l2hostility/l2hostility_config/difficulty/end.json
 6af6143a0eca61aff5e9d62155bcedca346a9a7f data/l2hostility/l2hostility_config/difficulty/nether.json
 a35ef4d0af3a6796b079cf8d88e4aa6d2376ea3f data/l2hostility/l2hostility_config/difficulty/overworld.json
