@@ -140,7 +140,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 				.ifPresent(integer -> maxRankKilled = Math.max(maxRankKilled, integer));
 		if (getLevel().getLevel() > rewardCount * 10) {
 			rewardCount++;
-			player.addItem(LHItems.HOSTILITY_ORB.asStack());
+			player.getInventory().placeItemBackInInventory(LHItems.HOSTILITY_ORB.asStack());
 			// TODO drop reward
 		}
 		sync();

@@ -3,11 +3,11 @@
   "immune": {
     "l2hostility:curse_of_wrath": [
       "minecraft:nausea",
-      "minecraft:darkness",
-      "minecraft:blindness",
-      "minecraft:weakness",
       "minecraft:slowness",
-      "minecraft:mining_fatigue"
+      "minecraft:mining_fatigue",
+      "minecraft:weakness",
+      "minecraft:darkness",
+      "minecraft:blindness"
     ]
   }
 }

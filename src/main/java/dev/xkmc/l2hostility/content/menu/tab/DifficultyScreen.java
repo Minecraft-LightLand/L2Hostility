@@ -44,7 +44,7 @@ public class DifficultyScreen extends BaseTextScreen {
 			if (mx >= x && mx <= x + font.width(c.getFirst()) && my >= y && my <= y + 10) {
 				tooltip = c.getSecond() == null ? null : c.getSecond().get();
 			}
-			drawString(pose, this.font, c.getFirst(), x, y, 0);
+			font.draw(pose, c.getFirst(), x, y, 0);
 			y += 10;
 		}
 		if (tooltip != null && !tooltip.isEmpty()) {

@@ -7,7 +7,6 @@ import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2complements.network.ArmorEffectConfig;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
-import dev.xkmc.l2hostility.compat.data.IaFData;
 import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
@@ -190,9 +189,10 @@ public class LHConfigGen extends ConfigDataProvider {
 		if (ModList.get().isLoaded(cataclysm.MODID)) {
 			CataclysmData.genConfig(collector);
 		}
+		/*
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {
 			IaFData.genConfig(collector);
-		}
+		}*/
 	}
 
 	public static <T extends LivingEntity> void addEntity(Map<String, BaseConfig> collector, int min, int base, RegistryObject<EntityType<T>> obj, EntityConfig.TraitBase... traits) {
