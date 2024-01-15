@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-14T21:04:10.873054	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2024-01-14T23:58:03.212511	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 6bc447139ea57af12a41af6672594e6fe0142e59 assets/l2hostility/lang/en_ud.json
 2d98dad3d86e8c0288cad5f3c55b57a4536bcec9 assets/l2hostility/lang/en_us.json
@@ -97,10 +97,12 @@ e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.j
 63302afd6032fba91cf0e46be0c7c05285866cb9 data/curios/tags/items/head.json
 8915eecfcc4909e4a2e1bdf379cd07febb03baf3 data/curios/tags/items/hostility_curse.json
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/items/ring.json
-7f023bf109082ebf55ad3663e54042a3328cf855 data/l2complements/advancements/recipes/enchantments/insulator.json
-eeb5dfe27aa3ee65994aff79ec5a5e4b8f247be2 data/l2complements/advancements/recipes/enchantments/split_suppressor.json
-3cb03479ced0e3e569205d00a508b371857ae43c data/l2complements/recipes/insulator.json
-ba3ab31380936befeac911288e49c75f8d40113a data/l2complements/recipes/split_suppressor.json
+ff3418561c2f60d66349fae6872197f3a9885d60 data/l2complements/advancements/recipes/enchantments/insulator.json
+c3d2d46bf0fb1da223c947a38a467c54b7913db2 data/l2complements/advancements/recipes/enchantments/split_suppressor.json
+8dbda4df4d264025c718b98bd3048407b255c9e8 data/l2complements/recipes/insulator.json
+d8ead7339e1ddf9656c3a26a77122e3601d31296 data/l2complements/recipes/insulator_ars.json
+75e06b24d4c5f8254a79087c856d588370b90d50 data/l2complements/recipes/split_suppressor.json
+dfb859f09259437bf755e3c85ef1499db6748cd7 data/l2complements/recipes/split_suppressor_ars.json
 4b9d05f8d5dca02f6cf4f92c3c35a1a94303ad10 data/l2complements/tags/mob_effect/skill_effect.json
 b1f0948dec552920468cd47e2f8a8f99123aa9ad data/l2hostility/advancements/hostility/breed.json
 5438d24ee2cef442d96f87c920c8557262290d37 data/l2hostility/advancements/hostility/detector.json

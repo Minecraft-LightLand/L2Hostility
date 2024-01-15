@@ -1,5 +1,14 @@
 {
   "parent": "minecraft:recipes/root",
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "forge:mod_loaded",
+        "modid": "ars_nouveau"
+      }
+    }
+  ],
   "criteria": {
     "has_chaos_ingot": {
       "conditions": {
