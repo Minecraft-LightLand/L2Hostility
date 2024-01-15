@@ -38,6 +38,8 @@ public class EntityConfig extends MergableConfig {
 
 	@Nullable
 	public Config get(EntityType<?> type) {
+		if (!LHConfig.COMMON.enableEntitySpecificDatapack.get())
+			return null;
 		return cache.get(type);
 	}
 

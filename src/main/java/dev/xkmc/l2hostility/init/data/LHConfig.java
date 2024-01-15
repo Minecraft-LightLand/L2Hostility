@@ -50,7 +50,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue keepInventoryRuleKeepDifficulty;
 		public final ForgeConfigSpec.BooleanValue deathDecayDimension;
 		public final ForgeConfigSpec.BooleanValue deathDecayTraitCap;
-
+		public final ForgeConfigSpec.BooleanValue enableEntitySpecificDatapack;
 		public final ForgeConfigSpec.DoubleValue healthFactor;
 		public final ForgeConfigSpec.BooleanValue exponentialHealth;
 		public final ForgeConfigSpec.DoubleValue damageFactor;
@@ -154,6 +154,8 @@ public class LHConfig {
 		public final Map<String, ForgeConfigSpec.IntValue> range = new TreeMap<>();
 
 		Common(ForgeConfigSpec.Builder builder) {
+			enableEntitySpecificDatapack = builder.comment("Allow entity specific difficulty configs to load")
+					.define("enableEntitySpecificDatapack", true);
 			builder.push("scaling");
 			{
 				healthFactor = builder.comment("Health factor per level")

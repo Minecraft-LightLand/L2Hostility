@@ -57,6 +57,9 @@ public class TraitGenerator {
 	}
 
 	private void setRank(MobTrait e, int rank) {
+		if (rank == 0) {
+			traits.remove(e);
+		}
 		traits.put(e, rank);
 	}
 
@@ -77,6 +80,7 @@ public class TraitGenerator {
 
 	private void genBase(EntityConfig.TraitBase base) {
 		MobTrait e = base.trait();
+		if (e == null) return;
 		int maxTrait = TraitManager.getMaxLevel() + 1;
 		if (!e.allow(entity, mobLevel, maxTrait)) return;
 		int max = e.getMaxLevel();// config bypass player trait cap

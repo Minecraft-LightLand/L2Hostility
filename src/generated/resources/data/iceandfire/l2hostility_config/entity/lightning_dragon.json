@@ -1,0 +1,38 @@
+{
+  "list": [
+    {
+      "blacklist": [
+        "l2hostility:tank"
+      ],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 50,
+        "min": 100,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "iceandfire:lightning_dragon"
+      ],
+      "items": [],
+      "traits": [
+        {
+          "free": 1,
+          "min": 2,
+          "trait": "l2hostility:adaptive"
+        },
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:regenerate"
+        },
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:reflect"
+        }
+      ]
+    }
+  ]
+}
