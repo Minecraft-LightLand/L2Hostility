@@ -1,6 +1,9 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+1.0.5
+- Fix trait blacklist again
+
 1.0.4
 - Fix patchouli book
 - Fix difficulty screen

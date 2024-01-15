@@ -40,13 +40,17 @@ public class TraitConfig extends BaseConfig {
 
 	public TagKey<EntityType<?>> getBlacklistTag() {
 		assert id != null;
-		ResourceLocation tag = new ResourceLocation(id.getNamespace(), id.getPath() + "_blacklist");
+		String[] paths = id.getPath().split("/");
+		String path = paths[paths.length - 1];
+		ResourceLocation tag = new ResourceLocation(id.getNamespace(), path + "_blacklist");
 		return TagKey.create(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), tag);
 	}
 
 	public TagKey<EntityType<?>> getWhitelistTag() {
 		assert id != null;
-		ResourceLocation tag = new ResourceLocation(id.getNamespace(), id.getPath() + "_whitelist");
+		String[] paths = id.getPath().split("/");
+		String path = paths[paths.length - 1];
+		ResourceLocation tag = new ResourceLocation(id.getNamespace(), path + "_whitelist");
 		return TagKey.create(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), tag);
 	}
 
