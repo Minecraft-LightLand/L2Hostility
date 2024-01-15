@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.config;
 
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.serial.config.BaseConfig;
 import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
@@ -38,6 +39,8 @@ public class EntityConfig extends BaseConfig {
 
 	@Nullable
 	public Config get(EntityType<?> type) {
+		if (!LHConfig.COMMON.enableEntitySpecificDatapack.get())
+			return null;
 		return cache.get(type);
 	}
 

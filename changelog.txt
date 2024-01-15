@@ -1,7 +1,14 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+2.4.14
+- Add event to teleport
+- Growth trait slimes won't suffocate
+- Fix Rank 0 trait
+- Add config to disable entity specific data
+
 2.4.13
+- Fix more textures
 - Fix Drain crash
 - Sealed item can still put on curios slot
 - Drowned has higher chance to wield trident

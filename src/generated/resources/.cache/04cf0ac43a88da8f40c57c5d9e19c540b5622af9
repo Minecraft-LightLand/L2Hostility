@@ -1,4 +1,4 @@
-// 1.20.1	2023-12-21T13:52:48.693288	L2Hostility Config
+// 1.20.1	2024-01-14T21:04:10.879038	L2Hostility Config
 5fbad313d5dfcd98f724e819283dca6f274ba601 data/bosses_of_mass_destruction/l2hostility_config/entity/gauntlet.json
 2bb3a06cb2213d14b2ebfbd72e6b12f0e10f757f data/bosses_of_mass_destruction/l2hostility_config/entity/lich.json
 3b17d23d1e4877ba03c865ee4fbc88ba287bf6a5 data/bosses_of_mass_destruction/l2hostility_config/entity/obsidilith.json
@@ -11,6 +11,9 @@ a9e054ad97c2d6e1b2b3fa92d249422019ce80c3 data/cataclysm/l2hostility_config/entit
 c99d1f2c9b9f95d012477bbaab3780d861190e21 data/cataclysm/l2hostility_config/entity/netherite_monstrosity.json
 384e0f88babac901979949c4e3bc49037d81fa35 data/cataclysm/l2hostility_config/entity/the_harbinger.json
 f08b826e4ec8bc64b26460ec61edbc3c4bba245a data/cataclysm/l2hostility_config/entity/the_leviathan.json
+92a5bfb3847a0039ebb8929df5aa0eeb5759c4fa data/iceandfire/l2hostility_config/entity/fire_dragon.json
+f2054530f14f46a246da7b99bb86898b8de1b8d1 data/iceandfire/l2hostility_config/entity/ice_dragon.json
+89f69141c2edb064c58ae64bc176ffae9ec1fd4a data/iceandfire/l2hostility_config/entity/lightning_dragon.json
 1d1cbac166c312f2a4775ddf18952468add75051 data/l2archery/l2hostility_config/weapon/bows.json
 983ac9deb94092a7542fef91d974311f8d3af413 data/l2complements/l2hostility_config/weapon/l2complements.json
 cc60113e53b38f8ea4dbd7b841f48d9676e7d21e data/l2hostility/l2damagetracker_config/armor/equipments.json

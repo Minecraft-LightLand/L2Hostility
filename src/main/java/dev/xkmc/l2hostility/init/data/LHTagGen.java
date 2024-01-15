@@ -113,8 +113,6 @@ public class LHTagGen {
 				EntityType.SKELETON, EntityType.STRAY
 		);
 
-		ENTITY_TAG_BUILDER.values().forEach(e -> e.accept(pvd));
-
 		pvd.addTag(SEMIBOSS).addTag(Tags.EntityTypes.BOSSES)
 				.add(EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER);
 
@@ -174,6 +172,8 @@ public class LHTagGen {
 					.addOptional(BMDEntities.VOID_BLOSSOM.getId());
 
 		}
+
+		ENTITY_TAG_BUILDER.values().forEach(e -> e.accept(pvd));
 	}
 
 	public static TagKey<EntityType<?>> createEntityTag(String id) {
@@ -187,4 +187,5 @@ public class LHTagGen {
 	public static void onEffTagGen(RegistrateTagsProvider.IntrinsicImpl<MobEffect> pvd) {
 		pvd.addTag(TagGen.SKILL_EFFECT).add(LHEffects.ANTIBUILD.get());
 	}
+
 }
