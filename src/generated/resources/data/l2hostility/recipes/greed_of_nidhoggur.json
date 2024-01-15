@@ -5,6 +5,12 @@
     "A": {
       "item": "l2hostility:ragnarok"
     },
+    "B": {
+      "item": "l2hostility:pulling"
+    },
+    "E": {
+      "item": "l2complements:eternium_ingot"
+    },
     "I": {
       "item": "l2hostility:miracle_ingot"
     },
@@ -14,8 +20,8 @@
   },
   "pattern": [
     "AIA",
-    "IOI",
-    "AIA"
+    "EOE",
+    "BIB"
   ],
   "result": {
     "item": "l2hostility:greed_of_nidhoggur"

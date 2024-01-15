@@ -1,7 +1,5 @@
 package dev.xkmc.l2hostility.content.item.curio.curse;
 
-import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -22,7 +20,7 @@ public class CurseOfGluttony extends CurseCurioItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		int rate = (int) Math.round(100 * LHConfig.COMMON.gluttonyDropRate.get());
+		int rate = (int) Math.round(100 * LHConfig.COMMON.gluttonyBottleDropRate.get());
 		list.add(LangData.ITEM_CHARM_GLUTTONY.get(rate).withStyle(ChatFormatting.GOLD));
 	}
 

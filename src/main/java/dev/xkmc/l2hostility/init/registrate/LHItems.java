@@ -85,12 +85,12 @@ public class LHItems {
 		// consumables
 		{
 			HOSTILITY_ORB = L2Hostility.REGISTRATE.item(
-					"hostility_orb", p -> new HostilityOrb(p.stacksTo(16).rarity(Rarity.EPIC))).register();
+					"hostility_orb", p -> new HostilityOrb(p.stacksTo(64).rarity(Rarity.EPIC))).register();
 			BOTTLE_CURSE = L2Hostility.REGISTRATE.item(
-					"bottle_of_curse", p -> new BottleOfCurse(p.stacksTo(16).rarity(Rarity.RARE)
+					"bottle_of_curse", p -> new BottleOfCurse(p.stacksTo(64).rarity(Rarity.RARE)
 							.craftRemainder(Items.GLASS_BOTTLE))).register();
 			BOTTLE_SANITY = L2Hostility.REGISTRATE.item(
-					"bottle_of_sanity", p -> new BottleOfSanity(p.stacksTo(16).rarity(Rarity.RARE)
+					"bottle_of_sanity", p -> new BottleOfSanity(p.stacksTo(64).rarity(Rarity.RARE)
 							.craftRemainder(Items.GLASS_BOTTLE))).register();
 
 			WITCH_DROPLET = L2Hostility.REGISTRATE.item("witch_droplet", Item::new).register();

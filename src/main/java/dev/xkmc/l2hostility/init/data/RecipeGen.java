@@ -100,7 +100,7 @@ public class RecipeGen {
 					.requires(LHItems.BOOK_COPY.get())
 					.requires(LHTraits.REPRINT.get().asItem())
 					.requires(LHTraits.SPLIT.get().asItem())
-					.requires(LCMats.ETERNIUM.getIngot())
+					.requires(Items.NETHER_STAR)
 					.save(pvd);
 
 		}
@@ -118,7 +118,7 @@ public class RecipeGen {
 					.save(pvd);
 
 
-			convert(pvd, LHItems.BOTTLE_CURSE.get(), LHItems.HOSTILITY_ESSENCE.get(), 1024);
+			convert(pvd, LHItems.BOTTLE_CURSE.get(), LHItems.HOSTILITY_ESSENCE.get(), 512);
 			recycle(pvd, LHTagGen.CHAOS_CURIO, LHItems.CHAOS_INGOT.get(), 1f);
 			recycle(pvd, LHTagGen.TRAIT_ITEM, LHItems.MIRACLE_POWDER.get(), 1f);
 
@@ -180,23 +180,26 @@ public class RecipeGen {
 						.save(pvd);
 
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.CURSE_WRATH.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
-						.pattern("B1B").pattern("CID").pattern("B2B")
-						.define('I', LHItems.CHAOS_INGOT.get())
-						.define('1', LHTraits.FIERY.get().asItem())
-						.define('2', LHTraits.SOUL_BURNER.get().asItem())
+						.pattern("314").pattern("5I6").pattern("B2B")
+						.define('I', LHItems.MIRACLE_INGOT.get())
 						.define('B', LHItems.HOSTILITY_ESSENCE.get())
-						.define('C', LHTraits.STRIKE.get().asItem())
-						.define('D', LHTraits.REFLECT.get().asItem())
+						.define('1', LHTraits.FIERY.get().asItem())
+						.define('2', LHTraits.REPRINT.get().asItem())
+						.define('3', LHTraits.SHULKER.get().asItem())
+						.define('4', LHTraits.GRENADE.get().asItem())
+						.define('5', LHTraits.STRIKE.get().asItem())
+						.define('6', LHTraits.REFLECT.get().asItem())
 						.save(pvd);
 
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.CURSE_PRIDE.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
-						.pattern("B1B").pattern("CID").pattern("B2B")
-						.define('I', LHItems.CHAOS_INGOT.get())
-						.define('1', LHTraits.WEAKNESS.get().asItem())
-						.define('2', LHTraits.PROTECTION.get().asItem())
+						.pattern("515").pattern("3I4").pattern("B2B")
+						.define('I', LHItems.MIRACLE_INGOT.get())
 						.define('B', LHItems.HOSTILITY_ESSENCE.get())
-						.define('C', LHTraits.DEMENTOR.get().asItem())
-						.define('D', LHTraits.ADAPTIVE.get().asItem())
+						.define('1', LHTraits.KILLER_AURA.get().asItem())
+						.define('2', LHTraits.PROTECTION.get().asItem())
+						.define('3', LHTraits.DEMENTOR.get().asItem())
+						.define('4', LHTraits.ADAPTIVE.get().asItem())
+						.define('5', LHTraits.GROWTH.get().asItem())
 						.save(pvd);
 			}
 
@@ -308,32 +311,37 @@ public class RecipeGen {
 					.save(pvd);
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.ABRAHADABRA.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
-					.pattern("AIA").pattern("IOI").pattern("AIA")
+					.pattern("AIA").pattern("EOE").pattern("BIB")
 					.define('I', LHItems.MIRACLE_INGOT.get())
+					.define('E', LCMats.ETERNIUM.getIngot())
 					.define('O', LHItems.RING_REFLECTION.get())
 					.define('A', LHTraits.RAGNAROK.get().asItem())
+					.define('B', LHTraits.REPELLING.get().asItem())
 					.save(pvd);
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.NIDHOGGUR.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
-					.pattern("AIA").pattern("IOI").pattern("AIA")
+					.pattern("AIA").pattern("EOE").pattern("BIB")
 					.define('I', LHItems.MIRACLE_INGOT.get())
+					.define('E', LCMats.ETERNIUM.getIngot())
 					.define('O', LHItems.CURSE_GREED.get())
 					.define('A', LHTraits.RAGNAROK.get().asItem())
+					.define('B', LHTraits.PULLING.get().asItem())
 					.save(pvd);
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.PLATINUM_STAR.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("BIB").pattern("ISI").pattern("BIB")
-					.define('I', LHItems.CHAOS_INGOT.get())
+					.define('S', LHItems.MIRACLE_INGOT.get())
 					.define('B', LHTraits.KILLER_AURA.get().asItem())
-					.define('S', Items.NETHER_STAR)
+					.define('I', Items.NETHER_STAR)
 					.save(pvd);
 
 			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.RESTORATION.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
-					.pattern("BLB").pattern("SIS").pattern("BLB")
+					.pattern("BLB").pattern("SIS").pattern("BGB")
 					.define('I', LHItems.MIRACLE_INGOT.get())
 					.define('B', LCItems.BLACKSTONE_CORE.get())
 					.define('S', LHTraits.DISPELL.get().asItem())
 					.define('L', LHTraits.MOONWALK.get().asItem())
+					.define('G', LHTraits.GRAVITY.get().asItem())
 					.save(pvd);
 
 		}

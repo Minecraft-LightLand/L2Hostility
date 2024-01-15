@@ -3,27 +3,30 @@
   "category": "misc",
   "key": {
     "1": {
-      "item": "l2hostility:weakness"
+      "item": "l2hostility:killer_aura"
     },
     "2": {
       "item": "l2hostility:protection"
     },
+    "3": {
+      "item": "l2hostility:dementor"
+    },
+    "4": {
+      "item": "l2hostility:adaptive"
+    },
+    "5": {
+      "item": "l2hostility:growth"
+    },
     "B": {
       "item": "l2hostility:hostility_essence"
     },
-    "C": {
-      "item": "l2hostility:dementor"
-    },
-    "D": {
-      "item": "l2hostility:adaptive"
-    },
     "I": {
-      "item": "l2hostility:chaos_ingot"
+      "item": "l2hostility:miracle_ingot"
     }
   },
   "pattern": [
-    "B1B",
-    "CID",
+    "515",
+    "3I4",
     "B2B"
   ],
   "result": {

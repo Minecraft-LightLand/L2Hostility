@@ -6,10 +6,10 @@
       "item": "l2hostility:killer_aura"
     },
     "I": {
-      "item": "l2hostility:chaos_ingot"
+      "item": "minecraft:nether_star"
     },
     "S": {
-      "item": "minecraft:nether_star"
+      "item": "l2hostility:miracle_ingot"
     }
   },
   "pattern": [

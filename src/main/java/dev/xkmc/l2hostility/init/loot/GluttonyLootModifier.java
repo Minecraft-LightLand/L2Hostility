@@ -40,7 +40,7 @@ public class GluttonyLootModifier extends LootModifier {
 					}
 				}
 
-				double chance = factor * cap.getLevel() * LHConfig.COMMON.gluttonyDropRate.get();
+				double chance = factor * cap.getLevel() * LHConfig.COMMON.gluttonyBottleDropRate.get();
 				int base = (int) chance;
 				if (context.getRandom().nextDouble() < chance - base) {
 					base++;

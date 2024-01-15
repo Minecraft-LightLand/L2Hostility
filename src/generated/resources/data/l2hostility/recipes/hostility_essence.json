@@ -1,6 +1,6 @@
 {
   "type": "l2complements:burnt",
-  "chance": 1024,
+  "chance": 512,
   "ingredient": {
     "item": "l2hostility:bottle_of_curse"
   },
