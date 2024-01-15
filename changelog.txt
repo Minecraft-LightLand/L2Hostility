@@ -6,6 +6,8 @@
 - Growth trait slimes won't suffocate
 - Fix Rank 0 trait
 - Add config to disable entity specific data
+- Add Arena effect icon
+- Add Ice and Fire dragon default traits
 
 2.4.13
 - Fix more textures

@@ -30,6 +30,13 @@ public class IaFData {
 				new EntityConfig.TraitBase(LHTraits.REGEN.get(), 2, 3),
 				new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 2, 3)
 		), List.of(LHTraits.TANK.get()));
+		addEntity(collector, 30, 10, IafEntityRegistry.GHOST, List.of(
+				new EntityConfig.TraitBase(LHTraits.DEMENTOR.get(), 0, 1)
+		), List.of(LHTraits.DISPELL.get()));
+		addEntity(collector, 30, 10, IafEntityRegistry.SIREN, List.of(
+				new EntityConfig.TraitBase(LHTraits.CONFUSION.get(), 1, 1),
+				new EntityConfig.TraitBase(LHTraits.DRAIN.get(), 0, 1)
+		), List.of());
 	}
 
 	public static <T extends LivingEntity> void addEntity(ConfigDataProvider.Collector collector, int min, int base, RegistryObject<EntityType<T>> obj, List<EntityConfig.TraitBase> traits, List<MobTrait> ban) {

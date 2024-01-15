@@ -1,0 +1,31 @@
+{
+  "list": [
+    {
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 10,
+        "min": 30,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "iceandfire:siren"
+      ],
+      "items": [],
+      "traits": [
+        {
+          "free": 1,
+          "min": 1,
+          "trait": "l2hostility:nausea"
+        },
+        {
+          "free": 0,
+          "min": 1,
+          "trait": "l2hostility:drain"
+        }
+      ]
+    }
+  ]
+}
