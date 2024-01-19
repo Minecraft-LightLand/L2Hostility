@@ -1,6 +1,9 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+2.4.16
+- Fix Curse of Pride text
+
 2.4.15
 - Fix hostility orb not added to player inventory when inventory is full
 - Double Curse of Gluttony default drop rate

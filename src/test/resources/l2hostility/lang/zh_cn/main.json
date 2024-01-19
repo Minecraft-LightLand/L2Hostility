@@ -8,7 +8,7 @@
   "entity.l2hostility.hostility_bullet": "恶意子弹",
   "entity.l2hostility.hostility_charge": "恶意弹",
   "curios.identifier.hostility_curse": "恶意-诅咒",
-
+  "curios.modifiers.hostility_curse": "作为恶意诅咒装备时:",
   "l2hostility": {
 	"command": {
 	  "mob.success": "指令已对%s个怪物起效",

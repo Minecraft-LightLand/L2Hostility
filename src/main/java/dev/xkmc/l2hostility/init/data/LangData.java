@@ -157,6 +157,7 @@ public enum LangData {
 		pvd.add("death.attack.killer_aura", "%s was killed by killer aura");
 		pvd.add("death.attack.killer_aura.player", "%s was killed by %s's killer aura");
 		pvd.add("curios.identifier.hostility_curse", "L2Hostility - Curse");
+		pvd.add("curios.modifiers.hostility_curse", "When worn as Curse:");
 	}
 
 	public static String asId(String name) {

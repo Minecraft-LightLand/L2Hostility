@@ -42,6 +42,7 @@
   "block.l2hostility.hostility_spawner": "Hostility Spawner",
   "config.jade.plugin_l2hostility.mob": "L2Hostility",
   "curios.identifier.hostility_curse": "L2Hostility - Curse",
+  "curios.modifiers.hostility_curse": "When worn as Curse:",
   "death.attack.killer_aura": "%s was killed by killer aura",
   "death.attack.killer_aura.player": "%s was killed by %s's killer aura",
   "effect.l2hostility.antibuild": "Antibuild",
