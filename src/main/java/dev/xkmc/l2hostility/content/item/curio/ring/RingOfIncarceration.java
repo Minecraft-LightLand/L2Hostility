@@ -40,6 +40,7 @@ public class RingOfIncarceration extends CurioItem implements ISimpleCapItem {
 		var r = attr == null ? reach.getDefaultValue() : attr.getValue();
 		for (var e : wearer.level.getEntities(EntityTypeTest.forClass(LivingEntity.class),
 				wearer.getBoundingBox().inflate(r), e -> wearer.distanceTo(e) < r)) {
+			if (e.hasEffect(LCEffects.CLEANSE.get())) continue;
 			EffectUtil.refreshEffect(e, new MobEffectInstance(LCEffects.STONE_CAGE.get(), 40),
 					EffectUtil.AddReason.NONE, wearer);
 		}
