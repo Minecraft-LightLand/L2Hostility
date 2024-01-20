@@ -1,6 +1,10 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+1.0.8
+- Fix text
+- Fix equipment wand
+
 1.0.7
 - Fix trait blacklist again
 - Fix hostility screen

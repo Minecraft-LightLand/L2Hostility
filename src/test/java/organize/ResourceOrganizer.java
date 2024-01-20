@@ -32,8 +32,8 @@ public abstract class ResourceOrganizer {
         new LangFileOrganizer();
         //new ItemFileOrganizer();
         //new BlockFileOrganizer();
-        //new AssetMisc();
-        //new DataMisc();
+        new AssetMisc();
+        new DataMisc();
         File f = new File("./src/test/resources");
         for (File fi : f.listFiles()) {
             MODID = fi.getName();

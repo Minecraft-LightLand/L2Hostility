@@ -16,6 +16,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.function.BiPredicate;
 
 public class EquipmentsMenu extends BaseContainerMenu<EquipmentsMenu> {
 
@@ -36,6 +37,16 @@ public class EquipmentsMenu extends BaseContainerMenu<EquipmentsMenu> {
 		this.golem = golem;
 		addSlot("hand", (i, e) -> isValid(SLOTS[i], e));
 		addSlot("armor", (i, e) -> isValid(SLOTS[i + 2], e));
+	}
+
+	protected void addSlot(String name, BiPredicate<Integer, ItemStack> pred) {
+		int current = this.added;
+		this.sprite.getSlot(name, (x, y) -> {
+			int i = this.added - current;
+			PredSlot ans = new PredSlot(this.container, this.added, x, y, (e) -> pred.test(i, e));
+			++this.added;
+			return ans;
+		}, this::addSlot);
 	}
 
 	private boolean isValid(EquipmentSlot slot, ItemStack stack) {
