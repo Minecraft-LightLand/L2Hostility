@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.init.data;
 
 
-import com.github.L_Ender.cataclysm.cataclysm;
+import com.github.L_Ender.cataclysm.Cataclysm;
 import dev.xkmc.l2complements.content.enchantment.core.EnchantmentRecipeBuilder;
 import dev.xkmc.l2complements.content.recipe.BurntRecipeBuilder;
 import dev.xkmc.l2complements.init.materials.LCMats;
@@ -343,7 +343,7 @@ public class RecipeGen {
 			TFData.genRecipe(pvd);
 		}
 
-		if (ModList.get().isLoaded(cataclysm.MODID)) {
+		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genRecipe(pvd);
 		}
 

@@ -51,6 +51,12 @@ public class CataclysmData {
 						new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 2, 3)),
 				List.of());
 
+		addEntity(collector, 200, 50, ModEntities.ANCIENT_REMNANT, List.of(
+						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
+						new EntityConfig.TraitBase(LHTraits.REPRINT.get(), 1, 1),
+						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 3)),
+				List.of());
+
 		addEntity(collector, 100, 30, ModEntities.ENDER_GOLEM,
 				new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 0, 1),
 				new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 0, 1)

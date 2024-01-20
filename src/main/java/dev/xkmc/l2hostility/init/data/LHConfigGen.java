@@ -1,12 +1,15 @@
 package dev.xkmc.l2hostility.init.data;
 
-import com.github.L_Ender.cataclysm.cataclysm;
+import com.github.L_Ender.cataclysm.Cataclysm;
+import com.github.alexthe666.iceandfire.IceAndFire;
 import dev.xkmc.l2archery.init.L2Archery;
 import dev.xkmc.l2archery.init.registrate.ArcheryItems;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2complements.network.ArmorEffectConfig;
+import dev.xkmc.l2hostility.compat.data.BoMDData;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
+import dev.xkmc.l2hostility.compat.data.IaFData;
 import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
@@ -186,13 +189,15 @@ public class LHConfigGen extends ConfigDataProvider {
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
 			TFData.genConfig(collector);
 		}
-		if (ModList.get().isLoaded(cataclysm.MODID)) {
+		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genConfig(collector);
 		}
-		/*
+		if (ModList.get().isLoaded("bosses_of_mass_destruction")) {
+			BoMDData.genConfig(collector);
+		}
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {
 			IaFData.genConfig(collector);
-		}*/
+		}
 	}
 
 	public static <T extends LivingEntity> void addEntity(Map<String, BaseConfig> collector, int min, int base, RegistryObject<EntityType<T>> obj, EntityConfig.TraitBase... traits) {

@@ -159,6 +159,8 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:caelus-308989:3929284")
     runtimeOnly fg.deobf("curse.maven:elytra-slot-317716:4519258")
 
+    implementation fg.deobf("curse.maven:cloth-config-348521:4973444")
+    implementation fg.deobf("curse.maven:geckolib-388172:4407241")
     implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5037952")
     implementation fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955735")
     implementation fg.deobf("curse.maven:l_ender-s-cataclysm-551586:5039717")
