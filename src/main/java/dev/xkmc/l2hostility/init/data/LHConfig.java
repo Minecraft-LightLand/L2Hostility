@@ -18,6 +18,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue showTraitOverHead;
 		public final ForgeConfigSpec.BooleanValue showLevelOverHead;
 		public final ForgeConfigSpec.IntValue overHeadRenderDistance;
+		public final ForgeConfigSpec.BooleanValue overHeadRenderFullBright;
+		public final ForgeConfigSpec.IntValue overHeadLevelColor;
 		public final ForgeConfigSpec.DoubleValue overHeadRenderOffset;
 		public final ForgeConfigSpec.BooleanValue showOnlyWhenHovered;
 		public final ForgeConfigSpec.IntValue glowingRangeHidden;
@@ -33,6 +35,10 @@ public class LHConfig {
 					.defineInRange("overHeadRenderDistance", 32, 0, 128);
 			overHeadRenderOffset = builder.comment("Name plate render offset in lines, upward is positive")
 					.defineInRange("overHeadRenderOffset", 0d, -100, 100);
+			overHeadRenderFullBright = builder.comment("Overhead render text becomes full bright")
+					.define("overHeadRenderFullBright", true);
+			overHeadLevelColor = builder.comment("Overhead level color in decimal form, converted from hex form")
+					.defineInRange("overHeadLevelColor", 11184810, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			showOnlyWhenHovered = builder.comment("Show nameplate style trait and name only when hovered")
 					.define("showOnlyWhenHovered", false);
 			glowingRangeHidden = builder.comment("Detector Glasses glowing range for hidden mobs")

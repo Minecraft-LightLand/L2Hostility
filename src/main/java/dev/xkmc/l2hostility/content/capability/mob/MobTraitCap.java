@@ -22,6 +22,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -270,7 +271,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public List<Component> getTitle(boolean showLevel, boolean showTrait) {
 		List<Component> ans = new ArrayList<>();
 		if (showLevel && lv > 0) {
-			ans.add(Component.literal("Lv." + lv).withStyle(ChatFormatting.GRAY));
+			ans.add(Component.literal("Lv." + lv).withStyle(Style.EMPTY
+					.withColor(LHConfig.CLIENT.overHeadLevelColor.get())));
 		}
 		if (!showTrait) return ans;
 		MutableComponent temp = null;
