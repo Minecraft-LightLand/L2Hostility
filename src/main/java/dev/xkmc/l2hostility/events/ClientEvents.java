@@ -44,11 +44,12 @@ public class ClientEvents {
 					LHConfig.CLIENT.showTraitOverHead.get()
 			);
 			int offset = list.size();
+			float off = (float) (double) LHConfig.CLIENT.overHeadRenderOffset.get();
 			Font.DisplayMode mode = player.hasLineOfSight(event.getEntity()) ?
 					Font.DisplayMode.SEE_THROUGH :
 					Font.DisplayMode.NORMAL;
 			for (var e : list) {
-				renderNameTag(event, e, event.getPoseStack(), offset * 0.2f, mode);
+				renderNameTag(event, e, event.getPoseStack(), (offset + off) * 0.2f, mode);
 				offset--;
 			}
 		}
