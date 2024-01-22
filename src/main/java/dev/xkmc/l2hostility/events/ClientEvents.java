@@ -12,6 +12,7 @@ import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -44,9 +45,10 @@ public class ClientEvents {
 					LHConfig.CLIENT.showTraitOverHead.get()
 			);
 			int offset = list.size();
+			float off = (float) (double) LHConfig.CLIENT.overHeadRenderOffset.get();
 			boolean indirect = !player.hasLineOfSight(event.getEntity());
 			for (var e : list) {
-				renderNameTag(event, e, event.getPoseStack(), offset * 0.2f, indirect);
+				renderNameTag(event, e, event.getPoseStack(), (offset + off) * 0.2f, indirect);
 				offset--;
 			}
 		}
@@ -57,6 +59,8 @@ public class ClientEvents {
 		var dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
 		double d0 = dispatcher.distanceToSqr(event.getEntity());
 		int max = LHConfig.CLIENT.overHeadRenderDistance.get();
+		int light = LHConfig.CLIENT.overHeadRenderFullBright.get() ? LightTexture.FULL_BRIGHT :
+				event.getPackedLight();
 		if (d0 < max * max) {
 			float f = event.getEntity().getBbHeight() + 0.5f + offset;
 			pose.pushPose();
@@ -69,7 +73,7 @@ public class ClientEvents {
 			float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
 			int j = (int) (f1 * 255.0F) << 24;
 			font.drawInBatch(text, f2, 0, -1, false, matrix4f,
-					event.getMultiBufferSource(), indirect, j, event.getPackedLight());//TODO check render correctly, may reverse indirect
+					event.getMultiBufferSource(), indirect, j, light);
 			pose.popPose();
 		}
 	}
