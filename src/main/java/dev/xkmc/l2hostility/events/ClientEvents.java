@@ -11,6 +11,7 @@ import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -60,6 +61,8 @@ public class ClientEvents {
 		var dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
 		double d0 = dispatcher.distanceToSqr(event.getEntity());
 		int max = LHConfig.CLIENT.overHeadRenderDistance.get();
+		int light = LHConfig.CLIENT.overHeadRenderFullBright.get() ? LightTexture.FULL_BRIGHT :
+				event.getPackedLight();
 		if (d0 < max * max) {
 			float f = event.getEntity().getNameTagOffsetY() + offset;
 			pose.pushPose();
@@ -72,7 +75,7 @@ public class ClientEvents {
 			float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
 			int j = (int) (f1 * 255.0F) << 24;
 			font.drawInBatch(text, f2, 0, -1, false, matrix4f,
-					event.getMultiBufferSource(), mode, j, event.getPackedLight());
+					event.getMultiBufferSource(), mode, j, light);
 			pose.popPose();
 		}
 	}
