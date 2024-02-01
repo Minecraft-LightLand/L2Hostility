@@ -2,6 +2,7 @@
 - TODO press alt to show blacklist/whitelist
 
 2.4.16
+- Add more advancements
 - Fix Curse of Pride text
 - Nameplate render offset
 - Fix EnigmaticLegacy compat

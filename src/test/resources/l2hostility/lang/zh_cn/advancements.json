@@ -39,6 +39,22 @@
 	"sloth.description": "获得怠惰诅咒",
 	"sloth.title": "我想休息一下",
 	"trait.description": "获得一个词条物品",
-	"trait.title": "新世界的大门"
+	"trait.title": "新世界的大门",
+	"abrahadabra.description": "获得扭曲之魂",
+	"abrahadabra.title": "终幕",
+	"gluttony.description": "获得暴食诅咒",
+	"gluttony.title": "无尽恶意",
+	"greed.description": "获得贪婪诅咒",
+	"greed.title": "多多益善",
+	"imagine_breaker.description": "获得破咒遗骨",
+	"imagine_breaker.title": "扭曲粉碎者",
+	"miracle.description": "获得奇迹锭",
+	"miracle.title": "世界的奇迹",
+	"pride.description": "获得傲慢诅咒",
+	"pride.title": "恶意之王",
+	"wrath.description": "获得暴怒诅咒",
+	"wrath.title": "复仇时刻",
+	"lust.description": "获得色欲诅咒",
+	"lust.title": "赤裸尸体"
   }
 }

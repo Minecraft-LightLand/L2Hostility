@@ -1,12 +1,12 @@
 {
-  "parent": "l2hostility:hostility/ingot",
+  "parent": "l2hostility:hostility/breed",
   "criteria": {
     "0": {
       "conditions": {
         "items": [
           {
             "items": [
-              "l2hostility:curse_of_sloth"
+              "l2hostility:imagine_breaker"
             ]
           }
         ]
@@ -17,16 +17,16 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancements.l2hostility.advancements.hostility.sloth.description"
+      "translate": "advancements.l2hostility.advancements.hostility.imagine_breaker.description"
     },
-    "frame": "goal",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
-      "item": "l2hostility:curse_of_sloth"
+      "item": "l2hostility:imagine_breaker"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.l2hostility.advancements.hostility.sloth.title"
+      "translate": "advancements.l2hostility.advancements.hostility.imagine_breaker.title"
     }
   },
   "requirements": [

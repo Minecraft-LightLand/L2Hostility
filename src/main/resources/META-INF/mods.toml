@@ -25,13 +25,13 @@ description='''
 [[dependencies.l2hostility]]
     modId="l2library"
     mandatory=true
-    versionRange="[2.4.21,)"
+    versionRange="[2.4.23,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.l2hostility]]
     modId="l2complements"
     mandatory=true
-    versionRange="[2.4.14,)"
+    versionRange="[2.4.29,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.l2hostility]]
