@@ -21,7 +21,7 @@ public class TraitConfig extends BaseConfig {
 			10, 100, 1, 10);
 
 	@SerialClass.SerialField
-	public int min_level, cost, max_rank, weight, color;
+	public int min_level, cost, max_rank, weight;
 
 	@Deprecated
 	public TraitConfig() {
