@@ -148,20 +148,4 @@ public class MobEvents {
 		}
 	}
 
-	private static final List<Runnable> TASKS = new ArrayList<>();
-
-	public static synchronized void schedule(Runnable runnable) {
-		TASKS.add(runnable);
-	}
-
-	@SubscribeEvent
-	public static void onTick(TickEvent.ServerTickEvent event) {
-		if (TASKS.isEmpty()) return;
-		var temp = new ArrayList<>(TASKS);
-		TASKS.clear();
-		for (var e : temp) {
-			e.run();
-		}
-	}
-
 }

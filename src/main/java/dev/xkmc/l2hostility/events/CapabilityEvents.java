@@ -59,6 +59,9 @@ public class CapabilityEvents {
 		if (Float.isNaN(event.getEntity().getHealth())) {
 			event.getEntity().setHealth(0);
 		}
+		if (Float.isNaN(event.getEntity().getAbsorptionAmount())) {
+			event.getEntity().setAbsorptionAmount(0);
+		}
 		LivingEntity mob = event.getEntity();
 		if (MobTraitCap.HOLDER.isProper(mob) && mob.isAlive()) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
