@@ -82,6 +82,9 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue defaultLevelVar;
 		public final ForgeConfigSpec.DoubleValue defaultLevelScale;
 		public final ForgeConfigSpec.DoubleValue initialTraitChanceSlope;
+		public final ForgeConfigSpec.BooleanValue allowNoAI;
+		public final ForgeConfigSpec.BooleanValue allowPlayerAllies;
+		public final ForgeConfigSpec.BooleanValue allowTraitOnOwnable;
 
 		public final ForgeConfigSpec.IntValue bottleOfCurseLevel;
 		public final ForgeConfigSpec.IntValue envyExtraLevel;
@@ -216,6 +219,13 @@ public class LHConfig {
 						.defineInRange("initialTraitChanceSlope", 0.01, 0, 1);
 				splitDropRateFactor = builder.comment("Slimes hostility loot drop rate decay per split")
 						.defineInRange("splitDropRateFactor", 0.25d, 0, 1);
+				allowNoAI = builder.comment("Allow mobs without AI to have levels")
+						.define("allowNoAI", false);
+				allowPlayerAllies = builder.comment("Allow mobs allied to player to have levels")
+						.define("allowPlayerAllies", false);
+				allowTraitOnOwnable = builder.comment("Keep traits on mobs tamed by player")
+						.define("allowTraitOnOwnable", false);
+
 			}
 			builder.pop();
 

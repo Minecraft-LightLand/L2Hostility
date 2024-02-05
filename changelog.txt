@@ -1,6 +1,10 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+2.4.17
+- Add config to allow player summoned entities to have levels and traits
+
+
 2.4.16
 - Add more advancements
 - Fix Curse of Pride text

@@ -26,6 +26,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
@@ -119,7 +120,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void init(Level level, LivingEntity le, RegionalDifficultyModifier difficulty) {
-		boolean skip = false;
+		boolean skip = !LHConfig.COMMON.allowNoAI.get() && le instanceof Mob mob && mob.isNoAi();
 		MobDifficultyCollector instance = new MobDifficultyCollector();
 		var diff = L2Hostility.ENTITY.getMerged().get(le.getType());
 		if (diff != null) {
@@ -130,7 +131,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		if (player != null && PlayerDifficulty.HOLDER.isProper(player)) {
 			PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
 			playerDiff.apply(instance);
-			if (le instanceof OwnableEntity own && own.getOwner() == player) {
+			if (!LHConfig.COMMON.allowPlayerAllies.get() && le.isAlliedTo(player)) {
 				skip = true;
 			}
 		}
@@ -223,7 +224,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				mob.setHealth(mob.getMaxHealth());
 				syncToClient(mob);
 			}
-			if (!traits.isEmpty() && mob instanceof OwnableEntity own && own.getOwner() instanceof Player) {
+			if (!traits.isEmpty() &&
+					!LHConfig.COMMON.allowTraitOnOwnable.get() &&
+					mob instanceof OwnableEntity own &&
+					own.getOwner() instanceof Player) {
 				traits.clear();
 				syncToClient(mob);
 			}
