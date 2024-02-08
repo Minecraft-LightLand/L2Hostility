@@ -34,7 +34,8 @@ public class AuraEffectTrait extends MobTrait {
 					if (e.distanceTo(mob) > range) continue;
 					if (CurioCompat.hasItem(e, LHItems.RING_REFLECTION.get())) continue;
 					if (CurioCompat.hasItem(e, LHItems.ABRAHADABRA.get())) continue;
-					EffectUtil.refreshEffect(e, new MobEffectInstance(eff.get(), 40, level - 1, false, false, false),
+					EffectUtil.refreshEffect(e, new MobEffectInstance(eff.get(), 40, level - 1,
+									true, true),
 							EffectUtil.AddReason.FORCE, mob);
 				}
 			}

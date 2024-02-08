@@ -33,7 +33,8 @@ public class RingOfDivinity extends CurioItem implements ISimpleCapItem {
 	public void curioTick(ItemStack stack, SlotContext slotContext) {
 		LivingEntity wearer = slotContext.entity();
 		if (wearer == null) return;
-		EffectUtil.refreshEffect(wearer, new MobEffectInstance(LCEffects.CLEANSE.get(), 40), EffectUtil.AddReason.SELF, wearer);
+		EffectUtil.refreshEffect(wearer, new MobEffectInstance(LCEffects.CLEANSE.get(), 40,
+				0,true,true), EffectUtil.AddReason.SELF, wearer);
 	}
 
 }
