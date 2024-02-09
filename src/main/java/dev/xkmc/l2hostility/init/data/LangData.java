@@ -9,6 +9,7 @@ import java.util.Locale;
 
 public enum LangData {
 	SHIFT("tooltip.shift", "Press SHIFT to show spawn condition", 0),
+	LV("tooltip.lv", "Lv.%s", 1),
 	TOOLTIP_DISABLE("tooltip.disable", "%s enchantments disabled for %ss. Any new enchantment will vanish.", 2),
 	TOOLTIP_SELF_EFFECT("tooltip.self_effect", "Mob gains continuous effect: ", 0),
 	TOOLTIP_TARGET_EFFECT("tooltip.target_effect", "Mob inflict effect on hit: ", 0),

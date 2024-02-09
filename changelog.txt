@@ -3,7 +3,8 @@
 
 2.4.17
 - Add config to allow player summoned entities to have levels and traits
-- Make effect ambient
+- Make constantly refreshing effects ambient
+- Add death tome to blacklist
 
 2.4.16
 - Add more advancements

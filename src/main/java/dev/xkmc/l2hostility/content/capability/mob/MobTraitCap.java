@@ -14,6 +14,7 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
 import dev.xkmc.l2serial.serialization.SerialClass;
@@ -275,7 +276,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public List<Component> getTitle(boolean showLevel, boolean showTrait) {
 		List<Component> ans = new ArrayList<>();
 		if (showLevel && lv > 0) {
-			ans.add(Component.literal("Lv." + lv).withStyle(Style.EMPTY
+			ans.add(LangData.LV.get(lv).withStyle(Style.EMPTY
 					.withColor(LHConfig.CLIENT.overHeadLevelColor.get())));
 		}
 		if (!showTrait) return ans;

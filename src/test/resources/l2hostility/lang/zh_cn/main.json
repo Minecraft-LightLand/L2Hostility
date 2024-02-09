@@ -37,6 +37,7 @@
 	},
 	"boss_event": "恶意清除进度：%s/%s",
 	"tooltip": {
+	  "lv": "Lv.%s",
 	  "disable": "%s个附魔被抑制了，剩余%s秒。任何新附魔将会被抹消",
 	  "self_effect": "怪物获得常驻效果：",
 	  "target_effect": "怪物攻击将会施加：",

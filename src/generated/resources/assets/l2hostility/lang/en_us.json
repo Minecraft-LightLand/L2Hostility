@@ -215,6 +215,7 @@
   "l2hostility.tooltip.disable": "%s enchantments disabled for %ss. Any new enchantment will vanish.",
   "l2hostility.tooltip.legendary": "Legendary",
   "l2hostility.tooltip.level_cost": "Mob level cost: %s",
+  "l2hostility.tooltip.lv": "Lv.%s",
   "l2hostility.tooltip.min_level": "Minimum mob level: %s",
   "l2hostility.tooltip.seal_time": "Hold use to unseal. Takes %ss.",
   "l2hostility.tooltip.sealed_item": "Item sealed within:",

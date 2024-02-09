@@ -1,7 +1,7 @@
-// 1.20.1	2024-02-01T19:40:25.956928	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (enchantments), Tags (mob_effects), Tags (traits), Patchouli Provider]
+// 1.20.1	2024-02-10T01:08:47.656194	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-98f977b9a65533045cbd546cc33158c603e4de90 assets/l2hostility/lang/en_ud.json
-05f49b1109a7dce0655b30500079a74edc17128f assets/l2hostility/lang/en_us.json
+d649a0a623a9c2db1f7add48cde05ecd777b42cf assets/l2hostility/lang/en_ud.json
+c63fdc31f71afba132d24a0500608d72336deb86 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -277,6 +277,7 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/mele
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/moonwalk_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/nausea_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/nausea_whitelist.json
+ebcd146f52a62b349b6314398e2d418692138153 data/l2hostility/tags/entity_types/no_drop.json
 217ca38cad2e92f1ca03034aaa17f2dc686cbf50 data/l2hostility/tags/entity_types/no_scaling.json
 962e36a08d2e40469fba97926083112d29ed66b4 data/l2hostility/tags/entity_types/no_trait.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/poison_blacklist.json

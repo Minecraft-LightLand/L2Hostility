@@ -288,5 +288,6 @@
   "advancements.l2hostility.advancements.hostility.wrath.description": "获得暴怒诅咒",
   "advancements.l2hostility.advancements.hostility.wrath.title": "复仇时刻",
   "advancements.l2hostility.advancements.hostility.lust.description": "获得色欲诅咒",
-  "advancements.l2hostility.advancements.hostility.lust.title": "赤裸尸体"
+  "advancements.l2hostility.advancements.hostility.lust.title": "赤裸尸体",
+  "l2hostility.tooltip.lv": "Lv.%s"
 }
