@@ -10,6 +10,10 @@
       "maxLevel": 5,
       "minLevel": 1,
       "trait": "l2hostility:cursed"
+    },
+    {
+      "condition": "l2hostility:player_has_item",
+      "item": "l2hostility:charm_of_looting_1"
     }
   ],
   "rankBonus": 0.2,

@@ -102,6 +102,17 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	}
 
 	@Override
+	public List<ItemStack> getCurioRequired() {
+		List<ItemStack> ans = new ArrayList<>();
+		for (var c : getConditions()) {
+			if (c instanceof PlayerHasItemCondition item) {
+				ans.add(item.item.getDefaultInstance());
+			}
+		}
+		return ans;
+	}
+
+	@Override
 	public List<ItemStack> getInputs() {
 		Set<MobTrait> set = new LinkedHashSet<>();
 		List<ItemStack> ans = new ArrayList<>();
@@ -110,8 +121,6 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 		for (var c : getConditions()) {
 			if (c instanceof TraitLootCondition cl) {
 				set.add(cl.trait);
-			} else if (c instanceof PlayerHasItemCondition item) {
-				ans.add(item.item.getDefaultInstance());
 			}
 		}
 		for (var e : set) {

@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.compat.jei;
 
-import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -25,8 +25,13 @@ public record EnvyLootRecipe() implements ITraitLootRecipe {
 	}
 
 	@Override
-	public List<ItemStack> getInputs() {
+	public List<ItemStack> getCurioRequired() {
 		return List.of(LHItems.CURSE_ENVY.asStack());
+	}
+
+	@Override
+	public List<ItemStack> getInputs() {
+		return List.of();
 	}
 
 	@Override

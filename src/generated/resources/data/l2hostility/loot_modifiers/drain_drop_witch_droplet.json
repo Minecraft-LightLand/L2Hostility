@@ -10,6 +10,10 @@
       "maxLevel": 5,
       "minLevel": 1,
       "trait": "l2hostility:drain"
+    },
+    {
+      "condition": "l2hostility:player_has_item",
+      "item": "l2hostility:charm_of_looting_2"
     }
   ],
   "rankBonus": 0.1,

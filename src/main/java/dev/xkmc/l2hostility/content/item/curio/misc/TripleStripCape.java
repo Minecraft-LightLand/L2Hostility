@@ -2,7 +2,7 @@ package dev.xkmc.l2hostility.content.item.curio.misc;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import dev.xkmc.l2hostility.content.item.curio.core.CurioItem;
+import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2hostility.content.item.curio.core.ISimpleCapItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;

@@ -13,6 +13,7 @@ import dev.xkmc.l2library.util.data.LootTableTemplate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -64,99 +65,111 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 
 	@Override
 	protected void start() {
+		var loot1 = LHItems.LOOT_1.get();
+		var loot2 = LHItems.LOOT_2.get();
+		var loot3 = LHItems.LOOT_3.get();
+		var loot4 = LHItems.LOOT_4.get();
+
+
 		add("loot_envy", new EnvyLootModifier(LootTableTemplate.byPlayer().build(),
 				new PlayerHasItemCondition(LHItems.CURSE_ENVY.get())));
 		add("loot_gluttony", new GluttonyLootModifier(LootTableTemplate.byPlayer().build(),
 				new PlayerHasItemCondition(LHItems.CURSE_GLUTTONY.get())));
 
-		add(LHTraits.TANK.get(), new ItemStack(Items.DIAMOND, 4), 1, 0, 0.1);
-		add(LHTraits.TANK.get(), new ItemStack(Items.NETHERITE_SCRAP, 1), 3, 0, 0.1);
-		add(LHTraits.SPEEDY.get(), new ItemStack(Items.RABBIT_FOOT, 2), 1, 0, 0.1);
-		add(LHTraits.SPEEDY.get(), new ItemStack(LCItems.CAPTURED_WIND, 1), 3, 0, 0.1, 50);
-		add(LHTraits.PROTECTION.get(), new ItemStack(Items.SCUTE, 4), 1, 0, 0.1);
-		add(LHTraits.PROTECTION.get(), new ItemStack(Items.SHULKER_SHELL, 1), 3, 0, 0.1);
-		add(LHTraits.INVISIBLE.get(), new ItemStack(Items.PHANTOM_MEMBRANE, 4), 1, 0.25, 0);
-		add(LHTraits.FIERY.get(), new ItemStack(Items.BLAZE_ROD, 8), 1, 0.25, 0);
-		add(LHTraits.REGEN.get(), new ItemStack(Items.GHAST_TEAR, 4), 1, 0, 0.1);
-		add(LHTraits.REGEN.get(), new ItemStack(LCMats.TOTEMIC_GOLD.getNugget(), 4), 3, 0, 0.1);
-		add(LHTraits.REGEN.get(), new ItemStack(LCItems.LIFE_ESSENCE.get(), 1), 5, 0.2, 0);
-		add(LHTraits.ADAPTIVE.get(), new ItemStack(LCItems.CURSED_DROPLET.get(), 1), 1, 0, 0.1);
-		add(LHTraits.REFLECT.get(), new ItemStack(LCItems.EXPLOSION_SHARD.get(), 1), 1, 0, 0.1);
-		add(LHTraits.DEMENTOR.get(), new ItemStack(LCItems.SUN_MEMBRANE.get(), 1), 1, 0.2, 0.1);
-		add(LHTraits.DISPELL.get(), new ItemStack(LCItems.RESONANT_FEATHER.get(), 1), 1, 0.2, 0.1);
-		add(LHTraits.UNDYING.get(), new ItemStack(Items.TOTEM_OF_UNDYING, 1), 1, 1, 0);
-		add(LHTraits.UNDYING.get(), new ItemStack(LCItems.LIFE_ESSENCE.get(), 1), 1, 0.5, 0);
-		add(LHTraits.ENDER.get(), new ItemStack(LCItems.VOID_EYE.get(), 1), 1, 0.2, 0.1);
-		add(LHTraits.REPELLING.get(), new ItemStack(LCItems.FORCE_FIELD.get(), 1), 1, 0.2, 0.1);
+		add(LHTraits.TANK.get(), loot1, new ItemStack(Items.DIAMOND, 4), 1, 0, 0.1);
+		add(LHTraits.TANK.get(), loot1, new ItemStack(Items.NETHERITE_SCRAP, 1), 3, 0, 0.1);
+		add(LHTraits.SPEEDY.get(), loot1, new ItemStack(Items.RABBIT_FOOT, 2), 1, 0, 0.1);
+		add(LHTraits.SPEEDY.get(), loot3, new ItemStack(LCItems.CAPTURED_WIND, 1), 3, 0, 0.1, 100);
+		add(LHTraits.PROTECTION.get(), loot1, new ItemStack(Items.SCUTE, 4), 1, 0, 0.1);
+		add(LHTraits.PROTECTION.get(), loot1, new ItemStack(Items.SHULKER_SHELL, 1), 3, 0, 0.1);
+		add(LHTraits.INVISIBLE.get(), loot1, new ItemStack(Items.PHANTOM_MEMBRANE, 4), 1, 0.25, 0);
+		add(LHTraits.FIERY.get(), loot1, new ItemStack(Items.BLAZE_ROD, 8), 1, 0.25, 0);
+		add(LHTraits.REGEN.get(), loot1, new ItemStack(Items.GHAST_TEAR, 4), 1, 0, 0.1);
+		add(LHTraits.REGEN.get(), loot2, new ItemStack(LCMats.TOTEMIC_GOLD.getNugget(), 4), 3, 0, 0.1);
+		add(LHTraits.REGEN.get(), loot2, new ItemStack(LCItems.LIFE_ESSENCE.get(), 1), 5, 0.2, 0);
+		add(LHTraits.ADAPTIVE.get(), loot2, new ItemStack(LCItems.CURSED_DROPLET.get(), 1), 1, 0, 0.1);
+		add(LHTraits.REFLECT.get(), loot2, new ItemStack(LCItems.EXPLOSION_SHARD.get(), 1), 1, 0, 0.1);
+		add(LHTraits.DEMENTOR.get(), loot4, new ItemStack(LCItems.SUN_MEMBRANE.get(), 1), 1, 0.2, 0.1);
+		add(LHTraits.DISPELL.get(), loot4, new ItemStack(LCItems.RESONANT_FEATHER.get(), 1), 1, 0.2, 0.1);
+		add(LHTraits.UNDYING.get(), loot2, new ItemStack(Items.TOTEM_OF_UNDYING, 1), 1, 1, 0);
+		add(LHTraits.UNDYING.get(), loot2, new ItemStack(LCItems.LIFE_ESSENCE.get(), 1), 1, 0.5, 0);
+		add(LHTraits.ENDER.get(), loot4, new ItemStack(LCItems.VOID_EYE.get(), 1), 1, 0.2, 0.1);
+		add(LHTraits.REPELLING.get(), loot3, new ItemStack(LCItems.FORCE_FIELD.get(), 1), 1, 0.2, 0.1);
 
-		add(LHTraits.WEAKNESS.get(), new ItemStack(Items.FERMENTED_SPIDER_EYE, 8), 1, 0, 0.1);
-		add(LHTraits.SLOWNESS.get(), new ItemStack(Items.COBWEB, 4), 1, 0, 0.1);
-		add(LHTraits.POISON.get(), new ItemStack(Items.SPIDER_EYE, 8), 1, 0, 0.1);
-		add(LHTraits.WITHER.get(), new ItemStack(Items.WITHER_ROSE, 8), 1, 0, 0.1);
-		add(LHTraits.WITHER.get(), new ItemStack(Items.WITHER_SKELETON_SKULL, 1), 3, 0, 0.1);
-		add(LHTraits.LEVITATION.get(), new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.1);
-		add(LHTraits.BLIND.get(), new ItemStack(Items.INK_SAC, 8), 1, 0, 0.1);
-		add(LHTraits.CONFUSION.get(), new ItemStack(Items.PUFFERFISH, 4), 1, 0, 0.1);
-		add(LHTraits.SOUL_BURNER.get(), new ItemStack(LCItems.SOUL_FLAME, 2), 1, 0, 0.1);
-		add(LHTraits.FREEZING.get(), new ItemStack(LCItems.HARD_ICE, 2), 1, 0, 0.1);
-		add(LHTraits.CURSED.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Objects.requireNonNull(ForgeRegistries.POTIONS.getValue(new ResourceLocation(L2Complements.MODID, "curse")))), 1, 0, 0.2);
-		add(LHTraits.CURSED.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.05);
-		add(LHTraits.CORROSION.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 1, 0, 0.1);
-		add(LHTraits.EROSION.get(), new ItemStack(LCItems.CURSED_DROPLET, 1), 1, 0, 0.1);
-		add(LHTraits.KILLER_AURA.get(), new ItemStack(LCItems.EMERALD, 1), 1, 0, 0.02);
-		add(LHTraits.RAGNAROK.get(), new ItemStack(LCMats.ETERNIUM.getNugget(), 4), 1, 0, 0.1);
-		add(LHTraits.SHULKER.get(), new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.2);
-		add(LHTraits.GRENADE.get(), new ItemStack(LCItems.STORM_CORE, 1), 3, 0, 0.1);
-		add(LHTraits.GRENADE.get(), new ItemStack(Items.GUNPOWDER, 4), 1, 0, 0.1);
-		add(LHTraits.GRENADE.get(), new ItemStack(Items.CREEPER_HEAD, 1), 5, 0.25, 0);
-		add(LHTraits.DRAIN.get(), new ItemStack(LHItems.WITCH_DROPLET, 1), 1, 0, 0.1);
-		add(LHTraits.GROWTH.get(), new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 1), 1, 0, 0.02);
-		add(LHTraits.SPLIT.get(), new ItemStack(LCItems.GUARDIAN_EYE, 1), 1, 0, 0.05);
-		add(LHTraits.GRAVITY.get(), new ItemStack(Items.DRAGON_BREATH, 4), 1, 0, 0.1);
-		add(LHTraits.MOONWALK.get(), new ItemStack(Items.DRAGON_BREATH, 4), 1, 0, 0.1);
-		add(LHTraits.STRIKE.get(), new ItemStack(LCItems.EXPLOSION_SHARD, 1), 1, 0, 0.1);
-		add(LHTraits.PULLING.get(), new ItemStack(LCItems.BLACKSTONE_CORE, 1), 1, 0, 0.05);
+		add(LHTraits.WEAKNESS.get(), loot1, new ItemStack(Items.FERMENTED_SPIDER_EYE, 8), 1, 0, 0.1);
+		add(LHTraits.SLOWNESS.get(), loot1, new ItemStack(Items.COBWEB, 4), 1, 0, 0.1);
+		add(LHTraits.POISON.get(), loot1, new ItemStack(Items.SPIDER_EYE, 8), 1, 0, 0.1);
+		add(LHTraits.WITHER.get(), loot1, new ItemStack(Items.WITHER_ROSE, 8), 1, 0, 0.1);
+		add(LHTraits.WITHER.get(), loot1, new ItemStack(Items.WITHER_SKELETON_SKULL, 1), 3, 0, 0.1);
+		add(LHTraits.LEVITATION.get(), loot2, new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.1);
+		add(LHTraits.BLIND.get(), loot1, new ItemStack(Items.INK_SAC, 8), 1, 0, 0.1);
+		add(LHTraits.CONFUSION.get(), loot1, new ItemStack(Items.PUFFERFISH, 4), 1, 0, 0.1);
+		add(LHTraits.SOUL_BURNER.get(), loot2, new ItemStack(LCItems.SOUL_FLAME, 2), 1, 0, 0.1);
+		add(LHTraits.FREEZING.get(), loot2, new ItemStack(LCItems.HARD_ICE, 2), 1, 0, 0.1);
+		add(LHTraits.CURSED.get(), loot1, PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Objects.requireNonNull(ForgeRegistries.POTIONS.getValue(new ResourceLocation(L2Complements.MODID, "curse")))), 1, 0, 0.2);
+		add(LHTraits.CURSED.get(), loot2, new ItemStack(LCItems.CURSED_DROPLET, 1), 3, 0, 0.05);
+		add(LHTraits.CORROSION.get(), loot2, new ItemStack(LCItems.CURSED_DROPLET, 1), 1, 0, 0.1);
+		add(LHTraits.EROSION.get(), loot2, new ItemStack(LCItems.CURSED_DROPLET, 1), 1, 0, 0.1);
+		add(LHTraits.KILLER_AURA.get(), loot4, new ItemStack(LCItems.EMERALD, 1), 1, 0, 0.02);
+		add(LHTraits.RAGNAROK.get(), loot4, new ItemStack(LCMats.ETERNIUM.getNugget(), 4), 1, 0, 0.1);
+		add(LHTraits.SHULKER.get(), loot2, new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.2);
+		add(LHTraits.GRENADE.get(), loot3, new ItemStack(LCItems.STORM_CORE, 1), 3, 0, 0.1);
+		add(LHTraits.GRENADE.get(), loot1, new ItemStack(Items.GUNPOWDER, 4), 1, 0, 0.1);
+		add(LHTraits.GRENADE.get(), loot2, new ItemStack(Items.CREEPER_HEAD, 1), 5, 0.25, 0);
+		add(LHTraits.DRAIN.get(), loot2, new ItemStack(LHItems.WITCH_DROPLET, 1), 1, 0, 0.1);
+		add(LHTraits.GROWTH.get(), loot2, new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 1), 1, 0, 0.02);
+		add(LHTraits.SPLIT.get(), loot2, new ItemStack(LCItems.GUARDIAN_EYE, 1), 1, 0, 0.05);
+		add(LHTraits.GRAVITY.get(), loot1, new ItemStack(Items.DRAGON_BREATH, 4), 1, 0, 0.1);
+		add(LHTraits.MOONWALK.get(), loot1, new ItemStack(Items.DRAGON_BREATH, 4), 1, 0, 0.1);
+		add(LHTraits.STRIKE.get(), loot2, new ItemStack(LCItems.EXPLOSION_SHARD, 1), 1, 0, 0.1);
+		add(LHTraits.PULLING.get(), loot3, new ItemStack(LCItems.BLACKSTONE_CORE, 1), 1, 0, 0.05);
 
-		add(LHTraits.REPRINT.get(), new ItemStack(LHItems.BOOK_COPY.get()), 1, 1, 0);
-		add(LHTraits.DISPELL.get(), new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);
+		add(LHTraits.REPRINT.get(), loot3, new ItemStack(LHItems.BOOK_COPY.get()), 1, 1, 0);
+		add(LHTraits.DISPELL.get(), loot4, new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);
 
 		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getNugget(), 6), 0, 0.1,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),
-				new TraitLootCondition(LHTraits.PROTECTION.get(), 1, 3)
+				new TraitLootCondition(LHTraits.PROTECTION.get(), 1, 3),
+				new PlayerHasItemCondition(loot2)
 		);
 		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getIngot(), 2), 0, 0.1,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),
-				new TraitLootCondition(LHTraits.PROTECTION.get(), 4, 5)
+				new TraitLootCondition(LHTraits.PROTECTION.get(), 4, 5),
+				new PlayerHasItemCondition(loot2)
 		);
 		add(LHTraits.SPEEDY.get(), new ItemStack(LCMats.SCULKIUM.getNugget(), 4), 0, 0.1,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(LHTraits.SPEEDY.get(), 3, 5),
-				new TraitLootCondition(LHTraits.TANK.get(), 3, 5)
+				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),
+				new PlayerHasItemCondition(loot3)
 		);
 
 		add(LHTraits.DEMENTOR.get(), new ItemStack(LHItems.CHAOS_INGOT.get(), 1), 1, 0,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(LHTraits.KILLER_AURA.get(), 1, 5),
-				new TraitLootCondition(LHTraits.RAGNAROK.get(), 1, 5)
+				new TraitLootCondition(LHTraits.RAGNAROK.get(), 1, 5),
+				new PlayerHasItemCondition(loot4)
 		);
 
 
 	}
 
-	private void add(MobTrait trait, ItemStack stack, int start, double chance, double bonus, int min) {
+	private void add(MobTrait trait, Item curio, ItemStack stack, int start, double chance, double bonus, int min) {
 		add(trait, stack, chance, bonus,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(trait, start, 5),
-				new MobCapLootCondition(min)
+				new MobCapLootCondition(min),
+				new PlayerHasItemCondition(curio)
 		);
 	}
 
-	private void add(MobTrait trait, ItemStack stack, int start, double chance, double bonus) {
+	private void add(MobTrait trait, Item curio, ItemStack stack, int start, double chance, double bonus) {
 		add(trait, stack, chance, bonus,
 				LootTableTemplate.byPlayer().build(),
-				new TraitLootCondition(trait, start, 5)
+				new TraitLootCondition(trait, start, 5),
+				new PlayerHasItemCondition(curio)
 		);
 	}
 

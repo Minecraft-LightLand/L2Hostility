@@ -26,5 +26,4 @@ public class ArenaTrait extends AuraEffectTrait {
 	}
 
 
-
 }

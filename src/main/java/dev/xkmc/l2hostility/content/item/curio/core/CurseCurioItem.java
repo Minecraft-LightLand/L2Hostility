@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.item.curio.core;
 
+import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
