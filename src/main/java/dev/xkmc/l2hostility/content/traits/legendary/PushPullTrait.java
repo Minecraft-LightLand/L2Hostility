@@ -1,7 +1,9 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
+import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -37,6 +39,7 @@ public abstract class PushPullTrait extends LegendaryTrait {
 		for (var e : list) {
 			double dist = mob.distanceTo(e) / r;
 			if (dist > 1) return;
+			if (CurioCompat.hasItem(e, LHItems.ABRAHADABRA.get())) continue;
 			double strength = getStrength(dist);
 			int lv = 0;
 			for (var armor : e.getArmorSlots()) {

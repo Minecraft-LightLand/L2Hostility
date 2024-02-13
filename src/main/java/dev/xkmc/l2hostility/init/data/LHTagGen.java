@@ -25,6 +25,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
+import twilightforest.TwilightForestMod;
+import twilightforest.init.TFEntities;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -53,6 +55,7 @@ public class LHTagGen {
 	public static final TagKey<EntityType<?>> NO_TRAIT = createEntityTag("no_trait");
 
 	public static final TagKey<EntityType<?>> SEMIBOSS = createEntityTag("semiboss");
+	public static final TagKey<EntityType<?>> NO_DROP = createEntityTag("no_drop");
 
 	public static final TagKey<EntityType<?>> ARMOR_TARGET = createEntityTag("armor_target");
 	public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
@@ -76,8 +79,7 @@ public class LHTagGen {
 
 	public static void onItemTagGen(RegistrateItemTagsProvider pvd) {
 		pvd.tag(NO_SEAL)
-				.addOptional(new ResourceLocation("enigmaticlegacy:curse_ring"))
-				.addOptional(new ResourceLocation("moonstone:sevencurse"));
+				.addOptional(new ResourceLocation("enigmaticlegacy:cursed_ring"));
 		pvd.tag(ANTIBUILD_BAN)
 				.addOptional(new ResourceLocation("enigmaticlegacy:extradimensional_eye"));
 	}
@@ -111,6 +113,10 @@ public class LHTagGen {
 
 		pvd.tag(SEMIBOSS).addTag(Tags.EntityTypes.BOSSES)
 				.add(EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER);
+
+		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
+			pvd.addTag(NO_DROP).addOptional(TFEntities.DEATH_TOME.getId());
+		}
 
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			pvd.tag(SEMIBOSS)

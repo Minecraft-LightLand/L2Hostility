@@ -4,8 +4,21 @@
     {
       "type": "forge:not",
       "value": {
-        "type": "forge:mod_loaded",
-        "modid": "ars_nouveau"
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "ars_nouveau"
+          },
+          {
+            "type": "l2library:boolean_config",
+            "expected": true,
+            "line": [
+              "useArsNouveauForEnchantmentRecipe"
+            ],
+            "path": "l2_configs/l2complements-common.toml"
+          }
+        ]
       }
     }
   ],

@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.content.item.curio.ring;
 
-import dev.xkmc.l2hostility.content.item.curio.core.CurioItem;
+import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2hostility.content.item.curio.core.ISimpleCapItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;

@@ -16,6 +16,10 @@
       "maxLevel": 5,
       "minLevel": 4,
       "trait": "l2hostility:protection"
+    },
+    {
+      "condition": "l2hostility:player_has_item",
+      "item": "l2hostility:charm_of_looting_2"
     }
   ],
   "rankBonus": 0.1,

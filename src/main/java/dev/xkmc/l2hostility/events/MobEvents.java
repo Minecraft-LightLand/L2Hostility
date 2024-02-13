@@ -16,7 +16,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.OnDatapackSyncEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -143,22 +142,6 @@ public class MobEvents {
 			L2Hostility.HANDLER.toAllClient(packet);
 		} else {
 			L2Hostility.HANDLER.toClientPlayer(packet, event.getPlayer());
-		}
-	}
-
-	private static final List<Runnable> TASKS = new ArrayList<>();
-
-	public static synchronized void schedule(Runnable runnable) {
-		TASKS.add(runnable);
-	}
-
-	@SubscribeEvent
-	public static void onTick(TickEvent.ServerTickEvent event) {
-		if (TASKS.isEmpty()) return;
-		var temp = new ArrayList<>(TASKS);
-		TASKS.clear();
-		for (var e : temp) {
-			e.run();
 		}
 	}
 

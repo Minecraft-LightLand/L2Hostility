@@ -21,10 +21,10 @@ public class AdvGen {
 
 	public static void genAdvancements(RegistrateAdvancementProvider pvd) {
 		AdvancementGenerator gen = new AdvancementGenerator(pvd, L2Hostility.MODID);
-		gen.new TabBuilder("hostility").root("root", LHTraits.ENDER.get().asItem(),
-						CriterionBuilder.item(LHItems.HOSTILITY_ORB.get()),
-						"Welcome to L2Hostility", "Your survival guide")
-				.root().create("detector", LHItems.DETECTOR.get(),
+		var root = gen.new TabBuilder("hostility").root("root", LHTraits.ENDER.get().asItem(),
+				CriterionBuilder.item(LHItems.HOSTILITY_ORB.get()),
+				"Welcome to L2Hostility", "Your survival guide").root();
+		root.root().create("detector", LHItems.DETECTOR.get(),
 						CriterionBuilder.item(LHItems.DETECTOR.get()),
 						"Safety Compass", "Obtain Hostility Detector")
 				.create("glasses", LHItems.DETECTOR_GLASSES.get(),
@@ -86,25 +86,49 @@ public class AdvGen {
 						CriterionBuilder.one(KillTraitEffectTrigger.ins(
 								LHTraits.ENDER.get(), LCEffects.STONE_CAGE.get())),
 						"Prevent Teleporting", "Use incarceration effect on mobs with Teleport and kill it")
-				.type(FrameType.CHALLENGE)
-				.root().enter().create("ingot", LHItems.CHAOS_INGOT.get(),
-						CriterionBuilder.item(LHItems.CHAOS_INGOT.get()),
-						"Pandora's Box", "Obtain a Chaos Ingot")
-				.create("sloth", LHItems.CURSE_SLOTH.get(),
-						CriterionBuilder.item(LHItems.CURSE_SLOTH.get()),
-						"I want a break", "Obtain Curse of Sloth")
-				.root().enter().enter().create("envy", LHItems.CURSE_ENVY.get(),
+				.type(FrameType.CHALLENGE);
+		var ingot = root.root().enter().create("ingot", LHItems.CHAOS_INGOT.get(),
+				CriterionBuilder.item(LHItems.CHAOS_INGOT.get()),
+				"Pandora's Box", "Obtain a Chaos Ingot");
+		ingot.create("sloth", LHItems.CURSE_SLOTH.get(),
+				CriterionBuilder.item(LHItems.CURSE_SLOTH.get()),
+				"I want a break", "Obtain Curse of Sloth").type(FrameType.GOAL);
+		var trait = ingot.create("envy", LHItems.CURSE_ENVY.get(),
 						CriterionBuilder.item(LHItems.CURSE_ENVY.get()),
 						"I want that!", "Obtain Curse of Envy")
 				.type(FrameType.GOAL)
 				.create("trait", LHTraits.TANK.get().asItem(),
 						CriterionBuilder.item(LHTagGen.TRAIT_ITEM),
-						"Gate to the New World", "Obtain a trait item")
-				.create("breed", LHTraits.REGEN.get().asItem(),
+						"Gate to the New World", "Obtain a trait item");
+		trait.create("greed", LHItems.CURSE_GREED.get(),
+				CriterionBuilder.item(LHItems.CURSE_GREED.get()),
+				"The More the Better", "Obtain Curse of Greed").type(FrameType.GOAL);
+		trait.create("lust", LHItems.CURSE_LUST.get(),
+				CriterionBuilder.item(LHItems.CURSE_LUST.get()),
+				"Naked Corpse", "Obtain Curse of Lust").type(FrameType.GOAL);
+		var miracle = trait.create("gluttony", LHItems.CURSE_GLUTTONY.get(),
+						CriterionBuilder.item(LHItems.CURSE_GLUTTONY.get()),
+						"Hostility Unlimited", "Obtain Curse of Gluttony")
+				.create("miracle", LHItems.MIRACLE_INGOT.get(),
+						CriterionBuilder.item(LHItems.MIRACLE_INGOT.get()),
+						"Miracle of the World", "Obtain Miracle Ingot");
+		trait.create("breed", LHTraits.REGEN.get().asItem(),
 						CriterionBuilder.one(ConsumeItemTrigger.TriggerInstance.usedItem(
 								ItemPredicate.Builder.item().of(LHTagGen.TRAIT_ITEM).build())),
 						"Breeding Mobs", "Use a trait item on mobs")
-				.finish();
+				.create("imagine_breaker", LHItems.IMAGINE_BREAKER.asStack(),
+						CriterionBuilder.item(LHItems.IMAGINE_BREAKER.get()),
+						"Reality Breakthrough", "Obtain Imagine Breaker").type(FrameType.CHALLENGE);
+		miracle.create("wrath", LHItems.CURSE_WRATH.get(),
+				CriterionBuilder.item(LHItems.CURSE_WRATH.get()),
+				"Revenge Time", "Obtain Curse of Wrath").type(FrameType.CHALLENGE);
+		miracle.create("pride", LHItems.CURSE_PRIDE.get(),
+				CriterionBuilder.item(LHItems.CURSE_PRIDE.get()),
+				"King of Hostility", "Obtain Curse of Pride").type(FrameType.CHALLENGE);
+		miracle.create("abrahadabra", LHItems.ABRAHADABRA.get(),
+				CriterionBuilder.item(LHItems.ABRAHADABRA.get()),
+				"The Finale", "Obtain Abrahadabra").type(FrameType.CHALLENGE);
+		root.finish();
 
 	}
 

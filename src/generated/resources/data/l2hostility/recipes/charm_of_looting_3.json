@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2complements:life_essence"
+    },
+    "D": {
+      "item": "l2hostility:witch_droplet"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    " A ",
+    "DID",
+    " A "
+  ],
+  "result": {
+    "item": "l2hostility:charm_of_looting_3"
+  },
+  "show_notification": true
+}

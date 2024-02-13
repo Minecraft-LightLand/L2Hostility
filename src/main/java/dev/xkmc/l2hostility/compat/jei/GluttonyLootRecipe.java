@@ -16,8 +16,13 @@ public record GluttonyLootRecipe() implements ITraitLootRecipe {
 	}
 
 	@Override
-	public List<ItemStack> getInputs() {
+	public List<ItemStack> getCurioRequired() {
 		return List.of(LHItems.CURSE_GLUTTONY.asStack());
+	}
+
+	@Override
+	public List<ItemStack> getInputs() {
+		return List.of();
 	}
 
 	@Override

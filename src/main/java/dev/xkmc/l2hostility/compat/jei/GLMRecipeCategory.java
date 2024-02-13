@@ -22,7 +22,7 @@ public class GLMRecipeCategory extends BaseRecipeCategory<ITraitLootRecipe, GLMR
 	}
 
 	public GLMRecipeCategory init(IGuiHelper guiHelper) {
-		background = guiHelper.createDrawable(BG, 0, 0, 72, 18);
+		background = guiHelper.createDrawable(BG, 0, 18, 90, 18);
 		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, Items.IRON_SWORD.getDefaultInstance());
 		return this;
 	}
@@ -34,8 +34,9 @@ public class GLMRecipeCategory extends BaseRecipeCategory<ITraitLootRecipe, GLMR
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, ITraitLootRecipe recipe, IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addItemStacks(recipe.getInputs());
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 1).addItemStacks(recipe.getResults())
+		builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addItemStacks(recipe.getCurioRequired());
+		builder.addSlot(RecipeIngredientRole.INPUT, 19, 1).addItemStacks(recipe.getInputs());
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 73, 1).addItemStacks(recipe.getResults())
 				.addTooltipCallback((v, l) -> recipe.addTooltip(l));
 	}
 

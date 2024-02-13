@@ -14,7 +14,11 @@
     {
       "condition": "l2hostility:mob_level",
       "maxLevel": 0,
-      "minLevel": 50
+      "minLevel": 100
+    },
+    {
+      "condition": "l2hostility:player_has_item",
+      "item": "l2hostility:charm_of_looting_3"
     }
   ],
   "rankBonus": 0.1,

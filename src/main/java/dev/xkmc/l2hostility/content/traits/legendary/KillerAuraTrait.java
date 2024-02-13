@@ -1,11 +1,13 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
+import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffects;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -36,6 +38,7 @@ public class KillerAuraTrait extends LegendaryTrait {
 				if (e instanceof Player pl && !pl.getAbilities().instabuild ||
 						e instanceof Mob target && target.getTarget() == mob) {
 					if (e.distanceTo(mob) > range) continue;
+					if (CurioCompat.hasItem(e, LHItems.ABRAHADABRA.get())) continue;
 					TraitEffectCache cache = new TraitEffectCache(e);
 					cap.traitEvent((k, v) -> k.postHurtPlayer(v, mob, cache));
 					e.hurt(new EntityDamageSource("killer_aura", mob).setMagic().bypassArmor(), damage);

@@ -31,6 +31,9 @@ public class PlayerHasItemCondition implements LootItemCondition {
 
 	@Override
 	public boolean test(LootContext lootContext) {
+		if (LHConfig.COMMON.disableHostilityLootCurioRequirement.get()) {
+			return true;
+		}
 		if (!lootContext.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) return false;
 		Player player = lootContext.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
 		return CurioCompat.hasItem(player, item);

@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.content.item.curio.ring;
 
+import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2complements.init.registrate.LCEffects;
-import dev.xkmc.l2hostility.content.item.curio.core.CurioItem;
 import dev.xkmc.l2hostility.content.item.curio.core.ISimpleCapItem;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2library.base.effects.EffectUtil;
@@ -41,7 +41,8 @@ public class RingOfIncarceration extends CurioItem implements ISimpleCapItem {
 		for (var e : wearer.level.getEntities(EntityTypeTest.forClass(LivingEntity.class),
 				wearer.getBoundingBox().inflate(r), e -> wearer.distanceTo(e) < r)) {
 			if (e.hasEffect(LCEffects.CLEANSE.get())) continue;
-			EffectUtil.refreshEffect(e, new MobEffectInstance(LCEffects.STONE_CAGE.get(), 40),
+			EffectUtil.refreshEffect(e, new MobEffectInstance(LCEffects.STONE_CAGE.get(), 40,
+							0, true, true),
 					EffectUtil.AddReason.NONE, wearer);
 		}
 	}

@@ -82,6 +82,9 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue defaultLevelVar;
 		public final ForgeConfigSpec.DoubleValue defaultLevelScale;
 		public final ForgeConfigSpec.DoubleValue initialTraitChanceSlope;
+		public final ForgeConfigSpec.BooleanValue allowNoAI;
+		public final ForgeConfigSpec.BooleanValue allowPlayerAllies;
+		public final ForgeConfigSpec.BooleanValue allowTraitOnOwnable;
 
 		public final ForgeConfigSpec.IntValue bottleOfCurseLevel;
 		public final ForgeConfigSpec.IntValue envyExtraLevel;
@@ -98,6 +101,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue prideHealthBonus;
 		public final ForgeConfigSpec.DoubleValue prideTraitFactor;
 		public final ForgeConfigSpec.DoubleValue wrathDamageBonus;
+		public final ForgeConfigSpec.BooleanValue disableHostilityLootCurioRequirement;
 
 		public final ForgeConfigSpec.IntValue hostilitySpawnCount;
 		public final ForgeConfigSpec.IntValue hostilitySpawnLevelFactor;
@@ -216,6 +220,13 @@ public class LHConfig {
 						.defineInRange("initialTraitChanceSlope", 0.01, 0, 1);
 				splitDropRateFactor = builder.comment("Slimes hostility loot drop rate decay per split")
 						.defineInRange("splitDropRateFactor", 0.25d, 0, 1);
+				allowNoAI = builder.comment("Allow mobs without AI to have levels")
+						.define("allowNoAI", false);
+				allowPlayerAllies = builder.comment("Allow mobs allied to player to have levels")
+						.define("allowPlayerAllies", false);
+				allowTraitOnOwnable = builder.comment("Keep traits on mobs tamed by player")
+						.define("allowTraitOnOwnable", false);
+
 			}
 			builder.pop();
 
@@ -254,6 +265,8 @@ public class LHConfig {
 
 			builder.push("items");
 			{
+				disableHostilityLootCurioRequirement = builder.comment("Disable curio requirement for hostility loot")
+						.define("disableHostilityLootCurioRequirement", false);
 				bottleOfCurseLevel = builder.comment("Number of level to add when using bottle of curse")
 						.defineInRange("bottleOfCurseLevel", 50, 1, 1000);
 

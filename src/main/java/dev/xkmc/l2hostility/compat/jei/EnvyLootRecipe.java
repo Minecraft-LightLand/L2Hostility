@@ -25,8 +25,13 @@ public record EnvyLootRecipe() implements ITraitLootRecipe {
 	}
 
 	@Override
-	public List<ItemStack> getInputs() {
+	public List<ItemStack> getCurioRequired() {
 		return List.of(LHItems.CURSE_ENVY.asStack());
+	}
+
+	@Override
+	public List<ItemStack> getInputs() {
+		return List.of();
 	}
 
 	@Override

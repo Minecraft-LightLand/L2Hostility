@@ -20,6 +20,7 @@ public class CorrosionTrait extends SlotIterateDamageTrait {
 
 	@Override
 	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache, TraitEffectCache traitCache) {
+		if (CurioCompat.hasItem(cache.getAttackTarget(), LHItems.ABRAHADABRA.get())) return;
 		int count = process(level, attacker, cache.getAttackTarget());
 		if (count < level) {
 			DamageModifier.hurtMultTotal(cache, (float) (LHConfig.COMMON.corrosionDamage.get() * level * (level - count)));

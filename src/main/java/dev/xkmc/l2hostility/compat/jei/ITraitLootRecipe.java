@@ -9,7 +9,10 @@ public interface ITraitLootRecipe {
 
 	List<ItemStack> getResults();
 
+	List<ItemStack> getCurioRequired();
+
 	List<ItemStack> getInputs();
+
 
 	void addTooltip(List<Component> l);
 }

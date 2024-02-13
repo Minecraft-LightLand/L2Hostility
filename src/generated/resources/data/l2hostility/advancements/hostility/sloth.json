@@ -19,7 +19,7 @@
     "description": {
       "translate": "advancements.l2hostility.advancements.hostility.sloth.description"
     },
-    "frame": "task",
+    "frame": "goal",
     "hidden": false,
     "icon": {
       "item": "l2hostility:curse_of_sloth"

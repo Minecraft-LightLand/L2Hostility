@@ -1,5 +1,9 @@
 {
   "values": [
+    "l2hostility:charm_of_looting_1",
+    "l2hostility:charm_of_looting_2",
+    "l2hostility:charm_of_looting_3",
+    "l2hostility:charm_of_looting_4",
     "l2hostility:curse_of_envy",
     "l2hostility:curse_of_gluttony",
     "l2hostility:curse_of_greed",
@@ -11,7 +15,7 @@
     "l2hostility:pocket_of_restoration",
     "l2hostility:sealed_item",
     {
-      "id": "enigmaticlegacy:curse_ring",
+      "id": "enigmaticlegacy:cursed_ring",
       "required": false
     }
   ]
