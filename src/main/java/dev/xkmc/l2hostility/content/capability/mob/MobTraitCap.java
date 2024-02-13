@@ -16,6 +16,7 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.util.code.Wrappers;
 import net.minecraft.ChatFormatting;

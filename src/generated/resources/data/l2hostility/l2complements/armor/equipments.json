@@ -2,12 +2,12 @@
   "_class": "dev.xkmc.l2complements.network.ArmorEffectConfig",
   "immune": {
     "l2hostility:curse_of_wrath": [
-      "minecraft:nausea",
+      "minecraft:darkness",
+      "minecraft:blindness",
       "minecraft:slowness",
       "minecraft:mining_fatigue",
       "minecraft:weakness",
-      "minecraft:blindness",
-      "minecraft:darkness"
+      "minecraft:nausea"
     ]
   }
 }

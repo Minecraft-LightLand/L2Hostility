@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.content.item.curio.misc;
 
-import dev.xkmc.l2complements.content.item.curios.CurioItem;
-import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.content.item.curio.core.CurioItem;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "A": {
       "item": "minecraft:blaze_powder"
@@ -19,6 +18,5 @@
   ],
   "result": {
     "item": "l2hostility:charm_of_looting_2"
-  },
-  "show_notification": true
+  }
 }

@@ -115,7 +115,7 @@ public class LHTagGen {
 				.add(EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER);
 
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
-			pvd.addTag(NO_DROP).addOptional(TFEntities.DEATH_TOME.getId());
+			pvd.tag(NO_DROP).addOptional(TFEntities.DEATH_TOME.getId());
 		}
 
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {

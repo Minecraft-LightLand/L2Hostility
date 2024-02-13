@@ -1,9 +1,11 @@
 package dev.xkmc.l2hostility.content.traits.highlevel;
 
 import dev.xkmc.l2hostility.backport.damage.DamageModifier;
+import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.item.traits.DurabilityEater;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.init.events.attack.AttackCache;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

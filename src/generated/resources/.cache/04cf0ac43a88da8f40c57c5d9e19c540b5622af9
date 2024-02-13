@@ -1,4 +1,4 @@
-// 1.19.2	2024-01-20T17:21:33.20095	L2Hostility Config
+// 1.19.2	2024-02-13T17:08:55.930536	L2Hostility Config
 60dc8cb934390cd948ed34000a7fd663eaef42cc data/bosses_of_mass_destruction/l2hostility_config/entity/gauntlet.json
 50a1a6671c7245f1ba85dd91e81ce076365b6d70 data/bosses_of_mass_destruction/l2hostility_config/entity/lich.json
 db4ebee4f4b7fff486bd4f3ed9847dee7510fbbd data/bosses_of_mass_destruction/l2hostility_config/entity/obsidilith.json
@@ -16,7 +16,7 @@ ff994c8f5c9834c36f06989759e2dbd444848287 data/iceandfire/l2hostility_config/enti
 8eea3e1fee61bcd1ed8a8b68e516ad1ca08eff3f data/iceandfire/l2hostility_config/entity/lightning_dragon.json
 c37bcf36df1b9e32be9b4c470ffe6295a5880f07 data/l2archery/l2hostility_config/weapon/bows.json
 72bd16f1eed0234955b95ab22b2f2425cc5da8bb data/l2complements/l2hostility_config/weapon/l2complements.json
-8554ac82d121da9da268c4326c5a70a2ea0f7dbe data/l2hostility/l2complements/armor/equipments.json
+d85a381df9b96ad24a964a9befa1507a0fdda6d6 data/l2hostility/l2complements/armor/equipments.json
 7cffcb6dc35ee83078bc0864137a791cbfcd4ac3 data/l2hostility/l2hostility_config/difficulty/end.json
 6af6143a0eca61aff5e9d62155bcedca346a9a7f data/l2hostility/l2hostility_config/difficulty/nether.json
 a35ef4d0af3a6796b079cf8d88e4aa6d2376ea3f data/l2hostility/l2hostility_config/difficulty/overworld.json

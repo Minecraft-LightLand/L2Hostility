@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.init.loot;
 
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;

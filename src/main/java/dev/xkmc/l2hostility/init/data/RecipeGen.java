@@ -134,32 +134,32 @@ public class RecipeGen {
 
 			{
 
-				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.LOOT_1.get(), 1)::unlockedBy, Items.EMERALD)
+				unlock(pvd, new ShapedRecipeBuilder(LHItems.LOOT_1.get(), 1)::unlockedBy, Items.EMERALD)
 						.pattern(" A ").pattern("DID").pattern(" A ")
 						.define('I', Items.EMERALD)
 						.define('A', Items.GOLD_INGOT)
 						.define('D', Items.COPPER_INGOT)
 						.save(pvd);
 
-				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.LOOT_2.get(), 1)::unlockedBy, Items.DIAMOND)
+				unlock(pvd, new ShapedRecipeBuilder(LHItems.LOOT_2.get(), 1)::unlockedBy, Items.DIAMOND)
 						.pattern(" A ").pattern("DID").pattern(" A ")
 						.define('I', Items.DIAMOND)
 						.define('A', Items.BLAZE_POWDER)
 						.define('D', Items.DRAGON_BREATH)
 						.save(pvd);
 
-				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.LOOT_3.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+				unlock(pvd, new ShapedRecipeBuilder(LHItems.LOOT_3.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 						.pattern(" A ").pattern("DID").pattern(" A ")
 						.define('I', LHItems.CHAOS_INGOT.get())
-						.define('A', LCItems.LIFE_ESSENCE)
-						.define('D', LHItems.WITCH_DROPLET)
+						.define('A', LCItems.LIFE_ESSENCE.get())
+						.define('D', LHItems.WITCH_DROPLET.get())
 						.save(pvd);
 
-				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.LOOT_4.get(), 1)::unlockedBy, LHItems.MIRACLE_INGOT.get())
+				unlock(pvd, new ShapedRecipeBuilder(LHItems.LOOT_4.get(), 1)::unlockedBy, LHItems.MIRACLE_INGOT.get())
 						.pattern(" A ").pattern("DID").pattern(" A ")
 						.define('I', LHItems.MIRACLE_INGOT.get())
-						.define('A', LCItems.BLACKSTONE_CORE)
-						.define('D', LCItems.FORCE_FIELD)
+						.define('A', LCItems.BLACKSTONE_CORE.get())
+						.define('D', LCItems.FORCE_FIELD.get())
 						.save(pvd);
 			}
 

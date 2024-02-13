@@ -2,7 +2,6 @@ package dev.xkmc.l2hostility.content.item.curio.core;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import dev.xkmc.l2complements.content.item.curios.ICapItem;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;

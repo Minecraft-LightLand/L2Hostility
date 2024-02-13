@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.content.item.curio.misc;
 
-import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.compat.curios.EntitySlotAccess;
+import dev.xkmc.l2hostility.content.item.curio.core.CurioItem;
 import dev.xkmc.l2hostility.content.item.curio.core.ISimpleCapItem;
 import dev.xkmc.l2hostility.content.item.traits.SealedItem;
 import dev.xkmc.l2hostility.init.data.LangData;

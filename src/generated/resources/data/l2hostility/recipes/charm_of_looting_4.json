@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "A": {
       "item": "l2complements:blackstone_core"
@@ -9,7 +8,7 @@
       "item": "l2complements:force_field"
     },
     "I": {
-      "item": "l2hostility:miracle_powder"
+      "item": "l2hostility:miracle_ingot"
     }
   },
   "pattern": [
@@ -19,6 +18,5 @@
   ],
   "result": {
     "item": "l2hostility:charm_of_looting_4"
-  },
-  "show_notification": true
+  }
 }
