@@ -2,11 +2,12 @@
 - TODO press alt to show blacklist/whitelist
 
 2.4.17
+- Add charms for drops
 - Add config to allow player summoned entities to have levels and traits
 - Make constantly refreshing effects ambient
 - Add death tome to blacklist
 - Fix Antibuild effect icon
-- TODO charms for drops
+- Fix reflect trait tooltip
 
 2.4.16
 - Add more advancements

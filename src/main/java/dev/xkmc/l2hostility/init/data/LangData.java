@@ -68,6 +68,7 @@ public enum LangData {
 	ABRAHADABRA("item.equipment.abrahadabra", "When a mob trait tries to apply a trait effect on you, apply it to surrounding enemies that target you instead.", 0),
 	NIDHOGGUR("item.equipment.nidhoggur", "Mobs you kill will drop +%s%% loot per mob level", 1),
 	POCKET_OF_RESTORATION("item.equipment.pocket_of_restoration", "Automatically put sealed item inside, unseal it, and put it back when finished.", 0),
+	LOOTING_CHARM("item.equipment.looting", "Enables some hostility trait drops. Check JEI for detail.", 0),
 
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),

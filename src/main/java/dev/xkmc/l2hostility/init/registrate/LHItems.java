@@ -72,7 +72,7 @@ public class LHItems {
 	public static final ItemEntry<Abrahadabra> ABRAHADABRA;
 	public static final ItemEntry<GreedOfNidhoggur> NIDHOGGUR;
 	public static final ItemEntry<PocketOfRestoration> RESTORATION;
-	public static final ItemEntry<CurioItem> LOOT_1, LOOT_2, LOOT_3, LOOT_4;
+	public static final ItemEntry<LootingCharm> LOOT_1, LOOT_2, LOOT_3, LOOT_4;
 	public static final ItemEntry<TraitAdderWand> ADDER;
 	public static final ItemEntry<TargetSelectWand> TARGET;
 	public static final ItemEntry<AiConfigWand> AI;
@@ -150,10 +150,10 @@ public class LHItems {
 			TagKey<Item> pandora = ItemTags.create(new ResourceLocation("curios", "pandora_charm"));
 			TagKey<Item> curse = LHTagGen.CURSE_SLOT;
 
-			LOOT_1 = curio("charm_of_looting_1", CurioItem::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Charm of Looting Lv.1").register();
-			LOOT_2 = curio("charm_of_looting_2", CurioItem::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Charm of Looting Lv.2").register();
-			LOOT_3 = curio("charm_of_looting_3", CurioItem::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Charm of Looting Lv.3").register();
-			LOOT_4 = curio("charm_of_looting_4", CurioItem::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Charm of Looting Lv.4").register();
+			LOOT_1 = curio("charm_of_looting_1", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Unpolished Looting Charm").register();
+			LOOT_2 = curio("charm_of_looting_2", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Magical Looting Charm").register();
+			LOOT_3 = curio("charm_of_looting_3", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Chaotic Looting Charm").register();
+			LOOT_4 = curio("charm_of_looting_4", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Miraculous Looting Charm").register();
 
 			CURSE_ENVY = curio("curse_of_envy", CurseOfEnvy::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
 			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();

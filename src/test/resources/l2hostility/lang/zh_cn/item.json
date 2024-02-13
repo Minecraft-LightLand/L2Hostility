@@ -43,7 +43,11 @@
 	"book_of_reprint": "附魔影本",
 	"hostility_essence": "恶意精华",
 	"miracle_ingot": "奇迹锭",
-	"miracle_powder": "奇迹粉末"
+	"miracle_powder": "奇迹粉末",
+	"charm_of_looting_1": "粗糙抢夺宝珠",
+	"charm_of_looting_2": "魔能抢夺宝珠",
+	"charm_of_looting_3": "混沌抢夺宝珠",
+	"charm_of_looting_4": "奇迹抢夺宝珠"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"

@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -104,6 +105,9 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	@Override
 	public List<ItemStack> getCurioRequired() {
 		List<ItemStack> ans = new ArrayList<>();
+		if (LHConfig.COMMON.disableHostilityLootCurioRequirement.get()) {
+			return ans;
+		}
 		for (var c : getConditions()) {
 			if (c instanceof PlayerHasItemCondition item) {
 				ans.add(item.item.getDefaultInstance());

@@ -129,6 +129,39 @@ public class RecipeGen {
 					.define('A', LHItems.MIRACLE_POWDER.get())
 					.save(pvd);
 
+			// loot
+
+			{
+
+				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.LOOT_1.get(), 1)::unlockedBy, Items.EMERALD)
+						.pattern(" A ").pattern("DID").pattern(" A ")
+						.define('I', Items.EMERALD)
+						.define('A', Items.GOLD_INGOT)
+						.define('D', Items.COPPER_INGOT)
+						.save(pvd);
+
+				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.LOOT_2.get(), 1)::unlockedBy, Items.DIAMOND)
+						.pattern(" A ").pattern("DID").pattern(" A ")
+						.define('I', Items.DIAMOND)
+						.define('A', Items.BLAZE_POWDER)
+						.define('D', Items.DRAGON_BREATH)
+						.save(pvd);
+
+				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.LOOT_3.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+						.pattern(" A ").pattern("DID").pattern(" A ")
+						.define('I', LHItems.CHAOS_INGOT.get())
+						.define('A', LCItems.LIFE_ESSENCE)
+						.define('D', LHItems.WITCH_DROPLET)
+						.save(pvd);
+
+				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.LOOT_4.get(), 1)::unlockedBy, LHItems.MIRACLE_INGOT.get())
+						.pattern(" A ").pattern("DID").pattern(" A ")
+						.define('I', LHItems.MIRACLE_INGOT.get())
+						.define('A', LCItems.BLACKSTONE_CORE)
+						.define('D', LCItems.FORCE_FIELD)
+						.save(pvd);
+			}
+
 			// curse
 			{
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.CURSE_SLOTH.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())

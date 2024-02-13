@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.init.loot;
 
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -31,6 +32,9 @@ public class PlayerHasItemCondition implements LootItemCondition {
 
 	@Override
 	public boolean test(LootContext lootContext) {
+		if (LHConfig.COMMON.disableHostilityLootCurioRequirement.get()) {
+			return true;
+		}
 		if (!lootContext.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) return false;
 		Player player = lootContext.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
 		return CurioCompat.hasItem(player, item);

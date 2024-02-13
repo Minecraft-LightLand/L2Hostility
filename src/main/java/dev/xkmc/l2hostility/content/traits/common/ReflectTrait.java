@@ -31,7 +31,7 @@ public class ReflectTrait extends MobTrait {
 	@Override
 	public void addDetail(List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-						mapLevel(i -> Component.literal((int) Math.round(100 * (1 + i * LHConfig.COMMON.reflectFactor.get())) + "")
+						mapLevel(i -> Component.literal((int) Math.round(100 * (i * LHConfig.COMMON.reflectFactor.get())) + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}
