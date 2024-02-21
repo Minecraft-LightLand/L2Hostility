@@ -37,7 +37,8 @@ public class KillerAuraTrait extends LegendaryTrait {
 			AABB box = mob.getBoundingBox().inflate(range);
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
 				if (e instanceof Player pl && !pl.getAbilities().instabuild ||
-						e instanceof Mob target && target.getTarget() == mob) {
+						e instanceof Mob target && target.getTarget() == mob ||
+						mob instanceof Mob mobmob && mobmob.getTarget() == e) {
 					if (e.distanceTo(mob) > range) continue;
 					if (CurioCompat.hasItem(e, LHItems.ABRAHADABRA.get())) continue;
 					TraitEffectCache cache = new TraitEffectCache(e);

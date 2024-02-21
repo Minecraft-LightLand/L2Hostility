@@ -85,13 +85,13 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.INVISIBLE.get(), loot1, new ItemStack(Items.PHANTOM_MEMBRANE, 4), 1, 0.25, 0);
 		add(LHTraits.FIERY.get(), loot1, new ItemStack(Items.BLAZE_ROD, 8), 1, 0.25, 0);
 		add(LHTraits.REGEN.get(), loot1, new ItemStack(Items.GHAST_TEAR, 4), 1, 0, 0.1);
-		add(LHTraits.REGEN.get(), loot2, new ItemStack(LCMats.TOTEMIC_GOLD.getNugget(), 4), 3, 0, 0.1);
-		add(LHTraits.REGEN.get(), loot2, new ItemStack(LCItems.LIFE_ESSENCE.get(), 1), 5, 0.2, 0);
+		add(LHTraits.REGEN.get(), loot3, new ItemStack(LCMats.TOTEMIC_GOLD.getNugget(), 4), 3, 0, 0.1);
+		add(LHTraits.REGEN.get(), loot2, new ItemStack(LCItems.LIFE_ESSENCE.get(), 1), 3, -0.2, 0.08);
 		add(LHTraits.ADAPTIVE.get(), loot2, new ItemStack(LCItems.CURSED_DROPLET.get(), 1), 1, 0, 0.1);
 		add(LHTraits.REFLECT.get(), loot2, new ItemStack(LCItems.EXPLOSION_SHARD.get(), 1), 1, 0, 0.1);
 		add(LHTraits.DEMENTOR.get(), loot4, new ItemStack(LCItems.SUN_MEMBRANE.get(), 1), 1, 0.2, 0.1);
 		add(LHTraits.DISPELL.get(), loot4, new ItemStack(LCItems.RESONANT_FEATHER.get(), 1), 1, 0.2, 0.1);
-		add(LHTraits.UNDYING.get(), loot2, new ItemStack(Items.TOTEM_OF_UNDYING, 1), 1, 1, 0);
+		add(LHTraits.UNDYING.get(), loot1, new ItemStack(Items.TOTEM_OF_UNDYING, 1), 1, 1, 0);
 		add(LHTraits.UNDYING.get(), loot2, new ItemStack(LCItems.LIFE_ESSENCE.get(), 1), 1, 0.5, 0);
 		add(LHTraits.ENDER.get(), loot4, new ItemStack(LCItems.VOID_EYE.get(), 1), 1, 0.2, 0.1);
 		add(LHTraits.REPELLING.get(), loot3, new ItemStack(LCItems.FORCE_FIELD.get(), 1), 1, 0.2, 0.1);
@@ -115,9 +115,9 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.SHULKER.get(), loot2, new ItemStack(LCItems.CAPTURED_BULLET, 1), 1, 0, 0.2);
 		add(LHTraits.GRENADE.get(), loot3, new ItemStack(LCItems.STORM_CORE, 1), 3, 0, 0.1);
 		add(LHTraits.GRENADE.get(), loot1, new ItemStack(Items.GUNPOWDER, 4), 1, 0, 0.1);
-		add(LHTraits.GRENADE.get(), loot2, new ItemStack(Items.CREEPER_HEAD, 1), 5, 0.25, 0);
+		add(LHTraits.GRENADE.get(), loot1, new ItemStack(Items.CREEPER_HEAD, 1), 5, 0.25, 0);
 		add(LHTraits.DRAIN.get(), loot2, new ItemStack(LHItems.WITCH_DROPLET, 1), 1, 0, 0.1);
-		add(LHTraits.GROWTH.get(), loot2, new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 1), 1, 0, 0.02);
+		add(LHTraits.GROWTH.get(), loot1, new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 1), 1, 0, 0.02);
 		add(LHTraits.SPLIT.get(), loot2, new ItemStack(LCItems.GUARDIAN_EYE, 1), 1, 0, 0.05);
 		add(LHTraits.GRAVITY.get(), loot1, new ItemStack(Items.DRAGON_BREATH, 4), 1, 0, 0.1);
 		add(LHTraits.MOONWALK.get(), loot1, new ItemStack(Items.DRAGON_BREATH, 4), 1, 0, 0.1);

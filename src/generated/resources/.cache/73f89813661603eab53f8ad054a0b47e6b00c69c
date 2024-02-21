@@ -1,4 +1,4 @@
-// 1.20.1	2024-02-12T00:30:22.69391	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2024-02-20T16:44:34.663679	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 ce63b5d09c39daa2e1856f713722ec4a1098bbbb assets/l2hostility/lang/en_ud.json
 8e19e6c8f0f9969ceebb9eb4a3ff9383899bbb3f assets/l2hostility/lang/en_us.json
@@ -100,7 +100,6 @@ e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.j
 6b3db265ef90a4cf6af5cc3775209c4a04a67c42 data/curios/tags/items/hands.json
 63302afd6032fba91cf0e46be0c7c05285866cb9 data/curios/tags/items/head.json
 d144a143248b44b7b90f8475fad2c62855f5ddea data/curios/tags/items/hostility_curse.json
-2ba04a63b5c2b3a5a5de47acccf2268a35a0267f data/curios/tags/items/pandora_charm.json
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/items/ring.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/curseofpandora/tags/entity_types/reality_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/curseofpandora/tags/entity_types/reality_whitelist.json
@@ -206,7 +205,7 @@ aee9f7b2d428709b097b8936ff2c29573d3e79d2 data/l2hostility/recipes/chaos_ingot.js
 10727f443633ae59ecda9c05aa10e1c1cad75c99 data/l2hostility/recipes/charm_of_looting_1.json
 8369d0139cb601c4a7861fb3106bfe8691229a78 data/l2hostility/recipes/charm_of_looting_2.json
 fa0c8dd65513af4e909d2de7e37c0ea98156473e data/l2hostility/recipes/charm_of_looting_3.json
-5181c4922b4b343aee1c2335744bd139b8abbfca data/l2hostility/recipes/charm_of_looting_4.json
+f0eae760040856ffcc03dd53f3a1cfbb5676abf2 data/l2hostility/recipes/charm_of_looting_4.json
 869f014fe44abfc4dd718b14827047ee5c4d60d9 data/l2hostility/recipes/curse_of_envy.json
 9a2b77592e8b6c101a999d33251671a2cce25102 data/l2hostility/recipes/curse_of_gluttony.json
 2346ff0bc922b6cffb51930aad5ba429ce099d6c data/l2hostility/recipes/curse_of_greed.json

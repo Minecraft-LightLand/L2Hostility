@@ -13,7 +13,7 @@
     },
     {
       "condition": "l2hostility:player_has_item",
-      "item": "l2hostility:charm_of_looting_2"
+      "item": "l2hostility:charm_of_looting_1"
     }
   ],
   "rankBonus": 0.0,

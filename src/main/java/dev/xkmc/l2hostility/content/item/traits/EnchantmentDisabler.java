@@ -52,7 +52,7 @@ public class EnchantmentDisabler {
 
 	public static void tickStack(Level level, Entity user, ItemStack stack) {
 		if (level.isClientSide()) return;
-		if (user instanceof Player player && !player.getAbilities().instabuild &&
+		if (user instanceof Player player && !player.getAbilities().instabuild && stack.isEnchanted() &&
 				stack.getEnchantmentLevel(LHEnchantments.VANISH.get()) > 0) {
 			stack.setCount(0);
 			return;

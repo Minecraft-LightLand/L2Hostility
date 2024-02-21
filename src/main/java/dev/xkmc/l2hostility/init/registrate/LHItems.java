@@ -147,13 +147,12 @@ public class LHItems {
 			MIRACLE_INGOT = L2Hostility.REGISTRATE.item("miracle_ingot", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
 
 			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
-			TagKey<Item> pandora = ItemTags.create(new ResourceLocation("curios", "pandora_charm"));
 			TagKey<Item> curse = LHTagGen.CURSE_SLOT;
 
-			LOOT_1 = curio("charm_of_looting_1", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Unpolished Looting Charm").register();
-			LOOT_2 = curio("charm_of_looting_2", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Magical Looting Charm").register();
-			LOOT_3 = curio("charm_of_looting_3", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Chaotic Looting Charm").register();
-			LOOT_4 = curio("charm_of_looting_4", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL, pandora).lang("Miraculous Looting Charm").register();
+			LOOT_1 = curio("charm_of_looting_1", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL).lang("Unpolished Looting Charm").register();
+			LOOT_2 = curio("charm_of_looting_2", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL).lang("Magical Looting Charm").register();
+			LOOT_3 = curio("charm_of_looting_3", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL).lang("Chaotic Looting Charm").register();
+			LOOT_4 = curio("charm_of_looting_4", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL).lang("Miraculous Looting Charm").register();
 
 			CURSE_ENVY = curio("curse_of_envy", CurseOfEnvy::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
 			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
