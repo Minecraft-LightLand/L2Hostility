@@ -111,6 +111,9 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {
 	}
 
+	public void onDamaged(int level, LivingEntity mob, AttackCache cache) {
+	}
+
 	public void onDeath(int level, LivingEntity entity, LivingDeathEvent event) {
 	}
 

@@ -38,7 +38,7 @@ public class ReprintTrait extends MobTrait {
 				if (lv >= 30) {
 					total = -1;
 				} else if (total >= 0) {
-					total += 1L << lv;
+					total += 1L << (lv - 1);
 				}
 			}
 
@@ -57,7 +57,7 @@ public class ReprintTrait extends MobTrait {
 				}
 			}
 		}
-		float factor = total >= 0 ? total : (float) Math.pow(2, maxLv);
+		float factor = total >= 0 ? total : (float) Math.pow(2, maxLv - 1);
 		cache.addHurtModifier(DamageModifier.multTotal(1 + (float) (LHConfig.COMMON.reprintDamage.get() * factor)));
 	}
 

@@ -1,6 +1,13 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+2.4.18
+- Reduce reprint scaling by half
+- Tweak drop recipes
+- Killer arua mobs can now hurt non-player target
+- Fix pandora tooltip
+- Arena - Void Touch priority fix
+
 2.4.17
 - Add charms for drops
 - Add config to allow player summoned entities to have levels and traits
