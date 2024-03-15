@@ -198,7 +198,7 @@ dependencies {
         jarJar.ranged(it, "[1.1.0,)")
     }
 
-    implementation fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.2.8")
+    implementation fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.3.0")
     implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.3.1")
     implementation fg.deobf("dev.xkmc.l2weaponry:l2weaponry:2.4.22")
     implementation fg.deobf("dev.xkmc.l2archery:l2archery:2.4.13")
@@ -215,7 +215,7 @@ dependencies {
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     implementation fg.deobf("curse.maven:the-twilight-forest-227639:4635921")
     implementation fg.deobf("curse.maven:jade-324717:4654448")
-    implementation fg.deobf("curse.maven:l_ender-s-cataclysm-551586:4967633")
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:5058433")
     implementation fg.deobf("curse.maven:citadel-331936:4848887")
     implementation fg.deobf("curse.maven:cloth-config-348521:4633444")
     implementation fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")

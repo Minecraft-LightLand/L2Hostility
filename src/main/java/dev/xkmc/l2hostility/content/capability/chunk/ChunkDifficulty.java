@@ -17,6 +17,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @SerialClass
 public class ChunkDifficulty implements RegionalDifficultyModifier {
@@ -76,7 +77,7 @@ public class ChunkDifficulty implements RegionalDifficultyModifier {
 		BlockPos pos = mob.blockPosition();
 		int index = -chunk.getMinSection() + (pos.getY() >> 4);
 		if (index >= 0 && index < sections.length) {
-			sections[index].addKillHistory(player, mob, cap);
+			sections[index].addKillHistory(this, player, mob, cap);
 		}
 	}
 

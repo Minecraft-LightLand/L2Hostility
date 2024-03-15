@@ -3,10 +3,9 @@ package dev.xkmc.l2hostility.init;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.xkmc.l2complements.init.data.TagGen;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
-import dev.xkmc.l2hostility.content.capability.chunk.CapSyncToClient;
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
-import dev.xkmc.l2hostility.content.capability.chunk.InfoRequestToServer;
-import dev.xkmc.l2hostility.content.capability.mob.CapSyncPacket;
+import dev.xkmc.l2hostility.content.capability.mob.MobCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
@@ -46,11 +45,10 @@ public class L2Hostility {
 	public static final String MODID = "l2hostility";
 	public static final PacketHandlerWithConfig HANDLER = new PacketHandlerWithConfig(
 			new ResourceLocation(MODID, "main"), 1,
-			e -> e.create(CapSyncPacket.class, NetworkDirection.PLAY_TO_CLIENT),
+			e -> e.create(MobCapSyncToClient.class, NetworkDirection.PLAY_TO_CLIENT),
 			e -> e.create(TraitEffectToClient.class, NetworkDirection.PLAY_TO_CLIENT),
 			e -> e.create(LootDataToClient.class, NetworkDirection.PLAY_TO_CLIENT),
-			e -> e.create(InfoRequestToServer.class, NetworkDirection.PLAY_TO_SERVER),
-			e -> e.create(CapSyncToClient.class, NetworkDirection.PLAY_TO_CLIENT)
+			e -> e.create(ChunkCapSyncToClient.class, NetworkDirection.PLAY_TO_CLIENT)
 	);
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final LHRegistrate REGISTRATE = new LHRegistrate(MODID);

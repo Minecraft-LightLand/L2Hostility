@@ -95,11 +95,11 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void syncToClient(LivingEntity entity) {
-		L2Hostility.HANDLER.toTrackingPlayers(new CapSyncPacket(entity, this), entity);
+		L2Hostility.HANDLER.toTrackingPlayers(new MobCapSyncToClient(entity, this), entity);
 	}
 
 	public void syncToPlayer(LivingEntity entity, ServerPlayer player) {
-		L2Hostility.HANDLER.toClientPlayer(new CapSyncPacket(entity, this), player);
+		L2Hostility.HANDLER.toClientPlayer(new MobCapSyncToClient(entity, this), player);
 	}
 
 	public static void register() {

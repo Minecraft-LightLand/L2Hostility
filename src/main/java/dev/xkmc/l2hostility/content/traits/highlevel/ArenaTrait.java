@@ -15,6 +15,11 @@ public class ArenaTrait extends AuraEffectTrait {
 	}
 
 	@Override
+	protected boolean canApply(LivingEntity e) {
+		return true;
+	}
+
+	@Override
 	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
 		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
 			return;

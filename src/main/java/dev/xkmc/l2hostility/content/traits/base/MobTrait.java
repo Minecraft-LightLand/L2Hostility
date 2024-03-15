@@ -150,6 +150,18 @@ public class MobTrait extends NamedEntry<MobTrait> {
 	}
 
 	public boolean isBanned() {
+		if (LHTraits.TRAITS.get().getKey(this) == null) {
+			L2Hostility.LOGGER.error("------------");
+			L2Hostility.LOGGER.error("Trait " + getClass().getSimpleName() + " is not registered. Why?");
+			var set = LHTraits.TRAITS.get().getKeys();
+			L2Hostility.LOGGER.error("List of all ids registered: ");
+			for (var e : set) {
+				L2Hostility.LOGGER.error(e.toString());
+			}
+
+			L2Hostility.LOGGER.error("------------");
+			//return true; //TODO uncomment to prevent crash
+		}
 		if (LHConfig.COMMON.map.containsKey(getRegistryName().getPath())) {
 			return !LHConfig.COMMON.map.get(getRegistryName().getPath()).get();
 		}

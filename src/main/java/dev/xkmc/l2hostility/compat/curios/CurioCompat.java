@@ -1,6 +1,8 @@
 package dev.xkmc.l2hostility.compat.curios;
 
 import com.google.common.collect.Multimap;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -21,12 +23,16 @@ import java.util.function.Predicate;
 
 public class CurioCompat {
 
-	public static boolean hasItem(LivingEntity player, Item item) {
+	public static boolean hasItemInCurioOrSlot(LivingEntity player, Item item) {
 		for (EquipmentSlot e : EquipmentSlot.values()) {
 			if (player.getItemBySlot(e).is(item)) {
 				return true;
 			}
 		}
+		return hasItemInCurio(player, item);
+	}
+
+	public static boolean hasItemInCurio(LivingEntity player, Item item) {
 		if (ModList.get().isLoaded(CuriosApi.MODID)) {
 			return hasItemImpl(player, item);
 		}
@@ -83,7 +89,11 @@ public class CurioCompat {
 		if (opt.resolve().isEmpty()) {
 			return false;
 		}
+		ItemStack stack = new ItemStack(item);
 		for (var e : opt.resolve().get().getCurios().values()) {
+			if (e.getStacks().getSlots() == 0) continue;
+			if (!e.getIdentifier().equals("curio") &&
+					!stack.is(ItemTags.create(new ResourceLocation("curios", e.getIdentifier())))) continue;
 			for (int i = 0; i < e.getStacks().getSlots(); i++) {
 				if (e.getStacks().getStackInSlot(i).is(item)) {
 					return true;

@@ -1,5 +1,7 @@
 package dev.xkmc.l2hostility.content.logic;
 
+import dev.xkmc.l2hostility.init.data.LHConfig;
+
 public record LevelEditor(DifficultyLevel difficulty, int extra) {
 
 	public boolean setBase(int level) {
@@ -11,7 +13,7 @@ public record LevelEditor(DifficultyLevel difficulty, int extra) {
 
 	public boolean addBase(int level) {
 		int old = difficulty().level;
-		difficulty().level = Math.max(0, difficulty().level + level);
+		difficulty().level = Math.min(LHConfig.COMMON.maxPlayerLevel.get(), Math.max(0, difficulty().level + level));
 		if (level < 0) {
 			difficulty().experience = 0;
 		}

@@ -63,7 +63,6 @@ public class DifficultyScreen extends BaseTextScreen {
 		Player player = Minecraft.getInstance().player;
 		assert player != null;
 		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
-		cap.updateChunkFlag = true;
 		list.add(Pair.of(LangData.INFO_PLAYER_LEVEL.get(cap.getLevel().getStr()),
 				cap::getPlayerDifficultyDetail));
 		int perc = Math.round(100f * cap.getLevel().getExp() / cap.getLevel().getMaxExp());

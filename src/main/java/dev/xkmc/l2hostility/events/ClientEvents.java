@@ -2,10 +2,14 @@ package dev.xkmc.l2hostility.events;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkClearRenderer;
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
 import net.minecraft.client.Minecraft;
@@ -14,7 +18,9 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.client.event.RenderNameTagEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -78,6 +84,20 @@ public class ClientEvents {
 					event.getMultiBufferSource(), mode, j, light);
 			pose.popPose();
 		}
+	}
+
+	@SubscribeEvent
+	public static void onLevelRenderLast(RenderLevelStageEvent event) {
+		if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS) {
+			return;
+		}
+		Player player = Minecraft.getInstance().player;
+		if (player == null) return;
+		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
+		if (opt.isEmpty()) return;
+		if (! CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR_GLASSES.get())) return;
+		if (! CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR.get())) return;
+		ChunkClearRenderer.render(event.getPoseStack(), player, opt.get());
 	}
 
 }

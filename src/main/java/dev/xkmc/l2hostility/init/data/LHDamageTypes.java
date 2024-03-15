@@ -43,8 +43,6 @@ public class LHDamageTypes extends DamageTypeAndTagsGen {
 
 	public static final ResourceKey<DamageType> KILLER_AURA = create("killer_aura");
 
-	public static final TagKey<DamageType> IGNORE_SCALING = TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(L2Hostility.MODID, "ignore_scaling"));
-
 	public LHDamageTypes(PackOutput output,
 						 CompletableFuture<HolderLookup.Provider> pvd,
 						 ExistingFileHelper files) {
@@ -69,7 +67,6 @@ public class LHDamageTypes extends DamageTypeAndTagsGen {
 		for (DamageTypeWrapper wrapper : LIST) {
 			wrapper.gen(pvd, lookup);
 		}
-		pvd.tag(IGNORE_SCALING).add(DamageTypes.THORNS).addOptional(DamageTypeGen.SOUL_FLAME.location());
 	}
 
 	public static Holder<DamageType> forKey(Level level, ResourceKey<DamageType> key) {

@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.events;
 
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficultyCap;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
@@ -12,12 +13,17 @@ import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.level.ChunkWatchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CapabilityEvents {
@@ -59,7 +65,7 @@ public class CapabilityEvents {
 		if (Float.isNaN(event.getEntity().getHealth())) {
 			event.getEntity().setHealth(0);
 		}
-		if (Float.isNaN(event.getEntity().getAbsorptionAmount())) {
+		if (event.getEntity().tickCount % 10 == 0 && Float.isNaN(event.getEntity().getAbsorptionAmount())) {
 			event.getEntity().setAbsorptionAmount(0);
 		}
 		LivingEntity mob = event.getEntity();
@@ -95,6 +101,28 @@ public class CapabilityEvents {
 				}
 			}
 		}
+	}
+
+	private static final Set<ChunkDifficulty> PENDING = new LinkedHashSet<>();
+
+	@SubscribeEvent
+	public static void onServerTick(TickEvent.ServerTickEvent event) {
+		if (event.phase != TickEvent.Phase.END) return;
+		for (var e : PENDING) {
+			L2Hostility.toTrackingChunk(e.chunk, new ChunkCapSyncToClient(e));
+		}
+		PENDING.clear();
+	}
+
+	@SubscribeEvent
+	public static void onStartTrackingChunk(ChunkWatchEvent.Watch event) {
+		var opt = event.getChunk().getCapability(ChunkDifficulty.CAPABILITY).resolve();
+		if (opt.isEmpty()) return;
+		L2Hostility.HANDLER.toClientPlayer(new ChunkCapSyncToClient(opt.get()), event.getPlayer());
+	}
+
+	public static void markDirty(ChunkDifficulty chunk) {
+		PENDING.add(chunk);
 	}
 
 }

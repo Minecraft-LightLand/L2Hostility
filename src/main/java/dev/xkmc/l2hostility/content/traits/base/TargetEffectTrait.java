@@ -27,7 +27,7 @@ public class TargetEffectTrait extends MobTrait {
 
 	@Override
 	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
-		if (CurioCompat.hasItem(target, LHItems.RING_REFLECTION.get())) {
+		if (CurioCompat.hasItemInCurio(target, LHItems.RING_REFLECTION.get())) {
 			int radius = LHConfig.COMMON.ringOfReflectionRadius.get();
 			for (var e : target.level().getEntities(target, target.getBoundingBox().inflate(radius))) {
 				if (!(e instanceof Mob mob)) continue;

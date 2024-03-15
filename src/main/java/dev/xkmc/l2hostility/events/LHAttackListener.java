@@ -13,7 +13,6 @@ import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.data.HostilityDamageState;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.LHDamageTypes;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +24,7 @@ public class LHAttackListener implements AttackListener {
 	public void onHurt(AttackCache cache, ItemStack weapon) {
 		var event = cache.getLivingHurtEvent();
 		assert event != null;
-		if (event.getSource().is(LHDamageTypes.IGNORE_SCALING))
+		if (event.getSource().is(L2DamageTypes.NO_SCALE))
 			return;
 		LivingEntity mob = cache.getAttacker();
 		var target = cache.getAttackTarget();
@@ -80,10 +79,10 @@ public class LHAttackListener implements AttackListener {
 		if (type == null) return;
 		var root = type.toRoot();
 		if (root == L2DamageTypes.MOB_ATTACK || root == L2DamageTypes.PLAYER_ATTACK) {
-			if (CurioCompat.hasItem(mob, LHItems.IMAGINE_BREAKER.get())) {
+			if (CurioCompat.hasItemInCurioOrSlot(mob, LHItems.IMAGINE_BREAKER.get())) {
 				event.enable(DefaultDamageState.BYPASS_MAGIC);
 			}
-			if (CurioCompat.hasItem(mob, LHItems.PLATINUM_STAR.get())) {
+			if (CurioCompat.hasItemInCurio(mob, LHItems.PLATINUM_STAR.get())) {
 				event.enable(HostilityDamageState.BYPASS_COOLDOWN);
 			}
 		}

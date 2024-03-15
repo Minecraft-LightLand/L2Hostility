@@ -1,9 +1,0 @@
-{
-  "values": [
-    "minecraft:thorns",
-    {
-      "id": "l2complements:soul_flame",
-      "required": false
-    }
-  ]
-}

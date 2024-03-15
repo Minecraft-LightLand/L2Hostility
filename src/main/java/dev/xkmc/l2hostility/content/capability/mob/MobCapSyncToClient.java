@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.network.NetworkEvent;
 
 @SerialClass
-public class CapSyncPacket extends SerialPacketBase {
+public class MobCapSyncToClient extends SerialPacketBase {
 
 	@SerialClass.SerialField
 	public CompoundTag tag;
@@ -16,10 +16,10 @@ public class CapSyncPacket extends SerialPacketBase {
 	public int id;
 
 	@Deprecated
-	public CapSyncPacket() {
+	public MobCapSyncToClient() {
 	}
 
-	public CapSyncPacket(LivingEntity entity, MobTraitCap cap) {
+	public MobCapSyncToClient(LivingEntity entity, MobTraitCap cap) {
 		id = entity.getId();
 		tag = TagCodec.toTag(new CompoundTag(), MobTraitCap.class, cap, SerialClass.SerialField::toClient);
 	}

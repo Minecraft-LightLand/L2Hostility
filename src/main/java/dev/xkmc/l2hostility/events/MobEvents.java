@@ -36,7 +36,7 @@ public class MobEvents {
 		boolean bypassMagic = event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS);
 		boolean magic = event.getSource().is(L2DamageTypes.MAGIC);
 		if (magic && !bypassInvul && !bypassMagic) {
-			if (CurioCompat.hasItem(event.getEntity(), LHItems.RING_DIVINITY.get())) {
+			if (CurioCompat.hasItemInCurio(event.getEntity(), LHItems.RING_DIVINITY.get())) {
 				event.setCanceled(true);
 				return;
 			}
@@ -53,7 +53,7 @@ public class MobEvents {
 		} else if (event.getEntity() instanceof Player player &&
 				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
 				!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-				CurioCompat.hasItem(player, LHItems.CURSE_PRIDE.get())) {
+				CurioCompat.hasItemInCurio(player, LHItems.CURSE_PRIDE.get())) {
 			int level = PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
 			double rate = LHConfig.COMMON.prideHealthBonus.get();
 			double factor = 1 + rate * level;
@@ -74,7 +74,7 @@ public class MobEvents {
 	public static void onMobDeath(LivingDeathEvent event) {
 		if (event.getEntity() instanceof Mob mob) {
 			var credit = mob.getKillCredit();
-			if (credit != null && CurioCompat.hasItem(credit, LHItems.CURSE_LUST.get())) {
+			if (credit != null && CurioCompat.hasItemInCurio(credit, LHItems.CURSE_LUST.get())) {
 				for (var e : EquipmentSlot.values())
 					mob.setDropChance(e, 1);
 			}
@@ -93,7 +93,7 @@ public class MobEvents {
 				return;
 			}
 			LivingEntity killer = event.getEntity().getKillCredit();
-			if (killer != null && CurioCompat.hasItem(killer, LHItems.NIDHOGGUR.get())) {
+			if (killer != null && CurioCompat.hasItemInCurio(killer, LHItems.NIDHOGGUR.get())) {
 				double val = LHConfig.COMMON.nidhoggurDropFactor.get() * cap.getLevel();
 				int count = (int) val;
 				if (event.getEntity().getRandom().nextDouble() < val - count) count++;
@@ -123,7 +123,7 @@ public class MobEvents {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onPotionTest(MobEffectEvent.Applicable event) {
 		LivingEntity entity = event.getEntity();
-		if (CurioCompat.hasItem(entity, LHItems.CURSE_WRATH.get())) {
+		if (CurioCompat.hasItemInCurio(entity, LHItems.CURSE_WRATH.get())) {
 			var config = ArmorEffectConfig.get().getImmunity(LHItems.CURSE_WRATH.getId().toString());
 			if (config.contains(event.getEffectInstance().getEffect())) {
 				event.setResult(Event.Result.DENY);

@@ -24,6 +24,12 @@ public class AuraEffectTrait extends MobTrait {
 		this.eff = eff;
 	}
 
+	protected boolean canApply(LivingEntity e) {
+		if (CurioCompat.hasItemInCurio(e, LHItems.RING_REFLECTION.get())) return false;
+		if (CurioCompat.hasItemInCurio(e, LHItems.ABRAHADABRA.get())) return false;
+		return true;
+	}
+
 	@Override
 	public void tick(LivingEntity mob, int level) {
 		int range = LHConfig.COMMON.range.get(getRegistryName().getPath()).get();
@@ -32,8 +38,7 @@ public class AuraEffectTrait extends MobTrait {
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
 				if (!(e instanceof Player pl) || !pl.getAbilities().instabuild) {
 					if (e.distanceTo(mob) > range) continue;
-					if (CurioCompat.hasItem(e, LHItems.RING_REFLECTION.get())) continue;
-					if (CurioCompat.hasItem(e, LHItems.ABRAHADABRA.get())) continue;
+					if (!canApply(e)) continue;
 					EffectUtil.refreshEffect(e, new MobEffectInstance(eff.get(), 40, level - 1,
 									true, true),
 							EffectUtil.AddReason.FORCE, mob);

@@ -5,11 +5,10 @@ import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.content.logic.LevelEditor;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
+import dev.xkmc.l2hostility.events.CapabilityEvents;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
-import dev.xkmc.l2hostility.init.network.TraitEffects;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -98,7 +97,7 @@ public class SectionDifficulty {
 	public boolean setClear(ChunkDifficulty chunk, BlockPos pos) {
 		if (stage == SectionStage.CLEARED) return false;
 		stage = SectionStage.CLEARED;
-		L2Hostility.toTrackingChunk(chunk.chunk, new TraitEffectToClient(pos, TraitEffects.CLEAR));
+		CapabilityEvents.markDirty(chunk);
 		chunk.chunk.setUnsaved(true);
 		return true;
 	}
@@ -106,13 +105,15 @@ public class SectionDifficulty {
 	public boolean setUnclear(ChunkDifficulty chunk, BlockPos pos) {
 		if (stage == SectionStage.INIT) return false;
 		stage = SectionStage.INIT;
-		L2Hostility.toTrackingChunk(chunk.chunk, new TraitEffectToClient(pos, TraitEffects.CLEAR));
+		CapabilityEvents.markDirty(chunk);
 		chunk.chunk.setUnsaved(true);
 		return true;
 	}
 
-	public void addKillHistory(Player player, LivingEntity mob, MobTraitCap cap) {
+	public void addKillHistory(ChunkDifficulty chunk, Player player, LivingEntity mob, MobTraitCap cap) {
 		difficulty.grow(1, cap);
+		CapabilityEvents.markDirty(chunk);
+		chunk.chunk.setUnsaved(true);
 	}
 
 	public LevelEditor getLevelEditor(Level level, BlockPos pos) {

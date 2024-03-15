@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 
 public class ClientCapHandler {
 
-	public static void handle(CapSyncPacket packet) {
+	public static void handle(MobCapSyncToClient packet) {
 		Level level = Minecraft.getInstance().level;
 		if (level == null) return;
 		Entity entity = level.getEntity(packet.id);

@@ -1,6 +1,10 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+2.4.19
+- Make Reflect reflect only forge:direct damage
+- Make Arena not blocked by reflection ring and abrahadabra
+
 2.4.18
 - Reduce reprint scaling by half
 - Tweak drop recipes

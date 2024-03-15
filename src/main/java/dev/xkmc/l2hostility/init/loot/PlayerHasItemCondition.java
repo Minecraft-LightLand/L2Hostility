@@ -37,7 +37,7 @@ public class PlayerHasItemCondition implements LootItemCondition {
 		}
 		if (!lootContext.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) return false;
 		Player player = lootContext.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
-		return CurioCompat.hasItem(player, item);
+		return CurioCompat.hasItemInCurio(player, item);
 	}
 
 }

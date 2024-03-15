@@ -36,7 +36,7 @@ public class ClientGlowingHandler {
 	@OnlyIn(Dist.CLIENT)
 	private static boolean isGlowingImpl(LivingEntity entity) {
 		LocalPlayer player = Proxy.getClientPlayer();
-		if (player != null && CurioCompat.hasItem(player, LHItems.DETECTOR_GLASSES.get())) {
+		if (player != null && CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR_GLASSES.get())) {
 			boolean glow = entity.isInvisible() || entity.isInvisibleTo(player);
 			glow |= player.hasEffect(MobEffects.BLINDNESS);
 			glow |= player.hasEffect(MobEffects.DARKNESS);

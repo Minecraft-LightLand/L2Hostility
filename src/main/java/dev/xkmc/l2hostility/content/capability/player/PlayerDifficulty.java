@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.content.capability.player;
 
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
-import dev.xkmc.l2hostility.content.capability.chunk.InfoRequestToServer;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
@@ -26,6 +26,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.List;
@@ -50,9 +51,8 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	@SerialClass.SerialField
 	public final TreeSet<ResourceLocation> dimensions = new TreeSet<>();
 
-	public boolean updateChunkFlag = false, pendingFlag = false;
-
-	private int updateCooldown = 0, pendingTimeout = 0;
+	@Nullable
+	public ChunkDifficulty prevChunk;
 
 	public PlayerDifficulty() {
 	}
@@ -74,31 +74,16 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public void tick() {
-		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
-		if (player.level().isClientSide()) {
-			if (updateChunkFlag) {
-				if (pendingFlag) {
-					if (pendingTimeout > 0) {
-						pendingTimeout--;
-					} else {
-						pendingFlag = false;
-					}
-				}
-				if (!pendingFlag) {
-					if (updateCooldown > 0) {
-						updateCooldown--;
-					} else {
-						pendingFlag = true;
-						updateChunkFlag = false;
-						updateCooldown = 10;
-						pendingTimeout = 100;
-						opt.ifPresent(chunkDifficulty -> L2Hostility.HANDLER.toServer(new InfoRequestToServer(chunkDifficulty.chunk)));
-					}
-				}
-			}
+		if (!(player instanceof ServerPlayer sp)) {
 			return;
 		}
+		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 		if (opt.isPresent()) {
+			var currentChunk = opt.get();
+			if (prevChunk != currentChunk) {
+				L2Hostility.HANDLER.toClientPlayer(new ChunkCapSyncToClient(currentChunk), sp);
+				prevChunk = currentChunk;
+			}
 			var sec = opt.get().getSection(player.blockPosition().getY());
 			if (sec.activePos != null) {
 				if (player.level().isLoaded(sec.activePos)) {
@@ -120,7 +105,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	public void apply(MobDifficultyCollector instance) {
 		instance.acceptBonus(getLevel());
 		instance.setTraitCap(getRankCap());
-		if (CurioCompat.hasItem(player, LHItems.CURSE_PRIDE.get())) {
+		if (CurioCompat.hasItemInCurio(player, LHItems.CURSE_PRIDE.get())) {
 			instance.traitCostFactor(LHConfig.COMMON.prideTraitFactor.get());
 			instance.setFullChance();
 		}

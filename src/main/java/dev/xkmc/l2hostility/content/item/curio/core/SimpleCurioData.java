@@ -24,7 +24,7 @@ public record SimpleCurioData(ISimpleCapItem item, ItemStack stack) implements I
 
 	@Override
 	public boolean canEquip(SlotContext slotContext) {
-		return !CurioCompat.hasItem(slotContext.entity(), stack.getItem());
+		return !CurioCompat.hasItemInCurio(slotContext.entity(), stack.getItem());
 	}
 
 	@Override
