@@ -5,10 +5,7 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
-import dev.xkmc.l2hostility.content.logic.InheritContext;
-import dev.xkmc.l2hostility.content.logic.ItemPopulator;
-import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
-import dev.xkmc.l2hostility.content.logic.TraitManager;
+import dev.xkmc.l2hostility.content.logic.*;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
@@ -73,7 +70,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
 	@SerialClass.SerialField(toClient = true)
-	public boolean summoned = false, noDrop = false;
+	public boolean summoned = false, noDrop = false, fullDrop = false;
 
 	@SerialClass.SerialField
 	public double dropRate = 1;
@@ -128,7 +125,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			instance.acceptConfig(diff.difficulty());
 		}
 		difficulty.modifyInstance(le.blockPosition(), instance);
-		Player player = level.getNearestPlayer(le, 128);
+		Player player = PlayerFinder.getNearestPlayer(level, le);
 		if (player != null && PlayerDifficulty.HOLDER.isProper(player)) {
 			PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
 			playerDiff.apply(instance);
@@ -137,6 +134,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			}
 		}
 		lv = skip ? 0 : TraitManager.fill(le, traits, instance);
+		fullDrop = instance.isFullDrop();
 		stage = Stage.INIT;
 		syncToClient(le);
 	}
@@ -277,7 +275,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		List<Component> ans = new ArrayList<>();
 		if (showLevel && lv > 0) {
 			ans.add(LangData.LV.get(lv).withStyle(Style.EMPTY
-					.withColor(LHConfig.CLIENT.overHeadLevelColor.get())));
+					.withColor(fullDrop ? LHConfig.CLIENT.overHeadLevelColorAbyss.get() :
+							LHConfig.CLIENT.overHeadLevelColor.get())));
 		}
 		if (!showTrait) return ans;
 		MutableComponent temp = null;

@@ -40,7 +40,7 @@ public class EnvyLootModifier extends LootModifier {
 				}
 				for (var entry : cap.traits.entrySet()) {
 					double chance = factor * entry.getValue() * LHConfig.COMMON.envyDropRate.get();
-					if (context.getRandom().nextDouble() < chance) {
+					if (cap.fullDrop || context.getRandom().nextDouble() < chance) {
 						list.add(entry.getKey().asItem().getDefaultInstance());
 					}
 				}

@@ -1,0 +1,45 @@
+package dev.xkmc.l2hostility.content.item.curio.misc;
+
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.ISimpleCapItem;
+import dev.xkmc.l2hostility.init.data.LangData;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
+import top.theillusivec4.curios.api.SlotContext;
+
+import java.util.List;
+
+public class DivinityLight extends CurseCurioItem implements ISimpleCapItem {
+
+	public DivinityLight(Properties props) {
+		super(props);
+	}
+
+	@Override
+	public double getGrowFactor(ItemStack stack, PlayerDifficulty player, MobTraitCap mob) {
+		return 0;
+	}
+
+	@Override
+	public void curioTick(ItemStack stack, SlotContext slotContext) {
+		if (slotContext.entity() instanceof Player player) {
+			if (PlayerDifficulty.HOLDER.isProper(player)) {
+				var cap = PlayerDifficulty.HOLDER.get(player);
+				cap.getLevelEditor().setBase(0);
+			}
+		}
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+		list.add(LangData.DIVINITY_LIGHT.get().withStyle(ChatFormatting.GRAY));
+	}
+
+}

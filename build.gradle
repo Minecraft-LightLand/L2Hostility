@@ -191,7 +191,7 @@ repositories {
 dependencies {
     implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}-slim")
     implementation fg.deobf("dev.xkmc.l2serial:l2serial:1.2.2")
-    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.4.31-slim")
+    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.4.33-slim")
 
     implementation(jarJar(fg.deobf("dev.xkmc.l2modularblock:l2modularblock:1.1.0"))) {
         transitive = false

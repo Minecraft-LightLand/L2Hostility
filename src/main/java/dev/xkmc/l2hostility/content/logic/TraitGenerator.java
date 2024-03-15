@@ -39,7 +39,8 @@ public class TraitGenerator {
 		var config = L2Hostility.ENTITY.getMerged().get(entity.getType());
 		if (config != null) {
 			for (var base : config.traits()) {
-				genBase(base);
+				if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
+					genBase(base);
 			}
 		}
 

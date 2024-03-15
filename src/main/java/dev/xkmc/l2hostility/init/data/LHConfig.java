@@ -20,6 +20,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue overHeadRenderDistance;
 		public final ForgeConfigSpec.BooleanValue overHeadRenderFullBright;
 		public final ForgeConfigSpec.IntValue overHeadLevelColor;
+		public final ForgeConfigSpec.IntValue overHeadLevelColorAbyss;
 		public final ForgeConfigSpec.DoubleValue overHeadRenderOffset;
 		public final ForgeConfigSpec.BooleanValue showOnlyWhenHovered;
 		public final ForgeConfigSpec.IntValue glowingRangeHidden;
@@ -39,6 +40,8 @@ public class LHConfig {
 					.define("overHeadRenderFullBright", true);
 			overHeadLevelColor = builder.comment("Overhead level color in decimal form, converted from hex form")
 					.defineInRange("overHeadLevelColor", 11184810, Integer.MIN_VALUE, Integer.MAX_VALUE);
+			overHeadLevelColorAbyss = builder.comment("Overhead level color for mobs affected by abyssal thorn")
+					.defineInRange("overHeadLevelColorAbyss", 16733525, Integer.MIN_VALUE, Integer.MAX_VALUE);
 			showOnlyWhenHovered = builder.comment("Show nameplate style trait and name only when hovered")
 					.define("showOnlyWhenHovered", false);
 			glowingRangeHidden = builder.comment("Detector Glasses glowing range for hidden mobs")
@@ -55,6 +58,7 @@ public class LHConfig {
 
 		public final ForgeConfigSpec.IntValue killsPerLevel;
 		public final ForgeConfigSpec.IntValue maxPlayerLevel;
+		public final ForgeConfigSpec.IntValue newPlayerProtectRange;
 		public final ForgeConfigSpec.DoubleValue playerDeathDecay;
 		public final ForgeConfigSpec.BooleanValue keepInventoryRuleKeepDifficulty;
 		public final ForgeConfigSpec.BooleanValue deathDecayDimension;
@@ -244,6 +248,8 @@ public class LHConfig {
 						.define("deathDecayDimension", true);
 				deathDecayTraitCap = builder.comment("On player death, reduce max trait spawned by 1")
 						.define("deathDecayTraitCap", true);
+				newPlayerProtectRange = builder.comment("Mobs spawned within this range will use lowest player level in range instead of nearest player's level to determine mob level")
+						.defineInRange("newPlayerProtectRange", 48, 0, 128);
 			}
 			builder.pop();
 

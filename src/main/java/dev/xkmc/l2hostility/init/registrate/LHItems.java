@@ -3,7 +3,6 @@ package dev.xkmc.l2hostility.init.registrate;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
-import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2hostility.content.entity.ChargeType;
 import dev.xkmc.l2hostility.content.item.consumable.*;
 import dev.xkmc.l2hostility.content.item.curio.curse.*;
@@ -72,6 +71,9 @@ public class LHItems {
 	public static final ItemEntry<Abrahadabra> ABRAHADABRA;
 	public static final ItemEntry<GreedOfNidhoggur> NIDHOGGUR;
 	public static final ItemEntry<PocketOfRestoration> RESTORATION;
+	public static final ItemEntry<AbyssalThorn> ABYSSAL_THORN;
+	public static final ItemEntry<DivinityCross> DIVINITY_CROSS;
+	public static final ItemEntry<DivinityLight> DIVINITY_LIGHT;
 	public static final ItemEntry<LootingCharm> LOOT_1, LOOT_2, LOOT_3, LOOT_4;
 	public static final ItemEntry<TraitAdderWand> ADDER;
 	public static final ItemEntry<TargetSelectWand> TARGET;
@@ -178,6 +180,10 @@ public class LHItems {
 			IMAGINE_BREAKER = curio("imagine_breaker", ImagineBreaker::new).tag(chaos, hand, LHTagGen.NO_SEAL).register();
 			PLATINUM_STAR = curio("platinum_star", PlatinumStar::new).tag(chaos, hand, charm).register();
 			INFINITY_GLOVE = curio("infinity_glove", InfinityGlove::new).tag(chaos, hand).register();
+
+			ABYSSAL_THORN = curio("abyssal_thorn", AbyssalThorn::new).tag(chaos, curse).register();
+			DIVINITY_CROSS = curio("divinity_cross", DivinityCross::new).tag(chaos, charm, curse).register();
+			DIVINITY_LIGHT = curio("divinity_light", DivinityLight::new).tag(chaos, charm, curse).register();
 
 			TagKey<Item> back = ItemTags.create(new ResourceLocation("curios", "back"));
 

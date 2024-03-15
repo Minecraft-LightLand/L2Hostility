@@ -2,8 +2,11 @@ package dev.xkmc.l2hostility.content.logic;
 
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
 
 public class MobDifficultyCollector {
 
@@ -17,7 +20,8 @@ public class MobDifficultyCollector {
 	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel() + 1;
 	public double scale, varSq, apply_chance, trait_chance, trait_cost, finalFactor = 1;
 
-	private boolean fullChance;
+	private ServerPlayer player;
+	private boolean fullChance, fullDrop;
 
 	public MobDifficultyCollector() {
 		apply_chance = LHConfig.COMMON.globalApplyChance.get();
@@ -96,6 +100,26 @@ public class MobDifficultyCollector {
 
 	public boolean isFullChance() {
 		return fullChance;
+	}
+
+	public void setFullDrop() {
+		fullDrop = true;
+	}
+
+	public boolean isFullDrop() {
+		return fullDrop;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player instanceof ServerPlayer sp ? sp : null;
+	}
+
+	public boolean hasAdvancement(ResourceLocation id) {
+		if (player == null) return true;
+		var adv = player.server.getAdvancements().getAdvancement(id);
+		if (adv == null) return false;
+		var prog = player.getAdvancements().getOrStartProgress(adv);
+		return prog.isDone();
 	}
 
 }

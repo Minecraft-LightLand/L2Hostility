@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.config;
 
+import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -7,7 +8,9 @@ import dev.xkmc.l2library.serial.config.BaseConfig;
 import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -101,7 +104,18 @@ public class EntityConfig extends BaseConfig {
 
 	}
 
-	public record TraitBase(MobTrait trait, int free, int min) {
+	public record TraitBase(MobTrait trait, int free, int min, @Nullable TraitCondition condition) {
+
+	}
+
+	public record TraitCondition(int lv, float chance, @Nullable ResourceLocation id) {
+
+		public boolean match(LivingEntity entity, int mobLevel, MobDifficultyCollector ins) {
+			if (entity.getRandom().nextDouble() > chance) return false;
+			if (mobLevel < lv) return false;
+			if (id != null && !ins.hasAdvancement(id)) return false;
+			return true;
+		}
 
 	}
 
@@ -118,6 +132,14 @@ public class EntityConfig extends BaseConfig {
 
 	public static ItemPool simplePool(int level, String slot, ItemStack stack) {
 		return new ItemPool(level, 1, slot, new ArrayList<>(List.of(new ItemEntry(100, stack))));
+	}
+
+	public static TraitBase trait(MobTrait trait, int free, int min) {
+		return new TraitBase(trait, free, min, null);
+	}
+
+	public static TraitBase trait(MobTrait trait, int free, int min, int lv, float chance) {
+		return new TraitBase(trait, free, min, new TraitCondition(lv, chance, null));
 	}
 
 }

@@ -105,36 +105,36 @@ public class TFData {
 
 	public static void genConfig(ConfigDataProvider.Collector collector) {
 		addEntity(collector, 50, 20, TFEntities.NAGA,
-				new EntityConfig.TraitBase(LHTraits.SPEEDY.get(), 1, 2),
-				new EntityConfig.TraitBase(LHTraits.CURSED.get(), 0, 1)
+				EntityConfig.trait(LHTraits.SPEEDY.get(), 1, 2),
+				EntityConfig.trait(LHTraits.CURSED.get(), 0, 1)
 		);
 		addEntity(collector, 100, 30, TFEntities.LICH,
-				new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+				EntityConfig.trait(LHTraits.WEAKNESS.get(), 2, 3),
+				EntityConfig.trait(LHTraits.CURSED.get(), 1, 1)
 		);
 		addEntity(collector, 100, 30, TFEntities.MINOSHROOM,
-				new EntityConfig.TraitBase(LHTraits.TANK.get(), 1, 3),
-				new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+				EntityConfig.trait(LHTraits.TANK.get(), 1, 3),
+				EntityConfig.trait(LHTraits.CURSED.get(), 1, 1)
 		);
 		addEntity(collector, 100, 30, TFEntities.ALPHA_YETI,
-				new EntityConfig.TraitBase(LHTraits.REGEN.get(), 1, 2),
-				new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+				EntityConfig.trait(LHTraits.REGEN.get(), 1, 2),
+				EntityConfig.trait(LHTraits.CURSED.get(), 1, 1)
 		);
 		addEntity(collector, 150, 50, TFEntities.HYDRA,
-				new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 1, 1),
-				new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+				EntityConfig.trait(LHTraits.SOUL_BURNER.get(), 1, 1),
+				EntityConfig.trait(LHTraits.CURSED.get(), 1, 1)
 		);
 		addEntity(collector, 150, 50, TFEntities.KNIGHT_PHANTOM,
-				new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 0, 1),
-				new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+				EntityConfig.trait(LHTraits.REFLECT.get(), 0, 1),
+				EntityConfig.trait(LHTraits.CURSED.get(), 1, 1)
 		);
 		addEntity(collector, 150, 50, TFEntities.SNOW_QUEEN,
-				new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 1, 1),
-				new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+				EntityConfig.trait(LHTraits.FREEZING.get(), 1, 1),
+				EntityConfig.trait(LHTraits.CURSED.get(), 1, 1)
 		);
 		addEntity(collector, 150, 50, TFEntities.UR_GHAST,
-				new EntityConfig.TraitBase(LHTraits.WITHER.get(), 1, 1),
-				new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1)
+				EntityConfig.trait(LHTraits.WITHER.get(), 1, 1),
+				EntityConfig.trait(LHTraits.CURSED.get(), 1, 1)
 		);
 	}
 

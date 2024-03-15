@@ -43,7 +43,7 @@ public enum LangData {
 
 	ITEM_CHARM_ENVY("item.equipment.curse_of_envy", "Get trait items when you kill mobs with traits, with a chance of %s%% per trait rank", 1),
 	ITEM_CHARM_GLUTTONY("item.equipment.curse_of_gluttony", "Get Bottle of Curse when you kill mobs with level, with a chance of %s%% per level", 1),
-	ITEM_CHARM_GREED("item.equipment.curse_of_greed", "Mobs you kill will drop +%s%% hostility loot", 1),
+	ITEM_CHARM_GREED("item.equipment.curse_of_greed", "x%s hostility loot drop chance", 1),
 	ITEM_CHARM_LUST("item.equipment.curse_of_lust", "Mobs you kill will drop all equipments", 0),
 	ITEM_CHARM_PRIDE("item.equipment.curse_of_pride", "Gain %s%% health and %s%% attack damage per difficulty level", 2),
 	ITEM_CHARM_SLOTH("item.equipment.curse_of_sloth", "You will not gain difficulty by killing mobs", 0),
@@ -69,6 +69,9 @@ public enum LangData {
 	NIDHOGGUR("item.equipment.nidhoggur", "Mobs you kill will drop +%s%% loot per mob level", 1),
 	POCKET_OF_RESTORATION("item.equipment.pocket_of_restoration", "Automatically put sealed item inside, unseal it, and put it back when finished.", 0),
 	LOOTING_CHARM("item.equipment.looting", "Enables some hostility trait drops. Check JEI for detail.", 0),
+	ABYSSAL_THORN("item.equipment.abyssal_thorn", "Mobs get all possible traits at their level, but with Curse of Envy, they will always drop trait symbols of those when killed", 0),
+	DIVINITY_CROSS("item.equipment.divinity_cross", "Cleanse effect will not clear Lv.1 beneficial effects", 0),
+	DIVINITY_LIGHT("item.equipment.divinity_light", "Your adaptive level will stay at 0.", 0),
 
 	MSG_AI("msg.ai", "Configure %s: Set NoAI to %s.", 2),
 	MSG_SET_TARGET("msg.set_target", "Set %s and %s to fight", 2),

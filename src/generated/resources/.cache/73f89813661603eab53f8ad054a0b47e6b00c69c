@@ -1,12 +1,13 @@
-// 1.20.1	2024-02-20T16:44:34.663679	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2024-03-15T20:42:24.537311	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-ce63b5d09c39daa2e1856f713722ec4a1098bbbb assets/l2hostility/lang/en_ud.json
-8e19e6c8f0f9969ceebb9eb4a3ff9383899bbb3f assets/l2hostility/lang/en_us.json
+f38a1f141604c3eeff0efdca52029ff2dae3ae73 assets/l2hostility/lang/en_ud.json
+edf09f039fff54dbfb1fac505ef01f73932f8bf9 assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
 48ae9dc365b1dd9a5906beaf430a5da3bb6944bb assets/l2hostility/models/block/hostility_spawner_failed.json
 7d8b0f65a6ba1d0b1a18204037efe8aae9c0d3bc assets/l2hostility/models/item/abrahadabra.json
+f4f7794d8b5a01e52837f5d58ce52212641b2aee assets/l2hostility/models/item/abyssal_thorn.json
 1739df0d5d6c03e3738f188a9606b095b5198c01 assets/l2hostility/models/item/adaptive.json
 47b1669ffc91d13e17f5d08ed2a34cd11ddeaaf9 assets/l2hostility/models/item/ai_config_wand.json
 79df8d7f57c20e395ef38ac80ae4f5c351e3823c assets/l2hostility/models/item/arena.json
@@ -35,6 +36,8 @@ ffd80ef17e54fcd7ef3e1d11a93804e50b6aa529 assets/l2hostility/models/item/cursed.j
 35c86995f5f78475515fc173c46a04ba4f24b41c assets/l2hostility/models/item/dementor.json
 0f51d8c6b255ece00b8e0e60f0f90a4a748106f2 assets/l2hostility/models/item/detector_glasses.json
 68e7d5144c357b421964b2c26ba688790126b811 assets/l2hostility/models/item/dispell.json
+56d37ae18e97a105d697898e920f1e7ecd121f8e assets/l2hostility/models/item/divinity_cross.json
+580e80bddefc490671e2071407bb99f3168bfd73 assets/l2hostility/models/item/divinity_light.json
 daf50b250dc8c7ce6cb12a093b0dd1993c52e64f assets/l2hostility/models/item/drain.json
 31eb768e73a9e25dd120627d1792a0fc4b23a659 assets/l2hostility/models/item/equipment_wand.json
 a7e2d8292fc281adc07394f2043952d89b2af88a assets/l2hostility/models/item/erosion.json
@@ -96,10 +99,10 @@ d77ade334e7a963054ed571b2c9aae1fa3f61f4b assets/l2hostility/models/item/weakness
 d69681b4cb7544b64e002366a0e64e7a6402cdc8 assets/l2hostility/models/item/witch_wand.json
 e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.json
 7942255280f4ee1f25a76cfb178597324d566c77 data/curios/tags/items/back.json
-58e3421c5d4737dfe90a41b22b577e665e2742ad data/curios/tags/items/charm.json
+801a68ce0482049c4c2efe45f9de4366b8ff6691 data/curios/tags/items/charm.json
 6b3db265ef90a4cf6af5cc3775209c4a04a67c42 data/curios/tags/items/hands.json
 63302afd6032fba91cf0e46be0c7c05285866cb9 data/curios/tags/items/head.json
-d144a143248b44b7b90f8475fad2c62855f5ddea data/curios/tags/items/hostility_curse.json
+2c284131fbc1b0e5a82ea8e58c842877ab471350 data/curios/tags/items/hostility_curse.json
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/items/ring.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/curseofpandora/tags/entity_types/reality_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/curseofpandora/tags/entity_types/reality_whitelist.json
@@ -332,7 +335,7 @@ c61eace0d42617f0e9c82ef998ee1262cce34687 data/l2hostility/tags/entity_types/whit
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
 406c965f80725c8e6de68d3bdf4488940323728a data/l2hostility/tags/items/antibuild_ban.json
-50cbc9948d6c82b5b627ae08b27595db9fbd33b6 data/l2hostility/tags/items/chaos_equipment.json
+849cc0cb0a1698c5cdba74b391f84298eef583ac data/l2hostility/tags/items/chaos_equipment.json
 c11704257529150719574fe8070c7fca05bf7f04 data/l2hostility/tags/items/no_seal.json
 d27d9636bed88bf7eceb3cf1e97db21e63f16803 data/l2hostility/tags/items/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json

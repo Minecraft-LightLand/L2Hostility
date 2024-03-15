@@ -11,11 +11,81 @@
         "variation": 1.0
       },
       "entities": [
-        "minecraft:elder_guardian",
+        "minecraft:elder_guardian"
+      ],
+      "items": [],
+      "traits": [
+        {
+          "condition": {
+            "chance": 0.5,
+            "lv": 300
+          },
+          "free": 1,
+          "min": 1,
+          "trait": "l2hostility:repelling"
+        }
+      ]
+    },
+    {
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 20,
+        "min": 0,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 1.0
+      },
+      "entities": [
         "minecraft:piglin_brute"
       ],
       "items": [],
-      "traits": []
+      "traits": [
+        {
+          "condition": {
+            "chance": 0.5,
+            "lv": 300
+          },
+          "free": 1,
+          "min": 1,
+          "trait": "l2hostility:pulling"
+        }
+      ]
+    },
+    {
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 20,
+        "min": 0,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 1.0
+      },
+      "entities": [
+        "minecraft:warden"
+      ],
+      "items": [],
+      "traits": [
+        {
+          "condition": {
+            "chance": 1.0,
+            "lv": 200
+          },
+          "free": 1,
+          "min": 1,
+          "trait": "l2hostility:dispell"
+        },
+        {
+          "condition": {
+            "chance": 1.0,
+            "lv": 300
+          },
+          "free": 1,
+          "min": 1,
+          "trait": "l2hostility:reprint"
+        }
+      ]
     },
     {
       "blacklist": [],

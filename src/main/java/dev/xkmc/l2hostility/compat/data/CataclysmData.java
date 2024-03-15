@@ -29,48 +29,48 @@ public class CataclysmData {
 	public static void genConfig(ConfigDataProvider.Collector collector) {
 		int equipLevel = 600;
 		addEntity(collector, 200, 50, ModEntities.ENDER_GUARDIAN, List.of(
-						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
-						new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 3, 5)),
+						EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+						EntityConfig.trait(LHTraits.ADAPTIVE.get(), 2, 2),
+						EntityConfig.trait(LHTraits.WEAKNESS.get(), 3, 5)),
 				List.of(divinity(equipLevel), breaker(equipLevel)));
 		addEntity(collector, 200, 50, ModEntities.NETHERITE_MONSTROSITY, List.of(
-						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 2),
-						new EntityConfig.TraitBase(LHTraits.SLOWNESS.get(), 3, 5)),
+						EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+						EntityConfig.trait(LHTraits.ADAPTIVE.get(), 2, 2),
+						EntityConfig.trait(LHTraits.SLOWNESS.get(), 3, 5)),
 				List.of(divinity(equipLevel), breaker(equipLevel)));
 		addEntity(collector, 200, 50, ModEntities.IGNIS, List.of(
-						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-						new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
-						new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 2, 3)),
+						EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+						EntityConfig.trait(LHTraits.CURSED.get(), 1, 1),
+						EntityConfig.trait(LHTraits.SOUL_BURNER.get(), 2, 3)),
 				List.of(
 						EntityConfig.simplePool(equipLevel, "equipment/mainhand", getIgnisWeapon()),
 						divinity(equipLevel), breaker(equipLevel)
 				));
 		addEntity(collector, 200, 50, ModEntities.THE_HARBINGER, List.of(
-						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-						new EntityConfig.TraitBase(LHTraits.CURSED.get(), 1, 1),
-						new EntityConfig.TraitBase(LHTraits.WITHER.get(), 2, 3)),
+						EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+						EntityConfig.trait(LHTraits.CURSED.get(), 1, 1),
+						EntityConfig.trait(LHTraits.WITHER.get(), 2, 3)),
 				List.of(divinity(equipLevel)));
 
 		addEntity(collector, 200, 50, ModEntities.THE_LEVIATHAN, List.of(
-						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-						new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 2, 2),
-						new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 2, 3)),
+						EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+						EntityConfig.trait(LHTraits.REFLECT.get(), 2, 2),
+						EntityConfig.trait(LHTraits.FREEZING.get(), 2, 3)),
 				List.of(divinity(equipLevel)));
 
 		addEntity(collector, 200, 50, ModEntities.ANCIENT_REMNANT, List.of(
-						new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-						new EntityConfig.TraitBase(LHTraits.REPRINT.get(), 1, 1),
-						new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 3)),
+						EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+						EntityConfig.trait(LHTraits.REPRINT.get(), 1, 1),
+						EntityConfig.trait(LHTraits.ADAPTIVE.get(), 2, 3)),
 				List.of(divinity(equipLevel)));
 
 		addEntity(collector, 100, 30, ModEntities.ENDER_GOLEM,
-				new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 0, 1),
-				new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 0, 1)
+				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
+				EntityConfig.trait(LHTraits.WEAKNESS.get(), 0, 1)
 		);
 		addEntity(collector, 100, 30, ModEntities.AMETHYST_CRAB,
-				new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 0, 1),
-				new EntityConfig.TraitBase(LHTraits.POISON.get(), 0, 1)
+				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
+				EntityConfig.trait(LHTraits.POISON.get(), 0, 1)
 		);
 	}
 

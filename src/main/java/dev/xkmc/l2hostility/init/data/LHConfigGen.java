@@ -90,9 +90,19 @@ public class LHConfigGen extends ConfigDataProvider {
 		);
 
 		collector.add(L2Hostility.ENTITY, new ResourceLocation(L2Hostility.MODID, "bosses"), new EntityConfig()
-				.putEntity(0, 20, 1, 0, List.of(EntityType.ELDER_GUARDIAN, EntityType.PIGLIN_BRUTE), List.of())
-				.putEntity(0, 50, 1, 0, List.of(EntityType.WITHER),
-						List.of(new EntityConfig.TraitBase(LHTraits.CURSED.get(), 0, 1)))
+				.putEntity(0, 20, 1, 0, List.of(EntityType.ELDER_GUARDIAN), List.of(
+						EntityConfig.trait(LHTraits.REPELLING.get(), 1, 1, 300, 0.5f)
+				))
+				.putEntity(0, 20, 1, 0, List.of(EntityType.PIGLIN_BRUTE), List.of(
+						EntityConfig.trait(LHTraits.PULLING.get(), 1, 1, 300, 0.5f)
+				))
+				.putEntity(0, 20, 1, 0, List.of(EntityType.WARDEN), List.of(
+						EntityConfig.trait(LHTraits.DISPELL.get(), 1, 1, 200, 1),
+						EntityConfig.trait(LHTraits.REPRINT.get(), 1, 1, 300, 1)
+				))
+				.putEntity(0, 50, 1, 0, List.of(EntityType.WITHER), List.of(
+						EntityConfig.trait(LHTraits.CURSED.get(), 0, 1)
+				))
 				.putEntity(100, 50, 1, 0, List.of(EntityType.ENDER_DRAGON), List.of())
 		);
 

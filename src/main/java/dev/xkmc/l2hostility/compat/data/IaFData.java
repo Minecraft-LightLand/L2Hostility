@@ -16,26 +16,26 @@ public class IaFData {
 
 	public static void genConfig(ConfigDataProvider.Collector collector) {
 		addEntity(collector, 100, 50, IafEntityRegistry.FIRE_DRAGON, List.of(
-				new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 1, 2),
-				new EntityConfig.TraitBase(LHTraits.REGEN.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 2, 3)
+				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 1, 2),
+				EntityConfig.trait(LHTraits.REGEN.get(), 2, 3),
+				EntityConfig.trait(LHTraits.SOUL_BURNER.get(), 2, 3)
 		), List.of(LHTraits.TANK.get()));
 		addEntity(collector, 100, 50, IafEntityRegistry.ICE_DRAGON, List.of(
-				new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 1, 2),
-				new EntityConfig.TraitBase(LHTraits.REGEN.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 2, 3)
+				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 1, 2),
+				EntityConfig.trait(LHTraits.REGEN.get(), 2, 3),
+				EntityConfig.trait(LHTraits.FREEZING.get(), 2, 3)
 		), List.of(LHTraits.TANK.get()));
 		addEntity(collector, 100, 50, IafEntityRegistry.LIGHTNING_DRAGON, List.of(
-				new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 1, 2),
-				new EntityConfig.TraitBase(LHTraits.REGEN.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 2, 3)
+				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 1, 2),
+				EntityConfig.trait(LHTraits.REGEN.get(), 2, 3),
+				EntityConfig.trait(LHTraits.REFLECT.get(), 2, 3)
 		), List.of(LHTraits.TANK.get()));
 		addEntity(collector, 30, 10, IafEntityRegistry.GHOST, List.of(
-				new EntityConfig.TraitBase(LHTraits.DEMENTOR.get(), 0, 1)
+				EntityConfig.trait(LHTraits.DEMENTOR.get(), 0, 1)
 		), List.of(LHTraits.DISPELL.get()));
 		addEntity(collector, 30, 10, IafEntityRegistry.SIREN, List.of(
-				new EntityConfig.TraitBase(LHTraits.CONFUSION.get(), 1, 1),
-				new EntityConfig.TraitBase(LHTraits.DRAIN.get(), 0, 1)
+				EntityConfig.trait(LHTraits.CONFUSION.get(), 1, 1),
+				EntityConfig.trait(LHTraits.DRAIN.get(), 0, 1)
 		), List.of());
 	}
 

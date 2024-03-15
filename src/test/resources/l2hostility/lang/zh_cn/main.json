@@ -71,7 +71,7 @@
 		"curse_no_drop": "玩家击杀的怪物不会掉落词条掉落物",
 		"curse_of_envy": "击杀怪物获取其词条，概率为词条每阶%s%%",
 		"curse_of_gluttony": "击杀怪物掉落瓶装恶意，概率为每级%s%%",
-		"curse_of_greed": "击杀怪物掉落的词条掉落物+%s%%",
+		"curse_of_greed": "击杀怪物的词条掉落物掉落概率x%s",
 		"curse_of_lust": "击杀怪物掉落所有装备",
 		"curse_of_pride": "根据玩家难度每级获得%s%%血量上限和%s%%伤害提升",
 		"curse_of_sloth": "击杀生物不再提升难度",
@@ -92,7 +92,10 @@
 		"nidhoggur": "击杀怪物掉落的所有掉落物根据怪物等级每级增加+%s%%",
 		"platinum_star": "你所有的近战伤害无视伤害冷却",
 		"pocket_of_restoration": "自动收纳被封印的物品，将其解除封印后放回原位",
-		"looting": "击杀带部分词条的生物时掉落额外奖励。查看JEI了解详情"
+		"looting": "击杀带部分词条的生物时掉落额外奖励。查看JEI了解详情",
+		"abyssal_thorn": "怪物会获得当前等级下所有能获得的词条，但佩戴嫉妒诅咒时，必定掉落那些词条",
+		"divinity_cross": "净化效果不会清除1级的正面效果",
+		"divinity_light": "玩家动态等级维持在0"
 	  },
 	  "book": {
 		"copy": "在铁砧中和附魔书结合来复印",

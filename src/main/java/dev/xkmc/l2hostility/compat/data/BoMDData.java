@@ -13,24 +13,24 @@ public class BoMDData {
 
 	public static void genConfig(ConfigDataProvider.Collector collector) {
 		addEntity(collector, 200, 50, BMDEntities.LICH, List.of(
-				new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.REPRINT.get(), 1, 1),
-				new EntityConfig.TraitBase(LHTraits.FREEZING.get(), 2, 3)
+				EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+				EntityConfig.trait(LHTraits.REPRINT.get(), 1, 1),
+				EntityConfig.trait(LHTraits.FREEZING.get(), 2, 3)
 		), List.of());
 		addEntity(collector, 200, 50, BMDEntities.OBSIDILITH, List.of(
-				new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.WEAKNESS.get(), 5, 5)
+				EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+				EntityConfig.trait(LHTraits.REFLECT.get(), 2, 3),
+				EntityConfig.trait(LHTraits.WEAKNESS.get(), 5, 5)
 		), List.of());
 		addEntity(collector, 200, 50, BMDEntities.GAUNTLET, List.of(
-				new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.REFLECT.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.SOUL_BURNER.get(), 2, 3)
+				EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+				EntityConfig.trait(LHTraits.REFLECT.get(), 2, 3),
+				EntityConfig.trait(LHTraits.SOUL_BURNER.get(), 2, 3)
 		), List.of());
 		addEntity(collector, 200, 50, BMDEntities.VOID_BLOSSOM, List.of(
-				new EntityConfig.TraitBase(LHTraits.TANK.get(), 2, 3),
-				new EntityConfig.TraitBase(LHTraits.REGEN.get(), 5, 5),
-				new EntityConfig.TraitBase(LHTraits.ADAPTIVE.get(), 2, 3)
+				EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+				EntityConfig.trait(LHTraits.REGEN.get(), 5, 5),
+				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 2, 3)
 		), List.of());
 	}
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-14T16:32:26.487033	Tags for minecraft:damage_type mod id l2hostility
+// 1.20.1	2024-03-15T20:42:24.540928	Tags for minecraft:damage_type mod id l2hostility
 52bfca60524a3594b6770f82bc033579a60fd822 data/forge/tags/damage_type/direct.json
 4ecf5c12e1c8d9a3c82275c97ec043b63b2e0dca data/forge/tags/damage_type/is_magic.json
 36b1d888c182cc25536d00d1f6ec89f0399f1b17 data/minecraft/tags/damage_type/bypasses_armor.json

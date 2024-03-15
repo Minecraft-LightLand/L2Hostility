@@ -47,7 +47,10 @@
 	"charm_of_looting_1": "粗糙抢夺宝珠",
 	"charm_of_looting_2": "魔能抢夺宝珠",
 	"charm_of_looting_3": "混沌抢夺宝珠",
-	"charm_of_looting_4": "奇迹抢夺宝珠"
+	"charm_of_looting_4": "奇迹抢夺宝珠",
+	"abyssal_thorn": "深渊王座",
+	"divinity_cross": "神圣十字",
+	"divinity_light": "神圣之光"
   },
   "block.l2hostility": {
 	"hostility_spawner": "恶意刷怪笼"
@@ -131,6 +134,5 @@
 	"split_suppressor.desc": "击中目标时删除分裂词条",
 	"vanish": "毁灭",
 	"vanish.desc": "掉落或者被生存玩家持有时消失"
-
   }
 }

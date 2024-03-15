@@ -103,11 +103,17 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public void apply(MobDifficultyCollector instance) {
+		instance.setPlayer(player);
 		instance.acceptBonus(getLevel());
 		instance.setTraitCap(getRankCap());
 		if (CurioCompat.hasItemInCurio(player, LHItems.CURSE_PRIDE.get())) {
 			instance.traitCostFactor(LHConfig.COMMON.prideTraitFactor.get());
 			instance.setFullChance();
+		}
+		if (CurioCompat.hasItemInCurio(player, LHItems.ABYSSAL_THORN.get())) {
+			instance.traitCostFactor(0);
+			instance.setFullChance();
+			instance.setFullDrop();
 		}
 	}
 
