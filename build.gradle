@@ -200,16 +200,16 @@ dependencies {
 
     implementation fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.3.0")
     implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.3.1")
-    implementation fg.deobf("dev.xkmc.l2weaponry:l2weaponry:2.4.22")
+    implementation fg.deobf("dev.xkmc.l2weaponry:l2weaponry:2.4.26")
     implementation fg.deobf("dev.xkmc.l2archery:l2archery:2.4.13")
 
     runtimeOnly fg.deobf("dev.xkmc.l2screentracker:l2screentracker:0.1.4")
-    runtimeOnly fg.deobf("dev.xkmc.l2itemselector:l2itemselector:0.1.7")
+    runtimeOnly fg.deobf("dev.xkmc.l2itemselector:l2itemselector:0.1.8")
     runtimeOnly fg.deobf("dev.xkmc.l2backpack:l2backpack:2.4.19-slim")
-    runtimeOnly fg.deobf("dev.xkmc.modulargolems:modulargolems:2.4.28-slim")
+    runtimeOnly fg.deobf("dev.xkmc.modulargolems:modulargolems:2.4.30-slim")
     runtimeOnly fg.deobf("dev.xkmc.l2artifacts:l2artifacts:2.4.18-slim")
-    runtimeOnly fg.deobf("dev.xkmc.pandora:pandora:0.1.7-slim")
-    runtimeOnly fg.deobf("dev.xkmc.curseofpandora:curseofpandora:2.4.9-slim")
+    runtimeOnly fg.deobf("dev.xkmc.pandora:pandora:0.1.9-slim")
+    runtimeOnly fg.deobf("dev.xkmc.curseofpandora:curseofpandora:2.4.12-slim")
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
