@@ -13,10 +13,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class DivinityLight extends CurseCurioItem implements ISimpleCapItem {
+public class DivinityLight extends CurseCurioItem implements ICurioItem {
 
 	public DivinityLight(Properties props) {
 		super(props);
@@ -28,7 +29,7 @@ public class DivinityLight extends CurseCurioItem implements ISimpleCapItem {
 	}
 
 	@Override
-	public void curioTick(ItemStack stack, SlotContext slotContext) {
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
 		if (slotContext.entity() instanceof Player player) {
 			if (PlayerDifficulty.HOLDER.isProper(player)) {
 				var cap = PlayerDifficulty.HOLDER.get(player);

@@ -19,16 +19,14 @@ public class CurseOfEnvy extends CurseCurioItem {
 	}
 
 	@Override
-	public int getExtraLevel(ItemStack stack) {
+	public int getExtraLevel() {
 		return LHConfig.COMMON.envyExtraLevel.get();
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		int rate = (int) Math.round(100 * LHConfig.COMMON.envyDropRate.get());
-		int lv = LHConfig.COMMON.envyExtraLevel.get();
 		list.add(LangData.ITEM_CHARM_ENVY.get(rate).withStyle(ChatFormatting.GOLD));
-		list.add(LangData.ITEM_CHARM_ADD_LEVEL.get(lv).withStyle(ChatFormatting.RED));
 	}
 
 }

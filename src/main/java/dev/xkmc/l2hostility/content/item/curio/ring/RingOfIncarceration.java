@@ -16,10 +16,11 @@ import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraftforge.common.ForgeMod;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class RingOfIncarceration extends CurioItem implements ISimpleCapItem {
+public class RingOfIncarceration extends CurioItem implements ICurioItem {
 
 	public RingOfIncarceration(Properties properties) {
 		super(properties);
@@ -31,7 +32,7 @@ public class RingOfIncarceration extends CurioItem implements ISimpleCapItem {
 	}
 
 	@Override
-	public void curioTick(ItemStack stack, SlotContext slotContext) {
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
 		LivingEntity wearer = slotContext.entity();
 		if (wearer == null) return;
 		if (!wearer.isShiftKeyDown()) return;

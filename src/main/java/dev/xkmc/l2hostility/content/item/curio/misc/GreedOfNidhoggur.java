@@ -21,7 +21,7 @@ public class GreedOfNidhoggur extends CurseCurioItem {
 	}
 
 	@Override
-	public int getExtraLevel(ItemStack stack) {
+	public int getExtraLevel() {
 		return LHConfig.COMMON.nidhoggurExtraLevel.get();
 	}
 
@@ -33,10 +33,8 @@ public class GreedOfNidhoggur extends CurseCurioItem {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		int nid = (int) Math.round(100 * LHConfig.COMMON.nidhoggurDropFactor.get());
-		int lv = LHConfig.COMMON.nidhoggurExtraLevel.get();
 		list.add(LangData.ITEM_CHARM_GREED.get(LHConfig.COMMON.greedDropFactor.get()).withStyle(ChatFormatting.GOLD));
 		list.add(LangData.NIDHOGGUR.get(nid).withStyle(ChatFormatting.GOLD));
-		list.add(LangData.ITEM_CHARM_ADD_LEVEL.get(lv).withStyle(ChatFormatting.RED));
 	}
 
 }

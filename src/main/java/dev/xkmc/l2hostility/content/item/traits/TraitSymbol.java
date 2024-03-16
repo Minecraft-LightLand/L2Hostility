@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.content.item.traits;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
@@ -45,6 +46,17 @@ public class TraitSymbol extends Item {
 
 	public MobTrait get() {
 		var ans = LHTraits.TRAITS.get().getValue(ForgeRegistries.ITEMS.getKey(this));
+		if (ans == null) {
+			L2Hostility.LOGGER.error("------------");
+			L2Hostility.LOGGER.error("Trait " + ForgeRegistries.ITEMS.getKey(this) + " is not registered. Why?");
+			var set = LHTraits.TRAITS.get().getKeys();
+			L2Hostility.LOGGER.error("List of all ids registered: ");
+			for (var e : set) {
+				L2Hostility.LOGGER.error(e.toString());
+			}
+
+			L2Hostility.LOGGER.error("------------");
+		}
 		assert ans != null;
 		return ans;
 	}

@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.item.curio.core;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import dev.xkmc.l2complements.content.item.curios.ICapItem;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -18,7 +19,7 @@ public interface ISimpleCapItem extends ICapItem<SimpleCurioData> {
 	}
 
 	default Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
-		return HashMultimap.create();
+		return LinkedHashMultimap.create();
 	}
 
 	default void curioTick(ItemStack stack, SlotContext slotContext) {

@@ -14,10 +14,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class RingOfDivinity extends CurioItem implements ISimpleCapItem {
+public class RingOfDivinity extends CurioItem implements ICurioItem {
 
 	public RingOfDivinity(Properties properties) {
 		super(properties);
@@ -30,7 +31,7 @@ public class RingOfDivinity extends CurioItem implements ISimpleCapItem {
 	}
 
 	@Override
-	public void curioTick(ItemStack stack, SlotContext slotContext) {
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
 		LivingEntity wearer = slotContext.entity();
 		if (wearer == null) return;
 		EffectUtil.refreshEffect(wearer, new MobEffectInstance(LCEffects.CLEANSE.get(), 40,

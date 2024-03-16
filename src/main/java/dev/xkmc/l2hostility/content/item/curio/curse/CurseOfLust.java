@@ -19,15 +19,13 @@ public class CurseOfLust extends CurseCurioItem {
 	}
 
 	@Override
-	public int getExtraLevel(ItemStack stack) {
+	public int getExtraLevel() {
 		return LHConfig.COMMON.lustExtraLevel.get();
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		int lv = LHConfig.COMMON.lustExtraLevel.get();
 		list.add(LangData.ITEM_CHARM_LUST.get().withStyle(ChatFormatting.GOLD));
-		list.add(LangData.ITEM_CHARM_ADD_LEVEL.get(lv).withStyle(ChatFormatting.RED));
 	}
 
 }

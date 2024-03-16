@@ -31,16 +31,14 @@ public class CurseOfWrath extends CurseCurioItem {
 	}
 
 	@Override
-	public int getExtraLevel(ItemStack stack) {
+	public int getExtraLevel() {
 		return LHConfig.COMMON.wrathExtraLevel.get();
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		int rate = (int) Math.round(100 * LHConfig.COMMON.wrathDamageBonus.get());
-		int lv = LHConfig.COMMON.wrathExtraLevel.get();
 		list.add(LangData.ITEM_CHARM_WRATH.get(rate).withStyle(ChatFormatting.GOLD));
-		list.add(LangData.ITEM_CHARM_ADD_LEVEL.get(lv).withStyle(ChatFormatting.RED));
 		ResourceLocation id = ForgeRegistries.ITEMS.getKey(this);
 		assert id != null;
 		addTooltip(list, ArmorEffectConfig.get().getImmunity(id.toString()));

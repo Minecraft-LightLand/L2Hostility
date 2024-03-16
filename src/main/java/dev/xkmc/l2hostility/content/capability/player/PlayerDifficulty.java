@@ -153,7 +153,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		int ans = 0;
 		ans += getDimCount() * LHConfig.COMMON.dimensionFactor.get();
 		for (var stack : CurseCurioItem.getFromPlayer(player)) {
-			ans += stack.item().getExtraLevel(stack.stack());
+			ans += stack.item().getExtraLevel();
 		}
 		return ans;
 	}
@@ -161,7 +161,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	public List<Component> getPlayerDifficultyDetail() {
 		int item = 0;
 		for (var stack : CurseCurioItem.getFromPlayer(player)) {
-			item += stack.item().getExtraLevel(stack.stack());
+			item += stack.item().getExtraLevel();
 		}
 		int dim = getDimCount() * LHConfig.COMMON.dimensionFactor.get();
 		return List.of(

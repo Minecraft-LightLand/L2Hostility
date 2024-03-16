@@ -14,10 +14,11 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class PocketOfRestoration extends CurioItem implements ISimpleCapItem {
+public class PocketOfRestoration extends CurioItem implements ICurioItem {
 
 	public static final String ROOT = "UnsealRoot", KEY = "SealedSlotKey", START = "UnsealStartTime";
 
@@ -36,7 +37,7 @@ public class PocketOfRestoration extends CurioItem implements ISimpleCapItem {
 	}
 
 	@Override
-	public void curioTick(ItemStack stack, SlotContext slotContext) {
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
 		var le = slotContext.entity();
 		if (le.level().isClientSide) return;
 		var list = CurioCompat.getItemAccess(le);

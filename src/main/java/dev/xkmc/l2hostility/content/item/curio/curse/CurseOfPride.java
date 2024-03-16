@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.item.curio.curse;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
@@ -25,7 +24,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import java.util.List;
 import java.util.UUID;
 
-public class CurseOfPride extends CurseCurioItem implements ISimpleCapItem {
+public class CurseOfPride extends CurseCurioItem {
 
 	private static final String NAME = "l2hostility:pride";
 	private static final UUID ID = MathHelper.getUUIDFromString(NAME);
@@ -51,7 +50,7 @@ public class CurseOfPride extends CurseCurioItem implements ISimpleCapItem {
 	}
 
 	@Override
-	public void curioTick(ItemStack stack, SlotContext slotContext) {
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
 		LivingEntity wearer = slotContext.entity();
 		if (wearer == null) return;
 		int level = DifficultyLevel.ofAny(wearer);
@@ -59,8 +58,8 @@ public class CurseOfPride extends CurseCurioItem implements ISimpleCapItem {
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
-		Multimap<Attribute, AttributeModifier> ans = HashMultimap.create();
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+		Multimap<Attribute, AttributeModifier> ans = super.getAttributeModifiers(slotContext, uuid, stack);
 		LivingEntity wearer = slotContext.entity();
 		int level = wearer == null ? 0 : DifficultyLevel.ofAny(wearer);
 		if (level > 0) {

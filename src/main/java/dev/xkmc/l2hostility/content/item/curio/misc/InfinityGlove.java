@@ -13,11 +13,12 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 import java.util.UUID;
 
-public class InfinityGlove extends CurioItem implements ISimpleCapItem {
+public class InfinityGlove extends CurioItem implements ICurioItem {
 
 	public InfinityGlove(Properties properties) {
 		super(properties);
@@ -28,7 +29,7 @@ public class InfinityGlove extends CurioItem implements ISimpleCapItem {
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
 		Multimap<Attribute, AttributeModifier> map = HashMultimap.create();
 		CuriosApi.addSlotModifier(map, "ring", uuid, 5, AttributeModifier.Operation.ADDITION);
 		CuriosApi.addSlotModifier(map, "charm", uuid, 1, AttributeModifier.Operation.ADDITION);

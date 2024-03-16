@@ -20,7 +20,7 @@ public class Abrahadabra extends CurseCurioItem {
 	}
 
 	@Override
-	public int getExtraLevel(ItemStack stack) {
+	public int getExtraLevel() {
 		return LHConfig.COMMON.abrahadabraExtraLevel.get();
 	}
 
@@ -32,8 +32,6 @@ public class Abrahadabra extends CurseCurioItem {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.ABRAHADABRA.get().withStyle(ChatFormatting.GOLD));
-		int lv = LHConfig.COMMON.abrahadabraExtraLevel.get();
-		list.add(LangData.ITEM_CHARM_ADD_LEVEL.get(lv).withStyle(ChatFormatting.RED));
 	}
 
 }
