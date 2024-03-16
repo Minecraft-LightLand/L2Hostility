@@ -3,13 +3,7 @@
   "category": "misc",
   "key": {
     "A": {
-      "item": "l2hostility:ragnarok"
-    },
-    "B": {
-      "item": "l2hostility:repelling"
-    },
-    "C": {
-      "item": "l2hostility:pulling"
+      "item": "l2complements:guardian_eye"
     },
     "E": {
       "item": "l2complements:eternium_ingot"
@@ -17,17 +11,17 @@
     "I": {
       "item": "l2hostility:miracle_ingot"
     },
-    "O": {
-      "item": "l2hostility:ring_of_reflection"
+    "X": {
+      "item": "l2complements:blackstone_core"
     }
   },
   "pattern": [
     "AIA",
-    "EOE",
-    "BIC"
+    "IEI",
+    "XIX"
   ],
   "result": {
-    "item": "l2hostility:abrahadabra"
+    "item": "l2hostility:abyssal_thorn"
   },
   "show_notification": true
 }

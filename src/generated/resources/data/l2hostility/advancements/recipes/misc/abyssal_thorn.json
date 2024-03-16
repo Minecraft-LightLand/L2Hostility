@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "l2hostility:pocket_of_restoration"
+        "recipe": "l2hostility:abyssal_thorn"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "l2hostility:pocket_of_restoration"
+      "l2hostility:abyssal_thorn"
     ]
   },
   "sends_telemetry_event": false

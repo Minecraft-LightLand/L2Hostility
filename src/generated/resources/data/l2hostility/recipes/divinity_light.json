@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:killer_aura"
+    },
+    "E": {
+      "item": "l2hostility:gravity"
+    },
+    "I": {
+      "item": "l2hostility:curse_of_sloth"
+    },
+    "S": {
+      "item": "l2hostility:hostility_orb"
+    },
+    "T": {
+      "item": "l2hostility:miracle_ingot"
+    }
+  },
+  "pattern": [
+    "STS",
+    "TIT",
+    "ETA"
+  ],
+  "result": {
+    "item": "l2hostility:divinity_light"
+  },
+  "show_notification": true
+}

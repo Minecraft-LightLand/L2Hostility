@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chaos_ingot": {
+    "has_miracle_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "l2hostility:chaos_ingot"
+              "l2hostility:miracle_ingot"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_chaos_ingot",
+      "has_miracle_ingot",
       "has_the_recipe"
     ]
   ],

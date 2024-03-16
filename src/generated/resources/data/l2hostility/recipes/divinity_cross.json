@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:killer_aura"
+    },
+    "E": {
+      "item": "l2hostility:drain"
+    },
+    "I": {
+      "item": "l2hostility:miracle_ingot"
+    },
+    "S": {
+      "item": "l2hostility:witch_droplet"
+    },
+    "T": {
+      "item": "l2complements:life_essence"
+    }
+  },
+  "pattern": [
+    "STS",
+    "TIT",
+    "ETA"
+  ],
+  "result": {
+    "item": "l2hostility:divinity_cross"
+  },
+  "show_notification": true
+}
