@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.content.item.consumable.*;
 import dev.xkmc.l2hostility.content.item.curio.curse.*;
 import dev.xkmc.l2hostility.content.item.curio.misc.*;
 import dev.xkmc.l2hostility.content.item.curio.ring.*;
+import dev.xkmc.l2hostility.content.item.tool.Detector;
 import dev.xkmc.l2hostility.content.item.tool.DetectorGlasses;
 import dev.xkmc.l2hostility.content.item.tool.WitchWand;
 import dev.xkmc.l2hostility.content.item.traits.SealedItem;
@@ -41,7 +42,7 @@ public class LHItems {
 	public static final ItemEntry<EffectBoosterBottle> BOOSTER_POTION;
 	public static final ItemEntry<HostilityChargeItem> WITCH_CHARGE, ETERNAL_WITCH_CHARGE;
 
-	public static final ItemEntry<Item> DETECTOR;
+	public static final ItemEntry<Detector> DETECTOR;
 	public static final ItemEntry<DetectorGlasses> DETECTOR_GLASSES;
 	public static final ItemEntry<WitchWand> WITCH_WAND;
 	public static final ItemEntry<BookCopy> BOOK_COPY;
@@ -130,11 +131,10 @@ public class LHItems {
 
 			TagKey<Item> head = ItemTags.create(new ResourceLocation("curios", "head"));
 
-			DETECTOR = L2Hostility.REGISTRATE.item(
-					"hostility_detector", p -> new Item(p.stacksTo(1))).register();
-			DETECTOR_GLASSES = L2Hostility.REGISTRATE.item(
-							"detector_glasses", p -> new DetectorGlasses(p.stacksTo(1)))
-					.tag(head).register();
+			DETECTOR = L2Hostility.REGISTRATE.item("hostility_detector",
+					p -> new Detector(p.stacksTo(1))).register();
+			DETECTOR_GLASSES = L2Hostility.REGISTRATE.item("detector_glasses",
+							p -> new DetectorGlasses(p.stacksTo(1))).tag(head).register();
 
 			TagKey<Item> chaos = LHTagGen.CHAOS_CURIO;
 

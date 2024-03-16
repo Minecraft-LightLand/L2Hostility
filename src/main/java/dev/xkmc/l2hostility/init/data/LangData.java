@@ -2,8 +2,10 @@ package dev.xkmc.l2hostility.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Locale;
 
@@ -30,6 +32,8 @@ public enum LangData {
 	ITEM_WAND_ADDER("item.wand.adder", "Right click blocks to select trait. Right click mobs to select trait rank. Press shift to select in opposite direction.", 0),
 
 	ITEM_GLASSES("item.equipment.glasses", "Allow you to see invisible mobs, and see mobs when you have blindness or darkness effects", 0),
+	ITEM_DETECTOR("item.equipment.detector", "Shows player and regional difficulty information when held in hand / offhand", 0),
+	ITEM_SECTION_RENDER("item.equipment.section_render", "Hold [%s] and Equip [%s] to see regions cleared of hostility", 2),
 	ITEM_SPAWNER("item.spawner", "Summon strong mobs. Kill them all to make a chunk section no longer spawn mobs with levels", 0),
 	ITEM_ORB("item.consumable.orb", "Make %sx%sx%s chunk sections no longer spawn mobs with levels.", 3),
 	ITEM_BOTTLE_CURSE("item.consumable.bottle_of_curse", "Increase player difficulty by %s", 1),
@@ -171,6 +175,14 @@ public enum LangData {
 
 	public static MutableComponent translate(String key, Object... objs) {
 		return Component.translatable(key, objs);
+	}
+
+	public static MutableComponent item(ItemStack stack) {
+		return stack.getHoverName().copy().withStyle(stack.getRarity().getStyleModifier());
+	}
+
+	public static MutableComponent sectionRender() {
+		return ITEM_SECTION_RENDER.get(item(LHItems.DETECTOR.asStack()), item(LHItems.DETECTOR_GLASSES.asStack()));
 	}
 
 }

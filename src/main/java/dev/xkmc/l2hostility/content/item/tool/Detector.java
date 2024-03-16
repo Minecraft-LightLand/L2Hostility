@@ -12,20 +12,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DetectorGlasses extends Item {
+public class Detector extends Item {
 
-	public DetectorGlasses(Properties properties) {
+	public Detector(Properties properties) {
 		super(properties);
 	}
 
 	@Override
-	public @Nullable EquipmentSlot getEquipmentSlot(ItemStack stack) {
-		return EquipmentSlot.HEAD;
-	}
-
-	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.ITEM_GLASSES.get().withStyle(ChatFormatting.GRAY));
+		list.add(LangData.ITEM_DETECTOR.get().withStyle(ChatFormatting.GRAY));
 		list.add(LangData.sectionRender().withStyle(ChatFormatting.DARK_GREEN));
 	}
 

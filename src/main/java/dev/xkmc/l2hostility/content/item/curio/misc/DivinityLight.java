@@ -39,7 +39,7 @@ public class DivinityLight extends CurseCurioItem implements ISimpleCapItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.DIVINITY_LIGHT.get().withStyle(ChatFormatting.GRAY));
+		list.add(LangData.DIVINITY_LIGHT.get().withStyle(ChatFormatting.GOLD));
 	}
 
 }

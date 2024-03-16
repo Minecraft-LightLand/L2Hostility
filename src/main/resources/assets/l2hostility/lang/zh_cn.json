@@ -176,6 +176,8 @@
   "l2hostility.item.consumable.bottle_of_curse": "玩家难度等级提升%s",
   "l2hostility.item.consumable.bottle_of_sanity": "清空玩家基础难度等级",
   "l2hostility.item.equipment.glasses": "让你能看见隐身怪物，以及在失明/黑暗效果下看见怪物",
+  "l2hostility.item.equipment.detector": "在主副手持有时显示玩家和区域难度信息",
+  "l2hostility.item.equipment.section_render": "持有[%s]且佩戴[%s]时渲染被净化的区域",
   "l2hostility.item.equipment.curse_add_level": "玩家难度提升%s",
   "l2hostility.item.equipment.curse_no_drop": "玩家击杀的怪物不会掉落词条掉落物",
   "l2hostility.item.equipment.curse_of_envy": "击杀怪物获取其词条，概率为词条每阶%s%%",
