@@ -28,6 +28,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraftforge.fml.ModList;
@@ -52,7 +53,7 @@ public class LHConfigGen extends ConfigDataProvider {
 						MobEffects.MOVEMENT_SLOWDOWN, MobEffects.DIG_SLOWDOWN, MobEffects.WEAKNESS));
 
 		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "overworld"), new WorldDifficultyConfig()
-				.putDim(BuiltinDimensionTypes.OVERWORLD, 0, 0, 4, 1)
+				.putDim(Level.OVERWORLD, 0, 0, 4, 1)
 				.putBiome(0, 5, 1, 0,
 						Biomes.LUSH_CAVES,
 						Biomes.FOREST, Biomes.FLOWER_FOREST, Biomes.BIRCH_FOREST,
@@ -82,11 +83,11 @@ public class LHConfigGen extends ConfigDataProvider {
 		);
 
 		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "nether"), new WorldDifficultyConfig()
-				.putDim(BuiltinDimensionTypes.NETHER, 0, 20, 9, 1.2)
+				.putDim(Level.NETHER, 0, 20, 9, 1.2)
 		);
 
 		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "end"), new WorldDifficultyConfig()
-				.putDim(BuiltinDimensionTypes.END, 0, 40, 16, 1.5)
+				.putDim(Level.END, 0, 40, 16, 1.5)
 		);
 
 		collector.add(L2Hostility.ENTITY, new ResourceLocation(L2Hostility.MODID, "bosses"), new EntityConfig()

@@ -59,7 +59,7 @@ public class SectionDifficulty {
 
 	private void modifyInstanceInternal(Level level, BlockPos pos, MobDifficultyCollector instance) {
 		var levelDiff = L2Hostility.DIFFICULTY.getMerged()
-				.levelMap.get(level.dimensionTypeId().location());
+				.levelMap.get(level.dimension().location());
 		if (levelDiff == null) {
 			levelDiff = WorldDifficultyConfig.defaultLevel();
 		}
@@ -73,7 +73,7 @@ public class SectionDifficulty {
 	public List<Component> getSectionDifficultyDetail(Player player) {
 		if (isCleared()) return List.of();
 		var levelDiff = L2Hostility.DIFFICULTY.getMerged()
-				.levelMap.get(player.level().dimensionTypeId().location());
+				.levelMap.get(player.level().dimension().location());
 		int dim = levelDiff == null ? WorldDifficultyConfig.defaultLevel().base() : levelDiff.base();
 		BlockPos pos = player.blockPosition();
 		Holder<Biome> biome = player.level().getBiome(pos);

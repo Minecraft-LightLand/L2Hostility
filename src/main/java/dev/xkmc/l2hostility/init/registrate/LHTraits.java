@@ -126,7 +126,7 @@ public class LHTraits {
 									LHConfig.COMMON.shulkerInterval::get, BulletType.PLAIN, 0),
 							rl -> new TraitConfig(rl, 30, 100, 1, 70)
 									.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS)))
-					.desc("Shoot bullets every %s seconds")
+					.desc("Shoot bullets every %s seconds after the previous bullet disappears.")
 					.lang("Shulker").register();
 
 			GRENADE = L2Hostility.REGISTRATE.regTrait("grenade", () -> new ShulkerTrait(ChatFormatting.RED,

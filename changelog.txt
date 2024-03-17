@@ -2,8 +2,14 @@
 - TODO press alt to show blacklist/whitelist
 
 2.4.19
-- Make Reflect reflect only forge:direct damage
+- Make Reflect trait reflect only forge:direct damage
 - Make Arena not blocked by reflection ring and abrahadabra
+- Make Shulker only shoot bullet after first one disappears
+- Make Hostility Spanwer can only spawn mobs with level
+- Add Abyssal Thorn, Divine Cross, and Divine Light
+- Allow visualization of cleared levels
+- Allow mob-specific level config to add condition and chance to traits
+- Limit Teleport trait active teleport distance
 
 2.4.18
 - Reduce reprint scaling by half

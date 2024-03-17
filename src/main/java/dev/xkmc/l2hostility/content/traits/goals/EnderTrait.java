@@ -28,9 +28,13 @@ public class EnderTrait extends LegendaryTrait {
 	public void tick(LivingEntity mob, int level) {
 		if (mob.level().isClientSide()) return;
 		int duration = LHConfig.COMMON.teleportDuration.get();
+		int r = LHConfig.COMMON.teleportRange.get();
 		if (mob.tickCount % duration == 0 && mob instanceof Mob m && m.getTarget() != null) {
 			Vec3 old = mob.position();
 			Vec3 target = m.getTarget().position();
+			if (target.distanceTo(old) > r) {
+				target = target.subtract(old).normalize().scale(r).add(old);
+			}
 			EntityTeleportEvent.EnderEntity event = ForgeEventFactory.onEnderTeleport(m, target.x, target.y, target.z);
 			if (event.isCanceled()) return;
 			mob.teleportTo(target.x(), target.y(), target.z());

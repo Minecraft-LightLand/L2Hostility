@@ -7,6 +7,7 @@ import dev.xkmc.l2library.serial.config.ConfigCollect;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.dimension.DimensionType;
 
@@ -35,7 +36,7 @@ public class WorldDifficultyConfig extends BaseConfig {
 
 	}
 
-	public WorldDifficultyConfig putDim(ResourceKey<DimensionType> key, int min, int base, double var, double scale) {
+	public WorldDifficultyConfig putDim(ResourceKey<Level> key, int min, int base, double var, double scale) {
 		levelMap.put(key.location(), new DifficultyConfig(min, base, var, scale, 1, 1));
 		return this;
 	}

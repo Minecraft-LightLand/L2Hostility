@@ -90,17 +90,16 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 				if (entity instanceof Creeper) continue;
 				entity.setPos(Vec3.atCenterOf(getBlockPos()));
 				if (entity instanceof LivingEntity le) {
-					if (MobTraitCap.HOLDER.isProper(le)) {
-						MobTraitCap cap = MobTraitCap.HOLDER.get(le);
-						cap.summoned = true;
-						cap.noDrop = true;
-						cap.pos = getBlockPos();
-						cap.init(level, le, (a, b) -> {
-							cdcap.get().modifyInstance(a, b);
-							b.acceptBonusFactor(getBonusFactor());
-							b.setFullChance();
-						});
-					}
+					if (!MobTraitCap.HOLDER.isProper(le)) continue;
+					MobTraitCap cap = MobTraitCap.HOLDER.get(le);
+					cap.summoned = true;
+					cap.noDrop = true;
+					cap.pos = getBlockPos();
+					cap.init(level, le, (a, b) -> {
+						cdcap.get().modifyInstance(a, b);
+						b.acceptBonusFactor(getBonusFactor());
+						b.setFullChance();
+					});
 					entity.setPos(Vec3.atCenterOf(getBlockPos().above()));
 					data.add(le);
 					level.addFreshEntity(entity);

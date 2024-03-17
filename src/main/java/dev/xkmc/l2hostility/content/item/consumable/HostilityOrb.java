@@ -61,6 +61,7 @@ public class HostilityOrb extends Item {
 		if (!LHConfig.COMMON.allowHostilityOrb.get()) list.add(BANNED.get());
 		int r = LHConfig.COMMON.orbRadius.get() * 2 + 1;
 		list.add(LangData.ITEM_ORB.get(r, r, r).withStyle(ChatFormatting.GRAY));
+		list.add(LangData.sectionRender().withStyle(ChatFormatting.DARK_GREEN));
 	}
 
 }

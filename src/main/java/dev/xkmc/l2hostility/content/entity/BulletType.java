@@ -13,7 +13,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public enum BulletType {
-	PLAIN(4, false), EXPLODE(4, true);
+	PLAIN(4, true), EXPLODE(4, true);
 
 	private final float damage;
 	private final boolean limit;

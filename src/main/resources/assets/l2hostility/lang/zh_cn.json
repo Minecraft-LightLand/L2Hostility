@@ -96,7 +96,7 @@
   "trait.l2hostility.grenade": "榴弹",
   "trait.l2hostility.grenade.desc": "发射会爆炸的潜影榴弹，不会破坏方块。上一个子弹消失后%s秒发射下一个。",
   "trait.l2hostility.shulker": "潜影",
-  "trait.l2hostility.shulker.desc": "每%s秒发射潜影子弹",
+  "trait.l2hostility.shulker.desc": "发射潜影子弹。上一个子弹消失后%s秒发射下一个",
   "trait.l2hostility.growth": "生长",
   "trait.l2hostility.growth.desc": "史莱姆自动获得再生词条，满血时长大",
   "trait.l2hostility.split": "分裂",
