@@ -26,9 +26,11 @@ import dev.xkmc.l2library.serial.config.PacketHandlerWithConfig;
 import dev.xkmc.l2serial.network.SerialPacketBase;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -97,6 +99,12 @@ public class L2Hostility {
 						"Find out the mechanics and mob traits to know what to prepare for",
 						1, LHBlocks.TAB.getKey());
 		AttackEventHandler.register(4500, new LHAttackListener());
+	}
+
+
+	@SubscribeEvent
+	public static void modifyAttributes(EntityAttributeModificationEvent event) {
+		event.add(EntityType.PLAYER, LHMiscs.ADD_LEVEL.get());
 	}
 
 	@SubscribeEvent

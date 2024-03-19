@@ -4,7 +4,6 @@ import com.google.common.collect.Multimap;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
-import dev.xkmc.l2hostility.content.item.curio.core.ISimpleCapItem;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -58,9 +57,8 @@ public class CurseOfPride extends CurseCurioItem {
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-		Multimap<Attribute, AttributeModifier> ans = super.getAttributeModifiers(slotContext, uuid, stack);
-		LivingEntity wearer = slotContext.entity();
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(@Nullable LivingEntity wearer, UUID uuid) {
+		Multimap<Attribute, AttributeModifier> ans = super.getAttributeModifiers(wearer, uuid);
 		int level = wearer == null ? 0 : DifficultyLevel.ofAny(wearer);
 		if (level > 0) {
 			double rate = LHConfig.COMMON.prideHealthBonus.get() * level;

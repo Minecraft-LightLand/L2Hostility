@@ -2,10 +2,12 @@ package dev.xkmc.l2hostility.content.traits.highlevel;
 
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.common.AuraEffectTrait;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public class ArenaTrait extends AuraEffectTrait {
@@ -27,6 +29,11 @@ public class ArenaTrait extends AuraEffectTrait {
 		if (event.getSource().getEntity() instanceof LivingEntity attacker) {
 			if (attacker.hasEffect(LHEffects.ANTIBUILD.get())) {
 				return;
+			}
+			if (attacker instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob)) {
+				if (MobTraitCap.HOLDER.get(mob).getTraitLevel(this) >= level) {
+					return;
+				}
 			}
 		}
 		event.setCanceled(true);

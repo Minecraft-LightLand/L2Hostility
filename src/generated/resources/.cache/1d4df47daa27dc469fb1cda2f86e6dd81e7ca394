@@ -1,7 +1,7 @@
-// 1.20.1	2024-03-17T00:32:53.758138	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (traits), Patchouli Provider]
+// 1.20.1	2024-03-19T10:05:28.181555	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (attributes), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
-0326c035a2cf9246011cf28d7af7aa025299ad76 assets/l2hostility/lang/en_ud.json
-c6a96ae3dd6f4d2d6624b60ce95c4702cb96d2d3 assets/l2hostility/lang/en_us.json
+74874d3629ac4e0dd98fc0882305ca1f420e3cdf assets/l2hostility/lang/en_ud.json
+041bd3f59c8bec8cc1917174728122ddd3bd19ae assets/l2hostility/lang/en_us.json
 55c31fd97776999c18d0f2503db0ab0f48f978ca assets/l2hostility/models/block/hostility_spawner.json
 de5c51bce5800765c4480502c92b16feb891e135 assets/l2hostility/models/block/hostility_spawner_activated.json
 4fc08943953876aaddfa8b72bdf177b446377ce1 assets/l2hostility/models/block/hostility_spawner_clear.json
@@ -113,6 +113,7 @@ f40b938a37ab6a019c334f304104e1b0c368cc79 data/l2complements/recipes/insulator.js
 f9d10834648ee56c08d88386a28c7b0460144792 data/l2complements/recipes/split_suppressor.json
 c243d4887734cec7eddf3a30c7a0717a725e6cd3 data/l2complements/recipes/split_suppressor_ars.json
 4b9d05f8d5dca02f6cf4f92c3c35a1a94303ad10 data/l2complements/tags/mob_effect/skill_effect.json
+2c9ab6950527105198fde5e278bd3ff599cf1bdc data/l2damagetracker/tags/attribute/negative.json
 1a2af9ac388144c82d780687dc2d80e0707cade1 data/l2hostility/advancements/hostility/abrahadabra.json
 b1f0948dec552920468cd47e2f8a8f99123aa9ad data/l2hostility/advancements/hostility/breed.json
 5438d24ee2cef442d96f87c920c8557262290d37 data/l2hostility/advancements/hostility/detector.json

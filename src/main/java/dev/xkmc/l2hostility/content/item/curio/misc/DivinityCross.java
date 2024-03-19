@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.item.curio.misc;
 
 import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2complements.content.item.curios.EffectValidItem;
+import dev.xkmc.l2hostility.content.item.curio.core.MultiSlotItem;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DivinityCross extends CurioItem implements EffectValidItem {
+public class DivinityCross extends MultiSlotItem implements EffectValidItem {
 
 	public DivinityCross(Properties props) {
 		super(props);

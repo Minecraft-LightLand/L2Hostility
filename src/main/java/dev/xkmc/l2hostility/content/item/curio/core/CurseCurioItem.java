@@ -2,14 +2,16 @@ package dev.xkmc.l2hostility.content.item.curio.core;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2damagetracker.contents.curios.AttrTooltip;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.code.GenericItemStack;
+import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,14 +20,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class CurseCurioItem extends CurioItem implements ICurioItem {
+public class CurseCurioItem extends MultiSlotItem {
 
 	public static List<GenericItemStack<CurseCurioItem>> getFromPlayer(LivingEntity player) {
 		var list = CurioCompat.getItems(player, e -> e.getItem() instanceof CurseCurioItem);
@@ -43,7 +45,11 @@ public class CurseCurioItem extends CurioItem implements ICurioItem {
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+	public final Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+		return getAttributeModifiers(slotContext.entity(), uuid);
+	}
+
+	protected Multimap<Attribute, AttributeModifier> getAttributeModifiers(@Nullable LivingEntity wearer, UUID uuid) {
 		Multimap<Attribute, AttributeModifier> map = LinkedHashMultimap.create();
 		int lv = getExtraLevel();
 		if (lv > 0) {
@@ -52,6 +58,12 @@ public class CurseCurioItem extends CurioItem implements ICurioItem {
 			map.put(LHMiscs.ADD_LEVEL.get(), new AttributeModifier(uuid, id.getPath(), lv, AttributeModifier.Operation.ADDITION));
 		}
 		return map;
+	}
+
+	@Override
+	public List<Component> getAttributesTooltip(List<Component> tooltips, ItemStack stack) {
+		return AttrTooltip.modifyTooltip(super.getAttributesTooltip(tooltips, stack),
+				getAttributeModifiers(Proxy.getPlayer(), Util.NIL_UUID), false);
 	}
 
 	public int getExtraLevel() {

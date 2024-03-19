@@ -162,12 +162,6 @@ repositories {
             includeGroup "mezz.jei"
         }
     }
-    maven { // Registrate
-        url "https://maven.tterrag.com/"
-        content {
-            includeGroup "com.tterrag.registrate"
-        }
-    }
     maven {
         url 'https://www.cursemaven.com'
         content {
@@ -178,12 +172,6 @@ repositories {
         url = "https://maven.theillusivec4.top/"
         content {
             includeGroup "top.theillusivec4.curios"
-        }
-    }
-    maven {
-        url 'https://jitpack.io'
-        content {
-            includeGroup "com.github.llamalad7.mixinextras"
         }
     }
 }
@@ -198,7 +186,11 @@ dependencies {
         jarJar.ranged(it, "[1.1.0,)")
     }
 
-    implementation fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.3.0")
+    implementation(jarJar(fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.3.7"))) {
+        transitive = false
+        jarJar.ranged(it, "[0.3.7,)")
+    }
+
     implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.3.1")
     implementation fg.deobf("dev.xkmc.l2weaponry:l2weaponry:2.4.26")
     implementation fg.deobf("dev.xkmc.l2archery:l2archery:2.4.13")

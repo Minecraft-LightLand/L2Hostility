@@ -1,6 +1,10 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+2.4.20
+- Allow mobs with Arena to attack other mobs with Arena
+- Make additional player difficulty an attribute
+
 2.4.19
 - Make Reflect trait reflect only forge:direct damage
 - Make Arena not blocked by reflection ring and abrahadabra
@@ -10,6 +14,7 @@
 - Allow visualization of cleared levels
 - Allow mob-specific level config to add condition and chance to traits
 - Limit Teleport trait active teleport distance
+- Change Level Difficulty from using DimensionType ID to Level ID
 
 2.4.18
 - Reduce reprint scaling by half

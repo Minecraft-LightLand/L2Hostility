@@ -55,7 +55,7 @@
   "advancements.l2hostility.advancements.hostility.trait.title": "Gate to the New World",
   "advancements.l2hostility.advancements.hostility.wrath.description": "Obtain Curse of Wrath",
   "advancements.l2hostility.advancements.hostility.wrath.title": "Revenge Time",
-  "attribute.name.extra_difficulty": "Extra Difficulty",
+  "attribute.l2hostility.extra_difficulty": "Extra Difficulty",
   "block.l2hostility.hostility_spawner": "Hostility Spawner",
   "config.jade.plugin_l2hostility.mob": "L2Hostility",
   "curios.identifier.hostility_curse": "L2Hostility - Curse",

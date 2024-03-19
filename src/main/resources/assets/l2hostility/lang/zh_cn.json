@@ -135,6 +135,7 @@
   "entity.l2hostility.hostility_charge": "恶意弹",
   "curios.identifier.hostility_curse": "恶意-诅咒",
   "curios.modifiers.hostility_curse": "作为恶意诅咒装备时:",
+  "attribute.l2hostility.extra_difficulty": "额外难度",
   "l2hostility.command.mob.success": "指令已对%s个怪物起效",
   "l2hostility.command.player.fail": "指令无目标或者无效",
   "l2hostility.command.player.get_base": "%s的基础难度等级位Lv.%s",

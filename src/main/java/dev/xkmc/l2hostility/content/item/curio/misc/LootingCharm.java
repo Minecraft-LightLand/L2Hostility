@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.item.curio.misc;
 
 import dev.xkmc.l2complements.content.item.curios.CurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.MultiSlotItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class LootingCharm extends CurioItem {
+public class LootingCharm extends MultiSlotItem {
 
 	public LootingCharm(Properties properties) {
 		super(properties);

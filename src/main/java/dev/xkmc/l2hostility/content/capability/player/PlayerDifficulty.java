@@ -14,6 +14,7 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
@@ -152,17 +153,12 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	private int getExtraLevel() {
 		int ans = 0;
 		ans += getDimCount() * LHConfig.COMMON.dimensionFactor.get();
-		for (var stack : CurseCurioItem.getFromPlayer(player)) {
-			ans += stack.item().getExtraLevel();
-		}
+		ans += (int) player.getAttributeValue(LHMiscs.ADD_LEVEL.get());
 		return ans;
 	}
 
 	public List<Component> getPlayerDifficultyDetail() {
-		int item = 0;
-		for (var stack : CurseCurioItem.getFromPlayer(player)) {
-			item += stack.item().getExtraLevel();
-		}
+		int item = (int) player.getAttributeValue(LHMiscs.ADD_LEVEL.get());
 		int dim = getDimCount() * LHConfig.COMMON.dimensionFactor.get();
 		return List.of(
 				LangData.INFO_PLAYER_ADAPTIVE_LEVEL.get(difficulty.level).withStyle(ChatFormatting.GRAY),
