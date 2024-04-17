@@ -12,9 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Drowned;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -24,16 +22,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.Set;
 
 public class ItemPopulator {
+
 	static void populateArmors(LivingEntity le, int lv) {
-		int rank = Math.min(4, lv / LHConfig.COMMON.armorFactor.get() - 1);
-		if (rank < 0) return;
+		var r = le.getRandom();
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			if (slot.getType() == EquipmentSlot.Type.ARMOR) {
-				ItemStack stack = le.getItemBySlot(slot);
-				if (stack.isEmpty()) {
-					Item item = Mob.getEquipmentForSlot(slot, rank);
-					if (item != null) {
-						le.setItemSlot(slot, new ItemStack(item));
+				if (le.getItemBySlot(slot).isEmpty()) {
+					ItemStack stack = WeaponConfig.getRandomArmor(slot, lv, r);
+					if (!stack.isEmpty()) {
+						le.setItemSlot(slot, stack);
 					}
 				}
 			}
@@ -44,7 +41,7 @@ public class ItemPopulator {
 		var manager = ForgeRegistries.ITEMS.tags();
 		if (manager == null) return;
 		if (le instanceof Drowned && le.getMainHandItem().isEmpty()) {
-			double factor = cap.getLevel() / 16d / LHConfig.COMMON.armorFactor.get();
+			double factor = cap.getLevel() * LHConfig.COMMON.drownedTridentChancePerLevel.get();
 			if (factor > le.getRandom().nextDouble()) {
 				le.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.TRIDENT));
 			}

@@ -1,6 +1,13 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+2.4.21
+- Add armor spawn config datapack
+- Add config for trident spawn on drowned
+- Add config for spawner spawned hostility loot drop rate
+- Improve client side performance
+- Attempt to fix a rare unreproducible crash
+
 2.4.20
 - Allow mobs with Arena to attack other mobs with Arena
 - Make additional player difficulty an attribute

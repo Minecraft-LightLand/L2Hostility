@@ -30,7 +30,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import twilightforest.TwilightForestMod;
@@ -105,6 +104,17 @@ public class LHConfigGen extends ConfigDataProvider {
 						EntityConfig.trait(LHTraits.CURSED.get(), 0, 1)
 				))
 				.putEntity(100, 50, 1, 0, List.of(EntityType.ENDER_DRAGON), List.of())
+		);
+
+
+		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Hostility.MODID, "armors"), new WeaponConfig()
+				.putArmor(0, 200, Items.AIR)
+				.putArmor(20, 100, Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS)
+				.putArmor(35, 100, Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS)
+				.putArmor(45, 100, Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS)
+				.putArmor(60, 200, Items.IRON_HELMET, Items.IRON_CHESTPLATE, Items.IRON_LEGGINGS, Items.IRON_BOOTS)
+				.putArmor(80, 300, Items.DIAMOND_HELMET, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_LEGGINGS, Items.DIAMOND_BOOTS)
+				.putArmor(100, 100, Items.NETHERITE_HELMET, Items.NETHERITE_CHESTPLATE, Items.NETHERITE_LEGGINGS, Items.NETHERITE_BOOTS)
 		);
 
 		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Hostility.MODID, "vanilla"), new WeaponConfig()

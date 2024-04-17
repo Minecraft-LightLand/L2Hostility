@@ -1,4 +1,4 @@
-// 1.20.1	2024-03-19T10:05:28.181555	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Tags (mob_effects), Tags (enchantments), Tags (attributes), Tags (traits), Patchouli Provider]
+// 1.20.1	2024-04-13T17:33:19.47799	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (mob_effects), Tags (enchantments), Tags (attributes), Tags (traits), Patchouli Provider]
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 74874d3629ac4e0dd98fc0882305ca1f420e3cdf assets/l2hostility/lang/en_ud.json
 041bd3f59c8bec8cc1917174728122ddd3bd19ae assets/l2hostility/lang/en_us.json

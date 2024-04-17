@@ -34,10 +34,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
@@ -232,6 +229,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			}
 		}
 		if (isInitialized() && !traits.isEmpty()) {
+			traits.keySet().removeIf(Objects::isNull);
 			traits.keySet().removeIf(MobTrait::isBanned);
 			traits.forEach((k, v) -> k.tick(mob, v));
 			clearPending(mob);

@@ -6,9 +6,11 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficultyCap;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -43,12 +45,17 @@ public class CapabilityEvents {
 		}
 	}
 
-	private static void initMob(LivingEntity mob) {
+	private static void initMob(LivingEntity mob, MobSpawnType type) {
 		if (MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			if (!mob.level().isClientSide() && !cap.isInitialized()) {
 				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
-				opt.ifPresent(chunkDifficulty -> cap.init(mob.level(), mob, chunkDifficulty));
+				if (opt.isPresent()) {
+					cap.init(mob.level(), mob, opt.get());
+					if (type == MobSpawnType.SPAWNER) {
+						cap.dropRate = LHConfig.COMMON.dropRateFromSpawner.get();
+					}
+				}
 			}
 		}
 	}
@@ -56,7 +63,7 @@ public class CapabilityEvents {
 	@SubscribeEvent
 	public static void onEntitySpawn(MobSpawnEvent.FinalizeSpawn event) {
 		LivingEntity mob = event.getEntity();
-		initMob(mob);
+		initMob(mob, event.getSpawnType());
 	}
 
 

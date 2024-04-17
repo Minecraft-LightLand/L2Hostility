@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -33,10 +34,20 @@ public class ClientGlowingHandler {
 		return false;
 	}
 
+	private static int cacheTick;
+	private static boolean cacheGlass;
+
+	private static boolean playerHasGlass(Player player) {
+		if (player.tickCount == cacheTick) return cacheGlass;
+		cacheGlass = CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR_GLASSES.get());
+		cacheTick = player.tickCount;
+		return cacheGlass;
+	}
+
 	@OnlyIn(Dist.CLIENT)
 	private static boolean isGlowingImpl(LivingEntity entity) {
 		LocalPlayer player = Proxy.getClientPlayer();
-		if (player != null && CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR_GLASSES.get())) {
+		if (player != null && playerHasGlass(player)) {
 			boolean glow = entity.isInvisible() || entity.isInvisibleTo(player);
 			glow |= player.hasEffect(MobEffects.BLINDNESS);
 			glow |= player.hasEffect(MobEffects.DARKNESS);

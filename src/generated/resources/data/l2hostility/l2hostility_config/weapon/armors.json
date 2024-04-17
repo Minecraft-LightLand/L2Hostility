@@ -1,0 +1,149 @@
+{
+  "armor_enchantments": [],
+  "armors": [
+    {
+      "level": 0,
+      "stack": [
+        {
+          "item": "minecraft:air"
+        }
+      ],
+      "weight": 200
+    },
+    {
+      "level": 20,
+      "stack": [
+        {
+          "item": "minecraft:leather_helmet",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:leather_chestplate",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:leather_leggings",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:leather_boots",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "level": 35,
+      "stack": [
+        {
+          "item": "minecraft:chainmail_helmet",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:chainmail_chestplate",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:chainmail_leggings",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:chainmail_boots",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "level": 45,
+      "stack": [
+        {
+          "item": "minecraft:golden_helmet",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:golden_chestplate",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:golden_leggings",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:golden_boots",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 100
+    },
+    {
+      "level": 60,
+      "stack": [
+        {
+          "item": "minecraft:iron_helmet",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:iron_chestplate",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:iron_leggings",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:iron_boots",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 200
+    },
+    {
+      "level": 80,
+      "stack": [
+        {
+          "item": "minecraft:diamond_helmet",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:diamond_chestplate",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:diamond_leggings",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:diamond_boots",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 300
+    },
+    {
+      "level": 100,
+      "stack": [
+        {
+          "item": "minecraft:netherite_helmet",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:netherite_chestplate",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:netherite_leggings",
+          "nbt": "{Damage:0}"
+        },
+        {
+          "item": "minecraft:netherite_boots",
+          "nbt": "{Damage:0}"
+        }
+      ],
+      "weight": 100
+    }
+  ],
+  "melee_weapons": [],
+  "ranged_weapons": [],
+  "weapon_enchantments": []
+}

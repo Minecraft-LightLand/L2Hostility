@@ -69,7 +69,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue damageFactor;
 		public final ForgeConfigSpec.BooleanValue exponentialDamage;
 		public final ForgeConfigSpec.DoubleValue expDropFactor;
-		public final ForgeConfigSpec.IntValue armorFactor;
+		public final ForgeConfigSpec.DoubleValue drownedTridentChancePerLevel;
 		public final ForgeConfigSpec.DoubleValue enchantmentFactor;
 		public final ForgeConfigSpec.IntValue dimensionFactor;
 		public final ForgeConfigSpec.DoubleValue distanceFactor;
@@ -89,6 +89,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue allowNoAI;
 		public final ForgeConfigSpec.BooleanValue allowPlayerAllies;
 		public final ForgeConfigSpec.BooleanValue allowTraitOnOwnable;
+		public final ForgeConfigSpec.DoubleValue dropRateFromSpawner;
 
 		public final ForgeConfigSpec.IntValue bottleOfCurseLevel;
 		public final ForgeConfigSpec.IntValue envyExtraLevel;
@@ -185,8 +186,8 @@ public class LHConfig {
 						.define("exponentialDamage", false);
 				expDropFactor = builder.comment("Experience drop factor per level")
 						.defineInRange("expDropFactor", 0.05, 0, 1000);
-				armorFactor = builder.comment("Armor rank per n level")
-						.defineInRange("armorFactor", 10, 0, 1000);
+				drownedTridentChancePerLevel = builder.comment("Chance per level for drowned to hold trident")
+						.defineInRange("drownedTridentChancePerLevel", 0.005d, 0, 1000);
 				enchantmentFactor = builder.comment("Enchantment bonus per level.",
 								"Note: use it only when Apotheosis is installed",
 								"Otherwise too high enchantment level will yield no enchantment")
@@ -230,6 +231,8 @@ public class LHConfig {
 						.define("allowPlayerAllies", false);
 				allowTraitOnOwnable = builder.comment("Keep traits on mobs tamed by player")
 						.define("allowTraitOnOwnable", false);
+				dropRateFromSpawner = builder.comment("Drop rate of hostility loot from mobs from spawner")
+						.defineInRange("dropRateFromSpawner", 0.5d, 0, 1);
 
 			}
 			builder.pop();
