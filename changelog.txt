@@ -1,6 +1,3 @@
-- TODO arena patchouli
-- TODO press alt to show blacklist/whitelist
-
 2.4.21
 - Add armor spawn config datapack
 - Add config for trident spawn on drowned
@@ -16,7 +13,7 @@
 - Make Reflect trait reflect only forge:direct damage
 - Make Arena not blocked by reflection ring and abrahadabra
 - Make Shulker only shoot bullet after first one disappears
-- Make Hostility Spanwer can only spawn mobs with level
+- Make Hostility Spawner can only spawn mobs with level
 - Add Abyssal Thorn, Divine Cross, and Divine Light
 - Allow visualization of cleared levels
 - Allow mob-specific level config to add condition and chance to traits
@@ -167,7 +164,7 @@
 - Adds default dimension difficulty
 - Add options for minimum level to be bypassed by difficulty clearing or not
 - Add suppression mechanics: mobs will randomly terminate trait generation with a chance
-- Mobs with non-zero minimum level will not be affected by supression, apply chance, and trait chance
+- Mobs with non-zero minimum level will not be affected by suppression, apply chance, and trait chance
 
 2.4.3
 - Regenerate will not appear on mobs immune to effects

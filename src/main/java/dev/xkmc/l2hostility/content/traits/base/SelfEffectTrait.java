@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
+import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2library.base.effects.EffectUtil;
 import net.minecraft.ChatFormatting;
@@ -23,7 +24,7 @@ public class SelfEffectTrait extends MobTrait {
 	@Override
 	public void tick(LivingEntity mob, int level) {
 		if (mob.level().isClientSide()) return;
-		EffectUtil.refreshEffect(mob, new MobEffectInstance(effect.get(), 40, level - 1), EffectUtil.AddReason.FORCE, mob);
+		EffectUtil.refreshEffect(mob, new MobEffectInstance(effect.get(), PerformanceConstants.SELF_EFFECT, level - 1), EffectUtil.AddReason.FORCE, mob);
 	}
 
 	@Override

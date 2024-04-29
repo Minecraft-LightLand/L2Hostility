@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.traits.common;
 
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
@@ -33,7 +34,7 @@ public class AuraEffectTrait extends MobTrait {
 	@Override
 	public void tick(LivingEntity mob, int level) {
 		int range = LHConfig.COMMON.range.get(getRegistryName().getPath()).get();
-		if (!mob.level().isClientSide()) {
+		if (!mob.level().isClientSide() && mob.tickCount % PerformanceConstants.AURA == 0) {
 			AABB box = mob.getBoundingBox().inflate(range);
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
 				if (!(e instanceof Player pl) || !pl.getAbilities().instabuild) {

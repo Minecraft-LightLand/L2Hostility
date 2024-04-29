@@ -4,6 +4,7 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficultyCap;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -69,16 +70,17 @@ public class CapabilityEvents {
 
 	@SubscribeEvent
 	public static void livingTickEvent(LivingEvent.LivingTickEvent event) {
-		if (Float.isNaN(event.getEntity().getHealth())) {
-			event.getEntity().setHealth(0);
-		}
-		if (event.getEntity().tickCount % 10 == 0 && Float.isNaN(event.getEntity().getAbsorptionAmount())) {
-			event.getEntity().setAbsorptionAmount(0);
-		}
 		LivingEntity mob = event.getEntity();
-		if (MobTraitCap.HOLDER.isProper(mob) && mob.isAlive()) {
-			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
-			cap.tick(mob);
+		if (mob.tickCount % PerformanceConstants.NAN_FIX == 0) {
+			if (Float.isNaN(mob.getHealth())) {
+				mob.setHealth(0);
+			}
+			if (Float.isNaN(mob.getAbsorptionAmount())) {
+				mob.setAbsorptionAmount(0);
+			}
+		}
+		if (mob.isAlive()) {
+			mob.getCapability(MobTraitCap.CAPABILITY).ifPresent(e -> e.tick(mob));
 		}
 	}
 

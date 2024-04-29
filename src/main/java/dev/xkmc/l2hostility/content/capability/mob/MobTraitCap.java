@@ -229,8 +229,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			}
 		}
 		if (isInitialized() && !traits.isEmpty()) {
-			traits.keySet().removeIf(Objects::isNull);
-			traits.keySet().removeIf(MobTrait::isBanned);
+			if (mob.tickCount % PerformanceConstants.REMOVE == 0) {
+				traits.keySet().removeIf(Objects::isNull);
+				traits.keySet().removeIf(MobTrait::isBanned);
+			}
 			traits.forEach((k, v) -> k.tick(mob, v));
 			clearPending(mob);
 		}
