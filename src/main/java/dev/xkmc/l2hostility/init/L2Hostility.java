@@ -1,8 +1,10 @@
 package dev.xkmc.l2hostility.init;
 
 import com.tterrag.registrate.providers.ProviderType;
+import dev.shadowsoffire.gateways.Gateways;
 import dev.xkmc.l2complements.init.data.TagGen;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
+import dev.xkmc.l2hostility.compat.gateway.GatewayToEternityCompat;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobCapSyncToClient;
@@ -29,9 +31,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.network.NetworkDirection;
@@ -99,6 +103,10 @@ public class L2Hostility {
 						"Find out the mechanics and mob traits to know what to prepare for",
 						1, LHBlocks.TAB.getKey());
 		AttackEventHandler.register(4500, new LHAttackListener());
+
+		if (ModList.get().isLoaded(Gateways.MODID)) {
+			MinecraftForge.EVENT_BUS.register(GatewayToEternityCompat.class);
+		}
 	}
 
 

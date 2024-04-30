@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.config;
 
+import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -8,6 +9,7 @@ import dev.xkmc.l2library.serial.config.BaseConfig;
 import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,12 +32,19 @@ public class EntityConfig extends BaseConfig {
 	public final ArrayList<Config> list = new ArrayList<>();
 
 	private final Map<EntityType<?>, Config> cache = new HashMap<>();
+	private final Map<ResourceLocation, ArrayList<Pair<SpecialConfigCondition<?>, Config>>> conditions = new HashMap<>();
 
 	@Override
 	protected void postMerge() {
 		for (var e : list) {
-			for (var type : e.entities) {
-				cache.put(type, e);
+			if (e.specialConditions.isEmpty()) {
+				for (var type : e.entities) {
+					cache.put(type, e);
+				}
+			} else {
+				for (var str : e.specialConditions) {
+					conditions.computeIfAbsent(str.id, k -> new ArrayList<>()).add(Pair.of(str, e));
+				}
 			}
 		}
 	}
@@ -47,11 +56,30 @@ public class EntityConfig extends BaseConfig {
 		return cache.get(type);
 	}
 
+	@Nullable
+	public <T> Config get(EntityType<?> type, ResourceLocation id, Class<T> cls, T obj) {
+		if (!LHConfig.COMMON.enableEntitySpecificDatapack.get())
+			return null;
+		var list = conditions.get(id);
+		if (list == null) return null;
+		for (var pair : list) {
+			var cond = pair.getFirst();
+			if (!pair.getSecond().entities.contains(type)) continue;
+			if (cond.cls() == cls && cond.test(Wrappers.cast(obj))) {
+				return pair.getSecond();
+			}
+		}
+		return null;
+	}
+
 	@SerialClass
 	public static class Config {
 
 		@SerialClass.SerialField
 		private final ArrayList<EntityType<?>> entities = new ArrayList<>();
+
+		@SerialClass.SerialField
+		private final ArrayList<SpecialConfigCondition<?>> specialConditions = new ArrayList<>();
 
 		@SerialClass.SerialField
 		private final ArrayList<TraitBase> traits = new ArrayList<>();
@@ -65,6 +93,9 @@ public class EntityConfig extends BaseConfig {
 
 		@SerialClass.SerialField
 		public final ArrayList<ItemPool> items = new ArrayList<>();
+
+		@SerialClass.SerialField
+		public int minSpawnLevel = 0;
 
 		@Deprecated
 		public Config() {

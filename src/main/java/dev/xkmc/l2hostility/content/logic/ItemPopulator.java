@@ -130,7 +130,7 @@ public class ItemPopulator {
 				fillEnch(cap.getLevel(), le.getRandom(), stack, e);
 			le.setItemSlot(e, stack);
 		}
-		var config = L2Hostility.ENTITY.getMerged().get(le.getType());
+		var config = cap.getConfigCache(le);
 		if (config != null && !config.items.isEmpty()) {
 			for (var pool : config.items) {
 				generateItems(cap, le, pool);

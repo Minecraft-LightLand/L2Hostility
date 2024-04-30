@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.*;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
@@ -80,8 +81,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	private TraitSpawnerBlockEntity summoner = null;
 
 	private boolean inherited = false;
-
 	private boolean ticking = false;
+	private EntityConfig.Config configCache = null;
 
 	private final ArrayList<Pair<MobTrait, Integer>> pending = new ArrayList<>();
 
@@ -114,10 +115,22 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		return true;
 	}
 
+	@Nullable
+	public EntityConfig.Config getConfigCache(LivingEntity le) {
+		if (configCache == null) {
+			configCache = L2Hostility.ENTITY.getMerged().get(le.getType());
+		}
+		return configCache;
+	}
+
+	public void setConfigCache(EntityConfig.Config config) {
+		configCache = config;
+	}
+
 	public void init(Level level, LivingEntity le, RegionalDifficultyModifier difficulty) {
 		boolean skip = !LHConfig.COMMON.allowNoAI.get() && le instanceof Mob mob && mob.isNoAi();
 		MobDifficultyCollector instance = new MobDifficultyCollector();
-		var diff = L2Hostility.ENTITY.getMerged().get(le.getType());
+		var diff = getConfigCache(le);
 		if (diff != null) {
 			instance.acceptConfig(diff.difficulty());
 		}
@@ -130,7 +143,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				skip = true;
 			}
 		}
-		lv = skip ? 0 : TraitManager.fill(le, traits, instance);
+		lv = skip ? 0 : TraitManager.fill(this, le, traits, instance);
 		fullDrop = instance.isFullDrop();
 		stage = Stage.INIT;
 		syncToClient(le);
@@ -149,7 +162,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				traits.put(ent.getKey(), rank);
 			}
 		}
-		TraitManager.fill(child, traits, MobDifficultyCollector.noTrait(lv));
+		TraitManager.fill(this, child, traits, MobDifficultyCollector.noTrait(lv));
 		stage = Stage.INIT;
 	}
 
@@ -211,6 +224,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			if (!isInitialized()) {
 				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
 				opt.ifPresent(chunkDifficulty -> init(mob.level(), mob, chunkDifficulty));
+				if (shouldDiscard(mob)) {
+					mob.discard();
+					return;
+				}
 			}
 			if (stage == Stage.INIT) {
 				stage = Stage.POST_INIT;
@@ -219,6 +236,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				clearPending(mob);
 				mob.setHealth(mob.getMaxHealth());
 				syncToClient(mob);
+				if (shouldDiscard(mob)) {
+					mob.discard();
+					return;
+				}
 			}
 			if (!traits.isEmpty() &&
 					!LHConfig.COMMON.allowTraitOnOwnable.get() &&
@@ -228,13 +249,21 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				syncToClient(mob);
 			}
 		}
-		if (isInitialized() && !traits.isEmpty()) {
+		if (isInitialized()) {
 			if (mob.tickCount % PerformanceConstants.REMOVE == 0) {
-				traits.keySet().removeIf(Objects::isNull);
-				traits.keySet().removeIf(MobTrait::isBanned);
+				if (shouldDiscard(mob)) {
+					mob.discard();
+					return;
+				}
 			}
-			traits.forEach((k, v) -> k.tick(mob, v));
-			clearPending(mob);
+			if (!traits.isEmpty()) {
+				if (mob.tickCount % PerformanceConstants.REMOVE == 0) {
+					traits.keySet().removeIf(Objects::isNull);
+					traits.keySet().removeIf(MobTrait::isBanned);
+				}
+				traits.forEach((k, v) -> k.tick(mob, v));
+				clearPending(mob);
+			}
 		}
 		if (!mob.level().isClientSide() && pos != null) {
 			if (summoner == null) {
@@ -247,6 +276,12 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			}
 		}
 		ticking = false;
+	}
+
+	public boolean shouldDiscard(LivingEntity mob) {
+		var config = getConfigCache(mob);
+		if (config == null || config.minSpawnLevel <= 0) return false;
+		return lv < config.minSpawnLevel;
 	}
 
 	public void onKilled(LivingEntity mob, @Nullable Player player) {

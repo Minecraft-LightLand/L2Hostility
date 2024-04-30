@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.content.logic;
 
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
-import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.util.RandomSource;
@@ -14,8 +14,8 @@ import java.util.List;
 
 public class TraitGenerator {
 
-	public static void generateTraits(LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
-		new TraitGenerator(le, lv, traits, ins).generate();
+	public static void generateTraits(MobTraitCap cap, LivingEntity le, int lv, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
+		new TraitGenerator(cap, le, lv, traits, ins).generate();
 	}
 
 	private final LivingEntity entity;
@@ -27,7 +27,7 @@ public class TraitGenerator {
 
 	private int level, weights;
 
-	private TraitGenerator(LivingEntity entity, int mobLevel, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
+	private TraitGenerator(MobTraitCap cap, LivingEntity entity, int mobLevel, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
 		this.entity = entity;
 		this.mobLevel = mobLevel;
 		this.ins = ins;
@@ -36,7 +36,7 @@ public class TraitGenerator {
 		rand = entity.getRandom();
 		level = mobLevel;
 
-		var config = L2Hostility.ENTITY.getMerged().get(entity.getType());
+		var config = cap.getConfigCache(entity);
 		if (config != null) {
 			for (var base : config.traits()) {
 				if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
@@ -45,7 +45,9 @@ public class TraitGenerator {
 		}
 
 		traitPool = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
-				!traits.containsKey(e) && e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
+				config == null || !config.blacklist().contains(e) &&
+						!traits.containsKey(e) &&
+						e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
 		weights = 0;
 		for (var e : traitPool) {
 			weights += e.getConfig().weight;

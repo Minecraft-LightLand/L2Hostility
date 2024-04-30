@@ -198,7 +198,7 @@ dependencies {
     runtimeOnly fg.deobf("dev.xkmc.l2screentracker:l2screentracker:0.1.4")
     runtimeOnly fg.deobf("dev.xkmc.l2itemselector:l2itemselector:0.1.8")
     runtimeOnly fg.deobf("dev.xkmc.l2backpack:l2backpack:2.4.19-slim")
-    runtimeOnly fg.deobf("dev.xkmc.modulargolems:modulargolems:2.4.30-slim")
+    runtimeOnly fg.deobf("dev.xkmc.modulargolems:modulargolems:2.4.33-pre4-slim")
     runtimeOnly fg.deobf("dev.xkmc.l2artifacts:l2artifacts:2.4.18-slim")
     runtimeOnly fg.deobf("dev.xkmc.pandora:pandora:0.1.9-slim")
     runtimeOnly fg.deobf("dev.xkmc.curseofpandora:curseofpandora:2.4.12-slim")
@@ -207,7 +207,6 @@ dependencies {
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     implementation fg.deobf("curse.maven:the-twilight-forest-227639:4635921")
     implementation fg.deobf("curse.maven:jade-324717:4654448")
-    implementation fg.deobf("curse.maven:lendercataclysm-551586:5058433")
     implementation fg.deobf("curse.maven:citadel-331936:4848887")
     implementation fg.deobf("curse.maven:cloth-config-348521:4633444")
     implementation fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")
@@ -227,6 +226,14 @@ dependencies {
 
     implementation fg.deobf("curse.maven:geckolib-388172:5021668")
     implementation fg.deobf("curse.maven:ars-nouveau-401955:4751471")
+    implementation fg.deobf("curse.maven:placebo-283644:5098182")
+    implementation fg.deobf("curse.maven:apothic-attributes-898963:5209162")
+    implementation fg.deobf("curse.maven:gateways-to-eternity-417802:5188310")
+    implementation fg.deobf("curse.maven:lionfish-api-1001614:5274401")
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:5299092")
+    implementation fg.deobf("curse.maven:goety-586095:5256230")
+    implementation fg.deobf("curse.maven:eeeabs-mobs-921600:5229035")
+
 
     //runtimeOnly fg.deobf("curse.maven:lightmans-currency-472521:4813507")
     //runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:4581240")

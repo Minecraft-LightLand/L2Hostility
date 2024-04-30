@@ -1,3 +1,8 @@
+2.4.22
+- Gateway to Eternity config support
+- Allow banning mob spawn that is lower than certain level
+- Performance improvement
+
 2.4.21
 - Add armor spawn config datapack
 - Add config for trident spawn on drowned

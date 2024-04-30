@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.logic;
 
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
@@ -23,7 +24,7 @@ public class TraitManager {
 		ins.addPermanentModifier(modifier);
 	}
 
-	public static int fill(LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
+	public static int fill(MobTraitCap cap, LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
 		int lv = ins.getDifficulty(le.getRandom());
 		int ans = 0;
 		if (ins.apply_chance() < le.getRandom().nextDouble()) {
@@ -49,7 +50,7 @@ public class TraitManager {
 
 		if (ins.trait_chance(lv) >= le.getRandom().nextDouble()) {
 			if (!le.getType().is(LHTagGen.NO_TRAIT)) {
-				TraitGenerator.generateTraits(le, lv, traits, ins);
+				TraitGenerator.generateTraits(cap, le, lv, traits, ins);
 			}
 			ans = lv;
 		}
