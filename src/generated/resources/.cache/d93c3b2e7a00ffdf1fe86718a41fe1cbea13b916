@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-13T17:39:33.867172	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
+// 1.20.1	2024-05-13T19:19:07.1839	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 d41e71fe39d4df9df21c477a199e8ea364844e30 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -275,6 +275,7 @@ ab7d5325b5f812e70a745c856d154020f81c5fd3 data/l2hostility/recipes/ring_of_life.j
 05554481822736579b77129e856e79c0a8ef96ec data/l2hostility/recipes/ur_ghast_boss_spawner.json
 acc7a68fd78965e3a3b5bf36a3839d7b3ff4df7a data/l2hostility/recipes/witch_charge.json
 0692d7fc2ec445309e367634fee532b74dfa573e data/l2hostility/recipes/witch_wand.json
+1934359a43bfa9b9f4727bc44646d20c17219834 data/l2hostility/tags/blocks/beacon.json
 5d1e2ebb64aacfef2ec58d20bbf318100b796670 data/l2hostility/tags/enchantment/no_dispell.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_whitelist.json
@@ -364,9 +365,11 @@ ebcd146f52a62b349b6314398e2d418692138153 data/l2hostility/tags/entity_types/no_d
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/wither_whitelist.json
 406c965f80725c8e6de68d3bdf4488940323728a data/l2hostility/tags/items/antibuild_ban.json
+ddeff5cd528e370493ffe7336d2e14fa59fa3fae data/l2hostility/tags/items/beacon_payment.json
 849cc0cb0a1698c5cdba74b391f84298eef583ac data/l2hostility/tags/items/chaos_equipment.json
 c11704257529150719574fe8070c7fca05bf7f04 data/l2hostility/tags/items/no_seal.json
 d27d9636bed88bf7eceb3cf1e97db21e63f16803 data/l2hostility/tags/items/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
+ae3272ea9c6f244c79f6192ef5e9f1d387c45909 data/minecraft/tags/blocks/beacon_base_blocks.json
 65da76b3a96d076426cc78810d00296dfd0b5679 data/minecraft/tags/blocks/mineable/pickaxe.json
 6a70fe0b66cbb6fbf8cd0870ea1ad350fae1bf08 data/minecraft/tags/blocks/needs_diamond_tool.json

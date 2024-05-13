@@ -53,7 +53,10 @@
 	"divinity_light": "神圣之光"
   },
   "block.l2hostility": {
-	"hostility_spawner": "恶意刷怪笼"
+	"hostility_spawner": "恶意刷怪笼",
+	"chaos_block": "混沌块",
+	"hostility_beacon": "恶意信标",
+	"miracle_block": "奇迹块"
   },
   "trait.l2hostility": {
 	"adaptive": "适应",

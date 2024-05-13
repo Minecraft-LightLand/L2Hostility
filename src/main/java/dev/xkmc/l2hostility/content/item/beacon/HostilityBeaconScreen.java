@@ -1,6 +1,8 @@
 package dev.xkmc.l2hostility.content.item.beacon;
 
 import com.google.common.collect.Lists;
+import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,7 +21,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -27,7 +28,7 @@ import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class HostilityBeaconScreen extends AbstractContainerScreen<HostilityBeaconMenu> implements ContainerListener {
-	static final ResourceLocation BEACON_LOCATION = new ResourceLocation("textures/gui/container/beacon.png");
+	static final ResourceLocation BEACON_LOCATION = new ResourceLocation(L2Hostility.MODID,"textures/gui/container/beacon.png");
 	private static final Component PRIMARY_EFFECT_LABEL = Component.translatable("block.minecraft.beacon.primary");
 	private final List<HostilityBeaconScreen.BeaconButton> beaconButtons = Lists.newArrayList();
 
@@ -95,11 +96,8 @@ public class HostilityBeaconScreen extends AbstractContainerScreen<HostilityBeac
 		p_282454_.blit(BEACON_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
 		p_282454_.pose().pushPose();
 		p_282454_.pose().translate(0.0F, 0.0F, 100.0F);
-		p_282454_.renderItem(new ItemStack(Items.NETHERITE_INGOT), i + 20, j + 109);
-		p_282454_.renderItem(new ItemStack(Items.EMERALD), i + 41, j + 109);
-		p_282454_.renderItem(new ItemStack(Items.DIAMOND), i + 41 + 22, j + 109);
-		p_282454_.renderItem(new ItemStack(Items.GOLD_INGOT), i + 42 + 44, j + 109);
-		p_282454_.renderItem(new ItemStack(Items.IRON_INGOT), i + 42 + 66, j + 109);
+		p_282454_.renderItem(new ItemStack(LHItems.CHAOS_INGOT), i + 42 + 44, j + 109);
+		p_282454_.renderItem(new ItemStack(LHItems.MIRACLE_INGOT), i + 42 + 66, j + 109);
 		p_282454_.pose().popPose();
 	}
 

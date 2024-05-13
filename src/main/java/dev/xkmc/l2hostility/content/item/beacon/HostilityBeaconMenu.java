@@ -1,19 +1,18 @@
 package dev.xkmc.l2hostility.content.item.beacon;
 
+import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.l2hostility.init.registrate.LHBlocks;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class HostilityBeaconMenu extends AbstractContainerMenu {
    private final Container beacon = new SimpleContainer(1) {
@@ -36,7 +35,7 @@ public class HostilityBeaconMenu extends AbstractContainerMenu {
 
    public HostilityBeaconMenu(MenuType<HostilityBeaconMenu> type, int id, Inventory cont, ContainerData data, ContainerLevelAccess access) {
       super(type, id);
-      checkContainerDataCount(data, 3);
+      checkContainerDataCount(data, 2);
       this.beaconData = data;
       this.access = access;
       this.paymentSlot = new PaymentSlot(this.beacon, 0, 136, 110);
@@ -69,7 +68,7 @@ public class HostilityBeaconMenu extends AbstractContainerMenu {
    }
 
    public boolean stillValid(Player p_39047_) {
-      return stillValid(this.access, p_39047_, Blocks.BEACON);
+      return stillValid(this.access, p_39047_, LHBlocks.HOSTILITY_BEACON.get());
    }
 
    public void setData(int p_39044_, int p_39045_) {
@@ -127,9 +126,18 @@ public class HostilityBeaconMenu extends AbstractContainerMenu {
       return this.beaconData.get(1);
    }
 
-   public void updateEffects(Optional<MobEffect> opt) {
+   @Override
+   public boolean clickMenuButton(Player player, int btn) {
+      if (btn >= 0 && btn < 6 && btn / 2 < getLevels()) {
+         updateEffects(btn);
+         return true;
+      }
+      return super.clickMenuButton(player, btn);
+   }
+
+   public void updateEffects(int opt) {
       if (this.paymentSlot.hasItem()) {
-         this.beaconData.set(1, opt.map(MobEffect::getId).orElse(-1));
+         this.beaconData.set(1, opt);
          this.paymentSlot.remove(1);
          this.access.execute(Level::blockEntityChanged);
       }
@@ -146,7 +154,7 @@ public class HostilityBeaconMenu extends AbstractContainerMenu {
       }
 
       public boolean mayPlace(ItemStack p_39077_) {
-         return p_39077_.is(ItemTags.BEACON_PAYMENT_ITEMS);
+         return p_39077_.is(LHTagGen.BEACON_PAYMENT);
       }
 
       public int getMaxStackSize() {

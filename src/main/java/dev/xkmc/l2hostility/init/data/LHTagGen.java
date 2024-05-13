@@ -56,7 +56,8 @@ public class LHTagGen {
 	public static final TagKey<Item> NO_SEAL = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "no_seal"));
 	public static final TagKey<Item> ANTIBUILD_BAN = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "antibuild_ban"));
 
-	public static final TagKey<Block> BEACON = BlockTags.create(new ResourceLocation(L2Hostility.MODID, "beacon"));
+	public static final TagKey<Block> BEACON_BLOCK = BlockTags.create(new ResourceLocation(L2Hostility.MODID, "beacon"));
+	public static final TagKey<Item> BEACON_PAYMENT = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "beacon_payment"));
 
 	public static final TagKey<Enchantment> NO_DISPELL = TagKey.create(Registries.ENCHANTMENT,
 			new ResourceLocation(L2Hostility.MODID, "no_dispell"));
@@ -76,6 +77,7 @@ public class LHTagGen {
 	public static final Map<ResourceLocation, Consumer<RegistrateTagsProvider.IntrinsicImpl<EntityType<?>>>> ENTITY_TAG_BUILDER = new TreeMap<>();
 
 	public static void onBlockTagGen(RegistrateTagsProvider.IntrinsicImpl<Block> pvd) {
+		pvd.addTag(BlockTags.BEACON_BASE_BLOCKS).addTag(BEACON_BLOCK);
 	}
 
 	public static void onEnchTagGen(RegistrateTagsProvider.IntrinsicImpl<Enchantment> pvd) {

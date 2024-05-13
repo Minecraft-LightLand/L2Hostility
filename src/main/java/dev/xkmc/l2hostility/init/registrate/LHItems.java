@@ -143,10 +143,10 @@ public class LHItems {
 					.model((ctx, pvd) -> pvd.handheld(ctx)).tag(chaos).register();
 
 
-			CHAOS_INGOT = L2Hostility.REGISTRATE.item("chaos_ingot", p -> new Item(p.rarity(Rarity.EPIC).fireResistant())).register();
+			CHAOS_INGOT = L2Hostility.REGISTRATE.item("chaos_ingot", p -> new Item(p.rarity(Rarity.EPIC).fireResistant())).tag(LHTagGen.BEACON_PAYMENT).register();
 			HOSTILITY_ESSENCE = L2Hostility.REGISTRATE.item("hostility_essence", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
 			MIRACLE_POWDER = L2Hostility.REGISTRATE.item("miracle_powder", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
-			MIRACLE_INGOT = L2Hostility.REGISTRATE.item("miracle_ingot", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
+			MIRACLE_INGOT = L2Hostility.REGISTRATE.item("miracle_ingot", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).tag(LHTagGen.BEACON_PAYMENT).register();
 
 			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
 			TagKey<Item> curse = LHTagGen.CURSE_SLOT;

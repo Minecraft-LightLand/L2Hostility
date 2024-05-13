@@ -163,7 +163,7 @@ public class HostilityBeaconBlockEntity extends BaseBlockEntity
          boolean valid = true;
          for (int ix = x - iy; ix <= x + iy && valid; ++ix) {
             for (int iz = z - iy; iz <= z + iy; ++iz) {
-               if (!level.getBlockState(new BlockPos(ix, y0, iz)).is(LHTagGen.BEACON)) {
+               if (!level.getBlockState(new BlockPos(ix, y0, iz)).is(LHTagGen.BEACON_BLOCK)) {
                   valid = false;
                   break;
                }

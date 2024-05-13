@@ -11,9 +11,9 @@ import dev.xkmc.l2hostility.content.item.beacon.HostilityBeaconScreen;
 import dev.xkmc.l2hostility.content.item.spawner.BurstSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlock;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2modularblock.DelegateBlock;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -38,11 +38,11 @@ public class LHBlocks {
 
 	static {
 		CHAOS = L2Hostility.REGISTRATE.block("chaos_block", p -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)))
-				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
+				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, LHTagGen.BEACON_BLOCK)
 				.simpleItem().register();
 
 		MIRACLE = L2Hostility.REGISTRATE.block("miracle_block", p -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)))
-				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
+				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, LHTagGen.BEACON_BLOCK)
 				.simpleItem().register();
 
 		BURST_SPAWNER = L2Hostility.REGISTRATE.block("hostility_spawner", p ->
