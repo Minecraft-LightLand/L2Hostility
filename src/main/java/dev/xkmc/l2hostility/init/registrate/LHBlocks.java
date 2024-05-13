@@ -2,12 +2,18 @@ package dev.xkmc.l2hostility.init.registrate;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.entry.MenuEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2hostility.content.item.beacon.HostilityBeaconBlock;
+import dev.xkmc.l2hostility.content.item.beacon.HostilityBeaconBlockEntity;
+import dev.xkmc.l2hostility.content.item.beacon.HostilityBeaconMenu;
+import dev.xkmc.l2hostility.content.item.beacon.HostilityBeaconScreen;
 import dev.xkmc.l2hostility.content.item.spawner.BurstSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlock;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2modularblock.DelegateBlock;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -23,8 +29,12 @@ public class LHBlocks {
 
 	public static final BlockEntry<Block> CHAOS, MIRACLE;
 
-	public static final BlockEntry<DelegateBlock> BURST_SPAWNER, HOSTILITY_BEACON;
+	public static final BlockEntry<DelegateBlock> BURST_SPAWNER;
 	public static final BlockEntityEntry<BurstSpawnerBlockEntity> BE_BURST;
+
+	public static final BlockEntry<HostilityBeaconBlock> HOSTILITY_BEACON;
+	public static final BlockEntityEntry<HostilityBeaconBlockEntity> BE_BEACON;
+	public static final MenuEntry<HostilityBeaconMenu> MT_BEACON;
 
 	static {
 		CHAOS = L2Hostility.REGISTRATE.block("chaos_block", p -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)))
@@ -56,16 +66,21 @@ public class LHBlocks {
 				.validBlocks(BURST_SPAWNER).register();
 
 		HOSTILITY_BEACON = L2Hostility.REGISTRATE.block("hostility_beacon", p ->
-						DelegateBlock.newBaseBlock(BlockBehaviour.Properties.copy(Blocks.BEACON)))
-				.blockstate((ctx, pvd) -> pvd.models().withExistingParent(ctx.getName(), "block/beacon")
+						new HostilityBeaconBlock(BlockBehaviour.Properties.copy(Blocks.BEACON)))
+				.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models().withExistingParent(ctx.getName(), "block/beacon")
 						.texture("particle", pvd.modLoc("block/beacon_glass"))
 						.texture("glass", pvd.modLoc("block/beacon_glass"))
 						.texture("obsidian", pvd.mcLoc("block/crying_obsidian"))
 						.texture("beacon", pvd.modLoc("block/beacon"))
 						.renderType("translucent")
-				)
-				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
+				)).tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
 				.simpleItem().register();
+
+		BE_BEACON = L2Hostility.REGISTRATE.blockEntity("hostility_beacon", HostilityBeaconBlockEntity::new)
+				.validBlocks(HOSTILITY_BEACON).register();
+
+		MT_BEACON = L2Hostility.REGISTRATE.menu("hostility_beacon", HostilityBeaconMenu::new, () -> HostilityBeaconScreen::new)
+				.register();
 	}
 
 	public static void register() {

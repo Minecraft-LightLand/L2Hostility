@@ -21,6 +21,7 @@ import fuzs.mutantmonsters.init.ModRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
@@ -54,6 +55,8 @@ public class LHTagGen {
 	public static final TagKey<Item> TRAIT_ITEM = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "trait_item"));
 	public static final TagKey<Item> NO_SEAL = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "no_seal"));
 	public static final TagKey<Item> ANTIBUILD_BAN = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "antibuild_ban"));
+
+	public static final TagKey<Block> BEACON = BlockTags.create(new ResourceLocation(L2Hostility.MODID, "beacon"));
 
 	public static final TagKey<Enchantment> NO_DISPELL = TagKey.create(Registries.ENCHANTMENT,
 			new ResourceLocation(L2Hostility.MODID, "no_dispell"));
