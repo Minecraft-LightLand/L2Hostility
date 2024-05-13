@@ -29,6 +29,8 @@
           "slot": "curios/ring"
         }
       ],
+      "minSpawnLevel": 0,
+      "specialConditions": [],
       "traits": [
         {
           "free": 2,

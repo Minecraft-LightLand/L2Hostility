@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "l2hostility:chaos_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "l2hostility:chaos_ingot"
+  }
+}

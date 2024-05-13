@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:block/beacon",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "beacon": "l2hostility:block/beacon",
+    "glass": "l2hostility:block/beacon_glass",
+    "obsidian": "minecraft:block/crying_obsidian",
+    "particle": "l2hostility:block/beacon_glass"
+  }
+}

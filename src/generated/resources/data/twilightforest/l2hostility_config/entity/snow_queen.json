@@ -14,6 +14,8 @@
         "twilightforest:snow_queen"
       ],
       "items": [],
+      "minSpawnLevel": 0,
+      "specialConditions": [],
       "traits": [
         {
           "free": 1,

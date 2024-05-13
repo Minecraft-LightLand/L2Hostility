@@ -16,6 +16,8 @@
         "iceandfire:ghost"
       ],
       "items": [],
+      "minSpawnLevel": 0,
+      "specialConditions": [],
       "traits": [
         {
           "free": 0,

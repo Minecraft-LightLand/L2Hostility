@@ -22,6 +22,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -32,7 +33,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
 
-public class MobTrait extends NamedEntry<MobTrait> {
+public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 
 	private final IntSupplier color;
 

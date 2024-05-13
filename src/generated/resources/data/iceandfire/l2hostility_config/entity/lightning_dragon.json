@@ -16,6 +16,8 @@
         "iceandfire:lightning_dragon"
       ],
       "items": [],
+      "minSpawnLevel": 0,
+      "specialConditions": [],
       "traits": [
         {
           "free": 1,

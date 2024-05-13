@@ -2,7 +2,6 @@
   "values": [
     "l2hostility:chaos_block",
     "l2hostility:miracle_block",
-    "l2hostility:hostility_spawner",
     "l2hostility:hostility_beacon"
   ]
 }

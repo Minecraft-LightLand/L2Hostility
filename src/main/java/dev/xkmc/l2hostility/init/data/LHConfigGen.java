@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.init.data;
 
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.alexthe666.iceandfire.IceAndFire;
+import dev.shadowsoffire.gateways.Gateways;
 import dev.xkmc.l2archery.init.L2Archery;
 import dev.xkmc.l2archery.init.registrate.ArcheryItems;
 import dev.xkmc.l2complements.init.L2Complements;
@@ -12,6 +13,7 @@ import dev.xkmc.l2hostility.compat.data.BoMDData;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
 import dev.xkmc.l2hostility.compat.data.IaFData;
 import dev.xkmc.l2hostility.compat.data.TFData;
+import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
@@ -215,6 +217,9 @@ public class LHConfigGen extends ConfigDataProvider {
 		}
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {
 			IaFData.genConfig(collector);
+		}
+		if (ModList.get().isLoaded(Gateways.MODID)) {
+			GatewayConfigGen.genConfig(collector);
 		}
 	}
 

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "l2hostility:killer_aura"
+    },
+    "2": {
+      "item": "l2hostility:gravity"
+    },
+    "3": {
+      "item": "l2hostility:drain"
+    },
+    "B": {
+      "item": "minecraft:beacon"
+    },
+    "C": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "E": {
+      "item": "l2hostility:hostility_essence"
+    }
+  },
+  "pattern": [
+    "E3E",
+    "1B1",
+    "C2C"
+  ],
+  "result": {
+    "item": "l2hostility:hostility_beacon"
+  },
+  "show_notification": true
+}

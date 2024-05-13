@@ -14,6 +14,8 @@
         "twilightforest:ur_ghast"
       ],
       "items": [],
+      "minSpawnLevel": 0,
+      "specialConditions": [],
       "traits": [
         {
           "free": 1,

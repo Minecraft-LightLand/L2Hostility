@@ -103,6 +103,20 @@ public class RecipeGen {
 					.requires(Items.NETHER_STAR)
 					.save(pvd);
 
+			pvd.storage(LHItems.CHAOS_INGOT, RecipeCategory.MISC, LHBlocks.CHAOS);
+			pvd.storage(LHItems.MIRACLE_INGOT, RecipeCategory.MISC, LHBlocks.MIRACLE);
+
+
+			unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHBlocks.HOSTILITY_BEACON.get(), 1)::unlockedBy, LHItems.HOSTILITY_ESSENCE.get())
+					.pattern("E3E").pattern("1B1").pattern("C2C")
+					.define('B', Items.BEACON)
+					.define('C', Items.CRYING_OBSIDIAN)
+					.define('E', LHItems.HOSTILITY_ESSENCE)
+					.define('1', LHTraits.KILLER_AURA.get())
+					.define('2', LHTraits.GRAVITY.get())
+					.define('3', LHTraits.DRAIN.get())
+					.save(pvd);
+
 		}
 
 		//curio

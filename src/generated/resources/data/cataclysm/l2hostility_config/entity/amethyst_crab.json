@@ -14,6 +14,8 @@
         "cataclysm:amethyst_crab"
       ],
       "items": [],
+      "minSpawnLevel": 0,
+      "specialConditions": [],
       "traits": [
         {
           "free": 0,
