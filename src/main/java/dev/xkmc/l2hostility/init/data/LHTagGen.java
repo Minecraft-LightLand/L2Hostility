@@ -16,6 +16,8 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import fuzs.mutantmonsters.MutantMonsters;
+import fuzs.mutantmonsters.init.ModRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -177,6 +179,20 @@ public class LHTagGen {
 					.addOptional(BMDEntities.GAUNTLET.getId())
 					.addOptional(BMDEntities.OBSIDILITH.getId())
 					.addOptional(BMDEntities.VOID_BLOSSOM.getId());
+
+		}
+
+
+		if (ModList.get().isLoaded(MutantMonsters.MOD_ID)) {
+			pvd.addTag(SEMIBOSS)
+					.addOptional(ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.getResourceLocation())
+					.addOptional(ModRegistry.MUTANT_CREEPER_ENTITY_TYPE.getResourceLocation())
+					.addOptional(ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.getResourceLocation())
+					.addOptional(ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.getResourceLocation())
+					.addOptional(ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation());
+
+			pvd.addTag(WHITELIST)
+					.addOptional(ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation());
 
 		}
 

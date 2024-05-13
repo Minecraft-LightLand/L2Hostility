@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.config;
 
 import com.mojang.datafixers.util.Pair;
+import dev.xkmc.l2hostility.compat.gateway.GatewayCondition;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -103,13 +104,10 @@ public class EntityConfig extends BaseConfig {
 		}
 
 		public Config(List<EntityType<?>> entities,
-					  List<TraitBase> traits,
-					  WorldDifficultyConfig.DifficultyConfig difficulty,
-					  List<ItemPool> items) {
+					  WorldDifficultyConfig.DifficultyConfig difficulty) {
 			this.entities.addAll(entities);
-			this.traits.addAll(traits);
 			this.difficulty = difficulty;
-			this.items.addAll(items);
+			;
 		}
 
 		public Set<MobTrait> blacklist() {
@@ -122,6 +120,31 @@ public class EntityConfig extends BaseConfig {
 
 		public WorldDifficultyConfig.DifficultyConfig difficulty() {
 			return difficulty;
+		}
+
+		public Config minLevel(int level) {
+			minSpawnLevel = level;
+			return this;
+		}
+
+		public Config trait(List<TraitBase> list) {
+			traits.addAll(list);
+			return this;
+		}
+
+		public Config item(List<ItemPool> list) {
+			items.addAll(list);
+			return this;
+		}
+
+		public Config conditions(GatewayCondition list) {
+			Collections.addAll(specialConditions, list);
+			return this;
+		}
+
+		public Config blacklist(MobTrait... list) {
+			Collections.addAll(blacklist, list);
+			return this;
 		}
 
 	}
@@ -155,10 +178,17 @@ public class EntityConfig extends BaseConfig {
 	}
 
 	public final EntityConfig putEntityAndItem(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits, List<ItemPool> items) {
-		list.add(new Config(new ArrayList<>(keys), new ArrayList<>(traits),
-				new WorldDifficultyConfig.DifficultyConfig(min, base, var, scale, 1, 1),
-				items));
+		return put(entity(min, base, var, scale, keys).trait(traits).item(items));
+	}
+
+	public final EntityConfig put(Config config) {
+		list.add(config);
 		return this;
+	}
+
+	public static Config entity(int min, int base, double var, double scale, List<EntityType<?>> keys) {
+		return new Config(new ArrayList<>(keys),
+				new WorldDifficultyConfig.DifficultyConfig(min, base, var, scale, 1, 1));
 	}
 
 	public static ItemPool simplePool(int level, String slot, ItemStack stack) {

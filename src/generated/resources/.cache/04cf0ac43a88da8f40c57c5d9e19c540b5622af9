@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-13T13:35:46.672652	L2Hostility Config
+// 1.20.1	2024-05-13T16:49:25.281611	L2Hostility Config
 5828da74975d7d91ebb4567c2813e4c6f91cf370 data/bosses_of_mass_destruction/l2hostility_config/entity/gauntlet.json
 5b772a96a3491f9d9ffbe232ff087e336ac67618 data/bosses_of_mass_destruction/l2hostility_config/entity/lich.json
 b83dea06348e72355b3c40b7015dfcf0a6bb3976 data/bosses_of_mass_destruction/l2hostility_config/entity/obsidilith.json
@@ -64,6 +64,7 @@ fe58efe1b38328837aa9e3fb8f79ad12f309fa47 data/l2hostility/l2hostility_config/tra
 d7d12845111124584c8b11adb1ee13d12f1ec311 data/l2hostility/l2hostility_config/weapon/armors.json
 2d208358fa9bf1089e5029378956e69edc88bca4 data/l2hostility/l2hostility_config/weapon/vanilla.json
 c5e767166def72221e386dcb18512e0cbfcb1b62 data/l2weaponry/l2hostility_config/weapon/weapons.json
+8bca4245fd89df08fd709c6b1fb5278d13cf425c data/mutantmonsters/l2hostility_config/entity/bosses.json
 613c61f16340707ad5f6f280ff4d4427010364c2 data/twilightforest/l2hostility_config/entity/alpha_yeti.json
 76868b16405fd6b176a5d35504db5237caeb95a3 data/twilightforest/l2hostility_config/entity/hydra.json
 4d498a55dc9de0a77e35644f00224d295120f6dd data/twilightforest/l2hostility_config/entity/knight_phantom.json

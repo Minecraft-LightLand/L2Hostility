@@ -9,10 +9,7 @@ import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
-import dev.xkmc.l2hostility.compat.data.BoMDData;
-import dev.xkmc.l2hostility.compat.data.CataclysmData;
-import dev.xkmc.l2hostility.compat.data.IaFData;
-import dev.xkmc.l2hostility.compat.data.TFData;
+import dev.xkmc.l2hostility.compat.data.*;
 import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
@@ -23,6 +20,7 @@ import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.serial.config.ConfigDataProvider;
 import dev.xkmc.l2weaponry.init.L2Weaponry;
 import dev.xkmc.l2weaponry.init.registrate.LWItems;
+import fuzs.mutantmonsters.MutantMonsters;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
@@ -220,6 +218,9 @@ public class LHConfigGen extends ConfigDataProvider {
 		}
 		if (ModList.get().isLoaded(Gateways.MODID)) {
 			GatewayConfigGen.genConfig(collector);
+		}
+		if (ModList.get().isLoaded(MutantMonsters.MOD_ID)) {
+			MutantMonsterData.genConfig(collector);
 		}
 	}
 

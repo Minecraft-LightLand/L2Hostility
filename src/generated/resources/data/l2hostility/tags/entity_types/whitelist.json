@@ -59,6 +59,10 @@
     {
       "id": "bosses_of_mass_destruction:void_blossom",
       "required": false
+    },
+    {
+      "id": "mutantmonsters:spider_pig",
+      "required": false
     }
   ]
 }

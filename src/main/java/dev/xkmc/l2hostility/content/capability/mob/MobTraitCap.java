@@ -224,10 +224,6 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			if (!isInitialized()) {
 				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
 				opt.ifPresent(chunkDifficulty -> init(mob.level(), mob, chunkDifficulty));
-				if (shouldDiscard(mob)) {
-					mob.discard();
-					return;
-				}
 			}
 			if (stage == Stage.INIT) {
 				stage = Stage.POST_INIT;
@@ -236,10 +232,6 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				clearPending(mob);
 				mob.setHealth(mob.getMaxHealth());
 				syncToClient(mob);
-				if (shouldDiscard(mob)) {
-					mob.discard();
-					return;
-				}
 			}
 			if (!traits.isEmpty() &&
 					!LHConfig.COMMON.allowTraitOnOwnable.get() &&
@@ -250,12 +242,6 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			}
 		}
 		if (isInitialized()) {
-			if (mob.tickCount % PerformanceConstants.REMOVE == 0) {
-				if (shouldDiscard(mob)) {
-					mob.discard();
-					return;
-				}
-			}
 			if (!traits.isEmpty()) {
 				if (mob.tickCount % PerformanceConstants.REMOVE == 0) {
 					traits.keySet().removeIf(Objects::isNull);

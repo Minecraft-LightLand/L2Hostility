@@ -46,25 +46,30 @@ public class CapabilityEvents {
 		}
 	}
 
-	private static void initMob(LivingEntity mob, MobSpawnType type) {
+	private static boolean initMob(LivingEntity mob, MobSpawnType type) {
 		if (MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			if (!mob.level().isClientSide() && !cap.isInitialized()) {
 				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
 				if (opt.isPresent()) {
 					cap.init(mob.level(), mob, opt.get());
+					if (type == MobSpawnType.NATURAL && cap.shouldDiscard(mob))
+						return true;
 					if (type == MobSpawnType.SPAWNER) {
 						cap.dropRate = LHConfig.COMMON.dropRateFromSpawner.get();
 					}
 				}
 			}
 		}
+		return false;
 	}
 
 	@SubscribeEvent
 	public static void onEntitySpawn(MobSpawnEvent.FinalizeSpawn event) {
 		LivingEntity mob = event.getEntity();
-		initMob(mob, event.getSpawnType());
+		if (initMob(mob, event.getSpawnType())) {
+			event.setSpawnCancelled(true);
+		}
 	}
 
 
