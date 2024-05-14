@@ -7,15 +7,13 @@ import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-@Pseudo
-@Mixin(targets = "software.bernie.geckolib.renderer.GeoEntityRenderer")
+@Mixin(GeoEntityRenderer.class)
 public class GeoEntityRendererMixin {
 
-	@WrapOperation(remap = false, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInvisibleTo(Lnet/minecraft/world/entity/player/Player;)Z"),
-			method = "actuallyRender(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/Entity;Lsoftware/bernie/geckolib/cache/object/BakedGeoModel;Lnet/minecraft/client/renderer/RenderType;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V")
+	@WrapOperation(remap = false, at = @At(remap = true, value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInvisibleTo(Lnet/minecraft/world/entity/player/Player;)Z"), method = "actuallyRender*")
 	public boolean l2hostility$isInvisibleTo$geckoFix(Entity instance, Player player, Operation<Boolean> original, @Local(argsOnly = true, ordinal = 4) LocalFloatRef alpha) {
 		boolean ans = original.call(instance, player);
 		if (ans && instance.isCurrentlyGlowing()) {

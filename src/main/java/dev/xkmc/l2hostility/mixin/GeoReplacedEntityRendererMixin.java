@@ -9,13 +9,12 @@ import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
+import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 
-@Pseudo
-@Mixin(targets = "software.bernie.geckolib.renderer.GeoReplacedEntityRenderer")
+@Mixin(GeoReplacedEntityRenderer.class)
 public class GeoReplacedEntityRendererMixin {
 
-	@WrapOperation(remap = false, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInvisibleTo(Lnet/minecraft/world/entity/player/Player;)Z"),
-			method = "actuallyRender")
+	@WrapOperation(remap = false, at = @At(remap = true, value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInvisibleTo(Lnet/minecraft/world/entity/player/Player;)Z"), method = "actuallyRender")
 	public boolean l2hostility$isInvisibleTo$geckoFix(Entity instance, Player player, Operation<Boolean> original, @Local(argsOnly = true, ordinal = 4) LocalFloatRef alpha) {
 		boolean ans = original.call(instance, player);
 		if (ans && instance.isCurrentlyGlowing()) {
