@@ -279,6 +279,11 @@ public class HostilityBeaconBlockEntity extends BaseBlockEntity
 
    }
 
+   @Override
+   public AABB getRenderBoundingBox() {
+      return INFINITE_EXTENT_AABB;
+   }
+
    public int getCount() {
       return 2;
    }

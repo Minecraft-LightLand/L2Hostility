@@ -9,9 +9,9 @@ import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
-import software.bernie.geckolib.renderer.GeoReplacedEntityRenderer;
 
-@Mixin(GeoReplacedEntityRenderer.class)
+@Pseudo
+@Mixin(targets = "software.bernie.geckolib.renderer.GeoReplacedEntityRenderer")
 public class GeoReplacedEntityRendererMixin {
 
 	@WrapOperation(remap = false, at = @At(remap = true, value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;isInvisibleTo(Lnet/minecraft/world/entity/player/Player;)Z"), method = "actuallyRender")

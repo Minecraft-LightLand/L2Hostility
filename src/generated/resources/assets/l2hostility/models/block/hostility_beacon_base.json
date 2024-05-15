@@ -1,0 +1,9 @@
+{
+  "parent": "l2hostility:block/beacon",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "beacon": "l2hostility:block/beacon",
+    "obsidian": "minecraft:block/crying_obsidian",
+    "particle": "l2hostility:block/beacon_glass"
+  }
+}
