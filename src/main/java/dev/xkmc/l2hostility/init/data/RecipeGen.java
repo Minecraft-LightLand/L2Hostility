@@ -6,12 +6,14 @@ import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import dev.shadowsoffire.gateways.Gateways;
 import dev.xkmc.l2complements.content.enchantment.core.EnchantmentRecipeBuilder;
 import dev.xkmc.l2complements.content.recipe.BurntRecipeBuilder;
 import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
 import dev.xkmc.l2hostility.compat.data.TFData;
+import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
@@ -449,6 +451,9 @@ public class RecipeGen {
 		}
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genRecipe(pvd);
+		}
+		if (ModList.get().isLoaded(Gateways.MODID)){
+			GatewayConfigGen.genRecipe(pvd);
 		}
 
 	}

@@ -125,6 +125,10 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 		return ans.withStyle(Style.EMPTY.withColor(color.getAsInt()));
 	}
 
+	public int getColor(){
+		return color.getAsInt();
+	}
+
 	public void addDetail(List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY));
 	}

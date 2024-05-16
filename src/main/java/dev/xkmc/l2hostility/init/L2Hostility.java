@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.ProviderType;
 import dev.shadowsoffire.gateways.Gateways;
 import dev.xkmc.l2complements.init.data.TagGen;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
+import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.compat.gateway.GatewayToEternityCompat;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
@@ -129,10 +130,13 @@ public class L2Hostility {
 		var pvd = event.getLookupProvider();
 		var helper = event.getExistingFileHelper();
 		var gen = event.getGenerator();
-		gen.addProvider(server, new LHConfigGen(gen));
 		gen.addProvider(server, new TraitGLMProvider(gen));
 		gen.addProvider(server, new SlotGen(gen));
 		new LHDamageTypes(output, pvd, helper).generate(server, gen);
+		if (ModList.get().isLoaded(Gateways.MODID)) {
+			gen.addProvider(server, new GatewayConfigGen(gen));
+		}
+		gen.addProvider(server, new LHConfigGen(gen));
 	}
 
 	public static void toTrackingChunk(LevelChunk chunk, SerialPacketBase packet) {

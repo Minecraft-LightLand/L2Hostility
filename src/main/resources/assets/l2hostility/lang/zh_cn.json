@@ -251,6 +251,8 @@
   "l2hostility.jei.required": "需要佩戴[%s]饰品才能掉落",
   "l2hostility.jei.min_health": "总血量在%s及以上的怪物才会掉落",
   "l2hostility.jei.no_trait": "击杀满足条件的怪物时有%s概率掉落",
+  "gateways.hostility/growth": "生长传送门",
+  "gateways.hostility/split": "分裂传送门",
   "advancements.l2hostility.advancements.hostility.breed.description": "使用词条物品赋予怪物词条",
   "advancements.l2hostility.advancements.hostility.breed.title": "养虎为患",
   "advancements.l2hostility.advancements.hostility.detector.description": "获得恶意侦测器",

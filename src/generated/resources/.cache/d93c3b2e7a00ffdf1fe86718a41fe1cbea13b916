@@ -1,10 +1,10 @@
-// 1.20.1	2024-05-15T19:12:11.684363	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
+// 1.20.1	2024-05-16T15:24:55.442624	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 0d15a69c346a80468001a02f1326848a9559d3bf assets/l2hostility/blockstates/miracle_block.json
-9a32b97a4e0548b2e72f4b903d0ece877f623ff2 assets/l2hostility/lang/en_ud.json
-d4e2fda61d4ad989573b7dc164d613472c07eb12 assets/l2hostility/lang/en_us.json
+db007036f6412915323a8f5eac1c086b6c33fdab assets/l2hostility/lang/en_ud.json
+0a1c85069ff2344bf6a28665ec30a5850812a797 assets/l2hostility/lang/en_us.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets/l2hostility/models/block/chaos_block.json
 b482cdea0faf29842ecf75310f414ce76d12e36a assets/l2hostility/models/block/hostility_beacon.json
 22de6e577112bb035808d5d1e24858fd33742e3a assets/l2hostility/models/block/hostility_beacon_base.json
@@ -117,6 +117,10 @@ e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.j
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/items/ring.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/curseofpandora/tags/entity_types/reality_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/curseofpandora/tags/entity_types/reality_whitelist.json
+34e160ef01ab2b89fa7ae71c0aff2285cbb51539 data/gateways/advancements/recipes/misc/hostility/growth.json
+8477ae5c981284d75a8e859ec5427fa7824b60db data/gateways/advancements/recipes/misc/hostility/split.json
+69579bea04b615dfe77e7b1d9281af0668f8bf78 data/gateways/recipes/hostility/growth.json
+0545fbd71a327cc183879ec7ded928e22dda3eb3 data/gateways/recipes/hostility/split.json
 c59e72118acd26aca84f253125d8771d3a81aca6 data/l2complements/advancements/recipes/enchantments/insulator.json
 49afc2d5e855ea5379f538abc40b855fc74deb9a data/l2complements/advancements/recipes/enchantments/split_suppressor.json
 f40b938a37ab6a019c334f304104e1b0c368cc79 data/l2complements/recipes/insulator.json

@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.content.config;
 
 import com.mojang.datafixers.util.Pair;
-import dev.xkmc.l2hostility.compat.gateway.GatewayCondition;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -137,8 +136,8 @@ public class EntityConfig extends BaseConfig {
 			return this;
 		}
 
-		public Config conditions(GatewayCondition list) {
-			Collections.addAll(specialConditions, list);
+		public Config conditions(SpecialConfigCondition<?> list) {
+			specialConditions.add(list);
 			return this;
 		}
 

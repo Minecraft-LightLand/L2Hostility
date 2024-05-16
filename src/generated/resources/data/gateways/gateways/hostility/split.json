@@ -1,0 +1,298 @@
+{
+  "boss_event": {
+    "fog": true,
+    "mode": "boss_bar"
+  },
+  "color": "#55FF55",
+  "failures": [],
+  "rewards": [
+    {
+      "type": "gateways:stack",
+      "stack": {
+        "count": 2,
+        "item": "l2hostility:split"
+      }
+    },
+    {
+      "type": "gateways:experience",
+      "experience": 2000,
+      "orb_size": 200
+    }
+  ],
+  "rules": {
+    "allow_dim_change": false,
+    "allow_discarding": false,
+    "default_drop_chance": 0.0,
+    "fail_on_out_of_bounds": false,
+    "follow_range_boost": 32.0,
+    "leash_range": 32.0,
+    "player_damage_only": false,
+    "remove_mobs_on_failure": true,
+    "spacing": 0.0,
+    "spawn_range": 8.0
+  },
+  "size": "medium",
+  "spawn_algorithm": "gateways:open_field",
+  "waves": [
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 4,
+          "desc": "entity.minecraft.zombie",
+          "entity": "minecraft:zombie",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:zombie"
+          }
+        }
+      ],
+      "max_wave_time": 1200,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 100
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.skeleton",
+          "entity": "minecraft:skeleton",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:skeleton"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.zombie",
+          "entity": "minecraft:zombie",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:zombie"
+          }
+        }
+      ],
+      "max_wave_time": 1800,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 100
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.drowned",
+          "entity": "minecraft:drowned",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:drowned"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.skeleton",
+          "entity": "minecraft:skeleton",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:skeleton"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.husk",
+          "entity": "minecraft:husk",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:husk"
+          }
+        }
+      ],
+      "max_wave_time": 2400,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 120
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.drowned",
+          "entity": "minecraft:drowned",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:drowned"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.wither_skeleton",
+          "entity": "minecraft:wither_skeleton",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:wither_skeleton"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.stray",
+          "entity": "minecraft:stray",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:stray"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.zombie",
+          "entity": "minecraft:zombie",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:zombie"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.husk",
+          "entity": "minecraft:husk",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:husk"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.skeleton",
+          "entity": "minecraft:skeleton",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:skeleton"
+          }
+        }
+      ],
+      "max_wave_time": 3000,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 120
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.vex",
+          "entity": "minecraft:vex",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:vex"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.cave_spider",
+          "entity": "minecraft:cave_spider",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:cave_spider"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.zombie",
+          "entity": "minecraft:zombie",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:zombie"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.husk",
+          "entity": "minecraft:husk",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:husk"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.skeleton",
+          "entity": "minecraft:skeleton",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:skeleton"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.drowned",
+          "entity": "minecraft:drowned",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:drowned"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.wither_skeleton",
+          "entity": "minecraft:wither_skeleton",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:wither_skeleton"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.stray",
+          "entity": "minecraft:stray",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "id": "minecraft:stray"
+          }
+        }
+      ],
+      "max_wave_time": 3600,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 140
+    }
+  ]
+}

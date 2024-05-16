@@ -1,0 +1,210 @@
+{
+  "boss_event": {
+    "fog": true,
+    "mode": "boss_bar"
+  },
+  "color": "#00AA00",
+  "failures": [],
+  "rewards": [
+    {
+      "type": "gateways:stack",
+      "stack": {
+        "count": 2,
+        "item": "l2hostility:growth"
+      }
+    },
+    {
+      "type": "gateways:experience",
+      "experience": 2000,
+      "orb_size": 200
+    }
+  ],
+  "rules": {
+    "allow_dim_change": false,
+    "allow_discarding": false,
+    "default_drop_chance": 0.0,
+    "fail_on_out_of_bounds": false,
+    "follow_range_boost": 32.0,
+    "leash_range": 32.0,
+    "player_damage_only": false,
+    "remove_mobs_on_failure": true,
+    "spacing": 0.0,
+    "spawn_range": 8.0
+  },
+  "size": "medium",
+  "spawn_algorithm": "gateways:open_field",
+  "waves": [
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 4,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:slime"
+          }
+        }
+      ],
+      "max_wave_time": 1200,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 100
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 3,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:magma_cube"
+          }
+        }
+      ],
+      "max_wave_time": 1800,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 100
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:magma_cube"
+          }
+        }
+      ],
+      "max_wave_time": 2400,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 120
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 7,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 1,
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 7,
+            "id": "minecraft:magma_cube"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:magma_cube"
+          }
+        }
+      ],
+      "max_wave_time": 3000,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 120
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 3,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 7,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 3,
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "modifiers": [],
+          "nbt": {
+            "Size": 7,
+            "id": "minecraft:magma_cube"
+          }
+        }
+      ],
+      "max_wave_time": 3600,
+      "modifiers": [],
+      "rewards": [],
+      "setup_time": 140
+    }
+  ]
+}
