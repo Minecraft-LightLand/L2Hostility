@@ -1,7 +1,7 @@
 2.4.23
 - Hostility Beacon render fix
 - Fix Trait Generation
-- Gateways compat TODO
+- Gateways compat for Split and Growth
 
 2.4.22
 - Hostility Beacon
