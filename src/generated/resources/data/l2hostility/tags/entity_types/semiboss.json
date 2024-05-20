@@ -37,6 +37,18 @@
       "required": false
     },
     {
+      "id": "cataclysm:ignited_berserker",
+      "required": false
+    },
+    {
+      "id": "cataclysm:kobolediator",
+      "required": false
+    },
+    {
+      "id": "cataclysm:wadjet",
+      "required": false
+    },
+    {
       "id": "iceandfire:ice_dragon",
       "required": false
     },

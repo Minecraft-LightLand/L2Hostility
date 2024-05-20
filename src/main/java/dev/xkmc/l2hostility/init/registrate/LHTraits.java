@@ -72,6 +72,7 @@ public class LHTraits {
 	public static final RegistryEntry<CounterStrikeTrait> STRIKE;
 	public static final RegistryEntry<AuraEffectTrait> GRAVITY, MOONWALK;
 	public static final RegistryEntry<ArenaTrait> ARENA;
+	public static final RegistryEntry<MasterTrait> MASTER;
 
 	static {
 		// no desc
@@ -242,6 +243,11 @@ public class LHTraits {
 							rl -> new TraitConfig(rl, 200, 50, 3, 600))
 					.desc("When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.")
 					.lang("Ragnarok").register();
+
+			MASTER = L2Hostility.REGISTRATE.regTrait("master", () -> new MasterTrait(ChatFormatting.GOLD),
+							rl -> new TraitConfig(rl, 200, 50, 1, 200))
+					.desc("Summons minions around the mob. Some minions will protect master.")
+					.lang("Master").register();
 
 		}
 

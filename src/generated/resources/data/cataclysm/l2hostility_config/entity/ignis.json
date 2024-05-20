@@ -1,6 +1,46 @@
 {
   "list": [
     {
+      "asMaster": {
+        "maxTotalCount": 5,
+        "minions": [
+          {
+            "type": "minecraft:blaze",
+            "copyLevel": true,
+            "copyTrait": false,
+            "discardOnUnlink": true,
+            "linkDistance": 32.0,
+            "maxCount": 2,
+            "maxHealthPercentage": 0.9,
+            "minLevel": 0,
+            "protectMaster": false
+          },
+          {
+            "type": "cataclysm:ignited_revenant",
+            "copyLevel": true,
+            "copyTrait": false,
+            "discardOnUnlink": true,
+            "linkDistance": 32.0,
+            "maxCount": 2,
+            "maxHealthPercentage": 0.67,
+            "minLevel": 300,
+            "protectMaster": true
+          },
+          {
+            "type": "cataclysm:ignited_berserker",
+            "copyLevel": true,
+            "copyTrait": false,
+            "discardOnUnlink": true,
+            "linkDistance": 32.0,
+            "maxCount": 1,
+            "maxHealthPercentage": 0.33,
+            "minLevel": 400,
+            "protectMaster": true
+          }
+        ],
+        "spawnInterval": 80,
+        "spawnOnHurt": true
+      },
       "blacklist": [],
       "difficulty": {
         "apply_chance": 1.0,
@@ -74,6 +114,11 @@
           "free": 2,
           "min": 3,
           "trait": "l2hostility:soul_burner"
+        },
+        {
+          "free": 1,
+          "min": 0,
+          "trait": "l2hostility:master"
         }
       ]
     }

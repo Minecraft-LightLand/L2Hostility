@@ -278,6 +278,8 @@
   "trait.l2hostility.killer_aura": "Killer Aura",
   "trait.l2hostility.killer_aura.desc": "Deal %s magic damage to players and entities targeting it within %s blocks and apply trait effects for every %ss",
   "trait.l2hostility.levitation": "Levitater",
+  "trait.l2hostility.master": "Master",
+  "trait.l2hostility.master.desc": "Summons minions around the mob. Some minions will protect master.",
   "trait.l2hostility.moonwalk": "Moonwalk",
   "trait.l2hostility.moonwalk.desc": "Decrease gravity for mobs around it",
   "trait.l2hostility.nausea": "Distorter",

@@ -1,6 +1,46 @@
 {
   "list": [
     {
+      "asMaster": {
+        "maxTotalCount": 4,
+        "minions": [
+          {
+            "type": "cataclysm:koboleton",
+            "copyLevel": true,
+            "copyTrait": false,
+            "discardOnUnlink": true,
+            "linkDistance": 32.0,
+            "maxCount": 2,
+            "maxHealthPercentage": 0.8,
+            "minLevel": 0,
+            "protectMaster": true
+          },
+          {
+            "type": "cataclysm:kobolediator",
+            "copyLevel": true,
+            "copyTrait": false,
+            "discardOnUnlink": true,
+            "linkDistance": 32.0,
+            "maxCount": 1,
+            "maxHealthPercentage": 0.6,
+            "minLevel": 300,
+            "protectMaster": true
+          },
+          {
+            "type": "cataclysm:wadjet",
+            "copyLevel": true,
+            "copyTrait": false,
+            "discardOnUnlink": true,
+            "linkDistance": 32.0,
+            "maxCount": 1,
+            "maxHealthPercentage": 0.6,
+            "minLevel": 300,
+            "protectMaster": true
+          }
+        ],
+        "spawnInterval": 80,
+        "spawnOnHurt": true
+      },
       "blacklist": [],
       "difficulty": {
         "apply_chance": 1.0,
@@ -46,6 +86,11 @@
           "free": 2,
           "min": 3,
           "trait": "l2hostility:adaptive"
+        },
+        {
+          "free": 1,
+          "min": 0,
+          "trait": "l2hostility:master"
         }
       ]
     }

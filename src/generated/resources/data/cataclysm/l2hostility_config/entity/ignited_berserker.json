@@ -1,0 +1,33 @@
+{
+  "list": [
+    {
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 30,
+        "min": 100,
+        "scale": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "cataclysm:ignited_berserker"
+      ],
+      "items": [],
+      "minSpawnLevel": 0,
+      "specialConditions": [],
+      "traits": [
+        {
+          "free": 0,
+          "min": 1,
+          "trait": "l2hostility:reflect"
+        },
+        {
+          "free": 0,
+          "min": 1,
+          "trait": "l2hostility:drain"
+        }
+      ]
+    }
+  ]
+}

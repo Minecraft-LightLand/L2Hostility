@@ -139,7 +139,10 @@ public class LHTagGen {
 					.addOptional(ModEntities.THE_HARBINGER.getId())
 					.addOptional(ModEntities.THE_LEVIATHAN.getId())
 					.addOptional(ModEntities.AMETHYST_CRAB.getId())
-					.addOptional(ModEntities.ANCIENT_REMNANT.getId());
+					.addOptional(ModEntities.ANCIENT_REMNANT.getId())
+					.addOptional(ModEntities.IGNITED_BERSERKER.getId())
+					.addOptional(ModEntities.KOBOLEDIATOR.getId())
+					.addOptional(ModEntities.WADJET.getId());
 		}
 
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {

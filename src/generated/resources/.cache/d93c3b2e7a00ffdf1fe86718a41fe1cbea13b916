@@ -1,10 +1,10 @@
-// 1.20.1	2024-05-16T15:24:55.442624	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
+// 1.20.1	2024-05-20T13:55:13.576148	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 0d15a69c346a80468001a02f1326848a9559d3bf assets/l2hostility/blockstates/miracle_block.json
-db007036f6412915323a8f5eac1c086b6c33fdab assets/l2hostility/lang/en_ud.json
-0a1c85069ff2344bf6a28665ec30a5850812a797 assets/l2hostility/lang/en_us.json
+c689a5c5f04cfa581f2161fc71e952ba6ed92d7f assets/l2hostility/lang/en_ud.json
+7e23cb592a3b23542dafde14bc914c8afe88f9a9 assets/l2hostility/lang/en_us.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets/l2hostility/models/block/chaos_block.json
 b482cdea0faf29842ecf75310f414ce76d12e36a assets/l2hostility/models/block/hostility_beacon.json
 22de6e577112bb035808d5d1e24858fd33742e3a assets/l2hostility/models/block/hostility_beacon_base.json
@@ -68,6 +68,7 @@ f6a296c6a2848206b754d5a73a1bac29a584877d assets/l2hostility/models/item/imagine_
 58b06d8bf23062bfe4c6b14c92f5711eee66cb1b assets/l2hostility/models/item/invisible.json
 3ddab52c8faefddb808553cf6792661ae82231fa assets/l2hostility/models/item/killer_aura.json
 43c4e173ed5bf8b1b6a1a2a3c295bfee364b6cef assets/l2hostility/models/item/levitation.json
+db02cfca055f8a42f283a570762acb1c5ae7f47d assets/l2hostility/models/item/master.json
 7a532f277c3ec138c38afb77fbb7877cb637fc35 assets/l2hostility/models/item/miracle_block.json
 9490a10afb4d159d34be10805e0cc02492130193 assets/l2hostility/models/item/miracle_ingot.json
 425e908f5a3fc8b410d194df746f6245c6a9680c assets/l2hostility/models/item/miracle_powder.json
@@ -323,6 +324,8 @@ f46f3cd8fa14a1a94a7bb3dcd1960bf4e051ffc6 data/l2hostility/tags/entity_types/coun
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/killer_aura_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/levitation_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/levitation_whitelist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/master_blacklist.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/master_whitelist.json
 a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_types/melee_weapon_target.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/moonwalk_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/moonwalk_whitelist.json
@@ -348,7 +351,7 @@ ebcd146f52a62b349b6314398e2d418692138153 data/l2hostility/tags/entity_types/no_d
 778fdb4a5208400e8f9b783e17704df130baf07b data/l2hostility/tags/entity_types/repelling_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_whitelist.json
-25dee1533da2f6e26381caa33e2ae33e1f94173e data/l2hostility/tags/entity_types/semiboss.json
+cafeb2a84d175b463f663171226ec056ef272dab data/l2hostility/tags/entity_types/semiboss.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_types/shulker_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/shulker_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/slowness_blacklist.json
@@ -374,7 +377,7 @@ ebcd146f52a62b349b6314398e2d418692138153 data/l2hostility/tags/entity_types/no_d
 ddeff5cd528e370493ffe7336d2e14fa59fa3fae data/l2hostility/tags/items/beacon_payment.json
 849cc0cb0a1698c5cdba74b391f84298eef583ac data/l2hostility/tags/items/chaos_equipment.json
 c11704257529150719574fe8070c7fca05bf7f04 data/l2hostility/tags/items/no_seal.json
-d27d9636bed88bf7eceb3cf1e97db21e63f16803 data/l2hostility/tags/items/trait_item.json
+4072165ff119a927f419da1c0ecfc954fdee7f3e data/l2hostility/tags/items/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
 ae3272ea9c6f244c79f6192ef5e9f1d387c45909 data/minecraft/tags/blocks/beacon_base_blocks.json
 65da76b3a96d076426cc78810d00296dfd0b5679 data/minecraft/tags/blocks/mineable/pickaxe.json

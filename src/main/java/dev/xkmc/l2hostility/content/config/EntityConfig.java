@@ -97,6 +97,9 @@ public class EntityConfig extends BaseConfig {
 		@SerialClass.SerialField
 		public int minSpawnLevel = 0;
 
+		@SerialClass.SerialField
+		public MasterConfig asMaster = null;
+
 		@Deprecated
 		public Config() {
 
@@ -146,8 +149,28 @@ public class EntityConfig extends BaseConfig {
 			return this;
 		}
 
+		public Config master(int maxTotal, int interval, boolean spawnOnHurt, Minion... minions) {
+			this.asMaster = new MasterConfig(maxTotal, interval, spawnOnHurt, new ArrayList<>(List.of(minions)));
+			return this;
+		}
+
 	}
 
+	public record MasterConfig(
+			int maxTotalCount,
+			int spawnInterval,
+			boolean spawnOnHurt,
+			ArrayList<Minion> minions
+	) {
+
+	}
+
+	public record Minion(
+			EntityType<?> type, int maxCount, int minLevel, double maxHealthPercentage,
+			boolean copyLevel, boolean copyTrait,
+			double linkDistance, boolean protectMaster, boolean discardOnUnlink) {
+
+	}
 
 	public record ItemEntry(int weight, ItemStack stack) {
 
