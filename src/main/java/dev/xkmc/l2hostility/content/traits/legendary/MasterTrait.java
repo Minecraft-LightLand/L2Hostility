@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 public class MasterTrait extends LegendaryTrait {
 
 	@Nullable
-	private static EntityConfig.MasterConfig getConfig(EntityType<?> type) {
+	public static EntityConfig.MasterConfig getConfig(EntityType<?> type) {
 		var config = L2Hostility.ENTITY.getMerged().get(type);
 		if (config == null) return null;
 		return config.asMaster;

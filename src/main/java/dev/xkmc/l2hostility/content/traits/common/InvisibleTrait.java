@@ -16,7 +16,7 @@ public class InvisibleTrait extends SelfEffectTrait {
 
 	@Override
 	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
-		if (MobTraitCap.HOLDER.get(le).summoned) {
+		if (MobTraitCap.HOLDER.get(le).isSummoned()) {
 			return false;
 		}
 		return super.allow(le, difficulty, maxModLv);

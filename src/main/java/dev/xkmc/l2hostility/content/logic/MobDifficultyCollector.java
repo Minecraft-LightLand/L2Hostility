@@ -21,7 +21,7 @@ public class MobDifficultyCollector {
 	public double scale, varSq, apply_chance, trait_chance, trait_cost, finalFactor = 1;
 
 	private ServerPlayer player;
-	private boolean fullChance, fullDrop;
+	private boolean fullChance, fullDrop, delegateTrait;
 
 	public MobDifficultyCollector() {
 		apply_chance = LHConfig.COMMON.globalApplyChance.get();
@@ -87,6 +87,7 @@ public class MobDifficultyCollector {
 	}
 
 	public double trait_chance(int lv) {
+		if (delegateTrait) return 0;
 		return fullChance ? 1 : trait_chance * Math.min(1, lv * LHConfig.COMMON.initialTraitChanceSlope.get());
 	}
 
@@ -96,6 +97,10 @@ public class MobDifficultyCollector {
 
 	public void setFullChance() {
 		fullChance = true;
+	}
+
+	public void delegateTrait(){
+		delegateTrait = true;
 	}
 
 	public boolean isFullChance() {

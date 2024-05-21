@@ -13,6 +13,7 @@ import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
 import dev.xkmc.l2serial.serialization.SerialClass;
@@ -68,7 +69,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
 	@SerialClass.SerialField(toClient = true)
-	public boolean summoned = false, noDrop = false, fullDrop = false;
+	public boolean summoned = false, minion = false, noDrop = false, fullDrop = false;
 
 	@SerialClass.SerialField
 	public double dropRate = 1;
@@ -76,6 +77,14 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	@Nullable
 	@SerialClass.SerialField
 	public BlockPos pos = null;
+
+	@Nullable
+	@SerialClass.SerialField(toClient = true)
+	public MinionData asMinion = null;
+
+	@Nullable
+	@SerialClass.SerialField(toClient = true)
+	public MasterData asMaster = null;
 
 	@Nullable
 	private TraitSpawnerBlockEntity summoner = null;
@@ -154,6 +163,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		parent.inherited = true;
 		lv = parent.lv;
 		summoned = parent.summoned;
+		minion = parent.minion;
 		noDrop = parent.noDrop;
 		dropRate = parent.dropRate * LHConfig.COMMON.splitDropRateFactor.get();
 		for (var ent : parent.traits.entrySet()) {
@@ -219,6 +229,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void tick(LivingEntity mob) {
+		boolean sync = false;
 		ticking = true;
 		if (!mob.level().isClientSide()) {
 			if (!isInitialized()) {
@@ -231,14 +242,14 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				traits.forEach((k, v) -> k.postInit(mob, v));
 				clearPending(mob);
 				mob.setHealth(mob.getMaxHealth());
-				syncToClient(mob);
+				sync = true;
 			}
 			if (!traits.isEmpty() &&
 					!LHConfig.COMMON.allowTraitOnOwnable.get() &&
 					mob instanceof OwnableEntity own &&
 					own.getOwner() instanceof Player) {
 				traits.clear();
-				syncToClient(mob);
+				sync = true;
 			}
 		}
 		if (isInitialized()) {
@@ -251,16 +262,31 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				clearPending(mob);
 			}
 		}
-		if (!mob.level().isClientSide() && pos != null) {
-			if (summoner == null) {
-				if (mob.level().getBlockEntity(pos) instanceof TraitSpawnerBlockEntity be) {
-					summoner = be;
+		if (!mob.level().isClientSide()) {
+			if (pos != null) {
+				if (summoner == null) {
+					if (mob.level().getBlockEntity(pos) instanceof TraitSpawnerBlockEntity be) {
+						summoner = be;
+					}
+				}
+				if (summoner == null || summoner.isRemoved()) {
+					mob.discard();
 				}
 			}
-			if (summoner == null || summoner.isRemoved()) {
-				mob.discard();
+		}
+		if (asMinion != null) {
+			sync |= asMinion.tick(mob);
+		}
+		if (hasTrait(LHTraits.MASTER.get())) {
+			if (!mob.level().isClientSide() && asMaster == null) {
+				asMaster = new MasterData();
+				sync = true;
+			}
+			if (mob instanceof Mob master && asMaster != null) {
+				sync |= asMaster.tick(this, master);
 			}
 		}
+		if (!mob.level().isClientSide() && sync && !mob.isRemoved()) syncToClient(mob);
 		ticking = false;
 	}
 
@@ -281,6 +307,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			HostilityTriggers.TRAIT_FLAME.trigger(sp, mob, this);
 			HostilityTriggers.TRAIT_EFFECT.trigger(sp, mob, this);
 		}
+	}
+
+	public boolean isSummoned() {
+		return summoned || minion;
 	}
 
 	@Nullable

@@ -16,9 +16,32 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 
 public class LHAttackListener implements AttackListener {
+
+	@Override
+	public void onAttack(AttackCache cache, ItemStack weapon) {
+		var event = cache.getLivingAttackEvent();
+		assert event != null;
+		if (cache.getAttacker() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob)) {
+			var cap = MobTraitCap.HOLDER.get(mob);
+			if (cap.asMinion != null) {
+				if (cache.getAttackTarget() == cap.asMinion.master) {
+					event.setCanceled(true);
+				}
+			}
+		}
+		if (cache.getAttackTarget() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob)) {
+			var cap = MobTraitCap.HOLDER.get(mob);
+			if (cap.asMinion != null) {
+				if (cache.getAttacker() == cap.asMinion.master) {
+					event.setCanceled(true);
+				}
+			}
+		}
+	}
 
 	@Override
 	public void onHurt(AttackCache cache, ItemStack weapon) {

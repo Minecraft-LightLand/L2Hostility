@@ -23,7 +23,7 @@ public class ClientGlowingHandler {
 		if (le instanceof Mob mob) {
 			if (MobTraitCap.HOLDER.isProper(mob)) {
 				var cap = MobTraitCap.HOLDER.get(mob);
-				if (cap.summoned) {
+				if (cap.isSummoned()) {
 					return true;
 				}
 			}
@@ -63,7 +63,7 @@ public class ClientGlowingHandler {
 	public static Integer getColor(Entity entity) {
 		if (entity instanceof Mob mob) {
 			if (MobTraitCap.HOLDER.isProper(mob)) {
-				if (MobTraitCap.HOLDER.get(mob).summoned) {
+				if (MobTraitCap.HOLDER.get(mob).isSummoned()) {
 					return 0xff0000;
 				}
 			}

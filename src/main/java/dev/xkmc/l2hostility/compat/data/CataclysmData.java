@@ -53,13 +53,13 @@ public class CataclysmData {
 								breaker(equipLevel)
 						)).master(5, 80, true,
 								new EntityConfig.Minion(EntityType.BLAZE, 2, 0,
-										0.9, true, false,
+										0.9, 16, true, false,
 										32, false, true),
 								new EntityConfig.Minion(ModEntities.IGNITED_REVENANT.get(), 2, 300,
-										0.67, true, false,
+										0.67, 16, true, false,
 										32, true, true),
 								new EntityConfig.Minion(ModEntities.IGNITED_BERSERKER.get(), 1, 400,
-										0.33, true, false,
+										0.33, 16, true, false,
 										32, true, true)
 						)));
 		addEntity(collector, 200, 50, ModEntities.THE_HARBINGER, List.of(
@@ -89,13 +89,13 @@ public class CataclysmData {
 						)).item(List.of(divinity(equipLevel)))
 						.master(4, 80, true,
 								new EntityConfig.Minion(ModEntities.KOBOLETON.get(), 2, 0,
-										0.8, true, false,
+										0.8, 16, true, false,
 										32, true, true),
 								new EntityConfig.Minion(ModEntities.KOBOLEDIATOR.get(), 1, 300,
-										0.6, true, false,
+										0.6, 16, true, false,
 										32, true, true),
 								new EntityConfig.Minion(ModEntities.WADJET.get(), 1, 300,
-										0.6, true, false,
+										0.6, 16, true, false,
 										32, true, true)
 						)));
 

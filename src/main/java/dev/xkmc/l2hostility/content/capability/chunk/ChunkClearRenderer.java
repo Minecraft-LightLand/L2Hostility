@@ -10,7 +10,7 @@ import org.joml.Matrix4f;
 
 public class ChunkClearRenderer {
 
-	public static void render(PoseStack pose, Player player, ChunkDifficulty center) {
+	public static void render(PoseStack pose, Player player, ChunkDifficulty center, float pTick) {
 		int r = 7;
 		boolean[][][] sections = new boolean[r * 2 + 1][r * 2 + 1][r * 2 + 1];
 		int cx = center.chunk.getPos().x;
@@ -29,7 +29,11 @@ public class ChunkClearRenderer {
 			}
 		}
 		pose.pushPose();
-		pose.translate(-player.getX(), -player.getEyeY(), -player.getZ());
+		pose.translate(
+				-Mth.lerp(pTick, player.xo, player.getX()),
+				-Mth.lerp(pTick, player.yo, player.getY()) - player.getEyeHeight(),
+				-Mth.lerp(pTick, player.zo, player.getZ())
+		);
 		new ChunkClearRenderer(pose, r, sections, cx, cz, py >> 4);
 		pose.popPose();
 	}

@@ -167,7 +167,7 @@ public class EntityConfig extends BaseConfig {
 
 	public record Minion(
 			EntityType<?> type, int maxCount, int minLevel, double maxHealthPercentage,
-			boolean copyLevel, boolean copyTrait,
+			int spawnRange, boolean copyLevel, boolean copyTrait,
 			double linkDistance, boolean protectMaster, boolean discardOnUnlink) {
 
 	}
