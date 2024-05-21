@@ -107,6 +107,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue prideTraitFactor;
 		public final ForgeConfigSpec.DoubleValue wrathDamageBonus;
 		public final ForgeConfigSpec.BooleanValue disableHostilityLootCurioRequirement;
+		public final ForgeConfigSpec.BooleanValue banBottles;
 
 		public final ForgeConfigSpec.IntValue hostilitySpawnCount;
 		public final ForgeConfigSpec.IntValue hostilitySpawnLevelFactor;
@@ -274,10 +275,12 @@ public class LHConfig {
 
 			builder.push("items");
 			{
+				banBottles = builder.comment("Ban drinking bottle of curse and sanity")
+						.define("banBottles", false);
 				disableHostilityLootCurioRequirement = builder.comment("Disable curio requirement for hostility loot")
 						.define("disableHostilityLootCurioRequirement", false);
 				bottleOfCurseLevel = builder.comment("Number of level to add when using bottle of curse")
-						.defineInRange("bottleOfCurseLevel", 50, 1, 1000);
+						.defineInRange("bottleOfCurseLevel", 50, 0, 1000);
 
 				witchChargeMinDuration = builder.comment("Minimum duration for witch charge to be effective, in ticks")
 						.defineInRange("witchChargeMinDuration", 200, 20, 10000);

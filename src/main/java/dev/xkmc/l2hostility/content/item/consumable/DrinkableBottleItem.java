@@ -1,5 +1,8 @@
 package dev.xkmc.l2hostility.content.item.consumable;
 
+import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -59,6 +62,9 @@ public abstract class DrinkableBottleItem extends Item {
 	}
 
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (LHConfig.COMMON.banBottles.get() || CurioCompat.hasItemInCurio(player, LHItems.DIVINITY_LIGHT.get()))
+			return InteractionResultHolder.fail(stack);
 		return ItemUtils.startUsingInstantly(level, player, hand);
 	}
 

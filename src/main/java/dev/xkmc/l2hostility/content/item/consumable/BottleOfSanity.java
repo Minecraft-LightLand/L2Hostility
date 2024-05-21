@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.item.consumable;
 
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.logic.LevelEditor;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -30,7 +31,8 @@ public class BottleOfSanity extends DrinkableBottleItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.ITEM_BOTTLE_SANITY.get().withStyle(ChatFormatting.GRAY));
+		if (!LHConfig.COMMON.banBottles.get())
+			list.add(LangData.ITEM_BOTTLE_SANITY.get().withStyle(ChatFormatting.GRAY));
 	}
 
 }
