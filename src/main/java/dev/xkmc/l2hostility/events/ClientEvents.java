@@ -12,7 +12,6 @@ import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
-import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.init.events.ClientEffectRenderEvents;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
@@ -26,6 +25,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -37,13 +37,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.joml.Matrix4f;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientEvents {
-
-	private static final List<LivingEntity> MASTERS = new ArrayList<>();
 
 	@SubscribeEvent
 	public static void addTooltip(ItemTooltipEvent event) {
@@ -57,9 +52,6 @@ public class ClientEvents {
 			LocalPlayer player = Proxy.getClientPlayer();
 			assert player != null;
 			var cap = MobTraitCap.HOLDER.get(le);
-			if (cap.hasTrait(LHTraits.MASTER.get())) {
-				MASTERS.add(le);
-			}
 			boolean needHover = le.isInvisible() || LHConfig.CLIENT.showOnlyWhenHovered.get();
 			if (needHover && RayTraceUtil.rayTraceEntity(player, player.getEntityReach(), e -> e == le) == null) {
 				return;
@@ -124,22 +116,25 @@ public class ClientEvents {
 			pose.pushPose();
 			var cam = event.getCamera().getPosition();
 			pose.translate(-cam.x, -cam.y, -cam.z);
-			for (var e : MASTERS) {
-				if (!e.isAlive()) continue;
-				var cap = MobTraitCap.HOLDER.get(e);
-				if (cap.asMaster == null) continue;
-				Vec3 p0 = e.position().add(0, e.getBbHeight() / 2, 0);
-				for (var minions : cap.asMaster.data) {
-					var m = minions.minion;
-					if (m == null || !m.isAlive()) continue;
-					var scap = MobTraitCap.HOLDER.get(m);
-					if (scap.asMinion == null) continue;
-					Vec3 p1 = m.position().add(0, m.getBbHeight() / 2, 0);
-					renderLink(event.getPoseStack(), cons, p0, p1, scap.asMinion.protectMaster);
+			var level = Minecraft.getInstance().level;
+			if (level != null) {
+				for (var e : level.entitiesForRendering()) {
+					if (!(e instanceof Mob mob)) continue;
+					if (!e.isAlive() || !MobTraitCap.HOLDER.isProper(mob)) continue;
+					var cap = MobTraitCap.HOLDER.get(mob);
+					if (cap.asMaster == null) continue;
+					Vec3 p0 = e.position().add(0, e.getBbHeight() / 2, 0);
+					for (var minions : cap.asMaster.data) {
+						var m = minions.minion;
+						if (m == null || !m.isAlive()) continue;
+						var scap = MobTraitCap.HOLDER.get(m);
+						if (scap.asMinion == null) continue;
+						Vec3 p1 = m.position().add(0, m.getBbHeight() / 2, 0);
+						renderLink(event.getPoseStack(), cons, p0, p1, scap.asMinion.protectMaster);
+					}
 				}
 			}
 			pose.popPose();
-			MASTERS.clear();
 		}
 	}
 
@@ -161,7 +156,6 @@ public class ClientEvents {
 		renderQuad(pose.last(), cons, 0, len, 0, 0, r, -r, off + 0.25f, off + 0.5f, 0, len);
 		pose.popPose();
 	}
-
 
 	private static void renderQuad(PoseStack.Pose entry, VertexConsumer vc,
 								   float y0, float y1, float x0, float x1, float z0, float z1,

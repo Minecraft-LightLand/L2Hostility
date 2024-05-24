@@ -16,8 +16,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
 @SerialClass
@@ -26,34 +25,54 @@ public class MasterData {
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<Minion> data = new ArrayList<>();
 
+	@SerialClass.SerialField
+	private LinkedHashMap<EntityType<?>, Data> map = new LinkedHashMap<>();
+
 	public boolean tick(MobTraitCap cap, Mob mob) {
 		var config = MasterTrait.getConfig(mob.getType());
 		if (config == null) return false;
-		Map<EntityType<?>, Data> map = new HashMap<>();
 		for (var e : config.minions())
-			map.put(e.type(), new Data(e));
+			map.computeIfAbsent(e.type(), k -> new Data()).setup(e);
 		boolean updated = data.removeIf(e -> {
 			e.tick(mob);
 			if (e.minion == null) {
-				return true;
+				return !mob.level().isClientSide();
 			} else {
 				var ent = map.get(e.minion.getType());
 				if (ent != null) ent.count++;
 				return false;
 			}
 		});
+		if (!mob.level().isClientSide()) {
+			for (var e : data) {
+				if (e.minion != null) {
+					if (e.minion.getTarget() == null && mob.getTarget() != null)
+						e.minion.setTarget(mob.getTarget());
+					if (e.id != e.minion.getId()) {
+						e.id = e.minion.getId();
+						updated = true;
+					}
+				}
+			}
+		}
+		for (var e : map.values()) {
+			if (e.count < e.config.maxCount() && e.cooldown > 0) {
+				e.cooldown--;
+			}
+		}
 		if (mob.level() instanceof ServerLevel sl &&
-				mob.getTarget() != null &&
+				mob.getTarget() != null && mob.getTarget().isAlive() &&
 				data.size() < config.maxTotalCount() &&
 				mob.tickCount % config.spawnInterval() == 0) {
 			for (var e : map.values()) {
-				if (data.size() < config.maxTotalCount() &&
+				if (e.cooldown <= 0 && data.size() < config.maxTotalCount() &&
 						e.count < e.config.maxCount() &&
 						cap.getLevel() >= e.config.minLevel()) {
 					var nd = e.spawn(cap, sl, mob);
 					if (nd != null) {
 						data.add(nd);
-						updated = true;
+						e.cooldown = e.config.cooldown();
+						return true;
 					}
 				}
 			}
@@ -97,14 +116,19 @@ public class MasterData {
 
 	}
 
+	@SerialClass
 	public static class Data {
 
-		private final EntityConfig.Minion config;
+		private EntityConfig.Minion config;
 
 		private int count;
 
-		public Data(EntityConfig.Minion e) {
+		@SerialClass.SerialField
+		public int cooldown;
+
+		public void setup(EntityConfig.Minion e) {
 			config = e;
+			count = 0;
 		}
 
 		@Nullable
@@ -130,7 +154,7 @@ public class MasterData {
 				}
 			}
 			if (target == null) return null;
-			var e = config.type().spawn(sl, target, MobSpawnType.MOB_SUMMONED);
+			var e = config.type().create(sl, null, null, target, MobSpawnType.MOB_SUMMONED, false, false);
 			if (!(e instanceof Mob m)) return null;
 			var cap = MobTraitCap.HOLDER.get(m);
 			RegionalDifficultyModifier diff = (p, c) -> {

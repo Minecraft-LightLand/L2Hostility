@@ -24,13 +24,7 @@ public class TraitManager {
 		ins.addPermanentModifier(modifier);
 	}
 
-	public static int fill(MobTraitCap cap, LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
-		int lv = ins.getDifficulty(le.getRandom());
-		int ans = 0;
-		if (ins.apply_chance() < le.getRandom().nextDouble()) {
-			return ans;
-		}
-		// add attributes
+	public static void scale(LivingEntity le, int lv) {
 		if (!le.getType().is(LHTagGen.NO_SCALING)) {
 			double factor;
 			if (LHConfig.COMMON.exponentialHealth.get()) {
@@ -40,6 +34,18 @@ public class TraitManager {
 			}
 			addAttribute(le, Attributes.MAX_HEALTH, "hostility_health", factor,
 					AttributeModifier.Operation.MULTIPLY_TOTAL);
+		}
+	}
+
+	public static int fill(MobTraitCap cap, LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
+		int lv = ins.getDifficulty(le.getRandom());
+		int ans = 0;
+		if (ins.apply_chance() < le.getRandom().nextDouble()) {
+			return ans;
+		}
+		// add attributes
+		if (!le.getType().is(LHTagGen.NO_SCALING)) {
+			scale(le, lv);
 			ans = lv;
 		}
 		// armor

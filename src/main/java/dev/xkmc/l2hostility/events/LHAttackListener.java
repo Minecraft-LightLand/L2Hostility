@@ -21,15 +21,12 @@ import net.minecraft.world.item.ItemStack;
 
 public class LHAttackListener implements AttackListener {
 
-	@Override
-	public void onAttack(AttackCache cache, ItemStack weapon) {
-		var event = cache.getLivingAttackEvent();
-		assert event != null;
+	private static boolean masterImmunity(AttackCache cache) {
 		if (cache.getAttacker() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob)) {
 			var cap = MobTraitCap.HOLDER.get(mob);
 			if (cap.asMinion != null) {
 				if (cache.getAttackTarget() == cap.asMinion.master) {
-					event.setCanceled(true);
+					return true;
 				}
 			}
 		}
@@ -37,9 +34,29 @@ public class LHAttackListener implements AttackListener {
 			var cap = MobTraitCap.HOLDER.get(mob);
 			if (cap.asMinion != null) {
 				if (cache.getAttacker() == cap.asMinion.master) {
-					event.setCanceled(true);
+					return true;
 				}
 			}
+			if (cap.asMaster != null) {
+				for (var e : cap.asMaster.data) {
+					if (e.minion.isAlive()) {
+						var mcap = MobTraitCap.HOLDER.get(e.minion);
+						if (mcap.asMinion != null && mcap.asMinion.protectMaster) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void onAttack(AttackCache cache, ItemStack weapon) {
+		var event = cache.getLivingAttackEvent();
+		assert event != null;
+		if (masterImmunity(cache)) {
+			event.setCanceled(true);
 		}
 	}
 
@@ -89,6 +106,9 @@ public class LHAttackListener implements AttackListener {
 		if (MobTraitCap.HOLDER.isProper(mob)) {
 			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
 			cap.traitEvent((k, v) -> k.onDamaged(v, mob, cache));
+		}
+		if (masterImmunity(cache)) {
+			cache.addDealtModifier(DamageModifier.nonlinearFinal(10432, e -> 0));
 		}
 	}
 

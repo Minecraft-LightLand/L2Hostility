@@ -184,6 +184,11 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		return lv;
 	}
 
+	public void setLevel(LivingEntity le, int level) {
+		lv = level;
+		TraitManager.scale(le, lv);
+	}
+
 	public boolean isInitialized() {
 		return stage != Stage.PRE_INIT;
 	}
@@ -198,6 +203,12 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	public void traitEvent(BiConsumer<MobTrait, Integer> cons) {
 		traits.forEach(cons);
+	}
+
+	public void setTrait(String id, int lv) {
+		var trait = LHTraits.TRAITS.get().getValue(new ResourceLocation(id));
+		if (trait != null)
+			setTrait(trait, lv);
 	}
 
 	public void setTrait(MobTrait trait, int lv) {

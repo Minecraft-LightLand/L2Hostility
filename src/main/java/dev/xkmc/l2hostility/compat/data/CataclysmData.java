@@ -51,15 +51,15 @@ public class CataclysmData {
 								EntityConfig.simplePool(equipLevel, "equipment/mainhand", getIgnisWeapon()),
 								divinity(equipLevel),
 								breaker(equipLevel)
-						)).master(5, 80, true,
+						)).master(5, 80,
 								new EntityConfig.Minion(EntityType.BLAZE, 2, 0,
-										0.9, 16, true, false,
+										0.9, 16, 100,true, false,
 										32, false, true),
 								new EntityConfig.Minion(ModEntities.IGNITED_REVENANT.get(), 2, 300,
-										0.67, 16, true, false,
+										0.67, 16, 400,true, false,
 										32, true, true),
 								new EntityConfig.Minion(ModEntities.IGNITED_BERSERKER.get(), 1, 400,
-										0.33, 16, true, false,
+										0.33, 16, 400,true, false,
 										32, true, true)
 						)));
 		addEntity(collector, 200, 50, ModEntities.THE_HARBINGER, List.of(
@@ -87,15 +87,15 @@ public class CataclysmData {
 								EntityConfig.trait(LHTraits.ADAPTIVE.get(), 2, 3),
 								EntityConfig.trait(LHTraits.MASTER.get(), 1, 0)
 						)).item(List.of(divinity(equipLevel)))
-						.master(4, 80, true,
+						.master(4, 80,
 								new EntityConfig.Minion(ModEntities.KOBOLETON.get(), 2, 0,
-										0.8, 16, true, false,
+										0.8, 16, 200,true, false,
 										32, true, true),
 								new EntityConfig.Minion(ModEntities.KOBOLEDIATOR.get(), 1, 300,
-										0.6, 16, true, false,
+										0.6, 16, 400,true, false,
 										32, true, true),
 								new EntityConfig.Minion(ModEntities.WADJET.get(), 1, 300,
-										0.6, 16, true, false,
+										0.6, 16, 400,true, false,
 										32, true, true)
 						)));
 

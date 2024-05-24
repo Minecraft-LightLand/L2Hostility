@@ -149,8 +149,8 @@ public class EntityConfig extends BaseConfig {
 			return this;
 		}
 
-		public Config master(int maxTotal, int interval, boolean spawnOnHurt, Minion... minions) {
-			this.asMaster = new MasterConfig(maxTotal, interval, spawnOnHurt, new ArrayList<>(List.of(minions)));
+		public Config master(int maxTotal, int interval, Minion... minions) {
+			this.asMaster = new MasterConfig(maxTotal, interval, new ArrayList<>(List.of(minions)));
 			return this;
 		}
 
@@ -159,7 +159,6 @@ public class EntityConfig extends BaseConfig {
 	public record MasterConfig(
 			int maxTotalCount,
 			int spawnInterval,
-			boolean spawnOnHurt,
 			ArrayList<Minion> minions
 	) {
 
@@ -167,7 +166,7 @@ public class EntityConfig extends BaseConfig {
 
 	public record Minion(
 			EntityType<?> type, int maxCount, int minLevel, double maxHealthPercentage,
-			int spawnRange, boolean copyLevel, boolean copyTrait,
+			int spawnRange, int cooldown, boolean copyLevel, boolean copyTrait,
 			double linkDistance, boolean protectMaster, boolean discardOnUnlink) {
 
 	}

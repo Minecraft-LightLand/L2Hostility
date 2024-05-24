@@ -173,6 +173,11 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return getID();
+	}
+
 	public int inherited(MobTraitCap mobTraitCap, int rank, InheritContext ctx) {
 		return rank;
 	}

@@ -6,6 +6,7 @@
         "minions": [
           {
             "type": "minecraft:blaze",
+            "cooldown": 100,
             "copyLevel": true,
             "copyTrait": false,
             "discardOnUnlink": true,
@@ -13,10 +14,12 @@
             "maxCount": 2,
             "maxHealthPercentage": 0.9,
             "minLevel": 0,
-            "protectMaster": false
+            "protectMaster": false,
+            "spawnRange": 16
           },
           {
             "type": "cataclysm:ignited_revenant",
+            "cooldown": 400,
             "copyLevel": true,
             "copyTrait": false,
             "discardOnUnlink": true,
@@ -24,10 +27,12 @@
             "maxCount": 2,
             "maxHealthPercentage": 0.67,
             "minLevel": 300,
-            "protectMaster": true
+            "protectMaster": true,
+            "spawnRange": 16
           },
           {
             "type": "cataclysm:ignited_berserker",
+            "cooldown": 400,
             "copyLevel": true,
             "copyTrait": false,
             "discardOnUnlink": true,
@@ -35,7 +40,8 @@
             "maxCount": 1,
             "maxHealthPercentage": 0.33,
             "minLevel": 400,
-            "protectMaster": true
+            "protectMaster": true,
+            "spawnRange": 16
           }
         ],
         "spawnInterval": 80,
