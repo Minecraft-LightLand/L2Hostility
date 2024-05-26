@@ -17,6 +17,7 @@
         "mutantmonsters:mutant_enderman"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 100,
       "specialConditions": [],
       "traits": [

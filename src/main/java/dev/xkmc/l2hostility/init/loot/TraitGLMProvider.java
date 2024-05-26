@@ -127,6 +127,9 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.REPRINT.get(), loot3, new ItemStack(LHItems.BOOK_COPY.get()), 1, 1, 0);
 		add(LHTraits.DISPELL.get(), loot4, new ItemStack(LHItems.IMAGINE_BREAKER.get()), 3, 1, 0);
 
+		add(LHTraits.ARENA.get(), loot4, new ItemStack(LHItems.CHAOS_INGOT.get()), 1, 0.5, 0);
+		add(LHTraits.MASTER.get(), loot4, new ItemStack(LHItems.CHAOS_INGOT.get(), 4), 1, 1, 0);
+
 		add(LHTraits.TANK.get(), new ItemStack(LCMats.SHULKERATE.getNugget(), 6), 0, 0.1,
 				LootTableTemplate.byPlayer().build(),
 				new TraitLootCondition(LHTraits.TANK.get(), 3, 5),

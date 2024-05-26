@@ -38,7 +38,7 @@ public class TraitManager {
 	}
 
 	public static int fill(MobTraitCap cap, LivingEntity le, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
-		int lv = ins.getDifficulty(le.getRandom());
+		int lv = cap.clampLevel(le, ins.getDifficulty(le.getRandom()));
 		int ans = 0;
 		if (ins.apply_chance() < le.getRandom().nextDouble()) {
 			return ans;

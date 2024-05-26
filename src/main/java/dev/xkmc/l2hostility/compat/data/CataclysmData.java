@@ -89,8 +89,8 @@ public class CataclysmData {
 						)).item(List.of(divinity(equipLevel)))
 						.master(4, 80,
 								new EntityConfig.Minion(ModEntities.KOBOLETON.get(), 2, 0,
-										0.8, 16, 200,true, false,
-										32, true, true),
+										0.8, 16, 250,true, false,
+										32, false, true),
 								new EntityConfig.Minion(ModEntities.KOBOLEDIATOR.get(), 1, 300,
 										0.6, 16, 400,true, false,
 										32, true, true),

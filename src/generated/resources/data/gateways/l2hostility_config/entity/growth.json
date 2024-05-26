@@ -18,6 +18,7 @@
         "minecraft:slime"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [
         {
@@ -70,6 +71,7 @@
         "minecraft:magma_cube"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [
         {
@@ -122,6 +124,7 @@
         "minecraft:slime"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [
         {
@@ -169,6 +172,7 @@
         "minecraft:magma_cube"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [
         {
@@ -216,6 +220,7 @@
         "minecraft:slime"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [
         {
@@ -258,6 +263,7 @@
         "minecraft:magma_cube"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [
         {
@@ -301,6 +307,7 @@
         "minecraft:magma_cube"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [
         {

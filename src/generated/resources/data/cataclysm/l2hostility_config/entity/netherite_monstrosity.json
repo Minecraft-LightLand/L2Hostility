@@ -43,6 +43,7 @@
           "slot": "curios/hands"
         }
       ],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [

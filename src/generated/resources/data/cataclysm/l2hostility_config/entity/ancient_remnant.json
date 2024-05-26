@@ -6,7 +6,7 @@
         "minions": [
           {
             "type": "cataclysm:koboleton",
-            "cooldown": 200,
+            "cooldown": 250,
             "copyLevel": true,
             "copyTrait": false,
             "discardOnUnlink": true,
@@ -14,7 +14,7 @@
             "maxCount": 2,
             "maxHealthPercentage": 0.8,
             "minLevel": 0,
-            "protectMaster": true,
+            "protectMaster": false,
             "spawnRange": 16
           },
           {
@@ -44,8 +44,7 @@
             "spawnRange": 16
           }
         ],
-        "spawnInterval": 80,
-        "spawnOnHurt": true
+        "spawnInterval": 80
       },
       "blacklist": [],
       "difficulty": {
@@ -75,6 +74,7 @@
           "slot": "curios/ring"
         }
       ],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [

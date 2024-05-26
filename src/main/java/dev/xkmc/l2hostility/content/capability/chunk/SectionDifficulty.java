@@ -67,7 +67,7 @@ public class SectionDifficulty {
 		Holder<Biome> biome = level.getBiome(pos);
 		biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location())).ifPresent(instance::acceptConfig);
 		instance.acceptBonusLevel((int) Math.round(LHConfig.COMMON.distanceFactor.get() *
-				Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ())));
+				Math.sqrt(1d * pos.getX() * pos.getX() + 1d * pos.getZ() * pos.getZ())));
 	}
 
 	public List<Component> getSectionDifficultyDetail(Player player) {

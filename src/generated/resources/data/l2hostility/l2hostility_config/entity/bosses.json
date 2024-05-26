@@ -14,6 +14,7 @@
         "minecraft:elder_guardian"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [
@@ -42,6 +43,7 @@
         "minecraft:piglin_brute"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [
@@ -70,6 +72,7 @@
         "minecraft:warden"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [
@@ -107,6 +110,7 @@
         "minecraft:wither"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [
@@ -131,6 +135,7 @@
         "minecraft:ender_dragon"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": []

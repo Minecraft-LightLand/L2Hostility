@@ -14,6 +14,7 @@
         "twilightforest:hydra"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [

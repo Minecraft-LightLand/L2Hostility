@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkClearRenderer;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -31,6 +32,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.client.event.RenderNameTagEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -96,6 +98,20 @@ public class ClientEvents {
 		}
 	}
 
+	private static boolean renderChunk = false;
+
+	@SubscribeEvent
+	public static void onClientTick(TickEvent.ClientTickEvent event) {
+		if (event.phase == TickEvent.Phase.END) {
+			var player = Proxy.getClientPlayer();
+			if (player != null && player.tickCount % PerformanceConstants.CHUNK_RENDER == 0) {
+				renderChunk = CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR_GLASSES.get()) &&
+						CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR.get());
+
+			}
+		}
+	}
+
 	@SubscribeEvent
 	public static void onLevelRenderLast(RenderLevelStageEvent event) {
 		if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS) {
@@ -103,8 +119,7 @@ public class ClientEvents {
 			if (player == null) return;
 			var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 			if (opt.isEmpty()) return;
-			if (!CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR_GLASSES.get())) return;
-			if (!CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR.get())) return;
+			if (!renderChunk) return;
 			ChunkClearRenderer.render(event.getPoseStack(), player, opt.get(), event.getPartialTick());
 		}
 		if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {

@@ -13,6 +13,7 @@
   "l2hostility": {
 	"command": {
 	  "mob.success": "指令已对%s个怪物起效",
+	  "invalid_trait": "%s不是正确的词条id",
 	  "player": {
 		"fail": "指令无目标或者无效",
 		"get_base": "%s的基础难度等级位Lv.%s",
@@ -70,6 +71,7 @@
 		"glasses": "让你能看见隐身怪物，以及在失明/黑暗效果下看见怪物",
 		"detector": "在主副手持有时显示玩家和区域难度信息",
 		"section_render": "持有[%s]且佩戴[%s]时渲染被净化的区域",
+		"orb_use": "只有持有[%s]且佩戴[%s]时才能使用",
 		"curse_add_level": "玩家难度提升%s",
 		"curse_no_drop": "玩家击杀的怪物不会掉落词条掉落物",
 		"curse_of_envy": "击杀怪物获取其词条，概率为词条每阶%s%%",

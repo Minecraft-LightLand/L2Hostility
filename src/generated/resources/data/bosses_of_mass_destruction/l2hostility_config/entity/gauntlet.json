@@ -14,6 +14,7 @@
         "bosses_of_mass_destruction:gauntlet"
       ],
       "items": [],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [

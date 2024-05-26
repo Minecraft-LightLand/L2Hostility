@@ -37,6 +37,7 @@ public enum LangData {
 	ITEM_GLASSES("item.equipment.glasses", "Allow you to see invisible mobs, and see mobs when you have blindness or darkness effects", 0),
 	ITEM_DETECTOR("item.equipment.detector", "Shows player and regional difficulty information when held in hand / offhand", 0),
 	ITEM_SECTION_RENDER("item.equipment.section_render", "Hold [%s] and Equip [%s] to see regions cleared of hostility", 2),
+	ITEM_ORB_USE("item.equipment.orb_use", "Usable only when you hold [%s] in off hand and Equip [%s]", 2),
 	ITEM_SPAWNER("item.spawner", "Summon strong mobs. Kill them all to make a chunk section no longer spawn mobs with levels", 0),
 	ITEM_ORB("item.consumable.orb", "Make %sx%sx%s chunk sections no longer spawn mobs with levels.", 3),
 	ITEM_BOTTLE_CURSE("item.consumable.bottle_of_curse", "Increase player difficulty by %s", 1),
@@ -138,9 +139,11 @@ public enum LangData {
 	COMMAND_REGION_NOT_CLEAR("command.region.not_clear", "Section Not Cleared", 0),
 
 	COMMAND_MOB_SUCCEED("command.mob.success", "Performed actions on %s mobs", 1),
+	COMMAND_INVALID_TRAIT("command.invalid_trait", "Invalid trait id %s", 1),
 
 	PATCHOULI_TITLE("patchouli.title", "L2Hostility Guide", 0),
 	PATCHOULI_LANDING("patchouli.landing", "Welcome to Champion-like difficulty scaling mod", 0),
+
 	;
 
 	final String id, def;
@@ -189,6 +192,10 @@ public enum LangData {
 
 	public static MutableComponent sectionRender() {
 		return ITEM_SECTION_RENDER.get(item(LHItems.DETECTOR.asStack()), item(LHItems.DETECTOR_GLASSES.asStack()));
+	}
+
+	public static MutableComponent orbUse() {
+		return ITEM_ORB_USE.get(item(LHItems.DETECTOR.asStack()), item(LHItems.DETECTOR_GLASSES.asStack()));
 	}
 
 }

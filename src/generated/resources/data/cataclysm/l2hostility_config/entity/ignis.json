@@ -44,8 +44,7 @@
             "spawnRange": 16
           }
         ],
-        "spawnInterval": 80,
-        "spawnOnHurt": true
+        "spawnInterval": 80
       },
       "blacklist": [],
       "difficulty": {
@@ -103,6 +102,7 @@
           "slot": "curios/hands"
         }
       ],
+      "maxLevel": 0,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [

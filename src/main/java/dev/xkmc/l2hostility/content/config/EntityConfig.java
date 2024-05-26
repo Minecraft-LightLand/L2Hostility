@@ -95,7 +95,7 @@ public class EntityConfig extends BaseConfig {
 		public final ArrayList<ItemPool> items = new ArrayList<>();
 
 		@SerialClass.SerialField
-		public int minSpawnLevel = 0;
+		public int minSpawnLevel = 0, maxLevel = 0;
 
 		@SerialClass.SerialField
 		public MasterConfig asMaster = null;
@@ -109,7 +109,6 @@ public class EntityConfig extends BaseConfig {
 					  WorldDifficultyConfig.DifficultyConfig difficulty) {
 			this.entities.addAll(entities);
 			this.difficulty = difficulty;
-			;
 		}
 
 		public Set<MobTrait> blacklist() {

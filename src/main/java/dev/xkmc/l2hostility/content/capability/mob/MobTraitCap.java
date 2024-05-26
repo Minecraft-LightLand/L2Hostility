@@ -185,8 +185,17 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void setLevel(LivingEntity le, int level) {
-		lv = level;
+		lv = clampLevel(le, level);
 		TraitManager.scale(le, lv);
+	}
+
+	public int clampLevel(LivingEntity le, int lv) {
+		int cap = LHConfig.COMMON.maxMobLevel.get();
+		var config = getConfigCache(le);
+		if (config != null && config.maxLevel > 0) {
+			cap = Math.min(config.maxLevel, cap);
+		}
+		return Math.min(cap, lv);
 	}
 
 	public boolean isInitialized() {
@@ -225,7 +234,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	}
 
-	private void clearPending(LivingEntity mob) {
+	private boolean clearPending(LivingEntity mob) {
+		if (pending.isEmpty()) return false;
 		while (!pending.isEmpty()) {
 			var temp = new ArrayList<>(pending);
 			for (var pair : pending) {
@@ -236,7 +246,13 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				pair.getFirst().initialize(mob, pair.getSecond());
 				pair.getFirst().postInit(mob, pair.getSecond());
 			}
+			for (var pair : temp) {
+				if (pair.getSecond() == 0) {
+					traits.remove(pair.getFirst());
+				}
+			}
 		}
+		return true;
 	}
 
 	public void tick(LivingEntity mob) {
@@ -266,12 +282,12 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		if (isInitialized()) {
 			if (!traits.isEmpty()) {
 				if (mob.tickCount % PerformanceConstants.REMOVE == 0) {
-					traits.keySet().removeIf(Objects::isNull);
-					traits.keySet().removeIf(MobTrait::isBanned);
+					sync |= traits.keySet().removeIf(Objects::isNull);
+					sync |= traits.keySet().removeIf(MobTrait::isBanned);
 				}
 				traits.forEach((k, v) -> k.tick(mob, v));
-				clearPending(mob);
 			}
+			sync |= clearPending(mob);
 		}
 		if (!mob.level().isClientSide()) {
 			if (pos != null) {
