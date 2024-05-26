@@ -1,5 +1,7 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.bobmowzie.mowziesmobs.MowziesMobs;
+import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
 import com.cerbon.bosses_of_mass_destruction.entity.BMDEntities;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.L_Ender.cataclysm.init.ModEntities;
@@ -202,6 +204,12 @@ public class LHTagGen {
 			pvd.addTag(WHITELIST)
 					.addOptional(ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation());
 
+		}
+		if (ModList.get().isLoaded(MowziesMobs.MODID)) {
+			pvd.addTag(SEMIBOSS)
+					.addOptional(EntityHandler.FROSTMAW.getId())
+					.addOptional(EntityHandler.UMVUTHI.getId())
+					.addOptional(EntityHandler.WROUGHTNAUT.getId());
 		}
 
 		ENTITY_TAG_BUILDER.values().forEach(e -> e.accept(pvd));

@@ -340,6 +340,19 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		return summoned || minion;
 	}
 
+	public boolean isMasterProtected() {
+		if (asMaster != null) {
+			for (var e : asMaster.data) {
+				if (e.minion != null) {
+					var scap = MobTraitCap.HOLDER.get(e.minion);
+					if (scap.asMinion != null && scap.asMinion.protectMaster)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@Nullable
 	public <T extends CapStorageData> T getData(ResourceLocation id) {
 		return Wrappers.cast(data.get(id));

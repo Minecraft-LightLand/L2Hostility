@@ -37,16 +37,8 @@ public class LHAttackListener implements AttackListener {
 					return true;
 				}
 			}
-			if (cap.asMaster != null) {
-				for (var e : cap.asMaster.data) {
-					if (e.minion.isAlive()) {
-						var mcap = MobTraitCap.HOLDER.get(e.minion);
-						if (mcap.asMinion != null && mcap.asMinion.protectMaster) {
-							return true;
-						}
-					}
-				}
-			}
+			if (cap.isMasterProtected())
+				return true;
 		}
 		return false;
 	}

@@ -3,6 +3,7 @@
 - Add master trait, default on Ignis and Ancient Remnant
 - Orb usable only when having glasses and detector
 - Add drops to Arena and Master trait
+- Add Mowzie's mobs compatibility
 - Add command to set level, set trait, remove trait, and clear all traits
 - Add config for max mob level
 - Add datapack config entry for mob-specific max level ("maxLevel in entity config")

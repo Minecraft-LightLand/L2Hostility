@@ -1,4 +1,4 @@
-// 1.20.1	2024-05-25T19:55:25.644178	L2Hostility Config
+// 1.20.1	2024-05-26T21:18:10.438812	L2Hostility Config
 d1c6720bfa98ce1e36277db06ed61621b12f3ce2 data/bosses_of_mass_destruction/l2hostility_config/entity/gauntlet.json
 986b3c93f358d33a3b45d6d98925765ab7691083 data/bosses_of_mass_destruction/l2hostility_config/entity/lich.json
 cfb243362573cb27980131fb0edb7c59106e519c data/bosses_of_mass_destruction/l2hostility_config/entity/obsidilith.json
@@ -70,6 +70,9 @@ fe58efe1b38328837aa9e3fb8f79ad12f309fa47 data/l2hostility/l2hostility_config/tra
 d7d12845111124584c8b11adb1ee13d12f1ec311 data/l2hostility/l2hostility_config/weapon/armors.json
 2d208358fa9bf1089e5029378956e69edc88bca4 data/l2hostility/l2hostility_config/weapon/vanilla.json
 c5e767166def72221e386dcb18512e0cbfcb1b62 data/l2weaponry/l2hostility_config/weapon/weapons.json
+03070b91ceec864408161a291763439209430698 data/mowziesmobs/l2hostility_config/entity/ferrous_wroughtnaut.json
+ed2224f5a06a328dc5697eec8b793c256d86b556 data/mowziesmobs/l2hostility_config/entity/frostmaw.json
+7d6942c216dbae06cd9617cce16a9cf2278a0271 data/mowziesmobs/l2hostility_config/entity/umvuthi.json
 2faa9f1d9afcc84cd60e643955c226e9029a2487 data/mutantmonsters/l2hostility_config/entity/bosses.json
 0323b65bead9dca44d01db0c1e86e4fc02ea2add data/twilightforest/l2hostility_config/entity/alpha_yeti.json
 9c6a06bf54b747039a5b3eee880f5748f4037afb data/twilightforest/l2hostility_config/entity/hydra.json

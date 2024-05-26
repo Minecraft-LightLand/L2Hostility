@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.bobmowzie.mowziesmobs.MowziesMobs;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import com.github.alexthe666.iceandfire.IceAndFire;
 import dev.shadowsoffire.gateways.Gateways;
@@ -221,6 +222,9 @@ public class LHConfigGen extends ConfigDataProvider {
 		}
 		if (ModList.get().isLoaded(MutantMonsters.MOD_ID)) {
 			MutantMonsterData.genConfig(collector);
+		}
+		if (ModList.get().isLoaded(MowziesMobs.MODID)) {
+			MowzieData.genConfig(collector);
 		}
 	}
 
