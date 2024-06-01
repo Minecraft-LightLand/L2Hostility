@@ -1,3 +1,7 @@
+2.4.25
+- Fix Master summoned minions fight each other
+- Traits won't show stat bonus if it's 0
+
 2.4.24
 - Fix distance difficulty factor over 40k blocks
 - Add master trait, default on Ignis and Ancient Remnant

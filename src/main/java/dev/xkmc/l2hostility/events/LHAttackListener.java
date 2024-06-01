@@ -22,24 +22,28 @@ import net.minecraft.world.item.ItemStack;
 public class LHAttackListener implements AttackListener {
 
 	private static boolean masterImmunity(AttackCache cache) {
-		if (cache.getAttacker() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob)) {
-			var cap = MobTraitCap.HOLDER.get(mob);
-			if (cap.asMinion != null) {
-				if (cache.getAttackTarget() == cap.asMinion.master) {
-					return true;
-				}
-			}
-		}
-		if (cache.getAttackTarget() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob)) {
-			var cap = MobTraitCap.HOLDER.get(mob);
-			if (cap.asMinion != null) {
-				if (cache.getAttacker() == cap.asMinion.master) {
-					return true;
-				}
-			}
-			if (cap.isMasterProtected())
+		MobTraitCap attacker = null, target = null;
+		if (cache.getAttacker() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob))
+			attacker = MobTraitCap.HOLDER.get(mob);
+		if (cache.getAttackTarget() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob))
+			target = MobTraitCap.HOLDER.get(mob);
+		LivingEntity attackerMaster = null, targetMaster = null;
+		if (attacker != null && attacker.asMinion != null) {
+			attackerMaster = attacker.asMinion.master;
+			if (cache.getAttackTarget() == attackerMaster) {
 				return true;
+			}
 		}
+		if (target != null && target.asMinion != null) {
+			targetMaster = target.asMinion.master;
+			if (cache.getAttacker() == targetMaster) {
+				return true;
+			}
+		}
+		if (attackerMaster != null && attackerMaster == targetMaster)
+			return true;
+		if (target != null && target.isMasterProtected())
+			return true;
 		return false;
 	}
 

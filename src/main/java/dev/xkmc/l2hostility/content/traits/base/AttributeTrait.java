@@ -36,9 +36,11 @@ public class AttributeTrait extends MobTrait {
 	@Override
 	public void addDetail(List<Component> list) {
 		for (var e : entries) {
+			double val = e.factor.getAsDouble();
+			if (val == 0) continue;
 			list.add(mapLevel(i -> (e.op == AttributeModifier.Operation.ADDITION ?
-					Component.literal("+" + Math.round(e.factor.getAsDouble() * i))
-					: Component.literal("+" + Math.round(e.factor.getAsDouble() * i * 100) + "%"))
+					Component.literal("+" + Math.round(val * i))
+					: Component.literal("+" + Math.round(val * i * 100) + "%"))
 					.withStyle(ChatFormatting.AQUA)).append(CommonComponents.SPACE).append(
 					Component.translatable(e.attribute.get().getDescriptionId()).withStyle(ChatFormatting.BLUE)));
 		}
