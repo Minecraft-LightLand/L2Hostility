@@ -46,17 +46,6 @@ public class TraitSymbol extends Item {
 
 	public MobTrait get() {
 		var ans = LHTraits.TRAITS.get().getValue(ForgeRegistries.ITEMS.getKey(this));
-		if (ans == null) {
-			L2Hostility.LOGGER.error("------------");
-			L2Hostility.LOGGER.error("Trait " + ForgeRegistries.ITEMS.getKey(this) + " is not registered. Why?");
-			var set = LHTraits.TRAITS.get().getKeys();
-			L2Hostility.LOGGER.error("List of all ids registered: ");
-			for (var e : set) {
-				L2Hostility.LOGGER.error(e.toString());
-			}
-
-			L2Hostility.LOGGER.error("------------");
-		}
 		assert ans != null;
 		return ans;
 	}

@@ -13,6 +13,7 @@ import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.init.events.ClientEffectRenderEvents;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
@@ -37,10 +38,26 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.joml.Matrix4f;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientEvents {
+
+	private static void test() {
+		for (var e : LHTraits.TRAITS.get()) {
+			var x = LHTraits.TRAITS.get().getValue(e.getRegistryName());
+			if (x == null) {
+				throw new IllegalStateException("Registry Inconsistency detected");
+			}
+		}
+		for (var e : ForgeRegistries.ITEMS.getKeys()) {
+			var x = ForgeRegistries.ITEMS.getValue(e);
+			if (x == null) {
+				throw new IllegalStateException("Registry Inconsistency detected");
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public static void addTooltip(ItemTooltipEvent event) {
@@ -109,12 +126,15 @@ public class ClientEvents {
 						CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR.get());
 
 			}
+
+			test();//TODO
 		}
 	}
 
 	@SubscribeEvent
 	public static void onLevelRenderLast(RenderLevelStageEvent event) {
 		if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_TRIPWIRE_BLOCKS) {
+			test();//TODO
 			Player player = Minecraft.getInstance().player;
 			if (player == null) return;
 			var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
