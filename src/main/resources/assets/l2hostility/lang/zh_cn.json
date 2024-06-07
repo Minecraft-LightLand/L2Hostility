@@ -109,7 +109,7 @@
   "trait.l2hostility.counter_strike": "反击",
   "trait.l2hostility.counter_strike.desc": "被攻击后会试图冲刺反击",
   "trait.l2hostility.gravity": "重力",
-  "trait.l2hostility.gravity.desc": "增加周围区域重力",
+  "trait.l2hostility.gravity.desc": "增加周围区域重力。受到空中生物攻击时使攻击者向下坠落",
   "trait.l2hostility.moonwalk": "月步",
   "trait.l2hostility.moonwalk.desc": "减少周围区域重力",
   "trait.l2hostility.reprint": "复印",

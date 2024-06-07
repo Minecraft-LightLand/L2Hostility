@@ -114,7 +114,7 @@
 	"counter_strike": "反击",
 	"counter_strike.desc": "被攻击后会试图冲刺反击",
 	"gravity": "重力",
-	"gravity.desc": "增加周围区域重力",
+	"gravity.desc": "增加周围区域重力。受到空中生物攻击时使攻击者向下坠落",
 	"moonwalk": "月步",
 	"moonwalk.desc": "减少周围区域重力",
 	"reprint": "复印",

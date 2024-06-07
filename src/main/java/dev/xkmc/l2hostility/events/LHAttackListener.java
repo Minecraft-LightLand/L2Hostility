@@ -15,6 +15,7 @@ import dev.xkmc.l2hostility.init.data.HostilityDamageState;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +23,9 @@ import net.minecraft.world.item.ItemStack;
 public class LHAttackListener implements AttackListener {
 
 	private static boolean masterImmunity(AttackCache cache) {
+		var event = cache.getLivingAttackEvent();
+		if (event != null && event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY))
+			return false;
 		MobTraitCap attacker = null, target = null;
 		if (cache.getAttacker() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob))
 			attacker = MobTraitCap.HOLDER.get(mob);

@@ -1,3 +1,8 @@
+2.4.26
+- Fix Master Trait crash
+- Pulling and Repelling won't move spectator
+- Gravity grounds attack on hurt
+
 2.4.25
 - Fix Master summoned minions fight each other
 - Traits won't show stat bonus if it's 0

@@ -70,7 +70,8 @@ public class LHTraits {
 	public static final RegistryEntry<DrainTrait> DRAIN;
 	public static final RegistryEntry<ReprintTrait> REPRINT;
 	public static final RegistryEntry<CounterStrikeTrait> STRIKE;
-	public static final RegistryEntry<AuraEffectTrait> GRAVITY, MOONWALK;
+	public static final RegistryEntry<GravityTrait> GRAVITY;
+	public static final RegistryEntry<AuraEffectTrait> MOONWALK;
 	public static final RegistryEntry<ArenaTrait> ARENA;
 	public static final RegistryEntry<MasterTrait> MASTER;
 
@@ -177,9 +178,9 @@ public class LHTraits {
 					.desc("After attacked, it will attempt to perform a counter strike.")
 					.lang("Counter Strike").register();
 
-			GRAVITY = L2Hostility.REGISTRATE.regTrait("gravity", () -> new AuraEffectTrait(LHEffects.GRAVITY::get),
+			GRAVITY = L2Hostility.REGISTRATE.regTrait("gravity", () -> new GravityTrait(LHEffects.GRAVITY::get),
 							rl -> new TraitConfig(rl, 50, 100, 3, 80))
-					.desc("Increase gravity for mobs around it").lang("Gravity").register();
+					.desc("Increase gravity for mobs around it. Knock attackers downward when damaged.").lang("Gravity").register();
 
 			MOONWALK = L2Hostility.REGISTRATE.regTrait("moonwalk", () -> new AuraEffectTrait(LHEffects.MOONWALK::get),
 							rl -> new TraitConfig(rl, 50, 100, 3, 80))

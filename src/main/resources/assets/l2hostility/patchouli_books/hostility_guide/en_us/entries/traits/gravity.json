@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:gravity",
-	  "text": "Mobs with this trait will increase gravity in a region around it. Higher level will further increase gravity."
+	  "text": "Mobs with this trait will increase gravity in a region around it. Higher level will further increase gravity.$(br2)If it's attacked by entities in the air, knock down the attacker"
 	}
   ]
 }

@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:gravity",
-	  "text": "持有这个词条的怪物会增加周围的重力，幅度取决于等级。"
+	  "text": "持有这个词条的怪物会增加周围的重力，幅度取决于等级。受到空中生物攻击时使攻击者向下坠落"
 	}
   ]
 }
