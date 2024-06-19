@@ -41,7 +41,7 @@ public class ShulkerTrait extends MobTrait {
 	@Override
 	public void tick(LivingEntity e, int level) {
 		if (e.level().isClientSide()) return;
-		if (e instanceof Mob mob) {
+		if (e instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob)) {
 			var cap = MobTraitCap.HOLDER.get(mob);
 			var data = cap.getOrCreateData(getRegistryName(), Data::new);
 			if (data.uuid != null &&

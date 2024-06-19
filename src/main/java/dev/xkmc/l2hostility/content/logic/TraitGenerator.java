@@ -62,8 +62,9 @@ public class TraitGenerator {
 	private void setRank(MobTrait e, int rank) {
 		if (rank == 0) {
 			traits.remove(e);
+		} else {
+			traits.put(e, rank);
 		}
-		traits.put(e, rank);
 	}
 
 	private MobTrait pop() {

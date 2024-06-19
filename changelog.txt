@@ -1,3 +1,7 @@
+2.4.27
+- Fix a rare shulker trait crash
+- Fix lv.0 traits generated
+
 2.4.26
 - Fix Master Trait crash
 - Pulling and Repelling won't move spectator
