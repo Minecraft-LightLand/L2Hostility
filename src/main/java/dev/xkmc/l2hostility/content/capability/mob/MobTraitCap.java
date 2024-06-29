@@ -129,6 +129,9 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		if (configCache == null) {
 			configCache = L2Hostility.ENTITY.getMerged().get(le.getType());
 		}
+		if (configCache == null) {
+			configCache = L2Hostility.DIFFICULTY.getMerged().get(le.level().dimension().location(), le.getType());
+		}
 		return configCache;
 	}
 

@@ -76,7 +76,7 @@ public class EntityConfig extends BaseConfig {
 	public static class Config {
 
 		@SerialClass.SerialField
-		private final ArrayList<EntityType<?>> entities = new ArrayList<>();
+		public final ArrayList<EntityType<?>> entities = new ArrayList<>();
 
 		@SerialClass.SerialField
 		private final ArrayList<SpecialConfigCondition<?>> specialConditions = new ArrayList<>();

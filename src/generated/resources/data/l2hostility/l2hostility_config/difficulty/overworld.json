@@ -281,6 +281,7 @@
       "variation": 1.0
     }
   },
+  "levelDefaultTraits": {},
   "levelMap": {
     "minecraft:overworld": {
       "apply_chance": 1.0,
