@@ -1,6 +1,9 @@
 - TODO arena patchouli
 - TODO press alt to show blacklist/whitelist
 
+1.1.0
+- Backport 2.4.17 changes
+
 1.0.8
 - Fix text
 - Fix equipment wand
