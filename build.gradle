@@ -255,10 +255,20 @@ tasks.register('publishCurseForge', TaskPublishCurseForge) {
     mainFile.addEnvironment("Client", "Server")
     mainFile.addGameVersion("1.20.1")
     mainFile.addModLoader("Forge","NeoForge")
-    mainFile.addRequirement("l2-complements", "l2library")
-    mainFile.addOptional("the-twilight-forest", "ice-and-fire-dragons", "aerial-hell", "the-undergarden",
-            "modulargolems", "ars-nouveau", "passive-skill-tree",
-            "better-combat-by-daedelus", "just-enough-effect-descriptions-jeed")
+    mainFile.addRequirement("l2library", "l2-complements", "curios", "patchouli")
+    mainFile.addOptional(
+            "alexs-caves",
+            "ars-nouveau",
+            "bosses-of-mass-destruction-forge",
+            "gateways-to-eternity",
+            "geckolib",
+            "ice-and-fire-dragons",
+            "jade",
+            "jei",
+            "lendercataclysm",
+            "mowzies-mobs",
+            "mutant-monsters",
+            "the-twilight-forest")
     mainFile.releaseType = "release"
     disableVersionDetection()
 }
@@ -276,12 +286,16 @@ modrinth {
     dependencies {
         required.project "l2library"
         required.project "l2-complements"
-        optional.project "better-combat"
-        optional.project "just-enough-effect-descriptions-jeed"
-        optional.project "the-undergarden"
-        optional.project "ice-and-fire-dragons"
+        required.project "curios"
+        required.project "patchouli"
+        optional.project "alexs-caves"
         optional.project "ars-nouveau"
-        optional.project "modular-golems"
-        optional.project "aerial-hell"
+        optional.project "bosses-of-mass-destruction-forge"
+        optional.project "geckolib"
+        optional.project "ice-and-fire-dragons"
+        optional.project "jade"
+        optional.project "jei"
+        optional.project "l_enders-cataclysm"
+        optional.project "mutant-monsters"
     }
 }
