@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.content.item.curio.misc;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import dev.xkmc.l2complements.content.item.curios.CurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.SingletonItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -17,7 +18,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import java.util.List;
 import java.util.UUID;
 
-public class InfinityGlove extends CurioItem implements ICurioItem {
+public class InfinityGlove extends SingletonItem {
 
 	public InfinityGlove(Properties properties) {
 		super(properties);

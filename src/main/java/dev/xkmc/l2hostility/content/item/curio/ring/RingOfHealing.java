@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.item.curio.ring;
 
 import dev.xkmc.l2complements.content.item.curios.CurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.SingletonItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
@@ -15,7 +16,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class RingOfHealing extends CurioItem implements ICurioItem {
+public class RingOfHealing extends SingletonItem {
 
 	public RingOfHealing(Properties properties) {
 		super(properties);

@@ -11,13 +11,13 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultiSlotItem extends CurioItem implements ICurioItem {
+public class MultiSlotItem extends SingletonItem {
 	public MultiSlotItem(Properties properties) {
 		super(properties);
 	}
 
 	public List<Component> getAttributesTooltip(List<Component> tooltips, ItemStack stack) {
-		tooltips = ICurioItem.super.getAttributesTooltip(tooltips, stack);
+		tooltips = super.getAttributesTooltip(tooltips, stack);
 		List<List<Component>> ans = new ArrayList<>();
 		List<Component> cur = null;
 		for (var e : tooltips) {

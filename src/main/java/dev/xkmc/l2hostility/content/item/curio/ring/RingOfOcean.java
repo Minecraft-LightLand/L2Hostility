@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.item.curio.ring;
 
 import dev.xkmc.l2complements.content.item.curios.CurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.SingletonItem;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RingOfOcean extends CurioItem {
+public class RingOfOcean extends SingletonItem {
 
 	public RingOfOcean(Properties properties) {
 		super(properties);

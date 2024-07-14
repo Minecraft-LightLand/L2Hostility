@@ -1,5 +1,6 @@
 2.4.28
 - Allow level default trait config
+- Limit 1-per-item for curios
 
 2.4.27
 - Fix a rare shulker trait crash
