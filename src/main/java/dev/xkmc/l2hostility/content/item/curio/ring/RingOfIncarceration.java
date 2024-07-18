@@ -8,6 +8,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -34,11 +35,13 @@ public class RingOfIncarceration extends SingletonItem {
 		LivingEntity wearer = slotContext.entity();
 		if (wearer == null) return;
 		if (!wearer.isShiftKeyDown()) return;
+		if (wearer.isSpectator()) return;
 		var reach = ForgeMod.ENTITY_REACH.get();
 		var attr = wearer.getAttribute(reach);
 		var r = attr == null ? reach.getDefaultValue() : attr.getValue();
 		for (var e : wearer.level().getEntities(EntityTypeTest.forClass(LivingEntity.class),
 				wearer.getBoundingBox().inflate(r), e -> wearer.distanceTo(e) < r)) {
+			if (e.isSpectator() || e instanceof Player player && player.isCreative()) continue;
 			EffectUtil.refreshEffect(e, new MobEffectInstance(LCEffects.STONE_CAGE.get(), 40,
 							0, true, true),
 					EffectUtil.AddReason.NONE, wearer);

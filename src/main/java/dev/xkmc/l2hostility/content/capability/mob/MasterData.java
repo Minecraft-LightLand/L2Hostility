@@ -8,6 +8,7 @@ import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.ClipContext;
@@ -21,6 +22,28 @@ import java.util.UUID;
 
 @SerialClass
 public class MasterData {
+
+	@Nullable
+	public static BlockPos getRandomPos(ServerLevel sl, EntityType<?> type, LivingEntity mob, int r, int round) {
+		var pos = mob.blockPosition();
+		var eye = mob.getEyePosition();
+		var rand = mob.getRandom();
+		for (int i = 0; i < round; i++) {
+			BlockPos p = pos.offset(
+					rand.nextInt(0, r * 2 + 1) - r,
+					rand.nextInt(0, 3),
+					rand.nextInt(0, r * 2 + 1) - r
+			);
+			if (sl.noCollision(type.getAABB(p.getX(), p.getY(), p.getZ()))) {
+				Vec3 e = Vec3.atBottomCenterOf(p).add(0, type.getHeight() / 2, 0);
+				var bhit = sl.clip(new ClipContext(eye, e, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, null));
+				if (bhit.getType() == HitResult.Type.MISS) {
+					return p;
+				}
+			}
+		}
+		return null;
+	}
 
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<Minion> data = new ArrayList<>();
@@ -134,25 +157,7 @@ public class MasterData {
 		@Nullable
 		public Minion spawn(MobTraitCap parent, ServerLevel sl, Mob mob) {
 			int r = config.spawnRange();
-			var rand = mob.getRandom();
-			var eye = mob.getEyePosition();
-			BlockPos pos = mob.blockPosition();
-			BlockPos target = null;
-			for (int i = 0; i < 16; i++) {
-				BlockPos p = pos.offset(
-						rand.nextInt(0, r * 2 + 1) - r,
-						rand.nextInt(0, 3),
-						rand.nextInt(0, r * 2 + 1) - r
-				);
-				if (sl.noCollision(config.type().getAABB(p.getX(), p.getY(), p.getZ()))) {
-					Vec3 e = Vec3.atBottomCenterOf(p).add(0, config.type().getHeight() / 2, 0);
-					var bhit = sl.clip(new ClipContext(eye, e, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, null));
-					if (bhit.getType() == HitResult.Type.MISS) {
-						target = p;
-						break;
-					}
-				}
-			}
+			BlockPos target = getRandomPos(sl, config.type(), mob, r / 2, 16);
 			if (target == null) return null;
 			var e = config.type().create(sl, null, null, target, MobSpawnType.MOB_SUMMONED, false, false);
 			if (!(e instanceof Mob m)) return null;
@@ -168,6 +173,8 @@ public class MasterData {
 					c.delegateTrait();
 				}
 			};
+			if (config.traits() != null)
+				cap.setConfigCache(config.traits());
 			cap.minion = true;
 			cap.asMinion = new MinionData().init(mob, config);
 			cap.init(sl, m, diff);

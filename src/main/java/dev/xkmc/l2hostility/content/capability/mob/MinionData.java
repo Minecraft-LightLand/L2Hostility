@@ -5,7 +5,9 @@ import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.UUID;
 
 @SerialClass
@@ -23,6 +25,7 @@ public class MinionData {
 	@SerialClass.SerialField(toClient = true)
 	public boolean protectMaster, discardOnUnlink;
 
+	@Nullable
 	public Mob master;
 
 	public boolean tick(LivingEntity mob) {
@@ -31,10 +34,17 @@ public class MinionData {
 				var e = sl.getEntity(uuid);
 				if (e instanceof Mob mas) {
 					master = mas;
+				} else if (discardOnUnlink) {
+					mob.discard();
 				}
 			}
-			if (discardOnUnlink && (master == null || master.distanceTo(mob) > linkDistance)) {
-				mob.discard();
+			if (master != null && master.distanceTo(mob) > linkDistance) {
+				var next = MasterData.getRandomPos(sl, mob.getType(), master, (int) (linkDistance * 0.5), 16);
+				if (next != null) {
+					mob.moveTo(Vec3.atCenterOf(next));
+				} else if (discardOnUnlink) {
+					mob.discard();
+				}
 			}
 		} else {
 			if (master == null) {

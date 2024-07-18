@@ -1,6 +1,11 @@
+2.4.29
+- Master trait summon minions can now attach custom entity config
+- Now Spectator cannot trigger Incarceration ring, and it won't affect spectators and creative players.
+
 2.4.28
 - Allow level default trait config
 - Limit 1-per-item for curios
+- Mobs summoned by Master trait will attempt to teleport toward owner when left behind
 
 2.4.27
 - Fix a rare shulker trait crash

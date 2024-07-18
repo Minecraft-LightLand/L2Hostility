@@ -166,7 +166,17 @@ public class EntityConfig extends BaseConfig {
 	public record Minion(
 			EntityType<?> type, int maxCount, int minLevel, double maxHealthPercentage,
 			int spawnRange, int cooldown, boolean copyLevel, boolean copyTrait,
-			double linkDistance, boolean protectMaster, boolean discardOnUnlink) {
+			double linkDistance, boolean protectMaster, boolean discardOnUnlink,
+			@Nullable Config traits) {
+
+		public Minion(EntityType<?> type, int maxCount, int minLevel, double maxHealthPercentage,
+					  int spawnRange, int cooldown, boolean copyLevel, boolean copyTrait,
+					  double linkDistance, boolean protectMaster, boolean discardOnUnlink){
+			this(type, maxCount, minLevel, maxHealthPercentage,
+					spawnRange, cooldown, copyLevel, copyTrait,
+					linkDistance, protectMaster, discardOnUnlink,
+					null);
+		}
 
 	}
 
