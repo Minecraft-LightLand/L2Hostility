@@ -5,10 +5,12 @@ import dev.xkmc.l2hostility.content.logic.InheritContext;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Slime;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class GrowthTrait extends MobTrait {
 
@@ -39,6 +41,14 @@ public class GrowthTrait extends MobTrait {
 	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
 		if (event.getSource().is(DamageTypes.IN_WALL)) {
 			event.setCanceled(true);
+		}
+	}
+
+	@Override
+	public void onDeath(int lv, LivingEntity entity, LivingDeathEvent event){
+		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+			entity.setHealth(entity.getMaxHealth());
+			entity.discard();
 		}
 	}
 

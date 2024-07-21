@@ -1,6 +1,13 @@
+2.4.30
+- Make loot cap applicable for curse of greed as well
+
 2.4.29
 - Master trait summon minions can now attach custom entity config
 - Now Spectator cannot trigger Incarceration ring, and it won't affect spectators and creative players.
+- Fix Pocket of Restoration returning item to dead player
+- When Slime with Growth trait is killed by command, remove that slime without splitting
+- (config: default off) Nidhoggur cannot increase drop over max stack size
+- (config: default off) Disable book overstacking from Book of Reprint. Add extra to player inventory directly.
 
 2.4.28
 - Allow level default trait config

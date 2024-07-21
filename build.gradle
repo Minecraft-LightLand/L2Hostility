@@ -196,7 +196,7 @@ dependencies {
         jarJar.ranged(it, "[0.3.7,)")
     }
 
-    implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.3.1")
+    implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.3.3")
     implementation fg.deobf("dev.xkmc.l2weaponry:l2weaponry:2.4.26")
     implementation fg.deobf("dev.xkmc.l2archery:l2archery:2.4.13")
 

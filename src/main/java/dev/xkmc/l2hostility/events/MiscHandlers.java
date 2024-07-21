@@ -5,6 +5,7 @@ import dev.xkmc.l2hostility.content.item.consumable.BookCopy;
 import dev.xkmc.l2hostility.content.item.traits.SealedItem;
 import dev.xkmc.l2hostility.content.item.wand.IMobClickItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -66,10 +68,26 @@ public class MiscHandlers {
 				cost += BookCopy.cost(e.getKey(), e.getValue());
 			}
 			ItemStack result = book.copy();
-			result.setCount(book.getCount() + copy.getCount());
+			if (!LHConfig.COMMON.bookOfReprintSpread.get())
+				result.setCount(book.getCount() + copy.getCount());
 			event.setOutput(result);
 			event.setMaterialCost(book.getCount());
 			event.setCost(cost);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onAnvilTake(AnvilRepairEvent event) {
+		ItemStack copy = event.getLeft();
+		ItemStack book = event.getRight();
+		if (copy.getItem() instanceof BookCopy && book.getItem() instanceof EnchantedBookItem) {
+			if (LHConfig.COMMON.bookOfReprintSpread.get()) {
+				for (int i = 0; i < copy.getCount(); i++) {
+					ItemStack result = book.copy();
+					result.setCount(1);
+					event.getEntity().getInventory().placeItemBackInInventory(result);
+				}
+			}
 		}
 	}
 

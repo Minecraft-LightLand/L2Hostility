@@ -109,6 +109,8 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue wrathDamageBonus;
 		public final ForgeConfigSpec.BooleanValue disableHostilityLootCurioRequirement;
 		public final ForgeConfigSpec.BooleanValue banBottles;
+		public final ForgeConfigSpec.BooleanValue nidhoggurCapAtItemMaxStack;
+		public final ForgeConfigSpec.BooleanValue bookOfReprintSpread;
 
 		public final ForgeConfigSpec.IntValue hostilitySpawnCount;
 		public final ForgeConfigSpec.IntValue hostilitySpawnLevelFactor;
@@ -343,6 +345,10 @@ public class LHConfig {
 						.defineInRange("nidhoggurExtraLevel", 100, 0, 1000);
 				nidhoggurDropFactor = builder.comment("All loot drop factor when using Greed of Nidhoggur")
 						.defineInRange("nidhoggurDropFactor", 0.01, 0, 10);
+				nidhoggurCapAtItemMaxStack = builder.comment("Cap drop at item max stack size")
+						.define("nidhoggurCapAtItemMaxStack", false);
+				bookOfReprintSpread = builder.comment("When using book of reprint to copy books, drop extra on player and does not allow overstacking")
+						.define("bookOfReprintSpread",false);
 
 				insulatorFactor = builder.comment("Insulator Enchantment factor for reducing pushing")
 						.defineInRange("insulatorFactor", 0.8, 0, 1);

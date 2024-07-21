@@ -99,7 +99,11 @@ public class MobEvents {
 				if (event.getEntity().getRandom().nextDouble() < val - count) count++;
 				count++;
 				for (var stack : event.getDrops()) {
-					stack.getItem().setCount(stack.getItem().getCount() * count);
+					int ans = stack.getItem().getCount() * count;
+					if (LHConfig.COMMON.nidhoggurCapAtItemMaxStack.get()){
+						ans = Math.min(stack.getItem().getMaxStackSize(), ans);
+					}
+					stack.getItem().setCount(ans);
 				}
 			}
 		}

@@ -39,6 +39,7 @@ public class PocketOfRestoration extends CurioItem implements ICurioItem {
 	public void curioTick(SlotContext slotContext, ItemStack stack) {
 		var le = slotContext.entity();
 		if (le.level().isClientSide) return;
+		if (!slotContext.entity().isAlive()) return;
 		var list = CurioCompat.getItemAccess(le);
 
 		if (stack.getTag() != null && stack.getTag().contains(ROOT)) {
