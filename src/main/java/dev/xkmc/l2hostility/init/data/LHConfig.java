@@ -65,6 +65,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue deathDecayDimension;
 		public final ForgeConfigSpec.BooleanValue deathDecayTraitCap;
 		public final ForgeConfigSpec.BooleanValue enableEntitySpecificDatapack;
+		public final ForgeConfigSpec.BooleanValue enableStructureSpecificDatapack;
 		public final ForgeConfigSpec.DoubleValue healthFactor;
 		public final ForgeConfigSpec.BooleanValue exponentialHealth;
 		public final ForgeConfigSpec.DoubleValue damageFactor;
@@ -178,6 +179,8 @@ public class LHConfig {
 		Common(ForgeConfigSpec.Builder builder) {
 			enableEntitySpecificDatapack = builder.comment("Allow entity specific difficulty configs to load")
 					.define("enableEntitySpecificDatapack", true);
+			enableStructureSpecificDatapack = builder.comment("Allow structure specific difficulty configs to load")
+					.define("enableStructureSpecificDatapack", true);
 			builder.push("scaling");
 			{
 				healthFactor = builder.comment("Health factor per level")

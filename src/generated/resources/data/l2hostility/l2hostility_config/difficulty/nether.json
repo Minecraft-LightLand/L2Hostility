@@ -1,6 +1,59 @@
 {
   "biomeMap": {},
-  "levelDefaultTraits": {},
+  "levelDefaultTraits": {
+    "minecraft:the_nether": [
+      {
+        "blacklist": [],
+        "difficulty": {
+          "apply_chance": 1.0,
+          "base": 10,
+          "min": 0,
+          "scale": 0.0,
+          "trait_chance": 1.0,
+          "variation": 0.0
+        },
+        "entities": [
+          "minecraft:zombie"
+        ],
+        "items": [],
+        "maxLevel": 0,
+        "minSpawnLevel": 0,
+        "specialConditions": [],
+        "traits": [
+          {
+            "free": 1,
+            "min": 1,
+            "trait": "l2hostility:tank"
+          }
+        ]
+      },
+      {
+        "blacklist": [],
+        "difficulty": {
+          "apply_chance": 1.0,
+          "base": 10,
+          "min": 0,
+          "scale": 0.0,
+          "trait_chance": 1.0,
+          "variation": 0.0
+        },
+        "entities": [
+          "minecraft:skeleton"
+        ],
+        "items": [],
+        "maxLevel": 0,
+        "minSpawnLevel": 0,
+        "specialConditions": [],
+        "traits": [
+          {
+            "free": 1,
+            "min": 1,
+            "trait": "l2hostility:speedy"
+          }
+        ]
+      }
+    ]
+  },
   "levelMap": {
     "minecraft:the_nether": {
       "apply_chance": 1.0,
@@ -10,5 +63,34 @@
       "trait_chance": 1.0,
       "variation": 9.0
     }
+  },
+  "structureDefaultTraits": {
+    "minecraft:bastion_remnant": [
+      {
+        "blacklist": [],
+        "difficulty": {
+          "apply_chance": 1.0,
+          "base": 20,
+          "min": 0,
+          "scale": 0.0,
+          "trait_chance": 1.0,
+          "variation": 0.0
+        },
+        "entities": [
+          "minecraft:piglin"
+        ],
+        "items": [],
+        "maxLevel": 0,
+        "minSpawnLevel": 0,
+        "specialConditions": [],
+        "traits": [
+          {
+            "free": 1,
+            "min": 1,
+            "trait": "l2hostility:protection"
+          }
+        ]
+      }
+    ]
   }
 }

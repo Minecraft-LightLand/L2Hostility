@@ -24,6 +24,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -128,6 +129,9 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public EntityConfig.Config getConfigCache(LivingEntity le) {
 		if (configCache == null) {
 			configCache = L2Hostility.ENTITY.getMerged().get(le.getType());
+		}
+		if (configCache == null && le.level() instanceof ServerLevel sl) {
+			configCache = L2Hostility.DIFFICULTY.getMerged().get(sl, le.blockPosition(), le.getType());
 		}
 		if (configCache == null) {
 			configCache = L2Hostility.DIFFICULTY.getMerged().get(le.level().dimension().location(), le.getType());

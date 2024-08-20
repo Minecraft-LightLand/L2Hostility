@@ -79,6 +79,9 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 					}
 					if (count > 0) {
 						ItemStack ans = result.copy();
+						if (LHConfig.COMMON.nidhoggurCapAtItemMaxStack.get()){
+							count = Math.min(count, ans.getMaxStackSize());
+						}
 						ans.setCount(count);
 						list.add(ans);
 					}

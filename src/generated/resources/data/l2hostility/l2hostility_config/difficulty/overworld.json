@@ -291,5 +291,6 @@
       "trait_chance": 1.0,
       "variation": 4.0
     }
-  }
+  },
+  "structureDefaultTraits": {}
 }

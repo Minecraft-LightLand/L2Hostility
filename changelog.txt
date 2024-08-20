@@ -1,5 +1,7 @@
 2.4.30
+- Add structure-specific default trait config
 - Make loot cap applicable for curse of greed as well
+- Default level / structure config for nether
 
 2.4.29
 - Master trait summon minions can now attach custom entity config

@@ -1,7 +1,5 @@
 package dev.xkmc.l2hostility.compat.gateway;
 
-import dev.xkmc.l2hostility.content.config.EntityConfig;
-
 import java.util.HashMap;
 import java.util.Map;
 

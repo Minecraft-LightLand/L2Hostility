@@ -31,6 +31,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import twilightforest.TwilightForestMod;
@@ -84,6 +85,12 @@ public class LHConfigGen extends ConfigDataProvider {
 
 		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "nether"), new WorldDifficultyConfig()
 				.putDim(Level.NETHER, 0, 20, 9, 1.2)
+				.putLevelDef(Level.NETHER, EntityConfig.entity(0, 10, 0, 0, List.of(EntityType.ZOMBIE))
+						.trait(List.of(EntityConfig.trait(LHTraits.TANK.get(), 1, 1))))
+				.putLevelDef(Level.NETHER, EntityConfig.entity(0, 10, 0, 0, List.of(EntityType.SKELETON))
+						.trait(List.of(EntityConfig.trait(LHTraits.SPEEDY.get(), 1, 1))))
+				.putStructureDef(BuiltinStructures.BASTION_REMNANT, EntityConfig.entity(0, 20, 0, 0, List.of(EntityType.PIGLIN))
+						.trait(List.of(EntityConfig.trait(LHTraits.PROTECTION.get(), 1, 1))))
 		);
 
 		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "end"), new WorldDifficultyConfig()

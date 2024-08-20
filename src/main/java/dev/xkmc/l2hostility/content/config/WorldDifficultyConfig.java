@@ -5,11 +5,16 @@ import dev.xkmc.l2library.serial.config.BaseConfig;
 import dev.xkmc.l2library.serial.config.CollectType;
 import dev.xkmc.l2library.serial.config.ConfigCollect;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -36,6 +41,45 @@ public class WorldDifficultyConfig extends BaseConfig {
 	@ConfigCollect(CollectType.MAP_COLLECT)
 	@SerialClass.SerialField
 	public final HashMap<ResourceLocation, ArrayList<EntityConfig.Config>> levelDefaultTraits = new HashMap<>();
+
+	@ConfigCollect(CollectType.MAP_COLLECT)
+	@SerialClass.SerialField
+	public final HashMap<ResourceLocation, ArrayList<EntityConfig.Config>> structureDefaultTraits = new HashMap<>();
+
+	@Nullable
+	public EntityConfig.Config get(ServerLevel level, BlockPos pos, EntityType<?> type) {
+		if (!LHConfig.COMMON.enableEntitySpecificDatapack.get())
+			return null;
+		if (!LHConfig.COMMON.enableStructureSpecificDatapack.get())
+			return null;
+		if (structureDefaultTraits.isEmpty())
+			return null;
+		var manager = level.structureManager();
+		var map = manager.getAllStructuresAt(pos);
+		EntityConfig.Config def = null;
+		for (var ent : map.entrySet()) {
+			var structure = ent.getKey();
+			var key = level.registryAccess().registryOrThrow(Registries.STRUCTURE).getKey(structure);
+			var list = structureDefaultTraits.get(key);
+			if (list == null) continue;
+			MutableBoolean ans = new MutableBoolean(false);
+			manager.fillStartsForStructure(structure, ent.getValue(), (e) -> {
+				if (ans.isFalse() && manager.structureHasPieceAt(pos, e)) {
+					ans.setTrue();
+				}
+			});
+			if (ans.isFalse()) continue;
+			for (var e : list) {
+				if (e.entities.contains(type)) {
+					return e;
+				}
+				if (e.entities.isEmpty()) {
+					def = e;
+				}
+			}
+		}
+		return def;
+	}
 
 	@Nullable
 	public EntityConfig.Config get(ResourceLocation level, EntityType<?> type) {
@@ -70,6 +114,16 @@ public class WorldDifficultyConfig extends BaseConfig {
 		for (var key : keys) {
 			biomeMap.put(key.location(), new DifficultyConfig(min, base, var, scale, 1, 1));
 		}
+		return this;
+	}
+
+	public WorldDifficultyConfig putLevelDef(ResourceKey<Level> id, EntityConfig.Config config) {
+		levelDefaultTraits.computeIfAbsent(id.location(), l -> new ArrayList<>()).add(config);
+		return this;
+	}
+
+	public WorldDifficultyConfig putStructureDef(ResourceKey<Structure> id, EntityConfig.Config config) {
+		structureDefaultTraits.computeIfAbsent(id.location(), l -> new ArrayList<>()).add(config);
 		return this;
 	}
 

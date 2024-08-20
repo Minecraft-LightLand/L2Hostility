@@ -10,5 +10,6 @@
       "trait_chance": 1.0,
       "variation": 16.0
     }
-  }
+  },
+  "structureDefaultTraits": {}
 }
