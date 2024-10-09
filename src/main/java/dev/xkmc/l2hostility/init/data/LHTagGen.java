@@ -144,7 +144,9 @@ public class LHTagGen {
 					.addOptional(ModEntities.ANCIENT_REMNANT.getId())
 					.addOptional(ModEntities.IGNITED_BERSERKER.getId())
 					.addOptional(ModEntities.KOBOLEDIATOR.getId())
-					.addOptional(ModEntities.WADJET.getId());
+					.addOptional(ModEntities.WADJET.getId())
+					.addOptional(ModEntities.MALEDICTUS.getId())
+					.addOptional(ModEntities.APTRGANGR.getId());
 		}
 
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {

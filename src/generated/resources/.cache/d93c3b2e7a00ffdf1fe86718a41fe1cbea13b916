@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-29T20:08:37.611123	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
+// 1.20.1	2024-10-10T04:36:36.770631	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -351,7 +351,7 @@ ebcd146f52a62b349b6314398e2d418692138153 data/l2hostility/tags/entity_types/no_d
 778fdb4a5208400e8f9b783e17704df130baf07b data/l2hostility/tags/entity_types/repelling_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_whitelist.json
-29222808857ced48a3db7d727d24f9cd6085f335 data/l2hostility/tags/entity_types/semiboss.json
+68d7b5e753acd825763c43098f32c76cf194e095 data/l2hostility/tags/entity_types/semiboss.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_types/shulker_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/shulker_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/slowness_blacklist.json

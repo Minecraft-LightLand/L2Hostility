@@ -215,6 +215,7 @@ dependencies {
     implementation fg.deobf("curse.maven:citadel-331936:4848887")
     implementation fg.deobf("curse.maven:cloth-config-348521:4633444")
 
+
     runtimeOnly fg.deobf("curse.maven:attributefix-280510:4588114")
     runtimeOnly fg.deobf("curse.maven:bookshelf-228525:4581675")
     runtimeOnly fg.deobf("curse.maven:enchantment-descriptions-250419:4587429")
@@ -223,25 +224,22 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:4599236")
     runtimeOnly fg.deobf("curse.maven:inventory-sorter-240633:4655091")
 
-
-    runtimeOnly fg.deobf("zip.local:celestial_artifacts:1.0-slim")
-
     implementation fg.deobf("curse.maven:geckolib-388172:5188427")
     implementation fg.deobf("curse.maven:placebo-283644:5098182")
     implementation fg.deobf("curse.maven:apothic-attributes-898963:5209162")
-    implementation fg.deobf("curse.maven:lionfish-api-1001614:5274401")
-    implementation fg.deobf("curse.maven:lendercataclysm-551586:5299092")
+    implementation fg.deobf("curse.maven:lionfish-api-1001614:5363774")
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:5785769")
 
-    compileOnly fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")
-    compileOnly fg.deobf("curse.maven:ice-and-fire-dragons-264231:5037783")
-    compileOnly fg.deobf("curse.maven:alexs-caves-924854:4852042")
-    compileOnly fg.deobf("curse.maven:ars-nouveau-401955:4751471")
-    compileOnly fg.deobf("curse.maven:gateways-to-eternity-417802:5188310")
-    compileOnly fg.deobf("curse.maven:goety-586095:5256230")
-    compileOnly fg.deobf("curse.maven:eeeabs-mobs-921600:5229035")
-    compileOnly fg.deobf("curse.maven:puzzles-lib-495476:5330447")
-    compileOnly fg.deobf("curse.maven:mutant-monsters-852665:5107399")
-    compileOnly fg.deobf("curse.maven:mowzies-mobs-250498:5372378")
+    implementation fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")
+    implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5037783")
+    implementation fg.deobf("curse.maven:alexs-caves-924854:4852042")
+    implementation fg.deobf("curse.maven:ars-nouveau-401955:4751471")
+    implementation fg.deobf("curse.maven:gateways-to-eternity-417802:5188310")
+    implementation fg.deobf("curse.maven:goety-586095:5256230")
+    implementation fg.deobf("curse.maven:eeeabs-mobs-921600:5229035")
+    implementation fg.deobf("curse.maven:puzzles-lib-495476:5330447")
+    implementation fg.deobf("curse.maven:mutant-monsters-852665:5107399")
+    implementation fg.deobf("curse.maven:mowzies-mobs-250498:5372378")
 
 
     //runtimeOnly fg.deobf("curse.maven:lightmans-currency-472521:4813507")

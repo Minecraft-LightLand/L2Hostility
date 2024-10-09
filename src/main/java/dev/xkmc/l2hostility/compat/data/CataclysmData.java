@@ -74,11 +74,6 @@ public class CataclysmData {
 						EntityConfig.trait(LHTraits.FREEZING.get(), 2, 3)),
 				List.of(divinity(equipLevel)));
 
-		addEntity(collector, 200, 50, ModEntities.ANCIENT_REMNANT, List.of(
-						EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
-						EntityConfig.trait(LHTraits.REPRINT.get(), 1, 1),
-						EntityConfig.trait(LHTraits.ADAPTIVE.get(), 2, 3)),
-				List.of(divinity(equipLevel)));
 		collector.add(L2Hostility.ENTITY, ModEntities.ANCIENT_REMNANT.getId(), new EntityConfig()
 				.put(EntityConfig.entity(200, 50, 0, 0, List.of(ModEntities.ANCIENT_REMNANT.get()))
 						.trait(List.of(
@@ -96,6 +91,30 @@ public class CataclysmData {
 										32, true, true),
 								new EntityConfig.Minion(ModEntities.WADJET.get(), 1, 300,
 										0.6, 16, 400,true, false,
+										32, true, true)
+						)));
+
+
+		collector.add(L2Hostility.ENTITY, ModEntities.MALEDICTUS.getId(), new EntityConfig()
+				.put(EntityConfig.entity(200, 50, 0, 0, List.of(ModEntities.MALEDICTUS.get()))
+						.trait(List.of(
+								EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+								EntityConfig.trait(LHTraits.DRAIN.get(), 1, 1),
+								EntityConfig.trait(LHTraits.DISPELL.get(), 1, 1),
+								EntityConfig.trait(LHTraits.MASTER.get(), 1, 0)
+						)).item(List.of(divinity(equipLevel)))
+						.master(8, 80,
+								new EntityConfig.Minion(ModEntities.DRAUGR.get(), 3, 0,
+										0.9, 16, 250,true, false,
+										32, false, true),
+								new EntityConfig.Minion(ModEntities.ELITE_DRAUGR.get(), 2, 250,
+										0.7, 16, 400,true, false,
+										32, false, true),
+								new EntityConfig.Minion(ModEntities.ROYAL_DRAUGR.get(), 2, 300,
+										0.5, 16, 700,true, false,
+										32, false, true),
+								new EntityConfig.Minion(ModEntities.APTRGANGR.get(), 1, 350,
+										0.4, 16, 100,true, false,
 										32, true, true)
 						)));
 
@@ -119,6 +138,36 @@ public class CataclysmData {
 				EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
 				EntityConfig.trait(LHTraits.DEMENTOR.get(), 0, 1, 250, 1)
 		);
+
+		addEntity(collector, 30, 10, ModEntities.DRAUGR,
+				EntityConfig.trait(LHTraits.SPEEDY.get(), 1, 2),
+				EntityConfig.trait(LHTraits.WEAKNESS.get(), 1, 2),
+				EntityConfig.trait(LHTraits.UNDYING.get(), 1, 1),
+				EntityConfig.trait(LHTraits.SPLIT.get(), 1, 1, 250, 1)
+		);
+
+		addEntity(collector, 70, 20, ModEntities.ELITE_DRAUGR,
+				EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
+				EntityConfig.trait(LHTraits.SLOWNESS.get(), 1, 2),
+				EntityConfig.trait(LHTraits.UNDYING.get(), 1, 1),
+				EntityConfig.trait(LHTraits.CORROSION.get(), 0, 1, 250, 1)
+		);
+
+		addEntity(collector, 70, 20, ModEntities.ROYAL_DRAUGR,
+				EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
+				EntityConfig.trait(LHTraits.WITHER.get(), 1, 2),
+				EntityConfig.trait(LHTraits.UNDYING.get(), 1, 1),
+				EntityConfig.trait(LHTraits.EROSION.get(), 0, 1, 250, 1)
+		);
+
+		addEntity(collector, 100, 30, ModEntities.APTRGANGR,
+				EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
+				EntityConfig.trait(LHTraits.CURSED.get(), 1, 2),
+				EntityConfig.trait(LHTraits.DISPELL.get(), 1, 1, 200, 0.5f),
+				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1, 250, 1)
+		);
+
+
 	}
 
 	private static ItemStack getIgnisWeapon() {

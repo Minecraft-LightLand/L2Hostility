@@ -1,3 +1,6 @@
+2.4.31
+- Add compat for Cataclysm's Maledictus and its minions
+
 2.4.30
 - Add structure-specific default trait config
 - Make loot cap applicable for curse of greed as well
