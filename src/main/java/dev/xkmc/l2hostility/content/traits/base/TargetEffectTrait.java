@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
-import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
@@ -27,7 +26,7 @@ public class TargetEffectTrait extends MobTrait {
 
 	@Override
 	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
-		if (CurioCompat.hasItemInCurio(target, LHItems.RING_REFLECTION.get())) {
+		if (LHItems.RING_REFLECTION.get().isOn(target)) {
 			int radius = LHConfig.COMMON.ringOfReflectionRadius.get();
 			for (var e : target.level().getEntities(target, target.getBoundingBox().inflate(radius))) {
 				if (!(e instanceof Mob mob)) continue;

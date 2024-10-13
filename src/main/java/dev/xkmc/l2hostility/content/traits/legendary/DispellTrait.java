@@ -37,7 +37,7 @@ public class DispellTrait extends LegendaryTrait {
 				list.add(stack);
 			}
 		}
-		if (list.size() == 0) return;
+		if (list.isEmpty()) return;
 		int time = LHConfig.COMMON.dispellTime.get() * level;
 		int count = Math.min(level, list.size());
 		for (int i = 0; i < count; i++) {

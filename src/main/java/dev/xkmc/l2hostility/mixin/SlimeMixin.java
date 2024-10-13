@@ -11,6 +11,14 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(Slime.class)
 public class SlimeMixin {
 
+	@WrapOperation(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/Slime;isDeadOrDying()Z"), method = "remove")
+	public boolean l2hostility$remove$suppress(Slime instance, Operation<Boolean> original) {
+		if (instance.getTags().contains("SuppressSplit")) {
+			return false;
+		}
+		return original.call(instance);
+	}
+
 	@WrapOperation(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/monster/Slime;setNoAi(Z)V"), method = "remove")
 	public void l2hostility$remove$inheritCap(Slime sub, boolean noAI, Operation<Void> op) {
 		Slime self = Wrappers.cast(this);

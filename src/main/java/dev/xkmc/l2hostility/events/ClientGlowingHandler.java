@@ -21,7 +21,7 @@ public class ClientGlowingHandler {
 	public static boolean isGlowing(Entity entity) {
 		if (!(entity instanceof LivingEntity le)) return false;
 		if (le instanceof Mob mob) {
-			if (MobTraitCap.HOLDER.isProper(mob)) {
+			if (mob.getTags().contains("HostilityGlowing") && MobTraitCap.HOLDER.isProper(mob)) {
 				var cap = MobTraitCap.HOLDER.get(mob);
 				if (cap.isSummoned() || cap.isMasterProtected()) {
 					return true;

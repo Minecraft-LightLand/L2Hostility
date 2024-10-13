@@ -172,6 +172,13 @@ public class LHConfig {
 		public final ForgeConfigSpec.DoubleValue insulatorFactor;
 		public final ForgeConfigSpec.IntValue orbRadius;
 		public final ForgeConfigSpec.DoubleValue splitDropRateFactor;
+		public final ForgeConfigSpec.DoubleValue equipmentDropRate;
+		public final ForgeConfigSpec.BooleanValue enableHostilityOrbDrop;
+
+		public final ForgeConfigSpec.BooleanValue enableCurioCheckFilter;
+		public final ForgeConfigSpec.IntValue removeTraitCheckInterval;
+		public final ForgeConfigSpec.IntValue auraEffectApplicationInterval;
+		public final ForgeConfigSpec.IntValue selfEffectApplicationInterval;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
 		public final Map<String, ForgeConfigSpec.IntValue> range = new TreeMap<>();
@@ -240,6 +247,8 @@ public class LHConfig {
 						.define("allowTraitOnOwnable", false);
 				dropRateFromSpawner = builder.comment("Drop rate of hostility loot from mobs from spawner")
 						.defineInRange("dropRateFromSpawner", 0.5d, 0, 1);
+				equipmentDropRate = builder.comment("Drop rate of equipments spawned via hostility")
+						.defineInRange("equipmentDropRate", 0.085, 0, 1);
 
 			}
 			builder.pop();
@@ -269,6 +278,8 @@ public class LHConfig {
 			{
 				allowHostilityOrb = builder.comment("Allow to use hostility orb")
 						.define("allowHostilityOrb", true);
+				enableHostilityOrbDrop = builder.comment("Give player hostility orbs when upleveling difficulty")
+						.define("enableHostilityOrbDrop", true);
 				orbRadius = builder.comment("Radius for Hostility Orb to take effect.")
 						.comment("0 means 1x1x1 section, 1 means 3x3x3 sections, 2 means 5x5x5 sections")
 						.defineInRange("orbRadius", 2, 0, 10);
@@ -351,10 +362,23 @@ public class LHConfig {
 				nidhoggurCapAtItemMaxStack = builder.comment("Cap drop at item max stack size")
 						.define("nidhoggurCapAtItemMaxStack", false);
 				bookOfReprintSpread = builder.comment("When using book of reprint to copy books, drop extra on player and does not allow overstacking")
-						.define("bookOfReprintSpread",false);
+						.define("bookOfReprintSpread", false);
 
 				insulatorFactor = builder.comment("Insulator Enchantment factor for reducing pushing")
 						.defineInRange("insulatorFactor", 0.8, 0, 1);
+			}
+			builder.pop();
+
+			builder.push("performance");
+			{
+				enableCurioCheckFilter = builder.comment("Enable curios checks whitelist for items such as ring of ocean, on only selected mobs to reduce lag")
+						.define("enableCurioCheckFilter", true);
+				removeTraitCheckInterval = builder.comment("Interval for which traits check if they are banned and to be removed")
+						.defineInRange("removeTraitCheckInterval", 10, 1, 1000);
+				auraEffectApplicationInterval = builder.comment("Interval for aura effect traits to apply")
+						.defineInRange("auraEffectApplicationInterval", 5, 1, 1000);
+				selfEffectApplicationInterval = builder.comment("Interval for self effect traits to apply")
+						.defineInRange("selfEffectApplicationInterval", 200, 1, 1000);
 			}
 			builder.pop();
 

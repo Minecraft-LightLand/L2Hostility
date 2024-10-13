@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.*;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.events.ClientEvents;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -288,7 +289,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		}
 		if (isInitialized()) {
 			if (!traits.isEmpty()) {
-				if (mob.tickCount % PerformanceConstants.REMOVE == 0) {
+				if (mob.tickCount % PerformanceConstants.removeTraitInterval() == 0) {
 					sync |= traits.keySet().removeIf(Objects::isNull);
 					sync |= traits.keySet().removeIf(MobTrait::isBanned);
 				}
@@ -319,6 +320,14 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			if (mob instanceof Mob master && asMaster != null) {
 				sync |= asMaster.tick(this, master);
 			}
+			if (mob.level().isClientSide()) {
+				if (mob instanceof Mob m)
+					ClientEvents.MASTERS.add(m);
+				mob.addTag("HostilityGlowing");
+			}
+		}
+		if (summoned && mob.level().isClientSide()) {
+			mob.addTag("HostilityGlowing");
 		}
 		if (!mob.level().isClientSide() && sync && !mob.isRemoved()) syncToClient(mob);
 		ticking = false;

@@ -19,7 +19,7 @@ public class GravityTrait extends AuraEffectTrait {
 	public void onDamaged(int level, LivingEntity mob, AttackCache cache) {
 		var e = cache.getAttacker();
 		if (e != null && !e.onGround()) {
-			if (CurioCompat.hasItemInCurio(e, LHItems.ABRAHADABRA.get())) return;
+			if (LHItems.ABRAHADABRA.get().isOn(e)) return;
 			e.push(0, -level, 0);
 			if (e instanceof ServerPlayer) {
 				e.hurtMarked = true;

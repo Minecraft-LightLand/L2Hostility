@@ -24,7 +24,7 @@ public class SelfEffectTrait extends MobTrait {
 	@Override
 	public void tick(LivingEntity mob, int level) {
 		if (mob.level().isClientSide()) return;
-		EffectUtil.refreshEffect(mob, new MobEffectInstance(effect.get(), PerformanceConstants.SELF_EFFECT, level - 1), EffectUtil.AddReason.FORCE, mob);
+		EffectUtil.refreshEffect(mob, new MobEffectInstance(effect.get(), PerformanceConstants.selfEffectInterval(), level - 1), EffectUtil.AddReason.FORCE, mob);
 	}
 
 	@Override

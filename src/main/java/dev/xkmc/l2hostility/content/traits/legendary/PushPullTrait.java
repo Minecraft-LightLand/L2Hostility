@@ -41,7 +41,7 @@ public abstract class PushPullTrait extends LegendaryTrait {
 		for (var e : list) {
 			double dist = mob.distanceTo(e) / r;
 			if (dist > 1) return;
-			if (CurioCompat.hasItemInCurio(e, LHItems.ABRAHADABRA.get())) continue;
+			if (LHItems.ABRAHADABRA.get().isOn(e)) continue;
 			double strength = getStrength(dist);
 			int lv = 0;
 			for (var armor : e.getArmorSlots()) {

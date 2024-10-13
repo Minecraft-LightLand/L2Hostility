@@ -1,4 +1,14 @@
-2.4.31
+2.4.33
+- Add config for orb drop
+- Split suppress can prevent slimes from splitting as well
+- Allow changing default chance for hostility spawned equipment to drop
+- Sealed items with vanish enchantment will also have vanish enchantment, preventing unwanted drops
+- L2H enchantments cannot be dispelled now
+- Improve master trait and glowing rendering performance
+- Add several performance improvement config options
+
+2.4.32
+- Fix crash
 - Add compat for Cataclysm's Maledictus and its minions
 
 2.4.30

@@ -12,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -31,6 +32,9 @@ public class ItemPopulator {
 					ItemStack stack = WeaponConfig.getRandomArmor(slot, lv, r);
 					if (!stack.isEmpty()) {
 						le.setItemSlot(slot, stack);
+						if (le instanceof Mob mob) {
+							mob.setDropChance(slot, LHConfig.COMMON.equipmentDropRate.get().floatValue());
+						}
 					}
 				}
 			}
@@ -51,12 +55,18 @@ public class ItemPopulator {
 				ItemStack stack = WeaponConfig.getRandomMeleeWeapon(cap.getLevel(), r);
 				if (!stack.isEmpty()) {
 					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+					if (le instanceof Mob mob) {
+						mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.COMMON.equipmentDropRate.get().floatValue());
+					}
 				}
 			}
 		} else if (le.getType().is(LHTagGen.RANGED_WEAPON_TARGET)) {
 			ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r);
 			if (!stack.isEmpty()) {
 				le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+				if (le instanceof Mob mob) {
+					mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.COMMON.equipmentDropRate.get().floatValue());
+				}
 			}
 		}
 	}

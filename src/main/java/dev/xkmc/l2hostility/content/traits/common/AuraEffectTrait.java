@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.traits.common;
 
-import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -26,15 +25,15 @@ public class AuraEffectTrait extends MobTrait {
 	}
 
 	protected boolean canApply(LivingEntity e) {
-		if (CurioCompat.hasItemInCurio(e, LHItems.RING_REFLECTION.get())) return false;
-		if (CurioCompat.hasItemInCurio(e, LHItems.ABRAHADABRA.get())) return false;
+		if (LHItems.RING_REFLECTION.get().isOn(e)) return false;
+		if (LHItems.ABRAHADABRA.get().isOn(e)) return false;
 		return true;
 	}
 
 	@Override
 	public void tick(LivingEntity mob, int level) {
 		int range = LHConfig.COMMON.range.get(getRegistryName().getPath()).get();
-		if (!mob.level().isClientSide() && mob.tickCount % PerformanceConstants.AURA == 0) {
+		if (!mob.level().isClientSide() && mob.tickCount % PerformanceConstants.auraApplyInterval() == 0) {
 			AABB box = mob.getBoundingBox().inflate(range);
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
 				if (!(e instanceof Player pl) || !pl.getAbilities().instabuild) {

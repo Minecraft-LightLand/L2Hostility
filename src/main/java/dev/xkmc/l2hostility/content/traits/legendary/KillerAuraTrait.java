@@ -40,7 +40,7 @@ public class KillerAuraTrait extends LegendaryTrait {
 						e instanceof Mob target && target.getTarget() == mob ||
 						mob instanceof Mob mobmob && mobmob.getTarget() == e) {
 					if (e.distanceTo(mob) > range) continue;
-					if (CurioCompat.hasItemInCurio(e, LHItems.ABRAHADABRA.get())) continue;
+					if (LHItems.ABRAHADABRA.get().isOn(e)) continue;
 					TraitEffectCache cache = new TraitEffectCache(e);
 					cap.traitEvent((k, v) -> k.postHurtPlayer(v, mob, cache));
 					e.hurt(new DamageSource(LHDamageTypes.forKey(mob.level(), LHDamageTypes.KILLER_AURA),

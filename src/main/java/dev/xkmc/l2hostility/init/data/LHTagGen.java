@@ -17,6 +17,7 @@ import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
+import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import fuzs.mutantmonsters.MutantMonsters;
 import fuzs.mutantmonsters.init.ModRegistry;
@@ -89,7 +90,10 @@ public class LHTagGen {
 				LCEnchantments.SAFEGUARD.get(),
 				LCEnchantments.ETERNAL.get(),
 				LCEnchantments.DURABLE_ARMOR.get(),
-				LCEnchantments.SOUL_BOUND.get()
+				LCEnchantments.SOUL_BOUND.get(),
+				LHEnchantments.SPLIT_SUPPRESS.get(),
+				LHEnchantments.INSULATOR.get(),
+				LHEnchantments.VANISH.get()
 		);
 	}
 

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkClearRenderer;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
@@ -38,6 +39,9 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.joml.Matrix4f;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientEvents {
@@ -99,15 +103,18 @@ public class ClientEvents {
 	}
 
 	private static boolean renderChunk = false;
+	public static final List<Mob> MASTERS = new ArrayList<>();
 
 	@SubscribeEvent
 	public static void onClientTick(TickEvent.ClientTickEvent event) {
+		if (event.phase == TickEvent.Phase.START) {
+			MASTERS.clear();
+		}
 		if (event.phase == TickEvent.Phase.END) {
 			var player = Proxy.getClientPlayer();
 			if (player != null && player.tickCount % PerformanceConstants.CHUNK_RENDER == 0) {
 				renderChunk = CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR_GLASSES.get()) &&
 						CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR.get());
-
 			}
 		}
 	}
@@ -133,10 +140,9 @@ public class ClientEvents {
 			pose.translate(-cam.x, -cam.y, -cam.z);
 			var level = Minecraft.getInstance().level;
 			if (level != null) {
-				for (var e : level.entitiesForRendering()) {
-					if (!(e instanceof Mob mob)) continue;
-					if (!e.isAlive() || !MobTraitCap.HOLDER.isProper(mob)) continue;
-					var cap = MobTraitCap.HOLDER.get(mob);
+				for (var e : MASTERS) {
+					if (!e.isAlive()) continue;
+					var cap = MobTraitCap.HOLDER.get(e);
 					if (cap.asMaster == null) continue;
 					Vec3 p0 = e.position().add(0, e.getBbHeight() / 2, 0);
 					for (var minions : cap.asMaster.data) {

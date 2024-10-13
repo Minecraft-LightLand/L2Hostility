@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -30,6 +31,8 @@ public class SealedItem extends Item {
 		ItemStack ans = LHItems.SEAL.asStack();
 		ans.getOrCreateTag().putInt(TIME, time);
 		ans.getOrCreateTag().put(DATA, stack.save(new CompoundTag()));
+		if (stack.getEnchantmentLevel(LHEnchantments.VANISH.get()) > 0)
+			ans.enchant(LHEnchantments.VANISH.get(), 1);
 		return ans;
 	}
 

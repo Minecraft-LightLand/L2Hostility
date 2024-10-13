@@ -1,12 +1,15 @@
 package dev.xkmc.l2hostility.compat.curios;
 
 import com.google.common.collect.Multimap;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModList;
@@ -15,6 +18,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotAttribute;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
+import top.theillusivec4.curios.common.CuriosHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +34,14 @@ public class CurioCompat {
 			}
 		}
 		return hasItemInCurio(player, item);
+	}
+
+	public static boolean hasItemInCurioChecked(LivingEntity le, Item item) {
+		if (LHConfig.COMMON.enableCurioCheckFilter.get()) {
+			if (le instanceof Enemy || le instanceof Animal)
+				return false;
+		}
+		return hasItemInCurio(le, item);
 	}
 
 	public static boolean hasItemInCurio(LivingEntity player, Item item) {
@@ -89,11 +101,11 @@ public class CurioCompat {
 		if (opt.resolve().isEmpty()) {
 			return false;
 		}
-		ItemStack stack = new ItemStack(item);
+		opt.resolve().get().findFirstCurio(item);
 		for (var e : opt.resolve().get().getCurios().values()) {
 			if (e.getStacks().getSlots() == 0) continue;
 			if (!e.getIdentifier().equals("curio") &&
-					!stack.is(ItemTags.create(new ResourceLocation("curios", e.getIdentifier())))) continue;
+					!item.builtInRegistryHolder().is(ItemTags.create(new ResourceLocation("curios", e.getIdentifier())))) continue;
 			for (int i = 0; i < e.getStacks().getSlots(); i++) {
 				if (e.getStacks().getStackInSlot(i).is(item)) {
 					return true;

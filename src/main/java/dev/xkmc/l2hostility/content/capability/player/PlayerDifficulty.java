@@ -130,7 +130,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		difficulty.grow(growFactor, cap);
 		cap.traits.values().stream().max(Comparator.naturalOrder())
 				.ifPresent(integer -> maxRankKilled = Math.max(maxRankKilled, integer));
-		if (getLevel().getLevel() > rewardCount * 10) {
+		if (getLevel().getLevel() > rewardCount * 10 && LHConfig.COMMON.enableHostilityOrbDrop.get()) {
 			rewardCount++;
 			player.getInventory().add(LHItems.HOSTILITY_ORB.asStack());
 			// TODO drop reward

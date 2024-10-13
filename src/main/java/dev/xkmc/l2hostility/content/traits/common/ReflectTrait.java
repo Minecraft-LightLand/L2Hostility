@@ -22,7 +22,7 @@ public class ReflectTrait extends MobTrait {
 	@Override
 	public void onHurtByOthers(int level, LivingEntity entity, LivingHurtEvent event) {
 		if (event.getSource().getDirectEntity() instanceof LivingEntity le && event.getSource().is(L2DamageTypes.DIRECT)) {
-			if (CurioCompat.hasItemInCurio(le, LHItems.ABRAHADABRA.get())) return;
+			if (LHItems.ABRAHADABRA.get().isOn(le)) return;
 			float factor = (float) (level * LHConfig.COMMON.reflectFactor.get());
 			GeneralEventHandler.schedule(() -> le.hurt(entity.level().damageSources().indirectMagic(entity, null), event.getAmount() * factor));
 		}
