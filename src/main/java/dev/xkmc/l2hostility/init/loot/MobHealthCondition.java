@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.init.loot;
 
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -10,7 +11,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 @SerialClass
 public class MobHealthCondition implements LootItemCondition {
 
-	@SerialClass.SerialField
+	@SerialField
 	public int minHealth;
 
 	@Deprecated

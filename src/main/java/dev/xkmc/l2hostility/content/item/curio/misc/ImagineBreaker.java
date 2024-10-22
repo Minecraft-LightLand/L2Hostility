@@ -20,7 +20,7 @@ public class ImagineBreaker extends CurseCurioItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.ITEM_IMAGINE_BREAKER.get().withStyle(ChatFormatting.GOLD));
 		list.add(LangData.ITEM_CHARM_NO_DROP.get().withStyle(ChatFormatting.RED));
 	}

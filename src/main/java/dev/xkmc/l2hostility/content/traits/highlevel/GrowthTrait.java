@@ -1,16 +1,17 @@
 package dev.xkmc.l2hostility.content.traits.highlevel;
 
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.InheritContext;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Slime;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 public class GrowthTrait extends MobTrait {
 
@@ -30,7 +31,7 @@ public class GrowthTrait extends MobTrait {
 
 	@Override
 	public void postInit(LivingEntity mob, int lv) {
-		var cap = MobTraitCap.HOLDER.get(mob);
+		var cap = LHMiscs.MOB.type().getOrCreate(mob);
 		var regen = LHTraits.REGEN.get();
 		if (regen.allow(mob) && cap.getTraitLevel(regen) < lv) {
 			cap.setTrait(regen, lv);
@@ -38,14 +39,12 @@ public class GrowthTrait extends MobTrait {
 	}
 
 	@Override
-	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
-		if (event.getSource().is(DamageTypes.IN_WALL)) {
-			event.setCanceled(true);
-		}
+	public boolean onAttackedByOthers(int level, LivingEntity entity, DamageData.Attack event) {
+		return event.getSource().is(DamageTypes.IN_WALL);
 	}
 
 	@Override
-	public void onDeath(int lv, LivingEntity entity, LivingDeathEvent event){
+	public void onDeath(int lv, LivingEntity entity, LivingDeathEvent event) {
 		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
 			entity.setHealth(entity.getMaxHealth());
 			entity.discard();

@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public record GluttonyLootRecipe() implements ITraitLootRecipe {
 
@@ -26,8 +27,8 @@ public record GluttonyLootRecipe() implements ITraitLootRecipe {
 	}
 
 	@Override
-	public void addTooltip(List<Component> l) {
-		l.add(LangData.TOOLTIP_JEI_GLUTTONY.get().withStyle(ChatFormatting.YELLOW));
+	public void addTooltip(Consumer<Component> l) {
+		l.accept(LangData.TOOLTIP_JEI_GLUTTONY.get().withStyle(ChatFormatting.YELLOW));
 	}
 
 }

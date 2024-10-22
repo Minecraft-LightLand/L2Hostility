@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
@@ -11,7 +12,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class DispellTrait extends LegendaryTrait {
 			}
 		}
 		if (list.isEmpty()) return;
-		int time = LHConfig.COMMON.dispellTime.get() * level;
+		int time = LHConfig.SERVER.dispellTime.get() * level;
 		int count = Math.min(level, list.size());
 		for (int i = 0; i < count; i++) {
 			int index = attacker.getRandom().nextInt(list.size());
@@ -47,12 +48,10 @@ public class DispellTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
-		if (!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
+	public boolean onAttackedByOthers(int level, LivingEntity entity, DamageData.Attack event) {
+		return !event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
 				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				event.getSource().is(L2DamageTypes.MAGIC)) {
-			event.setCanceled(true);
-		}
+				event.getSource().is(Tags.DamageTypes.IS_MAGIC);
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class DispellTrait extends LegendaryTrait {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
 						mapLevel(i -> Component.literal(i + "")
 								.withStyle(ChatFormatting.AQUA)),
-						mapLevel(i -> Component.literal(LHConfig.COMMON.dispellTime.get() * i / 20 + "")
+						mapLevel(i -> Component.literal(LHConfig.SERVER.dispellTime.get() * i / 20 + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.capability.player;
 
+import dev.xkmc.l2core.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
@@ -15,18 +16,14 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
-import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
-import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
-import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
@@ -36,20 +33,13 @@ import java.util.TreeSet;
 @SerialClass
 public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty> {
 
-	public static final Capability<PlayerDifficulty> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
-	});
-
-	public static final PlayerCapabilityHolder<PlayerDifficulty> HOLDER =
-			new PlayerCapabilityHolder<>(new ResourceLocation(L2Hostility.MODID, "player"), CAPABILITY,
-					PlayerDifficulty.class, PlayerDifficulty::new, PlayerCapabilityNetworkHandler::new);
-
-	@SerialClass.SerialField
+	@SerialField
 	private final DifficultyLevel difficulty = new DifficultyLevel();
 
-	@SerialClass.SerialField
+	@SerialField
 	public int maxRankKilled = 0, rewardCount = 0;
 
-	@SerialClass.SerialField
+	@SerialField
 	public final TreeSet<ResourceLocation> dimensions = new TreeSet<>();
 
 	@Nullable
@@ -61,20 +51,20 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	public static void register() {
 	}
 
-	public void onClone(boolean isWasDeath) {
+	public void onClone(Player player, boolean isWasDeath) {
 		if (!isWasDeath) return;
-		if (LHConfig.COMMON.keepInventoryRuleKeepDifficulty.get() &&
-				world.getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
+		if (LHConfig.SERVER.keepInventoryRuleKeepDifficulty.get() &&
+				player.level().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY)) {
 			return;
 		}
-		if (LHConfig.COMMON.deathDecayDimension.get())
+		if (LHConfig.SERVER.deathDecayDimension.get())
 			dimensions.clear();
-		if (LHConfig.COMMON.deathDecayTraitCap.get())
+		if (LHConfig.SERVER.deathDecayTraitCap.get())
 			if (maxRankKilled > 0) maxRankKilled--;
 		difficulty.decay();
 	}
 
-	public void tick() {
+	public void tick(Player player) {
 		if (!(player instanceof ServerPlayer sp)) {
 			return;
 		}
@@ -82,7 +72,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		if (opt.isPresent()) {
 			var currentChunk = opt.get();
 			if (prevChunk != currentChunk) {
-				L2Hostility.HANDLER.toClientPlayer(new ChunkCapSyncToClient(currentChunk), sp);
+				L2Hostility.HANDLER.toClientPlayer(ChunkCapSyncToClient.of(currentChunk), sp);
 				prevChunk = currentChunk;
 			}
 			var sec = opt.get().getSection(player.blockPosition().getY());
@@ -95,20 +85,20 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 			}
 		}
 		if (dimensions.add(player.level().dimension().location())) {
-			sync();
+			sync(sp);
 		}
 	}
 
-	public void sync() {
-		HOLDER.network.toClientSyncAll((ServerPlayer) player);
+	public void sync(ServerPlayer sp) {
+		LHMiscs.PLAYER.type().network.toClient(sp);
 	}
 
-	public void apply(MobDifficultyCollector instance) {
+	public void apply(Player player, MobDifficultyCollector instance) {
 		instance.setPlayer(player);
-		instance.acceptBonus(getLevel());
+		instance.acceptBonus(getLevel(player));
 		instance.setTraitCap(getRankCap());
 		if (CurioCompat.hasItemInCurio(player, LHItems.CURSE_PRIDE.get())) {
-			instance.traitCostFactor(LHConfig.COMMON.prideTraitFactor.get());
+			instance.traitCostFactor(LHConfig.SERVER.prideTraitFactor.get());
 			instance.setFullChance();
 		}
 		if (CurioCompat.hasItemInCurio(player, LHItems.ABYSSAL_THORN.get())) {
@@ -122,7 +112,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		return TraitManager.getTraitCap(maxRankKilled, difficulty);
 	}
 
-	public void addKillCredit(MobTraitCap cap) {
+	public void addKillCredit(ServerPlayer player, MobTraitCap cap) {
 		double growFactor = 1;
 		for (var stack : CurseCurioItem.getFromPlayer(player)) {
 			growFactor *= stack.item().getGrowFactor(stack.stack(), this, cap);
@@ -130,36 +120,36 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		difficulty.grow(growFactor, cap);
 		cap.traits.values().stream().max(Comparator.naturalOrder())
 				.ifPresent(integer -> maxRankKilled = Math.max(maxRankKilled, integer));
-		if (getLevel().getLevel() > rewardCount * 10 && LHConfig.COMMON.enableHostilityOrbDrop.get()) {
+		if (getLevel(player).getLevel() > rewardCount * 10 && LHConfig.SERVER.enableHostilityOrbDrop.get()) {
 			rewardCount++;
 			player.getInventory().add(LHItems.HOSTILITY_ORB.asStack());
 			// TODO drop reward
 		}
-		sync();
+		sync(player);
 	}
 
 	public int getRewardCount() {
 		return rewardCount;
 	}
 
-	public DifficultyLevel getLevel() {
-		return DifficultyLevel.merge(difficulty, getExtraLevel());
+	public DifficultyLevel getLevel(Player player) {
+		return DifficultyLevel.merge(difficulty, getExtraLevel(player));
 	}
 
 	private int getDimCount() {
 		return Math.max(0, dimensions.size() - 1);
 	}
 
-	private int getExtraLevel() {
+	private int getExtraLevel(Player player) {
 		int ans = 0;
-		ans += getDimCount() * LHConfig.COMMON.dimensionFactor.get();
-		ans += (int) player.getAttributeValue(LHMiscs.ADD_LEVEL.get());
+		ans += getDimCount() * LHConfig.SERVER.dimensionFactor.get();
+		ans += (int) player.getAttributeValue(LHMiscs.ADD_LEVEL);
 		return ans;
 	}
 
-	public List<Component> getPlayerDifficultyDetail() {
-		int item = (int) player.getAttributeValue(LHMiscs.ADD_LEVEL.get());
-		int dim = getDimCount() * LHConfig.COMMON.dimensionFactor.get();
+	public List<Component> getPlayerDifficultyDetail(Player player) {
+		int item = (int) player.getAttributeValue(LHMiscs.ADD_LEVEL);
+		int dim = getDimCount() * LHConfig.SERVER.dimensionFactor.get();
 		return List.of(
 				LangData.INFO_PLAYER_ADAPTIVE_LEVEL.get(difficulty.level).withStyle(ChatFormatting.GRAY),
 				LangData.INFO_PLAYER_ITEM_LEVEL.get(item).withStyle(ChatFormatting.GRAY),
@@ -168,7 +158,8 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 		);
 	}
 
-	public LevelEditor getLevelEditor() {
-		return new LevelEditor(difficulty, getExtraLevel());
+	public LevelEditor getLevelEditor(Player player) {
+		return new LevelEditor(difficulty, getExtraLevel(player));
 	}
+
 }

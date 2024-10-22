@@ -1,19 +1,18 @@
 package dev.xkmc.l2hostility.content.traits.highlevel;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
-import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.common.AuraEffectTrait;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public class ArenaTrait extends AuraEffectTrait {
 
 	public ArenaTrait() {
-		super(LHEffects.ANTIBUILD::get);
+		super(LHEffects.ANTIBUILD);
 	}
 
 	@Override
@@ -22,34 +21,31 @@ public class ArenaTrait extends AuraEffectTrait {
 	}
 
 	@Override
-	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
+	public boolean onAttackedByOthers(int level, LivingEntity entity, DamageData.Attack event) {
 		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
-			return;
+			return false;
 		}
 		if (event.getSource().getEntity() instanceof LivingEntity attacker) {
-			if (attacker.hasEffect(LHEffects.ANTIBUILD.get())) {
-				return;
+			if (attacker.hasEffect(LHEffects.ANTIBUILD)) {
+				return false;
 			}
-			if (attacker instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob)) {
-				if (MobTraitCap.HOLDER.get(mob).getTraitLevel(this) >= level) {
-					return;
-				}
+			if (attacker instanceof Mob mob && LHMiscs.MOB.type().getExisting(mob)
+					.map(e -> e.getTraitLevel(this)).orElse(0) >= level) {
+				return false;
 			}
 		}
-		event.setCanceled(true);
+		return true;
 	}
 
 	@Override
-	public void onDamaged(int level, LivingEntity mob, AttackCache cache) {
-		var event = cache.getLivingDamageEvent();
-		assert event != null;
-		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+	public void onDamaged(int level, LivingEntity mob, DamageData.Defence cache) {
+		if (cache.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
 			return;
 		}
-		if (cache.getAttacker() != null && cache.getAttacker().hasEffect(LHEffects.ANTIBUILD.get())) {
+		if (cache.getAttacker() != null && cache.getAttacker().hasEffect(LHEffects.ANTIBUILD)) {
 			return;
 		}
-		cache.addDealtModifier(DamageModifier.nonlinearFinal(12345, e -> 0));
+		cache.addDealtModifier(DamageModifier.nonlinearFinal(12345, e -> 0, getRegistryName()));
 	}
 
 }

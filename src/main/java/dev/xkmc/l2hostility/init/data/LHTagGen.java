@@ -1,28 +1,15 @@
 package dev.xkmc.l2hostility.init.data;
 
-import com.bobmowzie.mowziesmobs.MowziesMobs;
-import com.bobmowzie.mowziesmobs.server.entity.EntityHandler;
-import com.cerbon.bosses_of_mass_destruction.entity.BMDEntities;
-import com.github.L_Ender.cataclysm.Cataclysm;
-import com.github.L_Ender.cataclysm.init.ModEntities;
-import com.github.alexmodguy.alexscaves.AlexsCaves;
-import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
-import com.github.alexthe666.iceandfire.IceAndFire;
-import com.github.alexthe666.iceandfire.entity.IafEntityRegistry;
-import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
-import dev.xkmc.l2complements.init.data.TagGen;
+import dev.xkmc.l2complements.init.data.LCTagGen;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import fuzs.mutantmonsters.MutantMonsters;
-import fuzs.mutantmonsters.init.ModRegistry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -33,11 +20,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.ForgeRegistries;
-import twilightforest.TwilightForestMod;
-import twilightforest.init.TFEntities;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -45,25 +28,17 @@ import java.util.function.Consumer;
 
 public class LHTagGen {
 
-	public static final ProviderType<RegistrateTagsProvider.IntrinsicImpl<Enchantment>> ENCH_TAGS =
-			ProviderType.register("tags/enchantment",
-					type -> (p, e) -> new RegistrateTagsProvider.IntrinsicImpl<>(p, type, "enchantments",
-							e.getGenerator().getPackOutput(), Registries.ENCHANTMENT, e.getLookupProvider(),
-							ench -> ResourceKey.create(ForgeRegistries.ENCHANTMENTS.getRegistryKey(),
-									ForgeRegistries.ENCHANTMENTS.getKey(ench)),
-							e.getExistingFileHelper()));
+	public static final TagKey<Item> CHAOS_CURIO = ItemTags.create(L2Hostility.loc("chaos_equipment"));
+	public static final TagKey<Item> CURSE_SLOT = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "hostility_curse"));
+	public static final TagKey<Item> TRAIT_ITEM = ItemTags.create(L2Hostility.loc("trait_item"));
+	public static final TagKey<Item> NO_SEAL = ItemTags.create(L2Hostility.loc("no_seal"));
+	public static final TagKey<Item> ANTIBUILD_BAN = ItemTags.create(L2Hostility.loc("antibuild_ban"));
 
-	public static final TagKey<Item> CHAOS_CURIO = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "chaos_equipment"));
-	public static final TagKey<Item> CURSE_SLOT = ItemTags.create(new ResourceLocation("curios", "hostility_curse"));
-	public static final TagKey<Item> TRAIT_ITEM = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "trait_item"));
-	public static final TagKey<Item> NO_SEAL = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "no_seal"));
-	public static final TagKey<Item> ANTIBUILD_BAN = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "antibuild_ban"));
-
-	public static final TagKey<Block> BEACON_BLOCK = BlockTags.create(new ResourceLocation(L2Hostility.MODID, "beacon"));
-	public static final TagKey<Item> BEACON_PAYMENT = ItemTags.create(new ResourceLocation(L2Hostility.MODID, "beacon_payment"));
+	public static final TagKey<Block> BEACON_BLOCK = BlockTags.create(L2Hostility.loc("beacon"));
+	public static final TagKey<Item> BEACON_PAYMENT = ItemTags.create(L2Hostility.loc("beacon_payment"));
 
 	public static final TagKey<Enchantment> NO_DISPELL = TagKey.create(Registries.ENCHANTMENT,
-			new ResourceLocation(L2Hostility.MODID, "no_dispell"));
+			L2Hostility.loc("no_dispell"));
 
 	public static final TagKey<EntityType<?>> BLACKLIST = createEntityTag("blacklist");
 	public static final TagKey<EntityType<?>> WHITELIST = createEntityTag("whitelist");
@@ -83,25 +58,25 @@ public class LHTagGen {
 		pvd.addTag(BlockTags.BEACON_BASE_BLOCKS).addTag(BEACON_BLOCK);
 	}
 
-	public static void onEnchTagGen(RegistrateTagsProvider.IntrinsicImpl<Enchantment> pvd) {
+	public static void onEnchTagGen(RegistrateTagsProvider<Enchantment> pvd) {
 		pvd.addTag(NO_DISPELL).add(Enchantments.UNBREAKING,
-				LCEnchantments.LIFE_SYNC.get(),
-				LCEnchantments.HARDENED.get(),
-				LCEnchantments.SAFEGUARD.get(),
-				LCEnchantments.ETERNAL.get(),
-				LCEnchantments.DURABLE_ARMOR.get(),
-				LCEnchantments.SOUL_BOUND.get(),
-				LHEnchantments.SPLIT_SUPPRESS.get(),
-				LHEnchantments.INSULATOR.get(),
-				LHEnchantments.VANISH.get()
+				LCEnchantments.LIFE_SYNC.id(),
+				LCEnchantments.HARDENED.id(),
+				LCEnchantments.SAFEGUARD.id(),
+				LCEnchantments.ETERNAL.id(),
+				LCEnchantments.DURABLE_ARMOR.id(),
+				LCEnchantments.SOUL_BOUND.id(),
+				LHEnchantments.SPLIT_SUPPRESS.id(),
+				LHEnchantments.INSULATOR.id(),
+				LHEnchantments.VANISH.id()
 		);
 	}
 
 	public static void onItemTagGen(RegistrateItemTagsProvider pvd) {
 		pvd.addTag(NO_SEAL)
-				.addOptional(new ResourceLocation("enigmaticlegacy:cursed_ring"));
+				.addOptional(ResourceLocation.fromNamespaceAndPath("enigmaticlegacy", "cursed_ring"));
 		pvd.addTag(ANTIBUILD_BAN)
-				.addOptional(new ResourceLocation("enigmaticlegacy:extradimensional_eye"));
+				.addOptional(ResourceLocation.fromNamespaceAndPath("enigmaticlegacy", "extradimensional_eye"));
 	}
 
 	public static void onTraitTagGen(RegistrateTagsProvider.IntrinsicImpl<MobTrait> pvd) {
@@ -132,6 +107,7 @@ public class LHTagGen {
 		pvd.addTag(SEMIBOSS).addTag(Tags.EntityTypes.BOSSES)
 				.add(EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER);
 
+		/* TODO
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
 			pvd.addTag(NO_DROP).addOptional(TFEntities.DEATH_TOME.getId());
 		}
@@ -218,19 +194,21 @@ public class LHTagGen {
 					.addOptional(EntityHandler.WROUGHTNAUT.getId());
 		}
 
+		 */
+
 		ENTITY_TAG_BUILDER.values().forEach(e -> e.accept(pvd));
 	}
 
 	public static TagKey<EntityType<?>> createEntityTag(String id) {
-		return TagKey.create(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), new ResourceLocation(L2Hostility.MODID, id));
+		return TagKey.create(Registries.ENTITY_TYPE, L2Hostility.loc(id));
 	}
 
 	public static TagKey<MobTrait> createTraitTag(String id) {
-		return TagKey.create(LHTraits.TRAITS.key(), new ResourceLocation(L2Hostility.MODID, id));
+		return TagKey.create(LHTraits.TRAITS.key(), L2Hostility.loc(id));
 	}
 
 	public static void onEffTagGen(RegistrateTagsProvider.IntrinsicImpl<MobEffect> pvd) {
-		pvd.addTag(TagGen.SKILL_EFFECT).add(LHEffects.ANTIBUILD.get());
+		pvd.addTag(LCTagGen.SKILL_EFFECT).add(LHEffects.ANTIBUILD.get());
 	}
 
 }

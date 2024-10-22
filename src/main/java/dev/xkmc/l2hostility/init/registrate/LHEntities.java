@@ -13,7 +13,6 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 
 import static dev.xkmc.l2hostility.init.L2Hostility.REGISTRATE;
 
@@ -36,7 +35,6 @@ public class LHEntities {
 				.renderer(() -> LHEntities::addRenderer)
 				.defaultLang().register();
 
-
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -45,9 +43,6 @@ public class LHEntities {
 	}
 
 	public static void register() {
-	}
-
-	public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
 	}
 
 }

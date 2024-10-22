@@ -1,34 +1,30 @@
 package dev.xkmc.l2hostility.content.capability.chunk;
 
+import dev.xkmc.l2core.capability.attachment.GeneralCapabilityTemplate;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import dev.xkmc.l2serial.serialization.marker.OnInject;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.chunk.ImposterProtoChunk;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @SerialClass
-public class ChunkDifficulty implements RegionalDifficultyModifier {
-
+public class ChunkDifficulty extends GeneralCapabilityTemplate<LevelChunk, ChunkDifficulty> implements RegionalDifficultyModifier {
 
 	public enum ChunkStage {
 		PRE_INIT, INIT
 	}
-
-	public static Capability<ChunkDifficulty> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
-	});
 
 	public static Optional<ChunkDifficulty> at(Level level, BlockPos pos) {
 		return at(level, pos.getX() >> 4, pos.getZ() >> 4);
@@ -40,17 +36,17 @@ public class ChunkDifficulty implements RegionalDifficultyModifier {
 			chunk = im.getWrapped();
 		}
 		if (chunk instanceof LevelChunk c) {
-			return c.getCapability(CAPABILITY).resolve();
+			return Optional.of(LHMiscs.CHUNK.type().getOrCreate(c));
 		}
 		return Optional.empty();
 	}
 
 	public final LevelChunk chunk;
 
-	@SerialClass.SerialField
+	@SerialField
 	private ChunkStage stage = ChunkStage.PRE_INIT;
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	private SectionDifficulty[] sections;
 
 	protected ChunkDifficulty(LevelChunk chunk) {
@@ -81,7 +77,7 @@ public class ChunkDifficulty implements RegionalDifficultyModifier {
 		}
 	}
 
-	@SerialClass.OnInject
+	@OnInject
 	public void init() {
 		int size = chunk.getLevel().getSectionsCount();
 		if (sections == null || sections.length != size) {

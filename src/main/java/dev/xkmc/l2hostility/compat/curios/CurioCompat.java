@@ -18,7 +18,6 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotAttribute;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
-import top.theillusivec4.curios.common.CuriosHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class CurioCompat {
 	}
 
 	public static boolean hasItemInCurioChecked(LivingEntity le, Item item) {
-		if (LHConfig.COMMON.enableCurioCheckFilter.get()) {
+		if (LHConfig.SERVER.enableCurioCheckFilter.get()) {
 			if (le instanceof Enemy || le instanceof Animal)
 				return false;
 		}

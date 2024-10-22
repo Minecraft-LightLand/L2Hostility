@@ -12,24 +12,22 @@ import dev.xkmc.l2hostility.content.item.tool.Detector;
 import dev.xkmc.l2hostility.content.item.tool.DetectorGlasses;
 import dev.xkmc.l2hostility.content.item.tool.WitchWand;
 import dev.xkmc.l2hostility.content.item.traits.SealedItem;
-import dev.xkmc.l2hostility.content.item.wand.AiConfigWand;
-import dev.xkmc.l2hostility.content.item.wand.EquipmentWand;
-import dev.xkmc.l2hostility.content.item.wand.TargetSelectWand;
 import dev.xkmc.l2hostility.content.item.wand.TraitAdderWand;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2magic.init.registrate.LMItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SimpleFoiledItem;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 
 @SuppressWarnings({"unsafe"})
 @MethodsReturnNonnullByDefault
@@ -48,7 +46,7 @@ public class LHItems {
 	public static final ItemEntry<BookCopy> BOOK_COPY;
 	public static final ItemEntry<BookEverything> BOOK_OMNISCIENCE;
 	public static final ItemEntry<Item> CHAOS_INGOT;
-	public static final ItemEntry<SimpleFoiledItem> HOSTILITY_ESSENCE, MIRACLE_POWDER, MIRACLE_INGOT;
+	public static final ItemEntry<Item> HOSTILITY_ESSENCE, MIRACLE_POWDER, MIRACLE_INGOT;
 	public static final ItemEntry<CurseOfEnvy> CURSE_ENVY;
 	public static final ItemEntry<CurseOfGluttony> CURSE_GLUTTONY;
 	public static final ItemEntry<CurseOfGreed> CURSE_GREED;
@@ -77,9 +75,6 @@ public class LHItems {
 	public static final ItemEntry<DivinityLight> DIVINITY_LIGHT;
 	public static final ItemEntry<LootingCharm> LOOT_1, LOOT_2, LOOT_3, LOOT_4;
 	public static final ItemEntry<TraitAdderWand> ADDER;
-	public static final ItemEntry<TargetSelectWand> TARGET;
-	public static final ItemEntry<AiConfigWand> AI;
-	public static final ItemEntry<EquipmentWand> EQUIPMENT;
 
 	public static final ItemEntry<SealedItem> SEAL;
 
@@ -106,16 +101,16 @@ public class LHItems {
 			WITCH_CHARGE = L2Hostility.REGISTRATE.item("witch_charge",
 					p -> new HostilityChargeItem(p, ChargeType.BOOST, () ->
 							LangData.TOOLTIP_WITCH_CHARGE.get(
-									LHConfig.COMMON.witchChargeMinDuration.get() / 20,
-									Math.round(100 * LHConfig.COMMON.drainDuration.get()),
-									LHConfig.COMMON.drainDurationMax.get() / 20
+									LHConfig.SERVER.witchChargeMinDuration.get() / 20,
+									Math.round(100 * LHConfig.SERVER.drainDuration.get()),
+									LHConfig.SERVER.drainDurationMax.get() / 20
 							).withStyle(ChatFormatting.GRAY))
 			).register();
 
 			ETERNAL_WITCH_CHARGE = L2Hostility.REGISTRATE.item("eternal_witch_charge",
 					p -> new HostilityChargeItem(p, ChargeType.ETERNAL, () ->
 							LangData.TOOLTIP_WITCH_ETERNAL.get(
-									LHConfig.COMMON.witchChargeMinDuration.get() / 20
+									LHConfig.SERVER.witchChargeMinDuration.get() / 20
 							).withStyle(ChatFormatting.GRAY))
 			).register();
 
@@ -129,12 +124,12 @@ public class LHItems {
 		// equipments
 		{
 
-			TagKey<Item> head = ItemTags.create(new ResourceLocation("curios", "head"));
+			TagKey<Item> head = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "head"));
 
 			DETECTOR = L2Hostility.REGISTRATE.item("hostility_detector",
 					p -> new Detector(p.stacksTo(1))).register();
 			DETECTOR_GLASSES = L2Hostility.REGISTRATE.item("detector_glasses",
-							p -> new DetectorGlasses(p.stacksTo(1))).tag(head).register();
+					p -> new DetectorGlasses(p.stacksTo(1))).tag(head).register();
 
 			TagKey<Item> chaos = LHTagGen.CHAOS_CURIO;
 
@@ -144,11 +139,11 @@ public class LHItems {
 
 
 			CHAOS_INGOT = L2Hostility.REGISTRATE.item("chaos_ingot", p -> new Item(p.rarity(Rarity.EPIC).fireResistant())).tag(LHTagGen.BEACON_PAYMENT).register();
-			HOSTILITY_ESSENCE = L2Hostility.REGISTRATE.item("hostility_essence", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
-			MIRACLE_POWDER = L2Hostility.REGISTRATE.item("miracle_powder", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).register();
-			MIRACLE_INGOT = L2Hostility.REGISTRATE.item("miracle_ingot", p -> new SimpleFoiledItem(p.rarity(Rarity.EPIC).fireResistant())).tag(LHTagGen.BEACON_PAYMENT).register();
+			HOSTILITY_ESSENCE = L2Hostility.REGISTRATE.item("hostility_essence", p -> new Item(p.rarity(Rarity.EPIC).fireResistant().component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))).register();
+			MIRACLE_POWDER = L2Hostility.REGISTRATE.item("miracle_powder", p -> new Item(p.rarity(Rarity.EPIC).fireResistant().component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))).register();
+			MIRACLE_INGOT = L2Hostility.REGISTRATE.item("miracle_ingot", p -> new Item(p.rarity(Rarity.EPIC).fireResistant().component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true))).tag(LHTagGen.BEACON_PAYMENT).register();
 
-			TagKey<Item> charm = ItemTags.create(new ResourceLocation("curios", "charm"));
+			TagKey<Item> charm = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "charm"));
 			TagKey<Item> curse = LHTagGen.CURSE_SLOT;
 
 			LOOT_1 = curio("charm_of_looting_1", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL).lang("Unpolished Looting Charm").register();
@@ -164,7 +159,7 @@ public class LHItems {
 			CURSE_SLOTH = curio("curse_of_sloth", CurseOfSloth::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
 			CURSE_WRATH = curio("curse_of_wrath", CurseOfWrath::new).tag(chaos, charm, curse).register();
 
-			TagKey<Item> ring = ItemTags.create(new ResourceLocation("curios", "ring"));
+			TagKey<Item> ring = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "ring"));
 
 			RING_OCEAN = curio("ring_of_ocean", RingOfOcean::new).tag(chaos, ring).register();
 			RING_LIFE = curio("ring_of_life", RingOfLife::new).tag(chaos, ring).register();
@@ -174,7 +169,7 @@ public class LHItems {
 			RING_CORROSION = curio("ring_of_corrosion", RingOfCorrosion::new).tag(chaos, ring).register();
 			RING_HEALING = curio("ring_of_healing", RingOfHealing::new).tag(chaos, ring).register();
 
-			TagKey<Item> hand = ItemTags.create(new ResourceLocation("curios", "hands"));
+			TagKey<Item> hand = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "hands"));
 
 			FLAMING_THORN = curio("flaming_thorn", FlamingThorn::new).tag(chaos, hand).register();
 			IMAGINE_BREAKER = curio("imagine_breaker", ImagineBreaker::new).tag(chaos, hand, LHTagGen.NO_SEAL).register();
@@ -185,7 +180,7 @@ public class LHItems {
 			DIVINITY_CROSS = curio("divinity_cross", DivinityCross::new).tag(chaos, charm, curse).register();
 			DIVINITY_LIGHT = curio("divinity_light", DivinityLight::new).tag(chaos, charm, curse).register();
 
-			TagKey<Item> back = ItemTags.create(new ResourceLocation("curios", "back"));
+			TagKey<Item> back = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "back"));
 
 			ODDEYES_GLASSES = curio("oddeyes_glasses", OddeyesGlasses::new).tag(chaos, head).register();
 			TRIPLE_STRIP_CAPE = curio("triple_strip_cape", TripleStripCape::new).tag(chaos, back).register();
@@ -195,7 +190,7 @@ public class LHItems {
 
 			RESTORATION = L2Hostility.REGISTRATE.item("pocket_of_restoration", p -> new PocketOfRestoration(p, 128))
 					.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/curio/" + ctx.getName())).override()
-							.predicate(new ResourceLocation(L2Hostility.MODID, "filled"), 0.5f)
+							.predicate(L2Hostility.loc("filled"), 0.5f)
 							.model(pvd.getBuilder(ctx.getName() + "_full")
 									.parent(new ModelFile.UncheckedModelFile("item/generated"))
 									.texture("layer0", "item/curio/" + ctx.getName() + "_full")))
@@ -208,19 +203,15 @@ public class LHItems {
 			ADDER = L2Hostility.REGISTRATE.item(
 							"trait_adder_wand", p -> new TraitAdderWand(p.stacksTo(1)))
 					.model((ctx, pvd) -> pvd.handheld(ctx)).register();
-			TARGET = L2Hostility.REGISTRATE.item(
-							"target_select_wand", p -> new TargetSelectWand(p.stacksTo(1)))
-					.model((ctx, pvd) -> pvd.handheld(ctx)).register();
-			AI = L2Hostility.REGISTRATE.item(
-							"ai_config_wand", p -> new AiConfigWand(p.stacksTo(1)))
-					.model((ctx, pvd) -> pvd.handheld(ctx)).register();
-			EQUIPMENT = L2Hostility.REGISTRATE.item(
-							"equipment_wand", p -> new EquipmentWand(p.stacksTo(1)))
-					.model((ctx, pvd) -> pvd.handheld(ctx)).register();
+			L2Hostility.REGISTRATE.modifyCreativeModeTab(LHBlocks.TAB.key(), e -> {
+				e.accept(LMItems.WAND_AI.asStack());
+				e.accept(LMItems.WAND_EQUIPMENT.asStack());
+				e.accept(LMItems.WAND_TARGET.asStack());
+			});
 		}
 
 		SEAL = L2Hostility.REGISTRATE.item("sealed_item", p -> new SealedItem(p.stacksTo(1).fireResistant()))
-				.removeTab(LHBlocks.TAB.getKey()).tag(LHTagGen.NO_SEAL).register();
+				.removeTab(LHBlocks.TAB.key()).tag(LHTagGen.NO_SEAL).register();
 	}
 
 	private static <T extends Item> ItemBuilder<T, ?> curio(String str, NonNullFunction<Item.Properties, T> factory) {

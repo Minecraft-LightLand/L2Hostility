@@ -9,7 +9,8 @@ import dev.xkmc.l2hostility.events.CapabilityEvents;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -34,23 +35,23 @@ public class SectionDifficulty {
 		return ChunkDifficulty.at(level, pos).map(e -> e.getSection(pos.getY()));
 	}
 
-	@SerialClass.SerialField
+	@SerialField
 	int index;
 
-	@SerialClass.SerialField
+	@SerialField
 	public BlockPos activePos = null;
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	private final DifficultyLevel difficulty = new DifficultyLevel();
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	private SectionStage stage = SectionStage.INIT;
 
 	LevelChunkSection section;
 
 	public void modifyInstance(Level level, BlockPos pos, MobDifficultyCollector instance) {
 		modifyInstanceInternal(level, pos, instance);
-		if (LHConfig.COMMON.allowSectionDifficulty.get())
+		if (LHConfig.SERVER.allowSectionDifficulty.get())
 			instance.acceptBonusLevel(difficulty.getLevel());
 		if (stage == SectionStage.CLEARED) {
 			instance.setCap(0);
@@ -66,7 +67,7 @@ public class SectionDifficulty {
 		instance.acceptConfig(levelDiff);
 		Holder<Biome> biome = level.getBiome(pos);
 		biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location())).ifPresent(instance::acceptConfig);
-		instance.acceptBonusLevel((int) Math.round(LHConfig.COMMON.distanceFactor.get() *
+		instance.acceptBonusLevel((int) Math.round(LHConfig.SERVER.distanceFactor.get() *
 				Math.sqrt(1d * pos.getX() * pos.getX() + 1d * pos.getZ() * pos.getZ())));
 	}
 
@@ -79,7 +80,7 @@ public class SectionDifficulty {
 		Holder<Biome> biome = player.level().getBiome(pos);
 		int bio = biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location()))
 				.map(WorldDifficultyConfig.DifficultyConfig::base).orElse(0);
-		int dist = (int) Math.round(LHConfig.COMMON.distanceFactor.get() *
+		int dist = (int) Math.round(LHConfig.SERVER.distanceFactor.get() *
 				Math.sqrt(pos.getX() * pos.getX() + pos.getZ() * pos.getZ()));
 		int adaptive = difficulty.getLevel();
 		return List.of(
@@ -119,7 +120,7 @@ public class SectionDifficulty {
 	public LevelEditor getLevelEditor(Level level, BlockPos pos) {
 		MobDifficultyCollector col = new MobDifficultyCollector();
 		modifyInstanceInternal(level, pos, col);
-		var diff = LHConfig.COMMON.allowSectionDifficulty.get() ?
+		var diff = LHConfig.SERVER.allowSectionDifficulty.get() ?
 				difficulty : new DifficultyLevel();
 		return new LevelEditor(diff, col.getBase());
 	}

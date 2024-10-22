@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.content.item.curio.curse;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
-import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
+import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.L2DTLangData;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
@@ -16,9 +16,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -32,24 +30,23 @@ public class CurseOfWrath extends CurseCurioItem {
 
 	@Override
 	public int getExtraLevel() {
-		return LHConfig.COMMON.wrathExtraLevel.get();
+		return LHConfig.SERVER.wrathExtraLevel.get();
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		int rate = (int) Math.round(100 * LHConfig.COMMON.wrathDamageBonus.get());
+	public void appendHoverText(ItemStack stack, TooltipContext ctx, List<Component> list, TooltipFlag flag) {
+		int rate = (int) Math.round(100 * LHConfig.SERVER.wrathDamageBonus.get());
 		list.add(LangData.ITEM_CHARM_WRATH.get(rate).withStyle(ChatFormatting.GOLD));
-		ResourceLocation id = ForgeRegistries.ITEMS.getKey(this);
-		assert id != null;
-		addTooltip(list, ArmorEffectConfig.get().getImmunity(id.toString()));
+		if (ctx.level() != null)
+			addTooltip(list, L2DamageTracker.ARMOR.get(ctx.level().registryAccess(), builtInRegistryHolder()));
 	}
 
 	@Override
-	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {
-		int level = DifficultyLevel.ofAny(cache.getAttackTarget()) - DifficultyLevel.ofAny(user);
+	public void onHurtTarget(ItemStack stack, LivingEntity user, DamageData.Offence cache) {
+		int level = DifficultyLevel.ofAny(cache.getTarget()) - DifficultyLevel.ofAny(user);
 		if (level > 0) {
-			double rate = LHConfig.COMMON.wrathDamageBonus.get();
-			cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
+			double rate = LHConfig.SERVER.wrathDamageBonus.get();
+			cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate), getID()));
 		}
 	}
 

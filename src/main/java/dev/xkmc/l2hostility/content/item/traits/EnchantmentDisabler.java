@@ -4,17 +4,19 @@ import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,30 +26,23 @@ public class EnchantmentDisabler {
 	private static final String ENCH = "Enchantments", ROOT = "l2hostility_enchantment", OLD = "originalEnchantments", TIME = "startTime";
 
 	public static void disableEnchantment(Level level, ItemStack stack, int duration) {
-		CompoundTag root = stack.getOrCreateTag();
-		if (!root.contains(ENCH, Tag.TAG_LIST)) return;
+		var enchs = stack.get(DataComponents.ENCHANTMENTS);
+		if (enchs == null) return;
 		double durability = stack.getMaxDamage() == 0 ? 0 : 1d * stack.getDamageValue() / stack.getMaxDamage();
-		CompoundTag tag = stack.getOrCreateTagElement(ROOT);
-		var list = root.getList(ENCH, Tag.TAG_COMPOUND);
-		var cache = new ListTag();
-		list.removeIf(e -> {
-			if (noDispell(e)) return false;
-			cache.add(e);
-			return true;
-		});
-		tag.put(OLD, cache);
+		ItemEnchantments.Mutable retain = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
+		ItemEnchantments.Mutable disabled = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
+		for (var e : enchs.entrySet()) {
+			if (e.getKey().is(LHTagGen.NO_DISPELL)) {
+				retain.set(e.getKey(), e.getIntValue());
+			} else {
+				disabled.set(e.getKey(), e.getIntValue());
+			}
+		}
+		stack.set(DataComponents.ENCHANTMENTS, retain.toImmutable());
 		tag.putLong(TIME, level.getGameTime() + duration);
 		if (stack.isDamageableItem()) {
 			stack.setDamageValue(Mth.clamp((int) Math.floor(durability * stack.getMaxDamage()), 0, stack.getMaxDamage() - 1));
 		}
-	}
-
-	private static boolean noDispell(Tag e) {
-		if (!(e instanceof CompoundTag c)) return false;
-		var id = new ResourceLocation(c.getString("id"));
-		return ForgeRegistries.ENCHANTMENTS.tags()
-				.getTag(LHTagGen.NO_DISPELL)
-				.contains(ForgeRegistries.ENCHANTMENTS.getValue(id));
 	}
 
 	public static void tickStack(Level level, Entity user, ItemStack stack) {

@@ -1,43 +1,46 @@
 package dev.xkmc.l2hostility.init.registrate;
 
-import com.tterrag.registrate.builders.EnchantmentBuilder;
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
-import dev.xkmc.l2hostility.content.enchantments.HostilityEnchantment;
+import dev.xkmc.l2core.init.reg.ench.EnchColor;
+import dev.xkmc.l2core.init.reg.ench.EnchReg;
+import dev.xkmc.l2core.init.reg.ench.EnchVal;
 import dev.xkmc.l2hostility.content.enchantments.RemoveTraitEnchantment;
-import dev.xkmc.l2hostility.content.enchantments.VanishEnchantment;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2library.base.L2Registrate;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.ChatFormatting;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 
 public class LHEnchantments {
 
-	public static final RegistryEntry<HostilityEnchantment> INSULATOR;
-	public static final RegistryEntry<RemoveTraitEnchantment> SPLIT_SUPPRESS;
-	public static final RegistryEntry<VanishEnchantment> VANISH;
+	private static final EnchReg DC = EnchReg.of(L2Hostility.REG, L2Hostility.REGISTRATE);
+	public static final EnchVal INSULATOR, VANISH;
+
+	public static final EnchVal.Legacy<RemoveTraitEnchantment> SPLIT_SUPPRESS;
 
 	static {
-		INSULATOR = reg("insulator", EnchantmentCategory.ARMOR, (r, t, s) ->
-						new HostilityEnchantment(r, t, s, 3),
-				"Reduce trait effects that pulls or pushes you")
-				.addArmorSlots().register();
+		EnchColor green = new EnchColor(ChatFormatting.GREEN, ChatFormatting.GRAY);
+		EnchColor red = new EnchColor(ChatFormatting.RED, ChatFormatting.GRAY);
+		LCEnchantments.Order order = new LCEnchantments.Order();
 
-		SPLIT_SUPPRESS = reg("split_suppressor", EnchantmentCategory.WEAPON, (r, t, s) ->
-						new RemoveTraitEnchantment(r, t, s, LHTraits.SPLIT::get),
-				"Disable Split trait on enemies on hit").addSlots(EquipmentSlot.MAINHAND).register();
+		int armor = 0xff4fbfff;
+		int weapon = 0xffff4f4f;
+		int curse = 16733525;
 
-		VANISH = reg("vanish", LCEnchantments.ALL, VanishEnchantment::new,
-				"This item vanishes when on ground or in hand of survival / adventure player")
-				.register();
-	}
+		INSULATOR = DC.ench("insulator", "Insulator",
+				"Reduce trait effects that pulls or pushes you",
+				e -> e.maxLevel(3).group(EquipmentSlotGroup.ARMOR).items(ItemTags.ARMOR_ENCHANTABLE)
+						.color(green).special(LCEnchantments.CRAFT, order.of(armor, 3)));
 
-	private static <T extends Enchantment> EnchantmentBuilder<T, L2Registrate> reg(
-			String id, EnchantmentCategory category,
-			EnchantmentBuilder.EnchantmentFactory<T> fac, String desc
-	) {
-		return L2Hostility.REGISTRATE.enchantment(id, category, fac, desc);
+		SPLIT_SUPPRESS = DC.enchLegacy("split_suppressor", "Split Suppressor",
+				"Disable Split trait on enemies on hit",
+				e -> e.group(EquipmentSlotGroup.MAINHAND).items(ItemTags.WEAPON_ENCHANTABLE)
+						.color(green).special(LCEnchantments.CRAFT, order.of(weapon)),
+				() -> new RemoveTraitEnchantment(LHTraits.SPLIT));
+
+		VANISH = DC.ench("vanish", "Vanish",
+				"This item vanishes when on ground or in hand of survival / adventure player",
+				e -> e.color(red).special(LCEnchantments.CRAFT, order.of(curse)));
+
 	}
 
 	public static void register() {

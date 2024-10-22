@@ -31,7 +31,7 @@ public class BottleOfSanity extends DrinkableBottleItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		if (!LHConfig.COMMON.banBottles.get())
+		if (!LHConfig.SERVER.banBottles.get())
 			list.add(LangData.ITEM_BOTTLE_SANITY.get().withStyle(ChatFormatting.GRAY));
 	}
 

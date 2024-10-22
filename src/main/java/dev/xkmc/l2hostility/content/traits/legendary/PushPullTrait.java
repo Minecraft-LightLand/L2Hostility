@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
-import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
@@ -45,10 +44,10 @@ public abstract class PushPullTrait extends LegendaryTrait {
 			double strength = getStrength(dist);
 			int lv = 0;
 			for (var armor : e.getArmorSlots()) {
-				lv += armor.getEnchantmentLevel(LHEnchantments.INSULATOR.get());
+				lv += armor.getEnchantmentLevel(LHEnchantments.INSULATOR.holder());
 			}
 			if (lv > 0) {
-				strength *= Math.pow(LHConfig.COMMON.insulatorFactor.get(), lv);
+				strength *= Math.pow(LHConfig.SERVER.insulatorFactor.get(), lv);
 			}
 			Vec3 vec = e.position().subtract(mob.position()).normalize().scale(strength);
 			e.push(vec.x, vec.y, vec.z);

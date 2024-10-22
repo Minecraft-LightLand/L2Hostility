@@ -1,26 +1,23 @@
 package dev.xkmc.l2hostility.init.data;
 
-import com.github.L_Ender.cataclysm.Cataclysm;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import dev.shadowsoffire.gateways.Gateways;
 import dev.xkmc.l2complements.content.enchantment.core.EnchantmentRecipeBuilder;
 import dev.xkmc.l2complements.content.recipe.BurntRecipeBuilder;
 import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
-import dev.xkmc.l2hostility.compat.data.CataclysmData;
-import dev.xkmc.l2hostility.compat.data.TFData;
-import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.serial.ingredients.EnchantmentIngredient;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -31,13 +28,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
-import twilightforest.TwilightForestMod;
 
 import java.util.function.BiFunction;
 
-import static dev.xkmc.l2library.serial.recipe.AbstractSmithingRecipe.TEMPLATE_PLACEHOLDER;
+import static dev.xkmc.l2core.serial.recipe.AbstractSmithingRecipe.TEMPLATE_PLACEHOLDER;
 
 public class RecipeGen {
 
@@ -444,7 +439,7 @@ public class RecipeGen {
 					.define('C', LHItems.BOTTLE_SANITY.get())
 					.save(pvd);
 		}
-
+		/*TODO
 		// compat
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
 			TFData.genRecipe(pvd);
@@ -452,9 +447,11 @@ public class RecipeGen {
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genRecipe(pvd);
 		}
-		if (ModList.get().isLoaded(Gateways.MODID)){
+		if (ModList.get().isLoaded(Gateways.MODID)) {
 			GatewayConfigGen.genRecipe(pvd);
 		}
+
+ 		*/
 
 	}
 
@@ -470,12 +467,12 @@ public class RecipeGen {
 
 	@SuppressWarnings("ConstantConditions")
 	public static ResourceLocation getID(ItemLike item) {
-		return new ResourceLocation(L2Hostility.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item.asItem()).getPath());
+		return L2Hostility.loc(currentFolder + BuiltInRegistries.ITEM.getKey(item.asItem()).getPath());
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	private static ResourceLocation getID(Item item, String suffix) {
-		return new ResourceLocation(L2Hostility.MODID, currentFolder + ForgeRegistries.ITEMS.getKey(item).getPath() + suffix);
+		return L2Hostility.loc(currentFolder + BuiltInRegistries.ITEM.getKey(item).getPath() + suffix);
 	}
 
 	private static void storage(RegistrateRecipeProvider pvd, ItemEntry<?> nugget, ItemEntry<?> ingot, BlockEntry<?> block) {
@@ -491,8 +488,8 @@ public class RecipeGen {
 				.requires(to.get()).save(pvd, getID(to.get().asItem()) + "_unpack");
 	}
 
-	public static <T> T unlock(RegistrateRecipeProvider pvd, BiFunction<String, InventoryChangeTrigger.TriggerInstance, T> func, Item item) {
-		return func.apply("has_" + pvd.safeName(item), DataIngredient.items(item).getCritereon(pvd));
+	public static <T> T unlock(RegistrateRecipeProvider pvd, BiFunction<String, Criterion<InventoryChangeTrigger.TriggerInstance>, T> func, Item item) {
+		return func.apply("has_" + pvd.safeName(item), DataIngredient.items(item).getCriterion(pvd));
 	}
 
 	public static void smithing(RegistrateRecipeProvider pvd, TagKey<Item> in, Item mat, Item out) {

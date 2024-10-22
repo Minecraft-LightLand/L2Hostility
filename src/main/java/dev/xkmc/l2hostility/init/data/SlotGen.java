@@ -3,36 +3,31 @@ package dev.xkmc.l2hostility.init.data;
 import com.github.L_Ender.cataclysm.Cataclysm;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2library.compat.curios.CurioEntityBuilder;
-import dev.xkmc.l2library.compat.curios.CurioSlotBuilder;
-import dev.xkmc.l2library.compat.curios.SlotCondition;
-import dev.xkmc.l2library.serial.config.RecordDataProvider;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.ModList;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.EntityType;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import top.theillusivec4.curios.api.CuriosDataProvider;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.BiConsumer;
+import java.util.concurrent.CompletableFuture;
 
-public class SlotGen extends RecordDataProvider {
+public class SlotGen extends CuriosDataProvider {
 
-	public SlotGen(DataGenerator generator) {
-		super(generator, "Curios Generator");
+	public SlotGen(String modId, PackOutput output, ExistingFileHelper fileHelper, CompletableFuture<HolderLookup.Provider> registries) {
+		super(modId, output, fileHelper, registries);
 	}
 
 	@Override
-	public void add(BiConsumer<String, Record> map) {
-		map.accept("l2hostility/curios/slots/hostility_curse",
-				new CurioSlotBuilder(-1300, new ResourceLocation(L2Hostility.MODID,
-						"slot/empty_hostility_slot").toString()));
-		map.accept("l2hostility/curios/entities/l2hostility_entity", new CurioEntityBuilder(
-				new ArrayList<>(List.of(new ResourceLocation("player"))),
-				new ArrayList<>(List.of("head", "charm", "ring", "hands", "hostility_curse")),
-				SlotCondition.of()
-		));
+	public void generate(HolderLookup.Provider ovd, ExistingFileHelper helper) {
+		createSlot("hostility_curse").icon(L2Hostility.loc("slot/empty_hostility_slot")).order(131);
+		createEntities("hostility_entity").addEntities(EntityType.PLAYER).addSlots("head", "charm", "ring", "hands", "hostility_curse");
+		/* TODO
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
-			CataclysmData.genSlot(map);
+			CataclysmData.genSlot(this);
 		}
+		
+		 */
 	}
+
 }

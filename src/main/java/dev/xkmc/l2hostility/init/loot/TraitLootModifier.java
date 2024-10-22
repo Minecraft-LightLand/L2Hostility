@@ -1,14 +1,15 @@
 package dev.xkmc.l2hostility.init.loot;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2hostility.compat.jei.ITraitLootRecipe;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
@@ -19,16 +20,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.loot.LootModifier;
+import net.neoforged.neoforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class TraitLootModifier extends LootModifier implements ITraitLootRecipe {
 
-	public static final Codec<TraitLootModifier> CODEC = RecordCodecBuilder.create(i -> codecStart(i).and(i.group(
-					LHTraits.TRAITS.get().getCodec().optionalFieldOf("trait").forGetter(e -> Optional.ofNullable(e.trait)),
+	public static final MapCodec<TraitLootModifier> CODEC = RecordCodecBuilder.mapCodec(i -> codecStart(i).and(i.group(
+					LHTraits.TRAITS.get().byNameCodec().optionalFieldOf("trait").forGetter(e -> Optional.ofNullable(e.trait)),
 					Codec.DOUBLE.fieldOf("chance").forGetter(e -> e.chance),
 					Codec.DOUBLE.fieldOf("rankBonus").forGetter(e -> e.rankBonus),
 					ItemStack.CODEC.fieldOf("result").forGetter(e -> e.result)))
@@ -58,13 +60,14 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	@Override
 	protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> list, LootContext context) {
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
-			if (MobTraitCap.HOLDER.isProper(le)) {
-				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
+			var opt = LHMiscs.MOB.type().getExisting(le);
+			if (opt.isPresent()) {
+				MobTraitCap cap = opt.get();
 				if (trait == null || cap.hasTrait(trait)) {
 					double factor = cap.dropRate;
 					if (context.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) {
 						Player player = context.getParam(LootContextParams.LAST_DAMAGE_PLAYER);
-						var pl = PlayerDifficulty.HOLDER.get(player);
+						var pl = LHMiscs.PLAYER.type().getOrCreate(player);
 						for (var stack : CurseCurioItem.getFromPlayer(player)) {
 							factor *= stack.item().getLootFactor(stack.stack(), pl, cap);
 						}
@@ -79,7 +82,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 					}
 					if (count > 0) {
 						ItemStack ans = result.copy();
-						if (LHConfig.COMMON.nidhoggurCapAtItemMaxStack.get()){
+						if (LHConfig.SERVER.nidhoggurCapAtItemMaxStack.get()) {
 							count = Math.min(count, ans.getMaxStackSize());
 						}
 						ans.setCount(count);
@@ -92,7 +95,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	}
 
 	@Override
-	public Codec<TraitLootModifier> codec() {
+	public MapCodec<TraitLootModifier> codec() {
 		return CODEC;
 	}
 
@@ -108,7 +111,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	@Override
 	public List<ItemStack> getCurioRequired() {
 		List<ItemStack> ans = new ArrayList<>();
-		if (LHConfig.COMMON.disableHostilityLootCurioRequirement.get()) {
+		if (LHConfig.SERVER.disableHostilityLootCurioRequirement.get()) {
 			return ans;
 		}
 		for (var c : getConditions()) {
@@ -137,8 +140,8 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	}
 
 	@Override
-	public void addTooltip(List<Component> list) {
-		int max = trait == null ? 0 : trait.getConfig().max_rank;
+	public void addTooltip(Consumer<Component> list) {
+		int max = trait == null ? 0 : trait.getConfig().max_rank();
 		int min = 1;
 		int minLevel = 0;
 		List<TraitLootCondition> other = new ArrayList<>();
@@ -161,18 +164,18 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 			}
 		}
 		if (minLevel > 0) {
-			list.add(LangData.LOOT_MIN_LEVEL.get(Component.literal(minLevel + "")
+			list.accept(LangData.LOOT_MIN_LEVEL.get(Component.literal(minLevel + "")
 							.withStyle(ChatFormatting.AQUA))
 					.withStyle(ChatFormatting.LIGHT_PURPLE));
 		}
 		for (var e : health) {
-			list.add(LangData.LOOT_MIN_HEALTH.get(Component.literal(e.minHealth + "")
+			list.accept(LangData.LOOT_MIN_HEALTH.get(Component.literal(e.minHealth + "")
 							.withStyle(ChatFormatting.AQUA))
 					.withStyle(ChatFormatting.LIGHT_PURPLE));
 		}
 		if (trait != null) {
 			for (int lv = min; lv <= max; lv++) {
-				list.add(LangData.LOOT_CHANCE.get(
+				list.accept(LangData.LOOT_CHANCE.get(
 								Component.literal(Math.round((chance + rankBonus * lv) * 100) + "%")
 										.withStyle(ChatFormatting.AQUA),
 								trait.getDesc().withStyle(ChatFormatting.GOLD),
@@ -181,7 +184,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 			}
 		} else {
 
-			list.add(LangData.LOOT_NO_TRAIT.get(Component.literal(Math.round(chance * 100) + "%")
+			list.accept(LangData.LOOT_NO_TRAIT.get(Component.literal(Math.round(chance * 100) + "%")
 							.withStyle(ChatFormatting.AQUA))
 					.withStyle(ChatFormatting.GRAY));
 		}
@@ -193,13 +196,13 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 					cmax >= c.trait.getMaxLevel() ?
 							cmin + "+" :
 							cmin + "-" + cmax;
-			list.add(LangData.LOOT_OTHER_TRAIT.get(c.trait.getDesc().withStyle(ChatFormatting.GOLD),
+			list.accept(LangData.LOOT_OTHER_TRAIT.get(c.trait.getDesc().withStyle(ChatFormatting.GOLD),
 							Component.literal(str).withStyle(ChatFormatting.AQUA))
 					.withStyle(ChatFormatting.RED));
 		}
 		for (var e : itemReq) {
 			var name = e.item.getDescription().copy().withStyle(ChatFormatting.LIGHT_PURPLE);
-			list.add(LangData.TOOLTIP_JEI_REQUIRED.get(name).withStyle(ChatFormatting.YELLOW));
+			list.accept(LangData.TOOLTIP_JEI_REQUIRED.get(name).withStyle(ChatFormatting.YELLOW));
 		}
 	}
 

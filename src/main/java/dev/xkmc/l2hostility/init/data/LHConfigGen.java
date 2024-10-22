@@ -1,27 +1,21 @@
 package dev.xkmc.l2hostility.init.data;
 
-import com.bobmowzie.mowziesmobs.MowziesMobs;
-import com.github.L_Ender.cataclysm.Cataclysm;
-import com.github.alexthe666.iceandfire.IceAndFire;
-import dev.shadowsoffire.gateways.Gateways;
 import dev.xkmc.l2archery.init.L2Archery;
 import dev.xkmc.l2archery.init.registrate.ArcheryItems;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
+import dev.xkmc.l2core.serial.config.ConfigDataProvider;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
-import dev.xkmc.l2hostility.compat.data.*;
-import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.serial.config.ConfigDataProvider;
 import dev.xkmc.l2weaponry.init.L2Weaponry;
 import dev.xkmc.l2weaponry.init.registrate.LWItems;
-import fuzs.mutantmonsters.MutantMonsters;
+import net.minecraft.core.Holder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
@@ -32,9 +26,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.RegistryObject;
-import twilightforest.TwilightForestMod;
 
 import java.util.List;
 
@@ -48,12 +39,12 @@ public class LHConfigGen extends ConfigDataProvider {
 	public void add(Collector collector) {
 		L2Hostility.REGISTRATE.CONFIGS.forEach(e -> e.accept(collector));
 
-		collector.add(L2DamageTracker.ARMOR, new ResourceLocation(L2Hostility.MODID, "equipments"), new ArmorEffectConfig()
+		collector.add(L2DamageTracker.ARMOR, L2Hostility.loc("equipments"), new ArmorEffectConfig()
 				.add(LHItems.CURSE_WRATH.getId().toString(),
 						MobEffects.BLINDNESS, MobEffects.DARKNESS, MobEffects.CONFUSION,
 						MobEffects.MOVEMENT_SLOWDOWN, MobEffects.DIG_SLOWDOWN, MobEffects.WEAKNESS));
 
-		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "overworld"), new WorldDifficultyConfig()
+		collector.add(L2Hostility.DIFFICULTY, L2Hostility.loc("overworld"), new WorldDifficultyConfig()
 				.putDim(Level.OVERWORLD, 0, 0, 4, 1)
 				.putBiome(0, 5, 1, 0,
 						Biomes.LUSH_CAVES,
@@ -83,7 +74,7 @@ public class LHConfigGen extends ConfigDataProvider {
 				.putBiome(0, 50, 4, 0.5, Biomes.DEEP_DARK)
 		);
 
-		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "nether"), new WorldDifficultyConfig()
+		collector.add(L2Hostility.DIFFICULTY, L2Hostility.loc("nether"), new WorldDifficultyConfig()
 				.putDim(Level.NETHER, 0, 20, 9, 1.2)
 				.putLevelDef(Level.NETHER, EntityConfig.entity(0, 10, 0, 0, List.of(EntityType.ZOMBIE))
 						.trait(List.of(EntityConfig.trait(LHTraits.TANK.get(), 1, 1))))
@@ -93,11 +84,11 @@ public class LHConfigGen extends ConfigDataProvider {
 						.trait(List.of(EntityConfig.trait(LHTraits.PROTECTION.get(), 1, 1))))
 		);
 
-		collector.add(L2Hostility.DIFFICULTY, new ResourceLocation(L2Hostility.MODID, "end"), new WorldDifficultyConfig()
+		collector.add(L2Hostility.DIFFICULTY, L2Hostility.loc("end"), new WorldDifficultyConfig()
 				.putDim(Level.END, 0, 40, 16, 1.5)
 		);
 
-		collector.add(L2Hostility.ENTITY, new ResourceLocation(L2Hostility.MODID, "bosses"), new EntityConfig()
+		collector.add(L2Hostility.ENTITY, L2Hostility.loc("bosses"), new EntityConfig()
 				.putEntity(0, 20, 1, 0, List.of(EntityType.ELDER_GUARDIAN), List.of(
 						EntityConfig.trait(LHTraits.REPELLING.get(), 1, 1, 300, 0.5f)
 				))
@@ -115,7 +106,7 @@ public class LHConfigGen extends ConfigDataProvider {
 		);
 
 
-		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Hostility.MODID, "armors"), new WeaponConfig()
+		collector.add(L2Hostility.WEAPON, L2Hostility.loc("armors"), new WeaponConfig()
 				.putArmor(0, 200, Items.AIR)
 				.putArmor(20, 100, Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS)
 				.putArmor(35, 100, Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS)
@@ -125,7 +116,7 @@ public class LHConfigGen extends ConfigDataProvider {
 				.putArmor(100, 100, Items.NETHERITE_HELMET, Items.NETHERITE_CHESTPLATE, Items.NETHERITE_LEGGINGS, Items.NETHERITE_BOOTS)
 		);
 
-		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Hostility.MODID, "vanilla"), new WeaponConfig()
+		collector.add(L2Hostility.WEAPON, L2Hostility.loc("vanilla"), new WeaponConfig()
 				.putMeleeWeapon(0, 200, Items.AIR)
 				.putMeleeWeapon(30, 100, Items.IRON_AXE, Items.IRON_SWORD)
 				.putMeleeWeapon(50, 100, Items.DIAMOND_AXE, Items.DIAMOND_SWORD)
@@ -135,44 +126,44 @@ public class LHConfigGen extends ConfigDataProvider {
 				)
 				.putWeaponEnch(30, 0.5f,
 						Enchantments.SHARPNESS,
-						Enchantments.POWER_ARROWS
+						Enchantments.POWER
 				)
 				.putWeaponEnch(40, 0.2f,
 						Enchantments.KNOCKBACK,
-						Enchantments.PUNCH_ARROWS
+						Enchantments.PUNCH
 				)
 				.putWeaponEnch(50, 0.1f,
 						Enchantments.FIRE_ASPECT,
-						Enchantments.FLAMING_ARROWS
+						Enchantments.FLAME
 				)
-				.putArmorEnch(30, 0.5f, Enchantments.ALL_DAMAGE_PROTECTION)
+				.putArmorEnch(30, 0.5f, Enchantments.PROTECTION)
 				.putArmorEnch(30, 0.2f,
 						Enchantments.PROJECTILE_PROTECTION,
 						Enchantments.BLAST_PROTECTION,
 						Enchantments.FIRE_PROTECTION,
-						Enchantments.FALL_PROTECTION
+						Enchantments.FEATHER_FALLING
 				)
 				.putArmorEnch(70, 0.3f, Enchantments.BINDING_CURSE)
 		);
 
-		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Complements.MODID, "l2complements"), new WeaponConfig()
+		collector.add(L2Hostility.WEAPON, L2Complements.loc("l2complements"), new WeaponConfig()
 				.putWeaponEnch(100, 0.02f,
-						LCEnchantments.CURSE_BLADE.get(),
-						LCEnchantments.SHARP_BLADE.get(),
-						LCEnchantments.FLAME_BLADE.get(),
-						LCEnchantments.ICE_BLADE.get()
+						LCEnchantments.CURSE_BLADE.id(),
+						LCEnchantments.SHARP_BLADE.id(),
+						LCEnchantments.HELLFIRE_BLADE.id(),
+						LCEnchantments.FREEZING_BLADE.id()
 				)
 				.putWeaponEnch(200, 0.01f,
-						LCEnchantments.VOID_TOUCH.get()
+						LCEnchantments.VOID_TOUCH.id()
 				)
 				.putArmorEnch(70, 0.2f,
-						LCEnchantments.STABLE_BODY.get(),
-						LCEnchantments.SNOW_WALKER.get()
+						LCEnchantments.STABLE_BODY.id(),
+						LCEnchantments.SNOW_WALKER.id()
 				)
 				.putArmorEnch(100, 0.02f,
-						LCEnchantments.ICE_THORN.get(),
-						LCEnchantments.FLAME_THORN.get(),
-						LCEnchantments.SAFEGUARD.get()
+						LCEnchantments.FREEZING_THORN.id(),
+						LCEnchantments.HELLFIRE_THORN.id(),
+						LCEnchantments.SAFEGUARD.id()
 				)
 		);
 
@@ -212,6 +203,7 @@ public class LHConfigGen extends ConfigDataProvider {
 				)
 		);
 
+		/* TODO
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
 			TFData.genConfig(collector);
 		}
@@ -233,14 +225,15 @@ public class LHConfigGen extends ConfigDataProvider {
 		if (ModList.get().isLoaded(MowziesMobs.MODID)) {
 			MowzieData.genConfig(collector);
 		}
+		*/
 	}
 
-	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, RegistryObject<EntityType<T>> obj, EntityConfig.TraitBase... traits) {
-		collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntity(min, base, 0, 0, List.of(obj.get()), List.of(traits)));
+	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, Holder<EntityType<T>> obj, EntityConfig.TraitBase... traits) {
+		collector.add(L2Hostility.ENTITY, obj.getKey().location(), new EntityConfig().putEntity(min, base, 0, 0, List.of(obj.value()), List.of(traits)));
 	}
 
-	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, RegistryObject<EntityType<T>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
-		collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntityAndItem(min, base, 0, 0, List.of(obj.get()), traits, items));
+	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, Holder<EntityType<T>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
+		collector.add(L2Hostility.ENTITY, obj.getKey().location(), new EntityConfig().putEntityAndItem(min, base, 0, 0, List.of(obj.value()), traits, items));
 	}
 
 }

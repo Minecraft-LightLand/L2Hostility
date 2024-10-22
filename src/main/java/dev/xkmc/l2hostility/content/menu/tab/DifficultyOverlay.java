@@ -2,9 +2,8 @@ package dev.xkmc.l2hostility.content.menu.tab;
 
 import com.mojang.datafixers.util.Pair;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
-import dev.xkmc.l2library.base.overlay.InfoSideBar;
-import dev.xkmc.l2library.base.overlay.SideBar;
-import dev.xkmc.l2library.util.Proxy;
+import dev.xkmc.l2itemselector.overlay.InfoSideBar;
+import dev.xkmc.l2itemselector.overlay.SideBar;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -41,7 +40,7 @@ public class DifficultyOverlay extends InfoSideBar<SideBar.IntSignature> {
 	@Override
 	public boolean isScreenOn() {
 		if (Minecraft.getInstance().screen != null) return false;
-		LocalPlayer player = Proxy.getClientPlayer();
+		LocalPlayer player = Minecraft.getInstance().player;
 		if (player == null) return false;
 		return player.getMainHandItem().is(LHItems.DETECTOR.get()) ||
 				player.getOffhandItem().is(LHItems.DETECTOR.get());

@@ -63,7 +63,7 @@ public abstract class DrinkableBottleItem extends Item {
 
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (LHConfig.COMMON.banBottles.get() || CurioCompat.hasItemInCurio(player, LHItems.DIVINITY_LIGHT.get()))
+		if (LHConfig.SERVER.banBottles.get() || CurioCompat.hasItemInCurio(player, LHItems.DIVINITY_LIGHT.get()))
 			return InteractionResultHolder.fail(stack);
 		return ItemUtils.startUsingInstantly(level, player, hand);
 	}

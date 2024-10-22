@@ -7,8 +7,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -20,12 +18,12 @@ public class CurseOfEnvy extends CurseCurioItem {
 
 	@Override
 	public int getExtraLevel() {
-		return LHConfig.COMMON.envyExtraLevel.get();
+		return LHConfig.SERVER.envyExtraLevel.get();
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		int rate = (int) Math.round(100 * LHConfig.COMMON.envyDropRate.get());
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
+		int rate = (int) Math.round(100 * LHConfig.SERVER.envyDropRate.get());
 		list.add(LangData.ITEM_CHARM_ENVY.get(rate).withStyle(ChatFormatting.GOLD));
 	}
 

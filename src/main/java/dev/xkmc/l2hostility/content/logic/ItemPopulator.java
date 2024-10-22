@@ -18,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Set;
 
@@ -27,13 +26,13 @@ public class ItemPopulator {
 	static void populateArmors(LivingEntity le, int lv) {
 		var r = le.getRandom();
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
-			if (slot.getType() == EquipmentSlot.Type.ARMOR) {
+			if (slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
 				if (le.getItemBySlot(slot).isEmpty()) {
 					ItemStack stack = WeaponConfig.getRandomArmor(slot, lv, r);
 					if (!stack.isEmpty()) {
 						le.setItemSlot(slot, stack);
 						if (le instanceof Mob mob) {
-							mob.setDropChance(slot, LHConfig.COMMON.equipmentDropRate.get().floatValue());
+							mob.setDropChance(slot, LHConfig.SERVER.equipmentDropRate.get().floatValue());
 						}
 					}
 				}
@@ -42,10 +41,8 @@ public class ItemPopulator {
 	}
 
 	static void populateWeapons(LivingEntity le, MobTraitCap cap, RandomSource r) {
-		var manager = ForgeRegistries.ITEMS.tags();
-		if (manager == null) return;
 		if (le instanceof Drowned && le.getMainHandItem().isEmpty()) {
-			double factor = cap.getLevel() * LHConfig.COMMON.drownedTridentChancePerLevel.get();
+			double factor = cap.getLevel() * LHConfig.SERVER.drownedTridentChancePerLevel.get();
 			if (factor > le.getRandom().nextDouble()) {
 				le.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.TRIDENT));
 			}
@@ -56,7 +53,7 @@ public class ItemPopulator {
 				if (!stack.isEmpty()) {
 					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
 					if (le instanceof Mob mob) {
-						mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.COMMON.equipmentDropRate.get().floatValue());
+						mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.SERVER.equipmentDropRate.get().floatValue());
 					}
 				}
 			}
@@ -65,7 +62,7 @@ public class ItemPopulator {
 			if (!stack.isEmpty()) {
 				le.setItemSlot(EquipmentSlot.MAINHAND, stack);
 				if (le instanceof Mob mob) {
-					mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.COMMON.equipmentDropRate.get().floatValue());
+					mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.SERVER.equipmentDropRate.get().floatValue());
 				}
 			}
 		}
@@ -136,7 +133,7 @@ public class ItemPopulator {
 						cap.getEnchantBonus();
 				stack = EnchantmentHelper.enchantItem(r, stack, (int) lvl, false);
 			}
-			if (LHConfig.COMMON.allowExtraEnchantments.get())
+			if (LHConfig.SERVER.allowExtraEnchantments.get())
 				fillEnch(cap.getLevel(), le.getRandom(), stack, e);
 			le.setItemSlot(e, stack);
 		}

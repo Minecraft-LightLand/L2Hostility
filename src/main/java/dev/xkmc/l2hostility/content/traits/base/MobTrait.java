@@ -1,19 +1,20 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2core.init.reg.registrate.NamedEntry;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.logic.InheritContext;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
-import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHDamageTypes;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.base.NamedEntry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -21,12 +22,8 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -47,8 +44,8 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	public TraitConfig getConfig() {
-		TraitConfig ans = L2Hostility.TRAIT.getEntry(getRegistryName());
+	public TraitConfig getConfig(RegistryAccess access) {
+		TraitConfig ans = LHTraits.DATA.get(access, holder());
 		if (ans == null) return TraitConfig.DEFAULT;
 		return ans;
 	}
@@ -63,10 +60,10 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 
 	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {
 		if (isBanned()) return false;
-		TraitConfig config = getConfig();
-		if (difficulty < config.min_level) return false;
+		TraitConfig config = getConfig(le.level().registryAccess());
+		if (difficulty < config.min_level()) return false;
 		if (!EntityConfig.allow(le.getType(), this)) return false;
-		return config.allows(le.getType());
+		return config.allows(getRegistryName(), le.getType());
 	}
 
 	public final boolean allow(LivingEntity le) {
@@ -82,10 +79,8 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 	public void tick(LivingEntity mob, int level) {
 	}
 
-	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache, TraitEffectCache traitCache) {
-		var e = cache.getLivingHurtEvent();
-		assert e != null;
-		if (e.getAmount() > 0 && !e.getSource().is(LHDamageTypes.KILLER_AURA)) {
+	public void onHurtTarget(int level, LivingEntity attacker, DamageData.Offence e, TraitEffectCache traitCache) {
+		if (e.getDamageOriginal() > 0 && !e.getSource().is(LHDamageTypes.KILLER_AURA)) {
 			postHurtPlayer(level, attacker, traitCache);
 		}
 	}
@@ -103,16 +98,17 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
 	}
 
-	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
+	public boolean onAttackedByOthers(int level, LivingEntity entity, DamageData.Attack event) {
+		return false;
 	}
 
-	public void onHurtByOthers(int level, LivingEntity entity, LivingHurtEvent event) {
+	public void onDamaged(int level, LivingEntity entity, DamageData.Defence event) {
 	}
 
 	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {
 	}
 
-	public void onDamaged(int level, LivingEntity mob, AttackCache cache) {
+	public void onHurtByMax(int level, LivingEntity mob, DamageData.OffenceMax cache) {
 	}
 
 	public void onDeath(int level, LivingEntity entity, LivingDeathEvent event) {
@@ -125,7 +121,7 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 		return ans.withStyle(Style.EMPTY.withColor(color.getAsInt()));
 	}
 
-	public int getColor(){
+	public int getColor() {
 		return color.getAsInt();
 	}
 
@@ -147,28 +143,12 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 	}
 
 	public Item asItem() {
-		Item item = ForgeRegistries.ITEMS.getValue(getRegistryName());
-		if (item == null) {
-			item = Items.AIR;
-		}
-		return item;
+		return BuiltInRegistries.ITEM.get(getRegistryName());
 	}
 
 	public boolean isBanned() {
-		if (LHTraits.TRAITS.get().getKey(this) == null) {
-			L2Hostility.LOGGER.error("------------");
-			L2Hostility.LOGGER.error("Trait " + getClass().getSimpleName() + " is not registered. Why?");
-			var set = LHTraits.TRAITS.get().getKeys();
-			L2Hostility.LOGGER.error("List of all ids registered: ");
-			for (var e : set) {
-				L2Hostility.LOGGER.error(e.toString());
-			}
-
-			L2Hostility.LOGGER.error("------------");
-			//return true; //TODO uncomment to prevent crash
-		}
-		if (LHConfig.COMMON.map.containsKey(getRegistryName().getPath())) {
-			return !LHConfig.COMMON.map.get(getRegistryName().getPath()).get();
+		if (LHConfig.SERVER.map.containsKey(getRegistryName().getPath())) {
+			return !LHConfig.SERVER.map.get(getRegistryName().getPath()).get();
 		}
 		return false;
 	}
@@ -183,7 +163,7 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 	}
 
 	public boolean is(TagKey<MobTrait> tag) {
-		return LHTraits.TRAITS.get().tags().getTag(tag).contains(this);
+		return holder().is(tag);
 	}
 
 }

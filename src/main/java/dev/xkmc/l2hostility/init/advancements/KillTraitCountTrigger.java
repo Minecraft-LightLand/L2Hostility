@@ -1,23 +1,22 @@
 package dev.xkmc.l2hostility.init.advancements;
 
+import dev.xkmc.l2core.serial.advancements.BaseCriterion;
+import dev.xkmc.l2core.serial.advancements.BaseCriterionInstance;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2library.serial.advancements.BaseCriterion;
-import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
-import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.resources.ResourceLocation;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.server.level.ServerPlayer;
 
 public class KillTraitCountTrigger extends BaseCriterion<KillTraitCountTrigger.Ins, KillTraitCountTrigger> {
 
 	public static Ins ins(int count) {
-		var ans = new Ins(HostilityTriggers.TRAIT_COUNT.getId(), ContextAwarePredicate.ANY);
+		var ans = new Ins();
 		ans.count = count;
 		return ans;
 	}
 
-	public KillTraitCountTrigger(ResourceLocation id) {
-		super(id, Ins::new, Ins.class);
+	public KillTraitCountTrigger() {
+		super(Ins.class);
 	}
 
 	public void trigger(ServerPlayer player, MobTraitCap cap) {
@@ -27,11 +26,11 @@ public class KillTraitCountTrigger extends BaseCriterion<KillTraitCountTrigger.I
 	@SerialClass
 	public static class Ins extends BaseCriterionInstance<Ins, KillTraitCountTrigger> {
 
-		@SerialClass.SerialField
+		@SerialField
 		public int count;
 
-		public Ins(ResourceLocation id, ContextAwarePredicate player) {
-			super(id, player);
+		protected Ins() {
+			super(HostilityTriggers.TRAIT_COUNT);
 		}
 
 		public boolean matchAll(MobTraitCap cap) {

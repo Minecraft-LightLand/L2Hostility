@@ -1,7 +1,9 @@
 package dev.xkmc.l2hostility.init.loot;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -11,10 +13,10 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 @SerialClass
 public class MobCapLootCondition implements LootItemCondition {
 
-	@SerialClass.SerialField
+	@SerialField
 	public int minLevel;
 
-	@SerialClass.SerialField
+	@SerialField
 	public int maxLevel;
 
 	@Deprecated
@@ -34,10 +36,8 @@ public class MobCapLootCondition implements LootItemCondition {
 	@Override
 	public boolean test(LootContext lootContext) {
 		if (lootContext.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
-			if (MobTraitCap.HOLDER.isProper(le)) {
-				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
-				return (minLevel <= 0 || cap.getLevel() >= minLevel) && (maxLevel <= 0 || cap.getLevel() < maxLevel);
-			}
+			int capLevel = LHMiscs.MOB.type().getExisting(le).map(MobTraitCap::getLevel).orElse(0);
+			return (minLevel <= 0 || capLevel >= minLevel) && (maxLevel <= 0 || capLevel < maxLevel);
 		}
 		return false;
 	}

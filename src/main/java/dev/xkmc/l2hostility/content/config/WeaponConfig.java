@@ -1,10 +1,12 @@
 package dev.xkmc.l2hostility.content.config;
 
+import dev.xkmc.l2core.serial.config.BaseConfig;
+import dev.xkmc.l2core.serial.config.CollectType;
+import dev.xkmc.l2core.serial.config.ConfigCollect;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2library.serial.config.BaseConfig;
-import dev.xkmc.l2library.serial.config.CollectType;
-import dev.xkmc.l2library.serial.config.ConfigCollect;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
@@ -86,23 +88,23 @@ public class WeaponConfig extends BaseConfig {
 		return ItemStack.EMPTY;
 	}
 
-	@SerialClass.SerialField
+	@SerialField
 	@ConfigCollect(CollectType.COLLECT)
 	public final ArrayList<ItemConfig> melee_weapons = new ArrayList<>();
 
-	@SerialClass.SerialField
+	@SerialField
 	@ConfigCollect(CollectType.COLLECT)
 	public final ArrayList<ItemConfig> armors = new ArrayList<>();
 
-	@SerialClass.SerialField
+	@SerialField
 	@ConfigCollect(CollectType.COLLECT)
 	public final ArrayList<ItemConfig> ranged_weapons = new ArrayList<>();
 
-	@SerialClass.SerialField
+	@SerialField
 	@ConfigCollect(CollectType.COLLECT)
 	public final ArrayList<EnchConfig> weapon_enchantments = new ArrayList<>();
 
-	@SerialClass.SerialField
+	@SerialField
 	@ConfigCollect(CollectType.COLLECT)
 	public final ArrayList<EnchConfig> armor_enchantments = new ArrayList<>();
 
@@ -133,15 +135,16 @@ public class WeaponConfig extends BaseConfig {
 		return this;
 	}
 
-	public WeaponConfig putWeaponEnch(int level, float chance, Enchantment... items) {
-		ArrayList<Enchantment> list = new ArrayList<>(Arrays.asList(items));
+	@SafeVarargs
+	public final WeaponConfig putWeaponEnch(int level, float chance, ResourceKey<Enchantment>... items) {
+		ArrayList<ResourceKey<Enchantment>> list = new ArrayList<>(Arrays.asList(items));
 		weapon_enchantments.add(new EnchConfig(list, level, chance));
 		return this;
 	}
 
-
-	public WeaponConfig putArmorEnch(int level, float chance, Enchantment... items) {
-		ArrayList<Enchantment> list = new ArrayList<>(Arrays.asList(items));
+	@SafeVarargs
+	public final WeaponConfig putArmorEnch(int level, float chance, ResourceKey<Enchantment>... items) {
+		ArrayList<ResourceKey<Enchantment>> list = new ArrayList<>(Arrays.asList(items));
 		armor_enchantments.add(new EnchConfig(list, level, chance));
 		return this;
 	}
@@ -150,7 +153,7 @@ public class WeaponConfig extends BaseConfig {
 
 	}
 
-	public record EnchConfig(ArrayList<Enchantment> enchantments, int level, float chance) {
+	public record EnchConfig(ArrayList<ResourceKey<Enchantment>> enchantments, int level, float chance) {
 
 	}
 

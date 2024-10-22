@@ -2,38 +2,25 @@ package dev.xkmc.l2hostility.content.capability.chunk;
 
 import dev.xkmc.l2hostility.init.network.ClientSyncHandler;
 import dev.xkmc.l2serial.network.SerialPacketBase;
-import dev.xkmc.l2serial.serialization.SerialClass;
 import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.world.entity.player.Player;
 
-@SerialClass
-public class ChunkCapSyncToClient extends SerialPacketBase {
+public record ChunkCapSyncToClient(
+		CompoundTag tag, ResourceLocation level, int x, int z
+) implements SerialPacketBase<ChunkCapSyncToClient> {
 
-	@SerialClass.SerialField
-	public CompoundTag tag;
-
-	@SerialClass.SerialField
-	public ResourceLocation level;
-
-	@SerialClass.SerialField
-	public int x, z;
-
-	@Deprecated
-	public ChunkCapSyncToClient() {
+	public static ChunkCapSyncToClient of(ChunkDifficulty chunk) {
+		var level = chunk.chunk.getLevel().dimension().location();
+		var x = chunk.chunk.getPos().x;
+		var z = chunk.chunk.getPos().z;
+		var tag = new TagCodec(chunk.chunk.getLevel().registryAccess()).toTag(new CompoundTag(), chunk);
+		return new ChunkCapSyncToClient(tag, level, x, z);
 	}
-
-	public ChunkCapSyncToClient(ChunkDifficulty chunk) {
-		this.level = chunk.chunk.getLevel().dimension().location();
-		this.x = chunk.chunk.getPos().x;
-		this.z = chunk.chunk.getPos().z;
-		this.tag = TagCodec.toTag(new CompoundTag(), chunk);
-	}
-
 
 	@Override
-	public void handle(NetworkEvent.Context context) {
+	public void handle(Player player) {
 		ClientSyncHandler.handleChunkUpdate(level, x, z, tag);
 	}
 

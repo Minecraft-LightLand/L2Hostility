@@ -2,7 +2,8 @@ package dev.xkmc.l2hostility.init.loot;
 
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 @SerialClass
 public class PlayerHasItemCondition implements LootItemCondition {
 
-	@SerialClass.SerialField
+	@SerialField
 	public Item item;
 
 	@Deprecated
@@ -32,7 +33,7 @@ public class PlayerHasItemCondition implements LootItemCondition {
 
 	@Override
 	public boolean test(LootContext lootContext) {
-		if (LHConfig.COMMON.disableHostilityLootCurioRequirement.get()) {
+		if (LHConfig.SERVER.disableHostilityLootCurioRequirement.get()) {
 			return true;
 		}
 		if (!lootContext.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) return false;

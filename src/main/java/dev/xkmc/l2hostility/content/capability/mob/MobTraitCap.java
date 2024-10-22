@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.capability.mob;
 
 import com.mojang.datafixers.util.Pair;
+import dev.xkmc.l2core.capability.attachment.GeneralCapabilityTemplate;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
@@ -12,12 +13,11 @@ import dev.xkmc.l2hostility.events.ClientEvents;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
-import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -30,12 +30,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.OwnableEntity;
-import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -45,47 +41,38 @@ import java.util.function.Supplier;
 @SerialClass
 public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTraitCap> {
 
-	public static final Capability<MobTraitCap> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
-	});
-
-	public static final GeneralCapabilityHolder<LivingEntity, MobTraitCap> HOLDER =
-			new GeneralCapabilityHolder<>(new ResourceLocation(L2Hostility.MODID, "traits"),
-					CAPABILITY, MobTraitCap.class, MobTraitCap::new, LivingEntity.class, (e) ->
-					e.getType().is(LHTagGen.WHITELIST) ||
-							e instanceof Enemy && !e.getType().is(LHTagGen.BLACKLIST));
-
 	public enum Stage {
 		PRE_INIT, INIT, POST_INIT
 	}
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public final LinkedHashMap<MobTrait, Integer> traits = new LinkedHashMap<>();
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	private Stage stage = Stage.PRE_INIT;
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public int lv;
 
-	@SerialClass.SerialField
+	@SerialField(toClient = false)
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public boolean summoned = false, minion = false, noDrop = false, fullDrop = false;
 
-	@SerialClass.SerialField
+	@SerialField
 	public double dropRate = 1;
 
 	@Nullable
-	@SerialClass.SerialField
+	@SerialField
 	public BlockPos pos = null;
 
 	@Nullable
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public MinionData asMinion = null;
 
 	@Nullable
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public MasterData asMaster = null;
 
 	@Nullable
@@ -101,11 +88,11 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void syncToClient(LivingEntity entity) {
-		L2Hostility.HANDLER.toTrackingPlayers(new MobCapSyncToClient(entity, this), entity);
+		L2Hostility.HANDLER.toTrackingPlayers(MobCapSyncToClient.of(entity, this), entity);
 	}
 
 	public void syncToPlayer(LivingEntity entity, ServerPlayer player) {
-		L2Hostility.HANDLER.toClientPlayer(new MobCapSyncToClient(entity, this), player);
+		L2Hostility.HANDLER.toClientPlayer(MobCapSyncToClient.of(entity, this), player);
 	}
 
 	public static void register() {
@@ -145,7 +132,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void init(Level level, LivingEntity le, RegionalDifficultyModifier difficulty) {
-		boolean skip = !LHConfig.COMMON.allowNoAI.get() && le instanceof Mob mob && mob.isNoAi();
+		boolean skip = !LHConfig.SERVER.allowNoAI.get() && le instanceof Mob mob && mob.isNoAi();
 		MobDifficultyCollector instance = new MobDifficultyCollector();
 		var diff = getConfigCache(le);
 		if (diff != null) {
@@ -153,10 +140,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		}
 		difficulty.modifyInstance(le.blockPosition(), instance);
 		Player player = PlayerFinder.getNearestPlayer(level, le);
-		if (player != null && PlayerDifficulty.HOLDER.isProper(player)) {
-			PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
-			playerDiff.apply(instance);
-			if (!LHConfig.COMMON.allowPlayerAllies.get() && le.isAlliedTo(player)) {
+		if (player != null && LHMiscs.PLAYER.type().isProper(player)) {
+			PlayerDifficulty playerDiff = LHMiscs.PLAYER.type().getOrCreate(player);
+			playerDiff.apply(player, instance);
+			if (!LHConfig.SERVER.allowPlayerAllies.get() && le.isAlliedTo(player)) {
 				skip = true;
 			}
 		}
@@ -173,7 +160,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		summoned = parent.summoned;
 		minion = parent.minion;
 		noDrop = parent.noDrop;
-		dropRate = parent.dropRate * LHConfig.COMMON.splitDropRateFactor.get();
+		dropRate = parent.dropRate * LHConfig.SERVER.splitDropRateFactor.get();
 		for (var ent : parent.traits.entrySet()) {
 			int rank = ent.getKey().inherited(this, ent.getValue(), ctx);
 			if (rank > 0) {
@@ -185,7 +172,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public int getEnchantBonus() {
-		return (int) (lv * LHConfig.COMMON.enchantmentFactor.get());
+		return (int) (lv * LHConfig.SERVER.enchantmentFactor.get());
 	}
 
 	public int getLevel() {
@@ -198,7 +185,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public int clampLevel(LivingEntity le, int lv) {
-		int cap = LHConfig.COMMON.maxMobLevel.get();
+		int cap = LHConfig.SERVER.maxMobLevel.get();
 		var config = getConfigCache(le);
 		if (config != null && config.maxLevel > 0) {
 			cap = Math.min(config.maxLevel, cap);
@@ -280,7 +267,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				sync = true;
 			}
 			if (!traits.isEmpty() &&
-					!LHConfig.COMMON.allowTraitOnOwnable.get() &&
+					!LHConfig.SERVER.allowTraitOnOwnable.get() &&
 					mob instanceof OwnableEntity own &&
 					own.getOwner() instanceof Player) {
 				traits.clear();
@@ -359,8 +346,8 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public boolean isMasterProtected() {
 		if (asMaster != null) {
 			for (var e : asMaster.data) {
-				if (e.minion != null && MobTraitCap.HOLDER.isProper(e.minion)) {
-					var scap = MobTraitCap.HOLDER.get(e.minion);
+				if (e.minion != null && LHMiscs.MOB.type().isProper(e.minion)) {
+					var scap = LHMiscs.MOB.type().getOrCreate(e.minion);
 					if (scap.asMinion != null && scap.asMinion.protectMaster)
 						return true;
 				}

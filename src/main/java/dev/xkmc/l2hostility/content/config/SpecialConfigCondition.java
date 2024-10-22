@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.config;
 
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.resources.ResourceLocation;
 
 @SerialClass
@@ -8,7 +9,7 @@ public abstract class SpecialConfigCondition<T> {
 
 	private final Class<T> cls;
 
-	@SerialClass.SerialField
+	@SerialField
 	public ResourceLocation id;
 
 	protected SpecialConfigCondition(Class<T> cls) {

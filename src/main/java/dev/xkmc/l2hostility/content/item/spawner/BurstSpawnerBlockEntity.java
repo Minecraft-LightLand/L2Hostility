@@ -6,11 +6,11 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.bossevents.CustomBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.random.WeightedRandomList;
@@ -26,28 +26,25 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.event.EventHooks;
 
 @SerialClass
 public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 
-	private static WeightedRandomList<MobSpawnSettings.SpawnerData> mobsAt(
-			ServerLevel level,
-			MobCategory category,
-			BlockPos pos) {
+	private static WeightedRandomList<MobSpawnSettings.SpawnerData> mobsAt(ServerLevel level, BlockPos pos) {
 		StructureManager structure = level.structureManager();
 		ChunkGenerator chunkGen = level.getChunkSource().getGenerator();
 		Holder<Biome> biome = level.getBiome(pos);
-		return ForgeEventFactory.getPotentialSpawns(
-				level, category, pos, chunkGen.getMobsAt(biome, structure, category, pos));
+		return EventHooks.getPotentialSpawns(
+				level, MobCategory.MONSTER, pos, chunkGen.getMobsAt(biome, structure, MobCategory.MONSTER, pos));
 	}
 
 	public static int getSpawnGroup() {
-		return LHConfig.COMMON.hostilitySpawnCount.get();
+		return LHConfig.SERVER.hostilitySpawnCount.get();
 	}
 
 	public static double getBonusFactor() {
-		return LHConfig.COMMON.hostilitySpawnLevelFactor.get();
+		return LHConfig.SERVER.hostilitySpawnLevelFactor.get();
 	}
 
 	public static int getMaxTrials() {
@@ -80,7 +77,7 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 					getBlockPos().getY() & -8 | y,
 					getBlockPos().getZ() & -8 | z
 			);
-			var e = mobsAt(sl, MobCategory.MONSTER, pos).getRandom(level.getRandom());
+			var e = mobsAt(sl, pos).getRandom(level.getRandom());
 			if (e.isPresent()) {
 				if (e.get().type.is(LHTagGen.NO_SCALING) || e.get().type.is(LHTagGen.NO_TRAIT)) {
 					continue;
@@ -90,8 +87,9 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 				if (entity instanceof Creeper) continue;
 				entity.setPos(Vec3.atCenterOf(getBlockPos()));
 				if (entity instanceof LivingEntity le) {
-					if (!MobTraitCap.HOLDER.isProper(le)) continue;
-					MobTraitCap cap = MobTraitCap.HOLDER.get(le);
+					var opt = LHMiscs.MOB.type().getExisting(le);
+					if (opt.isEmpty()) continue;
+					MobTraitCap cap = opt.get();
 					cap.summoned = true;
 					cap.noDrop = true;
 					cap.pos = getBlockPos();
@@ -125,7 +123,7 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 
 	@Override
 	protected CustomBossEvent createBossEvent() {
-		var ans = new CustomBossEvent(new ResourceLocation(L2Hostility.MODID, "hostility_spawner"),
+		var ans = new CustomBossEvent(L2Hostility.loc("hostility_spawner"),
 				LangData.BOSS_EVENT.get(0, getSpawnGroup()).withStyle(ChatFormatting.GOLD));
 		ans.setColor(BossEvent.BossBarColor.PURPLE);
 		ans.setOverlay(BossEvent.BossBarOverlay.NOTCHED_10);

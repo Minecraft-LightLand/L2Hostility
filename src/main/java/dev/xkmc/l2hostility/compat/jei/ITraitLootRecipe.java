@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public interface ITraitLootRecipe {
 
@@ -14,5 +15,5 @@ public interface ITraitLootRecipe {
 	List<ItemStack> getInputs();
 
 
-	void addTooltip(List<Component> l);
+	void addTooltip(Consumer<Component> l);
 }

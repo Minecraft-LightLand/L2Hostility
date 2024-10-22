@@ -25,6 +25,6 @@ hs_err_pid*
 .gradle
 build
 run
+runs
 
 .DS_Store
-secrets.properties

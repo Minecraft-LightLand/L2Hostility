@@ -1,7 +1,8 @@
 package dev.xkmc.l2hostility.content.capability.mob;
 
 import dev.xkmc.l2hostility.content.config.EntityConfig;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -13,16 +14,16 @@ import java.util.UUID;
 @SerialClass
 public class MinionData {
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public UUID uuid;
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public int id;
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public double linkDistance;
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public boolean protectMaster, discardOnUnlink;
 
 	@Nullable

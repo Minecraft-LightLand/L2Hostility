@@ -4,6 +4,8 @@ import dev.xkmc.l2hostility.compat.jei.ITraitLootRecipe;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2serial.network.SerialPacketBase;
 import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
@@ -17,7 +19,7 @@ public class LootDataToClient extends SerialPacketBase {
 
 	public static List<ITraitLootRecipe> LIST_CACHE = new ArrayList<>();
 
-	@SerialClass.SerialField
+	@SerialField
 	public ArrayList<CompoundTag> list = new ArrayList<>();
 
 	@Deprecated

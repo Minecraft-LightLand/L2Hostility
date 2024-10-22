@@ -1,11 +1,11 @@
 package dev.xkmc.l2hostility.content.item.tool;
 
-import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2core.base.effects.EffectBuilder;
 import dev.xkmc.l2hostility.content.traits.base.TargetEffectTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.base.effects.EffectBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -22,19 +22,18 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class WitchWand extends Item {
 
 	private static MobEffectInstance getRandom(int maxRank, RandomSource source) {
-		var list = LHTraits.TRAITS.get().getValues().stream()
+		var list = LHTraits.TRAITS.get().stream()
 				.filter(e -> e instanceof TargetEffectTrait).toList();
 		TargetEffectTrait trait = (TargetEffectTrait) list.get(source.nextInt(list.size()));
-		int rank = Math.min(maxRank, trait.getConfig().max_rank);
+		int rank = Math.min(maxRank, trait.getConfig().max_rank());
 		var ans = trait.func.apply(rank);
-		return new EffectBuilder(ans).setDuration(ans.getDuration() * LHConfig.COMMON.witchWandFactor.get()).ins;
+		return new EffectBuilder(ans).setDuration(ans.getDuration() * LHConfig.SERVER.witchWandFactor.get()).ins;
 	}
 
 	public WitchWand(Properties properties) {
@@ -49,7 +48,7 @@ public class WitchWand extends Item {
 		if (!level.isClientSide) {
 			ThrownPotion entity = new ThrownPotion(level, player);
 			ItemStack potion = new ItemStack(Items.SPLASH_POTION);
-			int maxRank = PlayerDifficulty.HOLDER.get(player).maxRankKilled;
+			int maxRank = LHMiscs.PLAYER.type().getOrCreate(player).maxRankKilled;
 			MobEffectInstance ins = getRandom(maxRank, player.getRandom());
 			PotionUtils.setCustomEffects(potion, List.of(ins));
 			potion.getOrCreateTag().putInt("CustomPotionColor", ins.getEffect().getColor());
@@ -65,7 +64,7 @@ public class WitchWand extends Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.ITEM_WITCH_WAND.get().withStyle(ChatFormatting.GOLD));
 	}
 

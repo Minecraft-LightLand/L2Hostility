@@ -7,8 +7,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -20,11 +18,11 @@ public class CurseOfLust extends CurseCurioItem {
 
 	@Override
 	public int getExtraLevel() {
-		return LHConfig.COMMON.lustExtraLevel.get();
+		return LHConfig.SERVER.lustExtraLevel.get();
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.ITEM_CHARM_LUST.get().withStyle(ChatFormatting.GOLD));
 	}
 

@@ -9,6 +9,7 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
@@ -103,7 +104,7 @@ public class LHMobCommands extends HostilityCommands {
 
 	private static boolean commandSetTrait(LivingEntity le, MobTraitCap cap, MobTrait trait, int rank) {
 		if (!trait.allow(le)) return false;
-		if (trait.getConfig().max_rank < rank) return false;
+		if (trait.getConfig().max_rank() < rank) return false;
 		cap.setTrait(trait, rank);
 		return true;
 	}
@@ -132,7 +133,7 @@ public class LHMobCommands extends HostilityCommands {
 		return ctx -> {
 			var trait = resolveKey(ctx, "trait", LHTraits.TRAITS.key(), ERR_INVALID_NAME);
 			var list = EntityArgument.getEntities(ctx, "targets");
-			int count = iterate(list, (le, cap) -> cmd.run(le, cap, trait.get()));
+			int count = iterate(list, (le, cap) -> cmd.run(le, cap, trait.value()));
 			printCompletion(ctx.getSource(), count);
 			return 0;
 		};
@@ -143,7 +144,7 @@ public class LHMobCommands extends HostilityCommands {
 			int rank = ctx.getArgument("rank", Integer.class);
 			var trait = resolveKey(ctx, "trait", LHTraits.TRAITS.key(), ERR_INVALID_NAME);
 			var list = EntityArgument.getEntities(ctx, "targets");
-			int count = iterate(list, (le, cap) -> cmd.run(le, cap, trait.get(), rank));
+			int count = iterate(list, (le, cap) -> cmd.run(le, cap, trait.value(), rank));
 			printCompletion(ctx.getSource(), count);
 			return 0;
 		};
@@ -152,8 +153,10 @@ public class LHMobCommands extends HostilityCommands {
 	private static int iterate(Collection<? extends Entity> list, BiPredicate<LivingEntity, MobTraitCap> task) {
 		int count = 0;
 		for (var e : list) {
-			if (!(e instanceof LivingEntity le) || !MobTraitCap.HOLDER.isProper(le)) continue;
-			var cap = MobTraitCap.HOLDER.get(le);
+			if (!(e instanceof LivingEntity le)) continue;
+			var opt = LHMiscs.MOB.type().getExisting(le);
+			if (opt.isEmpty()) continue;
+			var cap = opt.get();
 			if (task.test(le, cap)) {
 				count++;
 			}

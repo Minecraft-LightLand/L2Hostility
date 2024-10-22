@@ -1,74 +1,33 @@
 package dev.xkmc.l2hostility.events;
 
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
-import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
-import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
-import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
 import dev.xkmc.l2hostility.init.network.LootDataToClient;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
-import dev.xkmc.l2hostility.mixin.ForgeInternalHandlerAccessor;
-import net.minecraft.tags.DamageTypeTags;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import dev.xkmc.l2hostility.mixin.NeoForgeEventHandlerAccessor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = L2Hostility.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class MobEvents {
-
-	@SubscribeEvent
-	public static void onMobAttack(LivingAttackEvent event) {
-		boolean bypassInvul = event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY);
-		boolean bypassMagic = event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS);
-		boolean magic = event.getSource().is(L2DamageTypes.MAGIC);
-		if (magic && !bypassInvul && !bypassMagic) {
-			if (CurioCompat.hasItemInCurio(event.getEntity(), LHItems.RING_DIVINITY.get())) {
-				event.setCanceled(true);
-				return;
-			}
-		}
-		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			MobTraitCap.HOLDER.get(event.getEntity()).traitEvent((k, v) -> k.onAttackedByOthers(v, event.getEntity(), event));
-		}
-	}
-
-	@SubscribeEvent(priority = EventPriority.LOW)
-	public static void onMobHurt(LivingHurtEvent event) {
-		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			MobTraitCap.HOLDER.get(event.getEntity()).traitEvent((k, v) -> k.onHurtByOthers(v, event.getEntity(), event));
-		} else if (event.getEntity() instanceof Player player &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-				CurioCompat.hasItemInCurio(player, LHItems.CURSE_PRIDE.get())) {
-			int level = PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
-			double rate = LHConfig.COMMON.prideHealthBonus.get();
-			double factor = 1 + rate * level;
-			event.setAmount((float) (event.getAmount() / factor));
-		}
-	}
-
-	@SubscribeEvent
-	public static void onDamage(LivingDamageEvent event) {
-		for (var e : CurioCompat.getItems(event.getEntity(), e -> e.getItem() instanceof CurseCurioItem)) {
-			if (e.getItem() instanceof CurseCurioItem curse) {
-				curse.onDamage(e, event.getEntity(), event);
-			}
-		}
-	}
 
 	@SubscribeEvent
 	public static void onMobDeath(LivingDeathEvent event) {
@@ -79,49 +38,51 @@ public class MobEvents {
 					mob.setDropChance(e, 1);
 			}
 		}
-		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			MobTraitCap.HOLDER.get(event.getEntity()).traitEvent((k, v) -> k.onDeath(v, event.getEntity(), event));
-		}
+		var opt = LHMiscs.MOB.type().getExisting(event.getEntity());
+		opt.ifPresent(cap -> cap.traitEvent((k, v) -> k.onDeath(v, event.getEntity(), event)));
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void onMobDrop(LivingDropsEvent event) {
-		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			var cap = MobTraitCap.HOLDER.get(event.getEntity());
-			if (cap.noDrop) {
-				event.setCanceled(true);
-				return;
-			}
-			LivingEntity killer = event.getEntity().getKillCredit();
-			if (killer != null && CurioCompat.hasItemInCurio(killer, LHItems.NIDHOGGUR.get())) {
-				double val = LHConfig.COMMON.nidhoggurDropFactor.get() * cap.getLevel();
-				int count = (int) val;
-				if (event.getEntity().getRandom().nextDouble() < val - count) count++;
-				count++;
-				for (var stack : event.getDrops()) {
-					int ans = stack.getItem().getCount() * count;
-					if (LHConfig.COMMON.nidhoggurCapAtItemMaxStack.get()){
-						ans = Math.min(stack.getItem().getMaxStackSize(), ans);
-					}
-					stack.getItem().setCount(ans);
+		var mob = event.getEntity();
+		var opt = LHMiscs.MOB.type().getExisting(mob);
+		if (opt.isEmpty()) return;
+		var cap = opt.get();
+		if (cap.noDrop) {
+			event.setCanceled(true);
+			return;
+		}
+		LivingEntity killer = event.getEntity().getKillCredit();
+		if (killer != null && CurioCompat.hasItemInCurio(killer, LHItems.NIDHOGGUR.get())) {
+			double val = LHConfig.SERVER.nidhoggurDropFactor.get() * cap.getLevel();
+			int count = (int) val;
+			if (event.getEntity().getRandom().nextDouble() < val - count) count++;
+			count++;
+			for (var stack : event.getDrops()) {
+				int ans = stack.getItem().getCount() * count;
+				if (LHConfig.SERVER.nidhoggurCapAtItemMaxStack.get()) {
+					ans = Math.min(stack.getItem().getMaxStackSize(), ans);
 				}
+				stack.getItem().setCount(ans);
 			}
+
 		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onExpDrop(LivingExperienceDropEvent event) {
-		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
-			var cap = MobTraitCap.HOLDER.get(event.getEntity());
-			if (cap.noDrop) {
-				event.setCanceled(true);
-				return;
-			}
-			int exp = event.getDroppedExperience();
-			int level = cap.getLevel();
-			exp = (int) (exp * (1 + LHConfig.COMMON.expDropFactor.get() * level));
-			event.setDroppedExperience(exp);
+		var mob = event.getEntity();
+		var opt = LHMiscs.MOB.type().getExisting(mob);
+		if (opt.isEmpty()) return;
+		var cap = opt.get();
+		if (cap.noDrop) {
+			event.setCanceled(true);
+			return;
 		}
+		int exp = event.getDroppedExperience();
+		int level = cap.getLevel();
+		exp = (int) (exp * (1 + LHConfig.SERVER.expDropFactor.get() * level));
+		event.setDroppedExperience(exp);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
@@ -138,7 +99,7 @@ public class MobEvents {
 	@SubscribeEvent
 	public static void onDatapackSync(OnDatapackSyncEvent event) {
 		List<TraitLootModifier> list = new ArrayList<>();
-		for (var e : ForgeInternalHandlerAccessor.callGetLootModifierManager().getAllLootMods()) {
+		for (var e : NeoForgeEventHandlerAccessor.callGetLootModifierManager().getAllLootMods()) {
 			if (e instanceof TraitLootModifier loot) {
 				list.add(loot);
 			}

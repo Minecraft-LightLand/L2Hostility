@@ -2,9 +2,11 @@ package dev.xkmc.l2hostility.content.item.consumable;
 
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -21,10 +23,10 @@ import java.util.List;
 public class BookEverything extends Item {
 
 	@Nullable
-	private static Enchantment getEnch(ItemStack stack) {
+	private static Holder<Enchantment> getEnch(ItemStack stack) {
 		String name = stack.getHoverName().getString();
 		try {
-			ResourceLocation rl = new ResourceLocation(name.trim());
+			ResourceLocation rl = ResourceLocation.parse(name.trim());
 			if (!ForgeRegistries.ENCHANTMENTS.containsKey(rl))
 				return null;
 			return ForgeRegistries.ENCHANTMENTS.getValue(rl);
@@ -33,9 +35,10 @@ public class BookEverything extends Item {
 		}
 	}
 
-	public static boolean allow(Enchantment ench) {
-		if (ench.isTreasureOnly() || !ench.isAllowedOnBooks() || !ench.isDiscoverable())
+	public static boolean allow(Holder<Enchantment> holder) {
+		if (holder.is(EnchantmentTags.TREASURE) || !holder.is(EnchantmentTags.IN_ENCHANTING_TABLE))
 			return false;
+		var ench = holder.value();
 		return ench.getMaxCost(ench.getMaxLevel()) >= ench.getMinCost(ench.getMaxLevel());
 	}
 
@@ -87,18 +90,20 @@ public class BookEverything extends Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.ITEM_BOOK_EVERYTHING_USE.get().withStyle(ChatFormatting.GRAY));
 		list.add(LangData.ITEM_BOOK_EVERYTHING_SHIFT.get().withStyle(ChatFormatting.GOLD));
-		Enchantment e = getEnch(stack);
-		if (e == null) {
+		Holder<Enchantment> holder = getEnch(stack);
+		if (holder == null) {
 			list.add(LangData.ITEM_BOOK_EVERYTHING_INVALID.get().withStyle(ChatFormatting.GRAY));
 		} else {
-			if (allow(e)) {
+			var e = holder.value();
+			var name = Enchantment.getFullname(holder, e.getMaxLevel());
+			if (allow(holder)) {
 				int cost = cost(e);
-				list.add(LangData.ITEM_BOOK_EVERYTHING_READY.get(e.getFullname(e.getMaxLevel()), cost).withStyle(ChatFormatting.GREEN));
+				list.add(LangData.ITEM_BOOK_EVERYTHING_READY.get(name, cost).withStyle(ChatFormatting.GREEN));
 			} else {
-				list.add(LangData.ITEM_BOOK_EVERYTHING_FORBIDDEN.get(e.getFullname(e.getMaxLevel())).withStyle(ChatFormatting.RED));
+				list.add(LangData.ITEM_BOOK_EVERYTHING_FORBIDDEN.get(name).withStyle(ChatFormatting.RED));
 			}
 		}
 	}

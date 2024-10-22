@@ -19,7 +19,7 @@ public class LegendaryTrait extends MobTrait {
 
 	@Override
 	public boolean isBanned() {
-		return !LHConfig.COMMON.allowLegendary.get() || super.isBanned();
+		return !LHConfig.SERVER.allowLegendary.get() || super.isBanned();
 	}
 
 }

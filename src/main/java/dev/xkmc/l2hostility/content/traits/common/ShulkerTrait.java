@@ -1,11 +1,13 @@
 package dev.xkmc.l2hostility.content.traits.common;
 
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2hostility.content.capability.mob.CapStorageData;
-import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.entity.BulletType;
 import dev.xkmc.l2hostility.content.entity.HostilityBullet;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -14,7 +16,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,16 +35,15 @@ public class ShulkerTrait extends MobTrait {
 	}
 
 	@Override
-	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
-		type.onAttackedByOthers(level, entity, event);
+	public boolean onAttackedByOthers(int level, LivingEntity entity, DamageData.Attack event) {
+		return type.onAttackedByOthers(level, entity, event);
 	}
 
 	@Override
 	public void tick(LivingEntity e, int level) {
 		if (e.level().isClientSide()) return;
-		if (e instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob)) {
-			var cap = MobTraitCap.HOLDER.get(mob);
-			var data = cap.getOrCreateData(getRegistryName(), Data::new);
+		if (e instanceof Mob mob && LHMiscs.MOB.type().isProper(mob)) {
+			var data = LHMiscs.MOB.type().getOrCreate(mob).getOrCreateData(getRegistryName(), Data::new);
 			if (data.uuid != null &&
 					mob.level() instanceof ServerLevel sl &&
 					sl.getEntity(data.uuid) instanceof ShulkerBullet)
@@ -74,10 +74,10 @@ public class ShulkerTrait extends MobTrait {
 	@SerialClass
 	public static class Data extends CapStorageData {
 
-		@SerialClass.SerialField
+		@SerialField
 		public int tickCount;
 
-		@SerialClass.SerialField
+		@SerialField
 		public UUID uuid;
 
 		public Data() {

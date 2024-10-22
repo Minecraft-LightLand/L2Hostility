@@ -27,7 +27,7 @@ public class RingOfReflection extends CurseCurioItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.ITEM_RING_REFLECTION.get().withStyle(ChatFormatting.GOLD));
 	}
 

@@ -2,9 +2,10 @@ package dev.xkmc.l2hostility.content.logic;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
-import dev.xkmc.l2library.util.math.MathHelper;
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -14,12 +15,13 @@ import java.util.HashMap;
 
 public class TraitManager {
 
-	public static void addAttribute(LivingEntity le, Attribute attr, String name, double factor, AttributeModifier.Operation op) {
+	public static void addAttribute(LivingEntity le, Holder<Attribute> attr, String name, double factor, AttributeModifier.Operation op) {
 		var ins = le.getAttribute(attr);
 		if (ins == null) return;
-		var modifier = new AttributeModifier(MathHelper.getUUIDFromString(name), name, factor, op);
-		if (ins.hasModifier(modifier)) {
-			ins.removeModifier(modifier.getId());
+		var id = L2Hostility.loc(name);
+		var modifier = new AttributeModifier(id, factor, op);
+		if (ins.hasModifier(id)) {
+			ins.removeModifier(id);
 		}
 		ins.addPermanentModifier(modifier);
 	}
@@ -27,13 +29,13 @@ public class TraitManager {
 	public static void scale(LivingEntity le, int lv) {
 		if (!le.getType().is(LHTagGen.NO_SCALING)) {
 			double factor;
-			if (LHConfig.COMMON.exponentialHealth.get()) {
-				factor = Math.pow(1 + LHConfig.COMMON.healthFactor.get(), lv) - 1;
+			if (LHConfig.SERVER.exponentialHealth.get()) {
+				factor = Math.pow(1 + LHConfig.SERVER.healthFactor.get(), lv) - 1;
 			} else {
-				factor = lv * LHConfig.COMMON.healthFactor.get();
+				factor = lv * LHConfig.SERVER.healthFactor.get();
 			}
 			addAttribute(le, Attributes.MAX_HEALTH, "hostility_health", factor,
-					AttributeModifier.Operation.MULTIPLY_TOTAL);
+					AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 		}
 	}
 

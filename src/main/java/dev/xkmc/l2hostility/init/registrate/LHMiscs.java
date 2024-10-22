@@ -1,36 +1,53 @@
 package dev.xkmc.l2hostility.init.registrate;
 
-import com.tterrag.registrate.util.entry.MenuEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import dev.xkmc.l2damagetracker.contents.attributes.WrappedAttribute;
+import dev.xkmc.l2core.capability.player.PlayerCapabilityNetworkHandler;
+import dev.xkmc.l2core.init.reg.datapack.DataMapReg;
+import dev.xkmc.l2core.init.reg.registrate.SimpleEntry;
+import dev.xkmc.l2core.init.reg.simple.AttReg;
+import dev.xkmc.l2core.init.reg.simple.AttVal;
+import dev.xkmc.l2core.init.reg.simple.SR;
+import dev.xkmc.l2core.init.reg.simple.Val;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
-import dev.xkmc.l2hostility.compat.curios.EntityCuriosListMenu;
-import dev.xkmc.l2hostility.compat.curios.EntityCuriosListScreen;
-import dev.xkmc.l2hostility.content.menu.equipments.EquipmentsMenu;
-import dev.xkmc.l2hostility.content.menu.equipments.EquipmentsScreen;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraftforge.registries.ForgeRegistries;
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
+import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
+import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.menu.tab.DifficultyTab;
+import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2tabs.init.L2Tabs;
+import dev.xkmc.l2tabs.tabs.core.TabToken;
+import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.RangedAttribute;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.level.chunk.LevelChunk;
 
 import static dev.xkmc.l2hostility.init.L2Hostility.REGISTRATE;
 
-@SuppressWarnings({"ConstantConditions", "unchecked"})
 public class LHMiscs {
 
-	public static final MenuEntry<EquipmentsMenu> EQUIPMENTS =
-			REGISTRATE.menu("equipments", EquipmentsMenu::fromNetwork, () -> EquipmentsScreen::new)
-					.register();
+	private static final AttReg ATT = AttReg.of(L2Hostility.REG);
+	public static final AttVal.CapVal<LivingEntity, MobTraitCap> MOB = ATT.entity("mob",
+			MobTraitCap.class, MobTraitCap::new, LivingEntity.class, (e) ->
+					e.getType().is(LHTagGen.WHITELIST) || e instanceof Enemy && !e.getType().is(LHTagGen.BLACKLIST));
+	public static final AttVal.PlayerVal<PlayerDifficulty> PLAYER = ATT.player("player",
+			PlayerDifficulty.class, PlayerDifficulty::new, PlayerCapabilityNetworkHandler::new);
+	public static final AttVal.CapVal<LevelChunk, ChunkDifficulty> CHUNK = ATT.entity("chunk",
+			ChunkDifficulty.class, ChunkDifficulty::new, LevelChunk.class, e -> true);
 
-	public static final MenuEntry<EntityCuriosListMenu> CURIOS =
-			REGISTRATE.menu("curios", EntityCuriosListMenu::fromNetwork, () -> EntityCuriosListScreen::new)
-					.register();
+	private static final ResourceLocation DUMMY = L2Tabs.loc(L2Hostility.MODID);
+	private static final SR<TabToken<?, ?>> TAB_REG = SR.of(L2Hostility.REG, L2Tabs.TABS.reg());
+	public static final Val<TabToken<InvTabData, DifficultyTab>> TAB_DIFFICULTY = TAB_REG.reg("difficulty",
+			() -> L2Tabs.GROUP.registerTab(() -> DifficultyTab::new, LangData.INFO_TAB_TITLE.get()));//5000, Items.ZOMBIE_HEAD
 
-	public static final RegistryEntry<WrappedAttribute> ADD_LEVEL = L2DamageTracker.regWrapped(REGISTRATE,
-			"extra_difficulty", 0, 0, 1000, "Extra Difficulty", L2DamageTracker.NEGATIVE);
-
-	private static <A extends RecipeSerializer<?>> RegistryEntry<A> reg(String id, NonNullSupplier<A> sup) {
-		return REGISTRATE.simple(id, ForgeRegistries.Keys.RECIPE_SERIALIZERS, sup);
-	}
+	public static final SimpleEntry<Attribute> ADD_LEVEL = L2DamageTracker.reg(REGISTRATE,
+			"extra_difficulty", e -> new RangedAttribute(e, 0, 0, 2000)
+					.setSentiment(Attribute.Sentiment.NEGATIVE), "Extra Difficulty");
 
 	public static void register() {
 

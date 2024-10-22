@@ -4,13 +4,12 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
-import dev.xkmc.l2modularblock.DelegateEntityBlockImpl;
+import dev.xkmc.l2modularblock.core.DelegateEntityBlockImpl;
 import dev.xkmc.l2modularblock.impl.BlockEntityBlockMethodImpl;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.BeaconBeamBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 
 public class HostilityBeaconBlock extends DelegateEntityBlockImpl implements BeaconBeamBlock {
 
@@ -34,7 +33,7 @@ public class HostilityBeaconBlock extends DelegateEntityBlockImpl implements Bea
 				.renderType("translucent");
 		pvd.getMultipartBuilder(ctx.get())
 				.part().modelFile(pvd.models().getBuilder(ctx.getName() + "_base")
-						.parent(new ModelFile.UncheckedModelFile(new ResourceLocation(L2Hostility.MODID, "block/beacon")))
+						.parent(new ModelFile.UncheckedModelFile(L2Hostility.loc("block/beacon")))
 						.texture("particle", pvd.modLoc("block/beacon_glass"))
 						.texture("obsidian", pvd.mcLoc("block/crying_obsidian"))
 						.texture("beacon", pvd.modLoc("block/beacon"))

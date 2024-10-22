@@ -2,51 +2,29 @@ package dev.xkmc.l2hostility.init;
 
 import dev.xkmc.l2hostility.content.item.curio.misc.PocketOfRestoration;
 import dev.xkmc.l2hostility.content.menu.tab.DifficultyOverlay;
-import dev.xkmc.l2hostility.content.menu.tab.DifficultyTab;
-import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
-import dev.xkmc.l2tabs.tabs.core.TabRegistry;
-import dev.xkmc.l2tabs.tabs.core.TabToken;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Items;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT, modid = L2Hostility.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class L2HostilityClient {
-
-
-	public static TabToken<DifficultyTab> TAB_DIFFICULTY;
 
 	@SubscribeEvent
 	public static void client(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
-			TAB_DIFFICULTY = TabRegistry.registerTab(5000, DifficultyTab::new,
-					() -> Items.ZOMBIE_HEAD, LangData.INFO_TAB_TITLE.get());
-
-			ItemProperties.register(LHItems.RESTORATION.get(), new ResourceLocation(L2Hostility.MODID, "filled"),
+			ItemProperties.register(LHItems.RESTORATION.get(), L2Hostility.loc("filled"),
 					(stack, level, entity, i) -> stack.getTagElement(PocketOfRestoration.ROOT) == null ? 0 : 1);
 		});
 	}
 
 	@SubscribeEvent
-	public static void clientSetup(FMLClientSetupEvent event) {
-	}
-
-
-	@SubscribeEvent
-	public static void onResourceReload(RegisterClientReloadListenersEvent event) {
-	}
-
-	@SubscribeEvent
-	public static void registerOverlay(RegisterGuiOverlaysEvent event) {
-		event.registerAbove(VanillaGuiOverlay.CROSSHAIR.id(), "l2hostility", new DifficultyOverlay());
+	public static void registerOverlay(RegisterGuiLayersEvent event) {
+		event.registerAbove(VanillaGuiLayers.CROSSHAIR, L2Hostility.loc("info"), new DifficultyOverlay());
 	}
 
 }

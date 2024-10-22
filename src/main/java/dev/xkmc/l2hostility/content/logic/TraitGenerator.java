@@ -113,7 +113,7 @@ public class TraitGenerator {
 			}
 			setRank(e, rank);
 			level -= (rank - old) * cost;
-			if (!ins.isFullChance() && rand.nextDouble() < LHConfig.COMMON.globalTraitSuppression.get()) {
+			if (!ins.isFullChance() && rand.nextDouble() < LHConfig.SERVER.globalTraitSuppression.get()) {
 				break;
 			}
 		}

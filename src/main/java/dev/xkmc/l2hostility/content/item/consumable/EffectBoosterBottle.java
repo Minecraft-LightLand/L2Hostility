@@ -27,9 +27,9 @@ public class EffectBoosterBottle extends DrinkableBottleItem {
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.TOOLTIP_WITCH_BOTTLE.get(
-				LHConfig.COMMON.witchChargeMinDuration.get() / 20,
-				Math.round(100 * LHConfig.COMMON.drainDuration.get()),
-				LHConfig.COMMON.drainDurationMax.get() / 20
+				LHConfig.SERVER.witchChargeMinDuration.get() / 20,
+				Math.round(100 * LHConfig.SERVER.drainDuration.get()),
+				LHConfig.SERVER.drainDurationMax.get() / 20
 		).withStyle(ChatFormatting.GRAY));
 	}
 

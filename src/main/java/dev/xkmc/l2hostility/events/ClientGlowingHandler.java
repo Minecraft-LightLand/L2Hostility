@@ -1,18 +1,15 @@
 package dev.xkmc.l2hostility.events;
 
+import dev.xkmc.l2core.util.Proxy;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
-import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
-import dev.xkmc.l2library.util.Proxy;
-import net.minecraft.client.player.LocalPlayer;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -21,10 +18,13 @@ public class ClientGlowingHandler {
 	public static boolean isGlowing(Entity entity) {
 		if (!(entity instanceof LivingEntity le)) return false;
 		if (le instanceof Mob mob) {
-			if (mob.getTags().contains("HostilityGlowing") && MobTraitCap.HOLDER.isProper(mob)) {
-				var cap = MobTraitCap.HOLDER.get(mob);
-				if (cap.isSummoned() || cap.isMasterProtected()) {
-					return true;
+			if (mob.getTags().contains("HostilityGlowing")) {
+				var opt = LHMiscs.MOB.type().getExisting(mob);
+				if (opt.isPresent()) {
+					var cap = opt.get();
+					if (cap.isSummoned() || cap.isMasterProtected()) {
+						return true;
+					}
 				}
 			}
 		}
@@ -44,9 +44,8 @@ public class ClientGlowingHandler {
 		return cacheGlass;
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	private static boolean isGlowingImpl(LivingEntity entity) {
-		LocalPlayer player = Proxy.getClientPlayer();
+		Player player = Proxy.getPlayer();
 		if (player != null && playerHasGlass(player)) {
 			boolean glow = entity.isInvisible() || entity.isInvisibleTo(player);
 			glow |= player.hasEffect(MobEffects.BLINDNESS);
@@ -62,8 +61,9 @@ public class ClientGlowingHandler {
 	@Nullable
 	public static Integer getColor(Entity entity) {
 		if (entity instanceof Mob mob) {
-			if (MobTraitCap.HOLDER.isProper(mob)) {
-				var cap = MobTraitCap.HOLDER.get(mob);
+			var opt = LHMiscs.MOB.type().getExisting(mob);
+			if (opt.isPresent()) {
+				var cap = opt.get();
 				if (cap.isSummoned()) {
 					return 0xff0000;
 				}

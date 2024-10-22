@@ -2,53 +2,42 @@ package dev.xkmc.l2hostility.events;
 
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
-import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficultyCap;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import net.minecraft.resources.ResourceLocation;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.OwnableEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.MobSpawnEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.level.ChunkWatchEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.level.ChunkWatchEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Mod.EventBusSubscriber(modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(modid = L2Hostility.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class CapabilityEvents {
-
-	@SubscribeEvent
-	public static void onAttachChunkCapabilities(AttachCapabilitiesEvent<LevelChunk> event) {
-		event.addCapability(new ResourceLocation(L2Hostility.MODID, "difficulty"),
-				new ChunkDifficultyCap(event.getObject()));
-	}
 
 	@SubscribeEvent
 	public static void onStartTracking(PlayerEvent.StartTracking event) {
 		if (event.getTarget() instanceof LivingEntity entity && event.getEntity() instanceof ServerPlayer player) {
-			if (MobTraitCap.HOLDER.isProper(entity)) {
-				MobTraitCap.HOLDER.get(entity).syncToPlayer(entity, player);
-			}
+			LHMiscs.MOB.type().getExisting(entity).ifPresent(e -> e.syncToPlayer(entity, player));
 		}
 	}
 
 	private static boolean initMob(LivingEntity mob, MobSpawnType type) {
-		if (MobTraitCap.HOLDER.isProper(mob)) {
-			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
+		if (LHMiscs.MOB.type().isProper(mob)) {
+			MobTraitCap cap = LHMiscs.MOB.type().getOrCreate(mob);
 			if (!mob.level().isClientSide() && !cap.isInitialized()) {
 				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
 				if (opt.isPresent()) {
@@ -56,7 +45,7 @@ public class CapabilityEvents {
 					if (type == MobSpawnType.NATURAL && cap.shouldDiscard(mob))
 						return true;
 					if (type == MobSpawnType.SPAWNER) {
-						cap.dropRate = LHConfig.COMMON.dropRateFromSpawner.get();
+						cap.dropRate = LHConfig.SERVER.dropRateFromSpawner.get();
 					}
 				}
 			}
@@ -65,7 +54,7 @@ public class CapabilityEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEntitySpawn(MobSpawnEvent.FinalizeSpawn event) {
+	public static void onEntitySpawn(FinalizeSpawnEvent event) {
 		LivingEntity mob = event.getEntity();
 		if (initMob(mob, event.getSpawnType())) {
 			event.setSpawnCancelled(true);
@@ -74,8 +63,8 @@ public class CapabilityEvents {
 
 
 	@SubscribeEvent
-	public static void livingTickEvent(LivingEvent.LivingTickEvent event) {
-		LivingEntity mob = event.getEntity();
+	public static void livingTickEvent(EntityTickEvent event) {
+		if (!(event.getEntity() instanceof LivingEntity mob)) return;
 		if (mob.tickCount % PerformanceConstants.NAN_FIX == 0) {
 			if (Float.isNaN(mob.getHealth())) {
 				mob.setHealth(0);
@@ -84,9 +73,7 @@ public class CapabilityEvents {
 				mob.setAbsorptionAmount(0);
 			}
 		}
-		if (mob.isAlive()) {
-			mob.getCapability(MobTraitCap.CAPABILITY).ifPresent(e -> e.tick(mob));
-		}
+		LHMiscs.MOB.type().getExisting(mob).ifPresent(e -> e.tick(mob));
 	}
 
 	@SubscribeEvent
@@ -94,25 +81,23 @@ public class CapabilityEvents {
 		LivingEntity mob = event.getEntity();
 		if (mob.level().isClientSide()) return;
 		LivingEntity killer = event.getEntity().getKillCredit();
-		Player player = null;
-		if (killer instanceof Player pl) {
+		ServerPlayer player = null;
+		if (killer instanceof ServerPlayer pl) {
 			player = pl;
-		} else if (killer instanceof OwnableEntity own && own.getOwner() instanceof Player pl) {
+		} else if (killer instanceof OwnableEntity own && own.getOwner() instanceof ServerPlayer pl) {
 			player = pl;
 		}
-		if (MobTraitCap.HOLDER.isProper(mob)) {
-			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
+		var optCap = LHMiscs.MOB.type().getExisting(mob);
+		if (optCap.isPresent()) {
+			MobTraitCap cap = optCap.get();
 			if (killer != null) {
 				cap.onKilled(mob, player);
 			}
 			if (player != null) {
-				PlayerDifficulty playerDiff = PlayerDifficulty.HOLDER.get(player);
-				playerDiff.addKillCredit(cap);
+				PlayerDifficulty playerDiff = LHMiscs.PLAYER.type().getOrCreate(player);
+				playerDiff.addKillCredit(player, cap);
 				LevelChunk chunk = mob.level().getChunkAt(mob.blockPosition());
-				var opt = chunk.getCapability(ChunkDifficulty.CAPABILITY);
-				if (opt.resolve().isPresent()) {
-					opt.resolve().get().addKillHistory(player, mob, cap);
-				}
+				LHMiscs.CHUNK.type().getOrCreate(chunk).addKillHistory(player, mob, cap);
 			}
 		}
 	}
@@ -120,19 +105,17 @@ public class CapabilityEvents {
 	private static final Set<ChunkDifficulty> PENDING = new LinkedHashSet<>();
 
 	@SubscribeEvent
-	public static void onServerTick(TickEvent.ServerTickEvent event) {
-		if (event.phase != TickEvent.Phase.END) return;
+	public static void onServerTick(ServerTickEvent.Post event) {
 		for (var e : PENDING) {
-			L2Hostility.toTrackingChunk(e.chunk, new ChunkCapSyncToClient(e));
+			L2Hostility.toTrackingChunk(e.chunk, ChunkCapSyncToClient.of(e));
 		}
 		PENDING.clear();
 	}
 
 	@SubscribeEvent
 	public static void onStartTrackingChunk(ChunkWatchEvent.Watch event) {
-		var opt = event.getChunk().getCapability(ChunkDifficulty.CAPABILITY).resolve();
-		if (opt.isEmpty()) return;
-		L2Hostility.HANDLER.toClientPlayer(new ChunkCapSyncToClient(opt.get()), event.getPlayer());
+		var opt = LHMiscs.CHUNK.type().getOrCreate(event.getChunk());
+		L2Hostility.HANDLER.toClientPlayer(ChunkCapSyncToClient.of(opt), event.getPlayer());
 	}
 
 	public static void markDirty(ChunkDifficulty chunk) {

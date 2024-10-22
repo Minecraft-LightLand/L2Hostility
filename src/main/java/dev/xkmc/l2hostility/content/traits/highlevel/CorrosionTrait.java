@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.content.traits.highlevel;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.item.traits.DurabilityEater;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
@@ -20,11 +20,11 @@ public class CorrosionTrait extends SlotIterateDamageTrait {
 	}
 
 	@Override
-	public void onHurtTarget(int level, LivingEntity attacker, AttackCache cache, TraitEffectCache traitCache) {
-		if (LHItems.ABRAHADABRA.get().isOn(cache.getAttackTarget())) return;
-		int count = process(level, attacker, cache.getAttackTarget());
+	public void onHurtTarget(int level, LivingEntity attacker, DamageData.Offence cache, TraitEffectCache traitCache) {
+		if (LHItems.ABRAHADABRA.get().isOn(cache.getTarget())) return;
+		int count = process(level, attacker, cache.getTarget());
 		if (count < level) {
-			cache.addHurtModifier(DamageModifier.multTotal((float) (LHConfig.COMMON.corrosionDamage.get() * level * (level - count))));
+			cache.addHurtModifier(DamageModifier.multTotal((float) (LHConfig.SERVER.corrosionDamage.get() * level * (level - count)), getRegistryName()));
 		}
 	}
 
@@ -38,9 +38,9 @@ public class CorrosionTrait extends SlotIterateDamageTrait {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
 						mapLevel(i -> Component.literal(i + "")
 								.withStyle(ChatFormatting.AQUA)),
-						mapLevel(i -> Component.literal(Math.round(LHConfig.COMMON.corrosionDurability.get() * i * 100) + "%")
+						mapLevel(i -> Component.literal(Math.round(LHConfig.SERVER.corrosionDurability.get() * i * 100) + "%")
 								.withStyle(ChatFormatting.AQUA)),
-						mapLevel(i -> Component.literal(Math.round(LHConfig.COMMON.corrosionDamage.get() * i * 100) + "%")
+						mapLevel(i -> Component.literal(Math.round(LHConfig.SERVER.corrosionDamage.get() * i * 100) + "%")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

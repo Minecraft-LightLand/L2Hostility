@@ -24,8 +24,8 @@ public class MobDifficultyCollector {
 	private boolean fullChance, fullDrop, delegateTrait;
 
 	public MobDifficultyCollector() {
-		apply_chance = LHConfig.COMMON.globalApplyChance.get();
-		trait_chance = LHConfig.COMMON.globalTraitChance.get();
+		apply_chance = LHConfig.SERVER.globalApplyChance.get();
+		trait_chance = LHConfig.SERVER.globalTraitChance.get();
 		trait_cost = 1;
 	}
 
@@ -57,7 +57,7 @@ public class MobDifficultyCollector {
 	}
 
 	public void setCap(int cap) {
-		if (LHConfig.COMMON.allowBypassMinimum.get()) {
+		if (LHConfig.SERVER.allowBypassMinimum.get()) {
 			this.min = Math.min(this.min, cap);
 		} else {
 			cap = Math.max(this.min, cap);
@@ -88,7 +88,7 @@ public class MobDifficultyCollector {
 
 	public double trait_chance(int lv) {
 		if (delegateTrait) return 0;
-		return fullChance ? 1 : trait_chance * Math.min(1, lv * LHConfig.COMMON.initialTraitChanceSlope.get());
+		return fullChance ? 1 : trait_chance * Math.min(1, lv * LHConfig.SERVER.initialTraitChanceSlope.get());
 	}
 
 	public int getBase() {
@@ -121,7 +121,7 @@ public class MobDifficultyCollector {
 
 	public boolean hasAdvancement(ResourceLocation id) {
 		if (player == null) return true;
-		var adv = player.server.getAdvancements().getAdvancement(id);
+		var adv = player.server.getAdvancements().get(id);
 		if (adv == null) return false;
 		var prog = player.getAdvancements().getOrStartProgress(adv);
 		return prog.isDone();

@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.item.curio.ring;
 
-import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2hostility.content.item.curio.core.SingletonItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -9,10 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
@@ -23,8 +19,8 @@ public class RingOfHealing extends SingletonItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.ITEM_RING_HEALING.get(Math.round(LHConfig.COMMON.ringOfHealingRate.get() * 100)).withStyle(ChatFormatting.GOLD));
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
+		list.add(LangData.ITEM_RING_HEALING.get(Math.round(LHConfig.SERVER.ringOfHealingRate.get() * 100)).withStyle(ChatFormatting.GOLD));
 	}
 
 	@Override
@@ -32,7 +28,7 @@ public class RingOfHealing extends SingletonItem {
 		LivingEntity wearer = slotContext.entity();
 		if (wearer == null) return;
 		if (wearer.tickCount % 20 != 0) return;
-		wearer.heal((float) (LHConfig.COMMON.ringOfHealingRate.get() * wearer.getMaxHealth()));
+		wearer.heal((float) (LHConfig.SERVER.ringOfHealingRate.get() * wearer.getMaxHealth()));
 	}
 
 }

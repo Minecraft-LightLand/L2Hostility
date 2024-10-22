@@ -8,15 +8,15 @@ public class PerformanceConstants {
 	public static final int CHUNK_RENDER = 2;
 
 	public static int removeTraitInterval() {
-		return LHConfig.COMMON.removeTraitCheckInterval.get();
+		return LHConfig.SERVER.removeTraitCheckInterval.get();
 	}
 
 	public static int auraApplyInterval() {
-		return LHConfig.COMMON.auraEffectApplicationInterval.get();
+		return LHConfig.SERVER.auraEffectApplicationInterval.get();
 	}
 
 	public static int selfEffectInterval() {
-		return LHConfig.COMMON.selfEffectApplicationInterval.get();
+		return LHConfig.SERVER.selfEffectApplicationInterval.get();
 	}
 
 }

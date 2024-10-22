@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
+import dev.xkmc.l2core.base.effects.EffectBuilder;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2library.base.effects.EffectBuilder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -13,16 +13,16 @@ import java.util.function.Predicate;
 public class EffectBooster {
 
 	public static void boostCharge(LivingEntity target) {
-		double factor = 1 + LHConfig.COMMON.drainDuration.get();
-		int maxTime = LHConfig.COMMON.drainDurationMax.get();
-		int min = LHConfig.COMMON.witchChargeMinDuration.get();
+		double factor = 1 + LHConfig.SERVER.drainDuration.get();
+		int maxTime = LHConfig.SERVER.drainDurationMax.get();
+		int min = LHConfig.SERVER.witchChargeMinDuration.get();
 		boost(target, e -> e.getCategory() == MobEffectCategory.HARMFUL, min, factor, maxTime);
 	}
 
 	public static void boostBottle(LivingEntity target) {
-		double factor = 1 + LHConfig.COMMON.drainDuration.get();
-		int maxTime = LHConfig.COMMON.drainDurationMax.get();
-		int min = LHConfig.COMMON.witchChargeMinDuration.get();
+		double factor = 1 + LHConfig.SERVER.drainDuration.get();
+		int maxTime = LHConfig.SERVER.drainDurationMax.get();
+		int min = LHConfig.SERVER.witchChargeMinDuration.get();
 		boost(target, e -> true, min, factor, maxTime);
 	}
 
@@ -33,7 +33,7 @@ public class EffectBooster {
 	private static void boost(LivingEntity target, Predicate<MobEffect> pred, int min, double factor, int maxTime) {
 		var list = new ArrayList<>(target.getActiveEffects());
 		for (var e : list) {
-			if (pred.test(e.getEffect())) {
+			if (pred.test(e.getEffect().value())) {
 				int current = e.getDuration();
 				if (current < min) continue;
 				int max = Math.min(maxTime, (int) (current * factor));
@@ -46,10 +46,10 @@ public class EffectBooster {
 	}
 
 	public static void boostInfinite(LivingEntity target) {
-		int min = LHConfig.COMMON.witchChargeMinDuration.get();
+		int min = LHConfig.SERVER.witchChargeMinDuration.get();
 		var list = new ArrayList<>(target.getActiveEffects());
 		for (var e : list) {
-			if (e.getEffect().getCategory() == MobEffectCategory.HARMFUL) {
+			if (e.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
 				int current = e.getDuration();
 				if (current < min) continue;
 				new EffectBuilder(e).setDuration(MobEffectInstance.INFINITE_DURATION);

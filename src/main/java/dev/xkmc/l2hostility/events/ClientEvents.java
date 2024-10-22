@@ -4,19 +4,16 @@ package dev.xkmc.l2hostility.events;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import dev.xkmc.l2core.events.ClientEffectRenderEvents;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
-import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkClearRenderer;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
-import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
-import dev.xkmc.l2library.init.events.ClientEffectRenderEvents;
-import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2library.util.raytrace.RayTraceUtil;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.player.LocalPlayer;
@@ -24,26 +21,25 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderLevelStageEvent;
-import net.minecraftforge.client.event.RenderNameTagEvent;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.event.RenderNameTagEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.joml.Matrix4f;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = L2Hostility.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@EventBusSubscriber(value = Dist.CLIENT, modid = L2Hostility.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ClientEvents {
 
 	@SubscribeEvent
@@ -54,28 +50,27 @@ public class ClientEvents {
 
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void renderNamePlate(RenderNameTagEvent event) {
-		if (event.getEntity() instanceof LivingEntity le && MobTraitCap.HOLDER.isProper(le)) {
-			LocalPlayer player = Proxy.getClientPlayer();
-			assert player != null;
-			var cap = MobTraitCap.HOLDER.get(le);
-			boolean needHover = le.isInvisible() || LHConfig.CLIENT.showOnlyWhenHovered.get();
-			if (needHover && RayTraceUtil.rayTraceEntity(player, player.getEntityReach(), e -> e == le) == null) {
-				return;
-			}
-			var list = cap.getTitle(
-					LHConfig.CLIENT.showLevelOverHead.get(),
-					LHConfig.CLIENT.showTraitOverHead.get()
-			);
-			int offset = list.size();
-			float off = (float) (double) LHConfig.CLIENT.overHeadRenderOffset.get();
-			Font.DisplayMode mode = player.hasLineOfSight(event.getEntity()) ?
-					Font.DisplayMode.SEE_THROUGH :
-					Font.DisplayMode.NORMAL;
-			for (var e : list) {
-				renderNameTag(event, e, event.getPoseStack(), (offset + off) * 0.2f, mode);
-				offset--;
-			}
+		if (!(event.getEntity() instanceof LivingEntity le)) return;
+		boolean needHover = le.isInvisible() || LHConfig.CLIENT.showOnlyWhenHovered.get();
+		if (needHover && Minecraft.getInstance().crosshairPickEntity != le) return;
+		var opt = LHMiscs.MOB.type().getExisting(le);
+		LocalPlayer player = Minecraft.getInstance().player;
+		if (opt.isEmpty() || player == null) return;
+		var cap = opt.get();
+		var list = cap.getTitle(
+				LHConfig.CLIENT.showLevelOverHead.get(),
+				LHConfig.CLIENT.showTraitOverHead.get()
+		);
+		int offset = list.size();
+		float off = (float) (double) LHConfig.CLIENT.overHeadRenderOffset.get();
+		Font.DisplayMode mode = player.hasLineOfSight(event.getEntity()) ?
+				Font.DisplayMode.SEE_THROUGH :
+				Font.DisplayMode.NORMAL;
+		for (var e : list) {
+			renderNameTag(event, e, event.getPoseStack(), (offset + off) * 0.2f, mode);
+			offset--;
 		}
+
 
 	}
 
@@ -106,16 +101,16 @@ public class ClientEvents {
 	public static final List<Mob> MASTERS = new ArrayList<>();
 
 	@SubscribeEvent
-	public static void onClientTick(TickEvent.ClientTickEvent event) {
-		if (event.phase == TickEvent.Phase.START) {
-			MASTERS.clear();
-		}
-		if (event.phase == TickEvent.Phase.END) {
-			var player = Proxy.getClientPlayer();
-			if (player != null && player.tickCount % PerformanceConstants.CHUNK_RENDER == 0) {
-				renderChunk = CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR_GLASSES.get()) &&
-						CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR.get());
-			}
+	public static void onClientTick(ClientTickEvent.Pre event) {
+		MASTERS.clear();
+	}
+
+	@SubscribeEvent
+	public static void onClientTick(ClientTickEvent.Post event) {
+		var player = Minecraft.getInstance().player;
+		if (player != null && player.tickCount % PerformanceConstants.CHUNK_RENDER == 0) {
+			renderChunk = CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR_GLASSES.get()) &&
+					CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR.get());
 		}
 	}
 
@@ -127,13 +122,13 @@ public class ClientEvents {
 			var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 			if (opt.isEmpty()) return;
 			if (!renderChunk) return;
-			ChunkClearRenderer.render(event.getPoseStack(), player, opt.get(), event.getPartialTick());
+			ChunkClearRenderer.render(event.getPoseStack(), player, opt.get(), event.getPartialTick().getGameTimeDeltaPartialTick(true));
 		}
 		if (event.getStage() == RenderLevelStageEvent.Stage.AFTER_WEATHER) {
 			LevelRenderer renderer = event.getLevelRenderer();
 			MultiBufferSource.BufferSource buffers = Minecraft.getInstance().renderBuffers().bufferSource();
 			VertexConsumer cons = buffers.getBuffer(ClientEffectRenderEvents.get2DIcon(
-					new ResourceLocation("l2hostility:textures/entity/chain.png")));
+					L2Hostility.loc("textures/entity/chain.png")));
 			var pose = event.getPoseStack();
 			pose.pushPose();
 			var cam = event.getCamera().getPosition();
@@ -142,13 +137,13 @@ public class ClientEvents {
 			if (level != null) {
 				for (var e : MASTERS) {
 					if (!e.isAlive()) continue;
-					var cap = MobTraitCap.HOLDER.get(e);
+					var cap = LHMiscs.MOB.type().getOrCreate(e);
 					if (cap.asMaster == null) continue;
 					Vec3 p0 = e.position().add(0, e.getBbHeight() / 2, 0);
 					for (var minions : cap.asMaster.data) {
 						var m = minions.minion;
 						if (m == null || !m.isAlive()) continue;
-						var scap = MobTraitCap.HOLDER.get(m);
+						var scap = LHMiscs.MOB.type().getOrCreate(m);
 						if (scap.asMinion == null) continue;
 						Vec3 p1 = m.position().add(0, m.getBbHeight() / 2, 0);
 						renderLink(event.getPoseStack(), cons, p0, p1, scap.asMinion.protectMaster);
@@ -188,7 +183,7 @@ public class ClientEvents {
 	}
 
 	private static void vertex(PoseStack.Pose entry, VertexConsumer vc, float x, float y, float z, float u, float v) {
-		vc.vertex(entry.pose(), x, y, z).uv(u, v).normal(entry.normal(), 0.0F, 1.0F, 0.0F).endVertex();
+		vc.addVertex(entry.pose(), x, y, z).setUv(u, v).setNormal(entry, 0.0F, 1.0F, 0.0F);
 	}
 
 }

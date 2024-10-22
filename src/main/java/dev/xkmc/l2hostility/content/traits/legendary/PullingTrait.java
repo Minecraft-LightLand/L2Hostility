@@ -14,18 +14,18 @@ public class PullingTrait extends PushPullTrait {
 
 	@Override
 	protected int getRange() {
-		return LHConfig.COMMON.pullingRange.get();
+		return LHConfig.SERVER.pullingRange.get();
 	}
 
 	@Override
 	protected double getStrength(double dist) {
-		return (1 - dist) * dist * LHConfig.COMMON.pullingStrength.get() * -4;
+		return (1 - dist) * dist * LHConfig.SERVER.pullingStrength.get() * -4;
 	}
 
 	@Override
 	public void addDetail(List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-						Component.literal(LHConfig.COMMON.pullingRange.get() + "")
+						Component.literal(LHConfig.SERVER.pullingRange.get() + "")
 								.withStyle(ChatFormatting.AQUA))
 				.withStyle(ChatFormatting.GRAY));
 	}

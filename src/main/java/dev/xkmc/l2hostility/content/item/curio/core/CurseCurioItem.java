@@ -2,30 +2,25 @@ package dev.xkmc.l2hostility.content.item.curio.core;
 
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
-import dev.xkmc.l2damagetracker.contents.curios.AttrTooltip;
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
-import dev.xkmc.l2library.util.Proxy;
-import dev.xkmc.l2library.util.code.GenericItemStack;
-import net.minecraft.Util;
-import net.minecraft.network.chat.Component;
+import dev.xkmc.l2library.util.GenericItemStack;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class CurseCurioItem extends MultiSlotItem {
 
@@ -45,25 +40,17 @@ public class CurseCurioItem extends MultiSlotItem {
 	}
 
 	@Override
-	public final Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+	public final Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation uuid, ItemStack stack) {
 		return getAttributeModifiers(slotContext.entity(), uuid);
 	}
 
-	protected Multimap<Attribute, AttributeModifier> getAttributeModifiers(@Nullable LivingEntity wearer, UUID uuid) {
-		Multimap<Attribute, AttributeModifier> map = LinkedHashMultimap.create();
+	protected Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(@Nullable LivingEntity wearer, ResourceLocation uuid) {
+		Multimap<Holder<Attribute>, AttributeModifier> map = LinkedHashMultimap.create();
 		int lv = getExtraLevel();
 		if (lv > 0) {
-			ResourceLocation id = ForgeRegistries.ITEMS.getKey(this);
-			assert id != null;
-			map.put(LHMiscs.ADD_LEVEL.get(), new AttributeModifier(uuid, id.getPath(), lv, AttributeModifier.Operation.ADDITION));
+			map.put(LHMiscs.ADD_LEVEL, new AttributeModifier(uuid, lv, AttributeModifier.Operation.ADD_VALUE));
 		}
 		return map;
-	}
-
-	@Override
-	public List<Component> getAttributesTooltip(List<Component> tooltips, ItemStack stack) {
-		return AttrTooltip.modifyTooltip(super.getAttributesTooltip(tooltips, stack),
-				getAttributeModifiers(Proxy.getPlayer(), Util.NIL_UUID), false);
 	}
 
 	public int getExtraLevel() {
@@ -82,10 +69,14 @@ public class CurseCurioItem extends MultiSlotItem {
 		return false;
 	}
 
-	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {
+	public void onHurtTarget(ItemStack stack, LivingEntity user, DamageData.Offence cache) {
 	}
 
-	public void onDamage(ItemStack stack, LivingEntity user, LivingDamageEvent event) {
+	public void onDamage(ItemStack stack, LivingEntity user, DamageData.Defence event) {
+	}
+
+	protected ResourceLocation getID() {
+		return BuiltInRegistries.ITEM.getKey(this);
 	}
 
 }

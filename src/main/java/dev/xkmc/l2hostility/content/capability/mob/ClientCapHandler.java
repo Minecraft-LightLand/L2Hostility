@@ -1,7 +1,8 @@
 package dev.xkmc.l2hostility.content.capability.mob;
 
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2serial.serialization.codec.TagCodec;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,8 +15,11 @@ public class ClientCapHandler {
 		if (level == null) return;
 		Entity entity = level.getEntity(packet.id);
 		if (!(entity instanceof LivingEntity le)) return;
-		if (!MobTraitCap.HOLDER.isProper(le)) return;
-		TagCodec.fromTag(packet.tag, MobTraitCap.class, MobTraitCap.HOLDER.get(le), SerialClass.SerialField::toClient);
+		var opt = LHMiscs.MOB.type().getExisting(le);
+		if (opt.isEmpty()) return;
+		new TagCodec(level.registryAccess())
+				.pred(SerialField::toClient)
+				.fromTag(packet.tag, MobTraitCap.class, opt.get());
 	}
 
 }

@@ -28,14 +28,14 @@ public class HostilityOrb extends Item {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (!LHConfig.COMMON.allowHostilityOrb.get())
+		if (!LHConfig.SERVER.allowHostilityOrb.get())
 			return InteractionResultHolder.pass(stack);
 		if (!CurioCompat.hasItemInCurioOrSlot(player, LHItems.DETECTOR.get()) ||
 				!CurioCompat.hasItemInCurioOrSlot(player,LHItems.DETECTOR_GLASSES.get()))
 			return InteractionResultHolder.pass(stack);
 		if (!level.isClientSide()) {
 			boolean success = false;
-			int r = LHConfig.COMMON.orbRadius.get();
+			int r = LHConfig.SERVER.orbRadius.get();
 			for (int x = -r; x <= r; x++) {
 				for (int y = -r; y <= r; y++) {
 					for (int z = -r; z <= r; z++) {
@@ -60,11 +60,11 @@ public class HostilityOrb extends Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		if (!LHConfig.COMMON.allowHostilityOrb.get()) {
+	public void appendHoverText(ItemStack stack, TooltipContext ctx, List<Component> list, TooltipFlag flag) {
+		if (!LHConfig.SERVER.allowHostilityOrb.get()) {
 			return;
 		}
-		int r = LHConfig.COMMON.orbRadius.get() * 2 + 1;
+		int r = LHConfig.SERVER.orbRadius.get() * 2 + 1;
 		list.add(LangData.orbUse().withStyle(ChatFormatting.DARK_GREEN));
 		list.add(LangData.ITEM_ORB.get(r, r, r).withStyle(ChatFormatting.GRAY));
 	}

@@ -24,14 +24,14 @@ public class BottleOfCurse extends DrinkableBottleItem {
 	protected void doServerLogic(ServerPlayer player) {
 		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
 		LevelEditor editor = cap.getLevelEditor();
-		editor.addBase(LHConfig.COMMON.bottleOfCurseLevel.get());
+		editor.addBase(LHConfig.SERVER.bottleOfCurseLevel.get());
 		cap.sync();
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		if (!LHConfig.COMMON.banBottles.get())
-			list.add(LangData.ITEM_BOTTLE_CURSE.get(LHConfig.COMMON.bottleOfCurseLevel.get()).withStyle(ChatFormatting.GRAY));
+		if (!LHConfig.SERVER.banBottles.get())
+			list.add(LangData.ITEM_BOTTLE_CURSE.get(LHConfig.SERVER.bottleOfCurseLevel.get()).withStyle(ChatFormatting.GRAY));
 	}
 
 }

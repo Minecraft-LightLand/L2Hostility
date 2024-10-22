@@ -3,7 +3,9 @@ package dev.xkmc.l2hostility.content.item.wand;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import dev.xkmc.l2magic.content.item.utility.BaseWand;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -12,7 +14,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class TraitAdderWand extends BaseWand {
 	}
 
 	private static List<MobTrait> values() {
-		return new ArrayList<>(LHTraits.TRAITS.get().getValues());
+		return LHTraits.TRAITS.get().stream().toList();
 	}
 
 	private static MobTrait next(MobTrait mod) {
@@ -90,8 +91,8 @@ public class TraitAdderWand extends BaseWand {
 
 	@Override
 	public void clickTarget(ItemStack stack, Player player, LivingEntity target) {
-		if (MobTraitCap.HOLDER.isProper(target)) {
-			MobTraitCap cap = MobTraitCap.HOLDER.get(target);
+		if (LHMiscs.MOB.type().isProper(target)) {
+			MobTraitCap cap = LHMiscs.MOB.type().getOrCreate(target);
 			MobTrait trait = get(stack);
 			Integer ans;
 			if (player.isShiftKeyDown()) {
@@ -121,7 +122,7 @@ public class TraitAdderWand extends BaseWand {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.ITEM_WAND_ADDER.get().withStyle(ChatFormatting.GRAY));
 		MobTrait trait = get(stack);
 		list.add(LangData.MSG_SELECT_TRAIT.get(trait.getDesc().withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.GRAY));

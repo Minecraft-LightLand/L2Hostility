@@ -1,8 +1,8 @@
 package dev.xkmc.l2hostility.content.item.curio.misc;
 
-import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.compat.curios.EntitySlotAccess;
+import dev.xkmc.l2hostility.content.item.curio.core.SingletonItem;
 import dev.xkmc.l2hostility.content.item.traits.SealedItem;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
@@ -10,14 +10,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
-public class PocketOfRestoration extends CurioItem implements ICurioItem {
+public class PocketOfRestoration extends SingletonItem implements ICurioItem {
 
 	public static final String ROOT = "UnsealRoot", KEY = "SealedSlotKey", START = "UnsealStartTime";
 
@@ -76,7 +74,7 @@ public class PocketOfRestoration extends CurioItem implements ICurioItem {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.POCKET_OF_RESTORATION.get().withStyle(ChatFormatting.GOLD));
 		if (stack.getTag() != null && stack.getTag().contains(ROOT)) {
 			list.add(LangData.TOOLTIP_SEAL_DATA.get().withStyle(ChatFormatting.GRAY));

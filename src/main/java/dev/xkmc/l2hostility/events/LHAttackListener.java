@@ -1,46 +1,53 @@
 package dev.xkmc.l2hostility.events;
 
-import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
+import dev.xkmc.l2core.init.reg.ench.LegacyEnchantment;
 import dev.xkmc.l2damagetracker.contents.attack.AttackListener;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.enchantments.HitTargetEnchantment;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
-import dev.xkmc.l2hostility.init.data.HostilityDamageState;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.common.Tags;
 
 public class LHAttackListener implements AttackListener {
 
-	private static boolean masterImmunity(AttackCache cache) {
-		var event = cache.getLivingAttackEvent();
-		if (event != null && event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY))
+	private static final ResourceLocation SCALING = L2Hostility.loc("scaling");
+	private static final ResourceLocation MASTER_IMMUNE = L2Hostility.loc("master_immune");
+
+	private static boolean masterImmunity(DamageData event) {
+		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY))
 			return false;
 		MobTraitCap attacker = null, target = null;
-		if (cache.getAttacker() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob))
-			attacker = MobTraitCap.HOLDER.get(mob);
-		if (cache.getAttackTarget() instanceof Mob mob && MobTraitCap.HOLDER.isProper(mob))
-			target = MobTraitCap.HOLDER.get(mob);
+		if (event.getAttacker() instanceof Mob mob)
+			attacker = LHMiscs.MOB.type().getExisting(mob).orElse(null);
+		if (event.getTarget() instanceof Mob mob)
+			target = LHMiscs.MOB.type().getExisting(mob).orElse(null);
 		LivingEntity attackerMaster = null, targetMaster = null;
 		if (attacker != null && attacker.asMinion != null) {
 			attackerMaster = attacker.asMinion.master;
-			if (cache.getAttackTarget() == attackerMaster) {
+			if (event.getTarget() == attackerMaster) {
 				return true;
 			}
 		}
 		if (target != null && target.asMinion != null) {
 			targetMaster = target.asMinion.master;
-			if (cache.getAttacker() == targetMaster) {
+			if (event.getAttacker() == targetMaster) {
 				return true;
 			}
 		}
@@ -52,72 +59,94 @@ public class LHAttackListener implements AttackListener {
 	}
 
 	@Override
-	public void onAttack(AttackCache cache, ItemStack weapon) {
-		var event = cache.getLivingAttackEvent();
-		assert event != null;
-		if (masterImmunity(cache)) {
-			event.setCanceled(true);
+	public boolean onAttack(DamageData.Attack event) {
+		if (masterImmunity(event)) return true;
+		var source = event.getSource();
+		var target = event.getTarget();
+		boolean bypassInvul = source.is(DamageTypeTags.BYPASSES_INVULNERABILITY);
+		boolean bypassMagic = source.is(DamageTypeTags.BYPASSES_EFFECTS);
+		boolean magic = source.is(Tags.DamageTypes.IS_MAGIC);
+		if (magic && !bypassInvul && !bypassMagic) {
+			if (CurioCompat.hasItemInCurio(target, LHItems.RING_DIVINITY.get())) {
+				return true;
+			}
+		}
+		var opt = LHMiscs.MOB.type().getExisting(target);
+		opt.ifPresent(cap -> cap.traitEvent((k, v) -> k.onAttackedByOthers(v, target, event)));
+		return false;
+	}
+
+	@Override
+	public void onHurt(DamageData.Offence data) {
+		if (data.getSource().is(L2DamageTypes.NO_SCALE))
+			return;
+		LivingEntity attacker = data.getAttacker();
+		var target = data.getTarget();
+		if (attacker == target)
+			return;
+		var targetOpt = LHMiscs.MOB.type().getExisting(target);
+		if (targetOpt.isPresent()) {
+			var cap = targetOpt.get();
+			for (var e : LegacyEnchantment.findAll(data.getWeapon(), HitTargetEnchantment.class, true)) {
+				e.val().hitMob(target, cap, e.lv(), data);
+			}
+		}
+
+		if (attacker != null) {
+			var attOpt = LHMiscs.MOB.type().getExisting(attacker);
+			if (attOpt.isPresent()) {
+				MobTraitCap cap = attOpt.get();
+				if (!attacker.getType().is(LHTagGen.NO_SCALING)) {
+					int lv = cap.getLevel();
+					double factor;
+					if (LHConfig.SERVER.exponentialDamage.get()) {
+						factor = Math.pow(1 + LHConfig.SERVER.damageFactor.get(), lv);
+					} else {
+						factor = 1 + lv * LHConfig.SERVER.damageFactor.get();
+					}
+					data.addHurtModifier(DamageModifier.multTotal((float) factor, SCALING));
+				}
+				TraitEffectCache traitCache = new TraitEffectCache(target);
+				cap.traitEvent((k, v) -> k.onHurtTarget(v, attacker, data, traitCache));
+			}
+		}
+		if (attacker != null) {
+			for (var e : CurseCurioItem.getFromPlayer(attacker)) {
+				e.item().onHurtTarget(e.stack(), attacker, data);
+			}
 		}
 	}
 
 	@Override
-	public void onHurt(AttackCache cache, ItemStack weapon) {
-		var event = cache.getLivingHurtEvent();
-		assert event != null;
-		if (event.getSource().is(L2DamageTypes.NO_SCALE))
-			return;
-		LivingEntity mob = cache.getAttacker();
-		var target = cache.getAttackTarget();
-		if (mob == target)
-			return;
-		if (MobTraitCap.HOLDER.isProper(target)) {
-			MobTraitCap cap = MobTraitCap.HOLDER.get(target);
-			for (var e : weapon.getAllEnchantments().entrySet()) {
-				if (e.getKey() instanceof HitTargetEnchantment ench) {
-					ench.hitMob(target, cap, e.getValue(), cache);
-				}
-			}
-		}
-		if (mob != null && MobTraitCap.HOLDER.isProper(mob)) {
-			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
-			if (!mob.getType().is(LHTagGen.NO_SCALING)) {
-				int lv = cap.getLevel();
-				double factor;
-				if (LHConfig.COMMON.exponentialDamage.get()) {
-					factor = Math.pow(1 + LHConfig.COMMON.damageFactor.get(), lv);
-				} else {
-					factor = 1 + lv * LHConfig.COMMON.damageFactor.get();
-				}
-				cache.addHurtModifier(DamageModifier.multTotal((float) factor));
-			}
-			TraitEffectCache traitCache = new TraitEffectCache(target);
-			cap.traitEvent((k, v) -> k.onHurtTarget(v, mob, cache, traitCache));
-		}
-		if (mob != null) {
-			for (var e : CurseCurioItem.getFromPlayer(mob)) {
-				e.item().onHurtTarget(e.stack(), mob, cache);
-			}
-		}
+	public void onHurtMaximized(DamageData.OffenceMax data) {
+		var mob = data.getTarget();
+		var opt = LHMiscs.MOB.type().getExisting(mob);
+		opt.ifPresent(cap -> cap.traitEvent((k, v) -> k.onHurtByMax(v, mob, data)));
 	}
 
 	@Override
-	public void onDamage(AttackCache cache, ItemStack weapon) {
-		var mob = cache.getAttackTarget();
-		if (MobTraitCap.HOLDER.isProper(mob)) {
-			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
-			cap.traitEvent((k, v) -> k.onDamaged(v, mob, cache));
+	public void onDamage(DamageData.Defence data) {
+		var mob = data.getTarget();
+		var opt = LHMiscs.MOB.type().getExisting(mob);
+		if (opt.isPresent()) {
+			MobTraitCap cap = opt.get();
+			cap.traitEvent((k, v) -> k.onDamaged(v, mob, data));
 		}
-		if (masterImmunity(cache)) {
-			cache.addDealtModifier(DamageModifier.nonlinearFinal(10432, e -> 0));
+		for (var e : CurioCompat.getItems(mob, e -> e.getItem() instanceof CurseCurioItem)) {
+			if (e.getItem() instanceof CurseCurioItem curse) {
+				curse.onDamage(e, mob, data);
+			}
+		}
+		if (masterImmunity(data)) {
+			data.addDealtModifier(DamageModifier.nonlinearFinal(10432, e -> 0, MASTER_IMMUNE));
 		}
 	}
 
 	@Override
 	public void onCreateSource(CreateSourceEvent event) {
 		LivingEntity mob = event.getAttacker();
-		if (MobTraitCap.HOLDER.isProper(mob)) {
-			MobTraitCap.HOLDER.get(mob).traitEvent((k, v) -> k.onCreateSource(v, event.getAttacker(), event));
-		}
+		var opt = LHMiscs.MOB.type().getExisting(mob);
+		opt.ifPresent(cap -> cap.traitEvent((k, v) -> k.onCreateSource(v, event.getAttacker(), event)));
 		var type = event.getResult();
 		if (type == null) return;
 		var root = type.toRoot();
@@ -126,7 +155,7 @@ public class LHAttackListener implements AttackListener {
 				event.enable(DefaultDamageState.BYPASS_MAGIC);
 			}
 			if (CurioCompat.hasItemInCurio(mob, LHItems.PLATINUM_STAR.get())) {
-				event.enable(HostilityDamageState.BYPASS_COOLDOWN);
+				event.enable(DefaultDamageState.BYPASS_COOLDOWN);
 			}
 		}
 

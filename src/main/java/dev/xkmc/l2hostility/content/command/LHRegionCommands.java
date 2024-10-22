@@ -90,7 +90,7 @@ public class LHRegionCommands extends HostilityCommands {
 			BlockPos sel = BlockPosArgument.getLoadedBlockPos(ctx, "pos");
 			var e = SectionDifficulty.sectionAt(ctx.getSource().getLevel(), sel);
 			if (e.isEmpty()) throw ERROR_NOT_LOADED.create();
-			if (!LHConfig.COMMON.allowSectionDifficulty.get()) {
+			if (!LHConfig.SERVER.allowSectionDifficulty.get()) {
 				ctx.getSource().sendSystemMessage(LangData.COMMAND_REGION_LOCAL_OFF.get().withStyle(ChatFormatting.RED));
 				return 1;
 			}
@@ -127,7 +127,7 @@ public class LHRegionCommands extends HostilityCommands {
 			int level = ctx.getArgument("level", Integer.class);
 			BlockPos from = BlockPosArgument.getLoadedBlockPos(ctx, "from");
 			BlockPos to = BlockPosArgument.getLoadedBlockPos(ctx, "to");
-			if (!LHConfig.COMMON.allowSectionDifficulty.get()) {
+			if (!LHConfig.SERVER.allowSectionDifficulty.get()) {
 				ctx.getSource().sendSystemMessage(LangData.COMMAND_REGION_LOCAL_OFF.get().withStyle(ChatFormatting.RED));
 				return 1;
 			}
@@ -156,7 +156,7 @@ public class LHRegionCommands extends HostilityCommands {
 	}
 
 	private static int iterate(BlockPos from, BlockPos to, Predicate<BlockPos> pred) {
-		AABB aabb = new AABB(from, to);
+		AABB aabb = AABB.encapsulatingFullBlocks(from, to);
 		int x0 = ((int) aabb.minX) & -15;
 		int y0 = ((int) aabb.minY) & -15;
 		int z0 = ((int) aabb.minZ) & -15;

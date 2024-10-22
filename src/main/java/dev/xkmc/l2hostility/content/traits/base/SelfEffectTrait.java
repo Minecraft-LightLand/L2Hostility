@@ -1,40 +1,40 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
+import dev.xkmc.l2core.base.effects.EffectUtil;
 import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.init.data.LangData;
-import dev.xkmc.l2library.base.effects.EffectUtil;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class SelfEffectTrait extends MobTrait {
 
-	public final Supplier<MobEffect> effect;
+	public final Holder<MobEffect> effect;
 
-	public SelfEffectTrait(Supplier<MobEffect> effect) {
-		super(() -> effect.get().getColor());
+	public SelfEffectTrait(Holder<MobEffect> effect) {
+		super(() -> effect.value().getColor());
 		this.effect = effect;
 	}
 
 	@Override
 	public void tick(LivingEntity mob, int level) {
 		if (mob.level().isClientSide()) return;
-		EffectUtil.refreshEffect(mob, new MobEffectInstance(effect.get(), PerformanceConstants.selfEffectInterval(), level - 1), EffectUtil.AddReason.FORCE, mob);
+		EffectUtil.refreshEffect(mob, new MobEffectInstance(effect, PerformanceConstants.selfEffectInterval(), level - 1), mob);
 	}
 
 	@Override
 	public void addDetail(List<Component> list) {
 		list.add(LangData.TOOLTIP_SELF_EFFECT.get());
-		ChatFormatting color = effect.get().getCategory().getTooltipFormatting();
+		ChatFormatting color = effect.value().getCategory().getTooltipFormatting();
 		if (getMaxLevel() == 1) {
-			list.add(effect.get().getDisplayName().copy().withStyle(color));
+			list.add(effect.value().getDisplayName().copy().withStyle(color));
 		} else list.add(mapLevel(e ->
-				Component.translatable("potion.withAmplifier", effect.get().getDisplayName(),
+				Component.translatable("potion.withAmplifier", effect.value().getDisplayName(),
 								Component.translatable("potion.potency." + (e - 1)))
 						.withStyle(color))
 		);

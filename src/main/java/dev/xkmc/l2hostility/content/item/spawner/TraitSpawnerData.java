@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.item.spawner;
 
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -16,7 +17,7 @@ public class TraitSpawnerData {
 		ALIVE, DEAD, MISSING
 	}
 
-	@SerialClass.SerialField
+	@SerialField
 	private final HashMap<UUID, TrackedEntity> list = new HashMap<>();
 
 	private boolean init = false;
@@ -24,13 +25,13 @@ public class TraitSpawnerData {
 	@SerialClass
 	public static class TrackedEntity {
 
-		@SerialClass.SerialField
+		@SerialField
 		public UUID uuid;
 
-		@SerialClass.SerialField(toClient = true)
+		@SerialField(toClient = true)
 		public int uid;
 
-		@SerialClass.SerialField(toClient = true)
+		@SerialField(toClient = true)
 		public EntityState state;
 
 		@Nullable

@@ -1,24 +1,23 @@
 package dev.xkmc.l2hostility.init.advancements;
 
+import dev.xkmc.l2core.serial.advancements.BaseCriterion;
+import dev.xkmc.l2core.serial.advancements.BaseCriterionInstance;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
-import dev.xkmc.l2library.serial.advancements.BaseCriterion;
-import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
-import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.resources.ResourceLocation;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.server.level.ServerPlayer;
 
 public class KillTraitsTrigger extends BaseCriterion<KillTraitsTrigger.Ins, KillTraitsTrigger> {
 
 	public static Ins ins(MobTrait... traits) {
-		var ans = new Ins(HostilityTriggers.KILL_TRAITS.getId(), ContextAwarePredicate.ANY);
+		var ans = new Ins();
 		ans.traits = traits;
 		return ans;
 	}
 
-	public KillTraitsTrigger(ResourceLocation id) {
-		super(id, Ins::new, Ins.class);
+	public KillTraitsTrigger() {
+		super(Ins.class);
 	}
 
 	public void trigger(ServerPlayer player, MobTraitCap cap) {
@@ -28,11 +27,11 @@ public class KillTraitsTrigger extends BaseCriterion<KillTraitsTrigger.Ins, Kill
 	@SerialClass
 	public static class Ins extends BaseCriterionInstance<Ins, KillTraitsTrigger> {
 
-		@SerialClass.SerialField
+		@SerialField
 		public MobTrait[] traits;
 
-		public Ins(ResourceLocation id, ContextAwarePredicate player) {
-			super(id, player);
+		protected Ins() {
+			super(HostilityTriggers.KILL_TRAITS);
 		}
 
 		public boolean matchAll(MobTraitCap cap) {

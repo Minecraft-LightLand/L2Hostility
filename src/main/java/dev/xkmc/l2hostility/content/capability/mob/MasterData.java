@@ -4,7 +4,9 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.traits.legendary.MasterTrait;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
@@ -14,6 +16,7 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -34,9 +37,9 @@ public class MasterData {
 					rand.nextInt(0, 3),
 					rand.nextInt(0, r * 2 + 1) - r
 			);
-			if (sl.noCollision(type.getAABB(p.getX(), p.getY(), p.getZ()))) {
+			if (sl.noCollision(type.getSpawnAABB(p.getX(), p.getY(), p.getZ()))) {
 				Vec3 e = Vec3.atBottomCenterOf(p).add(0, type.getHeight() / 2, 0);
-				var bhit = sl.clip(new ClipContext(eye, e, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, null));
+				var bhit = sl.clip(new ClipContext(eye, e, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, CollisionContext.empty()));
 				if (bhit.getType() == HitResult.Type.MISS) {
 					return p;
 				}
@@ -45,11 +48,11 @@ public class MasterData {
 		return null;
 	}
 
-	@SerialClass.SerialField(toClient = true)
+	@SerialField
 	public ArrayList<Minion> data = new ArrayList<>();
 
-	@SerialClass.SerialField
-	private LinkedHashMap<EntityType<?>, Data> map = new LinkedHashMap<>();
+	@SerialField(toClient = false)
+	private final LinkedHashMap<EntityType<?>, Data> map = new LinkedHashMap<>();
 
 	public boolean tick(MobTraitCap cap, Mob mob) {
 		var config = MasterTrait.getConfig(mob.getType());
@@ -106,10 +109,10 @@ public class MasterData {
 	@SerialClass
 	public static class Minion {
 
-		@SerialClass.SerialField(toClient = true)
+		@SerialField(toClient = true)
 		public UUID uuid;
 
-		@SerialClass.SerialField(toClient = true)
+		@SerialField(toClient = true)
 		public int id;
 
 		public Mob minion;
@@ -146,7 +149,7 @@ public class MasterData {
 
 		private int count;
 
-		@SerialClass.SerialField
+		@SerialField
 		public int cooldown;
 
 		public void setup(EntityConfig.Minion e) {
@@ -159,9 +162,9 @@ public class MasterData {
 			int r = config.spawnRange();
 			BlockPos target = getRandomPos(sl, config.type(), mob, r / 2, 16);
 			if (target == null) return null;
-			var e = config.type().create(sl, null, null, target, MobSpawnType.MOB_SUMMONED, false, false);
-			if (!(e instanceof Mob m)) return null;
-			var cap = MobTraitCap.HOLDER.get(m);
+			var e = config.type().create(sl, null, target, MobSpawnType.MOB_SUMMONED, false, false);
+			if (!(e instanceof Mob m) || !LHMiscs.MOB.type().isProper(m)) return null;
+			var cap = LHMiscs.MOB.type().getOrCreate(m);
 			RegionalDifficultyModifier diff = (p, c) -> {
 				if (config.copyLevel()) {
 					c.base = parent.getLevel();

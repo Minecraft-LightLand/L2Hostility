@@ -11,7 +11,7 @@ public class PlayerFinder {
 
 	@Nullable
 	public static Player getNearestPlayer(Level level, LivingEntity le) {
-		int safeZone = LHConfig.COMMON.newPlayerProtectRange.get();
+		int safeZone = LHConfig.SERVER.newPlayerProtectRange.get();
 		int sr = safeZone * safeZone;
 
 		int lowLv = 0;

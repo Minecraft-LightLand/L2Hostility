@@ -3,27 +3,25 @@ package dev.xkmc.l2hostility.init.registrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.MenuEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2core.init.reg.registrate.SimpleEntry;
 import dev.xkmc.l2hostility.content.item.beacon.*;
 import dev.xkmc.l2hostility.content.item.spawner.BurstSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlock;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
-import dev.xkmc.l2modularblock.DelegateBlock;
-import net.minecraft.resources.ResourceLocation;
+import dev.xkmc.l2modularblock.core.DelegateBlock;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 
 import java.util.Locale;
 
 public class LHBlocks {
 
-	public static final RegistryEntry<CreativeModeTab> TAB = L2Hostility.REGISTRATE.buildL2CreativeTab(
+	public static final SimpleEntry<CreativeModeTab> TAB = L2Hostility.REGISTRATE.buildL2CreativeTab(
 			"hostility", "L2Hostility", e -> e.icon(() -> LHTraits.ENDER.get().asItem().getDefaultInstance()));
 
 	public static final BlockEntry<Block> CHAOS, MIRACLE;
@@ -36,16 +34,16 @@ public class LHBlocks {
 	public static final MenuEntry<HostilityBeaconMenu> MT_BEACON;
 
 	static {
-		CHAOS = L2Hostility.REGISTRATE.block("chaos_block", p -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)))
+		CHAOS = L2Hostility.REGISTRATE.block("chaos_block", p -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERITE_BLOCK)))
 				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, LHTagGen.BEACON_BLOCK)
 				.simpleItem().register();
 
-		MIRACLE = L2Hostility.REGISTRATE.block("miracle_block", p -> new Block(BlockBehaviour.Properties.copy(Blocks.NETHERITE_BLOCK)))
+		MIRACLE = L2Hostility.REGISTRATE.block("miracle_block", p -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERITE_BLOCK)))
 				.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL, LHTagGen.BEACON_BLOCK)
 				.simpleItem().register();
 
 		BURST_SPAWNER = L2Hostility.REGISTRATE.block("hostility_spawner", p ->
-						DelegateBlock.newBaseBlock(BlockBehaviour.Properties.copy(Blocks.SPAWNER)
+						DelegateBlock.newBaseBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.SPAWNER)
 										.strength(50.0F, 1200.0F),
 								TraitSpawnerBlock.BASE, TraitSpawnerBlock.CLICK,
 								TraitSpawnerBlock.BURST, TraitSpawnerBlock.BE_BURST))
@@ -65,7 +63,7 @@ public class LHBlocks {
 				.validBlocks(BURST_SPAWNER).register();
 
 		HOSTILITY_BEACON = L2Hostility.REGISTRATE.block("hostility_beacon", p ->
-						new HostilityBeaconBlock(BlockBehaviour.Properties.copy(Blocks.BEACON)))
+						new HostilityBeaconBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BEACON)))
 				.blockstate(HostilityBeaconBlock::buildModel).tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
 				.simpleItem().register();
 

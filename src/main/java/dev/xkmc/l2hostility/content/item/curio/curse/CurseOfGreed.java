@@ -9,8 +9,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -22,17 +20,17 @@ public class CurseOfGreed extends CurseCurioItem {
 
 	@Override
 	public int getExtraLevel() {
-		return LHConfig.COMMON.greedExtraLevel.get();
+		return LHConfig.SERVER.greedExtraLevel.get();
 	}
 
 	@Override
 	public double getLootFactor(ItemStack stack, PlayerDifficulty player, MobTraitCap mob) {
-		return LHConfig.COMMON.greedDropFactor.get();
+		return LHConfig.SERVER.greedDropFactor.get();
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.ITEM_CHARM_GREED.get(LHConfig.COMMON.greedDropFactor.get()).withStyle(ChatFormatting.GOLD));
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
+		list.add(LangData.ITEM_CHARM_GREED.get(LHConfig.SERVER.greedDropFactor.get()).withStyle(ChatFormatting.GOLD));
 	}
 
 }

@@ -1,13 +1,14 @@
 package dev.xkmc.l2hostility.init.advancements;
 
+import dev.xkmc.l2core.serial.advancements.BaseCriterion;
+import dev.xkmc.l2core.serial.advancements.BaseCriterionInstance;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
-import dev.xkmc.l2library.serial.advancements.BaseCriterion;
-import dev.xkmc.l2library.serial.advancements.BaseCriterionInstance;
-import dev.xkmc.l2serial.serialization.SerialClass;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Predicate;
@@ -15,7 +16,7 @@ import java.util.function.Predicate;
 public class KillTraitFlameTrigger extends BaseCriterion<KillTraitFlameTrigger.Ins, KillTraitFlameTrigger> {
 
 	public enum Type {
-		FLAME(le -> le.isOnFire());
+		FLAME(Entity::isOnFire);
 
 		private final Predicate<LivingEntity> pred;
 
@@ -29,14 +30,14 @@ public class KillTraitFlameTrigger extends BaseCriterion<KillTraitFlameTrigger.I
 	}
 
 	public static Ins ins(MobTrait traits, Type effect) {
-		var ans = new Ins(HostilityTriggers.TRAIT_FLAME.getId(), ContextAwarePredicate.ANY);
+		var ans = new Ins();
 		ans.trait = traits;
 		ans.effect = effect;
 		return ans;
 	}
 
 	public KillTraitFlameTrigger(ResourceLocation id) {
-		super(id, Ins::new, Ins.class);
+		super(Ins.class);
 	}
 
 	public void trigger(ServerPlayer player, LivingEntity le, MobTraitCap cap) {
@@ -46,14 +47,14 @@ public class KillTraitFlameTrigger extends BaseCriterion<KillTraitFlameTrigger.I
 	@SerialClass
 	public static class Ins extends BaseCriterionInstance<Ins, KillTraitFlameTrigger> {
 
-		@SerialClass.SerialField
+		@SerialField
 		public MobTrait trait;
 
-		@SerialClass.SerialField
+		@SerialField
 		public Type effect;
 
-		public Ins(ResourceLocation id, ContextAwarePredicate player) {
-			super(id, player);
+		public Ins() {
+			super(HostilityTriggers.TRAIT_FLAME);
 		}
 
 		public boolean matchAll(LivingEntity le, MobTraitCap cap) {

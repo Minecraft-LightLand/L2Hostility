@@ -1,14 +1,15 @@
 package dev.xkmc.l2hostility.content.config;
 
 import com.mojang.datafixers.util.Pair;
+import dev.xkmc.l2core.serial.config.BaseConfig;
+import dev.xkmc.l2core.serial.config.CollectType;
+import dev.xkmc.l2core.serial.config.ConfigCollect;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2library.serial.config.BaseConfig;
-import dev.xkmc.l2library.serial.config.CollectType;
-import dev.xkmc.l2library.serial.config.ConfigCollect;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -27,7 +28,7 @@ public class EntityConfig extends BaseConfig {
 		return !config.blacklist.contains(trait);
 	}
 
-	@SerialClass.SerialField
+	@SerialField
 	@ConfigCollect(CollectType.COLLECT)
 	public final ArrayList<Config> list = new ArrayList<>();
 
@@ -51,14 +52,14 @@ public class EntityConfig extends BaseConfig {
 
 	@Nullable
 	public Config get(EntityType<?> type) {
-		if (!LHConfig.COMMON.enableEntitySpecificDatapack.get())
+		if (!LHConfig.SERVER.enableEntitySpecificDatapack.get())
 			return null;
 		return cache.get(type);
 	}
 
 	@Nullable
 	public <T> Config get(EntityType<?> type, ResourceLocation id, Class<T> cls, T obj) {
-		if (!LHConfig.COMMON.enableEntitySpecificDatapack.get())
+		if (!LHConfig.SERVER.enableEntitySpecificDatapack.get())
 			return null;
 		var list = conditions.get(id);
 		if (list == null) return null;
@@ -75,29 +76,29 @@ public class EntityConfig extends BaseConfig {
 	@SerialClass
 	public static class Config {
 
-		@SerialClass.SerialField
+		@SerialField
 		public final ArrayList<EntityType<?>> entities = new ArrayList<>();
 
-		@SerialClass.SerialField
+		@SerialField
 		private final ArrayList<SpecialConfigCondition<?>> specialConditions = new ArrayList<>();
 
-		@SerialClass.SerialField
+		@SerialField
 		private final ArrayList<TraitBase> traits = new ArrayList<>();
 
-		@SerialClass.SerialField
+		@SerialField
 		private final LinkedHashSet<MobTrait> blacklist = new LinkedHashSet<>();
 
-		@SerialClass.SerialField
+		@SerialField
 		private WorldDifficultyConfig.DifficultyConfig difficulty =
 				new WorldDifficultyConfig.DifficultyConfig(0, 0, 0, 0, 1, 1);
 
-		@SerialClass.SerialField
+		@SerialField
 		public final ArrayList<ItemPool> items = new ArrayList<>();
 
-		@SerialClass.SerialField
+		@SerialField
 		public int minSpawnLevel = 0, maxLevel = 0;
 
-		@SerialClass.SerialField
+		@SerialField
 		public MasterConfig asMaster = null;
 
 		@Deprecated
@@ -171,7 +172,7 @@ public class EntityConfig extends BaseConfig {
 
 		public Minion(EntityType<?> type, int maxCount, int minLevel, double maxHealthPercentage,
 					  int spawnRange, int cooldown, boolean copyLevel, boolean copyTrait,
-					  double linkDistance, boolean protectMaster, boolean discardOnUnlink){
+					  double linkDistance, boolean protectMaster, boolean discardOnUnlink) {
 			this(type, maxCount, minLevel, maxHealthPercentage,
 					spawnRange, cooldown, copyLevel, copyTrait,
 					linkDistance, protectMaster, discardOnUnlink,

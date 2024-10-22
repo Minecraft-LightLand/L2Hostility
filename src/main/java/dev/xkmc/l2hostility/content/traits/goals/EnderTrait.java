@@ -1,6 +1,6 @@
 package dev.xkmc.l2hostility.content.traits.goals;
 
-import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
+import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
@@ -14,9 +14,9 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.entity.EntityTeleportEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
 
 public class EnderTrait extends LegendaryTrait {
 
@@ -27,15 +27,15 @@ public class EnderTrait extends LegendaryTrait {
 	@Override
 	public void tick(LivingEntity mob, int level) {
 		if (mob.level().isClientSide()) return;
-		int duration = LHConfig.COMMON.teleportDuration.get();
-		int r = LHConfig.COMMON.teleportRange.get();
+		int duration = LHConfig.SERVER.teleportDuration.get();
+		int r = LHConfig.SERVER.teleportRange.get();
 		if (mob.tickCount % duration == 0 && mob instanceof Mob m && m.getTarget() != null) {
 			Vec3 old = mob.position();
 			Vec3 target = m.getTarget().position();
 			if (target.distanceTo(old) > r) {
 				target = target.subtract(old).normalize().scale(r).add(old);
 			}
-			EntityTeleportEvent.EnderEntity event = ForgeEventFactory.onEnderTeleport(m, target.x, target.y, target.z);
+			EntityTeleportEvent.EnderEntity event = EventHooks.onEnderTeleport(m, target.x, target.y, target.z);
 			if (event.isCanceled()) return;
 			mob.teleportTo(target.x(), target.y(), target.z());
 			if (!mob.level().noCollision(mob)) {
@@ -51,18 +51,17 @@ public class EnderTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
+	public boolean onAttackedByOthers(int level, LivingEntity entity, DamageData.Attack event) {
 		if (!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
 				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				!event.getSource().is(L2DamageTypes.MAGIC)) {
-			if (teleport(entity) || event.getSource().is(DamageTypeTags.IS_PROJECTILE)) {
-				event.setCanceled(true);
-			}
+				!event.getSource().is(Tags.DamageTypes.IS_MAGIC)) {
+			return teleport(entity) || event.getSource().is(DamageTypeTags.IS_PROJECTILE);
 		}
+		return false;
 	}
 
 	private static boolean teleport(LivingEntity entity) {
-		int r = LHConfig.COMMON.teleportRange.get();
+		int r = LHConfig.SERVER.teleportRange.get();
 		if (!entity.level().isClientSide() && entity.isAlive() && r > 0) {
 			double d0 = entity.getX() + (entity.getRandom().nextDouble() - 0.5D) * r * 2;
 			double d1 = entity.getY() + (double) (entity.getRandom().nextInt(r * 2) - r);
@@ -83,7 +82,7 @@ public class EnderTrait extends LegendaryTrait {
 		boolean flag = blockstate.blocksMotion();
 		boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
 		if (flag && !flag1) {
-			EntityTeleportEvent.EnderEntity event = ForgeEventFactory.onEnderTeleport(entity, pX, pY, pZ);
+			EntityTeleportEvent.EnderEntity event = EventHooks.onEnderTeleport(entity, pX, pY, pZ);
 			if (event.isCanceled()) return false;
 			Vec3 vec3 = entity.position();
 			boolean flag2 = entity.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);

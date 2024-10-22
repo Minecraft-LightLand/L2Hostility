@@ -1,10 +1,11 @@
 package dev.xkmc.l2hostility.content.config;
 
+import dev.xkmc.l2core.serial.config.BaseConfig;
+import dev.xkmc.l2core.serial.config.CollectType;
+import dev.xkmc.l2core.serial.config.ConfigCollect;
 import dev.xkmc.l2hostility.init.data.LHConfig;
-import dev.xkmc.l2library.serial.config.BaseConfig;
-import dev.xkmc.l2library.serial.config.CollectType;
-import dev.xkmc.l2library.serial.config.ConfigCollect;
-import dev.xkmc.l2serial.serialization.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialClass;
+import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -24,33 +25,33 @@ import java.util.HashMap;
 public class WorldDifficultyConfig extends BaseConfig {
 
 	public static DifficultyConfig defaultLevel() {
-		int base = LHConfig.COMMON.defaultLevelBase.get();
-		double var = LHConfig.COMMON.defaultLevelVar.get();
-		double scale = LHConfig.COMMON.defaultLevelScale.get();
+		int base = LHConfig.SERVER.defaultLevelBase.get();
+		double var = LHConfig.SERVER.defaultLevelVar.get();
+		double scale = LHConfig.SERVER.defaultLevelScale.get();
 		return new DifficultyConfig(0, base, var, scale, 1, 1);
 	}
 
 	@ConfigCollect(CollectType.MAP_OVERWRITE)
-	@SerialClass.SerialField
+	@SerialField
 	public final HashMap<ResourceLocation, DifficultyConfig> levelMap = new HashMap<>();
 
 	@ConfigCollect(CollectType.MAP_OVERWRITE)
-	@SerialClass.SerialField
+	@SerialField
 	public final HashMap<ResourceLocation, DifficultyConfig> biomeMap = new HashMap<>();
 
 	@ConfigCollect(CollectType.MAP_COLLECT)
-	@SerialClass.SerialField
+	@SerialField
 	public final HashMap<ResourceLocation, ArrayList<EntityConfig.Config>> levelDefaultTraits = new HashMap<>();
 
 	@ConfigCollect(CollectType.MAP_COLLECT)
-	@SerialClass.SerialField
+	@SerialField
 	public final HashMap<ResourceLocation, ArrayList<EntityConfig.Config>> structureDefaultTraits = new HashMap<>();
 
 	@Nullable
 	public EntityConfig.Config get(ServerLevel level, BlockPos pos, EntityType<?> type) {
-		if (!LHConfig.COMMON.enableEntitySpecificDatapack.get())
+		if (!LHConfig.SERVER.enableEntitySpecificDatapack.get())
 			return null;
-		if (!LHConfig.COMMON.enableStructureSpecificDatapack.get())
+		if (!LHConfig.SERVER.enableStructureSpecificDatapack.get())
 			return null;
 		if (structureDefaultTraits.isEmpty())
 			return null;
@@ -83,7 +84,7 @@ public class WorldDifficultyConfig extends BaseConfig {
 
 	@Nullable
 	public EntityConfig.Config get(ResourceLocation level, EntityType<?> type) {
-		if (!LHConfig.COMMON.enableEntitySpecificDatapack.get())
+		if (!LHConfig.SERVER.enableEntitySpecificDatapack.get())
 			return null;
 		var list = levelDefaultTraits.get(level);
 		if (list == null) return null;

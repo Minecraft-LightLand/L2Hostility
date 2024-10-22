@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
-import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -9,6 +8,7 @@ import dev.xkmc.l2hostility.init.data.LHDamageTypes;
 import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.network.TraitEffects;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -29,11 +29,11 @@ public class KillerAuraTrait extends LegendaryTrait {
 
 	@Override
 	public void tick(LivingEntity mob, int level) {
-		int itv = LHConfig.COMMON.killerAuraInterval.get() / level;
-		int damage = LHConfig.COMMON.killerAuraDamage.get() * level;
-		int range = LHConfig.COMMON.killerAuraRange.get();
+		int itv = LHConfig.SERVER.killerAuraInterval.get() / level;
+		int damage = LHConfig.SERVER.killerAuraDamage.get() * level;
+		int range = LHConfig.SERVER.killerAuraRange.get();
 		if (!mob.level().isClientSide() && mob.tickCount % itv == 0) {
-			MobTraitCap cap = MobTraitCap.HOLDER.get(mob);
+			MobTraitCap cap = LHMiscs.MOB.type().getOrCreate(mob);
 			AABB box = mob.getBoundingBox().inflate(range);
 			for (var e : mob.level().getEntitiesOfClass(LivingEntity.class, box)) {
 				if (e instanceof Player pl && !pl.getAbilities().instabuild ||
@@ -47,7 +47,7 @@ public class KillerAuraTrait extends LegendaryTrait {
 							null, mob), damage);
 				}
 			}
-			L2Hostility.HANDLER.toTrackingPlayers(new TraitEffectToClient(mob, this, TraitEffects.AURA), mob);
+			L2Hostility.HANDLER.toTrackingPlayers(TraitEffectToClient.of(mob, this, TraitEffects.AURA), mob);
 		}
 		if (mob.level().isClientSide()) {
 			Vec3 center = mob.position();
@@ -64,11 +64,11 @@ public class KillerAuraTrait extends LegendaryTrait {
 	@Override
 	public void addDetail(List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-				mapLevel(i -> Component.literal(LHConfig.COMMON.killerAuraDamage.get() * i + "")
+				mapLevel(i -> Component.literal(LHConfig.SERVER.killerAuraDamage.get() * i + "")
 						.withStyle(ChatFormatting.AQUA)),
-				Component.literal("" + LHConfig.COMMON.killerAuraRange.get())
+				Component.literal("" + LHConfig.SERVER.killerAuraRange.get())
 						.withStyle(ChatFormatting.AQUA),
-				mapLevel(i -> Component.literal(Math.round(LHConfig.COMMON.killerAuraInterval.get() * 5d / i) * 0.01 + "")
+				mapLevel(i -> Component.literal(Math.round(LHConfig.SERVER.killerAuraInterval.get() * 5d / i) * 0.01 + "")
 						.withStyle(ChatFormatting.AQUA))
 		).withStyle(ChatFormatting.GRAY));
 	}

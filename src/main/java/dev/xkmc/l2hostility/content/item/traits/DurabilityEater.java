@@ -10,7 +10,7 @@ public class DurabilityEater {
 	public static void corrosion(LivingEntity target, EquipmentSlot slot) {
 		ItemStack stack = target.getItemBySlot(slot);
 		if (!stack.isDamageableItem()) return;
-		double factor = LHConfig.COMMON.corrosionDurability.get();
+		double factor = LHConfig.SERVER.corrosionDurability.get();
 		int add = (int) (stack.getDamageValue() * factor);
 		if (add <= 0) return;
 		stack.hurtAndBreak(add, target, e -> e.broadcastBreakEvent(slot));
@@ -19,7 +19,7 @@ public class DurabilityEater {
 	public static void erosion(LivingEntity target, EquipmentSlot slot) {
 		ItemStack stack = target.getItemBySlot(slot);
 		if (!stack.isDamageableItem()) return;
-		double factor = LHConfig.COMMON.erosionDurability.get();
+		double factor = LHConfig.SERVER.erosionDurability.get();
 		int add = (int) ((stack.getMaxDamage() - stack.getDamageValue()) * factor);
 		if (add <= 0) return;
 		stack.hurtAndBreak(add, target, e -> e.broadcastBreakEvent(slot));

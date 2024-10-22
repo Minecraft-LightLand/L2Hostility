@@ -6,15 +6,16 @@ import dev.xkmc.l2hostility.content.capability.chunk.SectionDifficulty;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
-import dev.xkmc.l2hostility.init.L2HostilityClient;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
+import dev.xkmc.l2tabs.init.L2Tabs;
 import dev.xkmc.l2tabs.tabs.contents.BaseTextScreen;
 import dev.xkmc.l2tabs.tabs.core.TabManager;
+import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
@@ -24,12 +25,12 @@ import java.util.function.Supplier;
 public class DifficultyScreen extends BaseTextScreen {
 
 	protected DifficultyScreen(Component title) {
-		super(title, new ResourceLocation("l2tabs:textures/gui/empty.png"));
+		super(title, L2Tabs.loc("textures/gui/empty.png"));
 	}
 
 	public void init() {
 		super.init();
-		new TabManager(this).init(this::addRenderableWidget, L2HostilityClient.TAB_DIFFICULTY);
+		new TabManager<>(this, new InvTabData()).init(this::addRenderableWidget, LHMiscs.TAB_DIFFICULTY.get());
 	}
 
 	public void render(GuiGraphics g, int mx, int my, float ptick) {
@@ -55,17 +56,17 @@ public class DifficultyScreen extends BaseTextScreen {
 	public static void addRewardInfo(List<Pair<Component, Supplier<List<Component>>>> list) {
 		Player player = Minecraft.getInstance().player;
 		assert player != null;
-		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
+		PlayerDifficulty cap = LHMiscs.PLAYER.type().getOrCreate(player);
 		list.add(Pair.of(LangData.INFO_REWARD.get(cap.getRewardCount()).withStyle(ChatFormatting.DARK_GREEN), List::of));
 	}
 
 	public static void addDifficultyInfo(List<Pair<Component, Supplier<List<Component>>>> list, ChatFormatting... formats) {// red, green, gold
 		Player player = Minecraft.getInstance().player;
 		assert player != null;
-		PlayerDifficulty cap = PlayerDifficulty.HOLDER.get(player);
-		list.add(Pair.of(LangData.INFO_PLAYER_LEVEL.get(cap.getLevel().getStr()),
-				cap::getPlayerDifficultyDetail));
-		int perc = Math.round(100f * cap.getLevel().getExp() / cap.getLevel().getMaxExp());
+		PlayerDifficulty cap = LHMiscs.PLAYER.type().getOrCreate(player);
+		list.add(Pair.of(LangData.INFO_PLAYER_LEVEL.get(cap.getLevel(player).getStr()),
+				() -> cap.getPlayerDifficultyDetail(player)));
+		int perc = Math.round(100f * cap.getLevel(player).getExp() / cap.getLevel(player).getMaxExp());
 		list.add(Pair.of(LangData.INFO_PLAYER_EXP.get(perc), List::of));
 		int maxCap = cap.getRankCap();
 		list.add(Pair.of(LangData.INFO_PLAYER_CAP.get(maxCap > TraitManager.getMaxLevel() ?
