@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-23T08:52:27.029198	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait)]
+// 1.21.1	2024-10-23T08:54:46.157417	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -197,7 +197,7 @@ f1b46c4f8a9b97bfa535c28d951af326ee47aebf data/l2hostility/advancement/recipes/mi
 fe37f6df8840e68e96675e55d7dd9d5825483e35 data/l2hostility/advancement/recipes/misc/witch_wand.json
 5cc00ffe96d33c1c100aa6bf50953ca8dacd69dd data/l2hostility/damage_type/killer_aura.json
 cd041e701e17701be3a0e7c321085591e8976df1 data/l2hostility/data_maps/l2hostility/trait/trait_data.json
-283e2c631b67f40e44324c31c883d7e4be151eae data/l2hostility/enchantment/insulator.json
+f689dd25a950129ab74c0b97ef73b815ee804470 data/l2hostility/enchantment/insulator.json
 80995ce7fd1d689c2b0fe889acd503703149cb63 data/l2hostility/enchantment/split_suppressor.json
 552928d3c2b535192e91cf238f8223380ddbd764 data/l2hostility/enchantment/vanish.json
 72ad1584c30645b03e0f4d88e8bd7df9b1b0bde6 data/l2hostility/loot_table/blocks/chaos_block.json

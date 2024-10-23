@@ -29,7 +29,7 @@ public class LHEnchantments {
 		INSULATOR = DC.ench("insulator", "Insulator",
 				"Reduce trait effects that pulls or pushes you",
 				e -> e.maxLevel(3).group(EquipmentSlotGroup.ARMOR).items(ItemTags.ARMOR_ENCHANTABLE)
-						.color(green).special(LCEnchantments.CRAFT, order.of(armor, 3)));
+						.color(green).special(LCEnchantments.CRAFT, order.of(armor)));
 
 		SPLIT_SUPPRESS = DC.enchLegacy("split_suppressor", "Split Suppressor",
 				"Disable Split trait on enemies on hit",
