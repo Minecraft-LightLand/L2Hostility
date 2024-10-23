@@ -31,7 +31,7 @@ public class KillTraitsTrigger extends BaseCriterion<KillTraitsTrigger.Ins, Kill
 		@SerialField
 		public MobTrait[] traits;
 
-		protected Ins() {
+		public Ins() {
 			super(HostilityTriggers.KILL_TRAITS.get());
 		}
 

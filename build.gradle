@@ -1,9 +1,14 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+
 plugins {
     id 'java-library'
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.gradle.userdev' version '7.0.165'
+    id 'net.darkhax.curseforgegradle' version '[1.1.24,)'
+    id "at.stnwtr.gradle-secrets-plugin" version "1.0.1"
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 version = mod_version
@@ -199,4 +204,59 @@ dependencies {
     //implementation "curse.maven:embeddium-908741:5681729"
     implementation "maven.modrinth:sodium:mc1.21-0.6.0-beta.2-neoforge"
     implementation "curse.maven:irisshaders-455508:5765375"
+    implementation "curse.maven:geckolib-388172:5763144"
+    implementation "curse.maven:the-twilight-forest-227639:5759335"
+}
+
+
+tasks.register('publishCurseForge', TaskPublishCurseForge) {
+    apiToken = secrets.get("curseforge_token")
+    def mainFile = upload(project.curseforge_project, new File("./build/libs/${mod_id}-${mod_version}.jar"))
+    mainFile.changelog = new File('./changelog.txt')
+    mainFile.addEnvironment("Client", "Server")
+    mainFile.addGameVersion("1.21.1")
+    mainFile.addModLoader("NeoForge")
+    mainFile.addRequirement("l2library", "l2-complements", "curios", "patchouli")
+    mainFile.addOptional(
+            "alexs-caves",
+            "ars-nouveau",
+            "bosses-of-mass-destruction-forge",
+            "gateways-to-eternity",
+            "geckolib",
+            "ice-and-fire-dragons",
+            "jade",
+            "jei",
+            "lendercataclysm",
+            "mowzies-mobs",
+            "mutant-monsters",
+            "the-twilight-forest")
+    mainFile.releaseType = "beta"
+    disableVersionDetection()
+}
+
+modrinth {
+    token = secrets.get("modrinth_token")
+    projectId = project.modrinth_project
+    versionName = "L2Hostility ${project.mod_version}"
+    versionNumber = project.mod_version
+    versionType = "beta"
+    uploadFile = new File("./build/libs/${mod_id}-${mod_version}.jar")
+    gameVersions = ["1.21.1"]
+    loaders = ["neoforge"]
+    changelog = new File('./changelog.txt').text.split("\n\n")[0]
+    dependencies {
+        required.project "l2library"
+        required.project "l2-complements"
+        required.project "curios"
+        required.project "patchouli"
+        optional.project "alexs-caves"
+        optional.project "ars-nouveau"
+        optional.project "bosses-of-mass-destruction-forge"
+        optional.project "geckolib"
+        optional.project "ice-and-fire-dragons"
+        optional.project "jade"
+        optional.project "jei"
+        optional.project "l_enders-cataclysm"
+        optional.project "mutant-monsters"
+    }
 }

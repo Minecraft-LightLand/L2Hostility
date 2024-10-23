@@ -15,11 +15,11 @@ public class ClientCapHandler {
 		if (level == null) return;
 		Entity entity = level.getEntity(packet.id());
 		if (!(entity instanceof LivingEntity le)) return;
-		var opt = LHMiscs.MOB.type().getExisting(le);
-		if (opt.isEmpty()) return;
+		if (!LHMiscs.MOB.type().isProper(le)) return;
+		var opt = LHMiscs.MOB.type().getOrCreate(le);
 		new TagCodec(level.registryAccess())
 				.pred(SerialField::toClient)
-				.fromTag(packet.tag(), MobTraitCap.class, opt.get());
+				.fromTag(packet.tag(), MobTraitCap.class, opt);
 	}
 
 }

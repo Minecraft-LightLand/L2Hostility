@@ -10,9 +10,7 @@
         "trait_chance": 1.0,
         "variation": 1.0
       },
-      "entities": [
-        "minecraft:elder_guardian"
-      ],
+      "entities": "minecraft:elder_guardian",
       "items": [],
       "maxLevel": 0,
       "minSpawnLevel": 0,
@@ -39,9 +37,7 @@
         "trait_chance": 1.0,
         "variation": 1.0
       },
-      "entities": [
-        "minecraft:piglin_brute"
-      ],
+      "entities": "minecraft:piglin_brute",
       "items": [],
       "maxLevel": 0,
       "minSpawnLevel": 0,
@@ -68,9 +64,7 @@
         "trait_chance": 1.0,
         "variation": 1.0
       },
-      "entities": [
-        "minecraft:warden"
-      ],
+      "entities": "minecraft:warden",
       "items": [],
       "maxLevel": 0,
       "minSpawnLevel": 0,
@@ -106,9 +100,7 @@
         "trait_chance": 1.0,
         "variation": 1.0
       },
-      "entities": [
-        "minecraft:wither"
-      ],
+      "entities": "minecraft:wither",
       "items": [],
       "maxLevel": 0,
       "minSpawnLevel": 0,
@@ -131,9 +123,7 @@
         "trait_chance": 1.0,
         "variation": 1.0
       },
-      "entities": [
-        "minecraft:ender_dragon"
-      ],
+      "entities": "minecraft:ender_dragon",
       "items": [],
       "maxLevel": 0,
       "minSpawnLevel": 0,

@@ -9,7 +9,11 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 public class SingletonItem extends Item implements ICurioItem {
 
 	public SingletonItem(Properties properties) {
-		super(properties);
+		super(properties.stacksTo(1));
+	}
+
+	public SingletonItem(Properties properties, int durability) {
+		super(properties.durability(durability));
 	}
 
 	@Override

@@ -12,9 +12,7 @@
           "trait_chance": 1.0,
           "variation": 0.0
         },
-        "entities": [
-          "minecraft:zombie"
-        ],
+        "entities": "minecraft:zombie",
         "items": [],
         "maxLevel": 0,
         "minSpawnLevel": 0,
@@ -37,9 +35,7 @@
           "trait_chance": 1.0,
           "variation": 0.0
         },
-        "entities": [
-          "minecraft:skeleton"
-        ],
+        "entities": "minecraft:skeleton",
         "items": [],
         "maxLevel": 0,
         "minSpawnLevel": 0,
@@ -76,9 +72,7 @@
           "trait_chance": 1.0,
           "variation": 0.0
         },
-        "entities": [
-          "minecraft:piglin"
-        ],
+        "entities": "minecraft:piglin",
         "items": [],
         "maxLevel": 0,
         "minSpawnLevel": 0,

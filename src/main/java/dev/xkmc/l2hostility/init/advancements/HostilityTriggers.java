@@ -16,7 +16,7 @@ public class HostilityTriggers {
 	public static final Val<KillTraitEffectTrigger> TRAIT_EFFECT = REG.reg("trait_effect", KillTraitEffectTrigger::new);
 	public static final Val<KillTraitFlameTrigger> TRAIT_FLAME = REG.reg("trait_flame", KillTraitFlameTrigger::new);
 
-	public static void register() {//TODO
+	public static void register() {
 
 	}
 

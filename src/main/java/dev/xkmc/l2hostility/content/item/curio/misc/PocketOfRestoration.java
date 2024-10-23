@@ -30,7 +30,7 @@ public class PocketOfRestoration extends SingletonItem implements ICurioItem {
 	}
 
 	public PocketOfRestoration(Properties properties, int durability) {
-		super(properties.durability(durability));
+		super(properties, durability);
 	}
 
 	@Override

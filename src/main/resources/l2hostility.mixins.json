@@ -12,8 +12,6 @@
 		"SlimeMixin"
 	],
 	"client": [
-		"GeoEntityRendererMixin",
-		"GeoReplacedEntityRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

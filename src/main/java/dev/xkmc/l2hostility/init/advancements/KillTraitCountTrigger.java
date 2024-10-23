@@ -30,7 +30,7 @@ public class KillTraitCountTrigger extends BaseCriterion<KillTraitCountTrigger.I
 		@SerialField
 		public int count;
 
-		protected Ins() {
+		public Ins() {
 			super(HostilityTriggers.TRAIT_COUNT.get());
 		}
 

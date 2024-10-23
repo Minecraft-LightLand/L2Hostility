@@ -86,16 +86,14 @@ public class ClientEvents {
 		pose.pushPose();
 		pose.translate(vec3.x, vec3.y + offset, vec3.z);
 		pose.mulPose(dispatcher.cameraOrientation());
-		pose.scale(-0.025F, -0.025F, 0.025F);
+		pose.scale(0.025F, -0.025F, 0.025F);
 		Matrix4f matrix4f = pose.last().pose();
 		Font font = event.getEntityRenderer().getFont();
 		float f2 = (float) (-font.width(text) / 2);
 		float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
 		int j = (int) (f1 * 255.0F) << 24;
-		font.drawInBatch(text, f2, 0, -1, false, matrix4f,
-				event.getMultiBufferSource(), mode, j, light);
+		font.drawInBatch(text, f2, 0, -1, false, matrix4f, event.getMultiBufferSource(), mode, j, light);
 		pose.popPose();
-
 	}
 
 	private static boolean renderChunk = false;

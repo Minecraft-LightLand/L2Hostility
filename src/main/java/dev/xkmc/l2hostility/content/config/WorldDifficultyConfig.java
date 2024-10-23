@@ -71,10 +71,10 @@ public class WorldDifficultyConfig extends BaseConfig {
 			});
 			if (ans.isFalse()) continue;
 			for (var e : list) {
-				if (e.entities.contains(type)) {
+				if (e.entities.contains(type.builtInRegistryHolder())) {
 					return e;
 				}
-				if (e.entities.isEmpty()) {
+				if (e.entities.size() == 0) {
 					def = e;
 				}
 			}
@@ -90,10 +90,10 @@ public class WorldDifficultyConfig extends BaseConfig {
 		if (list == null) return null;
 		EntityConfig.Config def = null;
 		for (var e : list) {
-			if (e.entities.contains(type)) {
+			if (e.entities.contains(type.builtInRegistryHolder())) {
 				return e;
 			}
-			if (e.entities.isEmpty()) {
+			if (e.entities.size() == 0) {
 				def = e;
 			}
 		}

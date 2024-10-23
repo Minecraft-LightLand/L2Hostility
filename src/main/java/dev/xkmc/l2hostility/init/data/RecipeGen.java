@@ -10,6 +10,7 @@ import dev.xkmc.l2complements.content.recipe.BurntRecipeBuilder;
 import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2core.serial.ingredients.EnchantmentIngredient;
+import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
@@ -27,6 +28,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.fml.ModList;
+import twilightforest.TwilightForestMod;
 
 import java.util.function.BiFunction;
 
@@ -437,11 +440,13 @@ public class RecipeGen {
 					.define('C', LHItems.BOTTLE_SANITY.get())
 					.save(pvd);
 		}
-		/*TODO
-		// compat
+
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
 			TFData.genRecipe(pvd);
 		}
+
+		/*TODO
+		// compat
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genRecipe(pvd);
 		}

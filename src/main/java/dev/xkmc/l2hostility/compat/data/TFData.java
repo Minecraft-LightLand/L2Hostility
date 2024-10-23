@@ -1,12 +1,12 @@
 package dev.xkmc.l2hostility.compat.data;
 
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
+import dev.xkmc.l2core.serial.config.ConfigDataProvider;
+import dev.xkmc.l2core.serial.recipe.ConditionalRecipeWrapper;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.init.data.RecipeGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.serial.config.ConfigDataProvider;
-import dev.xkmc.l2library.serial.recipe.ConditionalRecipeWrapper;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
@@ -16,7 +16,6 @@ import twilightforest.init.TFEntities;
 import twilightforest.init.TFItems;
 
 import static dev.xkmc.l2hostility.init.data.LHConfigGen.addEntity;
-import static dev.xkmc.l2hostility.init.data.RecipeGen.getID;
 
 public class TFData {
 

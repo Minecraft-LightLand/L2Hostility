@@ -28,3 +28,5 @@ run
 runs
 
 .DS_Store
+
+secrets.properties

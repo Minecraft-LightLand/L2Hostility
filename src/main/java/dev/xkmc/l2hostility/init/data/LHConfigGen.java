@@ -5,6 +5,7 @@ import dev.xkmc.l2archery.init.registrate.ArcheryItems;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2core.serial.config.ConfigDataProvider;
+import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
@@ -22,6 +23,8 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
+import net.neoforged.fml.ModList;
+import twilightforest.TwilightForestMod;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -194,10 +197,11 @@ public class LHConfigGen extends ConfigDataProvider {
 				)
 		);
 
-		/* TODO
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
 			TFData.genConfig(collector);
 		}
+
+		/* TODO
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genConfig(collector);
 		}
@@ -219,11 +223,11 @@ public class LHConfigGen extends ConfigDataProvider {
 		*/
 	}
 
-	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, Holder<EntityType<T>> obj, EntityConfig.TraitBase... traits) {
+	public static void addEntity(Collector collector, int min, int base, Holder<EntityType<?>> obj, EntityConfig.TraitBase... traits) {
 		collector.add(L2Hostility.ENTITY, obj.getKey().location(), new EntityConfig().putEntity(min, base, 0, 0, List.of(obj.value()), List.of(traits)));
 	}
 
-	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, Holder<EntityType<T>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
+	public static void addEntity(Collector collector, int min, int base, Holder<EntityType<?>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
 		collector.add(L2Hostility.ENTITY, obj.getKey().location(), new EntityConfig().putEntityAndItem(min, base, 0, 0, List.of(obj.value()), traits, items));
 	}
 

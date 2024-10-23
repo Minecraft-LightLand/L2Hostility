@@ -11,6 +11,7 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
 import dev.xkmc.l2serial.util.Wrappers;
+import net.minecraft.core.HolderSet;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,7 +41,7 @@ public class EntityConfig extends BaseConfig {
 		for (var e : list) {
 			if (e.specialConditions.isEmpty()) {
 				for (var type : e.entities) {
-					cache.put(type, e);
+					cache.put(type.value(), e);
 				}
 			} else {
 				for (var str : e.specialConditions) {
@@ -65,7 +66,7 @@ public class EntityConfig extends BaseConfig {
 		if (list == null) return null;
 		for (var pair : list) {
 			var cond = pair.getFirst();
-			if (!pair.getSecond().entities.contains(type)) continue;
+			if (!pair.getSecond().entities.contains(type.builtInRegistryHolder())) continue;
 			if (cond.cls() == cls && cond.test(Wrappers.cast(obj))) {
 				return pair.getSecond();
 			}
@@ -77,7 +78,7 @@ public class EntityConfig extends BaseConfig {
 	public static class Config {
 
 		@SerialField
-		public final ArrayList<EntityType<?>> entities = new ArrayList<>();
+		public HolderSet<EntityType<?>> entities = HolderSet.empty();
 
 		@SerialField
 		private final ArrayList<SpecialConfigCondition<?>> specialConditions = new ArrayList<>();
@@ -108,7 +109,7 @@ public class EntityConfig extends BaseConfig {
 
 		public Config(List<EntityType<?>> entities,
 					  WorldDifficultyConfig.DifficultyConfig difficulty) {
-			this.entities.addAll(entities);
+			this.entities = HolderSet.direct(EntityType::builtInRegistryHolder, entities);
 			this.difficulty = difficulty;
 		}
 
