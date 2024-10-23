@@ -6,6 +6,7 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -29,11 +30,11 @@ public class KillTraitFlameTrigger extends BaseCriterion<KillTraitFlameTrigger.I
 		}
 	}
 
-	public static Ins ins(MobTrait traits, Type effect) {
+	public static Criterion<Ins> ins(MobTrait traits, Type effect) {
 		var ans = new Ins();
 		ans.trait = traits;
 		ans.effect = effect;
-		return ans;
+		return ans.build();
 	}
 
 	public KillTraitFlameTrigger(ResourceLocation id) {
@@ -54,7 +55,7 @@ public class KillTraitFlameTrigger extends BaseCriterion<KillTraitFlameTrigger.I
 		public Type effect;
 
 		public Ins() {
-			super(HostilityTriggers.TRAIT_FLAME);
+			super(HostilityTriggers.TRAIT_FLAME.get());
 		}
 
 		public boolean matchAll(LivingEntity le, MobTraitCap cap) {

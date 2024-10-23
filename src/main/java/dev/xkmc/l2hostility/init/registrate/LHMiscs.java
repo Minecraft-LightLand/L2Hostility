@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.init.registrate;
 
 import dev.xkmc.l2core.capability.player.PlayerCapabilityNetworkHandler;
-import dev.xkmc.l2core.init.reg.datapack.DataMapReg;
 import dev.xkmc.l2core.init.reg.registrate.SimpleEntry;
 import dev.xkmc.l2core.init.reg.simple.AttReg;
 import dev.xkmc.l2core.init.reg.simple.AttVal;
@@ -11,9 +10,7 @@ import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
-import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.menu.tab.DifficultyTab;
-import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -33,7 +30,7 @@ public class LHMiscs {
 
 	private static final AttReg ATT = AttReg.of(L2Hostility.REG);
 	public static final AttVal.CapVal<LivingEntity, MobTraitCap> MOB = ATT.entity("mob",
-			MobTraitCap.class, MobTraitCap::new, LivingEntity.class, (e) ->
+			MobTraitCap.class, MobTraitCap::new, LivingEntity.class, e ->
 					e.getType().is(LHTagGen.WHITELIST) || e instanceof Enemy && !e.getType().is(LHTagGen.BLACKLIST));
 	public static final AttVal.PlayerVal<PlayerDifficulty> PLAYER = ATT.player("player",
 			PlayerDifficulty.class, PlayerDifficulty::new, PlayerCapabilityNetworkHandler::new);

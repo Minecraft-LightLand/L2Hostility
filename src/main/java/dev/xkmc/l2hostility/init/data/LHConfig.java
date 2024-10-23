@@ -70,7 +70,6 @@ public class LHConfig {
 		public final ModConfigSpec.BooleanValue exponentialDamage;
 		public final ModConfigSpec.DoubleValue expDropFactor;
 		public final ModConfigSpec.DoubleValue drownedTridentChancePerLevel;
-		public final ModConfigSpec.DoubleValue enchantmentFactor;
 		public final ModConfigSpec.IntValue dimensionFactor;
 		public final ModConfigSpec.DoubleValue distanceFactor;
 		public final ModConfigSpec.DoubleValue globalApplyChance;
@@ -201,10 +200,6 @@ public class LHConfig {
 						.defineInRange("expDropFactor", 0.05, 0, 1000);
 				drownedTridentChancePerLevel = builder.text("Chance per level for drowned to hold trident")
 						.defineInRange("drownedTridentChancePerLevel", 0.005d, 0, 1000);
-				enchantmentFactor = builder.text("Enchantment bonus per level.").comment(
-								"Note: use it only when Apotheosis is installed",
-								"Otherwise too high enchantment level will yield no enchantment")
-						.defineInRange("enchantmentFactor", 0d, 0, 1000);
 				dimensionFactor = builder.text("Difficulty bonus per level visited")
 						.defineInRange("dimensionFactor", 10, 0, 1000);
 				distanceFactor = builder.text("Difficulty bonus per block from origin")

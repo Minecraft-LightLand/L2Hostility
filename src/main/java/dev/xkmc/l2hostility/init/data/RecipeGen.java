@@ -9,12 +9,12 @@ import dev.xkmc.l2complements.content.enchantment.core.EnchantmentRecipeBuilder;
 import dev.xkmc.l2complements.content.recipe.BurntRecipeBuilder;
 import dev.xkmc.l2complements.init.materials.LCMats;
 import dev.xkmc.l2complements.init.registrate.LCItems;
+import dev.xkmc.l2core.serial.ingredients.EnchantmentIngredient;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHBlocks;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.serial.ingredients.EnchantmentIngredient;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -25,10 +25,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.BiFunction;
 
@@ -178,7 +176,7 @@ public class RecipeGen {
 						.pattern("B1B").pattern("CIC").pattern("BAB")
 						.define('I', LHItems.CHAOS_INGOT.get())
 						.define('A', LCItems.BLACKSTONE_CORE.get())
-						.define('1', new EnchantmentIngredient(Enchantments.VANISHING_CURSE, 1))
+						.define('1', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.VANISHING_CURSE, 1))
 						.define('B', Items.COPPER_INGOT)
 						.define('C', LHItems.BOTTLE_SANITY.get())
 						.save(pvd);
@@ -186,8 +184,8 @@ public class RecipeGen {
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.CURSE_ENVY.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 						.pattern("B1B").pattern("CIC").pattern("B2B")
 						.define('I', LHItems.CHAOS_INGOT.get())
-						.define('1', new EnchantmentIngredient(Enchantments.MOB_LOOTING, 1))
-						.define('2', new EnchantmentIngredient(Enchantments.SILK_TOUCH, 1))
+						.define('1', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.LOOTING, 1))
+						.define('2', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.SILK_TOUCH, 1))
 						.define('B', Items.PRISMARINE_SHARD)
 						.define('C', Items.ENDER_EYE)
 						.save(pvd);
@@ -195,8 +193,8 @@ public class RecipeGen {
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.CURSE_LUST.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 						.pattern("B1B").pattern("CID").pattern("B2B")
 						.define('I', LHItems.CHAOS_INGOT.get())
-						.define('1', new EnchantmentIngredient(Enchantments.MOB_LOOTING, 1))
-						.define('2', new EnchantmentIngredient(Enchantments.BINDING_CURSE, 1))
+						.define('1', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.LOOTING, 1))
+						.define('2', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.BINDING_CURSE, 1))
 						.define('B', Items.PHANTOM_MEMBRANE)
 						.define('C', LHTraits.REGEN.get().asItem())
 						.define('D', LHTraits.INVISIBLE.get().asItem())
@@ -205,8 +203,8 @@ public class RecipeGen {
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.CURSE_GREED.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 						.pattern("B1B").pattern("CID").pattern("B2B")
 						.define('I', LHItems.CHAOS_INGOT.get())
-						.define('1', new EnchantmentIngredient(Enchantments.MOB_LOOTING, 1))
-						.define('2', new EnchantmentIngredient(Enchantments.BLOCK_FORTUNE, 1))
+						.define('1', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.LOOTING, 1))
+						.define('2', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.FORTUNE, 1))
 						.define('B', Items.GOLD_INGOT)
 						.define('C', LHTraits.SPEEDY.get().asItem())
 						.define('D', LHTraits.TANK.get().asItem())
@@ -215,8 +213,8 @@ public class RecipeGen {
 				unlock(pvd, new ShapedRecipeBuilder(RecipeCategory.MISC, LHItems.CURSE_GLUTTONY.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 						.pattern("B1B").pattern("CID").pattern("B2B")
 						.define('I', LHItems.CHAOS_INGOT.get())
-						.define('1', new EnchantmentIngredient(Enchantments.MOB_LOOTING, 1))
-						.define('2', new EnchantmentIngredient(Enchantments.VANISHING_CURSE, 1))
+						.define('1', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.LOOTING, 1))
+						.define('2', EnchantmentIngredient.of(pvd.getProvider(), Enchantments.VANISHING_CURSE, 1))
 						.define('B', Items.NETHERITE_INGOT)
 						.define('C', LHTraits.CURSED.get().asItem())
 						.define('D', LHTraits.WITHER.get().asItem())
@@ -421,7 +419,7 @@ public class RecipeGen {
 
 		// ench
 		{
-			unlock(pvd, new EnchantmentRecipeBuilder(LHEnchantments.INSULATOR.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+			unlock(pvd, new EnchantmentRecipeBuilder(LHEnchantments.INSULATOR, pvd, 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("AIA").pattern("DBD").pattern("ACA")
 					.define('B', Items.BOOK)
 					.define('D', Items.LAPIS_LAZULI)
@@ -430,7 +428,7 @@ public class RecipeGen {
 					.define('C', LHItems.BOTTLE_SANITY.get())
 					.save(pvd);
 
-			unlock(pvd, new EnchantmentRecipeBuilder(LHEnchantments.SPLIT_SUPPRESS.get(), 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
+			unlock(pvd, new EnchantmentRecipeBuilder(LHEnchantments.SPLIT_SUPPRESS, pvd, 1)::unlockedBy, LHItems.CHAOS_INGOT.get())
 					.pattern("AIA").pattern("DBD").pattern("ACA")
 					.define('B', Items.BOOK)
 					.define('D', Items.LAPIS_LAZULI)
@@ -453,16 +451,6 @@ public class RecipeGen {
 
  		*/
 
-	}
-
-	@SuppressWarnings("ConstantConditions")
-	private static ResourceLocation getID(Enchantment item) {
-		return new ResourceLocation(L2Hostility.MODID, currentFolder + ForgeRegistries.ENCHANTMENTS.getKey(item).getPath());
-	}
-
-	@SuppressWarnings("ConstantConditions")
-	private static ResourceLocation getID(Enchantment item, String suffix) {
-		return new ResourceLocation(L2Hostility.MODID, currentFolder + ForgeRegistries.ENCHANTMENTS.getKey(item).getPath() + suffix);
 	}
 
 	@SuppressWarnings("ConstantConditions")

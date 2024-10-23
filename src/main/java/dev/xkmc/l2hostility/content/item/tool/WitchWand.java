@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,16 +15,18 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+import java.util.Optional;
 
 public class WitchWand extends Item {
 
@@ -50,13 +53,16 @@ public class WitchWand extends Item {
 			ItemStack potion = new ItemStack(Items.SPLASH_POTION);
 			int maxRank = LHMiscs.PLAYER.type().getOrCreate(player).maxRankKilled;
 			MobEffectInstance ins = getRandom(maxRank, player.getRandom());
-			PotionUtils.setCustomEffects(potion, List.of(ins));
-			potion.getOrCreateTag().putInt("CustomPotionColor", ins.getEffect().getColor());
+			potion.set(DataComponents.POTION_CONTENTS, new PotionContents(
+					Optional.empty(),
+					Optional.of(ins.getEffect().value().getColor()),
+					List.of(ins)
+			));
 			entity.setItem(potion);
 			entity.shootFromRotation(player, player.getXRot(), player.getYRot(), -20.0F, 0.5F, 1.0F);
 			level.addFreshEntity(entity);
 			if (!player.getAbilities().instabuild) {
-				stack.hurtAndBreak(1, player, e -> e.broadcastBreakEvent(hand));
+				stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 			}
 		}
 		player.getCooldowns().addCooldown(this, 60);

@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.02,
   "result": {
-    "Count": 1,
+    "count": 1,
     "id": "minecraft:enchanted_golden_apple"
   },
   "trait": "l2hostility:growth"

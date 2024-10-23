@@ -3,7 +3,6 @@ package dev.xkmc.l2hostility.content.item.beacon;
 import com.google.common.collect.Lists;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
-import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
@@ -12,6 +11,7 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -21,14 +21,14 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerListener;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class HostilityBeaconScreen extends AbstractContainerScreen<HostilityBeaconMenu> implements ContainerListener {
-	static final ResourceLocation BEACON_LOCATION = new ResourceLocation(L2Hostility.MODID,"textures/gui/container/beacon.png");
+	static final ResourceLocation BEACON_LOCATION = L2Hostility.loc("textures/gui/container/beacon.png");
 	private static final Component PRIMARY_EFFECT_LABEL = Component.translatable("block.minecraft.beacon.primary");
 	private final List<HostilityBeaconScreen.BeaconButton> beaconButtons = Lists.newArrayList();
 
@@ -59,8 +59,8 @@ public class HostilityBeaconScreen extends AbstractContainerScreen<HostilityBeac
 		this.addBeaconButton(new HostilityBeaconScreen.BeaconConfirmButton(this.leftPos + 164, this.topPos + 107));
 		this.addBeaconButton(new HostilityBeaconScreen.BeaconCancelButton(this.leftPos + 190, this.topPos + 107));
 
-		for (int i = 0; i <= 2; ++i) {
-			int n = HostilityBeaconBlockEntity.BEACON_EFFECTS[i].length;
+		for (int i = 0; i < 3; ++i) {
+			int n = 2;
 			int w = n * 22 + (n - 1) * 2;
 			for (int j = 0; j < n; ++j) {
 				HostilityBeaconScreen.BeaconPowerButton btn = new HostilityBeaconScreen.BeaconPowerButton(
@@ -96,13 +96,12 @@ public class HostilityBeaconScreen extends AbstractContainerScreen<HostilityBeac
 		p_282454_.blit(BEACON_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
 		p_282454_.pose().pushPose();
 		p_282454_.pose().translate(0.0F, 0.0F, 100.0F);
-		p_282454_.renderItem(new ItemStack(LHItems.CHAOS_INGOT), i + 42 + 44, j + 109);
-		p_282454_.renderItem(new ItemStack(LHItems.MIRACLE_INGOT), i + 42 + 66, j + 109);
+		p_282454_.renderItem(LHItems.CHAOS_INGOT.asStack(), i + 42 + 44, j + 109);
+		p_282454_.renderItem(LHItems.MIRACLE_INGOT.asStack(), i + 42 + 66, j + 109);
 		p_282454_.pose().popPose();
 	}
 
 	public void render(GuiGraphics p_283062_, int p_282876_, int p_282015_, float p_281395_) {
-		this.renderBackground(p_283062_);
 		super.render(p_283062_, p_282876_, p_282015_, p_281395_);
 		this.renderTooltip(p_283062_, p_282876_, p_282015_);
 	}
@@ -154,14 +153,14 @@ public class HostilityBeaconScreen extends AbstractContainerScreen<HostilityBeac
 			this.setEffect(eff);
 		}
 
-		protected MobEffect getEffect() {
-			return HostilityBeaconBlockEntity.BEACON_EFFECTS[effect / 2][effect % 2];
+		protected Holder<MobEffect> getEffect() {
+			return HostilityBeaconBlockEntity.BEACON_EFFECTS.get(effect);
 		}
 
 		protected void setEffect(int eff) {
 			this.effect = eff;
 			this.sprite = Minecraft.getInstance().getMobEffectTextures().get(getEffect());
-			this.setTooltip(Tooltip.create(this.createEffectDescription(getEffect()), null));
+			this.setTooltip(Tooltip.create(this.createEffectDescription(getEffect().value()), null));
 		}
 
 		protected MutableComponent createEffectDescription(MobEffect eff) {
@@ -185,7 +184,7 @@ public class HostilityBeaconScreen extends AbstractContainerScreen<HostilityBeac
 		}
 
 		protected MutableComponent createNarrationMessage() {
-			return this.createEffectDescription(getEffect());
+			return this.createEffectDescription(getEffect().value());
 		}
 
 	}
@@ -249,7 +248,9 @@ public class HostilityBeaconScreen extends AbstractContainerScreen<HostilityBeac
 	}
 
 	protected boolean click(int btn) {
-		if (this.menu.clickMenuButton(Proxy.getClientPlayer(), btn) && Minecraft.getInstance().gameMode != null) {
+		var player = Minecraft.getInstance().player;
+		if (player == null) return false;
+		if (this.menu.clickMenuButton(player, btn) && Minecraft.getInstance().gameMode != null) {
 			Minecraft.getInstance().gameMode.handleInventoryButtonClick(this.menu.containerId, btn);
 			return true;
 		} else {

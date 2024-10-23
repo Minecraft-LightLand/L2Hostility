@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:split"
+    },
+    "B": {
+      "item": "l2hostility:teleport"
+    },
+    "D": {
+      "item": "l2hostility:pulling"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "BAB",
+    "III",
+    "DID"
+  ],
+  "result": {
+    "count": 1,
+    "id": "l2hostility:infinity_glove"
+  }
+}

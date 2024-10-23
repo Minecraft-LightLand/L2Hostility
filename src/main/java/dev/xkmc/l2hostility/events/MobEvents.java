@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.events;
 
-import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.content.item.curio.curse.CurseOfWrath;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.loot.TraitLootModifier;
@@ -12,8 +12,6 @@ import dev.xkmc.l2hostility.mixin.NeoForgeEventHandlerAccessor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.eventbus.api.Event;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -87,11 +85,12 @@ public class MobEvents {
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onPotionTest(MobEffectEvent.Applicable event) {
+		var ins = event.getEffectInstance();
+		if (ins == null) return;
 		LivingEntity entity = event.getEntity();
 		if (CurioCompat.hasItemInCurio(entity, LHItems.CURSE_WRATH.get())) {
-			var config = ArmorEffectConfig.get().getImmunity(LHItems.CURSE_WRATH.getId().toString());
-			if (config.contains(event.getEffectInstance().getEffect())) {
-				event.setResult(Event.Result.DENY);
+			if (CurseOfWrath.SET.contains(ins.getEffect())) {
+				event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
 			}
 		}
 	}
@@ -104,7 +103,7 @@ public class MobEvents {
 				list.add(loot);
 			}
 		}
-		LootDataToClient packet = new LootDataToClient(list);
+		LootDataToClient packet = LootDataToClient.of(list);
 		if (event.getPlayer() == null) {
 			L2Hostility.HANDLER.toAllClient(packet);
 		} else {

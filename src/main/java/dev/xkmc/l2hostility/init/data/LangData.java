@@ -1,14 +1,11 @@
 package dev.xkmc.l2hostility.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
-import dev.shadowsoffire.gateways.Gateways;
-import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.ModList;
 
 import java.util.Locale;
 
@@ -173,9 +170,12 @@ public enum LangData {
 		pvd.add("death.attack.killer_aura.player", "%s was killed by %s's killer aura");
 		pvd.add("curios.identifier.hostility_curse", "L2Hostility - Curse");
 		pvd.add("curios.modifiers.hostility_curse", "When worn as Curse:");
+		/* TODO
 		if (ModList.get().isLoaded(Gateways.MODID)) {
 			GatewayConfigGen.genLang(pvd);
 		}
+
+		 */
 	}
 
 	public static String asId(String name) {

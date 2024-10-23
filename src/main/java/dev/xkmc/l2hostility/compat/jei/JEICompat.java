@@ -15,7 +15,7 @@ import java.util.List;
 @JeiPlugin
 public class JEICompat implements IModPlugin {
 
-	public static final ResourceLocation ID = new ResourceLocation(L2Hostility.MODID, "main");
+	public static final ResourceLocation ID = L2Hostility.loc("main");
 
 	public final GLMRecipeCategory LOOT = new GLMRecipeCategory();
 

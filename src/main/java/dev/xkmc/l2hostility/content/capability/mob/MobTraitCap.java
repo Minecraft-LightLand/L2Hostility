@@ -95,9 +95,6 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		L2Hostility.HANDLER.toClientPlayer(MobCapSyncToClient.of(entity, this), player);
 	}
 
-	public static void register() {
-	}
-
 	public void deinit() {
 		traits.clear();
 		lv = 0;
@@ -171,10 +168,6 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		stage = Stage.INIT;
 	}
 
-	public int getEnchantBonus() {
-		return (int) (lv * LHConfig.SERVER.enchantmentFactor.get());
-	}
-
 	public int getLevel() {
 		return lv;
 	}
@@ -210,7 +203,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void setTrait(String id, int lv) {
-		var trait = LHTraits.TRAITS.get().getValue(new ResourceLocation(id));
+		var trait = LHTraits.TRAITS.get().get(ResourceLocation.parse(id));
 		if (trait != null)
 			setTrait(trait, lv);
 	}
@@ -256,7 +249,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		if (!mob.level().isClientSide()) {
 			if (!isInitialized()) {
 				var opt = ChunkDifficulty.at(mob.level(), mob.blockPosition());
-				opt.ifPresent(chunkDifficulty -> init(mob.level(), mob, chunkDifficulty));
+				opt.ifPresent(h -> init(mob.level(), mob, h));
 			}
 			if (stage == Stage.INIT) {
 				stage = Stage.POST_INIT;
@@ -331,11 +324,11 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			summoner.data.onDeath(mob);
 		}
 		if (player instanceof ServerPlayer sp) {
-			HostilityTriggers.TRAIT_LEVEL.trigger(sp, this);
-			HostilityTriggers.TRAIT_COUNT.trigger(sp, this);
-			HostilityTriggers.KILL_TRAITS.trigger(sp, this);
-			HostilityTriggers.TRAIT_FLAME.trigger(sp, mob, this);
-			HostilityTriggers.TRAIT_EFFECT.trigger(sp, mob, this);
+			HostilityTriggers.TRAIT_LEVEL.get().trigger(sp, this);
+			HostilityTriggers.TRAIT_COUNT.get().trigger(sp, this);
+			HostilityTriggers.KILL_TRAITS.get().trigger(sp, this);
+			HostilityTriggers.TRAIT_FLAME.get().trigger(sp, mob, this);
+			HostilityTriggers.TRAIT_EFFECT.get().trigger(sp, mob, this);
 		}
 	}
 

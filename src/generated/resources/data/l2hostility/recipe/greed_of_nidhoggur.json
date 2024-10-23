@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:ragnarok"
+    },
+    "B": {
+      "item": "l2hostility:pulling"
+    },
+    "E": {
+      "item": "l2complements:eternium_ingot"
+    },
+    "I": {
+      "item": "l2hostility:miracle_ingot"
+    },
+    "O": {
+      "item": "l2hostility:curse_of_greed"
+    }
+  },
+  "pattern": [
+    "AIA",
+    "EOE",
+    "BIB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "l2hostility:greed_of_nidhoggur"
+  }
+}

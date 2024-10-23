@@ -22,6 +22,7 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EntityAttachment;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -44,8 +45,9 @@ public class ClientEvents {
 
 	@SubscribeEvent
 	public static void addTooltip(ItemTooltipEvent event) {
-		if (event.getEntity() == null) return;
-		EnchantmentDisabler.modifyTooltip(event.getItemStack(), event.getToolTip(), event.getEntity().level());
+		var level = event.getContext().level();
+		if (level == null) return;
+		EnchantmentDisabler.modifyTooltip(event.getItemStack(), event.getToolTip(), level, event.getContext(), event.getFlags());
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOW)
@@ -67,34 +69,33 @@ public class ClientEvents {
 				Font.DisplayMode.SEE_THROUGH :
 				Font.DisplayMode.NORMAL;
 		for (var e : list) {
-			renderNameTag(event, e, event.getPoseStack(), (offset + off) * 0.2f, mode);
+			renderNameTag(le, event, e, event.getPoseStack(), (offset + off) * 0.2f, mode);
 			offset--;
 		}
-
-
 	}
 
-	protected static void renderNameTag(RenderNameTagEvent event, Component text, PoseStack pose, float offset, Font.DisplayMode mode) {
+	protected static void renderNameTag(LivingEntity le, RenderNameTagEvent event, Component text, PoseStack pose, float offset, Font.DisplayMode mode) {
 		var dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-		double d0 = dispatcher.distanceToSqr(event.getEntity());
+		double d0 = dispatcher.distanceToSqr(le);
 		int max = LHConfig.CLIENT.overHeadRenderDistance.get();
+		if (d0 > max * max) return;
 		int light = LHConfig.CLIENT.overHeadRenderFullBright.get() ? LightTexture.FULL_BRIGHT :
 				event.getPackedLight();
-		if (d0 < max * max) {
-			float f = event.getEntity().getNameTagOffsetY() + offset;
-			pose.pushPose();
-			pose.translate(0.0F, f, 0.0F);
-			pose.mulPose(dispatcher.cameraOrientation());
-			pose.scale(-0.025F, -0.025F, 0.025F);
-			Matrix4f matrix4f = pose.last().pose();
-			Font font = event.getEntityRenderer().getFont();
-			float f2 = (float) (-font.width(text) / 2);
-			float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
-			int j = (int) (f1 * 255.0F) << 24;
-			font.drawInBatch(text, f2, 0, -1, false, matrix4f,
-					event.getMultiBufferSource(), mode, j, light);
-			pose.popPose();
-		}
+		Vec3 vec3 = le.getAttachments().getNullable(EntityAttachment.NAME_TAG, 0, le.getViewYRot(event.getPartialTick()));
+		if (vec3 == null) vec3 = new Vec3(0, le.getBoundingBox().getYsize(), 0);
+		pose.pushPose();
+		pose.translate(vec3.x, vec3.y + offset, vec3.z);
+		pose.mulPose(dispatcher.cameraOrientation());
+		pose.scale(-0.025F, -0.025F, 0.025F);
+		Matrix4f matrix4f = pose.last().pose();
+		Font font = event.getEntityRenderer().getFont();
+		float f2 = (float) (-font.width(text) / 2);
+		float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
+		int j = (int) (f1 * 255.0F) << 24;
+		font.drawInBatch(text, f2, 0, -1, false, matrix4f,
+				event.getMultiBufferSource(), mode, j, light);
+		pose.popPose();
+
 	}
 
 	private static boolean renderChunk = false;

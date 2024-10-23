@@ -10,11 +10,11 @@ import org.joml.Matrix4f;
 
 public class ChunkClearRenderer {
 
-	public static void render(PoseStack pose, Player player, ChunkDifficulty center, float pTick) {
+	public static void render(PoseStack pose, Player player, ChunkCapHolder center, float pTick) {
 		int r = 7;
 		boolean[][][] sections = new boolean[r * 2 + 1][r * 2 + 1][r * 2 + 1];
-		int cx = center.chunk.getPos().x;
-		int cz = center.chunk.getPos().z;
+		int cx = center.chunk().getPos().x;
+		int cz = center.chunk().getPos().z;
 		int py = Mth.floor((float) player.getEyeY());
 		for (int i = 0; i < r * 2 + 1; i++) {
 			for (int j = 0; j < r * 2 + 1; j++) {
@@ -184,9 +184,8 @@ public class ChunkClearRenderer {
 		}
 
 		private void vertex(float x, float y, float z, int c) {
-			cons.vertex(mat, x, y, z).color(c).endVertex();
+			cons.addVertex(mat, x, y, z).setColor(c);
 		}
-
 
 	}
 

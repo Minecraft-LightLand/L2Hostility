@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
 import dev.xkmc.l2core.init.reg.registrate.NamedEntry;
+import dev.xkmc.l2core.util.ServerProxy;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
@@ -43,19 +44,23 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 		this.color = color;
 	}
 
-	@SuppressWarnings("ConstantConditions")
 	public TraitConfig getConfig(RegistryAccess access) {
 		TraitConfig ans = LHTraits.DATA.get(access, holder());
 		if (ans == null) return TraitConfig.DEFAULT;
 		return ans;
 	}
 
+	@Deprecated //TODO
+	public TraitConfig getConfig() {
+		return getConfig(ServerProxy.getRegistryAccess());
+	}
+
 	public int getCost(double factor) {
-		return Math.max(1, (int) Math.round(getConfig().cost * factor));
+		return Math.max(1, (int) Math.round(getConfig().cost() * factor));
 	}
 
 	public int getMaxLevel() {
-		return getConfig().max_rank;
+		return getConfig().max_rank();
 	}
 
 	public boolean allow(LivingEntity le, int difficulty, int maxModLv) {

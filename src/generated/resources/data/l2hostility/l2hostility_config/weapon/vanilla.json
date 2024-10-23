@@ -30,9 +30,7 @@
     {
       "level": 0,
       "stack": [
-        {
-          "item": "minecraft:air"
-        }
+        {}
       ],
       "weight": 200
     },
@@ -40,12 +38,12 @@
       "level": 30,
       "stack": [
         {
-          "item": "minecraft:iron_axe",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "minecraft:iron_axe"
         },
         {
-          "item": "minecraft:iron_sword",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "minecraft:iron_sword"
         }
       ],
       "weight": 100
@@ -54,12 +52,12 @@
       "level": 50,
       "stack": [
         {
-          "item": "minecraft:diamond_axe",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "minecraft:diamond_axe"
         },
         {
-          "item": "minecraft:diamond_sword",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "minecraft:diamond_sword"
         }
       ],
       "weight": 100
@@ -68,12 +66,12 @@
       "level": 70,
       "stack": [
         {
-          "item": "minecraft:netherite_axe",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "minecraft:netherite_axe"
         },
         {
-          "item": "minecraft:netherite_sword",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "minecraft:netherite_sword"
         }
       ],
       "weight": 100
@@ -83,9 +81,7 @@
     {
       "level": 0,
       "stack": [
-        {
-          "item": "minecraft:air"
-        }
+        {}
       ],
       "weight": 100
     }

@@ -40,11 +40,7 @@ public class CurseCurioItem extends MultiSlotItem {
 	}
 
 	@Override
-	public final Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation uuid, ItemStack stack) {
-		return getAttributeModifiers(slotContext.entity(), uuid);
-	}
-
-	protected Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(@Nullable LivingEntity wearer, ResourceLocation uuid) {
+	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation uuid, ItemStack stack) {
 		Multimap<Holder<Attribute>, AttributeModifier> map = LinkedHashMultimap.create();
 		int lv = getExtraLevel();
 		if (lv > 0) {

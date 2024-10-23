@@ -1,17 +1,22 @@
 package dev.xkmc.l2hostility.init.advancements;
 
+import dev.xkmc.l2core.init.reg.simple.SR;
+import dev.xkmc.l2core.init.reg.simple.Val;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.advancements.CriterionTrigger;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 public class HostilityTriggers {
 
-	public static final KillTraitsTrigger KILL_TRAITS = new KillTraitsTrigger(new ResourceLocation(L2Hostility.MODID, "kill_trait"));
-	public static final KillTraitLevelTrigger TRAIT_LEVEL = new KillTraitLevelTrigger(new ResourceLocation(L2Hostility.MODID, "trait_level"));
-	public static final KillTraitCountTrigger TRAIT_COUNT = new KillTraitCountTrigger(new ResourceLocation(L2Hostility.MODID, "trait_count"));
-	public static final KillTraitEffectTrigger TRAIT_EFFECT = new KillTraitEffectTrigger(new ResourceLocation(L2Hostility.MODID, "trait_effect"));
-	public static final KillTraitFlameTrigger TRAIT_FLAME = new KillTraitFlameTrigger(new ResourceLocation(L2Hostility.MODID, "trait_flame"));
+	private static final SR<CriterionTrigger<?>> REG = SR.of(L2Hostility.REG, BuiltInRegistries.TRIGGER_TYPES);
 
-	public static void register() {
+	public static final Val<KillTraitsTrigger> KILL_TRAITS = REG.reg("kill_trait", KillTraitsTrigger::new);
+	public static final Val<KillTraitLevelTrigger> TRAIT_LEVEL = REG.reg("trait_level", KillTraitLevelTrigger::new);
+	public static final Val<KillTraitCountTrigger> TRAIT_COUNT = REG.reg("trait_count", KillTraitCountTrigger::new);
+	public static final Val<KillTraitEffectTrigger> TRAIT_EFFECT = REG.reg("trait_effect", KillTraitEffectTrigger::new);
+	public static final Val<KillTraitFlameTrigger> TRAIT_FLAME = REG.reg("trait_flame", KillTraitFlameTrigger::new);
+
+	public static void register() {//TODO
 
 	}
 

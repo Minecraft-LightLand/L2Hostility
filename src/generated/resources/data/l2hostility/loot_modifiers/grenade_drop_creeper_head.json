@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.0,
   "result": {
-    "Count": 1,
+    "count": 1,
     "id": "minecraft:creeper_head"
   },
   "trait": "l2hostility:grenade"

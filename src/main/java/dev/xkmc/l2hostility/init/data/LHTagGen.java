@@ -60,16 +60,15 @@ public class LHTagGen {
 
 	public static void onEnchTagGen(RegistrateTagsProvider<Enchantment> pvd) {
 		pvd.addTag(NO_DISPELL).add(Enchantments.UNBREAKING,
-				LCEnchantments.LIFE_SYNC.id(),
-				LCEnchantments.HARDENED.id(),
-				LCEnchantments.SAFEGUARD.id(),
-				LCEnchantments.ETERNAL.id(),
-				LCEnchantments.DURABLE_ARMOR.id(),
-				LCEnchantments.SOUL_BOUND.id(),
-				LHEnchantments.SPLIT_SUPPRESS.id(),
-				LHEnchantments.INSULATOR.id(),
-				LHEnchantments.VANISH.id()
-		);
+						LHEnchantments.SPLIT_SUPPRESS.id(),
+						LHEnchantments.INSULATOR.id(),
+						LHEnchantments.VANISH.id())
+				.addOptional(LCEnchantments.LIFE_SYNC.id().location())
+				.addOptional(LCEnchantments.HARDENED.id().location())
+				.addOptional(LCEnchantments.SAFEGUARD.id().location())
+				.addOptional(LCEnchantments.ETERNAL.id().location())
+				.addOptional(LCEnchantments.DURABLE_ARMOR.id().location())
+				.addOptional(LCEnchantments.SOUL_BOUND.id().location());
 	}
 
 	public static void onItemTagGen(RegistrateItemTagsProvider pvd) {

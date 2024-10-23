@@ -95,26 +95,26 @@ public class SectionDifficulty {
 		return stage == SectionStage.CLEARED;
 	}
 
-	public boolean setClear(ChunkDifficulty chunk, BlockPos pos) {
+	public boolean setClear(ChunkCapHolder chunk, BlockPos pos) {
 		if (stage == SectionStage.CLEARED) return false;
 		stage = SectionStage.CLEARED;
 		CapabilityEvents.markDirty(chunk);
-		chunk.chunk.setUnsaved(true);
+		chunk.chunk().setUnsaved(true);
 		return true;
 	}
 
-	public boolean setUnclear(ChunkDifficulty chunk, BlockPos pos) {
+	public boolean setUnclear(ChunkCapHolder chunk, BlockPos pos) {
 		if (stage == SectionStage.INIT) return false;
 		stage = SectionStage.INIT;
 		CapabilityEvents.markDirty(chunk);
-		chunk.chunk.setUnsaved(true);
+		chunk.chunk().setUnsaved(true);
 		return true;
 	}
 
-	public void addKillHistory(ChunkDifficulty chunk, Player player, LivingEntity mob, MobTraitCap cap) {
+	public void addKillHistory(ChunkCapHolder chunk, Player player, LivingEntity mob, MobTraitCap cap) {
 		difficulty.grow(1, cap);
 		CapabilityEvents.markDirty(chunk);
-		chunk.chunk.setUnsaved(true);
+		chunk.chunk().setUnsaved(true);
 	}
 
 	public LevelEditor getLevelEditor(Level level, BlockPos pos) {

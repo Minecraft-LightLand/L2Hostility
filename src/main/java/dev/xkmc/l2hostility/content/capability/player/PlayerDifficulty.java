@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.capability.player;
 
 import dev.xkmc.l2core.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapHolder;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
@@ -43,12 +44,9 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	public final TreeSet<ResourceLocation> dimensions = new TreeSet<>();
 
 	@Nullable
-	public ChunkDifficulty prevChunk;
+	public ChunkCapHolder prevChunk;
 
 	public PlayerDifficulty() {
-	}
-
-	public static void register() {
 	}
 
 	public void onClone(Player player, boolean isWasDeath) {

@@ -1,0 +1,34 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.l2hostility.vanish"
+  },
+  "effects": {
+    "l2complements:craftable": [
+      {
+        "color": 16733525,
+        "max": 1,
+        "order": 2
+      }
+    ],
+    "l2core:color": [
+      {
+        "base": "red",
+        "desc": "gray"
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 10,
+    "per_level_above_first": 5
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 5
+  },
+  "primary_items": "#c:enchantables",
+  "slots": [],
+  "supported_items": "#c:enchantables",
+  "weight": 1
+}

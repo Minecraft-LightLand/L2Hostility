@@ -1,20 +1,14 @@
 package dev.xkmc.l2hostility.init;
 
 import com.tterrag.registrate.providers.ProviderType;
-import dev.shadowsoffire.gateways.Gateways;
 import dev.xkmc.l2core.compat.patchouli.PatchouliHelper;
 import dev.xkmc.l2core.init.L2TagGen;
 import dev.xkmc.l2core.init.reg.simple.Reg;
 import dev.xkmc.l2core.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2core.serial.config.PacketHandlerWithConfig;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
-import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
-import dev.xkmc.l2hostility.compat.gateway.GatewayToEternityCompat;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
-import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobCapSyncToClient;
-import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
@@ -34,12 +28,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import org.apache.logging.log4j.LogManager;
@@ -61,6 +54,7 @@ public class L2Hostility {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final Reg REG = new Reg(MODID);
 	public static final LHRegistrate REGISTRATE = new LHRegistrate(MODID);
+	public static final PatchouliHelper PATCHOULI = new PatchouliHelper(REGISTRATE, "hostility_guide");
 
 	public static final ConfigTypeEntry<WorldDifficultyConfig> DIFFICULTY = new ConfigTypeEntry<>(HANDLER, "difficulty", WorldDifficultyConfig.class);
 	public static final ConfigTypeEntry<WeaponConfig> WEAPON = new ConfigTypeEntry<>(HANDLER, "weapon", WeaponConfig.class);
@@ -76,13 +70,7 @@ public class L2Hostility {
 		LHMiscs.register();
 		LHConfig.init();
 		LHEnchantments.register();
-
 		TraitGLMProvider.register();
-
-		MobTraitCap.register();
-		ChunkDifficulty.register();
-		PlayerDifficulty.register();
-
 		HostilityTriggers.register();
 
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
@@ -95,9 +83,7 @@ public class L2Hostility {
 		REGISTRATE.addDataGenerator(LHTraits.TRAIT_TAGS, LHTagGen::onTraitTagGen);
 		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 
-
-		new PatchouliHelper(REGISTRATE, "hostility_guide")
-				.buildModel().buildShapelessRecipe(e -> e
+		PATCHOULI.buildModel().buildShapelessRecipe(e -> e
 								.requires(Items.BOOK).requires(Items.ROTTEN_FLESH).requires(Items.BONE),
 						() -> Items.BOOK)
 				.buildBook("L2Hostility Guide",
@@ -105,11 +91,12 @@ public class L2Hostility {
 						1, LHBlocks.TAB.key());
 		AttackEventHandler.register(4500, new LHAttackListener());
 
+		/*TODO
 		if (ModList.get().isLoaded(Gateways.MODID)) {
 			NeoForge.EVENT_BUS.register(GatewayToEternityCompat.class);
 		}
+ 		*/
 	}
-
 
 	@SubscribeEvent
 	public static void modifyAttributes(EntityAttributeModificationEvent event) {
@@ -123,20 +110,24 @@ public class L2Hostility {
 		});
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void gatherData(GatherDataEvent event) {
 		boolean server = event.includeServer();
 		PackOutput output = event.getGenerator().getPackOutput();
 		var pvd = event.getLookupProvider();
 		var helper = event.getExistingFileHelper();
 		var gen = event.getGenerator();
-		gen.addProvider(server, new TraitGLMProvider(gen));
-		gen.addProvider(server, new SlotGen(gen));
-		new LHDamageTypes(output, pvd, helper).generate(server, gen);
+		gen.addProvider(server, new TraitGLMProvider(output, pvd));
+		gen.addProvider(server, new SlotGen(MODID, output, helper, pvd));
+		var init = REGISTRATE.getDataGenInitializer();
+		init.addDependency(ProviderType.RECIPE, ProviderType.DYNAMIC);
+		new LHDamageTypes().generate();
+		/* TODO
 		if (ModList.get().isLoaded(Gateways.MODID)) {
 			gen.addProvider(server, new GatewayConfigGen(gen));
 		}
-		gen.addProvider(server, new LHConfigGen(gen));
+		*/
+		gen.addProvider(server, new LHConfigGen(gen, pvd));
 	}
 
 	public static void toTrackingChunk(LevelChunk chunk, SerialPacketBase<?> packet) {

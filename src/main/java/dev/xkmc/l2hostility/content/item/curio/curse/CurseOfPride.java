@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -17,7 +18,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
@@ -49,16 +49,16 @@ public class CurseOfPride extends CurseCurioItem {
 		LivingEntity wearer = slotContext.entity();
 		if (wearer == null) return;
 		int level = DifficultyLevel.ofAny(wearer);
-		stack.getOrCreateTag().putInt(NAME, level);
+		LHItems.DC_PRIDE_LEVEL.set(stack, level);
 	}
 
 	@Override
-	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(@Nullable LivingEntity wearer, ResourceLocation uuid) {
-		Multimap<Holder<Attribute>, AttributeModifier> ans = super.getAttributeModifiers(wearer, uuid);
-		int level = wearer == null ? 0 : DifficultyLevel.ofAny(wearer);
+	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation uuid, ItemStack stack) {
+		Multimap<Holder<Attribute>, AttributeModifier> ans = super.getAttributeModifiers(slotContext, uuid, stack);
+		int level = LHItems.DC_PRIDE_LEVEL.getOrDefault(stack, 0);
 		if (level > 0) {
 			double rate = LHConfig.SERVER.prideHealthBonus.get() * level;
-			ans.put(Attributes.MAX_HEALTH, new AttributeModifier(uuid, NAME, rate, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+			ans.put(Attributes.MAX_HEALTH, new AttributeModifier(uuid, rate, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 		}
 		return ans;
 	}

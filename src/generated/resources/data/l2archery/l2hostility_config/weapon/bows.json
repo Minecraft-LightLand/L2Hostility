@@ -7,8 +7,8 @@
       "level": 50,
       "stack": [
         {
-          "item": "l2archery:starter_bow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2archery:starter_bow"
         }
       ],
       "weight": 10
@@ -17,12 +17,12 @@
       "level": 70,
       "stack": [
         {
-          "item": "l2archery:iron_bow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2archery:iron_bow"
         },
         {
-          "item": "l2archery:master_bow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2archery:master_bow"
         }
       ],
       "weight": 5
@@ -31,28 +31,28 @@
       "level": 100,
       "stack": [
         {
-          "item": "l2archery:flame_bow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2archery:flame_bow"
         },
         {
-          "item": "l2archery:slow_bow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2archery:slow_bow"
         },
         {
-          "item": "l2archery:turtle_bow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2archery:turtle_bow"
         },
         {
-          "item": "l2archery:eagle_bow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2archery:eagle_bow"
         },
         {
-          "item": "l2archery:explosion_bow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2archery:explosion_bow"
         },
         {
-          "item": "l2archery:froze_bow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2archery:froze_bow"
         }
       ],
       "weight": 2

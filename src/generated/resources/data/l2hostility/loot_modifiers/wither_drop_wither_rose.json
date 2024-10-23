@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.1,
   "result": {
-    "Count": 8,
+    "count": 8,
     "id": "minecraft:wither_rose"
   },
   "trait": "l2hostility:wither"

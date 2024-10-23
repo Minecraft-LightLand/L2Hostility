@@ -11,13 +11,9 @@ import dev.xkmc.l2hostility.init.advancements.KillTraitFlameTrigger;
 import dev.xkmc.l2hostility.init.advancements.KillTraitsTrigger;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.serial.advancements.AdvancementGenerator;
-import dev.xkmc.l2library.serial.advancements.CriterionBuilder;
-import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.ConsumeItemTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
 
@@ -29,7 +25,7 @@ public class AdvGen {
 				CriterionBuilder.item(LHItems.HOSTILITY_ORB.get()),
 				"Welcome to L2Hostility", "Your survival guide").root();
 		root.root().patchouli(L2Hostility.REGISTRATE, CriterionBuilder.item(LHItems.HOSTILITY_ORB.get()),
-						L2Hostility.loc( "hostility_guide"),
+						L2Hostility.PATCHOULI,
 						"Intro to L2Hostility", "Read the hostility guide")
 				.root().create("detector", LHItems.DETECTOR.get(),
 						CriterionBuilder.item(LHItems.DETECTOR.get()),
@@ -70,12 +66,12 @@ public class AdvGen {
 				.type(AdvancementType.CHALLENGE)
 				.root().enter().create("effect_kill_regen", LHTraits.REGEN.get().asItem(),
 						CriterionBuilder.one(KillTraitEffectTrigger.ins(
-								LHTraits.REGEN.get(), LCEffects.CURSE.get())),
+								LHTraits.REGEN.get(), LCEffects.CURSE)),
 						"Prevent Healing", "Use curse effect on mobs with Regeneration and kill it")
 				.type(AdvancementType.GOAL)
 				.create("effect_kill_adaptive", LHTraits.ADAPTIVE.get().asItem(),
 						CriterionBuilder.or().add(KillTraitEffectTrigger.ins(
-										LHTraits.ADAPTIVE.get(), LCEffects.FLAME.get()))
+										LHTraits.ADAPTIVE.get(), LCEffects.FLAME))
 								.add(KillTraitEffectTrigger.ins(
 										LHTraits.ADAPTIVE.get(), MobEffects.POISON))
 								.add(KillTraitEffectTrigger.ins(
@@ -86,12 +82,12 @@ public class AdvGen {
 				.type(AdvancementType.GOAL)
 				.create("effect_kill_undead", LHTraits.UNDYING.get().asItem(),
 						CriterionBuilder.one(KillTraitEffectTrigger.ins(
-								LHTraits.UNDYING.get(), LCEffects.CURSE.get())),
+								LHTraits.UNDYING.get(), LCEffects.CURSE)),
 						"Prevent Reviving", "Use curse effect on mobs with Undying and kill it")
 				.type(AdvancementType.CHALLENGE)
 				.create("effect_kill_teleport", LHTraits.ENDER.get().asItem(),
 						CriterionBuilder.one(KillTraitEffectTrigger.ins(
-								LHTraits.ENDER.get(), LCEffects.STONE_CAGE.get())),
+								LHTraits.ENDER.get(), LCEffects.INCARCERATE)),
 						"Prevent Teleporting", "Use incarceration effect on mobs with Teleport and kill it")
 				.type(AdvancementType.CHALLENGE);
 		var ingot = root.root().enter().create("ingot", LHItems.CHAOS_INGOT.get(),
@@ -121,7 +117,7 @@ public class AdvGen {
 						"Miracle of the World", "Obtain Miracle Ingot");
 		trait.create("breed", LHTraits.REGEN.get().asItem(),
 						CriterionBuilder.one(ConsumeItemTrigger.TriggerInstance.usedItem(
-								ItemPredicate.Builder.item().of(LHTagGen.TRAIT_ITEM).build())),
+								ItemPredicate.Builder.item().of(LHTagGen.TRAIT_ITEM))),
 						"Breeding Mobs", "Use a trait item on mobs")
 				.create("imagine_breaker", LHItems.IMAGINE_BREAKER.asStack(),
 						CriterionBuilder.item(LHItems.IMAGINE_BREAKER.get()),

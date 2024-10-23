@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "l2hostility:miracle_powder"
+    },
+    "B": {
+      "item": "l2hostility:hostility_essence"
+    },
+    "C": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "ACA",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "l2hostility:miracle_ingot"
+  }
+}

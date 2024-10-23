@@ -12,12 +12,14 @@ import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.LockCode;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.effect.MobEffect;
@@ -38,7 +40,6 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.List;
 
 @SerialClass
@@ -46,10 +47,11 @@ public class HostilityBeaconBlockEntity extends BaseBlockEntity
 		implements TickableBlockEntity, MenuProvider, ContainerData {
 
 	private static final int MAX_LEVELS = 3;
-	public static final Holder<MobEffect>[][] BEACON_EFFECTS = {
-			{MobEffects.WEAKNESS, LCEffects.ICE},
-			{LCEffects.FLAME, LCEffects.CURSE},
-			{LCEffects.CLEANSE, LCEffects.INCARCERATE}};
+	public static final List<Holder<MobEffect>> BEACON_EFFECTS = List.of(
+			MobEffects.WEAKNESS, LCEffects.ICE,
+			LCEffects.FLAME, LCEffects.CURSE,
+			LCEffects.CLEANSE, LCEffects.INCARCERATE
+	);
 
 	private static final int BLOCKS_CHECK_PER_TICK = 10;
 	private static final Component DEFAULT_NAME = Component.translatable("container.beacon");
@@ -95,20 +97,16 @@ public class HostilityBeaconBlockEntity extends BaseBlockEntity
 
 		for (int i = 0; i < BLOCKS_CHECK_PER_TICK && start.getY() <= h; ++i) {
 			BlockState state = level.getBlockState(start);
-			float[] afloat = state.getBeaconColorMultiplier(level, start, pos);
+			var afloat = state.getBeaconColorMultiplier(level, start, pos);
 			if (afloat != null) {
 				if (checkingBeamSections.size() <= 1) {
 					sec = new Section(afloat);
 					checkingBeamSections.add(sec);
 				} else if (sec != null) {
-					if (Arrays.equals(afloat, sec.color)) {
+					if (afloat == sec.color) {
 						sec.increaseHeight();
 					} else {
-						sec = new Section(new float[]{
-								(sec.color[0] + afloat[0]) / 2.0F,
-								(sec.color[1] + afloat[1]) / 2.0F,
-								(sec.color[2] + afloat[2]) / 2.0F}
-						);
+						sec = new Section(FastColor.ARGB32.average(sec.color, afloat));
 						checkingBeamSections.add(sec);
 					}
 				}
@@ -187,7 +185,7 @@ public class HostilityBeaconBlockEntity extends BaseBlockEntity
 
 	private void applyEffects(Level level, BlockPos pos) {
 		if (!level.isClientSide && power >= 0) {
-			var eff = BEACON_EFFECTS[power / 2][power % 2];
+			var eff = BEACON_EFFECTS.get(power);
 			double d0 = (levels * 10 + 10);
 			int i = 0;
 			int j = (9 + levels * 2) * 20;
@@ -208,20 +206,24 @@ public class HostilityBeaconBlockEntity extends BaseBlockEntity
 		return this.levels == 0 ? ImmutableList.of() : this.beamSections;
 	}
 
-	public void load(CompoundTag tag) {
-		super.load(tag);
+	@Override
+	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.loadAdditional(tag, registries);
 		if (tag.contains("CustomName", 8)) {
-			this.name = Component.Serializer.fromJson(tag.getString("CustomName"));
+			this.name = parseCustomNameSafe(tag.getString("CustomName"), registries);
 		}
+
 		this.lockKey = LockCode.fromTag(tag);
 	}
 
-	public void saveAdditional(CompoundTag tag) {
-		super.saveAdditional(tag);
+	@Override
+	public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.saveAdditional(tag, registries);
 		tag.putInt("Levels", this.levels);
 		if (this.name != null) {
-			tag.putString("CustomName", Component.Serializer.toJson(this.name));
+			tag.putString("CustomName", Component.Serializer.toJson(this.name, registries));
 		}
+
 		this.lockKey.addToTag(tag);
 	}
 
@@ -280,36 +282,30 @@ public class HostilityBeaconBlockEntity extends BaseBlockEntity
 
 	}
 
-	@Override
-	public AABB getRenderBoundingBox() {
-		return INFINITE_EXTENT_AABB;
-	}
-
 	public int getCount() {
 		return 2;
 	}
 
 	public static class Section {
-		final float[] color;
+		final int color;
 		private int height;
 
-		public Section(float[] color) {
-			this.color = color;
+		public Section(int p_350966_) {
+			this.color = p_350966_;
 			this.height = 1;
 		}
 
 		protected void increaseHeight() {
-			++this.height;
+			this.height++;
 		}
 
-		public float[] getColor() {
+		public int getColor() {
 			return this.color;
 		}
 
 		public int getHeight() {
 			return this.height;
 		}
-
 	}
 
 }

@@ -1,0 +1,33 @@
+{
+  "parent": "l2hostility:hostility/root",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "l2hostility:hostility_detector"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.l2hostility.hostility.detector.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "l2hostility:hostility_detector"
+    },
+    "title": {
+      "translate": "advancements.l2hostility.hostility.detector.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

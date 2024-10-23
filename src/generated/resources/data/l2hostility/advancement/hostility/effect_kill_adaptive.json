@@ -1,0 +1,55 @@
+{
+  "parent": "l2hostility:hostility/effect_kill_regen",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "effect": "l2complements:soul_burning",
+        "trait": "l2hostility:adaptive"
+      },
+      "trigger": "l2hostility:trait_effect"
+    },
+    "1": {
+      "conditions": {
+        "effect": "minecraft:poison",
+        "trait": "l2hostility:adaptive"
+      },
+      "trigger": "l2hostility:trait_effect"
+    },
+    "2": {
+      "conditions": {
+        "effect": "minecraft:wither",
+        "trait": "l2hostility:adaptive"
+      },
+      "trigger": "l2hostility:trait_effect"
+    },
+    "3": {
+      "conditions": {
+        "effect": "FLAME",
+        "trait": "l2hostility:adaptive"
+      },
+      "trigger": "l2hostility:trait_flame"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.l2hostility.hostility.effect_kill_adaptive.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "l2hostility:adaptive"
+    },
+    "title": {
+      "translate": "advancements.l2hostility.hostility.effect_kill_adaptive.title"
+    }
+  },
+  "requirements": [
+    [
+      "0",
+      "1",
+      "2",
+      "3"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

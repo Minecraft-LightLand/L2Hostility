@@ -1,10 +1,10 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
+import dev.xkmc.l2core.util.DCStack;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -15,24 +15,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class SealedItem extends Item {
 
-	public static final String TIME = "sealTime", DATA = "sealedItem";
-
 	public static ItemStack sealItem(ItemStack stack, int time) {
 		if (stack.is(LHItems.SEAL.get())) {
-			stack.getOrCreateTag().putInt(TIME, Math.max(stack.getOrCreateTag().getInt(TIME), time));
+			LHItems.DC_SEAL_TIME.set(stack, time);
 			return stack;
 		}
 		ItemStack ans = LHItems.SEAL.asStack();
-		ans.getOrCreateTag().putInt(TIME, time);
-		ans.getOrCreateTag().put(DATA, stack.save(new CompoundTag()));
-		if (stack.getEnchantmentLevel(LHEnchantments.VANISH.get()) > 0)
-			ans.enchant(LHEnchantments.VANISH.get(), 1);
+		LHItems.DC_SEAL_TIME.set(ans, time);
+		LHItems.DC_SEAL_STACK.set(ans, new DCStack(stack));
+		if (stack.getEnchantmentLevel(LHEnchantments.VANISH.holder()) > 0)
+			ans.enchant(LHEnchantments.VANISH.holder(), 1);
 		return ans;
 	}
 
@@ -50,12 +47,14 @@ public class SealedItem extends Item {
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
 		user.stopUsingItem();
-		return ItemStack.of(stack.getOrCreateTag().getCompound(DATA));
+		var sealed = LHItems.DC_SEAL_STACK.get(stack);
+		if (sealed == null) return ItemStack.EMPTY;
+		return sealed.stack();
 	}
 
 	@Override
-	public int getUseDuration(ItemStack stack) {
-		return stack.getOrCreateTag().getInt(TIME);
+	public int getUseDuration(ItemStack stack, LivingEntity le) {
+		return LHItems.DC_SEAL_TIME.getOrDefault(stack, 0);
 	}
 
 	@Override
@@ -64,10 +63,11 @@ public class SealedItem extends Item {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.TOOLTIP_SEAL_DATA.get().withStyle(ChatFormatting.GRAY));
-		list.add(ItemStack.of(stack.getOrCreateTag().getCompound(DATA)).getHoverName());
-		int time = stack.getOrCreateTag().getInt(TIME);
+		var sealed = LHItems.DC_SEAL_STACK.get(stack);
+		if (sealed != null) list.add(sealed.stack().getHoverName());
+		int time = LHItems.DC_SEAL_TIME.getOrDefault(stack, 0);
 		list.add(LangData.TOOLTIP_SEAL_TIME.get(
 				Component.literal(time / 20 + "").withStyle(ChatFormatting.AQUA)
 		).withStyle(ChatFormatting.RED));

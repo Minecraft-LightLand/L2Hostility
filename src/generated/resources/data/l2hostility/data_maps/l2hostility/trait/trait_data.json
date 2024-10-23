@@ -1,0 +1,238 @@
+{
+  "values": {
+    "l2hostility:adaptive": {
+      "cost": 80,
+      "max_rank": 5,
+      "min_level": 100,
+      "weight": 50
+    },
+    "l2hostility:arena": {
+      "cost": 1000,
+      "max_rank": 1,
+      "min_level": 50,
+      "weight": 1
+    },
+    "l2hostility:blindness": {
+      "cost": 30,
+      "max_rank": 3,
+      "min_level": 40,
+      "weight": 50
+    },
+    "l2hostility:corrosion": {
+      "cost": 50,
+      "max_rank": 3,
+      "min_level": 200,
+      "weight": 50
+    },
+    "l2hostility:counter_strike": {
+      "cost": 50,
+      "max_rank": 1,
+      "min_level": 60,
+      "weight": 100
+    },
+    "l2hostility:cursed": {
+      "cost": 20,
+      "max_rank": 3,
+      "min_level": 20,
+      "weight": 100
+    },
+    "l2hostility:dementor": {
+      "cost": 120,
+      "max_rank": 1,
+      "min_level": 150,
+      "weight": 50
+    },
+    "l2hostility:dispell": {
+      "cost": 100,
+      "max_rank": 3,
+      "min_level": 150,
+      "weight": 50
+    },
+    "l2hostility:drain": {
+      "cost": 80,
+      "max_rank": 3,
+      "min_level": 100,
+      "weight": 100
+    },
+    "l2hostility:erosion": {
+      "cost": 50,
+      "max_rank": 3,
+      "min_level": 200,
+      "weight": 50
+    },
+    "l2hostility:fiery": {
+      "cost": 20,
+      "max_rank": 1,
+      "min_level": 20,
+      "weight": 100
+    },
+    "l2hostility:freezing": {
+      "cost": 30,
+      "max_rank": 3,
+      "min_level": 50,
+      "weight": 50
+    },
+    "l2hostility:gravity": {
+      "cost": 50,
+      "max_rank": 3,
+      "min_level": 80,
+      "weight": 100
+    },
+    "l2hostility:grenade": {
+      "cost": 50,
+      "max_rank": 5,
+      "min_level": 100,
+      "weight": 100
+    },
+    "l2hostility:growth": {
+      "cost": 60,
+      "max_rank": 3,
+      "min_level": 100,
+      "weight": 300
+    },
+    "l2hostility:invisible": {
+      "cost": 30,
+      "max_rank": 1,
+      "min_level": 50,
+      "weight": 100
+    },
+    "l2hostility:killer_aura": {
+      "cost": 100,
+      "max_rank": 3,
+      "min_level": 300,
+      "weight": 50
+    },
+    "l2hostility:levitation": {
+      "cost": 25,
+      "max_rank": 3,
+      "min_level": 40,
+      "weight": 50
+    },
+    "l2hostility:master": {
+      "cost": 200,
+      "max_rank": 1,
+      "min_level": 200,
+      "weight": 50
+    },
+    "l2hostility:moonwalk": {
+      "cost": 50,
+      "max_rank": 3,
+      "min_level": 80,
+      "weight": 100
+    },
+    "l2hostility:nausea": {
+      "cost": 30,
+      "max_rank": 3,
+      "min_level": 40,
+      "weight": 50
+    },
+    "l2hostility:poison": {
+      "cost": 15,
+      "max_rank": 3,
+      "min_level": 20,
+      "weight": 100
+    },
+    "l2hostility:protection": {
+      "cost": 30,
+      "max_rank": 4,
+      "min_level": 50,
+      "weight": 100
+    },
+    "l2hostility:pulling": {
+      "cost": 50,
+      "max_rank": 1,
+      "min_level": 100,
+      "weight": 100
+    },
+    "l2hostility:ragnarok": {
+      "cost": 200,
+      "max_rank": 3,
+      "min_level": 600,
+      "weight": 50
+    },
+    "l2hostility:reflect": {
+      "cost": 80,
+      "max_rank": 5,
+      "min_level": 100,
+      "weight": 50
+    },
+    "l2hostility:regenerate": {
+      "cost": 30,
+      "max_rank": 5,
+      "min_level": 50,
+      "weight": 100
+    },
+    "l2hostility:repelling": {
+      "cost": 50,
+      "max_rank": 1,
+      "min_level": 100,
+      "weight": 100
+    },
+    "l2hostility:reprint": {
+      "cost": 100,
+      "max_rank": 1,
+      "min_level": 100,
+      "weight": 100
+    },
+    "l2hostility:shulker": {
+      "cost": 30,
+      "max_rank": 1,
+      "min_level": 70,
+      "weight": 100
+    },
+    "l2hostility:slowness": {
+      "cost": 10,
+      "max_rank": 5,
+      "min_level": 20,
+      "weight": 100
+    },
+    "l2hostility:soul_burner": {
+      "cost": 50,
+      "max_rank": 3,
+      "min_level": 70,
+      "weight": 100
+    },
+    "l2hostility:speedy": {
+      "cost": 20,
+      "max_rank": 5,
+      "min_level": 50,
+      "weight": 100
+    },
+    "l2hostility:split": {
+      "cost": 50,
+      "max_rank": 3,
+      "min_level": 120,
+      "weight": 100
+    },
+    "l2hostility:tank": {
+      "cost": 20,
+      "max_rank": 5,
+      "min_level": 20,
+      "weight": 100
+    },
+    "l2hostility:teleport": {
+      "cost": 120,
+      "max_rank": 1,
+      "min_level": 150,
+      "weight": 100
+    },
+    "l2hostility:undying": {
+      "cost": 150,
+      "max_rank": 1,
+      "min_level": 150,
+      "weight": 100
+    },
+    "l2hostility:weakness": {
+      "cost": 25,
+      "max_rank": 5,
+      "min_level": 40,
+      "weight": 50
+    },
+    "l2hostility:wither": {
+      "cost": 15,
+      "max_rank": 3,
+      "min_level": 20,
+      "weight": 50
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "type": "l2core:enchantment",
+      "enchantment": "minecraft:vanishing_curse",
+      "minLevel": 1
+    },
+    "A": {
+      "item": "l2complements:blackstone_core"
+    },
+    "B": {
+      "item": "minecraft:copper_ingot"
+    },
+    "C": {
+      "item": "l2hostility:bottle_of_sanity"
+    },
+    "I": {
+      "item": "l2hostility:chaos_ingot"
+    }
+  },
+  "pattern": [
+    "B1B",
+    "CIC",
+    "BAB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "l2hostility:curse_of_sloth"
+  }
+}

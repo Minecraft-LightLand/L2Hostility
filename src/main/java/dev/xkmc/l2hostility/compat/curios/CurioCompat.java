@@ -1,18 +1,15 @@
 package dev.xkmc.l2hostility.compat.curios;
 
-import com.google.common.collect.Multimap;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotAttribute;
@@ -21,10 +18,11 @@ import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Predicate;
 
 public class CurioCompat {
+
+	private static final ResourceLocation DUMMY_ID = ResourceLocation.fromNamespaceAndPath("curios", "dummy_id");
 
 	public static boolean hasItemInCurioOrSlot(LivingEntity player, Item item) {
 		for (EquipmentSlot e : EquipmentSlot.values()) {
@@ -82,7 +80,7 @@ public class CurioCompat {
 			if (strs[0].equals("equipment")) {
 				return new EquipmentSlotAccess(le, EquipmentSlot.byName(strs[1]));
 			} else if (strs[0].equals("curios")) {
-				var opt = CuriosApi.getCuriosInventory(le).resolve();
+				var opt = CuriosApi.getCuriosInventory(le);
 				if (opt.isEmpty()) return null;
 				var handler = opt.get().getStacksHandler(strs[1]);
 				if (handler.isEmpty()) return null;
@@ -97,14 +95,15 @@ public class CurioCompat {
 
 	private static boolean hasItemImpl(LivingEntity player, Item item) {
 		var opt = CuriosApi.getCuriosInventory(player);
-		if (opt.resolve().isEmpty()) {
+		if (opt.isEmpty()) {
 			return false;
 		}
-		opt.resolve().get().findFirstCurio(item);
-		for (var e : opt.resolve().get().getCurios().values()) {
+		opt.get().findFirstCurio(item);
+		for (var e : opt.get().getCurios().values()) {
 			if (e.getStacks().getSlots() == 0) continue;
 			if (!e.getIdentifier().equals("curio") &&
-					!item.builtInRegistryHolder().is(ItemTags.create(new ResourceLocation("curios", e.getIdentifier())))) continue;
+					!item.builtInRegistryHolder().is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", e.getIdentifier()))))
+				continue;
 			for (int i = 0; i < e.getStacks().getSlots(); i++) {
 				if (e.getStacks().getStackInSlot(i).is(item)) {
 					return true;
@@ -116,10 +115,10 @@ public class CurioCompat {
 
 	private static void getItemImpl(List<ItemStack> list, LivingEntity player, Predicate<ItemStack> pred) {
 		var opt = CuriosApi.getCuriosInventory(player);
-		if (opt.resolve().isEmpty()) {
+		if (opt.isEmpty()) {
 			return;
 		}
-		for (var e : opt.resolve().get().getCurios().values()) {
+		for (var e : opt.get().getCurios().values()) {
 			for (int i = 0; i < e.getStacks().getSlots(); i++) {
 				ItemStack stack = e.getStacks().getStackInSlot(i);
 				if (pred.test(stack)) {
@@ -131,10 +130,10 @@ public class CurioCompat {
 
 	private static void getItemAccessImpl(List<EntitySlotAccess> list, LivingEntity player) {
 		var opt = CuriosApi.getCuriosInventory(player);
-		if (opt.resolve().isEmpty()) {
+		if (opt.isEmpty()) {
 			return;
 		}
-		for (var e : opt.resolve().get().getCurios().values()) {
+		for (var e : opt.get().getCurios().values()) {
 			for (int i = 0; i < e.getStacks().getSlots(); i++) {
 				list.add(new CurioSlotAccess(player, e.getStacks(), i, e.getIdentifier()));
 			}
@@ -144,11 +143,10 @@ public class CurioCompat {
 	public static boolean isSlotAdder(EntitySlotAccess access) {
 		if (!(access instanceof CurioSlotAccess slot)) return false;
 		ItemStack stack = access.get();
-		var opt = CuriosApi.getCurio(stack).resolve();
+		var opt = CuriosApi.getCurio(stack);
 		if (opt.isEmpty()) return false;
-		Multimap<Attribute, AttributeModifier> multimap =
-				CuriosApi.getAttributeModifiers(new SlotContext(slot.id, slot.player, 0, false, true),
-						UUID.randomUUID(), stack);
+		var multimap = CuriosApi.getAttributeModifiers(
+				new SlotContext(slot.id, slot.player, 0, false, true), DUMMY_ID, stack);
 		for (var e : multimap.keySet()) {
 			if (e instanceof SlotAttribute) {
 				return true;

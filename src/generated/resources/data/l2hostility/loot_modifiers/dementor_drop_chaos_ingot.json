@@ -24,7 +24,7 @@
   ],
   "rankBonus": 0.0,
   "result": {
-    "Count": 1,
+    "count": 1,
     "id": "l2hostility:chaos_ingot"
   },
   "trait": "l2hostility:dementor"

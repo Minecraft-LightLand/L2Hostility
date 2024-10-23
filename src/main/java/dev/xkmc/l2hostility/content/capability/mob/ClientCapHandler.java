@@ -13,13 +13,13 @@ public class ClientCapHandler {
 	public static void handle(MobCapSyncToClient packet) {
 		Level level = Minecraft.getInstance().level;
 		if (level == null) return;
-		Entity entity = level.getEntity(packet.id);
+		Entity entity = level.getEntity(packet.id());
 		if (!(entity instanceof LivingEntity le)) return;
 		var opt = LHMiscs.MOB.type().getExisting(le);
 		if (opt.isEmpty()) return;
 		new TagCodec(level.registryAccess())
 				.pred(SerialField::toClient)
-				.fromTag(packet.tag, MobTraitCap.class, opt.get());
+				.fromTag(packet.tag(), MobTraitCap.class, opt.get());
 	}
 
 }

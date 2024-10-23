@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.05,
   "result": {
-    "Count": 1,
+    "count": 1,
     "id": "l2complements:blackstone_core"
   },
   "trait": "l2hostility:pulling"

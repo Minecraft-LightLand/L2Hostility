@@ -18,11 +18,13 @@
   ],
   "rankBonus": 0.2,
   "result": {
-    "Count": 1,
-    "id": "minecraft:potion",
-    "tag": {
-      "Potion": "l2complements:curse"
-    }
+    "components": {
+      "minecraft:potion_contents": {
+        "potion": "l2complements:curse"
+      }
+    },
+    "count": 1,
+    "id": "minecraft:potion"
   },
   "trait": "l2hostility:cursed"
 }

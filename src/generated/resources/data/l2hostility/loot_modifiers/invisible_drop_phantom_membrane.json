@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.0,
   "result": {
-    "Count": 4,
+    "count": 4,
     "id": "minecraft:phantom_membrane"
   },
   "trait": "l2hostility:invisible"

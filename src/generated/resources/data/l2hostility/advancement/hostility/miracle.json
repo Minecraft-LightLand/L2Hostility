@@ -1,0 +1,33 @@
+{
+  "parent": "l2hostility:hostility/gluttony",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "l2hostility:miracle_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.l2hostility.hostility.miracle.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "l2hostility:miracle_ingot"
+    },
+    "title": {
+      "translate": "advancements.l2hostility.hostility.miracle.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

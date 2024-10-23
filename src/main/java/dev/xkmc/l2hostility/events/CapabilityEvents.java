@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.events;
 
+import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapHolder;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
@@ -63,7 +64,7 @@ public class CapabilityEvents {
 
 
 	@SubscribeEvent
-	public static void livingTickEvent(EntityTickEvent event) {
+	public static void livingTickEvent(EntityTickEvent.Post event) {
 		if (!(event.getEntity() instanceof LivingEntity mob)) return;
 		if (mob.tickCount % PerformanceConstants.NAN_FIX == 0) {
 			if (Float.isNaN(mob.getHealth())) {
@@ -97,17 +98,18 @@ public class CapabilityEvents {
 				PlayerDifficulty playerDiff = LHMiscs.PLAYER.type().getOrCreate(player);
 				playerDiff.addKillCredit(player, cap);
 				LevelChunk chunk = mob.level().getChunkAt(mob.blockPosition());
-				LHMiscs.CHUNK.type().getOrCreate(chunk).addKillHistory(player, mob, cap);
+				new ChunkCapHolder(chunk, LHMiscs.CHUNK.type().getOrCreate(chunk))
+						.addKillHistory(player, mob, cap);
 			}
 		}
 	}
 
-	private static final Set<ChunkDifficulty> PENDING = new LinkedHashSet<>();
+	private static final Set<ChunkCapHolder> PENDING = new LinkedHashSet<>();
 
 	@SubscribeEvent
 	public static void onServerTick(ServerTickEvent.Post event) {
 		for (var e : PENDING) {
-			L2Hostility.toTrackingChunk(e.chunk, ChunkCapSyncToClient.of(e));
+			L2Hostility.toTrackingChunk(e.chunk(), ChunkCapSyncToClient.of(e));
 		}
 		PENDING.clear();
 	}
@@ -115,10 +117,12 @@ public class CapabilityEvents {
 	@SubscribeEvent
 	public static void onStartTrackingChunk(ChunkWatchEvent.Watch event) {
 		var opt = LHMiscs.CHUNK.type().getOrCreate(event.getChunk());
-		L2Hostility.HANDLER.toClientPlayer(ChunkCapSyncToClient.of(opt), event.getPlayer());
+		L2Hostility.HANDLER.toClientPlayer(ChunkCapSyncToClient.of(
+				new ChunkCapHolder(event.getChunk(), opt)
+		), event.getPlayer());
 	}
 
-	public static void markDirty(ChunkDifficulty chunk) {
+	public static void markDirty(ChunkCapHolder chunk) {
 		PENDING.add(chunk);
 	}
 

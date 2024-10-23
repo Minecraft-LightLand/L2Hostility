@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredient": {
+    "tag": "l2hostility:trait_item"
+  },
+  "result": {
+    "count": 1,
+    "id": "l2hostility:miracle_powder"
+  }
+}

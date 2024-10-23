@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.1,
   "result": {
-    "Count": 1,
+    "count": 1,
     "id": "l2complements:cursed_droplet"
   },
   "trait": "l2hostility:adaptive"

@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.0,
   "result": {
-    "Count": 8,
+    "count": 8,
     "id": "minecraft:blaze_rod"
   },
   "trait": "l2hostility:fiery"

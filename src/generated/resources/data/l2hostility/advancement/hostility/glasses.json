@@ -1,0 +1,33 @@
+{
+  "parent": "l2hostility:hostility/detector",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "l2hostility:detector_glasses"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.l2hostility.hostility.glasses.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "l2hostility:detector_glasses"
+    },
+    "title": {
+      "translate": "advancements.l2hostility.hostility.glasses.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

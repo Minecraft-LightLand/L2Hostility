@@ -24,7 +24,7 @@
   ],
   "rankBonus": 0.1,
   "result": {
-    "Count": 4,
+    "count": 4,
     "id": "l2complements:sculkium_nugget"
   },
   "trait": "l2hostility:speedy"

@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.02,
   "result": {
-    "Count": 1,
+    "count": 1,
     "id": "l2complements:heirophant_green"
   },
   "trait": "l2hostility:killer_aura"

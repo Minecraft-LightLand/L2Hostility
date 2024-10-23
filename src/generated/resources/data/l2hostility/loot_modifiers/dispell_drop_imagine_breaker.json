@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.0,
   "result": {
-    "Count": 1,
+    "count": 1,
     "id": "l2hostility:imagine_breaker"
   },
   "trait": "l2hostility:dispell"

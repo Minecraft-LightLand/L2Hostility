@@ -1,0 +1,39 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.l2hostility.split_suppressor"
+  },
+  "effects": {
+    "l2complements:craftable": [
+      {
+        "color": -45233,
+        "max": 1,
+        "order": 1
+      }
+    ],
+    "l2core:color": [
+      {
+        "base": "green",
+        "desc": "gray"
+      }
+    ],
+    "l2core:legacy": [
+      "l2hostility:split_suppressor"
+    ]
+  },
+  "max_cost": {
+    "base": 10,
+    "per_level_above_first": 5
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 5
+  },
+  "primary_items": "#minecraft:enchantable/weapon",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/weapon",
+  "weight": 1
+}

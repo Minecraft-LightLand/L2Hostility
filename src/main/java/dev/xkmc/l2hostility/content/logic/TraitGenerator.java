@@ -44,13 +44,13 @@ public class TraitGenerator {
 			}
 		}
 
-		traitPool = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
+		traitPool = new ArrayList<>(LHTraits.TRAITS.get().stream().filter(e ->
 				(config == null || !config.blacklist().contains(e)) &&
 						!traits.containsKey(e) &&
 						e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
 		weights = 0;
 		for (var e : traitPool) {
-			weights += e.getConfig().weight;
+			weights += e.getConfig().weight();
 		}
 
 	}
@@ -71,13 +71,13 @@ public class TraitGenerator {
 		int val = rand.nextInt(weights);
 		MobTrait e = traitPool.get(0);
 		for (var x : traitPool) {
-			val -= x.getConfig().weight;
+			val -= x.getConfig().weight();
 			if (val <= 0) {
 				e = x;
 				break;
 			}
 		}
-		weights -= e.getConfig().weight;
+		weights -= e.getConfig().weight();
 		traitPool.remove(e);
 		return e;
 	}

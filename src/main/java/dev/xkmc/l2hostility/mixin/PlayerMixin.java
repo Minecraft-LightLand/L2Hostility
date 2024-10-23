@@ -21,7 +21,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
 	@Inject(at = @At("HEAD"), method = "blockActionRestricted", cancellable = true)
 	public void l2hostility$blockActionRestricted$antibuild(Level level, BlockPos pos, GameType type, CallbackInfoReturnable<Boolean> cir) {
-		if (type == GameType.SURVIVAL && hasEffect(LHEffects.ANTIBUILD.get())) {
+		if (type == GameType.SURVIVAL && hasEffect(LHEffects.ANTIBUILD)) {
 			cir.setReturnValue(true);
 		}
 	}

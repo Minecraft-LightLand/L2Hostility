@@ -22,7 +22,7 @@ public class ClientSyncHandler {
 		if (level == null || !level.dimension().location().equals(id)) return;
 		var cap = ChunkDifficulty.at(level, x, z);
 		if (cap.isEmpty()) return;
-		ChunkDifficulty diff = cap.get();
+		ChunkDifficulty diff = cap.get().cap();
 		new TagCodec(level.registryAccess()).fromTag(tag, ChunkDifficulty.class, diff);
 	}
 

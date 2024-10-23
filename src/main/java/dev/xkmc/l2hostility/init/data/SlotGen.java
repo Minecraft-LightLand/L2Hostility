@@ -1,12 +1,9 @@
 package dev.xkmc.l2hostility.init.data;
 
-import com.github.L_Ender.cataclysm.Cataclysm;
-import dev.xkmc.l2hostility.compat.data.CataclysmData;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import top.theillusivec4.curios.api.CuriosDataProvider;
 
@@ -26,7 +23,7 @@ public class SlotGen extends CuriosDataProvider {
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genSlot(this);
 		}
-		
+
 		 */
 	}
 

@@ -2,27 +2,33 @@ package dev.xkmc.l2hostility.content.item.curio.curse;
 
 import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
-import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.L2DTLangData;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class CurseOfWrath extends CurseCurioItem {
+
+	public static final Set<Holder<MobEffect>> SET = new LinkedHashSet<>(List.of(
+			MobEffects.BLINDNESS, MobEffects.DARKNESS, MobEffects.CONFUSION,
+			MobEffects.MOVEMENT_SLOWDOWN, MobEffects.DIG_SLOWDOWN, MobEffects.WEAKNESS
+	));
 
 	public CurseOfWrath(Properties props) {
 		super(props);
@@ -37,8 +43,9 @@ public class CurseOfWrath extends CurseCurioItem {
 	public void appendHoverText(ItemStack stack, TooltipContext ctx, List<Component> list, TooltipFlag flag) {
 		int rate = (int) Math.round(100 * LHConfig.SERVER.wrathDamageBonus.get());
 		list.add(LangData.ITEM_CHARM_WRATH.get(rate).withStyle(ChatFormatting.GOLD));
-		if (ctx.level() != null)
-			addTooltip(list, L2DamageTracker.ARMOR.get(ctx.level().registryAccess(), builtInRegistryHolder()));
+		if (ctx.level() != null) {
+			addTooltip(list, SET);
+		}
 	}
 
 	@Override
@@ -50,10 +57,10 @@ public class CurseOfWrath extends CurseCurioItem {
 		}
 	}
 
-	private void addTooltip(List<Component> list, Set<MobEffect> set) {
+	private void addTooltip(List<Component> list, Set<Holder<MobEffect>> set) {
 		TreeMap<ResourceLocation, MobEffect> map = new TreeMap<>();
-		for (MobEffect e : set) {
-			map.put(ForgeRegistries.MOB_EFFECTS.getKey(e), e);
+		for (var e : set) {
+			map.put(e.getKey().location(), e.value());
 		}
 		MutableComponent comp = L2DTLangData.ARMOR_IMMUNE.get();
 		boolean comma = false;

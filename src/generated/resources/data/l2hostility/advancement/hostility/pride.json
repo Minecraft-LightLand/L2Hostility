@@ -1,0 +1,34 @@
+{
+  "parent": "l2hostility:hostility/miracle",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "l2hostility:curse_of_pride"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.l2hostility.hostility.pride.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "l2hostility:curse_of_pride"
+    },
+    "title": {
+      "translate": "advancements.l2hostility.hostility.pride.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

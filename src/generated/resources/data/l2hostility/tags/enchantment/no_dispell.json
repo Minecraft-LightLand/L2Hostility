@@ -1,11 +1,32 @@
 {
   "values": [
     "minecraft:unbreaking",
-    "l2complements:life_sync",
-    "l2complements:hardened",
-    "l2complements:safeguard",
-    "l2complements:eternal",
-    "l2complements:durable_armor",
-    "l2complements:soul_bound"
+    "l2hostility:split_suppressor",
+    "l2hostility:insulator",
+    "l2hostility:vanish",
+    {
+      "id": "l2complements:life_sync",
+      "required": false
+    },
+    {
+      "id": "l2complements:hardened",
+      "required": false
+    },
+    {
+      "id": "l2complements:safeguard",
+      "required": false
+    },
+    {
+      "id": "l2complements:eternal",
+      "required": false
+    },
+    {
+      "id": "l2complements:durable_armor",
+      "required": false
+    },
+    {
+      "id": "l2complements:soul_bound",
+      "required": false
+    }
   ]
 }

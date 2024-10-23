@@ -1,0 +1,33 @@
+{
+  "parent": "l2hostility:hostility/kill_adaptive",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "traits": [
+          "l2hostility:dementor",
+          "l2hostility:dispell"
+        ]
+      },
+      "trigger": "l2hostility:kill_trait"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.l2hostility.hostility.kill_dementor.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "l2hostility:dispell"
+    },
+    "title": {
+      "translate": "advancements.l2hostility.hostility.kill_dementor.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

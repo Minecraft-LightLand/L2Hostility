@@ -1,0 +1,34 @@
+{
+  "parent": "l2hostility:hostility/breed",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "l2hostility:imagine_breaker"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.l2hostility.hostility.imagine_breaker.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "l2hostility:imagine_breaker"
+    },
+    "title": {
+      "translate": "advancements.l2hostility.hostility.imagine_breaker.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -35,7 +35,7 @@ public class KillTraitLevelTrigger extends BaseCriterion<KillTraitLevelTrigger.I
 		public int rank;
 
 		public Ins() {
-			super(HostilityTriggers.TRAIT_LEVEL);
+			super(HostilityTriggers.TRAIT_LEVEL.get());
 		}
 
 		public boolean matchAll(MobTraitCap cap) {

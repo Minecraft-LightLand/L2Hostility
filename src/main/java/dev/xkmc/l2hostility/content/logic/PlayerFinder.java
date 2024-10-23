@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.content.logic;
 
-import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -24,10 +24,8 @@ public class PlayerFinder {
 				continue;
 			if (!pl.isAlive())
 				continue;
-			var plOpt = pl.getCapability(PlayerDifficulty.CAPABILITY).resolve();
-			if (plOpt.isEmpty())
-				continue;
-			int lv = plOpt.get().getLevel().getLevel();
+			var plOpt = LHMiscs.PLAYER.type().getOrCreate(pl);
+			int lv = plOpt.getLevel(pl).getLevel();
 			if (dist < sr) {
 				if (lowPl == null || lv < lowLv) {
 					lowPl = pl;

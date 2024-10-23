@@ -1,12 +1,12 @@
 package dev.xkmc.l2hostility.events;
 
 import dev.xkmc.l2hostility.content.item.consumable.BookCopy;
-import dev.xkmc.l2hostility.content.item.traits.SealedItem;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -49,10 +49,10 @@ public class MiscHandlers {
 		ItemStack copy = event.getLeft();
 		ItemStack book = event.getRight();
 		if (copy.getItem() instanceof BookCopy && book.getItem() instanceof EnchantedBookItem) {
-			var map = EnchantmentHelper.getEnchantments(book);
+			var map = EnchantmentHelper.getEnchantmentsForCrafting(book);
 			int cost = 0;
 			for (var e : map.entrySet()) {
-				cost += BookCopy.cost(e.getKey(), e.getValue());
+				cost += BookCopy.cost(e.getKey().value(), e.getIntValue());
 			}
 			ItemStack result = book.copy();
 			if (!LHConfig.SERVER.bookOfReprintSpread.get())
@@ -86,10 +86,9 @@ public class MiscHandlers {
 	}
 
 	public static boolean predicateSlotValid(SlotContext slotContext, ItemStack stack) {
-		if (!stack.hasTag() || stack.getTagElement(SealedItem.DATA) == null) return false;
-		var ctag = stack.getOrCreateTag().getCompound(SealedItem.DATA);
-		ItemStack content = ItemStack.of(ctag);
-		return CuriosApi.isStackValid(slotContext, content);
+		var sealed = LHItems.DC_SEAL_STACK.get(stack);
+		if (sealed == null) return false;
+		return CuriosApi.isStackValid(slotContext, sealed.stack());
 	}
 
 }

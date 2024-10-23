@@ -6,16 +6,16 @@
       "level": 200,
       "stack": [
         {
-          "item": "l2weaponry:poseidon_madness",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2weaponry:poseidon_madness"
         },
         {
-          "item": "l2weaponry:axe_of_cursed_flame",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2weaponry:axe_of_cursed_flame"
         },
         {
-          "item": "l2weaponry:spear_of_winter_storm",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2weaponry:spear_of_winter_storm"
         }
       ],
       "weight": 10
@@ -24,16 +24,16 @@
       "level": 300,
       "stack": [
         {
-          "item": "l2weaponry:abyss_resonance",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2weaponry:abyss_resonance"
         },
         {
-          "item": "l2weaponry:dogmatic_standoff",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2weaponry:dogmatic_standoff"
         },
         {
-          "item": "l2weaponry:barbaric_hallow",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2weaponry:barbaric_hallow"
         }
       ],
       "weight": 5
@@ -42,12 +42,12 @@
       "level": 400,
       "stack": [
         {
-          "item": "l2weaponry:claw_of_determination",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2weaponry:claw_of_determination"
         },
         {
-          "item": "l2weaponry:blade_of_illusion",
-          "nbt": "{Damage:0}"
+          "count": 1,
+          "id": "l2weaponry:blade_of_illusion"
         }
       ],
       "weight": 2

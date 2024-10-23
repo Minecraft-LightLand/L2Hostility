@@ -1,7 +1,7 @@
 package dev.xkmc.l2hostility.init.loot;
 
-import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.materials.LCMats;
+import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2core.init.reg.simple.CdcReg;
 import dev.xkmc.l2core.init.reg.simple.CdcVal;
@@ -12,24 +12,24 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2serial.serialization.codec.MapCodecAdaptor;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 
 public class TraitGLMProvider extends GlobalLootModifierProvider {
 
@@ -62,8 +62,8 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 
 	}
 
-	public TraitGLMProvider(DataGenerator gen) {
-		super(gen.getPackOutput(), L2Hostility.MODID);
+	public TraitGLMProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries, L2Hostility.MODID);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.CONFUSION.get(), loot1, new ItemStack(Items.PUFFERFISH, 4), 1, 0, 0.1);
 		add(LHTraits.SOUL_BURNER.get(), loot2, LCItems.SOUL_FLAME.asStack(2), 1, 0, 0.1);
 		add(LHTraits.FREEZING.get(), loot2, LCItems.HARD_ICE.asStack(2), 1, 0, 0.1);
-		add(LHTraits.CURSED.get(), loot1, PotionItem.setPotion(Items.POTION.getDefaultInstance(), Objects.requireNonNull(ForgeRegistries.POTIONS.getValue(new ResourceLocation(L2Complements.MODID, "curse")))), 1, 0, 0.2);
+		add(LHTraits.CURSED.get(), loot1, getPotion(LCEffects.CURSE.key().location()), 1, 0, 0.2);
 		add(LHTraits.CURSED.get(), loot2, LCItems.CURSED_DROPLET.asStack(), 3, 0, 0.05);
 		add(LHTraits.CORROSION.get(), loot2, LCItems.CURSED_DROPLET.asStack(), 1, 0, 0.1);
 		add(LHTraits.EROSION.get(), loot2, LCItems.CURSED_DROPLET.asStack(), 1, 0, 0.1);
@@ -159,7 +159,13 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 				new PlayerHasItemCondition(loot4)
 		);
 
+	}
 
+	private ItemStack getPotion(ResourceLocation holder) {
+		ItemStack stack = Items.POTION.getDefaultInstance();
+		var potion = BuiltInRegistries.POTION.getHolder(holder).orElseThrow();
+		stack.set(DataComponents.POTION_CONTENTS, new PotionContents(potion));
+		return stack;
 	}
 
 	private void add(MobTrait trait, Item curio, ItemStack stack, int start, double chance, double bonus, int min) {
@@ -184,7 +190,7 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 	}
 
 	private void add(MobTrait trait, ItemStack stack, double chance, double bonus, LootItemCondition... conditions) {
-		String name = trait.getRegistryName().getPath() + "_drop_" + ForgeRegistries.ITEMS.getKey(stack.getItem()).getPath();
+		String name = trait.getRegistryName().getPath() + "_drop_" + BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath();
 		add(name, new TraitLootModifier(trait, chance, bonus, stack, conditions));
 	}
 

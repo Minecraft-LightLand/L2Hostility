@@ -18,7 +18,7 @@
   ],
   "rankBonus": 0.1,
   "result": {
-    "Count": 1,
+    "count": 1,
     "id": "minecraft:wither_skeleton_skull"
   },
   "trait": "l2hostility:wither"

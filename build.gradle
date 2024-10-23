@@ -185,6 +185,7 @@ dependencies {
 
     implementation "mezz.jei:jei-${jei_minecraft_version}:${jei_version}"
     implementation "vazkii.patchouli:Patchouli:${patchouli_ver}"
+    implementation "curse.maven:jade-324717:5813144"
 
     //implementation "curse.maven:adorned-1036809:5740650"
 

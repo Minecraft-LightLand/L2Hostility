@@ -11,11 +11,12 @@ public record ChunkCapSyncToClient(
 		CompoundTag tag, ResourceLocation level, int x, int z
 ) implements SerialPacketBase<ChunkCapSyncToClient> {
 
-	public static ChunkCapSyncToClient of(ChunkDifficulty chunk) {
-		var level = chunk.chunk.getLevel().dimension().location();
-		var x = chunk.chunk.getPos().x;
-		var z = chunk.chunk.getPos().z;
-		var tag = new TagCodec(chunk.chunk.getLevel().registryAccess()).toTag(new CompoundTag(), chunk);
+	public static ChunkCapSyncToClient of(ChunkCapHolder chunk) {
+		var level = chunk.chunk().getLevel().dimension().location();
+		var x = chunk.chunk().getPos().x;
+		var z = chunk.chunk().getPos().z;
+		var tag = new TagCodec(chunk.chunk().getLevel().registryAccess())
+				.toTag(new CompoundTag(), chunk.cap());
 		return new ChunkCapSyncToClient(tag, level, x, z);
 	}
 

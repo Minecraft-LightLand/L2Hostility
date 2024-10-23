@@ -5,20 +5,16 @@ import dev.xkmc.l2archery.init.registrate.ArcheryItems;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2core.serial.config.ConfigDataProvider;
-import dev.xkmc.l2damagetracker.init.L2DamageTracker;
-import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
-import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2weaponry.init.L2Weaponry;
 import dev.xkmc.l2weaponry.init.registrate.LWItems;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Items;
@@ -28,21 +24,16 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class LHConfigGen extends ConfigDataProvider {
 
-	public LHConfigGen(DataGenerator generator) {
-		super(generator, "L2Hostility Config");
+	public LHConfigGen(DataGenerator generator, CompletableFuture<HolderLookup.Provider> pvd) {
+		super(generator, pvd, "L2Hostility Config");
 	}
 
 	@Override
 	public void add(Collector collector) {
-		L2Hostility.REGISTRATE.CONFIGS.forEach(e -> e.accept(collector));
-
-		collector.add(L2DamageTracker.ARMOR, L2Hostility.loc("equipments"), new ArmorEffectConfig()
-				.add(LHItems.CURSE_WRATH.getId().toString(),
-						MobEffects.BLINDNESS, MobEffects.DARKNESS, MobEffects.CONFUSION,
-						MobEffects.MOVEMENT_SLOWDOWN, MobEffects.DIG_SLOWDOWN, MobEffects.WEAKNESS));
 
 		collector.add(L2Hostility.DIFFICULTY, L2Hostility.loc("overworld"), new WorldDifficultyConfig()
 				.putDim(Level.OVERWORLD, 0, 0, 4, 1)
@@ -168,7 +159,7 @@ public class LHConfigGen extends ConfigDataProvider {
 		);
 
 
-		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Weaponry.MODID, "weapons"), new WeaponConfig()
+		collector.add(L2Hostility.WEAPON, L2Weaponry.loc("weapons"), new WeaponConfig()
 				.putMeleeWeapon(200, 10,
 						LWItems.STORM_JAVELIN.get(),
 						LWItems.FLAME_AXE.get(),
@@ -185,7 +176,7 @@ public class LHConfigGen extends ConfigDataProvider {
 				)
 		);
 
-		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Archery.MODID, "bows"), new WeaponConfig()
+		collector.add(L2Hostility.WEAPON, L2Archery.loc("bows"), new WeaponConfig()
 				.putRangedWeapon(50, 10,
 						ArcheryItems.STARTER_BOW.get()
 				)

@@ -1,0 +1,33 @@
+{
+  "parent": "l2hostility:hostility/envy",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#l2hostility:trait_item"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.l2hostility.hostility.trait.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "l2hostility:tank"
+    },
+    "title": {
+      "translate": "advancements.l2hostility.hostility.trait.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -3,6 +3,9 @@ package dev.xkmc.l2hostility.init.registrate;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
+import dev.xkmc.l2core.init.reg.simple.DCReg;
+import dev.xkmc.l2core.init.reg.simple.DCVal;
+import dev.xkmc.l2core.util.DCStack;
 import dev.xkmc.l2hostility.content.entity.ChargeType;
 import dev.xkmc.l2hostility.content.item.consumable.*;
 import dev.xkmc.l2hostility.content.item.curio.curse.*;
@@ -10,9 +13,10 @@ import dev.xkmc.l2hostility.content.item.curio.misc.*;
 import dev.xkmc.l2hostility.content.item.curio.ring.*;
 import dev.xkmc.l2hostility.content.item.tool.Detector;
 import dev.xkmc.l2hostility.content.item.tool.DetectorGlasses;
+import dev.xkmc.l2hostility.content.item.tool.TraitAdderWand;
 import dev.xkmc.l2hostility.content.item.tool.WitchWand;
 import dev.xkmc.l2hostility.content.item.traits.SealedItem;
-import dev.xkmc.l2hostility.content.item.wand.TraitAdderWand;
+import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
@@ -20,6 +24,7 @@ import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2magic.init.registrate.LMItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -27,6 +32,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 
 @SuppressWarnings({"unsafe"})
@@ -78,6 +84,15 @@ public class LHItems {
 
 	public static final ItemEntry<SealedItem> SEAL;
 
+	private static final DCReg DC = DCReg.of(L2Hostility.REG);
+	public static final DCVal<Long> DC_DISPELL_START = DC.longVal("dispell_start");
+	public static final DCVal<ItemEnchantments> DC_DISPELL_ENCH = DC.reg("dispell_ench", ItemEnchantments.CODEC, ItemEnchantments.STREAM_CODEC, false);
+	public static final DCVal<Integer> DC_PRIDE_LEVEL = DC.intVal("pride_level");
+	public static final DCVal<DCStack> DC_SEAL_STACK = DC.stack("sealed_stack");
+	public static final DCVal<Integer> DC_SEAL_TIME = DC.intVal("sealed_time");
+	public static final DCVal<Long> DC_UNSEAL_START = DC.longVal("unseal_start");
+	public static final DCVal<String> DC_UNSEAL_SLOT = DC.str("unseal_slot");
+	public static final DCVal<Holder<MobTrait>> DC_TRAIT_WAND = DC.registry("trait_wand", LHTraits.TRAITS.reg());
 
 	static {
 

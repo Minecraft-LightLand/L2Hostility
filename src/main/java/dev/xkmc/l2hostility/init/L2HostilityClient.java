@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.init;
 
-import dev.xkmc.l2hostility.content.item.curio.misc.PocketOfRestoration;
 import dev.xkmc.l2hostility.content.menu.tab.DifficultyOverlay;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -18,7 +17,7 @@ public class L2HostilityClient {
 	public static void client(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
 			ItemProperties.register(LHItems.RESTORATION.get(), L2Hostility.loc("filled"),
-					(stack, level, entity, i) -> stack.getTagElement(PocketOfRestoration.ROOT) == null ? 0 : 1);
+					(stack, level, entity, i) -> LHItems.DC_SEAL_STACK.get(stack) == null ? 0 : 1);
 		});
 	}
 

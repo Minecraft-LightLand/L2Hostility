@@ -73,7 +73,7 @@ public class DifficultyScreen extends BaseTextScreen {
 				LangData.TOOLTIP_LEGENDARY.get().withStyle(formats[2]) : maxCap), List::of));
 		var opt = ChunkDifficulty.at(player.level(), player.blockPosition());
 		if (opt.isPresent()) {
-			ChunkDifficulty chunk = opt.get();
+			var chunk = opt.get();
 			SectionDifficulty sec = chunk.getSection(player.blockPosition().getY());
 			if (sec.isCleared()) {
 				list.add(Pair.of(LangData.INFO_CHUNK_CLEAR.get().withStyle(formats[1]), List::of));

@@ -6,6 +6,7 @@ import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
@@ -34,7 +35,7 @@ public class DispellTrait extends LegendaryTrait {
 		List<ItemStack> list = new ArrayList<>();
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			ItemStack stack = target.getItemBySlot(slot);
-			if (stack.isEnchanted() && !(stack.getOrCreateTag().contains("l2hostility_enchantment"))) {
+			if (stack.isEnchanted() && LHItems.DC_DISPELL_ENCH.get(stack) == null) {
 				list.add(stack);
 			}
 		}

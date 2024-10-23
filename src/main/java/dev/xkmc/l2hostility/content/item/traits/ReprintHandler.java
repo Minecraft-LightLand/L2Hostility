@@ -1,40 +1,49 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ReprintHandler {
 
-	public static void reprint(ItemStack dst, ItemStack src) {
+	public static void reprint(RegistryAccess access, ItemStack dst, ItemStack src) {
 		if (!dst.isEnchanted() && !dst.isEnchantable() || !src.isEnchanted()) return;
-		var selfEnch = dst.getAllEnchantments();
-		var targetEnch = src.getAllEnchantments();
-		Map<Enchantment, Integer> newEnch = new LinkedHashMap<>();
+		var reg = access.lookupOrThrow(Registries.ENCHANTMENT);
+		var selfEnch = dst.getAllEnchantments(reg);
+		var targetEnch = src.getAllEnchantments(reg);
+		Map<Holder<Enchantment>, Integer> newEnch = new LinkedHashMap<>();
 		for (var pair : targetEnch.entrySet()) {
-			Enchantment e = pair.getKey();
-			if (!dst.canApplyAtEnchantingTable(e)) continue;
+			var e = pair.getKey();
+			if (!dst.isPrimaryItemFor(e)) continue;
 			if (!allow(newEnch, e)) continue;
-			int lv = pair.getValue();
+			int lv = pair.getIntValue();
 			newEnch.compute(e, (k, v) -> v == null ? lv : Math.max(v, lv));
 		}
 		for (var pair : selfEnch.entrySet()) {
-			Enchantment e = pair.getKey();
-			if (!dst.canApplyAtEnchantingTable(e)) continue;
+			var e = pair.getKey();
+			if (!dst.isPrimaryItemFor(e)) continue;
 			if (!allow(newEnch, e)) continue;
-			int lv = pair.getValue();
+			int lv = pair.getIntValue();
 			newEnch.compute(e, (k, v) -> v == null ? lv : Math.max(v, lv));
 		}
-		EnchantmentHelper.setEnchantments(newEnch, dst);
+		var builder = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
+		for (var e : newEnch.entrySet()) {
+			builder.set(e.getKey(), e.getValue());
+		}
+		EnchantmentHelper.setEnchantments(dst, builder.toImmutable());
 	}
 
-	private static boolean allow(Map<Enchantment, Integer> map, Enchantment ench) {
+	private static boolean allow(Map<Holder<Enchantment>, Integer> map, Holder<Enchantment> ench) {
 		if (map.containsKey(ench)) return true;
 		for (var e : map.keySet()) {
-			if (!e.isCompatibleWith(ench)) {
+			if (!Enchantment.areCompatible(e, ench)) {
 				return false;
 			}
 		}

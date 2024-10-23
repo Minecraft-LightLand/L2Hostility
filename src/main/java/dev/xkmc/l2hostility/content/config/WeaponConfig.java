@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 @SerialClass
 public class WeaponConfig extends BaseConfig {
@@ -137,14 +139,14 @@ public class WeaponConfig extends BaseConfig {
 
 	@SafeVarargs
 	public final WeaponConfig putWeaponEnch(int level, float chance, ResourceKey<Enchantment>... items) {
-		ArrayList<ResourceKey<Enchantment>> list = new ArrayList<>(Arrays.asList(items));
+		ArrayList<ResourceLocation> list = new ArrayList<>(Stream.of(items).map(ResourceKey::location).toList());
 		weapon_enchantments.add(new EnchConfig(list, level, chance));
 		return this;
 	}
 
 	@SafeVarargs
 	public final WeaponConfig putArmorEnch(int level, float chance, ResourceKey<Enchantment>... items) {
-		ArrayList<ResourceKey<Enchantment>> list = new ArrayList<>(Arrays.asList(items));
+		ArrayList<ResourceLocation> list = new ArrayList<>(Stream.of(items).map(ResourceKey::location).toList());
 		armor_enchantments.add(new EnchConfig(list, level, chance));
 		return this;
 	}
@@ -153,7 +155,7 @@ public class WeaponConfig extends BaseConfig {
 
 	}
 
-	public record EnchConfig(ArrayList<ResourceKey<Enchantment>> enchantments, int level, float chance) {
+	public record EnchConfig(ArrayList<ResourceLocation> enchantments, int level, float chance) {
 
 	}
 
