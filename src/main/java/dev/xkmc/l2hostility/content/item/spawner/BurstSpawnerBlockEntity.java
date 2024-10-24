@@ -87,9 +87,7 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 				if (entity instanceof Creeper) continue;
 				entity.setPos(Vec3.atCenterOf(getBlockPos()));
 				if (entity instanceof LivingEntity le) {
-					var opt = LHMiscs.MOB.type().getExisting(le);
-					if (opt.isEmpty()) continue;
-					MobTraitCap cap = opt.get();
+					var cap = LHMiscs.MOB.type().getOrCreate(le);
 					cap.summoned = true;
 					cap.noDrop = true;
 					cap.pos = getBlockPos();

@@ -84,16 +84,6 @@ public class LHItems {
 
 	public static final ItemEntry<SealedItem> SEAL;
 
-	private static final DCReg DC = DCReg.of(L2Hostility.REG);
-	public static final DCVal<Long> DC_DISPELL_START = DC.longVal("dispell_start");
-	public static final DCVal<ItemEnchantments> DC_DISPELL_ENCH = DC.reg("dispell_ench", ItemEnchantments.CODEC, ItemEnchantments.STREAM_CODEC, false);
-	public static final DCVal<Integer> DC_PRIDE_LEVEL = DC.intVal("pride_level");
-	public static final DCVal<DCStack> DC_SEAL_STACK = DC.stack("sealed_stack");
-	public static final DCVal<Integer> DC_SEAL_TIME = DC.intVal("sealed_time");
-	public static final DCVal<Long> DC_UNSEAL_START = DC.longVal("unseal_start");
-	public static final DCVal<String> DC_UNSEAL_SLOT = DC.str("unseal_slot");
-	public static final DCVal<Holder<MobTrait>> DC_TRAIT_WAND = DC.registry("trait_wand", LHTraits.TRAITS.reg());
-
 	static {
 
 		// consumables
@@ -217,17 +207,27 @@ public class LHItems {
 		{
 			ADDER = L2Hostility.REGISTRATE.item(
 							"trait_adder_wand", p -> new TraitAdderWand(p.stacksTo(1)))
-					.model((ctx, pvd) -> pvd.handheld(ctx)).register();
-			L2Hostility.REGISTRATE.modifyCreativeModeTab(LHBlocks.TAB.key(), e -> {
-				e.accept(LMItems.WAND_AI.asStack());
-				e.accept(LMItems.WAND_EQUIPMENT.asStack());
-				e.accept(LMItems.WAND_TARGET.asStack());
-			});
+					.model((ctx, pvd) -> pvd.handheld(ctx)).onRegister((x)->L2Hostility.REGISTRATE.modifyCreativeModeTab(LHBlocks.TAB.key(), e -> {
+						e.accept(LMItems.WAND_AI.asStack());
+						e.accept(LMItems.WAND_EQUIPMENT.asStack());
+						e.accept(LMItems.WAND_TARGET.asStack());
+					})).register();
+
 		}
 
 		SEAL = L2Hostility.REGISTRATE.item("sealed_item", p -> new SealedItem(p.stacksTo(1).fireResistant()))
 				.removeTab(LHBlocks.TAB.key()).tag(LHTagGen.NO_SEAL).register();
 	}
+
+	private static final DCReg DC = DCReg.of(L2Hostility.REG);
+	public static final DCVal<Long> DC_DISPELL_START = DC.longVal("dispell_start");
+	public static final DCVal<ItemEnchantments> DC_DISPELL_ENCH = DC.reg("dispell_ench", ItemEnchantments.CODEC, ItemEnchantments.STREAM_CODEC, false);
+	public static final DCVal<Integer> DC_PRIDE_LEVEL = DC.intVal("pride_level");
+	public static final DCVal<DCStack> DC_SEAL_STACK = DC.stack("sealed_stack");
+	public static final DCVal<Integer> DC_SEAL_TIME = DC.intVal("sealed_time");
+	public static final DCVal<Long> DC_UNSEAL_START = DC.longVal("unseal_start");
+	public static final DCVal<String> DC_UNSEAL_SLOT = DC.str("unseal_slot");
+	public static final DCVal<Holder<MobTrait>> DC_TRAIT_WAND = DC.registry("trait_wand", LHTraits.TRAITS.reg());
 
 	private static <T extends Item> ItemBuilder<T, ?> curio(String str, NonNullFunction<Item.Properties, T> factory) {
 		return L2Hostility.REGISTRATE.item(str, factory)

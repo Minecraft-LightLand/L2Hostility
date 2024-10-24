@@ -115,7 +115,7 @@ public class CapabilityEvents {
 	}
 
 	@SubscribeEvent
-	public static void onStartTrackingChunk(ChunkWatchEvent.Watch event) {
+	public static void onStartTrackingChunk(ChunkWatchEvent.Sent event) {
 		var opt = LHMiscs.CHUNK.type().getOrCreate(event.getChunk());
 		L2Hostility.HANDLER.toClientPlayer(ChunkCapSyncToClient.of(
 				new ChunkCapHolder(event.getChunk(), opt)

@@ -22,6 +22,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
 
 import static dev.xkmc.l2hostility.init.L2Hostility.REGISTRATE;
@@ -38,9 +39,11 @@ public class LHMiscs {
 			ChunkDifficulty.class, ChunkDifficulty::new, LevelChunk.class, e -> true);
 
 	private static final ResourceLocation DUMMY = L2Tabs.loc(L2Hostility.MODID);
-	private static final SR<TabToken<?, ?>> TAB_REG = SR.of(L2Hostility.REG, L2Tabs.TABS.reg());
-	public static final Val<TabToken<InvTabData, DifficultyTab>> TAB_DIFFICULTY = TAB_REG.reg("difficulty",
-			() -> L2Tabs.GROUP.registerTab(() -> DifficultyTab::new, LangData.INFO_TAB_TITLE.get()));//5000, Items.ZOMBIE_HEAD
+	public static final Val<TabToken<InvTabData, DifficultyTab>> TAB_DIFFICULTY = new Val.Registrate<>(
+			L2Hostility.REGISTRATE.generic(L2Tabs.TABS, "difficulty", () ->
+							L2Tabs.GROUP.registerTab(() -> DifficultyTab::new, LangData.INFO_TAB_TITLE.get()))
+					.dataMap(L2Tabs.ORDER.reg(), 5000).dataMap(L2Tabs.ICON.reg(), Items.ZOMBIE_HEAD)
+					.register());
 
 	public static final SimpleEntry<Attribute> ADD_LEVEL = L2DamageTracker.reg(REGISTRATE,
 			"extra_difficulty", e -> new RangedAttribute(e, 0, 0, 2000)

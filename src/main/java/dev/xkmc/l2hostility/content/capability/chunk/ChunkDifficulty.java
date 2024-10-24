@@ -44,9 +44,9 @@ public class ChunkDifficulty extends GeneralCapabilityTemplate<LevelChunk, Chunk
 	}
 
 	protected void check(LevelChunk chunk) {
-		if (stage != ChunkStage.PRE_INIT) return;
-		stage = ChunkStage.INIT;
 		int size = chunk.getLevel().getSectionsCount();
+		if (sections != null && sections.length == size && stage != ChunkStage.PRE_INIT) return;
+		stage = ChunkStage.INIT;
 		if (sections == null || sections.length != size) {
 			sections = new SectionDifficulty[size];
 			for (int i = 0; i < size; i++) {

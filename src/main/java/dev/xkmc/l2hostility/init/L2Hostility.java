@@ -22,6 +22,7 @@ import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.registrate.*;
 import dev.xkmc.l2serial.network.PacketHandler;
 import dev.xkmc.l2serial.network.SerialPacketBase;
+import dev.xkmc.l2tabs.init.L2Tabs;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
