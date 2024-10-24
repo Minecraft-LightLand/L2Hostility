@@ -1,5 +1,2 @@
 3.0.0+4
 - Port to 1.21.1
-
-TODO stackability dupes
-TODO hostility beacon block model rendered incorrectly in sodium

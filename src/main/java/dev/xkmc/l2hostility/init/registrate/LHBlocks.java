@@ -22,7 +22,7 @@ import java.util.Locale;
 public class LHBlocks {
 
 	public static final SimpleEntry<CreativeModeTab> TAB = L2Hostility.REGISTRATE.buildL2CreativeTab(
-			"hostility", "L2Hostility", e -> e.icon(() -> LHTraits.ENDER.get().asItem().getDefaultInstance()));
+			"hostility", "L2Hostility", e -> e.icon(() -> LHItems.LOOT_1.get().asItem().getDefaultInstance()));
 
 	public static final BlockEntry<Block> CHAOS, MIRACLE;
 

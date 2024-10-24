@@ -37,7 +37,7 @@ public class HostilityBeaconBlock extends DelegateEntityBlockImpl implements Bea
 						.texture("particle", pvd.modLoc("block/beacon_glass"))
 						.texture("obsidian", pvd.mcLoc("block/crying_obsidian"))
 						.texture("beacon", pvd.modLoc("block/beacon"))
-						.renderType("cutout")
+						.renderType("translucent")
 				).addModel().end()
 				.part().modelFile(pvd.models().cubeAll(ctx.getName() + "_glass",
 								pvd.modLoc("block/beacon_glass"))
