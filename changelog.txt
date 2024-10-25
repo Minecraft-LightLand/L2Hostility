@@ -1,2 +1,6 @@
+3.0.0+5
+- Fix immunity
+- Fix seal item default blacklist
+
 3.0.0+4
 - Port to 1.21.1

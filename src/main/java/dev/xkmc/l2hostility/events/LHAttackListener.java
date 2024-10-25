@@ -9,7 +9,6 @@ import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
-import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.enchantments.HitTargetEnchantment;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
@@ -22,7 +21,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.common.Tags;
 
 public class LHAttackListener implements AttackListener {
@@ -72,7 +70,13 @@ public class LHAttackListener implements AttackListener {
 			}
 		}
 		var opt = LHMiscs.MOB.type().getExisting(target);
-		opt.ifPresent(cap -> cap.traitEvent((k, v) -> k.onAttackedByOthers(v, target, event)));
+		if (opt.isPresent()) {
+			for (var e : opt.get().traits.entrySet()) {
+				if (e.getKey().onAttackedByOthers(e.getValue(), target, event)) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 

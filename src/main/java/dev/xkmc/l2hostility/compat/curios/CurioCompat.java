@@ -148,7 +148,7 @@ public class CurioCompat {
 		var multimap = CuriosApi.getAttributeModifiers(
 				new SlotContext(slot.id, slot.player, 0, false, true), DUMMY_ID, stack);
 		for (var e : multimap.keySet()) {
-			if (e instanceof SlotAttribute) {
+			if (e.value() instanceof SlotAttribute) {
 				return true;
 			}
 		}
