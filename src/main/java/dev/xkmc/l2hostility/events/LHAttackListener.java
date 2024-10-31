@@ -123,9 +123,10 @@ public class LHAttackListener implements AttackListener {
 
 	@Override
 	public void onHurtMaximized(DamageData.OffenceMax data) {
-		var mob = data.getTarget();
-		var opt = LHMiscs.MOB.type().getExisting(mob);
-		opt.ifPresent(cap -> cap.traitEvent((k, v) -> k.onHurtByMax(v, mob, data)));
+		var target = data.getTarget();
+		LHMiscs.MOB.type().getExisting(target)
+				.ifPresent(cap -> cap.traitEvent((k, v) -> k.onHurtByMax(v, target, data)));
+
 	}
 
 	@Override
@@ -136,6 +137,13 @@ public class LHAttackListener implements AttackListener {
 			MobTraitCap cap = opt.get();
 			cap.traitEvent((k, v) -> k.onDamaged(v, mob, data));
 		}
+
+		var attacker = data.getAttacker();
+		if (attacker == null) return;
+		TraitEffectCache traitCache = new TraitEffectCache(mob);
+		LHMiscs.MOB.type().getExisting(attacker)
+				.ifPresent(cap -> cap.traitEvent((k, v) -> k.onHurtTargetMax(v, attacker, data, traitCache)));
+
 		for (var e : CurioCompat.getItems(mob, e -> e.getItem() instanceof CurseCurioItem)) {
 			if (e.getItem() instanceof CurseCurioItem curse) {
 				curse.onDamage(e, mob, data);

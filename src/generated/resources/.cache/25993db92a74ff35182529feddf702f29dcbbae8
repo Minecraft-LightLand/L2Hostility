@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-24T13:19:37.41033	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait)]
+// 1.21.1	2024-10-31T08:33:23.123325	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -375,4 +375,5 @@ ae3272ea9c6f244c79f6192ef5e9f1d387c45909 data/minecraft/tags/block/beacon_base_b
 65da76b3a96d076426cc78810d00296dfd0b5679 data/minecraft/tags/block/mineable/pickaxe.json
 6a70fe0b66cbb6fbf8cd0870ea1ad350fae1bf08 data/minecraft/tags/block/needs_diamond_tool.json
 4ecf5c12e1c8d9a3c82275c97ec043b63b2e0dca data/minecraft/tags/damage_type/bypasses_armor.json
+8f06d01e99277dc97bf8e7db7cc0a8f3ff359d05 data/minecraft/tags/item/enchantable/durability.json
 4ecf5c12e1c8d9a3c82275c97ec043b63b2e0dca data/neoforge/tags/damage_type/is_magic.json

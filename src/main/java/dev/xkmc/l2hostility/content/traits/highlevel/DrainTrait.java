@@ -40,7 +40,6 @@ public class DrainTrait extends MobTrait {
 
 	@Override
 	public void onHurtTarget(int level, LivingEntity attacker, DamageData.Offence cache, TraitEffectCache traitCache) {
-		super.onHurtTarget(level, attacker, cache, traitCache);
 		LivingEntity target = cache.getTarget();
 		var neg = target.getActiveEffects().stream()
 				.filter(e -> e.getEffect().value().getCategory() == MobEffectCategory.HARMFUL)

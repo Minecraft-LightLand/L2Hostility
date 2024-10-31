@@ -1,3 +1,7 @@
+3.0.0+7
+- Fix effect will be applied even when damage is cancelled
+- Make pocket of restoration enchantable
+
 3.0.0+5
 - Fix immunity
 - Fix seal item default blacklist

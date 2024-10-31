@@ -19,7 +19,7 @@ public class FieryTrait extends SelfEffectTrait {
 	}
 
 	@Override
-	public void onHurtTarget(int level, LivingEntity attacker, DamageData.Offence cache, TraitEffectCache traitCache) {
+	public void onHurtTargetMax(int level, LivingEntity attacker, DamageData.OffenceMax cache, TraitEffectCache traitCache) {
 		if (cache.getDamageOriginal() > 0) {
 			if (cache.getSource().getDirectEntity() instanceof LivingEntity le) {
 				le.setRemainingFireTicks(LHConfig.SERVER.fieryTime.get() * 20);

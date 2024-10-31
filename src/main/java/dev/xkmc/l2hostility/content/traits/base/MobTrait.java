@@ -85,6 +85,9 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 	}
 
 	public void onHurtTarget(int level, LivingEntity attacker, DamageData.Offence e, TraitEffectCache traitCache) {
+	}
+
+	public void onHurtTargetMax(int level, LivingEntity attacker, DamageData.OffenceMax e, TraitEffectCache traitCache) {
 		if (e.getDamageOriginal() > 0 && !e.getSource().is(LHDamageTypes.KILLER_AURA)) {
 			postHurtPlayer(level, attacker, traitCache);
 		}

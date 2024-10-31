@@ -199,7 +199,7 @@ public class LHItems {
 							.model(pvd.getBuilder(ctx.getName() + "_full")
 									.parent(new ModelFile.UncheckedModelFile("item/generated"))
 									.texture("layer0", "item/curio/" + ctx.getName() + "_full")))
-					.tag(charm, LHTagGen.NO_SEAL).register();
+					.tag(charm, LHTagGen.NO_SEAL, ItemTags.DURABILITY_ENCHANTABLE).register();
 
 		}
 
@@ -207,7 +207,7 @@ public class LHItems {
 		{
 			ADDER = L2Hostility.REGISTRATE.item(
 							"trait_adder_wand", p -> new TraitAdderWand(p.stacksTo(1)))
-					.model((ctx, pvd) -> pvd.handheld(ctx)).onRegister((x)->L2Hostility.REGISTRATE.modifyCreativeModeTab(LHBlocks.TAB.key(), e -> {
+					.model((ctx, pvd) -> pvd.handheld(ctx)).onRegister((x) -> L2Hostility.REGISTRATE.modifyCreativeModeTab(LHBlocks.TAB.key(), e -> {
 						e.accept(LMItems.WAND_AI.asStack());
 						e.accept(LMItems.WAND_EQUIPMENT.asStack());
 						e.accept(LMItems.WAND_TARGET.asStack());
