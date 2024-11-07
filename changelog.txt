@@ -1,3 +1,6 @@
+3.0.0+9
+- Fix accessories compatibility
+
 3.0.0+7
 - Fix effect will be applied even when damage is cancelled
 - Make pocket of restoration enchantable

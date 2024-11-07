@@ -2,7 +2,6 @@ package dev.xkmc.l2hostility.compat.curios;
 
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
@@ -95,22 +94,8 @@ public class CurioCompat {
 
 	private static boolean hasItemImpl(LivingEntity player, Item item) {
 		var opt = CuriosApi.getCuriosInventory(player);
-		if (opt.isEmpty()) {
-			return false;
-		}
-		opt.get().findFirstCurio(item);
-		for (var e : opt.get().getCurios().values()) {
-			if (e.getStacks().getSlots() == 0) continue;
-			if (!e.getIdentifier().equals("curio") &&
-					!item.builtInRegistryHolder().is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", e.getIdentifier()))))
-				continue;
-			for (int i = 0; i < e.getStacks().getSlots(); i++) {
-				if (e.getStacks().getStackInSlot(i).is(item)) {
-					return true;
-				}
-			}
-		}
-		return false;
+		return opt.flatMap(e -> e.findFirstCurio(item)).isPresent();
+
 	}
 
 	private static void getItemImpl(List<ItemStack> list, LivingEntity player, Predicate<ItemStack> pred) {
