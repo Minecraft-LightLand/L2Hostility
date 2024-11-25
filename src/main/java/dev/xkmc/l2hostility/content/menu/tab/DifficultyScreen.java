@@ -81,7 +81,8 @@ public class DifficultyScreen extends BaseTextScreen {
 				chunk.modifyInstance(player.blockPosition(), ins);
 				list.add(Pair.of(LangData.INFO_CHUNK_LEVEL.get(ins.getBase()).withStyle(formats[0]),
 						() -> sec.getSectionDifficultyDetail(player)));
-				list.add(Pair.of(LangData.INFO_CHUNK_SCALE.get(ins.scale).withStyle(formats[0]), List::of));
+				list.add(Pair.of(LangData.INFO_ALL_SCALE.get(ins.scale).withStyle(formats[0]),
+						() -> sec.getSectionScaleDetail(player)));
 			}
 		}
 	}

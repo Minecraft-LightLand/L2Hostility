@@ -1,3 +1,7 @@
+2.4.34
+- Add extra_scale attribute
+- Make soul bound enchantment remain on sealed item
+
 2.4.33
 - Add config for orb drop
 - Split suppress can prevent slimes from splitting as well

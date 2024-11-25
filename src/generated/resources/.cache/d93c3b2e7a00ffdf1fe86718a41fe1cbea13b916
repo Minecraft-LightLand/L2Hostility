@@ -1,10 +1,10 @@
-// 1.20.1	2024-10-10T04:36:36.770631	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
+// 1.20.1	2024-11-25T14:22:10.473715	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (mob_effects), Tags (enchantments), Patchouli Provider, Tags (traits)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 0d15a69c346a80468001a02f1326848a9559d3bf assets/l2hostility/blockstates/miracle_block.json
-d73f0992a9e1e22291fa47776ac36bacd01cc33d assets/l2hostility/lang/en_ud.json
-dec85e5a46c4fbd05c46c29d0260f3a4646b990a assets/l2hostility/lang/en_us.json
+570abad846ad362808268476aa2f2da9a8be3b41 assets/l2hostility/lang/en_ud.json
+f4cef96b54c2eeebcce0f4c41b95eec82c73d354 assets/l2hostility/lang/en_us.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets/l2hostility/models/block/chaos_block.json
 b482cdea0faf29842ecf75310f414ce76d12e36a assets/l2hostility/models/block/hostility_beacon.json
 22de6e577112bb035808d5d1e24858fd33742e3a assets/l2hostility/models/block/hostility_beacon_base.json
@@ -129,7 +129,7 @@ f40b938a37ab6a019c334f304104e1b0c368cc79 data/l2complements/recipes/insulator.js
 f9d10834648ee56c08d88386a28c7b0460144792 data/l2complements/recipes/split_suppressor.json
 c243d4887734cec7eddf3a30c7a0717a725e6cd3 data/l2complements/recipes/split_suppressor_ars.json
 4b9d05f8d5dca02f6cf4f92c3c35a1a94303ad10 data/l2complements/tags/mob_effect/skill_effect.json
-2c9ab6950527105198fde5e278bd3ff599cf1bdc data/l2damagetracker/tags/attribute/negative.json
+5de129f73f1ef8fafa8be5b58a6acb7a8b2b378e data/l2damagetracker/tags/attribute/negative.json
 1a2af9ac388144c82d780687dc2d80e0707cade1 data/l2hostility/advancements/hostility/abrahadabra.json
 b1f0948dec552920468cd47e2f8a8f99123aa9ad data/l2hostility/advancements/hostility/breed.json
 5438d24ee2cef442d96f87c920c8557262290d37 data/l2hostility/advancements/hostility/detector.json
@@ -283,7 +283,7 @@ ab7d5325b5f812e70a745c856d154020f81c5fd3 data/l2hostility/recipes/ring_of_life.j
 acc7a68fd78965e3a3b5bf36a3839d7b3ff4df7a data/l2hostility/recipes/witch_charge.json
 0692d7fc2ec445309e367634fee532b74dfa573e data/l2hostility/recipes/witch_wand.json
 1934359a43bfa9b9f4727bc44646d20c17219834 data/l2hostility/tags/blocks/beacon.json
-5d1e2ebb64aacfef2ec58d20bbf318100b796670 data/l2hostility/tags/enchantment/no_dispell.json
+a2196d723630e41add4373ea91db88e531d843de data/l2hostility/tags/enchantment/no_dispell.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/arena_blacklist.json

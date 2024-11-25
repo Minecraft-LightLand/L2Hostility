@@ -27,6 +27,8 @@ public class LHMiscs {
 
 	public static final RegistryEntry<WrappedAttribute> ADD_LEVEL = L2DamageTracker.regWrapped(REGISTRATE,
 			"extra_difficulty", 0, 0, 1000, "Extra Difficulty", L2DamageTracker.NEGATIVE);
+	public static final RegistryEntry<WrappedAttribute> ADD_SCALE = L2DamageTracker.regWrapped(REGISTRATE,
+			"extra_scale", 0, 0, 10, "Extra Difficulty Scale", L2DamageTracker.NEGATIVE);
 
 	private static <A extends RecipeSerializer<?>> RegistryEntry<A> reg(String id, NonNullSupplier<A> sup) {
 		return REGISTRATE.simple(id, ForgeRegistries.Keys.RECIPE_SERIALIZERS, sup);

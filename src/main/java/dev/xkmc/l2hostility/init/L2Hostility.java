@@ -114,6 +114,7 @@ public class L2Hostility {
 	@SubscribeEvent
 	public static void modifyAttributes(EntityAttributeModificationEvent event) {
 		event.add(EntityType.PLAYER, LHMiscs.ADD_LEVEL.get());
+		event.add(EntityType.PLAYER, LHMiscs.ADD_SCALE.get());
 	}
 
 	@SubscribeEvent

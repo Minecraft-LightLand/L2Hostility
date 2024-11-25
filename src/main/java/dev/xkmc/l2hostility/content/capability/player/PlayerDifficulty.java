@@ -116,6 +116,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 			instance.setFullChance();
 			instance.setFullDrop();
 		}
+		instance.scale += player.getAttributeValue(LHMiscs.ADD_SCALE.get());
 	}
 
 	public int getRankCap() {

@@ -1,5 +1,6 @@
 {
   "values": [
-    "l2hostility:extra_difficulty"
+    "l2hostility:extra_difficulty",
+    "l2hostility:extra_scale"
   ]
 }

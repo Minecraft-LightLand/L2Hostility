@@ -50,14 +50,6 @@ public class MobEvents {
 	public static void onMobHurt(LivingHurtEvent event) {
 		if (MobTraitCap.HOLDER.isProper(event.getEntity())) {
 			MobTraitCap.HOLDER.get(event.getEntity()).traitEvent((k, v) -> k.onHurtByOthers(v, event.getEntity(), event));
-		} else if (event.getEntity() instanceof Player player &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-				CurioCompat.hasItemInCurio(player, LHItems.CURSE_PRIDE.get())) {
-			int level = PlayerDifficulty.HOLDER.get(player).getLevel().getLevel();
-			double rate = LHConfig.COMMON.prideHealthBonus.get();
-			double factor = 1 + rate * level;
-			event.setAmount((float) (event.getAmount() / factor));
 		}
 	}
 

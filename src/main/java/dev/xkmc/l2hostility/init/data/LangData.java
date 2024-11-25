@@ -94,7 +94,6 @@ public enum LangData {
 	INFO_PLAYER_EXP("info.player_exp", "Difficulty progress: %s%%", 1),
 	INFO_PLAYER_CAP("info.player_cap", "Mob trait rank limit: %s", 1),
 	INFO_CHUNK_LEVEL("info.chunk_level", "Chunk base difficulty: %s", 1),
-	INFO_CHUNK_SCALE("info.chunk_scale", "Chunk difficulty scale: %s", 1),
 	INFO_CHUNK_CLEAR("info.clear", "Chunk Section difficulty cleared", 0),
 	INFO_TAB_TITLE("info.title", "Difficulty Information", 0),
 	INFO_REWARD("info.reward", "Obtained %s rewards", 1),
@@ -108,6 +107,10 @@ public enum LangData {
 	INFO_SECTION_ADAPTIVE_LEVEL("info.section_detail.adaptive", "Adaptive level: %s", 1),
 	INFO_SECTION_DISTANCE_LEVEL("info.section_detail.distance", "Distance bonus: %s", 1),
 
+	INFO_ALL_SCALE("info.all_scale", "Difficulty scale: %s", 1),
+	INFO_PLAYER_SCALE("info.player_scale", "Player difficulty scale: %s", 1),
+	INFO_DIM_SCALE("info.dim_scale", "Dimension difficulty scale: %s", 1),
+	INFO_BIOME_SCALE("info.biome_scale", "Biome difficulty scale: %s", 1),
 
 	BOSS_EVENT("boss_event", "Hostility Clearing Progress: %s/%s", 2),
 

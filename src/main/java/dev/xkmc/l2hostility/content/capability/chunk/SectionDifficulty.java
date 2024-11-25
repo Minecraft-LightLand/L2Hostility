@@ -9,6 +9,7 @@ import dev.xkmc.l2hostility.events.CapabilityEvents;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -87,6 +88,23 @@ public class SectionDifficulty {
 				LangData.INFO_SECTION_BIOME_LEVEL.get(bio).withStyle(ChatFormatting.GRAY),
 				LangData.INFO_SECTION_DISTANCE_LEVEL.get(dist).withStyle(ChatFormatting.GRAY),
 				LangData.INFO_SECTION_ADAPTIVE_LEVEL.get(adaptive).withStyle(ChatFormatting.GRAY)
+		);
+	}
+
+	public List<Component> getSectionScaleDetail(Player player) {
+		if (isCleared()) return List.of();
+		var levelDiff = L2Hostility.DIFFICULTY.getMerged()
+				.levelMap.get(player.level().dimension().location());
+		double dim = levelDiff == null ? WorldDifficultyConfig.defaultLevel().scale() : levelDiff.scale();
+		BlockPos pos = player.blockPosition();
+		Holder<Biome> biome = player.level().getBiome(pos);
+		double bio = biome.unwrapKey().map(e -> L2Hostility.DIFFICULTY.getMerged().biomeMap.get(e.location()))
+				.map(WorldDifficultyConfig.DifficultyConfig::scale).orElse(0d);
+		double pl = player.getAttributeValue(LHMiscs.ADD_SCALE.get());
+		return List.of(
+				LangData.INFO_DIM_SCALE.get(dim).withStyle(ChatFormatting.GRAY),
+				LangData.INFO_BIOME_SCALE.get(bio).withStyle(ChatFormatting.GRAY),
+				LangData.INFO_PLAYER_SCALE.get(pl).withStyle(ChatFormatting.GRAY)
 		);
 	}
 
