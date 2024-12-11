@@ -1,3 +1,7 @@
+2.4.35
+- Fix crash when pocket of restoration wants to put item inside an non-existing curios slot
+- Add max trait count
+
 2.4.34
 - Add extra_scale attribute
 - Make soul bound enchantment remain on sealed item

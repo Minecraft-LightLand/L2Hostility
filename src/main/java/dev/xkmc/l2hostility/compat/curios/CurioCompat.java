@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModList;
@@ -18,7 +19,6 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotAttribute;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
-import top.theillusivec4.curios.common.CuriosHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +105,8 @@ public class CurioCompat {
 		for (var e : opt.resolve().get().getCurios().values()) {
 			if (e.getStacks().getSlots() == 0) continue;
 			if (!e.getIdentifier().equals("curio") &&
-					!item.builtInRegistryHolder().is(ItemTags.create(new ResourceLocation("curios", e.getIdentifier())))) continue;
+					!item.builtInRegistryHolder().is(ItemTags.create(new ResourceLocation("curios", e.getIdentifier()))))
+				continue;
 			for (int i = 0; i < e.getStacks().getSlots(); i++) {
 				if (e.getStacks().getStackInSlot(i).is(item)) {
 					return true;
@@ -163,12 +164,24 @@ public class CurioCompat {
 
 		@Override
 		public ItemStack get() {
-			return handler.getStackInSlot(slot);
+			if (handler.getSlots() <= slot) {
+				return ItemStack.EMPTY;
+			} else {
+				return handler.getStackInSlot(slot);
+			}
 		}
 
 		@Override
 		public void set(ItemStack stack) {
-			handler.setStackInSlot(slot, stack);
+			if (handler.getSlots() <= slot) {
+				if (player instanceof Player pl) {
+					pl.getInventory().placeItemBackInInventory(stack);
+				} else {
+					player.spawnAtLocation(stack);
+				}
+			} else {
+				handler.setStackInSlot(slot, stack);
+			}
 		}
 
 		@Override

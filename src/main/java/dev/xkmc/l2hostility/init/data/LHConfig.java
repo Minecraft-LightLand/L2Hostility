@@ -179,6 +179,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue removeTraitCheckInterval;
 		public final ForgeConfigSpec.IntValue auraEffectApplicationInterval;
 		public final ForgeConfigSpec.IntValue selfEffectApplicationInterval;
+		public final ForgeConfigSpec.IntValue maxTraitCount;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
 		public final Map<String, ForgeConfigSpec.IntValue> range = new TreeMap<>();
@@ -249,6 +250,8 @@ public class LHConfig {
 						.defineInRange("dropRateFromSpawner", 0.5d, 0, 1);
 				equipmentDropRate = builder.comment("Drop rate of equipments spawned via hostility")
 						.defineInRange("equipmentDropRate", 0.085, 0, 1);
+				maxTraitCount = builder.comment("Max number of traits on mobs")
+						.defineInRange("maxTraitCount", 9, 1, 100);
 
 			}
 			builder.pop();

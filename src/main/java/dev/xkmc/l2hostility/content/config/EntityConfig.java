@@ -95,7 +95,7 @@ public class EntityConfig extends BaseConfig {
 		public final ArrayList<ItemPool> items = new ArrayList<>();
 
 		@SerialClass.SerialField
-		public int minSpawnLevel = 0, maxLevel = 0;
+		public int minSpawnLevel = 0, maxLevel = 0, maxTraitCount = -1;
 
 		@SerialClass.SerialField
 		public MasterConfig asMaster = null;
@@ -171,7 +171,7 @@ public class EntityConfig extends BaseConfig {
 
 		public Minion(EntityType<?> type, int maxCount, int minLevel, double maxHealthPercentage,
 					  int spawnRange, int cooldown, boolean copyLevel, boolean copyTrait,
-					  double linkDistance, boolean protectMaster, boolean discardOnUnlink){
+					  double linkDistance, boolean protectMaster, boolean discardOnUnlink) {
 			this(type, maxCount, minLevel, maxHealthPercentage,
 					spawnRange, cooldown, copyLevel, copyTrait,
 					linkDistance, protectMaster, discardOnUnlink,

@@ -103,6 +103,7 @@
         }
       ],
       "maxLevel": 0,
+      "maxTraitCount": -1,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [
