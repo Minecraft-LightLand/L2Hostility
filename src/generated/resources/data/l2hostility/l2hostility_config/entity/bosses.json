@@ -7,6 +7,7 @@
         "base": 20,
         "min": 0,
         "scale": 0.0,
+        "suppression": 0.0,
         "trait_chance": 1.0,
         "variation": 1.0
       },
@@ -37,6 +38,7 @@
         "base": 20,
         "min": 0,
         "scale": 0.0,
+        "suppression": 0.0,
         "trait_chance": 1.0,
         "variation": 1.0
       },
@@ -67,6 +69,7 @@
         "base": 20,
         "min": 0,
         "scale": 0.0,
+        "suppression": 0.0,
         "trait_chance": 1.0,
         "variation": 1.0
       },
@@ -106,6 +109,7 @@
         "base": 50,
         "min": 0,
         "scale": 0.0,
+        "suppression": 0.0,
         "trait_chance": 1.0,
         "variation": 1.0
       },
@@ -132,6 +136,7 @@
         "base": 50,
         "min": 100,
         "scale": 0.0,
+        "suppression": 0.0,
         "trait_chance": 1.0,
         "variation": 1.0
       },

@@ -7,6 +7,7 @@
         "base": 30,
         "min": 100,
         "scale": 0.0,
+        "suppression": 0.0,
         "trait_chance": 1.0,
         "variation": 0.0
       },

@@ -27,7 +27,7 @@ public class WorldDifficultyConfig extends BaseConfig {
 		int base = LHConfig.COMMON.defaultLevelBase.get();
 		double var = LHConfig.COMMON.defaultLevelVar.get();
 		double scale = LHConfig.COMMON.defaultLevelScale.get();
-		return new DifficultyConfig(0, base, var, scale, 1, 1);
+		return new DifficultyConfig(0, base, var, scale, 1, 1, 0);
 	}
 
 	@ConfigCollect(CollectType.MAP_OVERWRITE)
@@ -100,19 +100,19 @@ public class WorldDifficultyConfig extends BaseConfig {
 	}
 
 	public record DifficultyConfig(int min, int base, double variation, double scale, double apply_chance,
-								   double trait_chance) {
+								   double trait_chance, double suppression) {
 
 	}
 
 	public WorldDifficultyConfig putDim(ResourceKey<Level> key, int min, int base, double var, double scale) {
-		levelMap.put(key.location(), new DifficultyConfig(min, base, var, scale, 1, 1));
+		levelMap.put(key.location(), new DifficultyConfig(min, base, var, scale, 1, 1, 0));
 		return this;
 	}
 
 	@SafeVarargs
 	public final WorldDifficultyConfig putBiome(int min, int base, double var, double scale, ResourceKey<Biome>... keys) {
 		for (var key : keys) {
-			biomeMap.put(key.location(), new DifficultyConfig(min, base, var, scale, 1, 1));
+			biomeMap.put(key.location(), new DifficultyConfig(min, base, var, scale, 1, 1, 0));
 		}
 		return this;
 	}

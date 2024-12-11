@@ -18,7 +18,7 @@ public class MobDifficultyCollector {
 	}
 
 	public int min, base, count, difficulty, cap = Integer.MAX_VALUE, traitCap = TraitManager.getMaxLevel() + 1;
-	public double scale, varSq, apply_chance, trait_chance, trait_cost, finalFactor = 1;
+	public double scale, varSq, apply_chance, trait_chance, trait_cost, suppression, finalFactor = 1;
 
 	private ServerPlayer player;
 	private boolean fullChance, fullDrop, delegateTrait;
@@ -26,6 +26,7 @@ public class MobDifficultyCollector {
 	public MobDifficultyCollector() {
 		apply_chance = LHConfig.COMMON.globalApplyChance.get();
 		trait_chance = LHConfig.COMMON.globalTraitChance.get();
+		suppression = LHConfig.COMMON.globalTraitSuppression.get();
 		trait_cost = 1;
 	}
 
@@ -37,7 +38,8 @@ public class MobDifficultyCollector {
 		count++;
 		apply_chance *= config.apply_chance();
 		trait_chance *= config.trait_chance();
-		fullChance |= min > 0;
+		suppression = 1 - (1 - suppression) * (1 - config.suppression());
+		fullChance |= min > 0 && config.suppression() == 0;
 	}
 
 	public void acceptBonus(DifficultyLevel difficulty) {
@@ -86,6 +88,10 @@ public class MobDifficultyCollector {
 		return fullChance ? 1 : apply_chance;
 	}
 
+	public double suppression() {
+		return fullChance ? 1 : suppression;
+	}
+
 	public double trait_chance(int lv) {
 		if (delegateTrait) return 0;
 		return fullChance ? 1 : trait_chance * Math.min(1, lv * LHConfig.COMMON.initialTraitChanceSlope.get());
@@ -99,7 +105,7 @@ public class MobDifficultyCollector {
 		fullChance = true;
 	}
 
-	public void delegateTrait(){
+	public void delegateTrait() {
 		delegateTrait = true;
 	}
 

@@ -9,6 +9,7 @@
           "base": 10,
           "min": 0,
           "scale": 0.0,
+          "suppression": 0.0,
           "trait_chance": 1.0,
           "variation": 0.0
         },
@@ -35,6 +36,7 @@
           "base": 10,
           "min": 0,
           "scale": 0.0,
+          "suppression": 0.0,
           "trait_chance": 1.0,
           "variation": 0.0
         },
@@ -62,6 +64,7 @@
       "base": 20,
       "min": 0,
       "scale": 1.2,
+      "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 9.0
     }
@@ -75,6 +78,7 @@
           "base": 20,
           "min": 0,
           "scale": 0.0,
+          "suppression": 0.0,
           "trait_chance": 1.0,
           "variation": 0.0
         },
