@@ -91,7 +91,7 @@ public class EntityConfig extends BaseConfig {
 
 		@SerialField
 		private WorldDifficultyConfig.DifficultyConfig difficulty =
-				new WorldDifficultyConfig.DifficultyConfig(0, 0, 0, 0, 1, 1);
+				new WorldDifficultyConfig.DifficultyConfig(0, 0, 0, 0, 1, 1, 0);
 
 		@SerialField
 		public final ArrayList<ItemPool> items = new ArrayList<>();
@@ -220,7 +220,7 @@ public class EntityConfig extends BaseConfig {
 
 	public static Config entity(int min, int base, double var, double scale, List<EntityType<?>> keys) {
 		return new Config(new ArrayList<>(keys),
-				new WorldDifficultyConfig.DifficultyConfig(min, base, var, scale, 1, 1));
+				new WorldDifficultyConfig.DifficultyConfig(min, base, var, scale, 1, 1, 0));
 	}
 
 	public static ItemPool simplePool(int level, String slot, ItemStack stack) {

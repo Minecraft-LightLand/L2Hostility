@@ -1,3 +1,6 @@
+3.0.1
+- Add max trait count and suppression config in datapack
+
 3.0.0+9
 - Fix accessories compatibility
 
