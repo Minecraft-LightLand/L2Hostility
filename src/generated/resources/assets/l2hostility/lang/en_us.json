@@ -382,6 +382,8 @@
   "l2hostility.configuration.maxMobLevel.tooltip": "Range: 100 ~ 100000",
   "l2hostility.configuration.maxPlayerLevel": "Max player adaptive level",
   "l2hostility.configuration.maxPlayerLevel.tooltip": "Range: 100 ~ 100000",
+  "l2hostility.configuration.maxTraitCount": "Drop rate of equipments spawned via hostility",
+  "l2hostility.configuration.maxTraitCount.tooltip": "Max number of traits on mobs\nRange: 1 ~ 100",
   "l2hostility.configuration.moonwalkRange": "Effect range for trait moonwalk",
   "l2hostility.configuration.moonwalkRange.tooltip": "Range: 0 ~ 100",
   "l2hostility.configuration.newPlayerProtectRange": "Mobs spawned within this range will use lowest player level in range instead of nearest player's level to determine mob level",

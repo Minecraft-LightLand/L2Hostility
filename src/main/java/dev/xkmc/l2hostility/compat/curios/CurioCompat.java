@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.ModList;
@@ -145,12 +146,24 @@ public class CurioCompat {
 
 		@Override
 		public ItemStack get() {
-			return handler.getStackInSlot(slot);
+			if (handler.getSlots() <= slot) {
+				return ItemStack.EMPTY;
+			} else {
+				return handler.getStackInSlot(slot);
+			}
 		}
 
 		@Override
 		public void set(ItemStack stack) {
-			handler.setStackInSlot(slot, stack);
+			if (handler.getSlots() <= slot) {
+				if (player instanceof Player pl) {
+					pl.getInventory().placeItemBackInInventory(stack);
+				} else {
+					player.spawnAtLocation(stack);
+				}
+			} else {
+				handler.setStackInSlot(slot, stack);
+			}
 		}
 
 		@Override

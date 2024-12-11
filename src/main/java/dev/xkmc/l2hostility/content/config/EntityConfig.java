@@ -97,7 +97,7 @@ public class EntityConfig extends BaseConfig {
 		public final ArrayList<ItemPool> items = new ArrayList<>();
 
 		@SerialField
-		public int minSpawnLevel = 0, maxLevel = 0;
+		public int minSpawnLevel = 0, maxLevel = 0, maxTraitCount = -1;
 
 		@SerialField
 		public MasterConfig asMaster = null;

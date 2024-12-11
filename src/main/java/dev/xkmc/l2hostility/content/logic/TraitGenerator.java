@@ -19,7 +19,7 @@ public class TraitGenerator {
 	}
 
 	private final LivingEntity entity;
-	private final int mobLevel;
+	private final int mobLevel, maxTrait;
 	private final MobDifficultyCollector ins;
 	private final HashMap<MobTrait, Integer> traits;
 	private final RandomSource rand;
@@ -37,12 +37,16 @@ public class TraitGenerator {
 		level = mobLevel;
 
 		var config = cap.getConfigCache(entity);
+		int max = LHConfig.SERVER.maxTraitCount.get();
 		if (config != null) {
+			if (config.maxTraitCount > 0) max = config.maxTraitCount;
+			if (ins.trait_cost < 0.01) maxTrait = -1;
+			else maxTrait = (int) (max / ins.trait_cost);
 			for (var base : config.traits()) {
 				if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
 					genBase(base);
 			}
-		}
+		} else maxTrait = max;
 
 		traitPool = new ArrayList<>(LHTraits.TRAITS.get().stream().filter(e ->
 				(config == null || !config.blacklist().contains(e)) &&
@@ -100,6 +104,8 @@ public class TraitGenerator {
 
 	private void generate() {
 		while (level > 0 && !traitPool.isEmpty()) {
+			if (maxTrait > 0 && traits.size() >= maxTrait)
+				break;
 			MobTrait e = pop();
 			int cost = e.getCost(ins.trait_cost);
 			if (cost > level) {

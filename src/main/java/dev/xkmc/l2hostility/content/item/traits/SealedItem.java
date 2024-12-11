@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
+import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2core.util.DCStack;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
@@ -30,6 +31,8 @@ public class SealedItem extends Item {
 		LHItems.DC_SEAL_STACK.set(ans, new DCStack(stack));
 		if (stack.getEnchantmentLevel(LHEnchantments.VANISH.holder()) > 0)
 			ans.enchant(LHEnchantments.VANISH.holder(), 1);
+		if (stack.getEnchantmentLevel(LCEnchantments.SOUL_BOUND.holder()) > 0)
+			ans.enchant(LCEnchantments.SOUL_BOUND.holder(), 1);
 		return ans;
 	}
 

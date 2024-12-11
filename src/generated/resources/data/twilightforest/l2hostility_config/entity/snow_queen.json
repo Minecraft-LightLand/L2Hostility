@@ -13,6 +13,7 @@
       "entities": "twilightforest:snow_queen",
       "items": [],
       "maxLevel": 0,
+      "maxTraitCount": -1,
       "minSpawnLevel": 0,
       "specialConditions": [],
       "traits": [

@@ -15,6 +15,7 @@
         "entities": "minecraft:zombie",
         "items": [],
         "maxLevel": 0,
+        "maxTraitCount": -1,
         "minSpawnLevel": 0,
         "specialConditions": [],
         "traits": [
@@ -38,6 +39,7 @@
         "entities": "minecraft:skeleton",
         "items": [],
         "maxLevel": 0,
+        "maxTraitCount": -1,
         "minSpawnLevel": 0,
         "specialConditions": [],
         "traits": [
@@ -75,6 +77,7 @@
         "entities": "minecraft:piglin",
         "items": [],
         "maxLevel": 0,
+        "maxTraitCount": -1,
         "minSpawnLevel": 0,
         "specialConditions": [],
         "traits": [
