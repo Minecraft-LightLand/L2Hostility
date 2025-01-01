@@ -1,0 +1,1 @@
+dev.xkmc.l2hostility.compat.kubejs.LHKJSPlugin

@@ -14,6 +14,7 @@ import net.minecraft.world.entity.Mob;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.IntSupplier;
 
 public class TargetEffectTrait extends MobTrait {
 
@@ -21,6 +22,11 @@ public class TargetEffectTrait extends MobTrait {
 
 	public TargetEffectTrait(Function<Integer, MobEffectInstance> func) {
 		super(() -> func.apply(1).getEffect().getColor());
+		this.func = func;
+	}
+
+	public TargetEffectTrait(IntSupplier color, Function<Integer, MobEffectInstance> func) {
+		super(color);
 		this.func = func;
 	}
 

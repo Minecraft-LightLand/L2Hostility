@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 import java.util.List;
 import java.util.function.DoubleSupplier;
+import java.util.function.IntSupplier;
 import java.util.function.Supplier;
 
 public class AttributeTrait extends MobTrait {
@@ -23,6 +24,11 @@ public class AttributeTrait extends MobTrait {
 
 	public AttributeTrait(ChatFormatting style, AttributeEntry... entries) {
 		super(style);
+		this.entries = entries;
+	}
+
+	public AttributeTrait(IntSupplier color, AttributeEntry... entries) {
+		super(color);
 		this.entries = entries;
 	}
 
