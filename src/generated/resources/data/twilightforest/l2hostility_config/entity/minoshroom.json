@@ -3,9 +3,9 @@
     {
       "blacklist": [],
       "difficulty": {
+        "min": 100,
         "apply_chance": 1.0,
         "base": 30,
-        "min": 100,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,
@@ -19,13 +19,13 @@
       "specialConditions": [],
       "traits": [
         {
-          "free": 1,
           "min": 3,
+          "free": 1,
           "trait": "l2hostility:tank"
         },
         {
-          "free": 1,
           "min": 1,
+          "free": 1,
           "trait": "l2hostility:cursed"
         }
       ]

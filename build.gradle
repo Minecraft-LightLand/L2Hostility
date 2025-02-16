@@ -197,7 +197,6 @@ dependencies {
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
     //dataRuntimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
-    //commonRuntimeOnly "curse.maven:cloth-config-348521:5623420"
     //commonRuntimeOnly "maven.modrinth:accessories:1.1.0-beta.5+1.21.1"
     //commonRuntimeOnly "maven.modrinth:accessories-cc-layer:9.0.12+1.21.1"
 
@@ -206,6 +205,12 @@ dependencies {
     implementation "curse.maven:irisshaders-455508:5765375"
     implementation "curse.maven:geckolib-388172:5763144"
     implementation "curse.maven:the-twilight-forest-227639:5759335"
+    implementation "curse.maven:mutant-monsters-852665:5742611"
+    implementation "curse.maven:bosses-of-mass-destruction-forge-941573:6117186"
+    implementation "curse.maven:cerbons-api-955605:6006403"
+    implementation "curse.maven:cloth-config-348521:5729127"
+    implementation "curse.maven:puzzles-lib-495476:6095894"
+
 
     implementation "curse.maven:apotheosis-313970:6148732"
     implementation "curse.maven:apothic-enchanting-1063926:6084297"

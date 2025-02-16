@@ -3,15 +3,15 @@
     {
       "blacklist": [],
       "difficulty": {
-        "min": 100,
+        "min": 200,
         "apply_chance": 1.0,
-        "base": 30,
+        "base": 50,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,
         "variation": 0.0
       },
-      "entities": "twilightforest:lich",
+      "entities": "bosses_of_mass_destruction:obsidilith",
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
@@ -21,12 +21,17 @@
         {
           "min": 3,
           "free": 2,
-          "trait": "l2hostility:weakness"
+          "trait": "l2hostility:tank"
         },
         {
-          "min": 1,
-          "free": 1,
-          "trait": "l2hostility:cursed"
+          "min": 3,
+          "free": 2,
+          "trait": "l2hostility:reflect"
+        },
+        {
+          "min": 5,
+          "free": 5,
+          "trait": "l2hostility:weakness"
         }
       ]
     }

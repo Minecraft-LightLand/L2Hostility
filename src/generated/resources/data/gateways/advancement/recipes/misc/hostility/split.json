@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "gateways"
+    }
+  ],
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "gateways:hostility/split"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_void_eye": {
+      "conditions": {
+        "items": [
+          {
+            "items": "l2complements:void_eye"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_void_eye"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "gateways:hostility/split"
+    ]
+  }
+}

@@ -1,7 +1,9 @@
 3.0.2
+- Restore Gateway, BoMD, and MutantMonster integration
 - Add KubeJS integration and example
 - Fix compat with Apotheosis
 - Fix Book of Omniscience shift use
+- Prevent double split
 - Fix get player total difficulty command
 
 3.0.1

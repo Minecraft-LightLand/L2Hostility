@@ -3,9 +3,9 @@
     {
       "blacklist": [],
       "difficulty": {
+        "min": 0,
         "apply_chance": 1.0,
         "base": 20,
-        "min": 0,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,
@@ -19,12 +19,12 @@
       "specialConditions": [],
       "traits": [
         {
+          "min": 1,
           "condition": {
             "chance": 0.5,
             "lv": 300
           },
           "free": 1,
-          "min": 1,
           "trait": "l2hostility:repelling"
         }
       ]
@@ -32,9 +32,9 @@
     {
       "blacklist": [],
       "difficulty": {
+        "min": 0,
         "apply_chance": 1.0,
         "base": 20,
-        "min": 0,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,
@@ -48,12 +48,12 @@
       "specialConditions": [],
       "traits": [
         {
+          "min": 1,
           "condition": {
             "chance": 0.5,
             "lv": 300
           },
           "free": 1,
-          "min": 1,
           "trait": "l2hostility:pulling"
         }
       ]
@@ -61,9 +61,9 @@
     {
       "blacklist": [],
       "difficulty": {
+        "min": 0,
         "apply_chance": 1.0,
         "base": 20,
-        "min": 0,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,
@@ -77,21 +77,21 @@
       "specialConditions": [],
       "traits": [
         {
+          "min": 1,
           "condition": {
             "chance": 1.0,
             "lv": 200
           },
           "free": 1,
-          "min": 1,
           "trait": "l2hostility:dispell"
         },
         {
+          "min": 1,
           "condition": {
             "chance": 1.0,
             "lv": 300
           },
           "free": 1,
-          "min": 1,
           "trait": "l2hostility:reprint"
         }
       ]
@@ -99,9 +99,9 @@
     {
       "blacklist": [],
       "difficulty": {
+        "min": 0,
         "apply_chance": 1.0,
         "base": 50,
-        "min": 0,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,
@@ -115,8 +115,8 @@
       "specialConditions": [],
       "traits": [
         {
-          "free": 0,
           "min": 1,
+          "free": 0,
           "trait": "l2hostility:cursed"
         }
       ]
@@ -124,9 +124,9 @@
     {
       "blacklist": [],
       "difficulty": {
+        "min": 100,
         "apply_chance": 1.0,
         "base": 50,
-        "min": 100,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,

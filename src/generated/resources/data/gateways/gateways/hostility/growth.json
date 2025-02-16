@@ -1,0 +1,168 @@
+{
+  "color": "#00AA00",
+  "rewards": [
+    {
+      "type": "gateways:stack",
+      "stack": {
+        "count": 2,
+        "id": "l2hostility:growth"
+      }
+    },
+    {
+      "type": "gateways:experience",
+      "experience": 2000,
+      "orb_size": 200
+    }
+  ],
+  "size": "medium",
+  "waves": [
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 4,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:slime"
+          }
+        }
+      ],
+      "max_wave_time": 1200,
+      "setup_time": 100
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 3,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:magma_cube"
+          }
+        }
+      ],
+      "max_wave_time": 1800,
+      "setup_time": 100
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:magma_cube"
+          }
+        }
+      ],
+      "max_wave_time": 2400,
+      "setup_time": 120
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 7,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 7,
+            "id": "minecraft:magma_cube"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 2,
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 3,
+            "id": "minecraft:magma_cube"
+          }
+        }
+      ],
+      "max_wave_time": 3000,
+      "setup_time": 120
+    },
+    {
+      "entities": [
+        {
+          "type": "gateways:standard",
+          "count": 3,
+          "desc": "entity.minecraft.slime",
+          "entity": "minecraft:slime",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 7,
+            "id": "minecraft:slime"
+          }
+        },
+        {
+          "type": "gateways:standard",
+          "count": 3,
+          "desc": "entity.minecraft.magma_cube",
+          "entity": "minecraft:magma_cube",
+          "finalize_spawn": false,
+          "nbt": {
+            "Size": 7,
+            "id": "minecraft:magma_cube"
+          }
+        }
+      ],
+      "max_wave_time": 3600,
+      "setup_time": 140
+    }
+  ]
+}

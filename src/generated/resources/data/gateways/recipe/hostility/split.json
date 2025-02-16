@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "gateways"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "A": {
+      "item": "l2hostility:hostility_essence"
+    },
+    "B": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "pattern": [
+    "1A1",
+    "ABA",
+    "1A1"
+  ],
+  "result": {
+    "components": {
+      "gateways:gateway": "gateways:hostility/split"
+    },
+    "count": 1,
+    "id": "gateways:gate_pearl"
+  }
+}

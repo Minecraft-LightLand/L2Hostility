@@ -1,10 +1,10 @@
-// 1.21.1	2024-12-11T09:13:24.104953	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait)]
+// 1.21.1	2025-02-16T20:43:43.34767	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 0d15a69c346a80468001a02f1326848a9559d3bf assets/l2hostility/blockstates/miracle_block.json
-b41eae30d4f757fbd976e23d99cc3c349fc8e490 assets/l2hostility/lang/en_ud.json
-576e130cb419d2b3e56e81370432167fbfb71c38 assets/l2hostility/lang/en_us.json
+02625234c5da7fcf4a29187f10d9eeadc3e5d94f assets/l2hostility/lang/en_ud.json
+790eea9d4ec683b0098be1c7cd12a4fd45054bb8 assets/l2hostility/lang/en_us.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets/l2hostility/models/block/chaos_block.json
 b482cdea0faf29842ecf75310f414ce76d12e36a assets/l2hostility/models/block/hostility_beacon.json
 3e128895a51810875704de53d8500ce23da14895 assets/l2hostility/models/block/hostility_beacon_base.json
@@ -113,6 +113,10 @@ e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.j
 63302afd6032fba91cf0e46be0c7c05285866cb9 data/curios/tags/item/head.json
 2c284131fbc1b0e5a82ea8e58c842877ab471350 data/curios/tags/item/hostility_curse.json
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/item/ring.json
+b08d54218fcbedee007aa32dce3fa7e334b48c7f data/gateways/advancement/recipes/misc/hostility/growth.json
+bb6f94597a939d6ca78f8a82bb4aca546f1a8e7a data/gateways/advancement/recipes/misc/hostility/split.json
+0c6380b2ce1d7d5a306909f36c645c700d765314 data/gateways/recipe/hostility/growth.json
+69f221d9b45d1083e7bcdf7f753b775b7b97787b data/gateways/recipe/hostility/split.json
 4b9d05f8d5dca02f6cf4f92c3c35a1a94303ad10 data/l2complements/tags/mob_effect/skill_effect.json
 53db2a68775994e813241e7b27d9cef235376bc3 data/l2hostility/advancement/hostility/abrahadabra.json
 ac2807052d5c9b6d1311edccfd0179f9a87dd755 data/l2hostility/advancement/hostility/breed.json

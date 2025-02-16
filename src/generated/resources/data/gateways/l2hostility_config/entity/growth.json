@@ -1,0 +1,333 @@
+{
+  "list": [
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 150,
+        "apply_chance": 1.0,
+        "base": 80,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": "minecraft:slime",
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/growth",
+          "maxCount": 1,
+          "maxWave": -1,
+          "minWave": 3
+        }
+      ],
+      "traits": [
+        {
+          "min": 3,
+          "free": 2,
+          "trait": "l2hostility:growth"
+        },
+        {
+          "min": 4,
+          "free": 3,
+          "trait": "l2hostility:tank"
+        },
+        {
+          "min": 1,
+          "free": 1,
+          "trait": "l2hostility:counter_strike"
+        },
+        {
+          "min": 1,
+          "free": 1,
+          "trait": "l2hostility:dementor"
+        }
+      ]
+    },
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 150,
+        "apply_chance": 1.0,
+        "base": 80,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": "minecraft:magma_cube",
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/growth",
+          "maxCount": 1,
+          "maxWave": -1,
+          "minWave": 3
+        }
+      ],
+      "traits": [
+        {
+          "min": 3,
+          "free": 2,
+          "trait": "l2hostility:growth"
+        },
+        {
+          "min": 2,
+          "free": 2,
+          "trait": "l2hostility:adaptive"
+        },
+        {
+          "min": 2,
+          "free": 2,
+          "trait": "l2hostility:reflect"
+        },
+        {
+          "min": 1,
+          "free": 1,
+          "trait": "l2hostility:dispell"
+        }
+      ]
+    },
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 130,
+        "apply_chance": 1.0,
+        "base": 70,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": "minecraft:slime",
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/growth",
+          "maxCount": 1,
+          "maxWave": -1,
+          "minWave": 2
+        }
+      ],
+      "traits": [
+        {
+          "min": 3,
+          "free": 2,
+          "trait": "l2hostility:growth"
+        },
+        {
+          "min": 3,
+          "free": 2,
+          "trait": "l2hostility:tank"
+        },
+        {
+          "min": 1,
+          "free": 1,
+          "trait": "l2hostility:counter_strike"
+        }
+      ]
+    },
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 130,
+        "apply_chance": 1.0,
+        "base": 70,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": "minecraft:magma_cube",
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/growth",
+          "maxCount": 1,
+          "maxWave": -1,
+          "minWave": 2
+        }
+      ],
+      "traits": [
+        {
+          "min": 3,
+          "free": 2,
+          "trait": "l2hostility:growth"
+        },
+        {
+          "min": 2,
+          "free": 2,
+          "trait": "l2hostility:adaptive"
+        },
+        {
+          "min": 2,
+          "free": 2,
+          "trait": "l2hostility:reflect"
+        }
+      ]
+    },
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 120,
+        "apply_chance": 1.0,
+        "base": 60,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": "minecraft:slime",
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/growth",
+          "maxCount": 1,
+          "maxWave": -1,
+          "minWave": 1
+        }
+      ],
+      "traits": [
+        {
+          "min": 2,
+          "free": 2,
+          "trait": "l2hostility:growth"
+        },
+        {
+          "min": 2,
+          "free": 2,
+          "trait": "l2hostility:tank"
+        }
+      ]
+    },
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 120,
+        "apply_chance": 1.0,
+        "base": 60,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": "minecraft:magma_cube",
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/growth",
+          "maxCount": 1,
+          "maxWave": -1,
+          "minWave": 1
+        }
+      ],
+      "traits": [
+        {
+          "min": 2,
+          "free": 2,
+          "trait": "l2hostility:growth"
+        },
+        {
+          "min": 2,
+          "free": 2,
+          "trait": "l2hostility:adaptive"
+        }
+      ]
+    },
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 100,
+        "apply_chance": 1.0,
+        "base": 50,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "minecraft:slime",
+        "minecraft:magma_cube"
+      ],
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/growth",
+          "maxCount": 100,
+          "maxWave": -1,
+          "minWave": 0
+        }
+      ],
+      "traits": [
+        {
+          "min": 2,
+          "free": 2,
+          "trait": "l2hostility:growth"
+        }
+      ]
+    }
+  ]
+}

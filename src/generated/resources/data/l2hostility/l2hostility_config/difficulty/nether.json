@@ -5,9 +5,9 @@
       {
         "blacklist": [],
         "difficulty": {
+          "min": 0,
           "apply_chance": 1.0,
           "base": 10,
-          "min": 0,
           "scale": 0.0,
           "suppression": 0.0,
           "trait_chance": 1.0,
@@ -21,8 +21,8 @@
         "specialConditions": [],
         "traits": [
           {
-            "free": 1,
             "min": 1,
+            "free": 1,
             "trait": "l2hostility:tank"
           }
         ]
@@ -30,9 +30,9 @@
       {
         "blacklist": [],
         "difficulty": {
+          "min": 0,
           "apply_chance": 1.0,
           "base": 10,
-          "min": 0,
           "scale": 0.0,
           "suppression": 0.0,
           "trait_chance": 1.0,
@@ -46,8 +46,8 @@
         "specialConditions": [],
         "traits": [
           {
-            "free": 1,
             "min": 1,
+            "free": 1,
             "trait": "l2hostility:speedy"
           }
         ]
@@ -56,9 +56,9 @@
   },
   "levelMap": {
     "minecraft:the_nether": {
+      "min": 0,
       "apply_chance": 1.0,
       "base": 20,
-      "min": 0,
       "scale": 1.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
@@ -70,9 +70,9 @@
       {
         "blacklist": [],
         "difficulty": {
+          "min": 0,
           "apply_chance": 1.0,
           "base": 20,
-          "min": 0,
           "scale": 0.0,
           "suppression": 0.0,
           "trait_chance": 1.0,
@@ -86,8 +86,8 @@
         "specialConditions": [],
         "traits": [
           {
-            "free": 1,
             "min": 1,
+            "free": 1,
             "trait": "l2hostility:protection"
           }
         ]

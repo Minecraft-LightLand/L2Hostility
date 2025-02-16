@@ -1,0 +1,47 @@
+{
+  "list": [
+    {
+      "blacklist": [],
+      "difficulty": {
+        "min": 0,
+        "apply_chance": 1.0,
+        "base": 0,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "mutantmonsters:mutant_zombie",
+        "mutantmonsters:mutant_skeleton",
+        "mutantmonsters:mutant_creeper",
+        "mutantmonsters:mutant_enderman"
+      ],
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 100,
+      "specialConditions": [],
+      "traits": [
+        {
+          "min": 1,
+          "condition": {
+            "chance": 0.5,
+            "lv": 150
+          },
+          "free": 1,
+          "trait": "l2hostility:reprint"
+        },
+        {
+          "min": 2,
+          "condition": {
+            "chance": 0.5,
+            "lv": 200
+          },
+          "free": 1,
+          "trait": "l2hostility:adaptive"
+        }
+      ]
+    }
+  ]
+}

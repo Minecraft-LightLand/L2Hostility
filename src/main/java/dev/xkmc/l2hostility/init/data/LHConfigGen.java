@@ -6,6 +6,8 @@ import dev.xkmc.l2archery.init.registrate.ArcheryItems;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2core.serial.config.ConfigDataProvider;
+import dev.xkmc.l2hostility.compat.data.BoMDData;
+import dev.xkmc.l2hostility.compat.data.MutantMonsterData;
 import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
@@ -13,14 +15,14 @@ import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2tabs.init.L2Tabs;
 import dev.xkmc.l2weaponry.init.L2Weaponry;
 import dev.xkmc.l2weaponry.init.registrate.LWItems;
+import fuzs.mutantmonsters.MutantMonsters;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -207,18 +209,20 @@ public class LHConfigGen extends ConfigDataProvider {
 		if (ModList.get().isLoaded(Gateways.MODID)) {
 			GatewayConfigGen.genConfig(collector);
 		}
+
+		if (ModList.get().isLoaded("bosses_of_mass_destruction")) {
+			BoMDData.genConfig(collector);
+		}
+
+		if (ModList.get().isLoaded(MutantMonsters.MOD_ID)) {
+			MutantMonsterData.genConfig(collector);
+		}
 		/* TODO
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			CataclysmData.genConfig(collector);
 		}
-		if (ModList.get().isLoaded("bosses_of_mass_destruction")) {
-			BoMDData.genConfig(collector);
-		}
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {
 			IaFData.genConfig(collector);
-		}
-		if (ModList.get().isLoaded(MutantMonsters.MOD_ID)) {
-			MutantMonsterData.genConfig(collector);
 		}
 		if (ModList.get().isLoaded(MowziesMobs.MODID)) {
 			MowzieData.genConfig(collector);
@@ -233,5 +237,6 @@ public class LHConfigGen extends ConfigDataProvider {
 	public static void addEntity(Collector collector, int min, int base, Holder<EntityType<?>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
 		collector.add(L2Hostility.ENTITY, obj.getKey().location(), new EntityConfig().putEntityAndItem(min, base, 0, 0, List.of(obj.value()), traits, items));
 	}
+
 
 }

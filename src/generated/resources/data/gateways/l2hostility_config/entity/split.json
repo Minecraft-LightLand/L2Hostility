@@ -1,0 +1,139 @@
+{
+  "list": [
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 100,
+        "apply_chance": 1.0,
+        "base": 50,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "minecraft:zombie",
+        "minecraft:drowned",
+        "minecraft:husk",
+        "minecraft:skeleton",
+        "minecraft:wither_skeleton",
+        "minecraft:stray"
+      ],
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/split",
+          "maxCount": 10,
+          "maxWave": 0,
+          "minWave": 0
+        }
+      ],
+      "traits": [
+        {
+          "min": 1,
+          "free": 1,
+          "trait": "l2hostility:split"
+        }
+      ]
+    },
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 120,
+        "apply_chance": 1.0,
+        "base": 70,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "minecraft:zombie",
+        "minecraft:drowned",
+        "minecraft:husk",
+        "minecraft:skeleton",
+        "minecraft:wither_skeleton",
+        "minecraft:stray"
+      ],
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/split",
+          "maxCount": 10,
+          "maxWave": 2,
+          "minWave": 1
+        }
+      ],
+      "traits": [
+        {
+          "min": 2,
+          "free": 1,
+          "trait": "l2hostility:split"
+        }
+      ]
+    },
+    {
+      "blacklist": [
+        "l2hostility:moonwalk",
+        "l2hostility:gravity",
+        "l2hostility:invisible"
+      ],
+      "difficulty": {
+        "min": 140,
+        "apply_chance": 1.0,
+        "base": 90,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": [
+        "minecraft:zombie",
+        "minecraft:drowned",
+        "minecraft:husk",
+        "minecraft:skeleton",
+        "minecraft:wither_skeleton",
+        "minecraft:stray"
+      ],
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [
+        {
+          "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
+          "chance": 1.0,
+          "id": "gateways:hostility/split",
+          "maxCount": 10,
+          "maxWave": 4,
+          "minWave": 3
+        }
+      ],
+      "traits": [
+        {
+          "min": 3,
+          "free": 2,
+          "trait": "l2hostility:split"
+        }
+      ]
+    }
+  ]
+}

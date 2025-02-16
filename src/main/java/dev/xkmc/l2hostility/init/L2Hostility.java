@@ -39,6 +39,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -98,7 +99,6 @@ public class L2Hostility {
 		if (ModList.get().isLoaded(Gateways.MODID)) {
 			NeoForge.EVENT_BUS.register(GatewayToEternityCompat.class);
 		}
-
 	}
 
 	@SubscribeEvent
