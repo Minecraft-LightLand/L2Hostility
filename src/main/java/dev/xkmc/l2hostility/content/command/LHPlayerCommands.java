@@ -56,7 +56,7 @@ public class LHPlayerCommands extends HostilityCommands {
 										.executes(playerLevel((cap, pl, level) ->
 												cap.getLevelEditor(pl).addTotal(level)))))
 						.then(literal("get").executes(playerGet((cap, pl) ->
-								LangData.COMMAND_PLAYER_GET_TOTAL.get(pl.getDisplayName(), cap.getLevelEditor(pl).getBase())))));
+								LangData.COMMAND_PLAYER_GET_TOTAL.get(pl.getDisplayName(), cap.getLevelEditor(pl).getTotal())))));
 	}
 
 	private static LiteralArgumentBuilder<CommandSourceStack> trait() {

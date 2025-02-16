@@ -62,7 +62,11 @@ public class BookEverything extends Item {
 						.forEach(e -> builder.set(e.getDelegate(), e.value().getMaxLevel()));
 				EnchantmentHelper.setEnchantments(result, builder.toImmutable());
 				stack.shrink(1);
-				player.getInventory().placeItemBackInInventory(result);
+				if (stack.isEmpty()) {
+					return InteractionResultHolder.success(result);
+				} else {
+					player.getInventory().placeItemBackInInventory(result);
+				}
 			}
 			return InteractionResultHolder.consume(stack);
 		} else {

@@ -206,6 +206,13 @@ dependencies {
     implementation "curse.maven:irisshaders-455508:5765375"
     implementation "curse.maven:geckolib-388172:5763144"
     implementation "curse.maven:the-twilight-forest-227639:5759335"
+
+    implementation "curse.maven:apotheosis-313970:6148732"
+    implementation "curse.maven:apothic-attributes-898963:6148951"
+    implementation "curse.maven:placebo-283644:6105436"
+    implementation "curse.maven:gateways-to-eternity-417802:6021376"
+    implementation "curse.maven:kubejs-238086:5810100"
+    implementation "curse.maven:rhino-416294:6184623"
 }
 
 
