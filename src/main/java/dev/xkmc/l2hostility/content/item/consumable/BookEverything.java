@@ -61,7 +61,11 @@ public class BookEverything extends Item {
 				}
 				result.getOrCreateTag().put("StoredEnchantments", listtag);
 				stack.shrink(1);
-				player.getInventory().placeItemBackInInventory(result);
+				if (stack.isEmpty()) {
+					return InteractionResultHolder.success(result);
+				} else {
+					player.getInventory().placeItemBackInInventory(result);
+				}
 			}
 			return InteractionResultHolder.consume(stack);
 		} else {

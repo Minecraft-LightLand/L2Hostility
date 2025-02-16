@@ -9,9 +9,14 @@ import dev.xkmc.l2damagetracker.compat.CustomAttackListener;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 
 public class LHKJSPlugin extends KubeJSPlugin {
+
+	static {
+		L2Hostility.init();
+	}
 
 	public static final RegistryInfo<MobTrait> TRAITS = RegistryInfo.of(LHTraits.TRAITS.key(), MobTrait.class);
 

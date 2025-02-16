@@ -65,7 +65,8 @@ public class L2Hostility {
 	public static final ConfigTypeEntry<WeaponConfig> WEAPON = new ConfigTypeEntry<>(HANDLER, "weapon", WeaponConfig.class);
 	public static final ConfigTypeEntry<EntityConfig> ENTITY = new ConfigTypeEntry<>(HANDLER, "entity", EntityConfig.class);
 
-	public L2Hostility() {
+
+	public static void init() {
 
 		LHBlocks.register();
 		LHItems.register();
@@ -84,6 +85,10 @@ public class L2Hostility {
 		PlayerDifficulty.register();
 
 		HostilityTriggers.register();
+	}
+
+	public L2Hostility() {
+		init();
 
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
@@ -143,5 +148,6 @@ public class L2Hostility {
 	public static void toTrackingChunk(LevelChunk chunk, SerialPacketBase packet) {
 		HANDLER.channel.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), packet);
 	}
+
 
 }

@@ -6,6 +6,7 @@ import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.damage.DamageState;
 import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
+import dev.xkmc.l2hostility.content.logic.DifficultyLevel;
 import dev.xkmc.l2hostility.init.data.HostilityDamageState;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -13,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
@@ -25,6 +27,13 @@ public class L2HHelper {
 			return MobTraitCap.HOLDER.get(mob);
 		}
 		return null;
+	}
+
+	public static int levelOf(Entity e) {
+		if (e instanceof LivingEntity le) {
+			return DifficultyLevel.ofAny(le);
+		}
+		return 0;
 	}
 
 	public static CustomAttackListener newAttackListener() {

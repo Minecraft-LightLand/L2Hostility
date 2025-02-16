@@ -1,6 +1,16 @@
+2.5.2
+- Fix Book of Omniscience shift use
+- Fix get player total level command
+- Fix creative tab when KubeJS is present
+
+2.5.1
+- Make Reflect damage safer for other mods to handle
+- Add KubeJS integration: allow fetching level of any entity easily with L2Hostility.levelOf(entity)
+
 2.5.0
 - Add KubeJS integration: allow adding custom traits, effect traits, and attribute traits
 - Add KubeJS integration: L2DamageTracker attack listener support
+
 
 2.4.35
 - Fix crash when pocket of restoration wants to put item inside an non-existing curios slot

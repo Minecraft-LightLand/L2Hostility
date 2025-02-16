@@ -24,7 +24,7 @@ public class ReflectTrait extends MobTrait {
 		if (event.getSource().getDirectEntity() instanceof LivingEntity le && event.getSource().is(L2DamageTypes.DIRECT)) {
 			if (LHItems.ABRAHADABRA.get().isOn(le)) return;
 			float factor = (float) (level * LHConfig.COMMON.reflectFactor.get());
-			GeneralEventHandler.schedule(() -> le.hurt(entity.level().damageSources().indirectMagic(entity, null), event.getAmount() * factor));
+			GeneralEventHandler.schedule(() -> le.hurt(entity.level().damageSources().indirectMagic(null, entity), event.getAmount() * factor));
 		}
 	}
 
