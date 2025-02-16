@@ -203,12 +203,6 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		traits.forEach(cons);
 	}
 
-	public void setTrait(String id, int lv) {
-		var trait = LHTraits.TRAITS.get().get(ResourceLocation.parse(id));
-		if (trait != null)
-			setTrait(trait, lv);
-	}
-
 	public void setTrait(MobTrait trait, int lv) {
 		pending.add(Pair.of(trait, lv));
 	}

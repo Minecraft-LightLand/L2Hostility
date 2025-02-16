@@ -175,10 +175,10 @@ dependencies {
     implementation "dev.xkmc:l2itemselector:${l2itemselector_ver}"
 
     implementation jarJar(group: 'dev.xkmc', name: 'l2magic', version: "[${l2magic_ver},)")
+    implementation jarJar(group: 'dev.xkmc', name: 'l2damagetracker', version: "[${l2damagetracker_ver},)")
     implementation jarJar(group: 'dev.xkmc', name: 'fast_projectile_api', version: "[${fast_projectile_api_ver},)")
 
     implementation "dev.xkmc:l2library:${l2library_ver}"
-    implementation "dev.xkmc:l2damagetracker:${l2damagetracker_ver}"
     implementation "dev.xkmc:l2backpack:${l2backpack_ver}"
     implementation "dev.xkmc:l2complements:${l2complements_ver}"
     implementation "dev.xkmc:l2weaponry:${l2weaponry_ver}"
@@ -208,6 +208,8 @@ dependencies {
     implementation "curse.maven:the-twilight-forest-227639:5759335"
 
     implementation "curse.maven:apotheosis-313970:6148732"
+    implementation "curse.maven:apothic-enchanting-1063926:6084297"
+    implementation "curse.maven:apothic-spawners-986583:6148923"
     implementation "curse.maven:apothic-attributes-898963:6148951"
     implementation "curse.maven:placebo-283644:6105436"
     implementation "curse.maven:gateways-to-eternity-417802:6021376"

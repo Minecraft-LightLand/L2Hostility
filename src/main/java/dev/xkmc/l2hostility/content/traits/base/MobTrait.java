@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
+import dev.latvian.mods.kubejs.util.RegistryAccessContainer;
 import dev.xkmc.l2core.init.reg.registrate.NamedEntry;
 import dev.xkmc.l2core.util.ServerProxy;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
