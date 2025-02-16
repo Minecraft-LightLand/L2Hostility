@@ -1,12 +1,15 @@
 package dev.xkmc.l2hostility.init;
 
 import com.tterrag.registrate.providers.ProviderType;
+import dev.shadowsoffire.gateways.Gateways;
 import dev.xkmc.l2core.compat.patchouli.PatchouliHelper;
 import dev.xkmc.l2core.init.L2TagGen;
 import dev.xkmc.l2core.init.reg.simple.Reg;
 import dev.xkmc.l2core.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2core.serial.config.PacketHandlerWithConfig;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
+import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
+import dev.xkmc.l2hostility.compat.gateway.GatewayToEternityCompat;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkCapSyncToClient;
 import dev.xkmc.l2hostility.content.capability.mob.MobCapSyncToClient;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
@@ -22,7 +25,6 @@ import dev.xkmc.l2hostility.init.network.TraitEffectToClient;
 import dev.xkmc.l2hostility.init.registrate.*;
 import dev.xkmc.l2serial.network.PacketHandler;
 import dev.xkmc.l2serial.network.SerialPacketBase;
-import dev.xkmc.l2tabs.init.L2Tabs;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -31,9 +33,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import org.apache.logging.log4j.LogManager;
@@ -91,12 +95,10 @@ public class L2Hostility {
 						"Find out the mechanics and mob traits to know what to prepare for",
 						1, LHBlocks.TAB.key());
 		AttackEventHandler.register(4500, new LHAttackListener());
-
-		/*TODO
 		if (ModList.get().isLoaded(Gateways.MODID)) {
 			NeoForge.EVENT_BUS.register(GatewayToEternityCompat.class);
 		}
- 		*/
+
 	}
 
 	@SubscribeEvent
@@ -123,11 +125,9 @@ public class L2Hostility {
 		var init = REGISTRATE.getDataGenInitializer();
 		init.addDependency(ProviderType.RECIPE, ProviderType.DYNAMIC);
 		new LHDamageTypes().generate();
-		/* TODO
 		if (ModList.get().isLoaded(Gateways.MODID)) {
 			gen.addProvider(server, new GatewayConfigGen(gen));
 		}
-		*/
 		gen.addProvider(server, new LHConfigGen(gen, pvd));
 	}
 

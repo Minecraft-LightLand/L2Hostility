@@ -1,3 +1,9 @@
+3.0.2
+- Add KubeJS integration and example
+- Fix compat with Apotheosis
+- Fix Book of Omniscience shift use
+- Fix get player total difficulty command
+
 3.0.1
 - Add max trait count and suppression config in datapack
 

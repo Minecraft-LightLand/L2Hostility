@@ -74,7 +74,8 @@ public class CapabilityEvents {
 				mob.setAbsorptionAmount(0);
 			}
 		}
-		LHMiscs.MOB.type().getExisting(mob).ifPresent(e -> e.tick(mob));
+		if (LHMiscs.MOB.type().isProper(mob))
+			LHMiscs.MOB.type().getOrCreate(mob).tick(mob);
 	}
 
 	@SubscribeEvent
