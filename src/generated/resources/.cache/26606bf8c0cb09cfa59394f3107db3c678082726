@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-16T20:43:43.344882	Global Loot Modifiers : l2hostility
+// 1.21.1	2025-02-17T08:37:19.894699	Global Loot Modifiers : l2hostility
 5da023b607455f91ba66abd245fc5ca60aef752b data/l2hostility/loot_modifiers/adaptive_drop_cursed_droplet.json
 f29722867a40cd06387f5d88016f8ac72a46b387 data/l2hostility/loot_modifiers/arena_drop_chaos_ingot.json
 f92d15e44acd800785fae0b85138d6ae8a5f462c data/l2hostility/loot_modifiers/blindness_drop_ink_sac.json
@@ -55,4 +55,4 @@ fbe8d9eb55b9e3b4fe7e47a26b2734563578cf4f data/l2hostility/loot_modifiers/telepor
 619fb218cf1c81d44573e7bb3b8dc80e5d55e899 data/l2hostility/loot_modifiers/weakness_drop_fermented_spider_eye.json
 0b9b0252869ab85d13162156740911fc081aa98a data/l2hostility/loot_modifiers/wither_drop_wither_rose.json
 563e8353d13ed73db17ffaddd46630f67d033513 data/l2hostility/loot_modifiers/wither_drop_wither_skeleton_skull.json
-ca8a9cacb3d1426ede00ebf7ab80b64e7682923f data/neoforge/loot_modifiers/global_loot_modifiers.json
+64dbdb5ad54980fe15ad13d81027ae22b5fd597a data/neoforge/loot_modifiers/global_loot_modifiers.json

@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.l2core.util.ConfigInit;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
@@ -486,7 +487,8 @@ public class LHConfig {
 
 			builder.push("toggle", " Trait Toggles");
 			for (var e : L2Hostility.REGISTRATE.getList()) {
-				map.put(e, builder.define("allow_" + e, true));
+				map.put(e, builder.text("Enable Trait " + RegistrateLangProvider.toEnglishName(e))
+						.define("allow_" + e, true));
 			}
 			builder.pop();
 		}

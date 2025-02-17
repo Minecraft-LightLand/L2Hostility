@@ -7,9 +7,9 @@
         "l2hostility:invisible"
       ],
       "difficulty": {
-        "min": 100,
         "apply_chance": 1.0,
         "base": 50,
+        "min": 100,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,
@@ -39,8 +39,8 @@
       ],
       "traits": [
         {
-          "min": 1,
           "free": 1,
+          "min": 1,
           "trait": "l2hostility:split"
         }
       ]
@@ -52,9 +52,9 @@
         "l2hostility:invisible"
       ],
       "difficulty": {
-        "min": 120,
         "apply_chance": 1.0,
         "base": 70,
+        "min": 120,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,
@@ -84,8 +84,8 @@
       ],
       "traits": [
         {
-          "min": 2,
           "free": 1,
+          "min": 2,
           "trait": "l2hostility:split"
         }
       ]
@@ -97,9 +97,9 @@
         "l2hostility:invisible"
       ],
       "difficulty": {
-        "min": 140,
         "apply_chance": 1.0,
         "base": 90,
+        "min": 140,
         "scale": 0.0,
         "suppression": 0.0,
         "trait_chance": 1.0,
@@ -129,8 +129,8 @@
       ],
       "traits": [
         {
-          "min": 3,
           "free": 2,
+          "min": 3,
           "trait": "l2hostility:split"
         }
       ]

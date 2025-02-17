@@ -3,9 +3,9 @@
   "levelDefaultTraits": {},
   "levelMap": {
     "minecraft:the_end": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 40,
+      "min": 0,
       "scale": 1.5,
       "suppression": 0.0,
       "trait_chance": 1.0,

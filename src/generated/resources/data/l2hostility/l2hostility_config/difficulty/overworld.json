@@ -1,315 +1,315 @@
 {
   "biomeMap": {
     "minecraft:badlands": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:bamboo_jungle": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:birch_forest": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:dark_forest": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:deep_cold_ocean": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:deep_dark": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 50,
+      "min": 0,
       "scale": 0.5,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 4.0
     },
     "minecraft:deep_frozen_ocean": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:deep_lukewarm_ocean": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:deep_ocean": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:desert": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:dripstone_caves": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:eroded_badlands": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:flower_forest": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:forest": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:frozen_peaks": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 20,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:ice_spikes": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 20,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:jagged_peaks": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 20,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:jungle": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:lush_caves": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:mangrove_swamp": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:mushroom_fields": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:savanna": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:savanna_plateau": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:snowy_slopes": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 20,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:snowy_taiga": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:sparse_jungle": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:stony_peaks": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 20,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:stony_shore": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:swamp": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:taiga": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.0,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:windswept_forest": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:windswept_gravelly_hills": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:windswept_hills": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:windswept_savanna": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 5,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
       "variation": 1.0
     },
     "minecraft:wooded_badlands": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 10,
+      "min": 0,
       "scale": 0.2,
       "suppression": 0.0,
       "trait_chance": 1.0,
@@ -319,9 +319,9 @@
   "levelDefaultTraits": {},
   "levelMap": {
     "minecraft:overworld": {
-      "min": 0,
       "apply_chance": 1.0,
       "base": 0,
+      "min": 0,
       "scale": 1.0,
       "suppression": 0.0,
       "trait_chance": 1.0,

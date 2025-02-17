@@ -166,6 +166,17 @@ if (lljij.toBoolean()) {
 }
 
 dependencies {
+
+    def dataImpl = { str ->
+        compileOnly str
+        runtimeOnly str
+    }
+
+    def commonImpl = { str ->
+        compileOnly str
+        commonRuntimeOnly str
+    }
+
     implementation "com.tterrag.registrate:Registrate:${registrate_version}"
     implementation "dev.xkmc:l2serial:${l2serial_ver}"
     implementation "dev.xkmc:l2modularblocks:${l2modularblocks_ver}"
@@ -201,25 +212,27 @@ dependencies {
     //commonRuntimeOnly "maven.modrinth:accessories-cc-layer:9.0.12+1.21.1"
 
     //implementation "curse.maven:embeddium-908741:5681729"
-    implementation "maven.modrinth:sodium:mc1.21-0.6.0-beta.2-neoforge"
-    implementation "curse.maven:irisshaders-455508:5765375"
+    commonRuntimeOnly "maven.modrinth:sodium:mc1.21-0.6.0-beta.2-neoforge"
+    commonRuntimeOnly "curse.maven:irisshaders-455508:5765375"
     implementation "curse.maven:geckolib-388172:5763144"
-    implementation "curse.maven:the-twilight-forest-227639:5759335"
-    implementation "curse.maven:mutant-monsters-852665:5742611"
-    implementation "curse.maven:bosses-of-mass-destruction-forge-941573:6117186"
-    implementation "curse.maven:cerbons-api-955605:6006403"
     implementation "curse.maven:cloth-config-348521:5729127"
-    implementation "curse.maven:puzzles-lib-495476:6095894"
+    implementation "curse.maven:the-twilight-forest-227639:5759335"
 
+    dataImpl "curse.maven:mutant-monsters-852665:5742611"
+    dataImpl "curse.maven:bosses-of-mass-destruction-forge-941573:6117186"
+    dataImpl "curse.maven:cerbons-api-955605:6006403"
+    dataImpl "curse.maven:puzzles-lib-495476:6095894"
 
-    implementation "curse.maven:apotheosis-313970:6148732"
-    implementation "curse.maven:apothic-enchanting-1063926:6084297"
-    implementation "curse.maven:apothic-spawners-986583:6148923"
     implementation "curse.maven:apothic-attributes-898963:6148951"
     implementation "curse.maven:placebo-283644:6105436"
     implementation "curse.maven:gateways-to-eternity-417802:6021376"
-    implementation "curse.maven:kubejs-238086:5810100"
-    implementation "curse.maven:rhino-416294:6184623"
+
+    commonImpl "curse.maven:apotheosis-313970:6148732"
+    commonImpl "curse.maven:apothic-enchanting-1063926:6084297"
+    commonImpl "curse.maven:apothic-spawners-986583:6148923"
+    commonImpl "curse.maven:kubejs-238086:5810100"
+    commonImpl "curse.maven:rhino-416294:6184623"
+
 }
 
 
