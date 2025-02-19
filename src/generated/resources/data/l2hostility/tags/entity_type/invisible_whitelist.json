@@ -1,3 +1,14 @@
 {
-  "values": []
+  "values": [
+    "minecraft:enderman",
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "minecraft:zombie",
+    "minecraft:husk",
+    "minecraft:drowned",
+    "minecraft:skeleton",
+    "minecraft:stray",
+    "minecraft:bogged",
+    "minecraft:wither"
+  ]
 }

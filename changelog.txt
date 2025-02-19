@@ -1,3 +1,11 @@
+3.0.3
+- Restore Cataclysm integration
+- Ban Protective trait from bosses
+- Limit Invisible trait to certain vanilla mobs
+- Fix missing boss tags for compat mods
+- Fix entity default carried item config
+- Fix config description for trait toggles
+
 3.0.2
 - Restore Gateway, BoMD, and MutantMonster integration
 - Add KubeJS integration and example
@@ -8,17 +16,9 @@
 
 3.0.1
 - Add max trait count and suppression config in datapack
-
-3.0.0+9
 - Fix accessories compatibility
-
-3.0.0+7
 - Fix effect will be applied even when damage is cancelled
 - Make pocket of restoration enchantable
-
-3.0.0+5
 - Fix immunity
 - Fix seal item default blacklist
-
-3.0.0+4
 - Port to 1.21.1

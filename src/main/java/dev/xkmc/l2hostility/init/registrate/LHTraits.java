@@ -94,11 +94,16 @@ public class LHTraits {
 
 			PROTECTION = L2Hostility.REGISTRATE.regTrait("protection",
 					() -> new SelfEffectTrait(MobEffects.DAMAGE_RESISTANCE),
-					new TraitConfig(30, 100, 4, 50)).lang("Protected").register();
+							new TraitConfig(30, 100, 4, 50))
+					.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS))
+					.lang("Protected").register();
 
 			INVISIBLE = L2Hostility.REGISTRATE.regTrait("invisible", InvisibleTrait::new,
 							new TraitConfig(30, 100, 1, 50))
-					.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS))
+					.addWhitelist(e -> e.add(
+							EntityType.ENDERMAN, EntityType.SPIDER, EntityType.CAVE_SPIDER,
+							EntityType.ZOMBIE, EntityType.HUSK, EntityType.DROWNED,
+							EntityType.SKELETON, EntityType.STRAY, EntityType.BOGGED, EntityType.WITHER))
 					.lang("Invisible").register();
 
 		}

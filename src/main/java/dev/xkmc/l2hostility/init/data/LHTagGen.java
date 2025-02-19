@@ -108,7 +108,7 @@ public class LHTagGen {
 		);
 
 		pvd.addTag(RANGED_WEAPON_TARGET).add(
-				EntityType.SKELETON, EntityType.STRAY
+				EntityType.SKELETON, EntityType.BOGGED, EntityType.STRAY
 		);
 
 		pvd.addTag(SEMIBOSS).addTag(Tags.EntityTypes.BOSSES)
