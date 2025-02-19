@@ -1,5 +1,8 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.cerbon.bosses_of_mass_destruction.entity.BMDEntities;
+import com.github.L_Ender.cataclysm.Cataclysm;
+import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.tterrag.registrate.providers.RegistrateItemTagsProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import dev.xkmc.l2complements.init.data.LCTagGen;
@@ -9,6 +12,8 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import fuzs.mutantmonsters.MutantMonsters;
+import fuzs.mutantmonsters.init.ModEntityTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -20,7 +25,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.Tags;
+import twilightforest.TwilightForestMod;
+import twilightforest.init.TFEntities;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -106,10 +114,6 @@ public class LHTagGen {
 		pvd.addTag(SEMIBOSS).addTag(Tags.EntityTypes.BOSSES)
 				.add(EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER);
 
-		/* TODO
-		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
-			pvd.addTag(NO_DROP).addOptional(TFEntities.DEATH_TOME.getId());
-		}
 
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			pvd.addTag(SEMIBOSS)
@@ -127,6 +131,41 @@ public class LHTagGen {
 					.addOptional(ModEntities.MALEDICTUS.getId())
 					.addOptional(ModEntities.APTRGANGR.getId());
 		}
+
+		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
+			pvd.addTag(NO_DROP).addOptional(TFEntities.DEATH_TOME.getId());
+		}
+
+		if (ModList.get().isLoaded("bosses_of_mass_destruction")) {
+			pvd.addTag(SEMIBOSS)
+					.addOptional(BMDEntities.LICH.getId())
+					.addOptional(BMDEntities.GAUNTLET.getId())
+					.addOptional(BMDEntities.OBSIDILITH.getId())
+					.addOptional(BMDEntities.VOID_BLOSSOM.getId());
+
+			pvd.addTag(WHITELIST)
+					.addOptional(BMDEntities.LICH.getId())
+					.addOptional(BMDEntities.GAUNTLET.getId())
+					.addOptional(BMDEntities.OBSIDILITH.getId())
+					.addOptional(BMDEntities.VOID_BLOSSOM.getId());
+
+		}
+
+
+		if (ModList.get().isLoaded(MutantMonsters.MOD_ID)) {
+			pvd.addTag(SEMIBOSS)
+					.addOptional(ModEntityTypes.MUTANT_ENDERMAN_ENTITY_TYPE.key().location())
+					.addOptional(ModEntityTypes.MUTANT_CREEPER_ENTITY_TYPE.key().location())
+					.addOptional(ModEntityTypes.MUTANT_ZOMBIE_ENTITY_TYPE.key().location())
+					.addOptional(ModEntityTypes.MUTANT_SKELETON_ENTITY_TYPE.key().location())
+					.addOptional(ModEntityTypes.SPIDER_PIG_ENTITY_TYPE.key().location());
+
+			pvd.addTag(WHITELIST)
+					.addOptional(ModEntityTypes.SPIDER_PIG_ENTITY_TYPE.key().location());
+
+		}
+
+		/* TODO
 
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {
 			pvd.addTag(SEMIBOSS)
@@ -158,34 +197,6 @@ public class LHTagGen {
 					.addOptional(ACEntityRegistry.TREMORSAURUS.getId());
 		}
 
-		if (ModList.get().isLoaded("bosses_of_mass_destruction")) {
-			pvd.addTag(SEMIBOSS)
-					.addOptional(BMDEntities.LICH.getId())
-					.addOptional(BMDEntities.GAUNTLET.getId())
-					.addOptional(BMDEntities.OBSIDILITH.getId())
-					.addOptional(BMDEntities.VOID_BLOSSOM.getId());
-
-			pvd.addTag(WHITELIST)
-					.addOptional(BMDEntities.LICH.getId())
-					.addOptional(BMDEntities.GAUNTLET.getId())
-					.addOptional(BMDEntities.OBSIDILITH.getId())
-					.addOptional(BMDEntities.VOID_BLOSSOM.getId());
-
-		}
-
-
-		if (ModList.get().isLoaded(MutantMonsters.MOD_ID)) {
-			pvd.addTag(SEMIBOSS)
-					.addOptional(ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.getResourceLocation())
-					.addOptional(ModRegistry.MUTANT_CREEPER_ENTITY_TYPE.getResourceLocation())
-					.addOptional(ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.getResourceLocation())
-					.addOptional(ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.getResourceLocation())
-					.addOptional(ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation());
-
-			pvd.addTag(WHITELIST)
-					.addOptional(ModRegistry.SPIDER_PIG_ENTITY_TYPE.getResourceLocation());
-
-		}
 		if (ModList.get().isLoaded(MowziesMobs.MODID)) {
 			pvd.addTag(SEMIBOSS)
 					.addOptional(EntityHandler.FROSTMAW.getId())

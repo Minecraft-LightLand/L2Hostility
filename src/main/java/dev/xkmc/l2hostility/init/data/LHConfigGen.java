@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.init.data;
 
+import com.github.L_Ender.cataclysm.Cataclysm;
 import dev.shadowsoffire.gateways.Gateways;
 import dev.xkmc.l2archery.init.L2Archery;
 import dev.xkmc.l2archery.init.registrate.ArcheryItems;
@@ -7,6 +8,7 @@ import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2core.serial.config.ConfigDataProvider;
 import dev.xkmc.l2hostility.compat.data.BoMDData;
+import dev.xkmc.l2hostility.compat.data.CataclysmData;
 import dev.xkmc.l2hostility.compat.data.MutantMonsterData;
 import dev.xkmc.l2hostility.compat.data.TFData;
 import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
@@ -21,7 +23,6 @@ import fuzs.mutantmonsters.MutantMonsters;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -217,10 +218,11 @@ public class LHConfigGen extends ConfigDataProvider {
 		if (ModList.get().isLoaded(MutantMonsters.MOD_ID)) {
 			MutantMonsterData.genConfig(collector);
 		}
-		/* TODO
+
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
-			CataclysmData.genConfig(collector);
+			CataclysmData.genConfig( collector);
 		}
+		/* TODO
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {
 			IaFData.genConfig(collector);
 		}

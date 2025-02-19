@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-17T08:37:19.897912	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait)]
+// 1.21.1	2025-02-19T11:31:59.855118	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -107,6 +107,26 @@ d77ade334e7a963054ed571b2c9aae1fa3f61f4b assets/l2hostility/models/item/weakness
 347b84c3484867babce110b45aa6a175fc13feb4 assets/l2hostility/models/item/witch_droplet.json
 d69681b4cb7544b64e002366a0e64e7a6402cdc8 assets/l2hostility/models/item/witch_wand.json
 e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.json
+886a093c2b1fe45607b94799eaf4ee42b03d2bbf data/bosses_of_mass_destruction/l2hostility_config/entity/gauntlet.json
+cfa1df6aeac30f5a8ba271031e3763fe51a4a6eb data/bosses_of_mass_destruction/l2hostility_config/entity/lich.json
+fd87599ee2ee1c548d4eb499b04e12fb17fb47e3 data/bosses_of_mass_destruction/l2hostility_config/entity/obsidilith.json
+2179ac3a568063b8465996b21758dd84f7786bbc data/bosses_of_mass_destruction/l2hostility_config/entity/void_blossom.json
+4b866198d39cedd2e0ab057b028db2db15595f8c data/cataclysm/l2hostility_config/entity/amethyst_crab.json
+b71d241f6294e08bbb226d65bd5a18277d03c775 data/cataclysm/l2hostility_config/entity/ancient_remnant.json
+0eff4ee0920a350053f619e97ef81f319f490cf6 data/cataclysm/l2hostility_config/entity/aptrgangr.json
+adebd9eff4624f0f137ffe0659f628281a3b5454 data/cataclysm/l2hostility_config/entity/draugr.json
+06b31ef07433c48f48209ef64a6170f0ec6fefbb data/cataclysm/l2hostility_config/entity/elite_draugr.json
+6f2e10175920c223280be5a14f1a60e19734cf99 data/cataclysm/l2hostility_config/entity/ender_golem.json
+2621729bac472ba709d044fa5a4b49f7ae329dda data/cataclysm/l2hostility_config/entity/ender_guardian.json
+91772223d124a788d5f9c97034d149951bcb0798 data/cataclysm/l2hostility_config/entity/ignis.json
+f9748baad1ed94ebcf3028987be506662541b77d data/cataclysm/l2hostility_config/entity/ignited_berserker.json
+5c4d6ae416d3cffd7409b4b56d9b3dd7909fb850 data/cataclysm/l2hostility_config/entity/kobolediator.json
+641765f2c5a48ac93058ce3926249a058cb4eb1c data/cataclysm/l2hostility_config/entity/maledictus.json
+422c8d16ccb93c7cd45fe5a72893d807edd501fe data/cataclysm/l2hostility_config/entity/netherite_monstrosity.json
+da1814522f2f88928d26e4b7e6b5c15c24e731b2 data/cataclysm/l2hostility_config/entity/royal_draugr.json
+e28f2bcffbacea0d33f7e987406892312aed0c24 data/cataclysm/l2hostility_config/entity/the_harbinger.json
+7a1c367a597e5f6dd5821e0f6256309d12eecdcf data/cataclysm/l2hostility_config/entity/the_leviathan.json
+e562a76b82fc87657ec328661c6c14b38c84fa2b data/cataclysm/l2hostility_config/entity/wadjet.json
 7942255280f4ee1f25a76cfb178597324d566c77 data/curios/tags/item/back.json
 801a68ce0482049c4c2efe45f9de4366b8ff6691 data/curios/tags/item/charm.json
 6b3db265ef90a4cf6af5cc3775209c4a04a67c42 data/curios/tags/item/hands.json
@@ -115,9 +135,14 @@ e7b1f4d150f0de4f8d63b768cd5f15b76bddfbfe assets/l2hostility/models/item/wither.j
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/item/ring.json
 b08d54218fcbedee007aa32dce3fa7e334b48c7f data/gateways/advancement/recipes/misc/hostility/growth.json
 bb6f94597a939d6ca78f8a82bb4aca546f1a8e7a data/gateways/advancement/recipes/misc/hostility/split.json
+1f9f6ff641d86590c6ee72b878562cf9ff2baf10 data/gateways/l2hostility_config/entity/growth.json
+fbc89e1a1f80c810ee79683580eb344e355a07a4 data/gateways/l2hostility_config/entity/split.json
 0c6380b2ce1d7d5a306909f36c645c700d765314 data/gateways/recipe/hostility/growth.json
 69f221d9b45d1083e7bcdf7f753b775b7b97787b data/gateways/recipe/hostility/split.json
+62a6b0f73609abe8086e91730410149b9bc4a364 data/l2archery/l2hostility_config/weapon/bows.json
+6a51a0941d904aa236350039b200077ec2857600 data/l2complements/l2hostility_config/weapon/l2complements.json
 4b9d05f8d5dca02f6cf4f92c3c35a1a94303ad10 data/l2complements/tags/mob_effect/skill_effect.json
+865b4b3f501fc3f54d9a654ae0f1cc2118346f6e data/l2hostility/advancement/burnt/hostility_essence.json
 53db2a68775994e813241e7b27d9cef235376bc3 data/l2hostility/advancement/hostility/abrahadabra.json
 ac2807052d5c9b6d1311edccfd0179f9a87dd755 data/l2hostility/advancement/hostility/breed.json
 6921854bab97035a3d1023c6a840c7bdac7ffab3 data/l2hostility/advancement/hostility/detector.json
@@ -146,7 +171,6 @@ ec1fff3bc47567c42ec91e54bbc71e6a91f204cd data/l2hostility/advancement/hostility/
 af26d09f43a97b8f2d022a76278deba64ddc4908 data/l2hostility/advancement/hostility/sloth.json
 44ab41c3f4c298b52e51a7b210cbc114e63f9025 data/l2hostility/advancement/hostility/trait.json
 4597bf0040968f99c48d3ac9909eb5d9db600576 data/l2hostility/advancement/hostility/wrath.json
-865b4b3f501fc3f54d9a654ae0f1cc2118346f6e data/l2hostility/advancement/recipes/burnt/hostility_essence.json
 12166fdec8b9d3adbf824be00e3192021ea293c5 data/l2hostility/advancement/recipes/misc/abrahadabra.json
 5fb58bbcfc009489fb798d4c84f5335e5d4f0f17 data/l2hostility/advancement/recipes/misc/abyssal_thorn.json
 f13d7e37089e1ccec997b7c8f49d89119db39498 data/l2hostility/advancement/recipes/misc/alpha_yeti_boss_spawner.json
@@ -212,6 +236,12 @@ cd041e701e17701be3a0e7c321085591e8976df1 data/l2hostility/data_maps/l2hostility/
 f689dd25a950129ab74c0b97ef73b815ee804470 data/l2hostility/enchantment/insulator.json
 80995ce7fd1d689c2b0fe889acd503703149cb63 data/l2hostility/enchantment/split_suppressor.json
 552928d3c2b535192e91cf238f8223380ddbd764 data/l2hostility/enchantment/vanish.json
+4d831711246039888000af371b45550c22560cf2 data/l2hostility/l2hostility_config/difficulty/end.json
+e4dadbaafcd6c7e604fd1582d06ceefe34ee382e data/l2hostility/l2hostility_config/difficulty/nether.json
+6ec8bf37d02af570ab69ee1435b3812433ccea32 data/l2hostility/l2hostility_config/difficulty/overworld.json
+00ef227246bbf99bcb58122388295a5190283651 data/l2hostility/l2hostility_config/entity/bosses.json
+0506bdf907561029963db2919e11912eda84e894 data/l2hostility/l2hostility_config/weapon/armors.json
+c2fbb22b2f67605766c473df982f83fe518a84d9 data/l2hostility/l2hostility_config/weapon/vanilla.json
 72ad1584c30645b03e0f4d88e8bd7df9b1b0bde6 data/l2hostility/loot_table/blocks/chaos_block.json
 200e7ea29344866c307f1b637e382ad287a95c58 data/l2hostility/loot_table/blocks/hostility_beacon.json
 e03c87788865e847130c7b79b3808e7b7b41742a data/l2hostility/loot_table/blocks/hostility_spawner.json
@@ -227,6 +257,7 @@ b7fbf139c7af870e65427982b8acfa06ce22d702 data/l2hostility/recipe/book_of_omnisci
 6155ddd90110beb2cca48b20432a60b4669faa83 data/l2hostility/recipe/bottle_of_curse.json
 4b5de6e84f829a169eea017bb72d6b3e8404c8a2 data/l2hostility/recipe/bottle_of_sanity_craft.json
 f03b95249e7d1b4516e3b8a0f3045f7c3353b9a8 data/l2hostility/recipe/bottle_of_sanity_renew.json
+6e269588a095d07101d4791d0f35c7a57b9c8e69 data/l2hostility/recipe/burnt/hostility_essence.json
 7a8c3f8984a16a9e08613a40b68f846e309c6ff9 data/l2hostility/recipe/chaos_block.json
 24b6e2a25cf4d1c5b4094bd3da2642251cfde918 data/l2hostility/recipe/chaos_ingot.json
 c046400d288afd9568d346d09412ec8494039bb3 data/l2hostility/recipe/chaos_ingot_from_chaos_block.json
@@ -265,7 +296,6 @@ ea7513cd867b5607a9273f935477f230a7fde38b data/l2hostility/recipe/naga_boss_spawn
 bd93ff5c838043c4fb57b91e3896cc8400913016 data/l2hostility/recipe/oddeyes_glasses.json
 9eaa9b41bb6e9facce6727554b61c1c10075c174 data/l2hostility/recipe/platinum_star.json
 bdbaa5dfdbf2f09f800113d253a9a2b6dd900c3b data/l2hostility/recipe/pocket_of_restoration.json
-6e269588a095d07101d4791d0f35c7a57b9c8e69 data/l2hostility/recipe/recipes/burnt/hostility_essence.json
 dcdd87503dbe8573d3944ce314ade13b7cd5701d data/l2hostility/recipe/ring_of_corrosion.json
 edb7b45e84e0a944be27ca78f1c896d1fe304982 data/l2hostility/recipe/ring_of_divinity.json
 fbe4e5eea5719af14b25b7fb61a0f856b6c46300 data/l2hostility/recipe/ring_of_healing.json
@@ -326,6 +356,7 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_type/melee
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/moonwalk_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/nausea_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/nausea_whitelist.json
+ebcd146f52a62b349b6314398e2d418692138153 data/l2hostility/tags/entity_type/no_drop.json
 217ca38cad2e92f1ca03034aaa17f2dc686cbf50 data/l2hostility/tags/entity_type/no_scaling.json
 962e36a08d2e40469fba97926083112d29ed66b4 data/l2hostility/tags/entity_type/no_trait.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/poison_blacklist.json
@@ -345,7 +376,7 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_type/melee
 778fdb4a5208400e8f9b783e17704df130baf07b data/l2hostility/tags/entity_type/repelling_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/reprint_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/reprint_whitelist.json
-3348bb0ad76b98a42bbccf7e1e1c29b609811c7d data/l2hostility/tags/entity_type/semiboss.json
+9b9a9a36ea4f38bb7355c6b01fc94dbccaea1d79 data/l2hostility/tags/entity_type/semiboss.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_type/shulker_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/shulker_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/slowness_blacklist.json
@@ -364,7 +395,7 @@ a438380ac1f3678dbcbefce8383749f001a9683b data/l2hostility/tags/entity_type/melee
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/undying_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/weakness_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/weakness_whitelist.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/whitelist.json
+643bf0602056f722fbfb17e8c6beafabc52f3c82 data/l2hostility/tags/entity_type/whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/wither_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/wither_whitelist.json
 406c965f80725c8e6de68d3bdf4488940323728a data/l2hostility/tags/item/antibuild_ban.json
@@ -375,9 +406,19 @@ c11704257529150719574fe8070c7fca05bf7f04 data/l2hostility/tags/item/no_seal.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
 d43d210ad5e087b02e96faecf8afa3f0ef47444e data/l2tabs/data_maps/l2tabs/tab/icon.json
 31ba5cac840af21246ac661d322294b7ac69c671 data/l2tabs/data_maps/l2tabs/tab/order.json
+c1ea6a25a6f15febf17af6659355d6412ae3a145 data/l2weaponry/l2hostility_config/weapon/weapons.json
 ae3272ea9c6f244c79f6192ef5e9f1d387c45909 data/minecraft/tags/block/beacon_base_blocks.json
 65da76b3a96d076426cc78810d00296dfd0b5679 data/minecraft/tags/block/mineable/pickaxe.json
 6a70fe0b66cbb6fbf8cd0870ea1ad350fae1bf08 data/minecraft/tags/block/needs_diamond_tool.json
 4ecf5c12e1c8d9a3c82275c97ec043b63b2e0dca data/minecraft/tags/damage_type/bypasses_armor.json
 8f06d01e99277dc97bf8e7db7cc0a8f3ff359d05 data/minecraft/tags/item/enchantable/durability.json
+527215b539298216eabcd4258225ca066acde40f data/mutantmonsters/l2hostility_config/entity/bosses.json
 4ecf5c12e1c8d9a3c82275c97ec043b63b2e0dca data/neoforge/tags/damage_type/is_magic.json
+25876f11fe0eb45354b394565b64418c37537b5a data/twilightforest/l2hostility_config/entity/alpha_yeti.json
+d2bdae5e167e638c1f8bcc94afe5f9ce95102ba5 data/twilightforest/l2hostility_config/entity/hydra.json
+79fab6461585d37c949af36f8260a5bccc4026ec data/twilightforest/l2hostility_config/entity/knight_phantom.json
+3ba4de467185ce2f843bb63605e8ac870c0eae0d data/twilightforest/l2hostility_config/entity/lich.json
+3f1ef88402fa3abe2da931a6a28d9c2f01fd1049 data/twilightforest/l2hostility_config/entity/minoshroom.json
+75b9580fa7a515fc8a245c12c0fcfe5206004e6b data/twilightforest/l2hostility_config/entity/naga.json
+6956337f271b8063330a0d7c8ef9916d976a0be3 data/twilightforest/l2hostility_config/entity/snow_queen.json
+73fd2e86542e7e576a5d5d76950426edb8ffd729 data/twilightforest/l2hostility_config/entity/ur_ghast.json

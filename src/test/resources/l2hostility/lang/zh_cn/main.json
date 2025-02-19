@@ -1,161 +1,162 @@
 {
-  "itemGroup.l2library.hostility": "莱特兰·恶意",
-  "config.jade.plugin_l2hostility.mob": "莱特兰·恶意",
-  "patchouli.l2hostility.landing": "了解难度机制和怪物词条，以更好地应对它们",
-  "patchouli.l2hostility.title": "莱特兰恶意教程",
-  "death.attack.killer_aura": "%s被杀戮光环杀死了",
-  "death.attack.killer_aura.player": "%s被%s被杀戮光环杀死了",
-  "entity.l2hostility.hostility_bullet": "恶意子弹",
-  "entity.l2hostility.hostility_charge": "恶意弹",
-  "curios.identifier.hostility_curse": "恶意-诅咒",
-  "curios.modifiers.hostility_curse": "作为恶意诅咒装备时:",
-  "attribute.l2hostility.extra_difficulty": "额外难度",
-  "l2hostility": {
-	"command": {
-	  "mob.success": "指令已对%s个怪物起效",
-	  "invalid_trait": "%s不是正确的词条id",
-	  "player": {
-		"fail": "指令无目标或者无效",
-		"get_base": "%s的基础难度等级位Lv.%s",
-		"get_dim": "%s造访过%s个维度",
-		"get_total": "%s综合难度等级为Lv.%s",
-		"success": "指令已对%s个玩家起效",
-		"trait_cap": "%s击杀的最高阶级词条为阶级%s"
-	  },
-	  "region": {
-		"clear": "子区块难度已净化",
-		"count": "指令已对%s个子区块起效",
-		"get_base": "目标子区块的累积难度为%s",
-		"get_scale": "目标子区块的难度倍率为%s",
-		"get_total": "目标子区块的总难度为%s",
-		"local_off": "子区块难度积累已禁用",
-		"not_clear": "子区块难度还未净化",
-		"success": "指令已生效"
-	  }
+	"l2hostility.title": "莱特兰·恶意",
+	"itemGroup.l2core.hostility": "莱特兰·恶意",
+	"config.jade.plugin_l2hostility.mob": "莱特兰·恶意",
+	"patchouli.l2hostility.landing": "了解难度机制和怪物词条，以更好地应对它们",
+	"patchouli.l2hostility.title": "莱特兰恶意教程",
+	"death.attack.killer_aura": "%s被杀戮光环杀死了",
+	"death.attack.killer_aura.player": "%s被%s被杀戮光环杀死了",
+	"entity.l2hostility.hostility_bullet": "恶意子弹",
+	"entity.l2hostility.hostility_charge": "恶意弹",
+	"curios.identifier.hostility_curse": "恶意-诅咒",
+	"curios.modifiers.hostility_curse": "作为恶意诅咒装备时:",
+	"attribute.l2hostility.extra_difficulty": "额外难度",
+	"l2hostility": {
+		"command": {
+			"mob.success": "指令已对%s个怪物起效",
+			"invalid_trait": "%s不是正确的词条id",
+			"player": {
+				"fail": "指令无目标或者无效",
+				"get_base": "%s的基础难度等级位Lv.%s",
+				"get_dim": "%s造访过%s个维度",
+				"get_total": "%s综合难度等级为Lv.%s",
+				"success": "指令已对%s个玩家起效",
+				"trait_cap": "%s击杀的最高阶级词条为阶级%s"
+			},
+			"region": {
+				"clear": "子区块难度已净化",
+				"count": "指令已对%s个子区块起效",
+				"get_base": "目标子区块的累积难度为%s",
+				"get_scale": "目标子区块的难度倍率为%s",
+				"get_total": "目标子区块的总难度为%s",
+				"local_off": "子区块难度积累已禁用",
+				"not_clear": "子区块难度还未净化",
+				"success": "指令已生效"
+			}
+		},
+		"patchouli": {
+			"title": "莱特兰·恶意-教程与词条列表",
+			"landing": "这个模组提升了怪物数值，并添加了各种能力"
+		},
+		"boss_event": "恶意清除进度：%s/%s",
+		"tooltip": {
+			"lv": "Lv.%s",
+			"disable": "%s个附魔被抑制了，剩余%s秒。任何新附魔将会被抹消",
+			"self_effect": "怪物获得常驻效果：",
+			"target_effect": "怪物攻击将会施加：",
+			"legendary": "传奇词条",
+			"level_cost": "怪物等级消耗: %s",
+			"min_level": "最低怪物等级: %s",
+			"shift": "按SHIFT显示生成要求",
+			"weight": "权重: %s",
+			"banned": "这个词条被禁用了",
+			"seal_time": "持续使用%s秒来破除封印",
+			"sealed_item": "被封印的物品：",
+			"witch_bottle": "所有超过%s秒的药水效果时间增加%s%%。最多增加至%s秒",
+			"witch_charge": "右键发射。击中的目标的所有超过%s秒的负面效果时间增加%s%%。最多增加至%s秒",
+			"witch_eternal": "右键发射。击中的目标的所有超过%s秒的负面效果时间变为无限"
+		},
+		"item": {
+			"wand": {
+				"adder": "右键方块选择词条。右键生物调整词条等级。按住Shift切换选择方向",
+				"ai": "右键怪物移除或者恢复怪物AI",
+				"equipment": "右键怪物打开怪物装备栏，潜行右键打开怪物饰品栏",
+				"target": "右键2个怪物让它们互相攻击"
+			},
+			"consumable": {
+				"orb": "让%sx%sx%s的子区块不再生成有等级的怪物",
+				"bottle_of_curse": "玩家难度等级提升%s",
+				"bottle_of_sanity": "清空玩家基础难度等级"
+			},
+			"equipment": {
+				"glasses": "让你能看见隐身怪物，以及在失明/黑暗效果下看见怪物",
+				"detector": "在主副手持有时显示玩家和区域难度信息",
+				"section_render": "持有[%s]且佩戴[%s]时渲染被净化的区域",
+				"orb_use": "只有持有[%s]且佩戴[%s]时才能使用",
+				"curse_add_level": "玩家难度提升%s",
+				"curse_no_drop": "玩家击杀的怪物不会掉落词条掉落物",
+				"curse_of_envy": "击杀怪物获取其词条，概率为词条每阶%s%%",
+				"curse_of_gluttony": "击杀怪物掉落瓶装恶意，概率为每级%s%%",
+				"curse_of_greed": "击杀怪物的词条掉落物掉落概率x%s",
+				"curse_of_lust": "击杀怪物掉落所有装备",
+				"curse_of_pride": "根据玩家难度每级获得%s%%血量上限和%s%%伤害提升",
+				"curse_of_sloth": "击杀生物不再提升难度",
+				"curse_of_wrath": "攻击等级比自己高的怪物时每级等级差伤害提升%s%%",
+				"curse_trait_cheap": "怪物词条总量+%s%%",
+				"ring_of_ocean": "玩家永远湿润",
+				"ring_of_life": "玩家一次损失血量不会超过总血量的%s%%",
+				"ring_of_divinity": "玩家免疫魔法伤害，获得持续的净化效果",
+				"flame_thorn": "当你对一个怪物造成伤害时，对其施加%s秒，等级等同其目前持有药水效果种类的魂火效果",
+				"imagine_breaker": "你所有的近战伤害穿透魔法防御",
+				"ring_of_reflection": "当一个怪物携带的词条试图对你施加药水效果时，将其施加在周围所有对你有敌意的生物上作为替代",
+				"witch_wand": "投掷随机喷溅药水，种类从药水词条中随机选择",
+				"ring_of_incarceration": "潜行时，对你和你攻击范围内所有生物施加禁锢",
+				"ring_of_corrosion": "造成伤害时，目标所有装备耐久下降总耐久的%s%%",
+				"ring_of_corrosion_neg": "受到伤害时，你所有装备耐久下降总耐久的%s%%",
+				"ring_of_healing": "每秒回复总血量的%s%%",
+				"abrahadabra": "当一个怪物携带的词条试图对你施加词条效果时，将其施加在周围所有对你有敌意的生物上作为替代",
+				"nidhoggur": "击杀怪物掉落的所有掉落物根据怪物等级每级增加+%s%%",
+				"platinum_star": "你所有的近战伤害无视伤害冷却",
+				"pocket_of_restoration": "自动收纳被封印的物品，将其解除封印后放回原位",
+				"looting": "击杀带部分词条的生物时掉落额外奖励。查看JEI了解详情",
+				"abyssal_thorn": "怪物会获得当前等级下所有能获得的词条，但佩戴嫉妒诅咒时，必定掉落那些词条",
+				"divinity_cross": "净化效果不会清除1级的正面效果",
+				"divinity_light": "玩家动态等级维持在0"
+			},
+			"book": {
+				"copy": "在铁砧中和附魔书结合来复印",
+				"everything_forbidden": "%s不可获取",
+				"everything_invalid": "当前物品名字不是附魔ID",
+				"everything_ready": "产出%s消耗%s级经验",
+				"everything_shift": "手持这个物品潜行右键把这个物品变成包含所有可以从附魔台中产出的附魔的附魔书",
+				"everything_use": "把这个物品重命名成可以从附魔台中产出的附魔的ID，然后手持右键消耗经验产出该附魔"
+			},
+			"spawner": "召唤强力怪物。击败它们能让当前子区块不再生成有等级的怪物"
+		},
+		"msg": {
+			"ai": "配置实体%s：将NoAI设为%s",
+			"select_trait": "词条：%s",
+			"set_target": "让%s和%s对战",
+			"set_trait": "将实体%2$s的词条%1$s设为%3$s级",
+			"target_fail": "%s和%s无法对战",
+			"target_record": "选中实体%s",
+			"err_disallow": "该词条不适用于当前生物",
+			"err_max": "该词条已达到最大值"
+		},
+		"info": {
+			"chunk_level": "区块难度基础值：%s",
+			"chunk_scale": "区块玩家难度倍率：%s",
+			"player_cap": "怪物词条阶级上限：%s",
+			"player_exp": "玩家难度等级进度：%s%%",
+			"player_level": "玩家难度等级：%s",
+			"title": "难度信息",
+			"clear": "子区块难度已清除",
+			"reward": "已获得%s个奖励",
+			"player_detail": {
+				"adaptive": "动态等级: %s",
+				"dim": "到访维度数量加成: %s",
+				"external": "外部加成: %s",
+				"item": "物品加成: %s"
+			},
+			"section_detail": {
+				"adaptive": "动态等级: %s",
+				"biome": "生物群系基础等级: %s",
+				"dim": "维度基础等级: %s",
+				"distance": "距离加成: %s"
+			}
+		},
+		"jei": {
+			"loot_chance": "%3$s阶%2$s词条%1$s概率掉落",
+			"loot_title": "恶意词条掉落",
+			"min_level": "等级%s及以上的怪物才会掉落",
+			"other_trait": "同时需要%2$s阶%1$s词条",
+			"envy": "装备嫉妒诅咒时击杀有词条的怪物有概率掉落对应词条",
+			"gluttony": "装备暴食诅咒时击杀有等级的怪物有概率掉落",
+			"required": "需要佩戴[%s]饰品才能掉落",
+			"min_health": "总血量在%s及以上的怪物才会掉落",
+			"no_trait": "击杀满足条件的怪物时有%s概率掉落"
+		}
 	},
-	"patchouli": {
-	  "title": "莱特兰·恶意-教程与词条列表",
-	  "landing": "这个模组提升了怪物数值，并添加了各种能力"
-	},
-	"boss_event": "恶意清除进度：%s/%s",
-	"tooltip": {
-	  "lv": "Lv.%s",
-	  "disable": "%s个附魔被抑制了，剩余%s秒。任何新附魔将会被抹消",
-	  "self_effect": "怪物获得常驻效果：",
-	  "target_effect": "怪物攻击将会施加：",
-	  "legendary": "传奇词条",
-	  "level_cost": "怪物等级消耗: %s",
-	  "min_level": "最低怪物等级: %s",
-	  "shift": "按SHIFT显示生成要求",
-	  "weight": "权重: %s",
-	  "banned": "这个词条被禁用了",
-	  "seal_time": "持续使用%s秒来破除封印",
-	  "sealed_item": "被封印的物品：",
-	  "witch_bottle": "所有超过%s秒的药水效果时间增加%s%%。最多增加至%s秒",
-	  "witch_charge": "右键发射。击中的目标的所有超过%s秒的负面效果时间增加%s%%。最多增加至%s秒",
-	  "witch_eternal": "右键发射。击中的目标的所有超过%s秒的负面效果时间变为无限"
-	},
-	"item": {
-	  "wand": {
-		"adder": "右键方块选择词条。右键生物调整词条等级。按住Shift切换选择方向",
-		"ai": "右键怪物移除或者恢复怪物AI",
-		"equipment": "右键怪物打开怪物装备栏，潜行右键打开怪物饰品栏",
-		"target": "右键2个怪物让它们互相攻击"
-	  },
-	  "consumable": {
-		"orb": "让%sx%sx%s的子区块不再生成有等级的怪物",
-		"bottle_of_curse": "玩家难度等级提升%s",
-		"bottle_of_sanity": "清空玩家基础难度等级"
-	  },
-	  "equipment": {
-		"glasses": "让你能看见隐身怪物，以及在失明/黑暗效果下看见怪物",
-		"detector": "在主副手持有时显示玩家和区域难度信息",
-		"section_render": "持有[%s]且佩戴[%s]时渲染被净化的区域",
-		"orb_use": "只有持有[%s]且佩戴[%s]时才能使用",
-		"curse_add_level": "玩家难度提升%s",
-		"curse_no_drop": "玩家击杀的怪物不会掉落词条掉落物",
-		"curse_of_envy": "击杀怪物获取其词条，概率为词条每阶%s%%",
-		"curse_of_gluttony": "击杀怪物掉落瓶装恶意，概率为每级%s%%",
-		"curse_of_greed": "击杀怪物的词条掉落物掉落概率x%s",
-		"curse_of_lust": "击杀怪物掉落所有装备",
-		"curse_of_pride": "根据玩家难度每级获得%s%%血量上限和%s%%伤害提升",
-		"curse_of_sloth": "击杀生物不再提升难度",
-		"curse_of_wrath": "攻击等级比自己高的怪物时每级等级差伤害提升%s%%",
-		"curse_trait_cheap": "怪物词条总量+%s%%",
-		"ring_of_ocean": "玩家永远湿润",
-		"ring_of_life": "玩家一次损失血量不会超过总血量的%s%%",
-		"ring_of_divinity": "玩家免疫魔法伤害，获得持续的净化效果",
-		"flame_thorn": "当你对一个怪物造成伤害时，对其施加%s秒，等级等同其目前持有药水效果种类的魂火效果",
-		"imagine_breaker": "你所有的近战伤害穿透魔法防御",
-		"ring_of_reflection": "当一个怪物携带的词条试图对你施加药水效果时，将其施加在周围所有对你有敌意的生物上作为替代",
-		"witch_wand": "投掷随机喷溅药水，种类从药水词条中随机选择",
-		"ring_of_incarceration": "潜行时，对你和你攻击范围内所有生物施加禁锢",
-		"ring_of_corrosion": "造成伤害时，目标所有装备耐久下降总耐久的%s%%",
-		"ring_of_corrosion_neg": "受到伤害时，你所有装备耐久下降总耐久的%s%%",
-		"ring_of_healing": "每秒回复总血量的%s%%",
-		"abrahadabra": "当一个怪物携带的词条试图对你施加词条效果时，将其施加在周围所有对你有敌意的生物上作为替代",
-		"nidhoggur": "击杀怪物掉落的所有掉落物根据怪物等级每级增加+%s%%",
-		"platinum_star": "你所有的近战伤害无视伤害冷却",
-		"pocket_of_restoration": "自动收纳被封印的物品，将其解除封印后放回原位",
-		"looting": "击杀带部分词条的生物时掉落额外奖励。查看JEI了解详情",
-		"abyssal_thorn": "怪物会获得当前等级下所有能获得的词条，但佩戴嫉妒诅咒时，必定掉落那些词条",
-		"divinity_cross": "净化效果不会清除1级的正面效果",
-		"divinity_light": "玩家动态等级维持在0"
-	  },
-	  "book": {
-		"copy": "在铁砧中和附魔书结合来复印",
-		"everything_forbidden": "%s不可获取",
-		"everything_invalid": "当前物品名字不是附魔ID",
-		"everything_ready": "产出%s消耗%s级经验",
-		"everything_shift": "手持这个物品潜行右键把这个物品变成包含所有可以从附魔台中产出的附魔的附魔书",
-		"everything_use": "把这个物品重命名成可以从附魔台中产出的附魔的ID，然后手持右键消耗经验产出该附魔"
-	  },
-	  "spawner": "召唤强力怪物。击败它们能让当前子区块不再生成有等级的怪物"
-	},
-	"msg": {
-	  "ai": "配置实体%s：将NoAI设为%s",
-	  "select_trait": "词条：%s",
-	  "set_target": "让%s和%s对战",
-	  "set_trait": "将实体%2$s的词条%1$s设为%3$s级",
-	  "target_fail": "%s和%s无法对战",
-	  "target_record": "选中实体%s",
-	  "err_disallow": "该词条不适用于当前生物",
-	  "err_max": "该词条已达到最大值"
-	},
-	"info": {
-	  "chunk_level": "区块难度基础值：%s",
-	  "chunk_scale": "区块玩家难度倍率：%s",
-	  "player_cap": "怪物词条阶级上限：%s",
-	  "player_exp": "玩家难度等级进度：%s%%",
-	  "player_level": "玩家难度等级：%s",
-	  "title": "难度信息",
-	  "clear": "子区块难度已清除",
-	  "reward": "已获得%s个奖励",
-	  "player_detail": {
-		"adaptive": "动态等级: %s",
-		"dim": "到访维度数量加成: %s",
-		"external": "外部加成: %s",
-		"item": "物品加成: %s"
-	  },
-	  "section_detail": {
-		"adaptive": "动态等级: %s",
-		"biome": "生物群系基础等级: %s",
-		"dim": "维度基础等级: %s",
-		"distance": "距离加成: %s"
-	  }
-	},
-	"jei": {
-	  "loot_chance": "%3$s阶%2$s词条%1$s概率掉落",
-	  "loot_title": "恶意词条掉落",
-	  "min_level": "等级%s及以上的怪物才会掉落",
-	  "other_trait": "同时需要%2$s阶%1$s词条",
-	  "envy": "装备嫉妒诅咒时击杀有词条的怪物有概率掉落对应词条",
-	  "gluttony": "装备暴食诅咒时击杀有等级的怪物有概率掉落",
-	  "required": "需要佩戴[%s]饰品才能掉落",
-	  "min_health": "总血量在%s及以上的怪物才会掉落",
-	  "no_trait": "击杀满足条件的怪物时有%s概率掉落"
-	}
-  },
-  "gateways.hostility/growth": "生长传送门",
-  "gateways.hostility/split": "分裂传送门"
+	"gateways.hostility/growth": "生长传送门",
+	"gateways.hostility/split": "分裂传送门"
 }

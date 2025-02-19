@@ -4,22 +4,18 @@ import com.github.L_Ender.cataclysm.init.ModEntities;
 import com.github.L_Ender.cataclysm.init.ModItems;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
+import dev.xkmc.l2core.serial.config.ConfigDataProvider;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfigGen;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import dev.xkmc.l2library.compat.curios.CurioEntityBuilder;
-import dev.xkmc.l2library.compat.curios.SlotCondition;
-import dev.xkmc.l2library.serial.config.ConfigDataProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
 import top.theillusivec4.curios.api.CuriosDataProvider;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 
 import static dev.xkmc.l2hostility.init.data.LHConfigGen.addEntity;
 
@@ -54,13 +50,13 @@ public class CataclysmData {
 								breaker(equipLevel)
 						)).master(5, 80,
 								new EntityConfig.Minion(EntityType.BLAZE, 2, 0,
-										0.9, 16, 100,true, false,
+										0.9, 16, 100, true, false,
 										32, false, true),
 								new EntityConfig.Minion(ModEntities.IGNITED_REVENANT.get(), 2, 300,
-										0.67, 16, 400,true, false,
+										0.67, 16, 400, true, false,
 										32, true, true),
 								new EntityConfig.Minion(ModEntities.IGNITED_BERSERKER.get(), 1, 400,
-										0.33, 16, 400,true, false,
+										0.33, 16, 400, true, false,
 										32, true, true)
 						)));
 		addEntity(collector, 200, 50, ModEntities.THE_HARBINGER, List.of(
@@ -85,13 +81,13 @@ public class CataclysmData {
 						)).item(List.of(divinity(equipLevel)))
 						.master(4, 80,
 								new EntityConfig.Minion(ModEntities.KOBOLETON.get(), 2, 0,
-										0.8, 16, 250,true, false,
+										0.8, 16, 250, true, false,
 										32, false, true),
 								new EntityConfig.Minion(ModEntities.KOBOLEDIATOR.get(), 1, 300,
-										0.6, 16, 400,true, false,
+										0.6, 16, 400, true, false,
 										32, true, true),
 								new EntityConfig.Minion(ModEntities.WADJET.get(), 1, 300,
-										0.6, 16, 400,true, false,
+										0.6, 16, 400, true, false,
 										32, true, true)
 						)));
 
@@ -106,16 +102,16 @@ public class CataclysmData {
 						)).item(List.of(divinity(equipLevel)))
 						.master(8, 80,
 								new EntityConfig.Minion(ModEntities.DRAUGR.get(), 3, 0,
-										0.9, 16, 250,true, false,
+										0.9, 16, 250, true, false,
 										32, false, true),
 								new EntityConfig.Minion(ModEntities.ELITE_DRAUGR.get(), 2, 250,
-										0.7, 16, 400,true, false,
+										0.7, 16, 400, true, false,
 										32, false, true),
 								new EntityConfig.Minion(ModEntities.ROYAL_DRAUGR.get(), 2, 300,
-										0.5, 16, 700,true, false,
+										0.5, 16, 700, true, false,
 										32, false, true),
 								new EntityConfig.Minion(ModEntities.APTRGANGR.get(), 1, 350,
-										0.4, 16, 100,true, false,
+										0.4, 16, 100, true, false,
 										32, true, true)
 						)));
 
@@ -173,35 +169,31 @@ public class CataclysmData {
 
 	private static ItemStack getIgnisWeapon() {
 		ItemStack stack = ModItems.THE_INCINERATOR.get().getDefaultInstance();
-		stack.enchant(LCEnchantments.VOID_TOUCH.get(), 10);
-		stack.enchant(Enchantments.VANISHING_CURSE, 1);
-		stack.enchant(LHEnchantments.VANISH.get(), 1);
+		stack.enchant(LCEnchantments.VOID_TOUCH.datagenDirect(), 10);
+		stack.enchant(LHEnchantments.VANISH.datagenDirect(), 1);
 		return stack;
 	}
 
 	private static EntityConfig.ItemPool divinity(int lv) {
 		ItemStack stack = LHItems.RING_DIVINITY.asStack();
-		stack.enchant(Enchantments.VANISHING_CURSE, 1);
+		stack.enchant(LHEnchantments.VANISH.datagenDirect(), 1);
 		return EntityConfig.simplePool(lv, "curios/ring", stack);
 	}
 
 	private static EntityConfig.ItemPool breaker(int lv) {
 		ItemStack stack = LHItems.IMAGINE_BREAKER.asStack();
-		stack.enchant(Enchantments.VANISHING_CURSE, 1);
+		stack.enchant(LHEnchantments.VANISH.datagenDirect(), 1);
 		return EntityConfig.simplePool(lv, "curios/hands", stack);
 	}
 
 	public static void genSlot(CuriosDataProvider map) {
-		map.accept("l2hostility/curios/entities/l2hostility_cataclysm", new CurioEntityBuilder(
-				new ArrayList<>(List.of(
-						ModEntities.ENDER_GUARDIAN.getId(),
-						ModEntities.NETHERITE_MONSTROSITY.getId(),
-						ModEntities.IGNIS.getId(),
-						ModEntities.THE_HARBINGER.getId(),
-						ModEntities.THE_LEVIATHAN.getId()
-				)),
-				new ArrayList<>(List.of("ring", "hands")),
-				SlotCondition.of()
-		));
+		map.createEntities("l2hostility/curios/entities/l2hostility_cataclysm")
+				.addEntities(
+						ModEntities.ENDER_GUARDIAN.get(),
+						ModEntities.NETHERITE_MONSTROSITY.get(),
+						ModEntities.IGNIS.get(),
+						ModEntities.THE_HARBINGER.get(),
+						ModEntities.THE_LEVIATHAN.get()
+				).addSlots("ring", "hands");
 	}
 }

@@ -147,8 +147,7 @@ repositories {
         }
     }
     maven {
-        name = "OctoStudios"
-        url = uri("https://maven.octo-studios.com/releases")
+        url = "https://maven.theillusivec4.top/"
     }
     mavenLocal();
 }
@@ -180,10 +179,11 @@ dependencies {
     implementation "com.tterrag.registrate:Registrate:${registrate_version}"
     implementation "dev.xkmc:l2serial:${l2serial_ver}"
     implementation "dev.xkmc:l2modularblocks:${l2modularblocks_ver}"
-    implementation "dev.xkmc:l2core:${l2core_ver}"
     implementation "dev.xkmc:l2tabs:${l2tabs_ver}"
     implementation "dev.xkmc:l2menustacker:${l2menustacker_ver}"
     implementation "dev.xkmc:l2itemselector:${l2itemselector_ver}"
+
+    implementation jarJar(group: 'dev.xkmc', name: 'l2core', version: "[${l2core_ver},)")
 
     implementation jarJar(group: 'dev.xkmc', name: 'l2magic', version: "[${l2magic_ver},)")
     implementation jarJar(group: 'dev.xkmc', name: 'l2damagetracker', version: "[${l2damagetracker_ver},)")
@@ -217,6 +217,8 @@ dependencies {
     implementation "curse.maven:geckolib-388172:5763144"
     implementation "curse.maven:cloth-config-348521:5729127"
     implementation "curse.maven:the-twilight-forest-227639:5759335"
+    implementation "curse.maven:lionfish-api-1001614:6168249"
+    implementation "curse.maven:lendercataclysm-551586:6196331"
 
     dataImpl "curse.maven:mutant-monsters-852665:5742611"
     dataImpl "curse.maven:bosses-of-mass-destruction-forge-941573:6117186"

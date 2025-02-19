@@ -1,0 +1,111 @@
+{
+  "list": [
+    {
+      "asMaster": {
+        "maxTotalCount": 4,
+        "minions": [
+          {
+            "type": "cataclysm:koboleton",
+            "cooldown": 250,
+            "copyLevel": true,
+            "copyTrait": false,
+            "discardOnUnlink": true,
+            "linkDistance": 32.0,
+            "maxCount": 2,
+            "maxHealthPercentage": 0.8,
+            "minLevel": 0,
+            "protectMaster": false,
+            "spawnRange": 16
+          },
+          {
+            "type": "cataclysm:kobolediator",
+            "cooldown": 400,
+            "copyLevel": true,
+            "copyTrait": false,
+            "discardOnUnlink": true,
+            "linkDistance": 32.0,
+            "maxCount": 1,
+            "maxHealthPercentage": 0.6,
+            "minLevel": 300,
+            "protectMaster": true,
+            "spawnRange": 16
+          },
+          {
+            "type": "cataclysm:wadjet",
+            "cooldown": 400,
+            "copyLevel": true,
+            "copyTrait": false,
+            "discardOnUnlink": true,
+            "linkDistance": 32.0,
+            "maxCount": 1,
+            "maxHealthPercentage": 0.6,
+            "minLevel": 300,
+            "protectMaster": true,
+            "spawnRange": 16
+          }
+        ],
+        "spawnInterval": 80
+      },
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 50,
+        "min": 200,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": "cataclysm:ancient_remnant",
+      "items": [
+        {
+          "chance": 1.0,
+          "entries": [
+            {
+              "stack": {
+                "components": {
+                  "minecraft:enchantments": {
+                    "levels": {
+                      "l2hostility:vanish": 1
+                    }
+                  }
+                },
+                "count": 1,
+                "id": "l2hostility:ring_of_divinity"
+              },
+              "weight": 100
+            }
+          ],
+          "level": 600,
+          "slot": "curios/ring"
+        }
+      ],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [],
+      "traits": [
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:tank"
+        },
+        {
+          "free": 1,
+          "min": 1,
+          "trait": "l2hostility:reprint"
+        },
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:adaptive"
+        },
+        {
+          "free": 1,
+          "min": 0,
+          "trait": "l2hostility:master"
+        }
+      ]
+    }
+  ]
+}

@@ -2,11 +2,13 @@ package dev.xkmc.l2hostility.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.shadowsoffire.gateways.Gateways;
+import dev.xkmc.l2complements.init.registrate.LCEnchantments;
 import dev.xkmc.l2core.compat.patchouli.PatchouliHelper;
 import dev.xkmc.l2core.init.L2TagGen;
 import dev.xkmc.l2core.init.reg.simple.Reg;
 import dev.xkmc.l2core.serial.config.ConfigTypeEntry;
 import dev.xkmc.l2core.serial.config.PacketHandlerWithConfig;
+import dev.xkmc.l2core.serial.config.RegistrateNestedProvider;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
 import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.compat.gateway.GatewayToEternityCompat;
@@ -39,7 +41,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -79,15 +80,6 @@ public class L2Hostility {
 		TraitGLMProvider.register();
 		HostilityTriggers.register();
 
-		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
-		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
-		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LHTagGen::onBlockTagGen);
-		REGISTRATE.addDataGenerator(L2TagGen.ENCH_TAGS, LHTagGen::onEnchTagGen);
-		REGISTRATE.addDataGenerator(L2TagGen.EFF_TAGS, LHTagGen::onEffTagGen);
-		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, LHTagGen::onItemTagGen);
-		REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, LHTagGen::onEntityTagGen);
-		REGISTRATE.addDataGenerator(LHTraits.TRAIT_TAGS, LHTagGen::onTraitTagGen);
-		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
 
 		PATCHOULI.buildModel().buildShapelessRecipe(e -> e
 								.requires(Items.BOOK).requires(Items.ROTTEN_FLESH).requires(Items.BONE),
@@ -115,6 +107,17 @@ public class L2Hostility {
 
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void gatherData(GatherDataEvent event) {
+		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
+		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
+		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LHTagGen::onBlockTagGen);
+		REGISTRATE.addDataGenerator(L2TagGen.ENCH_TAGS, LHTagGen::onEnchTagGen);
+		REGISTRATE.addDataGenerator(L2TagGen.EFF_TAGS, LHTagGen::onEffTagGen);
+		REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, LHTagGen::onItemTagGen);
+		REGISTRATE.addDataGenerator(ProviderType.ENTITY_TAGS, LHTagGen::onEntityTagGen);
+		REGISTRATE.addDataGenerator(LHTraits.TRAIT_TAGS, LHTagGen::onTraitTagGen);
+		REGISTRATE.addDataGenerator(ProviderType.ADVANCEMENT, AdvGen::genAdvancements);
+		REGISTRATE.addDataGenerator(RegistrateNestedProvider.TYPE, pvd -> pvd.add(LHConfigGen::new));
+
 		boolean server = event.includeServer();
 		PackOutput output = event.getGenerator().getPackOutput();
 		var pvd = event.getLookupProvider();
@@ -124,11 +127,12 @@ public class L2Hostility {
 		gen.addProvider(server, new SlotGen(MODID, output, helper, pvd));
 		var init = REGISTRATE.getDataGenInitializer();
 		init.addDependency(ProviderType.RECIPE, ProviderType.DYNAMIC);
+		init.addDependency(RegistrateNestedProvider.TYPE, ProviderType.DYNAMIC);
+		LHEnchantments.DC.addParent(LCEnchantments.REG);
 		new LHDamageTypes().generate();
 		if (ModList.get().isLoaded(Gateways.MODID)) {
 			gen.addProvider(server, new GatewayConfigGen(gen));
 		}
-		gen.addProvider(server, new LHConfigGen(gen, pvd));
 	}
 
 	public static void toTrackingChunk(LevelChunk chunk, SerialPacketBase<?> packet) {

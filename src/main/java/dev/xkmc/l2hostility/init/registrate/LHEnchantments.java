@@ -12,7 +12,7 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 
 public class LHEnchantments {
 
-	private static final EnchReg DC = EnchReg.of(L2Hostility.REG, L2Hostility.REGISTRATE);
+	public static final EnchReg DC = EnchReg.of(L2Hostility.REG, L2Hostility.REGISTRATE);
 	public static final EnchVal INSULATOR, VANISH;
 
 	public static final EnchVal.Legacy<RemoveTraitEnchantment> SPLIT_SUPPRESS;

@@ -1,0 +1,52 @@
+{
+  "list": [
+    {
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 30,
+        "min": 100,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": "cataclysm:aptrgangr",
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "specialConditions": [],
+      "traits": [
+        {
+          "free": 2,
+          "min": 3,
+          "trait": "l2hostility:protection"
+        },
+        {
+          "free": 1,
+          "min": 2,
+          "trait": "l2hostility:cursed"
+        },
+        {
+          "condition": {
+            "chance": 0.5,
+            "lv": 200
+          },
+          "free": 1,
+          "min": 1,
+          "trait": "l2hostility:dispell"
+        },
+        {
+          "condition": {
+            "chance": 1.0,
+            "lv": 250
+          },
+          "free": 0,
+          "min": 1,
+          "trait": "l2hostility:adaptive"
+        }
+      ]
+    }
+  ]
+}
