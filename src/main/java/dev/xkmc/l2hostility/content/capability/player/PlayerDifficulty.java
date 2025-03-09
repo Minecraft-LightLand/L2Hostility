@@ -27,6 +27,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
+import net.minecraftforge.common.util.FakePlayer;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
@@ -124,6 +125,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public void addKillCredit(MobTraitCap cap) {
+		if (player instanceof FakePlayer) return;
 		double growFactor = 1;
 		for (var stack : CurseCurioItem.getFromPlayer(player)) {
 			growFactor *= stack.item().getGrowFactor(stack.stack(), this, cap);

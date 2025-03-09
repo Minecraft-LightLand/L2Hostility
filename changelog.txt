@@ -1,3 +1,7 @@
+2.5.3
+- Now Fake player cannot get hostility orbs nor increase player difficulty
+
+
 2.5.2
 - Fix Book of Omniscience shift use
 - Fix get player total level command
@@ -10,7 +14,6 @@
 2.5.0
 - Add KubeJS integration: allow adding custom traits, effect traits, and attribute traits
 - Add KubeJS integration: L2DamageTracker attack listener support
-
 
 2.4.35
 - Fix crash when pocket of restoration wants to put item inside an non-existing curios slot
