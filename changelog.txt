@@ -1,3 +1,7 @@
+3.0.4
+- Now Fake player cannot get hostility orbs nor increase player difficulty
+
+
 3.0.3
 - Restore Cataclysm integration
 - Ban Protective trait from bosses

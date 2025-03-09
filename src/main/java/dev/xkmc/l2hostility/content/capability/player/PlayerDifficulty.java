@@ -25,6 +25,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
+import net.neoforged.neoforge.common.util.FakePlayer;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
@@ -111,6 +112,7 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 	}
 
 	public void addKillCredit(ServerPlayer player, MobTraitCap cap) {
+		if (player instanceof FakePlayer) return;
 		double growFactor = 1;
 		for (var stack : CurseCurioItem.getFromPlayer(player)) {
 			growFactor *= stack.item().getGrowFactor(stack.stack(), this, cap);
