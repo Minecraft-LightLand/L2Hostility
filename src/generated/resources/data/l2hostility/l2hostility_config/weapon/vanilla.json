@@ -86,6 +86,7 @@
       "weight": 100
     }
   ],
+  "special_weapons": {},
   "weapon_enchantments": [
     {
       "chance": 0.5,

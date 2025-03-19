@@ -6,6 +6,7 @@ import dev.xkmc.l2archery.init.L2Archery;
 import dev.xkmc.l2archery.init.registrate.ArcheryItems;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
+import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2core.serial.config.ConfigDataProvider;
 import dev.xkmc.l2hostility.compat.data.BoMDData;
 import dev.xkmc.l2hostility.compat.data.CataclysmData;
@@ -22,7 +23,9 @@ import dev.xkmc.l2weaponry.init.registrate.LWItems;
 import fuzs.mutantmonsters.MutantMonsters;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -32,6 +35,7 @@ import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.neoforged.fml.ModList;
 import twilightforest.TwilightForestMod;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -166,6 +170,18 @@ public class LHConfigGen extends ConfigDataProvider {
 						LCEnchantments.SAFEGUARD.id()
 				)
 		);
+
+		{
+			var config = new WeaponConfig();
+			config.special_weapons.put(HolderSet.direct(e -> e.builtInRegistryHolder(),
+					EntityType.ZOMBIE, EntityType.HUSK, EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON, EntityType.ZOMBIFIED_PIGLIN
+			), new ArrayList<>(List.of(
+					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.SONIC_SHOOTER.asStack())), 150, 100),
+					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.WINTERSTORM_WAND.asStack())), 180, 80),
+					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.HELLFIRE_WAND.asStack())), 200, 50)
+			)));
+			collector.add(L2Hostility.WEAPON, ResourceLocation.fromNamespaceAndPath(L2Complements.MODID, "special"), config);
+		}
 
 
 		collector.add(L2Hostility.WEAPON, L2Weaponry.loc("weapons"), new WeaponConfig()

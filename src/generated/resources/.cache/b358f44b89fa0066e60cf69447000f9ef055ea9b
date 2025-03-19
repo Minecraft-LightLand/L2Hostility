@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-19T12:47:53.849054	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
+// 1.21.1	2025-03-19T22:12:52.532723	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -127,6 +127,7 @@ da1814522f2f88928d26e4b7e6b5c15c24e731b2 data/cataclysm/l2hostility_config/entit
 e28f2bcffbacea0d33f7e987406892312aed0c24 data/cataclysm/l2hostility_config/entity/the_harbinger.json
 7a1c367a597e5f6dd5821e0f6256309d12eecdcf data/cataclysm/l2hostility_config/entity/the_leviathan.json
 e562a76b82fc87657ec328661c6c14b38c84fa2b data/cataclysm/l2hostility_config/entity/wadjet.json
+6284c5f620aaa8f823f45f5f4494320de6b89d0b data/cataclysm/l2hostility_config/weapon/weapons.json
 7942255280f4ee1f25a76cfb178597324d566c77 data/curios/tags/item/back.json
 801a68ce0482049c4c2efe45f9de4366b8ff6691 data/curios/tags/item/charm.json
 6b3db265ef90a4cf6af5cc3775209c4a04a67c42 data/curios/tags/item/hands.json
@@ -139,8 +140,9 @@ bb6f94597a939d6ca78f8a82bb4aca546f1a8e7a data/gateways/advancement/recipes/misc/
 fbc89e1a1f80c810ee79683580eb344e355a07a4 data/gateways/l2hostility_config/entity/split.json
 0c6380b2ce1d7d5a306909f36c645c700d765314 data/gateways/recipe/hostility/growth.json
 69f221d9b45d1083e7bcdf7f753b775b7b97787b data/gateways/recipe/hostility/split.json
-62a6b0f73609abe8086e91730410149b9bc4a364 data/l2archery/l2hostility_config/weapon/bows.json
-6a51a0941d904aa236350039b200077ec2857600 data/l2complements/l2hostility_config/weapon/l2complements.json
+8d937419c400c1ea3999389ad6254f1ee94b54c0 data/l2archery/l2hostility_config/weapon/bows.json
+d1b5316adc1ba1266148bd74536e3212510b2cad data/l2complements/l2hostility_config/weapon/l2complements.json
+6d923114640713ae6da698ec759cdc89dd88360b data/l2complements/l2hostility_config/weapon/special.json
 4b9d05f8d5dca02f6cf4f92c3c35a1a94303ad10 data/l2complements/tags/mob_effect/skill_effect.json
 865b4b3f501fc3f54d9a654ae0f1cc2118346f6e data/l2hostility/advancement/burnt/hostility_essence.json
 53db2a68775994e813241e7b27d9cef235376bc3 data/l2hostility/advancement/hostility/abrahadabra.json
@@ -240,8 +242,8 @@ f689dd25a950129ab74c0b97ef73b815ee804470 data/l2hostility/enchantment/insulator.
 e4dadbaafcd6c7e604fd1582d06ceefe34ee382e data/l2hostility/l2hostility_config/difficulty/nether.json
 6ec8bf37d02af570ab69ee1435b3812433ccea32 data/l2hostility/l2hostility_config/difficulty/overworld.json
 00ef227246bbf99bcb58122388295a5190283651 data/l2hostility/l2hostility_config/entity/bosses.json
-0506bdf907561029963db2919e11912eda84e894 data/l2hostility/l2hostility_config/weapon/armors.json
-c2fbb22b2f67605766c473df982f83fe518a84d9 data/l2hostility/l2hostility_config/weapon/vanilla.json
+7412b23bd886a347851c4b618b2d50be2c3475c6 data/l2hostility/l2hostility_config/weapon/armors.json
+a589f5707aa988795734558eb786e50db0627546 data/l2hostility/l2hostility_config/weapon/vanilla.json
 72ad1584c30645b03e0f4d88e8bd7df9b1b0bde6 data/l2hostility/loot_table/blocks/chaos_block.json
 200e7ea29344866c307f1b637e382ad287a95c58 data/l2hostility/loot_table/blocks/hostility_beacon.json
 e03c87788865e847130c7b79b3808e7b7b41742a data/l2hostility/loot_table/blocks/hostility_spawner.json
@@ -406,7 +408,7 @@ c11704257529150719574fe8070c7fca05bf7f04 data/l2hostility/tags/item/no_seal.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
 d43d210ad5e087b02e96faecf8afa3f0ef47444e data/l2tabs/data_maps/l2tabs/tab/icon.json
 31ba5cac840af21246ac661d322294b7ac69c671 data/l2tabs/data_maps/l2tabs/tab/order.json
-c1ea6a25a6f15febf17af6659355d6412ae3a145 data/l2weaponry/l2hostility_config/weapon/weapons.json
+bff31230b5ee66358421414dc1689d38bbaa9594 data/l2weaponry/l2hostility_config/weapon/weapons.json
 ae3272ea9c6f244c79f6192ef5e9f1d387c45909 data/minecraft/tags/block/beacon_base_blocks.json
 65da76b3a96d076426cc78810d00296dfd0b5679 data/minecraft/tags/block/mineable/pickaxe.json
 6a70fe0b66cbb6fbf8cd0870ea1ad350fae1bf08 data/minecraft/tags/block/needs_diamond_tool.json

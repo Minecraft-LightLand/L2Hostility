@@ -1,0 +1,199 @@
+{
+  "armor_enchantments": [],
+  "armors": [],
+  "melee_weapons": [],
+  "ranged_weapons": [],
+  "special_weapons": [
+    {
+      "_key": [
+        "minecraft:skeleton",
+        "minecraft:stray",
+        "minecraft:wither_skeleton"
+      ],
+      "_val": [
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_maledictus"
+            ]
+          },
+          "level": 130,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:cursed_bow"
+            }
+          ],
+          "weight": 80
+        },
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_harbinger"
+            ]
+          },
+          "level": 160,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:laser_gatling"
+            }
+          ],
+          "weight": 60
+        },
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_harbinger"
+            ]
+          },
+          "level": 190,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:wither_assault_shoulder_weapon"
+            }
+          ],
+          "weight": 40
+        },
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_remnant",
+              "cataclysm:kill_maledictus"
+            ]
+          },
+          "level": 220,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:wrath_of_the_desert"
+            }
+          ],
+          "weight": 40
+        },
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_harbinger",
+              "cataclysm:kill_ender_golem"
+            ]
+          },
+          "level": 250,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:void_assault_shoulder_weapon"
+            }
+          ],
+          "weight": 20
+        }
+      ]
+    },
+    {
+      "_key": [
+        "minecraft:zombie",
+        "minecraft:drowned",
+        "minecraft:husk",
+        "minecraft:vindicator",
+        "minecraft:zombified_piglin",
+        "minecraft:wither_skeleton"
+      ],
+      "_val": [
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:find_cursed_pyramid"
+            ]
+          },
+          "level": 130,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:ancient_spear"
+            }
+          ],
+          "weight": 60
+        },
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_monstrosity"
+            ]
+          },
+          "level": 160,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:infernal_forge"
+            }
+          ],
+          "weight": 40
+        },
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_harbinger"
+            ]
+          },
+          "level": 190,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:meat_shredder"
+            }
+          ],
+          "weight": 40
+        },
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_maledictus"
+            ]
+          },
+          "level": 190,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:soul_render"
+            }
+          ],
+          "weight": 40
+        },
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_ender_guardian",
+              "cataclysm:kill_remnant"
+            ]
+          },
+          "level": 220,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:gauntlet_of_maelstrom"
+            }
+          ],
+          "weight": 20
+        },
+        {
+          "condition": {
+            "advancements": [
+              "cataclysm:kill_monstrosity",
+              "cataclysm:kill_ender_golem"
+            ]
+          },
+          "level": 250,
+          "stack": [
+            {
+              "count": 1,
+              "id": "cataclysm:void_forge"
+            }
+          ],
+          "weight": 20
+        }
+      ]
+    }
+  ],
+  "weapon_enchantments": []
+}

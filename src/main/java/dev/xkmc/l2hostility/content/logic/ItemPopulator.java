@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.logic;
 
+import dev.shadowsoffire.apotheosis.Apoth;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
@@ -11,6 +12,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -22,17 +24,21 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class ItemPopulator {
 
 	static void populateArmors(LivingEntity le, int lv) {
+		if (isApothBoss(le)) return;
 		var r = le.getRandom();
+		ServerPlayer sp = PlayerFinder.getNearestPlayer(le.level(), le) instanceof ServerPlayer player ? player : null;
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			if (slot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
 				if (le.getItemBySlot(slot).isEmpty()) {
-					ItemStack stack = WeaponConfig.getRandomArmor(slot, lv, r);
+					ItemStack stack = WeaponConfig.getRandomArmor(slot, lv, r, sp);
 					if (!stack.isEmpty()) {
 						le.setItemSlot(slot, stack);
 						if (le instanceof Mob mob) {
@@ -44,7 +50,8 @@ public class ItemPopulator {
 		}
 	}
 
-	static void populateWeapons(LivingEntity le, MobTraitCap cap, RandomSource r) {
+	static void populateWeapons(LivingEntity le, MobTraitCap cap, RandomSource r, @Nullable ServerPlayer sp) {
+		if (isApothBoss(le) || isApothWeapon(le.getMainHandItem())) return;
 		if (le instanceof Drowned && le.getMainHandItem().isEmpty()) {
 			double factor = cap.getLevel() * LHConfig.SERVER.drownedTridentChancePerLevel.get();
 			if (factor > le.getRandom().nextDouble()) {
@@ -53,7 +60,7 @@ public class ItemPopulator {
 		}
 		if (le.getType().is(LHTagGen.MELEE_WEAPON_TARGET)) {
 			if (le.getMainHandItem().isEmpty()) {
-				ItemStack stack = WeaponConfig.getRandomMeleeWeapon(cap.getLevel(), r);
+				ItemStack stack = WeaponConfig.getRandomMeleeWeapon(cap.getLevel(), r, sp);
 				if (!stack.isEmpty()) {
 					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
 					if (le instanceof Mob mob) {
@@ -63,7 +70,7 @@ public class ItemPopulator {
 			}
 		}
 		if (le.getType().is(LHTagGen.RANGED_WEAPON_TARGET)) {
-			ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r);
+			ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r, sp);
 			if (!stack.isEmpty()) {
 				le.setItemSlot(EquipmentSlot.MAINHAND, stack);
 				if (le instanceof Mob mob) {
@@ -71,16 +78,26 @@ public class ItemPopulator {
 				}
 			}
 		}
+		ArrayList<WeaponConfig.ItemConfig> list = new ArrayList<>();
 		for (var ent : L2Hostility.WEAPON.getMerged().special_weapons.entrySet()) {
 			if (le.getType().is(ent.getKey())) {
-				ItemStack stack = WeaponConfig.getRandomWeapon(ent.getValue(), cap.getLevel(), le.getRandom());
-				if (!stack.isEmpty()) {
-					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
-					if (le instanceof Mob mob) {
-						mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.SERVER.equipmentDropRate.get().floatValue());
+				for (var e : ent.getValue()) {
+					boolean nonEmpty = false;
+					for (var stack : e.stack()) {
+						nonEmpty |= !stack.isEmpty();
 					}
+					if (!nonEmpty) continue;
+					list.add(e);
 				}
 			}
+		}
+		if (list.isEmpty()) return;
+		list.add(WeaponConfig.ItemConfig.EMPTY);
+		ItemStack stack = WeaponConfig.getRandomWeapon(list, cap.getLevel(), le.getRandom(), sp);
+		if (stack.isEmpty()) return;
+		le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+		if (le instanceof Mob mob) {
+			mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.SERVER.equipmentDropRate.get().floatValue());
 		}
 	}
 
@@ -104,6 +121,7 @@ public class ItemPopulator {
 	}
 
 	public static void fillEnch(RegistryAccess access, int level, RandomSource source, ItemStack stack, EquipmentSlot slot) {
+		if (isApothWeapon(stack)) return;
 		var config = L2Hostility.WEAPON.getMerged();
 		if (slot == EquipmentSlot.OFFHAND) return;
 		var list = slot == EquipmentSlot.MAINHAND ?
@@ -137,9 +155,10 @@ public class ItemPopulator {
 	}
 
 	public static void postFill(MobTraitCap cap, LivingEntity le) {
+		ServerPlayer sp = PlayerFinder.getNearestPlayer(le.level(), le) instanceof ServerPlayer player ? player : null;
 		// add weapon
 		RandomSource r = le.getRandom();
-		populateWeapons(le, cap, r);
+		populateWeapons(le, cap, r, sp);
 		// enchant
 		for (var e : EquipmentSlot.values()) {
 			ItemStack stack = le.getItemBySlot(e);
@@ -155,4 +174,14 @@ public class ItemPopulator {
 			}
 		}
 	}
+
+
+	private static boolean isApothBoss(LivingEntity mob) {
+		return mob.getPersistentData().getBoolean("apoth.boss");
+	}
+
+	private static boolean isApothWeapon(ItemStack stack) {
+		return stack.getOrDefault(Apoth.Components.FROM_BOSS, false);
+	}
+
 }

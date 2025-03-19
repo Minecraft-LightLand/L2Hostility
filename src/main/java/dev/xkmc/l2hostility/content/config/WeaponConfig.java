@@ -3,12 +3,14 @@ package dev.xkmc.l2hostility.content.config;
 import dev.xkmc.l2core.serial.config.BaseConfig;
 import dev.xkmc.l2core.serial.config.CollectType;
 import dev.xkmc.l2core.serial.config.ConfigCollect;
+import dev.xkmc.l2core.serial.configval.BooleanValueCondition;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.core.HolderSet;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,6 +18,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -25,26 +28,26 @@ import java.util.stream.Stream;
 @SerialClass
 public class WeaponConfig extends BaseConfig {
 
-	public static ItemStack getRandomMeleeWeapon(int level, RandomSource r) {
+	public static ItemStack getRandomMeleeWeapon(int level, RandomSource r, @Nullable ServerPlayer player) {
 		WeaponConfig config = L2Hostility.WEAPON.getMerged();
-		return getRandomWeapon(config.melee_weapons, level, r);
+		return getRandomWeapon(config.melee_weapons, level, r, player);
 	}
 
-	public static ItemStack getRandomArmor(EquipmentSlot slot, int level, RandomSource r) {
+	public static ItemStack getRandomArmor(EquipmentSlot slot, int level, RandomSource r, @Nullable ServerPlayer player) {
 		WeaponConfig config = L2Hostility.WEAPON.getMerged();
-		return getRandomArmors(slot, config.armors, level, r);
+		return getRandomArmors(slot, config.armors, level, r, player);
 	}
 
-	public static ItemStack getRandomRangedWeapon(int level, RandomSource r) {
+	public static ItemStack getRandomRangedWeapon(int level, RandomSource r, @Nullable ServerPlayer player) {
 		WeaponConfig config = L2Hostility.WEAPON.getMerged();
-		return getRandomWeapon(config.ranged_weapons, level, r);
+		return getRandomWeapon(config.ranged_weapons, level, r, player);
 	}
 
-	public static ItemStack getRandomWeapon(ArrayList<ItemConfig> entries, int level, RandomSource r) {
+	public static ItemStack getRandomWeapon(ArrayList<ItemConfig> entries, int level, RandomSource r, @Nullable ServerPlayer player) {
 		int total = 0;
 		List<ItemConfig> list = new ArrayList<>();
 		for (var e : entries) {
-			if (e.level <= level) {
+			if (e.test(level, player)) {
 				list.add(e);
 				total += e.weight();
 			}
@@ -61,11 +64,11 @@ public class WeaponConfig extends BaseConfig {
 		return ItemStack.EMPTY;
 	}
 
-	private static ItemStack getRandomArmors(EquipmentSlot slot, ArrayList<ItemConfig> entries, int level, RandomSource r) {
+	private static ItemStack getRandomArmors(EquipmentSlot slot, ArrayList<ItemConfig> entries, int level, RandomSource r, @Nullable ServerPlayer player) {
 		int total = 0;
 		List<ItemConfig> list = new ArrayList<>();
 		for (var e : entries) {
-			if (e.level > level) continue;
+			if (!e.test(level, player)) continue;
 			ArrayList<ItemStack> sub = new ArrayList<>();
 			for (var item : e.stack) {
 				if (item.isEmpty() ||
@@ -156,7 +159,47 @@ public class WeaponConfig extends BaseConfig {
 		return this;
 	}
 
-	public record ItemConfig(ArrayList<ItemStack> stack, int level, int weight) {
+
+	public record ItemConfig(ArrayList<ItemStack> stack, int level, int weight,
+							 @Nullable ItemCondition condition) {
+
+		public static final ItemConfig EMPTY = new WeaponConfig.ItemConfig(new ArrayList<>(List.of(ItemStack.EMPTY)), 0, 1000);
+
+		public ItemConfig(ArrayList<ItemStack> stack, int level, int weight) {
+			this(stack, level, weight, null);
+		}
+
+		public boolean test(int lv, @Nullable ServerPlayer player) {
+			if (lv < level()) return false;
+			return condition == null || condition.test(player);
+		}
+	}
+
+	public record ItemCondition(
+			ArrayList<ResourceLocation> advancements,
+			@Nullable BooleanValueCondition config
+	) {
+
+		public boolean test(@Nullable ServerPlayer sp) {
+			if (config != null) {
+				if (!config.test(null)) {
+					return false;
+				}
+			}
+			if (!advancements.isEmpty()) {
+				if (sp == null) return false;
+				var server = sp.level().getServer();
+				if (server == null) return false;
+				var manager = server.getAdvancements();
+				var spAdv = sp.getAdvancements();
+				for (var e : advancements) {
+					var adv = manager.get(e);
+					if (adv == null) return false;
+					if (!spAdv.getOrStartProgress(adv).isDone()) return false;
+				}
+			}
+			return true;
+		}
 
 	}
 

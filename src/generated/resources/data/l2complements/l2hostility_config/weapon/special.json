@@ -1,0 +1,51 @@
+{
+  "armor_enchantments": [],
+  "armors": [],
+  "melee_weapons": [],
+  "ranged_weapons": [],
+  "special_weapons": [
+    {
+      "_key": [
+        "minecraft:zombie",
+        "minecraft:husk",
+        "minecraft:skeleton",
+        "minecraft:stray",
+        "minecraft:wither_skeleton",
+        "minecraft:zombified_piglin"
+      ],
+      "_val": [
+        {
+          "level": 150,
+          "stack": [
+            {
+              "count": 1,
+              "id": "l2complements:sonic_shooter"
+            }
+          ],
+          "weight": 100
+        },
+        {
+          "level": 180,
+          "stack": [
+            {
+              "count": 1,
+              "id": "l2complements:winterstorm_wand"
+            }
+          ],
+          "weight": 80
+        },
+        {
+          "level": 200,
+          "stack": [
+            {
+              "count": 1,
+              "id": "l2complements:hellfire_wand"
+            }
+          ],
+          "weight": 50
+        }
+      ]
+    }
+  ],
+  "weapon_enchantments": []
+}
