@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.init.data;
 
-import dev.xkmc.l2complements.init.data.DamageTypeGen;
 import dev.xkmc.l2damagetracker.contents.damage.DamageTypeRoot;
 import dev.xkmc.l2damagetracker.contents.damage.DamageTypeWrapper;
 import dev.xkmc.l2damagetracker.contents.damage.DamageWrapperTagProvider;
@@ -17,10 +16,8 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageScaling;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.data.ExistingFileHelper;
 

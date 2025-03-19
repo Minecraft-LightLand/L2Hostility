@@ -9,7 +9,10 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHEffects;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
+import dev.xkmc.mob_weapon_api.example.vanilla.VanillaMobManager;
+import dev.xkmc.mob_weapon_api.init.MobWeaponAPI;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -50,10 +53,15 @@ public class MiscHandlers {
 
 	@SubscribeEvent
 	public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
-		if (event.getEntity() instanceof ItemEntity ie) {
+		var e = event.getEntity();
+		if (e instanceof ItemEntity ie) {
 			if (ie.getItem().getEnchantmentLevel(LHEnchantments.VANISH.get()) > 0) {
 				event.setCanceled(true);
 			}
+		}
+		if (e instanceof PathfinderMob mob && e.getTags().contains(MobWeaponAPI.MODID + "_applied")) {
+			ItemStack stack = mob.getMainHandItem();
+			VanillaMobManager.attachGoal(mob, stack);
 		}
 	}
 

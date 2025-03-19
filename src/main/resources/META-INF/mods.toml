@@ -44,4 +44,9 @@ description='''
     mandatory=true
     versionRange="[1.20.1-81-FORGE,)"
     side="BOTH"
+[[dependencies.l2hostility]]
+    modId="cataclysm"
+    mandatory=false
+    versionRange="[2.02,)"
+    side="BOTH"
 

@@ -34,7 +34,7 @@ public abstract class AbstractTraitBuilder<T extends AbstractTraitBuilder<T>> ex
 
 	@Override
 	public RegistryInfo<MobTrait> getRegistryType() {
-		return LHKJSPlugin.TRAITS;
+		return LHKJSPlugin.TRAITS.get();
 	}
 
 	@Override

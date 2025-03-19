@@ -7,29 +7,36 @@ import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.mob_weapon_api.example.vanilla.VanillaMobManager;
+import dev.xkmc.mob_weapon_api.init.MobWeaponAPI;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class ItemPopulator {
 
-	static void populateArmors(LivingEntity le, int lv) {
+	static void populateArmors(LivingEntity le, int lv, @Nullable ServerPlayer sp) {
+		if (isApothBoss(le)) return;
 		var r = le.getRandom();
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			if (slot.getType() == EquipmentSlot.Type.ARMOR) {
 				if (le.getItemBySlot(slot).isEmpty()) {
-					ItemStack stack = WeaponConfig.getRandomArmor(slot, lv, r);
+					ItemStack stack = WeaponConfig.getRandomArmor(slot, lv, r, sp);
 					if (!stack.isEmpty()) {
 						le.setItemSlot(slot, stack);
 						if (le instanceof Mob mob) {
@@ -41,27 +48,49 @@ public class ItemPopulator {
 		}
 	}
 
-	static void populateWeapons(LivingEntity le, MobTraitCap cap, RandomSource r) {
-		var manager = ForgeRegistries.ITEMS.tags();
-		if (manager == null) return;
+	static void populateWeapons(LivingEntity le, MobTraitCap cap, RandomSource r, @Nullable ServerPlayer sp) {
+		if (isApothBoss(le) || isApothWeapon(le.getMainHandItem())) return;
+		populateSimpleWeapons(le, cap, r, sp);
+		ArrayList<WeaponConfig.ItemConfig> list = new ArrayList<>();
+		for (var ent : L2Hostility.WEAPON.getMerged().special_weapons.entrySet()) {
+			if (ent.getKey().contains(le.getType())) {
+				list.addAll(ent.getValue());
+			}
+		}
+		if (list.isEmpty()) return;
+		ItemStack stack = WeaponConfig.getRandomWeapon(list, cap.getLevel(), le.getRandom(), sp);
+		if (stack.isEmpty()) return;
+		le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+		if (le instanceof PathfinderMob e && VanillaMobManager.attachGoal(e, stack)) {
+			e.addTag(MobWeaponAPI.MODID + "_applied");
+		}
+		if (le instanceof Mob mob) {
+			mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.COMMON.equipmentDropRate.get().floatValue());
+		}
+	}
+
+	static void populateSimpleWeapons(LivingEntity le, MobTraitCap cap, RandomSource r, @Nullable ServerPlayer sp) {
 		if (le instanceof Drowned && le.getMainHandItem().isEmpty()) {
 			double factor = cap.getLevel() * LHConfig.COMMON.drownedTridentChancePerLevel.get();
 			if (factor > le.getRandom().nextDouble()) {
 				le.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.TRIDENT));
+				return;
 			}
 		}
 		if (le.getType().is(LHTagGen.MELEE_WEAPON_TARGET)) {
 			if (le.getMainHandItem().isEmpty()) {
-				ItemStack stack = WeaponConfig.getRandomMeleeWeapon(cap.getLevel(), r);
+				ItemStack stack = WeaponConfig.getRandomMeleeWeapon(cap.getLevel(), r, sp);
 				if (!stack.isEmpty()) {
 					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
 					if (le instanceof Mob mob) {
 						mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.COMMON.equipmentDropRate.get().floatValue());
+						return;
 					}
 				}
 			}
-		} else if (le.getType().is(LHTagGen.RANGED_WEAPON_TARGET)) {
-			ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r);
+		}
+		if (le.getType().is(LHTagGen.RANGED_WEAPON_TARGET)) {
+			ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r, sp);
 			if (!stack.isEmpty()) {
 				le.setItemSlot(EquipmentSlot.MAINHAND, stack);
 				if (le instanceof Mob mob) {
@@ -91,6 +120,7 @@ public class ItemPopulator {
 	}
 
 	public static void fillEnch(int level, RandomSource source, ItemStack stack, EquipmentSlot slot) {
+		if (isApothWeapon(stack)) return;
 		var config = L2Hostility.WEAPON.getMerged();
 		if (slot == EquipmentSlot.OFFHAND) return;
 		var list = slot == EquipmentSlot.MAINHAND ?
@@ -123,9 +153,10 @@ public class ItemPopulator {
 	}
 
 	public static void postFill(MobTraitCap cap, LivingEntity le) {
+		ServerPlayer sp = PlayerFinder.getNearestPlayer(le.level(), le) instanceof ServerPlayer player ? player : null;
 		// add weapon
 		RandomSource r = le.getRandom();
-		populateWeapons(le, cap, r);
+		populateWeapons(le, cap, r, sp);
 		// enchant
 		for (var e : EquipmentSlot.values()) {
 			ItemStack stack = le.getItemBySlot(e);
@@ -147,4 +178,47 @@ public class ItemPopulator {
 			}
 		}
 	}
+
+	private static boolean isApothBoss(LivingEntity mob) {
+		return mob.getPersistentData().getBoolean("apoth.boss");
+	}
+
+	private static boolean isApothWeapon(ItemStack stack) {
+		var tag = stack.getTag();
+		return tag != null && tag.getBoolean("apoth_boss");
+	}
+
+
+	public static Populated getRandomWeapon(ArrayList<Populator> entries, int level, RandomSource r, @Nullable ServerPlayer player) {
+		int total = 0;
+		List<Populator> list = new ArrayList<>();
+		for (var e : entries) {
+			if (e.config().test(level, player)) {
+				list.add(e);
+				total += e.config().weight();
+			}
+		}
+		if (total == 0)
+			return Populated.EMPTY;
+		int val = r.nextInt(total);
+		for (var e : list) {
+			val -= e.config().weight();
+			if (val <= 0) {
+				var stacks = e.config.stack();
+				ItemStack ans = stacks.get(r.nextInt(stacks.size())).copy();
+				return new Populated(e.special, ans);
+			}
+		}
+		return Populated.EMPTY;
+	}
+
+
+	public record Populator(boolean special, WeaponConfig.ItemConfig config) {
+	}
+
+	public record Populated(boolean special, ItemStack stack) {
+
+		public static final Populated EMPTY = new Populated(false, ItemStack.EMPTY);
+	}
+
 }

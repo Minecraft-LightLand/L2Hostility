@@ -5,6 +5,7 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2library.util.math.MathHelper;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -50,7 +51,7 @@ public class TraitManager {
 		}
 		// armor
 		if (le.getType().is(LHTagGen.ARMOR_TARGET)) {
-			ItemPopulator.populateArmors(le, lv);
+			ItemPopulator.populateArmors(le, lv, PlayerFinder.getNearestPlayer(le.level(), le) instanceof ServerPlayer sp ? sp : null);
 		}
 		// add traits
 

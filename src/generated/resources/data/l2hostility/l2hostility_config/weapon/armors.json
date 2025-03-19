@@ -145,5 +145,6 @@
   ],
   "melee_weapons": [],
   "ranged_weapons": [],
+  "special_weapons": {},
   "weapon_enchantments": []
 }

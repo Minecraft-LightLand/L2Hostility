@@ -31,6 +31,8 @@ if (lljij.toBoolean()) jarJar.enable()
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+
+
 minecraft {
     //mappings channel: 'parchment', version: '1.19.3-2023.03.12-1.19.4'
     mappings channel: 'official', version: "${minecraft_version}"
@@ -212,6 +214,11 @@ dependencies {
         jarJar.ranged(it, "[0.4.1,)")
     }
 
+    implementation(jarJar(fg.deobf("dev.xkmc.mob_weapon_api:mob_weapon_api:0.2.3"))) {
+        transitive = false
+        jarJar.ranged(it, "[0.2.3,)")
+    }
+
     implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.3.3")
     implementation fg.deobf("dev.xkmc.l2weaponry:l2weaponry:2.4.26")
     implementation fg.deobf("dev.xkmc.l2archery:l2archery:2.4.13")
@@ -243,8 +250,8 @@ dependencies {
     implementation fg.deobf("curse.maven:geckolib-388172:5188427")
     implementation fg.deobf("curse.maven:placebo-283644:5098182")
     implementation fg.deobf("curse.maven:apothic-attributes-898963:5209162")
-    implementation fg.deobf("curse.maven:lionfish-api-1001614:5363774")
-    implementation fg.deobf("curse.maven:lendercataclysm-551586:5785769")
+    implementation fg.deobf("curse.maven:lionfish-api-1001614:5922047")
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:6208724")
 
     implementation fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")
     implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5037783")
@@ -256,15 +263,17 @@ dependencies {
     implementation fg.deobf("curse.maven:puzzles-lib-495476:5330447")
     implementation fg.deobf("curse.maven:mutant-monsters-852665:5107399")
     implementation fg.deobf("curse.maven:mowzies-mobs-250498:5372378")
-
+    implementation fg.deobf("curse.maven:caelus-308989:5281700")
+    compileOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
+    compileOnly fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:6054196")
 
     //runtimeOnly fg.deobf("curse.maven:lightmans-currency-472521:4813507")
     //runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:4581240")
 
-    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
+    compileOnly fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 
     // these two are unfortunately needed since fg.deobf doesn't respect transitive dependencies yet
-    implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
+    compileOnly fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
     implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 
 }
