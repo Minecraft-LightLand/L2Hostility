@@ -184,7 +184,6 @@ public class CataclysmData {
 			config.special_weapons.put(new LinkedHashSet<>(List.of(
 					EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON
 			)), new ArrayList<>(List.of(
-					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(ItemStack.EMPTY)), 0, 1000),
 					weapon(130, 80, ModItems.CURSED_BOW.get(), adv("kill_maledictus")),
 					weapon(160, 60, ModItems.LASER_GATLING.get(), adv("kill_harbinger")),
 					weapon(190, 40, ModItems.WITHER_ASSULT_SHOULDER_WEAPON.get(), adv("kill_harbinger")),
@@ -193,10 +192,9 @@ public class CataclysmData {
 			)));
 
 			config.special_weapons.put(new LinkedHashSet<>(List.of(
-					EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.VINDICATOR,
+					EntityType.ZOMBIE, EntityType.HUSK, EntityType.VINDICATOR,
 					EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER_SKELETON
 			)), new ArrayList<>(List.of(
-					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(ItemStack.EMPTY)), 0, 1000),
 					weapon(130, 60, ModItems.ANCIENT_SPEAR.get(), adv("find_cursed_pyramid")),
 					weapon(160, 40, ModItems.INFERNAL_FORGE.get(), adv("kill_monstrosity")),
 					weapon(190, 40, ModItems.MEAT_SHREDDER.get(), adv("kill_harbinger")),

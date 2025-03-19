@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-19T18:09:06.131173	L2Hostility Config
+// 1.20.1	2025-03-19T22:09:52.12243	L2Hostility Config
 9059b62ff65004c883f0d8b916590a2300ae2f33 data/bosses_of_mass_destruction/l2hostility_config/entity/gauntlet.json
 b86954d7747fd3123f6454bc48b01d91b0a5473e data/bosses_of_mass_destruction/l2hostility_config/entity/lich.json
 deda166dabb3a91593d0dd21194a86df792d2c05 data/bosses_of_mass_destruction/l2hostility_config/entity/obsidilith.json
@@ -19,7 +19,7 @@ d692686ca98fb4f60f22851f4cf884c09439b9b9 data/cataclysm/l2hostility_config/entit
 948d01a965ea99b7ecc485914fd86154861ebc57 data/cataclysm/l2hostility_config/entity/the_harbinger.json
 bbf13edecc8b213dfd7d610ae5447d773c30012e data/cataclysm/l2hostility_config/entity/the_leviathan.json
 0f4c70a0a19b656754256f1c510a6d8543c5d55f data/cataclysm/l2hostility_config/entity/wadjet.json
-242e22b3af0b68e0396caa99d5b4d9db3a6fd3b6 data/cataclysm/l2hostility_config/weapon/weapons.json
+3ec2c69904e01db74e4d6e0821f567a42495af21 data/cataclysm/l2hostility_config/weapon/weapons.json
 41fe41d0b884a92425f1e4f0f4a595cdeff8db9f data/gateways/l2hostility_config/entity/growth.json
 fbc89e1a1f80c810ee79683580eb344e355a07a4 data/gateways/l2hostility_config/entity/split.json
 1e640dc48c2867eb18ede832036decbcbe58f1ee data/iceandfire/l2hostility_config/entity/fire_dragon.json
@@ -29,6 +29,7 @@ f8b5d6f0f7529920e27c6dfdaea5334a51bec8dc data/iceandfire/l2hostility_config/enti
 aca89a533b9198294bca79fd73059a174ab4108c data/iceandfire/l2hostility_config/entity/siren.json
 2cb753b28bdf422f65b138ea120e881f0979bd6c data/l2archery/l2hostility_config/weapon/bows.json
 4299b86ed20b744b9b4e2b487663174c9ea611fa data/l2complements/l2hostility_config/weapon/l2complements.json
+746685998df1d93fb9c0631c16274d1c91665799 data/l2complements/l2hostility_config/weapon/special.json
 cc60113e53b38f8ea4dbd7b841f48d9676e7d21e data/l2hostility/l2damagetracker_config/armor/equipments.json
 4d831711246039888000af371b45550c22560cf2 data/l2hostility/l2hostility_config/difficulty/end.json
 f486393cfaddd2b07dab42b6ffd1d285a527d985 data/l2hostility/l2hostility_config/difficulty/nether.json

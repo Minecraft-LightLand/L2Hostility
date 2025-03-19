@@ -155,6 +155,8 @@ public class WeaponConfig extends BaseConfig {
 	public record ItemConfig(ArrayList<ItemStack> stack, int level, int weight,
 							 @Nullable ItemCondition condition) {
 
+		public static final ItemConfig EMPTY = new WeaponConfig.ItemConfig(new ArrayList<>(List.of(ItemStack.EMPTY)), 0, 1000);
+
 		public ItemConfig(ArrayList<ItemStack> stack, int level, int weight) {
 			this(stack, level, weight, null);
 		}

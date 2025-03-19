@@ -8,6 +8,7 @@ import dev.xkmc.l2archery.init.L2Archery;
 import dev.xkmc.l2archery.init.registrate.ArcheryItems;
 import dev.xkmc.l2complements.init.L2Complements;
 import dev.xkmc.l2complements.init.registrate.LCEnchantments;
+import dev.xkmc.l2complements.init.registrate.LCItems;
 import dev.xkmc.l2damagetracker.init.L2DamageTracker;
 import dev.xkmc.l2damagetracker.init.data.ArmorEffectConfig;
 import dev.xkmc.l2hostility.compat.data.*;
@@ -36,6 +37,8 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import twilightforest.TwilightForestMod;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public class LHConfigGen extends ConfigDataProvider {
@@ -175,7 +178,17 @@ public class LHConfigGen extends ConfigDataProvider {
 						LCEnchantments.SAFEGUARD.get()
 				)
 		);
-
+		{
+			var config = new WeaponConfig();
+			config.special_weapons.put(new LinkedHashSet<>(List.of(
+					EntityType.ZOMBIE, EntityType.HUSK, EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON, EntityType.ZOMBIFIED_PIGLIN
+			)), new ArrayList<>(List.of(
+					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.SONIC_SHOOTER.asStack())), 150, 100),
+					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.WINTERSTORM_WAND.asStack())), 180, 80),
+					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.HELLFIRE_WAND.asStack())), 200, 50)
+			)));
+			collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Complements.MODID, "special"), config);
+		}
 
 		collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Weaponry.MODID, "weapons"), new WeaponConfig()
 				.putMeleeWeapon(200, 10,

@@ -12,13 +12,6 @@
       ],
       "_val": [
         {
-          "level": 0,
-          "stack": [
-            null
-          ],
-          "weight": 1000
-        },
-        {
           "condition": {
             "advancements": [
               "cataclysm:kill_maledictus"
@@ -96,20 +89,12 @@
     {
       "_key": [
         "minecraft:zombie",
-        "minecraft:drowned",
         "minecraft:husk",
         "minecraft:vindicator",
         "minecraft:zombified_piglin",
         "minecraft:wither_skeleton"
       ],
       "_val": [
-        {
-          "level": 0,
-          "stack": [
-            null
-          ],
-          "weight": 1000
-        },
         {
           "condition": {
             "advancements": [

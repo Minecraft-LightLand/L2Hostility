@@ -53,10 +53,18 @@ public class ItemPopulator {
 		ArrayList<WeaponConfig.ItemConfig> list = new ArrayList<>();
 		for (var ent : L2Hostility.WEAPON.getMerged().special_weapons.entrySet()) {
 			if (ent.getKey().contains(le.getType())) {
-				list.addAll(ent.getValue());
+				for (var e : ent.getValue()) {
+					boolean nonEmpty = false;
+					for (var stack : e.stack()) {
+						nonEmpty |= !stack.isEmpty();
+					}
+					if (!nonEmpty) continue;
+					list.add(e);
+				}
 			}
 		}
 		if (list.isEmpty()) return;
+		list.add(WeaponConfig.ItemConfig.EMPTY);
 		ItemStack stack = WeaponConfig.getRandomWeapon(list, cap.getLevel(), le.getRandom(), sp);
 		if (stack.isEmpty()) return;
 		le.setItemSlot(EquipmentSlot.MAINHAND, stack);
