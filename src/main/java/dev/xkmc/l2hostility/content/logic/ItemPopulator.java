@@ -25,7 +25,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class ItemPopulator {
@@ -186,39 +185,6 @@ public class ItemPopulator {
 	private static boolean isApothWeapon(ItemStack stack) {
 		var tag = stack.getTag();
 		return tag != null && tag.getBoolean("apoth_boss");
-	}
-
-
-	public static Populated getRandomWeapon(ArrayList<Populator> entries, int level, RandomSource r, @Nullable ServerPlayer player) {
-		int total = 0;
-		List<Populator> list = new ArrayList<>();
-		for (var e : entries) {
-			if (e.config().test(level, player)) {
-				list.add(e);
-				total += e.config().weight();
-			}
-		}
-		if (total == 0)
-			return Populated.EMPTY;
-		int val = r.nextInt(total);
-		for (var e : list) {
-			val -= e.config().weight();
-			if (val <= 0) {
-				var stacks = e.config.stack();
-				ItemStack ans = stacks.get(r.nextInt(stacks.size())).copy();
-				return new Populated(e.special, ans);
-			}
-		}
-		return Populated.EMPTY;
-	}
-
-
-	public record Populator(boolean special, WeaponConfig.ItemConfig config) {
-	}
-
-	public record Populated(boolean special, ItemStack stack) {
-
-		public static final Populated EMPTY = new Populated(false, ItemStack.EMPTY);
 	}
 
 }
