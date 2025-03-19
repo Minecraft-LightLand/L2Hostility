@@ -1,3 +1,7 @@
+3.0.6
+- Add hostility events for other mods to make integration
+- Add special weapon generation
+
 3.0.5
 - Make Iron Spell damage count as magic damage
 

@@ -10,6 +10,7 @@ import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.*;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.events.ClientEvents;
+import dev.xkmc.l2hostility.events.HostilityInitEvent;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -32,12 +33,14 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.NeoForge;
 
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiConsumer;
-import java.util.function.BiPredicate;
 import java.util.function.Supplier;
+
+import static dev.xkmc.l2hostility.events.HostilityInitEvent.InitPhase.*;
 
 @SerialClass
 public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTraitCap> {
@@ -145,8 +148,12 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 				skip = true;
 			}
 		}
+		if (!skip) {
+			skip = NeoForge.EVENT_BUS.post(new HostilityInitEvent.Pre(le, this, INIT)).isCanceled();
+		}
 		lv = skip ? 0 : TraitManager.fill(this, le, traits, instance);
 		fullDrop = instance.isFullDrop();
+		NeoForge.EVENT_BUS.post(new HostilityInitEvent.Post(le, this, INIT));
 		stage = Stage.INIT;
 		syncToClient(le);
 	}
@@ -159,13 +166,16 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		minion = parent.minion;
 		noDrop = parent.noDrop;
 		dropRate = parent.dropRate * LHConfig.SERVER.splitDropRateFactor.get();
-		for (var ent : parent.traits.entrySet()) {
-			int rank = ent.getKey().inherited(this, ent.getValue(), ctx);
-			if (rank > 0) {
-				traits.put(ent.getKey(), rank);
+		if (!NeoForge.EVENT_BUS.post(new HostilityInitEvent.Pre(child, this, COPY)).isCanceled()) {
+			for (var ent : parent.traits.entrySet()) {
+				int rank = ent.getKey().inherited(this, ent.getValue(), ctx);
+				if (rank > 0) {
+					traits.put(ent.getKey(), rank);
+				}
 			}
 		}
 		TraitManager.fill(this, child, traits, MobDifficultyCollector.noTrait(lv));
+		NeoForge.EVENT_BUS.post(new HostilityInitEvent.Post(child, this, COPY));
 		stage = Stage.INIT;
 	}
 
@@ -248,7 +258,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			}
 			if (stage == Stage.INIT) {
 				stage = Stage.POST_INIT;
-				ItemPopulator.postFill(this, mob);
+				if (!NeoForge.EVENT_BUS.post(new HostilityInitEvent.Pre(mob, this, WEAPON)).isCanceled()) {
+					ItemPopulator.postFill(this, mob);
+					NeoForge.EVENT_BUS.post(new HostilityInitEvent.Post(mob, this, WEAPON));
+				}
 				traits.forEach((k, v) -> k.postInit(mob, v));
 				clearPending(mob);
 				mob.setHealth(mob.getMaxHealth());

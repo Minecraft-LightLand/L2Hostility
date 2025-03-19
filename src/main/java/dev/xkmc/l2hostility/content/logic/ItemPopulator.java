@@ -61,12 +61,24 @@ public class ItemPopulator {
 					}
 				}
 			}
-		} else if (le.getType().is(LHTagGen.RANGED_WEAPON_TARGET)) {
+		}
+		if (le.getType().is(LHTagGen.RANGED_WEAPON_TARGET)) {
 			ItemStack stack = WeaponConfig.getRandomRangedWeapon(cap.getLevel(), r);
 			if (!stack.isEmpty()) {
 				le.setItemSlot(EquipmentSlot.MAINHAND, stack);
 				if (le instanceof Mob mob) {
 					mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.SERVER.equipmentDropRate.get().floatValue());
+				}
+			}
+		}
+		for (var ent : L2Hostility.WEAPON.getMerged().special_weapons.entrySet()) {
+			if (le.getType().is(ent.getKey())) {
+				ItemStack stack = WeaponConfig.getRandomWeapon(ent.getValue(), cap.getLevel(), le.getRandom());
+				if (!stack.isEmpty()) {
+					le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+					if (le instanceof Mob mob) {
+						mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.SERVER.equipmentDropRate.get().floatValue());
+					}
 				}
 			}
 		}

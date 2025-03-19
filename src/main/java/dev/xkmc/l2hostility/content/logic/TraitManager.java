@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.logic;
 
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.events.HostilityInitEvent;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
@@ -10,8 +11,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.HashMap;
+
+import static dev.xkmc.l2hostility.events.HostilityInitEvent.InitPhase.ARMOR;
 
 public class TraitManager {
 
@@ -52,10 +56,12 @@ public class TraitManager {
 		}
 		// armor
 		if (le.getType().is(LHTagGen.ARMOR_TARGET)) {
-			ItemPopulator.populateArmors(le, lv);
+			if (!NeoForge.EVENT_BUS.post(new HostilityInitEvent.Pre(le, cap, ARMOR)).isCanceled()) {
+				ItemPopulator.populateArmors(le, lv);
+				NeoForge.EVENT_BUS.post(new HostilityInitEvent.Post(le, cap, ARMOR));
+			}
 		}
 		// add traits
-
 		if (ins.trait_chance(lv) >= le.getRandom().nextDouble()) {
 			if (!le.getType().is(LHTagGen.NO_TRAIT)) {
 				TraitGenerator.generateTraits(cap, le, lv, traits, ins);
