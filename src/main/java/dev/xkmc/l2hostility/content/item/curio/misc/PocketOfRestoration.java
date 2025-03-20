@@ -87,4 +87,9 @@ public class PocketOfRestoration extends SingletonItem implements ICurioItem {
 		}
 	}
 
+	@Override
+	public boolean allowDuplicate() {
+		return true;
+	}
+
 }

@@ -24,7 +24,7 @@
               "id": "cataclysm:cursed_bow"
             }
           ],
-          "weight": 80
+          "weight": 50
         },
         {
           "condition": {
@@ -39,7 +39,7 @@
               "id": "cataclysm:laser_gatling"
             }
           ],
-          "weight": 60
+          "weight": 40
         },
         {
           "condition": {
@@ -54,7 +54,7 @@
               "id": "cataclysm:wither_assault_shoulder_weapon"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {
@@ -70,7 +70,7 @@
               "id": "cataclysm:wrath_of_the_desert"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {
@@ -113,7 +113,7 @@
               "id": "cataclysm:ancient_spear"
             }
           ],
-          "weight": 60
+          "weight": 40
         },
         {
           "condition": {
@@ -128,7 +128,7 @@
               "id": "cataclysm:infernal_forge"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {
@@ -143,7 +143,7 @@
               "id": "cataclysm:meat_shredder"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {
@@ -158,7 +158,7 @@
               "id": "cataclysm:soul_render"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {

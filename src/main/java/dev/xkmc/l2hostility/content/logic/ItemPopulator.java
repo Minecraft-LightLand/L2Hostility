@@ -8,6 +8,8 @@ import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
+import dev.xkmc.mob_weapon_api.example.vanilla.VanillaMobManager;
+import dev.xkmc.mob_weapon_api.init.MobWeaponAPI;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
@@ -18,12 +20,14 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.neoforged.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -96,6 +100,9 @@ public class ItemPopulator {
 		ItemStack stack = WeaponConfig.getRandomWeapon(list, cap.getLevel(), le.getRandom(), sp);
 		if (stack.isEmpty()) return;
 		le.setItemSlot(EquipmentSlot.MAINHAND, stack);
+		if (le instanceof PathfinderMob e && VanillaMobManager.attachGoal(e, stack)) {
+			e.addTag(MobWeaponAPI.MODID + "_applied");
+		}
 		if (le instanceof Mob mob) {
 			mob.setDropChance(EquipmentSlot.MAINHAND, LHConfig.SERVER.equipmentDropRate.get().floatValue());
 		}
@@ -177,10 +184,14 @@ public class ItemPopulator {
 
 
 	private static boolean isApothBoss(LivingEntity mob) {
+		if (!ModList.get().isLoaded("apotheosis"))
+			return false;
 		return mob.getPersistentData().getBoolean("apoth.boss");
 	}
 
 	private static boolean isApothWeapon(ItemStack stack) {
+		if (!ModList.get().isLoaded("apotheosis"))
+			return false;
 		return stack.getOrDefault(Apoth.Components.FROM_BOSS, false);
 	}
 

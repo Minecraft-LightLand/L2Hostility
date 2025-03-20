@@ -179,10 +179,10 @@ public class CataclysmData {
 			config.special_weapons.put(holders(
 					EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON
 			), new ArrayList<>(List.of(
-					weapon(130, 80, ModItems.CURSED_BOW.get(), loc("kill_maledictus")),
-					weapon(160, 60, ModItems.LASER_GATLING.get(), loc("kill_harbinger")),
-					weapon(190, 40, ModItems.WITHER_ASSULT_SHOULDER_WEAPON.get(), loc("kill_harbinger")),
-					weapon(220, 40, ModItems.WRATH_OF_THE_DESERT.get(), loc("kill_remnant"), loc("kill_maledictus")),
+					weapon(130, 50, ModItems.CURSED_BOW.get(), loc("kill_maledictus")),
+					weapon(160, 40, ModItems.LASER_GATLING.get(), loc("kill_harbinger")),
+					weapon(190, 30, ModItems.WITHER_ASSULT_SHOULDER_WEAPON.get(), loc("kill_harbinger")),
+					weapon(220, 30, ModItems.WRATH_OF_THE_DESERT.get(), loc("kill_remnant"), loc("kill_maledictus")),
 					weapon(250, 20, ModItems.VOID_ASSULT_SHOULDER_WEAPON.get(), loc("kill_harbinger"), loc("kill_ender_golem"))
 			)));
 
@@ -190,10 +190,10 @@ public class CataclysmData {
 					EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.VINDICATOR,
 					EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER_SKELETON
 			), new ArrayList<>(List.of(
-					weapon(130, 60, ModItems.ANCIENT_SPEAR.get(), loc("find_cursed_pyramid")),
-					weapon(160, 40, ModItems.INFERNAL_FORGE.get(), loc("kill_monstrosity")),
-					weapon(190, 40, ModItems.MEAT_SHREDDER.get(), loc("kill_harbinger")),
-					weapon(190, 40, ModItems.SOUL_RENDER.get(), loc("kill_maledictus")),
+					weapon(130, 40, ModItems.ANCIENT_SPEAR.get(), loc("find_cursed_pyramid")),
+					weapon(160, 30, ModItems.INFERNAL_FORGE.get(), loc("kill_monstrosity")),
+					weapon(190, 30, ModItems.MEAT_SHREDDER.get(), loc("kill_harbinger")),
+					weapon(190, 30, ModItems.SOUL_RENDER.get(), loc("kill_maledictus")),
 					weapon(220, 20, ModItems.GAUNTLET_OF_MAELSTROM.get(), loc("kill_ender_guardian"), loc("kill_remnant")),
 					weapon(250, 20, ModItems.VOID_FORGE.get(), loc("kill_monstrosity"), loc("kill_ender_golem"))
 			)));

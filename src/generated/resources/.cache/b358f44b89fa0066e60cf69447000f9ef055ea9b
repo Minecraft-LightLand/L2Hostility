@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-19T22:12:52.532723	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
+// 1.21.1	2025-03-20T09:15:25.617771	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -127,7 +127,7 @@ da1814522f2f88928d26e4b7e6b5c15c24e731b2 data/cataclysm/l2hostility_config/entit
 e28f2bcffbacea0d33f7e987406892312aed0c24 data/cataclysm/l2hostility_config/entity/the_harbinger.json
 7a1c367a597e5f6dd5821e0f6256309d12eecdcf data/cataclysm/l2hostility_config/entity/the_leviathan.json
 e562a76b82fc87657ec328661c6c14b38c84fa2b data/cataclysm/l2hostility_config/entity/wadjet.json
-6284c5f620aaa8f823f45f5f4494320de6b89d0b data/cataclysm/l2hostility_config/weapon/weapons.json
+fdc7657e3e7740b40292c08d64c39d48a608f54a data/cataclysm/l2hostility_config/weapon/weapons.json
 7942255280f4ee1f25a76cfb178597324d566c77 data/curios/tags/item/back.json
 801a68ce0482049c4c2efe45f9de4366b8ff6691 data/curios/tags/item/charm.json
 6b3db265ef90a4cf6af5cc3775209c4a04a67c42 data/curios/tags/item/hands.json
@@ -142,7 +142,7 @@ fbc89e1a1f80c810ee79683580eb344e355a07a4 data/gateways/l2hostility_config/entity
 69f221d9b45d1083e7bcdf7f753b775b7b97787b data/gateways/recipe/hostility/split.json
 8d937419c400c1ea3999389ad6254f1ee94b54c0 data/l2archery/l2hostility_config/weapon/bows.json
 d1b5316adc1ba1266148bd74536e3212510b2cad data/l2complements/l2hostility_config/weapon/l2complements.json
-6d923114640713ae6da698ec759cdc89dd88360b data/l2complements/l2hostility_config/weapon/special.json
+edc910f31c4ef44a64dc63aa1d15e6369e4dba09 data/l2complements/l2hostility_config/weapon/special.json
 4b9d05f8d5dca02f6cf4f92c3c35a1a94303ad10 data/l2complements/tags/mob_effect/skill_effect.json
 865b4b3f501fc3f54d9a654ae0f1cc2118346f6e data/l2hostility/advancement/burnt/hostility_essence.json
 53db2a68775994e813241e7b27d9cef235376bc3 data/l2hostility/advancement/hostility/abrahadabra.json

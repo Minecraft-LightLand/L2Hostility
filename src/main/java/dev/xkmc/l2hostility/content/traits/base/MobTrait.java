@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.traits.base;
 
-import dev.latvian.mods.kubejs.util.RegistryAccessContainer;
 import dev.xkmc.l2core.init.reg.registrate.NamedEntry;
 import dev.xkmc.l2core.util.ServerProxy;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
@@ -25,6 +24,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 
 import javax.annotation.Nullable;
@@ -156,6 +156,8 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 	}
 
 	public boolean isBanned() {
+		if (!(LHConfig.SERVER.getSpec() instanceof ModConfigSpec spec) || !spec.isLoaded())
+			return false;
 		if (LHConfig.SERVER.map.containsKey(getRegistryName().getPath())) {
 			return !LHConfig.SERVER.map.get(getRegistryName().getPath()).get();
 		}

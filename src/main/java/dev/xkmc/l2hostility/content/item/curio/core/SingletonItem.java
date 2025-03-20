@@ -18,11 +18,16 @@ public class SingletonItem extends Item implements ICurioItem {
 
 	@Override
 	public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+		if (allowDuplicate()) return true;
 		var repeat = CuriosApi.getCuriosInventory(slotContext.entity())
 				.flatMap(e -> e.findFirstCurio(this));
 		if (repeat.isEmpty()) return true;
 		var rep = repeat.get().slotContext();
 		return rep.identifier().equals(slotContext.identifier()) && rep.index() == slotContext.index();
+	}
+
+	public boolean allowDuplicate() {
+		return false;
 	}
 
 }
