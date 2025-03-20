@@ -184,10 +184,10 @@ public class CataclysmData {
 			config.special_weapons.put(new LinkedHashSet<>(List.of(
 					EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON
 			)), new ArrayList<>(List.of(
-					weapon(130, 80, ModItems.CURSED_BOW.get(), adv("kill_maledictus")),
-					weapon(160, 60, ModItems.LASER_GATLING.get(), adv("kill_harbinger")),
-					weapon(190, 40, ModItems.WITHER_ASSULT_SHOULDER_WEAPON.get(), adv("kill_harbinger")),
-					weapon(220, 40, ModItems.WRATH_OF_THE_DESERT.get(), adv("kill_remnant"), adv("kill_maledictus")),
+					weapon(130, 50, ModItems.CURSED_BOW.get(), adv("kill_maledictus")),
+					weapon(160, 40, ModItems.LASER_GATLING.get(), adv("kill_harbinger")),
+					weapon(190, 30, ModItems.WITHER_ASSULT_SHOULDER_WEAPON.get(), adv("kill_harbinger")),
+					weapon(220, 30, ModItems.WRATH_OF_THE_DESERT.get(), adv("kill_remnant"), adv("kill_maledictus")),
 					weapon(250, 20, ModItems.VOID_ASSULT_SHOULDER_WEAPON.get(), adv("kill_harbinger"), adv("kill_ender_golem"))
 			)));
 
@@ -195,10 +195,10 @@ public class CataclysmData {
 					EntityType.ZOMBIE, EntityType.HUSK, EntityType.VINDICATOR,
 					EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER_SKELETON
 			)), new ArrayList<>(List.of(
-					weapon(130, 60, ModItems.ANCIENT_SPEAR.get(), adv("find_cursed_pyramid")),
-					weapon(160, 40, ModItems.INFERNAL_FORGE.get(), adv("kill_monstrosity")),
-					weapon(190, 40, ModItems.MEAT_SHREDDER.get(), adv("kill_harbinger")),
-					weapon(190, 40, ModItems.SOUL_RENDER.get(), adv("kill_maledictus")),
+					weapon(130, 40, ModItems.ANCIENT_SPEAR.get(), adv("find_cursed_pyramid")),
+					weapon(160, 30, ModItems.INFERNAL_FORGE.get(), adv("kill_monstrosity")),
+					weapon(190, 30, ModItems.MEAT_SHREDDER.get(), adv("kill_harbinger")),
+					weapon(190, 30, ModItems.SOUL_RENDER.get(), adv("kill_maledictus")),
 					weapon(220, 20, ModItems.GAUNTLET_OF_MAELSTROM.get(), adv("kill_ender_guardian"), adv("kill_remnant")),
 					weapon(250, 20, ModItems.VOID_FORGE.get(), adv("kill_monstrosity"), adv("kill_ender_golem"))
 			)));

@@ -23,7 +23,7 @@
               "item": "cataclysm:cursed_bow"
             }
           ],
-          "weight": 80
+          "weight": 50
         },
         {
           "condition": {
@@ -38,7 +38,7 @@
               "nbt": "{Damage:0}"
             }
           ],
-          "weight": 60
+          "weight": 40
         },
         {
           "condition": {
@@ -52,7 +52,7 @@
               "item": "cataclysm:wither_assault_shoulder_weapon"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {
@@ -67,7 +67,7 @@
               "item": "cataclysm:wrath_of_the_desert"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {
@@ -108,7 +108,7 @@
               "nbt": "{Damage:0}"
             }
           ],
-          "weight": 60
+          "weight": 40
         },
         {
           "condition": {
@@ -123,7 +123,7 @@
               "nbt": "{Damage:0}"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {
@@ -137,7 +137,7 @@
               "item": "cataclysm:meat_shredder"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {
@@ -151,7 +151,7 @@
               "item": "cataclysm:soul_render"
             }
           ],
-          "weight": 40
+          "weight": 30
         },
         {
           "condition": {

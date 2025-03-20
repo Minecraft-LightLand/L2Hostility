@@ -183,9 +183,9 @@ public class LHConfigGen extends ConfigDataProvider {
 			config.special_weapons.put(new LinkedHashSet<>(List.of(
 					EntityType.ZOMBIE, EntityType.HUSK, EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON, EntityType.ZOMBIFIED_PIGLIN
 			)), new ArrayList<>(List.of(
-					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.SONIC_SHOOTER.asStack())), 150, 100),
-					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.WINTERSTORM_WAND.asStack())), 180, 80),
-					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.HELLFIRE_WAND.asStack())), 200, 50)
+					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.SONIC_SHOOTER.asStack())), 150, 60),
+					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.WINTERSTORM_WAND.asStack())), 180, 40),
+					new WeaponConfig.ItemConfig(new ArrayList<>(List.of(LCItems.HELLFIRE_WAND.asStack())), 200, 20)
 			)));
 			collector.add(L2Hostility.WEAPON, new ResourceLocation(L2Complements.MODID, "special"), config);
 		}
