@@ -224,7 +224,6 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 		} else {
 			traits.remove(trait);
 		}
-
 	}
 
 	private boolean clearPending(LivingEntity mob) {

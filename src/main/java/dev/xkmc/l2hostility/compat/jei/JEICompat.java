@@ -34,7 +34,7 @@ public class JEICompat implements IModPlugin {
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		registration.addRecipes(LOOT.getRecipeType(), List.of(new EnvyLootRecipe(), new GluttonyLootRecipe()));
-		registration.addRecipes(LOOT.getRecipeType(), LootDataToClient.LIST_CACHE);
+		registration.addRecipes(LOOT.getRecipeType(), LootDataToClient.LIST_CACHE.stream().filter(ITraitLootRecipe::isValid).toList());
 	}
 
 }

@@ -1,3 +1,6 @@
+3.0.8
+- Fix JEI display when trait max level is lower than loot min level requirement
+
 3.0.7
 - Allow mobs with high level to use special items from L2Complements
 - After you defeat Cataclysm bosses, mobs might be able to use respective weapons

@@ -16,4 +16,9 @@ public interface ITraitLootRecipe {
 
 
 	void addTooltip(Consumer<Component> l);
+
+	default boolean isValid() {
+		return true;
+	}
+
 }

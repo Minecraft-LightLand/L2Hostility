@@ -140,6 +140,23 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	}
 
 	@Override
+	public boolean isValid() {
+		if (trait == null) return true;
+		if (trait.isBanned()) return false;
+		int max = trait.getMaxLevel();
+		for (var c : getConditions()) {
+			if (c instanceof TraitLootCondition cl) {
+				if (cl.trait.isBanned()) return false;
+				if (cl.trait == trait) {
+					if (cl.minLevel > max)
+						return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	@Override
 	public void addTooltip(Consumer<Component> list) {
 		int max = trait == null ? 0 : trait.getConfig().max_rank();
 		int min = 1;
