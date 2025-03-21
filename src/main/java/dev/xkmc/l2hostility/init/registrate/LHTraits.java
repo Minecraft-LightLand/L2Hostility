@@ -32,7 +32,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 public class LHTraits {
 
 	public static final L2Registrate.RegistryInstance<MobTrait> TRAITS =
-			L2Hostility.REGISTRATE.newRegistry("trait", MobTrait.class);
+			L2Hostility.REGISTRATE.newRegistry("trait", MobTrait.class, e -> e.sync(true));
 
 	public static final DataMapReg<MobTrait, TraitConfig> DATA =
 			L2Hostility.REG.dataMap("trait_data", LHTraits.TRAITS.key(), TraitConfig.class);
