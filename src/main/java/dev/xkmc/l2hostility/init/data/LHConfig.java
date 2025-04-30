@@ -122,6 +122,8 @@ public class LHConfig {
 		public final ModConfigSpec.DoubleValue adaptFactor;
 		public final ModConfigSpec.DoubleValue reflectFactor;
 		public final ModConfigSpec.IntValue dispellTime;
+		public final ModConfigSpec.DoubleValue dispellDamageFactor;
+		public final ModConfigSpec.DoubleValue dementorDamageFactor;
 		public final ModConfigSpec.IntValue fieryTime;
 		public final ModConfigSpec.IntValue weakTime;
 		public final ModConfigSpec.IntValue slowTime;
@@ -149,6 +151,7 @@ public class LHConfig {
 		public final ModConfigSpec.IntValue killerAuraInterval;
 		public final ModConfigSpec.IntValue shulkerInterval;
 		public final ModConfigSpec.IntValue grenadeInterval;
+		public final ModConfigSpec.DoubleValue grenadeDamageFactor;
 		public final ModConfigSpec.DoubleValue drainDamage;
 		public final ModConfigSpec.DoubleValue drainDuration;
 		public final ModConfigSpec.IntValue drainDurationMax;
@@ -476,6 +479,16 @@ public class LHConfig {
 						.defineInRange("reprintDamage", 0.02, 0, 1);
 				reprintBypass = builder.text("Reprint will gain Void Touch 20 and Vanishing Curse when it hits a mob with max Enchantment level of X or higher")
 						.defineInRange("reprintBypass", 10, 0, 10000);
+
+				dispellDamageFactor = builder.comment("Damage Bonus Factor for dispell-affected damage")
+						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
+						.defineInRange("dispellDamageFactor", 0.5, 0, 1);
+				dementorDamageFactor = builder.comment("Damage Bonus Factor for dementor-affected damage")
+						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
+						.defineInRange("dementorDamageFactor", 0.5, 0, 1);
+				grenadeDamageFactor = builder.comment("Damage Bonus Factor for grenade damage")
+						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
+						.defineInRange("grenadeDamageFactor", 0.25, 0, 1);
 
 				effectAura(builder, "gravity", 10);
 				effectAura(builder, "moonwalk", 10);

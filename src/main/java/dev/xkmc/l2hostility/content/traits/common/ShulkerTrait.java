@@ -8,11 +8,14 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
@@ -37,6 +40,13 @@ public class ShulkerTrait extends MobTrait {
 	@Override
 	public boolean onAttackedByOthers(int level, LivingEntity entity, DamageData.Attack event) {
 		return type.onAttackedByOthers(level, entity, event);
+	}
+
+	public double modifyBonusDamage(DamageSource source, double factor, int lv) {
+		if (source.getDirectEntity() instanceof HostilityBullet && source.is(DamageTypeTags.IS_EXPLOSION)) {
+			return LHConfig.SERVER.grenadeDamageFactor.get();
+		}
+		return 1;
 	}
 
 	@Override

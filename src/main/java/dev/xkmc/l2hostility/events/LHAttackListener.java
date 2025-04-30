@@ -82,7 +82,8 @@ public class LHAttackListener implements AttackListener {
 
 	@Override
 	public void onHurt(DamageData.Offence data) {
-		if (data.getSource().is(L2DamageTypes.NO_SCALE))
+		var source = data.getSource();
+		if (source.is(L2DamageTypes.NO_SCALE))
 			return;
 		LivingEntity attacker = data.getAttacker();
 		var target = data.getTarget();
@@ -104,11 +105,18 @@ public class LHAttackListener implements AttackListener {
 					int lv = cap.getLevel();
 					double factor;
 					if (LHConfig.SERVER.exponentialDamage.get()) {
-						factor = Math.pow(1 + LHConfig.SERVER.damageFactor.get(), lv);
+						factor = Math.pow(1 + LHConfig.SERVER.damageFactor.get(), lv) - 1;
 					} else {
-						factor = 1 + lv * LHConfig.SERVER.damageFactor.get();
+						factor = lv * LHConfig.SERVER.damageFactor.get();
 					}
-					data.addHurtModifier(DamageModifier.multTotal((float) factor, SCALING));
+					var config = cap.getConfigCache(attacker);
+					if (config != null)
+						factor *= config.attackScale;
+					double old = factor;
+					for (var ent : cap.traits.entrySet()) {
+						factor *= ent.getKey().modifyBonusDamage(source, old, ent.getValue());
+					}
+					data.addHurtModifier(DamageModifier.multTotal(1+(float) factor, SCALING));
 				}
 				TraitEffectCache traitCache = new TraitEffectCache(target);
 				cap.traitEvent((k, v) -> k.onHurtTarget(v, attacker, data, traitCache));

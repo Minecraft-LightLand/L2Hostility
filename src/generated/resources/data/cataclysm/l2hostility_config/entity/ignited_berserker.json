@@ -1,6 +1,7 @@
 {
   "list": [
     {
+      "attackScale": 0.8,
       "blacklist": [],
       "difficulty": {
         "apply_chance": 1.0,
@@ -12,6 +13,7 @@
         "variation": 0.0
       },
       "entities": "cataclysm:ignited_berserker",
+      "healthScale": 0.8,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,

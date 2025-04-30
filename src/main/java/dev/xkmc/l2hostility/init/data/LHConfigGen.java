@@ -236,7 +236,7 @@ public class LHConfigGen extends ConfigDataProvider {
 		}
 
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
-			CataclysmData.genConfig( collector);
+			CataclysmData.genConfig(collector);
 		}
 		/* TODO
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {
@@ -252,9 +252,17 @@ public class LHConfigGen extends ConfigDataProvider {
 		collector.add(L2Hostility.ENTITY, obj.getKey().location(), new EntityConfig().putEntity(min, base, 0, 0, List.of(obj.value()), List.of(traits)));
 	}
 
+	public static void addEntity(Collector collector, int min, int base, double hp, double atk, Holder<EntityType<?>> obj, EntityConfig.TraitBase... traits) {
+		collector.add(L2Hostility.ENTITY, obj.getKey().location(), new EntityConfig().putEntity(min, base, 0, 0, hp, atk, List.of(obj.value()), List.of(traits)));
+	}
+
 	public static void addEntity(Collector collector, int min, int base, Holder<EntityType<?>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
 		collector.add(L2Hostility.ENTITY, obj.getKey().location(), new EntityConfig().putEntityAndItem(min, base, 0, 0, List.of(obj.value()), traits, items));
 	}
 
+
+	public static void addEntity(Collector collector, int min, int base, double hp, double atk, Holder<EntityType<?>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
+		collector.add(L2Hostility.ENTITY, obj.getKey().location(), new EntityConfig().putEntityAndItem(min, base, 0, 0, hp, atk, List.of(obj.value()), traits, items));
+	}
 
 }

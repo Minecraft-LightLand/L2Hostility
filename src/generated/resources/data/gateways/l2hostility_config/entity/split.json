@@ -1,6 +1,7 @@
 {
   "list": [
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -23,6 +24,7 @@
         "minecraft:wither_skeleton",
         "minecraft:stray"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
@@ -46,6 +48,7 @@
       ]
     },
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -68,6 +71,7 @@
         "minecraft:wither_skeleton",
         "minecraft:stray"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
@@ -91,6 +95,7 @@
       ]
     },
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -113,6 +118,7 @@
         "minecraft:wither_skeleton",
         "minecraft:stray"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,

@@ -21,6 +21,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -175,6 +176,10 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 
 	public boolean is(TagKey<MobTrait> tag) {
 		return holder().is(tag);
+	}
+
+	public double modifyBonusDamage(DamageSource source, double factor, int lv) {
+		return 1;
 	}
 
 }

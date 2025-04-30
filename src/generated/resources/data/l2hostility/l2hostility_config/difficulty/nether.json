@@ -3,6 +3,7 @@
   "levelDefaultTraits": {
     "minecraft:the_nether": [
       {
+        "attackScale": 1.0,
         "blacklist": [],
         "difficulty": {
           "apply_chance": 1.0,
@@ -14,6 +15,7 @@
           "variation": 0.0
         },
         "entities": "minecraft:zombie",
+        "healthScale": 1.0,
         "items": [],
         "maxLevel": 0,
         "maxTraitCount": -1,
@@ -28,6 +30,7 @@
         ]
       },
       {
+        "attackScale": 1.0,
         "blacklist": [],
         "difficulty": {
           "apply_chance": 1.0,
@@ -39,6 +42,7 @@
           "variation": 0.0
         },
         "entities": "minecraft:skeleton",
+        "healthScale": 1.0,
         "items": [],
         "maxLevel": 0,
         "maxTraitCount": -1,
@@ -68,6 +72,7 @@
   "structureDefaultTraits": {
     "minecraft:bastion_remnant": [
       {
+        "attackScale": 1.0,
         "blacklist": [],
         "difficulty": {
           "apply_chance": 1.0,
@@ -79,6 +84,7 @@
           "variation": 0.0
         },
         "entities": "minecraft:piglin",
+        "healthScale": 1.0,
         "items": [],
         "maxLevel": 0,
         "maxTraitCount": -1,
