@@ -85,9 +85,9 @@ public class LHAttackListener implements AttackListener {
 				int lv = cap.getLevel();
 				double factor;
 				if (LHConfig.COMMON.exponentialDamage.get()) {
-					factor = Math.pow(1 + LHConfig.COMMON.damageFactor.get(), lv);
+					factor = Math.pow(1 + LHConfig.COMMON.damageFactor.get(), lv) - 1;
 				} else {
-					factor = 1 + lv * LHConfig.COMMON.damageFactor.get();
+					factor = lv * LHConfig.COMMON.damageFactor.get();
 				}
 				var config = cap.getConfigCache(mob);
 				if (config != null)
@@ -96,7 +96,7 @@ public class LHAttackListener implements AttackListener {
 				for (var ent : cap.traits.entrySet()) {
 					factor *= ent.getKey().modifyBonusDamage(source, old, ent.getValue());
 				}
-				cache.addHurtModifier(DamageModifier.multTotal((float) factor));
+				cache.addHurtModifier(DamageModifier.multTotal(1 + (float) factor));
 			}
 			TraitEffectCache traitCache = new TraitEffectCache(target);
 			cap.traitEvent((k, v) -> k.onHurtTarget(v, mob, cache, traitCache));
