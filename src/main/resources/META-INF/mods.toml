@@ -25,7 +25,7 @@ description='''
 [[dependencies.l2hostility]]
     modId="l2library"
     mandatory=true
-    versionRange="[2.4.30,)"
+    versionRange="[2.5.0,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.l2hostility]]
