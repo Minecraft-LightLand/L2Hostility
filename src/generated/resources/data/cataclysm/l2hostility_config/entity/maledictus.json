@@ -59,6 +59,7 @@
         ],
         "spawnInterval": 80
       },
+      "attackScale": 0.8,
       "blacklist": [],
       "difficulty": {
         "apply_chance": 1.0,
@@ -72,6 +73,7 @@
       "entities": [
         "cataclysm:maledictus"
       ],
+      "healthScale": 0.5,
       "items": [
         {
           "chance": 1.0,

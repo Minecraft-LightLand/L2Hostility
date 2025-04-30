@@ -1,6 +1,7 @@
 {
   "list": [
     {
+      "attackScale": 1.0,
       "blacklist": [],
       "difficulty": {
         "apply_chance": 1.0,
@@ -14,6 +15,7 @@
       "entities": [
         "cataclysm:elite_draugr"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,

@@ -1,4 +1,6 @@
 2.5.5
+- Tweak configs and level settings for traits to make them more balanced
+- Dementor, Dispell, and Grenade damage will get reduced scaling
 
 2.5.4
 - Allow mobs with high level to use special items from L2Complements

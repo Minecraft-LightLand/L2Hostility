@@ -1,6 +1,7 @@
 {
   "list": [
     {
+      "attackScale": 1.0,
       "blacklist": [],
       "difficulty": {
         "apply_chance": 1.0,
@@ -17,6 +18,7 @@
         "mutantmonsters:mutant_creeper",
         "mutantmonsters:mutant_enderman"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,

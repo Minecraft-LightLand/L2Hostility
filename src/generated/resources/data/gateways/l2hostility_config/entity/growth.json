@@ -1,6 +1,7 @@
 {
   "list": [
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -18,6 +19,7 @@
       "entities": [
         "minecraft:slime"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
@@ -56,6 +58,7 @@
       ]
     },
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -73,6 +76,7 @@
       "entities": [
         "minecraft:magma_cube"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
@@ -111,6 +115,7 @@
       ]
     },
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -128,6 +133,7 @@
       "entities": [
         "minecraft:slime"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
@@ -161,6 +167,7 @@
       ]
     },
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -178,6 +185,7 @@
       "entities": [
         "minecraft:magma_cube"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
@@ -211,6 +219,7 @@
       ]
     },
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -228,6 +237,7 @@
       "entities": [
         "minecraft:slime"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
@@ -256,6 +266,7 @@
       ]
     },
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -273,6 +284,7 @@
       "entities": [
         "minecraft:magma_cube"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
@@ -301,6 +313,7 @@
       ]
     },
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:moonwalk",
         "l2hostility:gravity",
@@ -319,6 +332,7 @@
         "minecraft:slime",
         "minecraft:magma_cube"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,

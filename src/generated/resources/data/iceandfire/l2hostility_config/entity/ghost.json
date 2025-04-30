@@ -1,6 +1,7 @@
 {
   "list": [
     {
+      "attackScale": 1.0,
       "blacklist": [
         "l2hostility:dispell"
       ],
@@ -16,6 +17,7 @@
       "entities": [
         "iceandfire:ghost"
       ],
+      "healthScale": 1.0,
       "items": [],
       "maxLevel": 0,
       "maxTraitCount": -1,
