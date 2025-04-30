@@ -37,18 +37,18 @@ public class CataclysmData {
 		// bosses
 		{
 			int equipLevel = 600;
-			addEntity(collector, 200, 50, ModEntities.ENDER_GUARDIAN, List.of(
+			addEntity(collector, 200, 50, 0.5, 0.8, ModEntities.ENDER_GUARDIAN, List.of(
 							EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
 							EntityConfig.trait(LHTraits.ADAPTIVE.get(), 2, 2),
 							EntityConfig.trait(LHTraits.WEAKNESS.get(), 3, 5)),
 					List.of(divinity(equipLevel), breaker(equipLevel)));
-			addEntity(collector, 200, 50, ModEntities.NETHERITE_MONSTROSITY, List.of(
+			addEntity(collector, 200, 50, 0.5, 0.8, ModEntities.NETHERITE_MONSTROSITY, List.of(
 							EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
 							EntityConfig.trait(LHTraits.ADAPTIVE.get(), 2, 2),
 							EntityConfig.trait(LHTraits.SLOWNESS.get(), 3, 5)),
 					List.of(divinity(equipLevel), breaker(equipLevel)));
 			collector.add(L2Hostility.ENTITY, ModEntities.IGNIS.getId(), new EntityConfig()
-					.put(EntityConfig.entity(200, 50, 0, 0, List.of(ModEntities.IGNIS.get()))
+					.put(EntityConfig.entity(200, 50, 0, 0, 0.5, 0.8, List.of(ModEntities.IGNIS.get()))
 							.trait(List.of(
 									EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
 									EntityConfig.trait(LHTraits.CURSED.get(), 1, 1),
@@ -69,20 +69,20 @@ public class CataclysmData {
 											0.33, 16, 400, true, false,
 											32, true, true)
 							)));
-			addEntity(collector, 200, 50, ModEntities.THE_HARBINGER, List.of(
+			addEntity(collector, 200, 50, 0.5, 0.8, ModEntities.THE_HARBINGER, List.of(
 							EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
 							EntityConfig.trait(LHTraits.CURSED.get(), 1, 1),
 							EntityConfig.trait(LHTraits.WITHER.get(), 2, 3)),
 					List.of(divinity(equipLevel)));
 
-			addEntity(collector, 200, 50, ModEntities.THE_LEVIATHAN, List.of(
+			addEntity(collector, 200, 50, 0.5, 0.8, ModEntities.THE_LEVIATHAN, List.of(
 							EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
 							EntityConfig.trait(LHTraits.REFLECT.get(), 2, 2),
 							EntityConfig.trait(LHTraits.FREEZING.get(), 2, 3)),
 					List.of(divinity(equipLevel)));
 
 			collector.add(L2Hostility.ENTITY, ModEntities.ANCIENT_REMNANT.getId(), new EntityConfig()
-					.put(EntityConfig.entity(200, 50, 0, 0, List.of(ModEntities.ANCIENT_REMNANT.get()))
+					.put(EntityConfig.entity(200, 50, 0, 0, 0.5, 0.8, List.of(ModEntities.ANCIENT_REMNANT.get()))
 							.trait(List.of(
 									EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
 									EntityConfig.trait(LHTraits.REPRINT.get(), 1, 1),
@@ -103,7 +103,7 @@ public class CataclysmData {
 
 
 			collector.add(L2Hostility.ENTITY, ModEntities.MALEDICTUS.getId(), new EntityConfig()
-					.put(EntityConfig.entity(200, 50, 0, 0, List.of(ModEntities.MALEDICTUS.get()))
+					.put(EntityConfig.entity(200, 50, 0, 0, 0.5, 0.8, List.of(ModEntities.MALEDICTUS.get()))
 							.trait(List.of(
 									EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
 									EntityConfig.trait(LHTraits.DRAIN.get(), 1, 1),
@@ -128,23 +128,23 @@ public class CataclysmData {
 
 		// elite
 		{
-			addEntity(collector, 100, 30, ModEntities.ENDER_GOLEM,
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.ENDER_GOLEM,
 					EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
 					EntityConfig.trait(LHTraits.WEAKNESS.get(), 0, 1)
 			);
-			addEntity(collector, 100, 30, ModEntities.AMETHYST_CRAB,
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.AMETHYST_CRAB,
 					EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
 					EntityConfig.trait(LHTraits.POISON.get(), 0, 1)
 			);
-			addEntity(collector, 100, 30, ModEntities.IGNITED_BERSERKER,
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.IGNITED_BERSERKER,
 					EntityConfig.trait(LHTraits.REFLECT.get(), 0, 1),
 					EntityConfig.trait(LHTraits.DRAIN.get(), 0, 1)
 			);
-			addEntity(collector, 100, 30, ModEntities.KOBOLEDIATOR,
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.KOBOLEDIATOR,
 					EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
 					EntityConfig.trait(LHTraits.DISPELL.get(), 0, 1, 250, 1)
 			);
-			addEntity(collector, 100, 30, ModEntities.WADJET,
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.WADJET,
 					EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
 					EntityConfig.trait(LHTraits.DEMENTOR.get(), 0, 1, 250, 1)
 			);
@@ -170,7 +170,7 @@ public class CataclysmData {
 					EntityConfig.trait(LHTraits.EROSION.get(), 0, 1, 250, 1)
 			);
 
-			addEntity(collector, 100, 30, ModEntities.APTRGANGR,
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.APTRGANGR,
 					EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
 					EntityConfig.trait(LHTraits.CURSED.get(), 1, 2),
 					EntityConfig.trait(LHTraits.DISPELL.get(), 1, 1, 200, 0.5f),

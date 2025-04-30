@@ -252,8 +252,16 @@ public class LHConfigGen extends ConfigDataProvider {
 		collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntity(min, base, 0, 0, List.of(obj.get()), List.of(traits)));
 	}
 
+	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, double hp, double atk, RegistryObject<EntityType<T>> obj, EntityConfig.TraitBase... traits) {
+		collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntity(min, base, 0, 0, hp, atk, List.of(obj.get()), List.of(traits)));
+	}
+
 	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, RegistryObject<EntityType<T>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
 		collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntityAndItem(min, base, 0, 0, List.of(obj.get()), traits, items));
+	}
+
+	public static <T extends LivingEntity> void addEntity(Collector collector, int min, int base, double hp, double atk, RegistryObject<EntityType<T>> obj, List<EntityConfig.TraitBase> traits, List<EntityConfig.ItemPool> items) {
+		collector.add(L2Hostility.ENTITY, obj.getId(), new EntityConfig().putEntityAndItem(min, base, 0, 0, hp, atk, List.of(obj.get()), traits, items));
 	}
 
 }

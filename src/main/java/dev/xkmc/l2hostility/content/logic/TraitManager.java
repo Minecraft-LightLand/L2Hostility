@@ -25,7 +25,7 @@ public class TraitManager {
 		ins.addPermanentModifier(modifier);
 	}
 
-	public static void scale(LivingEntity le, int lv) {
+	public static void scale(MobTraitCap cap, LivingEntity le, int lv) {
 		if (!le.getType().is(LHTagGen.NO_SCALING)) {
 			double factor;
 			if (LHConfig.COMMON.exponentialHealth.get()) {
@@ -33,6 +33,9 @@ public class TraitManager {
 			} else {
 				factor = lv * LHConfig.COMMON.healthFactor.get();
 			}
+			var config = cap.getConfigCache(le);
+			if (config != null)
+				factor *= config.healthScale;
 			addAttribute(le, Attributes.MAX_HEALTH, "hostility_health", factor,
 					AttributeModifier.Operation.MULTIPLY_TOTAL);
 		}
@@ -46,7 +49,7 @@ public class TraitManager {
 		}
 		// add attributes
 		if (!le.getType().is(LHTagGen.NO_SCALING)) {
-			scale(le, lv);
+			scale(cap, le, lv);
 			ans = lv;
 		}
 		// armor

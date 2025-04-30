@@ -98,6 +98,9 @@ public class EntityConfig extends BaseConfig {
 		public int minSpawnLevel = 0, maxLevel = 0, maxTraitCount = -1;
 
 		@SerialClass.SerialField
+		public double healthScale = 1, attackScale = 1;
+
+		@SerialClass.SerialField
 		public MasterConfig asMaster = null;
 
 		@Deprecated
@@ -207,8 +210,16 @@ public class EntityConfig extends BaseConfig {
 		return putEntityAndItem(min, base, var, scale, keys, traits, List.of());
 	}
 
+	public final EntityConfig putEntity(int min, int base, double var, double scale, double hp, double atk, List<EntityType<?>> keys, List<TraitBase> traits) {
+		return putEntityAndItem(min, base, var, scale, hp, atk, keys, traits, List.of());
+	}
+
 	public final EntityConfig putEntityAndItem(int min, int base, double var, double scale, List<EntityType<?>> keys, List<TraitBase> traits, List<ItemPool> items) {
-		return put(entity(min, base, var, scale, keys).trait(traits).item(items));
+		return put(entity(min, base, var, scale, 1, 1, keys).trait(traits).item(items));
+	}
+
+	public final EntityConfig putEntityAndItem(int min, int base, double var, double scale, double hp, double atk, List<EntityType<?>> keys, List<TraitBase> traits, List<ItemPool> items) {
+		return put(entity(min, base, var, scale, hp, atk, keys).trait(traits).item(items));
 	}
 
 	public final EntityConfig put(Config config) {
@@ -217,8 +228,15 @@ public class EntityConfig extends BaseConfig {
 	}
 
 	public static Config entity(int min, int base, double var, double scale, List<EntityType<?>> keys) {
-		return new Config(new ArrayList<>(keys),
+		return entity(min, base, var, scale, 1, 1, keys);
+	}
+
+	public static Config entity(int min, int base, double var, double scale, double hp, double atk, List<EntityType<?>> keys) {
+		var ans = new Config(new ArrayList<>(keys),
 				new WorldDifficultyConfig.DifficultyConfig(min, base, var, scale, 1, 1, 0));
+		ans.attackScale = atk;
+		ans.healthScale = hp;
+		return ans;
 	}
 
 	public static ItemPool simplePool(int level, String slot, ItemStack stack) {

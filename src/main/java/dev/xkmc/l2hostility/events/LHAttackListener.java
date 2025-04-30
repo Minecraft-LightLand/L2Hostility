@@ -64,7 +64,8 @@ public class LHAttackListener implements AttackListener {
 	public void onHurt(AttackCache cache, ItemStack weapon) {
 		var event = cache.getLivingHurtEvent();
 		assert event != null;
-		if (event.getSource().is(L2DamageTypes.NO_SCALE))
+		var source = event.getSource();
+		if (source.is(L2DamageTypes.NO_SCALE))
 			return;
 		LivingEntity mob = cache.getAttacker();
 		var target = cache.getAttackTarget();
@@ -87,6 +88,13 @@ public class LHAttackListener implements AttackListener {
 					factor = Math.pow(1 + LHConfig.COMMON.damageFactor.get(), lv);
 				} else {
 					factor = 1 + lv * LHConfig.COMMON.damageFactor.get();
+				}
+				var config = cap.getConfigCache(mob);
+				if (config != null)
+					factor *= config.attackScale;
+				double old = factor;
+				for (var ent : cap.traits.entrySet()) {
+					factor *= ent.getKey().modifyBonusDamage(source, old, ent.getValue());
 				}
 				cache.addHurtModifier(DamageModifier.multTotal((float) factor));
 			}

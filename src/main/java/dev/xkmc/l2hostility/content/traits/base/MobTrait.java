@@ -19,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -125,7 +126,7 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 		return ans.withStyle(Style.EMPTY.withColor(color.getAsInt()));
 	}
 
-	public int getColor(){
+	public int getColor() {
 		return color.getAsInt();
 	}
 
@@ -184,6 +185,10 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 
 	public boolean is(TagKey<MobTrait> tag) {
 		return LHTraits.TRAITS.get().tags().getTag(tag).contains(this);
+	}
+
+	public double modifyBonusDamage(DamageSource source, double factor, int lv) {
+		return 1;
 	}
 
 }

@@ -194,7 +194,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	public void setLevel(LivingEntity le, int level) {
 		lv = clampLevel(le, level);
-		TraitManager.scale(le, lv);
+		TraitManager.scale(this, le, lv);
 	}
 
 	public int clampLevel(LivingEntity le, int lv) {
