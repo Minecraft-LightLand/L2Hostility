@@ -385,19 +385,19 @@ public class LHConfig {
 			builder.push("traits", "Trait Settings");
 			{
 				tankHealth = builder.text("Health bonus for Tank trait per level")
-						.defineInRange("tankHealth", 0.5, 0, 1000);
+						.defineInRange("tankHealth", 0.2, 0, 1000);
 				tankArmor = builder.text("Armor bonus for Tank trait per level")
-						.defineInRange("tankArmor", 10d, 0, 1000);
+						.defineInRange("tankArmor", 4d, 0, 1000);
 				tankTough = builder.text("Toughness bonus for Tank trait per level")
 						.defineInRange("tankTough", 4d, 0, 1000);
 				speedy = builder.text("Speed bonus for Speedy trait per level")
 						.defineInRange("speedy", 0.2, 0, 1000);
 				regen = builder.text("Regen rate for Regeneration trait per second per level")
-						.defineInRange("regen", 0.02, 0, 1000);
+						.defineInRange("regen", 0.01, 0, 1000);
 				adaptFactor = builder.text("Damage factor for Adaptive. Higher means less reduction")
 						.defineInRange("adaptFactor", 0.5, 0, 1000);
-				reflectFactor = builder.text("Reflect factor per level for Reflect. 0.5 means +50% extra damage")
-						.defineInRange("reflectFactor", 0.3, 0, 1000);
+				reflectFactor = builder.text("Reflect factor per level for Reflect. 0.5 means reflect 50% damage (then scaled by level bonus)")
+						.defineInRange("reflectFactor", 0.1, 0, 1000);
 				dispellTime = builder.text("Duration in ticks for enchantments to be disabled per level for Dispell")
 						.defineInRange("dispellTime", 200, 1, 60000);
 				fieryTime = builder.text("Duration in seconds to set target on fire by Fiery")
@@ -405,21 +405,21 @@ public class LHConfig {
 				weakTime = builder.text("Duration in ticks for Weakness")
 						.defineInRange("weakTime", 200, 0, 3000);
 				slowTime = builder.text("Duration in ticks for Slowness")
-						.defineInRange("slowTime", 200, 0, 3000);
+						.defineInRange("slowTime", 160, 0, 3000);
 				poisonTime = builder.text("Duration in ticks for Poison")
 						.defineInRange("poisonTime", 200, 0, 3000);
 				witherTime = builder.text("Duration in ticks for Wither")
 						.defineInRange("witherTime", 200, 0, 3000);
 				levitationTime = builder.text("Duration in ticks for Levitation")
-						.defineInRange("levitationTime", 200, 0, 3000);
+						.defineInRange("levitationTime", 100, 0, 3000);
 				blindTime = builder.text("Duration in ticks for Blindness")
 						.defineInRange("blindTime", 200, 0, 3000);
 				confusionTime = builder.text("Duration in ticks for Nausea")
-						.defineInRange("confusionTime", 200, 0, 3000);
+						.defineInRange("confusionTime", 160, 0, 3000);
 				soulBurnerTime = builder.text("Duration in ticks for Soul Burner")
 						.defineInRange("soulBurnerTime", 60, 0, 3000);
 				freezingTime = builder.text("Duration in ticks for Freezing")
-						.defineInRange("freezingTime", 200, 0, 3000);
+						.defineInRange("freezingTime", 100, 0, 3000);
 				curseTime = builder.text("Duration in ticks for Cursed")
 						.defineInRange("curseTime", 200, 0, 3000);
 				teleportDuration = builder.text("Interval in ticks for Teleport")
@@ -429,14 +429,14 @@ public class LHConfig {
 				repellRange = builder.text("Range in blocks for Repell")
 						.defineInRange("repellRange", 10, 0, 64);
 				repellStrength = builder.text("Repell force strength, default is 0.2")
-						.defineInRange("repellStrength", 0.2, 0, 1);
+						.defineInRange("repellStrength", 0.15, 0, 1);
 
 				corrosionDurability = builder.text("Fraction of remaining durability to corrode, per trait rank")
-						.defineInRange("corrosionDurability", 0.3, 0, 1);
+						.defineInRange("corrosionDurability", 0.1, 0, 1);
 				corrosionDamage = builder.text("Damage bonus when nothing to corrode")
 						.defineInRange("corrosionDamage", 0.25, 0, 1);
 				erosionDurability = builder.text("Fraction of lost durability to erode, per trait rank")
-						.defineInRange("erosionDurability", 0.1, 0, 1);
+						.defineInRange("erosionDurability", 0.05, 0, 1);
 				erosionDamage = builder.text("Damage bonus when nothing to erode")
 						.defineInRange("erosionDamage", 0.25, 0, 1);
 				ragnarokTime = builder.text("Seal time per level for Ragnarok")
@@ -446,7 +446,7 @@ public class LHConfig {
 				ragnarokSealSlotAdder = builder.text("Allow Ragnarok to seal curios items that adds curios slot")
 						.define("ragnarokSealSlotAdder", false);
 				killerAuraDamage = builder.text("Damage for killer aura")
-						.defineInRange("killerAuraDamage", 10, 1, 10000);
+						.defineInRange("killerAuraDamage", 6, 1, 10000);
 				killerAuraRange = builder.text("Range for for killer aura")
 						.defineInRange("killerAuraRange", 6, 1, 32);
 				killerAuraInterval = builder.text("Interval for for killer aura")
@@ -471,7 +471,7 @@ public class LHConfig {
 				pullingRange = builder.text("Range in blocks for Pulling")
 						.defineInRange("pullingRange", 10, 0, 64);
 				pullingStrength = builder.text("Pulling force strength, default is 0.2")
-						.defineInRange("pullingStrength", 0.2, 0, 10);
+						.defineInRange("pullingStrength", 0.15, 0, 10);
 				reprintDamage = builder.text("Reprint damage factor per enchantment point")
 						.defineInRange("reprintDamage", 0.02, 0, 1);
 				reprintBypass = builder.text("Reprint will gain Void Touch 20 and Vanishing Curse when it hits a mob with max Enchantment level of X or higher")

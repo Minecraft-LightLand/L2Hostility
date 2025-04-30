@@ -94,7 +94,7 @@ public class LHTraits {
 
 			PROTECTION = L2Hostility.REGISTRATE.regTrait("protection",
 					() -> new SelfEffectTrait(MobEffects.DAMAGE_RESISTANCE),
-							new TraitConfig(30, 100, 4, 50))
+							new TraitConfig(40, 100, 4, 50))
 					.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS))
 					.lang("Protected").register();
 
@@ -129,25 +129,25 @@ public class LHTraits {
 
 			SHULKER = L2Hostility.REGISTRATE.regTrait("shulker", () -> new ShulkerTrait(ChatFormatting.LIGHT_PURPLE,
 									LHConfig.SERVER.shulkerInterval::get, BulletType.PLAIN, 0),
-							new TraitConfig(30, 100, 1, 70))
+							new TraitConfig(50, 100, 1, 70))
 					.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS))
 					.desc("Shoot bullets every %s seconds after the previous bullet disappears.")
 					.lang("Shulker").register();
 
 			GRENADE = L2Hostility.REGISTRATE.regTrait("grenade", () -> new ShulkerTrait(ChatFormatting.RED,
 									LHConfig.SERVER.grenadeInterval::get, BulletType.EXPLODE, 15),
-							new TraitConfig(50, 100, 5, 100))
+							new TraitConfig(100, 100, 5, 100))
 					.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS))
 					.desc("Shoot explosive bullets every %s seconds after the previous bullet disappears.")
 					.lang("Grenade").register();
 
 			CORROSION = L2Hostility.REGISTRATE.regTrait("corrosion", () -> new CorrosionTrait(ChatFormatting.DARK_RED),
-							new TraitConfig(50, 50, 3, 200))
+							new TraitConfig(120, 50, 3, 200))
 					.desc("When hit target, randomly picks %s equipments and increase their durability loss by %s. When there aren't enough equipments, increase damage by %s per piece")
 					.lang("Corrosion").register();
 
 			EROSION = L2Hostility.REGISTRATE.regTrait("erosion", () -> new ErosionTrait(ChatFormatting.DARK_BLUE),
-							new TraitConfig(50, 50, 3, 200))
+							new TraitConfig(120, 50, 3, 200))
 					.desc("When hit target, randomly picks %s equipments and reduce their durability by %s. When there aren't enough equipments, increase damage by %s per piece")
 					.lang("Erosion").register();
 
@@ -157,7 +157,7 @@ public class LHTraits {
 					.lang("Growth").register();
 
 			SPLIT = L2Hostility.REGISTRATE.regTrait("split", () -> new SplitTrait(ChatFormatting.GREEN),
-							new TraitConfig(50, 100, 3, 120))
+							new TraitConfig(70, 100, 3, 120))
 					.addWhitelist(e -> e.add(
 							EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
 							EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.HUSK,
@@ -182,11 +182,11 @@ public class LHTraits {
 					.lang("Counter Strike").register();
 
 			GRAVITY = L2Hostility.REGISTRATE.regTrait("gravity", () -> new GravityTrait(LHEffects.GRAVITY),
-							new TraitConfig(50, 100, 3, 80))
+							new TraitConfig(50, 25, 3, 80))
 					.desc("Increase gravity for mobs around it. Knock attackers downward when damaged.").lang("Gravity").register();
 
 			MOONWALK = L2Hostility.REGISTRATE.regTrait("moonwalk", () -> new AuraEffectTrait(LHEffects.MOONWALK),
-							new TraitConfig(50, 100, 3, 80))
+							new TraitConfig(50, 25, 3, 80))
 					.desc("Decrease gravity for mobs around it").lang("Moonwalk").register();
 
 			ARENA = L2Hostility.REGISTRATE.regTrait("arena", ArenaTrait::new,
@@ -218,7 +218,7 @@ public class LHTraits {
 					.desc("Mob will attempt to teleport to avoid physical damage and track targets.")
 					.lang("Teleport").register();
 			REPELLING = L2Hostility.REGISTRATE.regTrait("repelling", () -> new RepellingTrait(ChatFormatting.DARK_GREEN),
-							new TraitConfig(50, 100, 1, 100))
+							new TraitConfig(80, 50, 1, 100))
 					.addWhitelist(e -> e.add(
 							EntityType.SKELETON, EntityType.STRAY,
 							EntityType.PILLAGER, EntityType.EVOKER, EntityType.WITCH,
@@ -228,7 +228,7 @@ public class LHTraits {
 					.lang("Repelling").register();
 
 			PULLING = L2Hostility.REGISTRATE.regTrait("pulling", () -> new PullingTrait(ChatFormatting.DARK_BLUE),
-							new TraitConfig(50, 100, 1, 100))
+							new TraitConfig(80, 50, 1, 100))
 					.addWhitelist(e -> e.addTag(LHTagGen.MELEE_WEAPON_TARGET))
 					.desc("Mob will pull entities hostile to it within %s blocks.")
 					.lang("Pulling").register();
@@ -244,7 +244,7 @@ public class LHTraits {
 					.lang("Killer Aura").register();
 
 			RAGNAROK = L2Hostility.REGISTRATE.regTrait("ragnarok", () -> new RagnarokTrait(ChatFormatting.DARK_BLUE),
-							new TraitConfig(200, 50, 3, 600))
+							new TraitConfig(300, 100, 3, 600))
 					.desc("When hit target, randomly picks %s equipments and seal them, which takes %ss to unseal.")
 					.lang("Ragnarok").register();
 
@@ -259,35 +259,35 @@ public class LHTraits {
 		{
 			WEAKNESS = L2Hostility.REGISTRATE.regTrait("weakness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.WEAKNESS, LHConfig.SERVER.weakTime.get(), lv - 1)),
-					new TraitConfig(25, 50, 5, 40)
+					new TraitConfig(30, 50, 5, 40)
 			).tag(TRAIT_TAGS, POTION).lang("Weakener").register();
 			SLOWNESS = L2Hostility.REGISTRATE.regTrait("slowness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, LHConfig.SERVER.slowTime.get(), lv)),
-					new TraitConfig(10, 100, 5, 20)
+					new TraitConfig(20, 50, 5, 20)
 			).tag(TRAIT_TAGS, POTION).lang("Stray").register();
 			POISON = L2Hostility.REGISTRATE.regTrait("poison", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.POISON, LHConfig.SERVER.poisonTime.get() * lv)),
-					new TraitConfig(15, 100, 3, 20)
+					new TraitConfig(20, 75, 3, 20)
 			).tag(TRAIT_TAGS, POTION).lang("Poisonous").register();
 			WITHER = L2Hostility.REGISTRATE.regTrait("wither", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.WITHER, LHConfig.SERVER.witherTime.get(), lv - 1)),
-					new TraitConfig(15, 50, 3, 20)
+					new TraitConfig(20, 50, 3, 20)
 			).tag(TRAIT_TAGS, POTION).lang("Withering").register();
 			LEVITATION = L2Hostility.REGISTRATE.regTrait("levitation", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.LEVITATION, LHConfig.SERVER.levitationTime.get() * lv)),
-					new TraitConfig(25, 50, 3, 40)
+					new TraitConfig(50, 50, 3, 50)
 			).tag(TRAIT_TAGS, POTION).lang("Levitater").register();
 			BLIND = L2Hostility.REGISTRATE.regTrait("blindness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.BLINDNESS, LHConfig.SERVER.blindTime.get() * lv)),
-					new TraitConfig(30, 50, 3, 40)
+					new TraitConfig(30, 25, 3, 40)
 			).tag(TRAIT_TAGS, POTION).lang("Blinder").register();
 			CONFUSION = L2Hostility.REGISTRATE.regTrait("nausea", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.CONFUSION, LHConfig.SERVER.confusionTime.get() * lv)),
-					new TraitConfig(30, 50, 3, 40)
+					new TraitConfig(30, 25, 3, 40)
 			).tag(TRAIT_TAGS, POTION).lang("Distorter").register();
 			SOUL_BURNER = L2Hostility.REGISTRATE.regTrait("soul_burner", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.FLAME, LHConfig.SERVER.soulBurnerTime.get(), lv - 1)),
-					new TraitConfig(50, 100, 3, 70)
+					new TraitConfig(50, 50, 3, 70)
 			).tag(TRAIT_TAGS, POTION).lang("Soul Burner").register();
 			FREEZING = L2Hostility.REGISTRATE.regTrait("freezing", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.ICE, LHConfig.SERVER.freezingTime.get() * lv)),
