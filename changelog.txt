@@ -1,3 +1,5 @@
+2.5.5
+
 2.5.4
 - Allow mobs with high level to use special items from L2Complements
 - After you defeat Cataclysm bosses, mobs might be able to use respective weapons

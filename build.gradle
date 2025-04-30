@@ -202,16 +202,16 @@ repositories {
 dependencies {
     implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}-slim")
     implementation fg.deobf("dev.xkmc.l2serial:l2serial:1.2.2")
-    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.5.2-slim")
+    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.5.5-slim")
 
     implementation(jarJar(fg.deobf("dev.xkmc.l2modularblock:l2modularblock:1.1.0"))) {
         transitive = false
         jarJar.ranged(it, "[1.1.0,)")
     }
 
-    implementation(jarJar(fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.4.1"))) {
+    implementation(jarJar(fg.deobf("dev.xkmc.l2damagetracker:l2damagetracker:0.4.3"))) {
         transitive = false
-        jarJar.ranged(it, "[0.4.1,)")
+        jarJar.ranged(it, "[0.4.3,)")
     }
 
     implementation(jarJar(fg.deobf("dev.xkmc.mob_weapon_api:mob_weapon_api:0.2.3"))) {
