@@ -22,6 +22,7 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2magic.init.registrate.LMItems;
+import dev.xkmc.pandora.init.data.PandoraTagGen;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Holder;
@@ -150,11 +151,11 @@ public class LHItems {
 
 			TagKey<Item> charm = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "charm"));
 			TagKey<Item> curse = LHTagGen.CURSE_SLOT;
-
-			LOOT_1 = curio("charm_of_looting_1", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL).lang("Unpolished Looting Charm").register();
-			LOOT_2 = curio("charm_of_looting_2", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL).lang("Magical Looting Charm").register();
-			LOOT_3 = curio("charm_of_looting_3", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL).lang("Chaotic Looting Charm").register();
-			LOOT_4 = curio("charm_of_looting_4", LootingCharm::new).tag(charm, curse, LHTagGen.NO_SEAL).lang("Miraculous Looting Charm").register();
+			TagKey<Item> pandora = PandoraTagGen.PANDORA_SLOT;
+			LOOT_1 = curio("charm_of_looting_1", LootingCharm::new).tag(charm, pandora, LHTagGen.NO_SEAL).lang("Unpolished Looting Charm").register();
+			LOOT_2 = curio("charm_of_looting_2", LootingCharm::new).tag(charm, pandora, LHTagGen.NO_SEAL).lang("Magical Looting Charm").register();
+			LOOT_3 = curio("charm_of_looting_3", LootingCharm::new).tag(charm, pandora, LHTagGen.NO_SEAL).lang("Chaotic Looting Charm").register();
+			LOOT_4 = curio("charm_of_looting_4", LootingCharm::new).tag(charm, pandora, LHTagGen.NO_SEAL).lang("Miraculous Looting Charm").register();
 
 			CURSE_ENVY = curio("curse_of_envy", CurseOfEnvy::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();
 			CURSE_GLUTTONY = curio("curse_of_gluttony", CurseOfGluttony::new).tag(chaos, charm, curse, LHTagGen.NO_SEAL).register();

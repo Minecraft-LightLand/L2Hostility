@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-30T18:20:23.92669	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
+// 1.21.1	2025-05-24T18:39:54.135912	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -132,7 +132,8 @@ fdc7657e3e7740b40292c08d64c39d48a608f54a data/cataclysm/l2hostility_config/weapo
 801a68ce0482049c4c2efe45f9de4366b8ff6691 data/curios/tags/item/charm.json
 6b3db265ef90a4cf6af5cc3775209c4a04a67c42 data/curios/tags/item/hands.json
 63302afd6032fba91cf0e46be0c7c05285866cb9 data/curios/tags/item/head.json
-2c284131fbc1b0e5a82ea8e58c842877ab471350 data/curios/tags/item/hostility_curse.json
+17019eeb14aa488fce1823ecf9dff59fa84c2103 data/curios/tags/item/hostility_curse.json
+2ba04a63b5c2b3a5a5de47acccf2268a35a0267f data/curios/tags/item/pandora.json
 07bd595b2d5d2719859468c3c29425b5232e72ba data/curios/tags/item/ring.json
 b08d54218fcbedee007aa32dce3fa7e334b48c7f data/gateways/advancement/recipes/misc/hostility/growth.json
 bb6f94597a939d6ca78f8a82bb4aca546f1a8e7a data/gateways/advancement/recipes/misc/hostility/split.json

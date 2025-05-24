@@ -95,7 +95,7 @@ public class CurioCompat {
 
 	private static boolean hasItemImpl(LivingEntity player, Item item) {
 		var opt = CuriosApi.getCuriosInventory(player);
-		return opt.flatMap(e -> e.findFirstCurio(item)).isPresent();
+		return opt.isPresent() && opt.get().isEquipped(item);
 
 	}
 
