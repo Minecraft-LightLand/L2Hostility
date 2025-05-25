@@ -54,7 +54,11 @@ public class TraitSymbol extends Item {
 	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
 		var opt = LHMiscs.MOB.type().getExisting(target);
 		if (opt.isEmpty()) return InteractionResult.PASS;
-		MobTraitCap cap = LHMiscs.MOB.type().getOrCreate(target);
+		if (!LHMiscs.MOB.type().isProper(target)) {
+			if (!player.getAbilities().instabuild)
+				return InteractionResult.FAIL;
+		}
+		MobTraitCap cap = opt.get();
 		MobTrait trait = get();
 		if (!allow(player, trait, target)) {
 			if (player instanceof ServerPlayer sp) {

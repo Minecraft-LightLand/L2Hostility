@@ -5,10 +5,10 @@ import dev.xkmc.l2hostility.content.capability.mob.CapStorageData;
 import dev.xkmc.l2hostility.content.entity.BulletType;
 import dev.xkmc.l2hostility.content.entity.HostilityBullet;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
-import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -52,25 +52,26 @@ public class ShulkerTrait extends MobTrait {
 	@Override
 	public void tick(LivingEntity e, int level) {
 		if (e.level().isClientSide()) return;
-		if (e instanceof Mob mob && LHMiscs.MOB.type().isProper(mob)) {
-			var data = LHMiscs.MOB.type().getOrCreate(mob).getOrCreateData(getRegistryName(), Data::new);
-			if (data.uuid != null &&
-					mob.level() instanceof ServerLevel sl &&
-					sl.getEntity(data.uuid) instanceof ShulkerBullet)
-				return;
-			data.tickCount++;
-			if (data.tickCount < interval.getAsInt()) return;
-			if ((mob.tickCount + offset) % interval.getAsInt() != 0) return;
-			if (mob.getTarget() != null && mob.getTarget().isAlive()) {
-				var bullet = new HostilityBullet(mob.level(), mob, mob.getTarget(),
-						Direction.Axis.Y, type, level);
-				data.tickCount = 0;
-				if (type.limit())
-					data.uuid = bullet.getUUID();
-				mob.level().addFreshEntity(bullet);
-				mob.playSound(SoundEvents.SHULKER_SHOOT, 2.0F,
-						(mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);
-			}
+		if (!(e instanceof Mob mob)) return;
+		var opt = LHMiscs.MOB.type().getExisting(e);
+		if (opt.isEmpty()) return;
+		var data = opt.get().getOrCreateData(getRegistryName(), Data::new);
+		if (data.uuid != null &&
+				mob.level() instanceof ServerLevel sl &&
+				sl.getEntity(data.uuid) instanceof ShulkerBullet)
+			return;
+		data.tickCount++;
+		if (data.tickCount < interval.getAsInt()) return;
+		if ((mob.tickCount + offset) % interval.getAsInt() != 0) return;
+		if (mob.getTarget() != null && mob.getTarget().isAlive()) {
+			var bullet = new HostilityBullet(mob.level(), mob, mob.getTarget(),
+					Direction.Axis.Y, type, level);
+			data.tickCount = 0;
+			if (type.limit())
+				data.uuid = bullet.getUUID();
+			mob.level().addFreshEntity(bullet);
+			mob.playSound(SoundEvents.SHULKER_SHOOT, 2.0F,
+					(mob.getRandom().nextFloat() - mob.getRandom().nextFloat()) * 0.2F + 1.0F);
 		}
 	}
 

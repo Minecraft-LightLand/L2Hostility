@@ -74,8 +74,11 @@ public class CapabilityEvents {
 				mob.setAbsorptionAmount(0);
 			}
 		}
-		if (LHMiscs.MOB.type().isProper(mob))
-			LHMiscs.MOB.type().getOrCreate(mob).tick(mob);
+
+		var opt = LHMiscs.MOB.type().getExisting(mob);
+		if (opt.isEmpty() && !LHMiscs.MOB.type().isProper(mob)) return;
+		MobTraitCap cap = opt.orElse(LHMiscs.MOB.type().getOrCreate(mob));
+		cap.tick(mob);
 	}
 
 	@SubscribeEvent

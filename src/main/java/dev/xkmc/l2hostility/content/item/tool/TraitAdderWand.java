@@ -78,22 +78,22 @@ public class TraitAdderWand extends BaseWand {
 
 	@Override
 	public void clickTarget(ItemStack stack, Player player, LivingEntity target) {
-		if (LHMiscs.MOB.type().isProper(target)) {
-			MobTraitCap cap = LHMiscs.MOB.type().getOrCreate(target);
-			MobTrait trait = get(stack);
-			Integer ans;
-			if (player.isShiftKeyDown()) {
-				ans = cap.traits.compute(trait, TraitAdderWand::decrease);
-			} else {
-				ans = cap.traits.compute(trait, TraitAdderWand::increase);
-			}
-			int val = ans == null ? 0 : ans;
-			trait.initialize(target, val);
-			trait.postInit(target, val);
-			cap.syncToClient(target);
-			target.setHealth(target.getMaxHealth());
-			player.sendSystemMessage(LangData.MSG_SET_TRAIT.get(trait.getDesc(), target.getDisplayName(), val));
+		var opt = LHMiscs.MOB.type().getExisting(target);
+		if (opt.isEmpty() && !LHMiscs.MOB.type().isProper(target)) return;
+		MobTraitCap cap = opt.orElse(LHMiscs.MOB.type().getOrCreate(target));
+		MobTrait trait = get(stack);
+		Integer ans;
+		if (player.isShiftKeyDown()) {
+			ans = cap.traits.compute(trait, TraitAdderWand::decrease);
+		} else {
+			ans = cap.traits.compute(trait, TraitAdderWand::increase);
 		}
+		int val = ans == null ? 0 : ans;
+		trait.initialize(target, val);
+		trait.postInit(target, val);
+		cap.syncToClient(target);
+		target.setHealth(target.getMaxHealth());
+		player.sendSystemMessage(LangData.MSG_SET_TRAIT.get(trait.getDesc(), target.getDisplayName(), val));
 	}
 
 	@Override

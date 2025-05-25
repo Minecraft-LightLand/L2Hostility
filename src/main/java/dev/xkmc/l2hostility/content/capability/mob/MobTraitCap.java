@@ -348,8 +348,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	public boolean isMasterProtected() {
 		if (asMaster != null) {
 			for (var e : asMaster.data) {
-				if (e.minion != null && LHMiscs.MOB.type().isProper(e.minion)) {
-					var scap = LHMiscs.MOB.type().getOrCreate(e.minion);
+				if (e.minion == null) continue;
+				var opt = LHMiscs.MOB.type().getExisting(e.minion);
+				if (opt.isPresent()) {
+					var scap = opt.get();
 					if (scap.asMinion != null && scap.asMinion.protectMaster)
 						return true;
 				}

@@ -1,15 +1,10 @@
 package dev.xkmc.l2hostility.compat.kubejs;
 
 import dev.xkmc.l2damagetracker.compat.CustomAttackListener;
-import dev.xkmc.l2damagetracker.compat.SingletonDamageTypeWrapper;
-import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
-import dev.xkmc.l2damagetracker.contents.damage.DamageState;
-import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,7 +16,7 @@ public class L2HHelper {
 
 	@Nullable
 	public static MobTraitCap of(Entity e) {
-		if (e instanceof Mob mob && LHMiscs.MOB.type().isProper(mob)) {
+		if (e instanceof Mob mob) {
 			return LHMiscs.MOB.type().getExisting(mob).orElse(null);
 		}
 		return null;
