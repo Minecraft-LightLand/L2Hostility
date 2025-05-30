@@ -66,7 +66,7 @@ public class TraitSymbol extends Item {
 			}
 			return InteractionResult.FAIL;
 		}
-		if (cap.getTraitLevel(trait) >= trait.getMaxLevel()) {
+		if (cap.getTraitLevel(trait) >= trait.getMaxLevel(player.registryAccess())) {
 			if (player instanceof ServerPlayer sp) {
 				sp.sendSystemMessage(LangData.MSG_ERR_MAX.get().withStyle(ChatFormatting.RED), true);
 			}
@@ -101,13 +101,15 @@ public class TraitSymbol extends Item {
 			list.add(LangData.TOOLTIP_LEGENDARY.get().withStyle(ChatFormatting.GOLD));
 		}
 		var level = ctx.level();
-		if (flag.hasShiftDown() && level != null) {
-			var config = get().getConfig(level.registryAccess());
+		if (level == null) return;
+		var access = level.registryAccess();
+		if (flag.hasShiftDown()) {
+			var config = get().getConfig(access);
 			list.add(LangData.TOOLTIP_MIN_LEVEL.get(Component.literal(config.min_level() + "").withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.GRAY));
 			list.add(LangData.TOOLTIP_LEVEL_COST.get(Component.literal(config.cost() + "").withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.GRAY));
 			list.add(LangData.TOOLTIP_WEIGHT.get(Component.literal(config.weight() + "").withStyle(ChatFormatting.DARK_AQUA)).withStyle(ChatFormatting.DARK_GRAY));
 		} else {
-			get().addDetail(list);
+			get().addDetail(access, list);
 			list.add(LangData.SHIFT.get().withStyle(ChatFormatting.GRAY));
 		}
 	}

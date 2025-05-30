@@ -10,6 +10,7 @@ import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2serial.serialization.marker.SerialClass;
 import dev.xkmc.l2serial.serialization.marker.SerialField;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
@@ -49,11 +50,11 @@ public class AdaptingTrait extends MobTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
 						Component.literal((int) Math.round(100 * (1 - LHConfig.SERVER.adaptFactor.get())) + "")
 								.withStyle(ChatFormatting.AQUA),
-						mapLevel(i -> Component.literal("" + i)
+						mapLevel(access, i -> Component.literal("" + i)
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

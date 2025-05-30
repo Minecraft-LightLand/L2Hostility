@@ -9,6 +9,7 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHEnchantments;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -63,9 +64,9 @@ public class ReprintTrait extends MobTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-						mapLevel(i -> Component.literal(Math.round(LHConfig.SERVER.reprintDamage.get() * i * 100) + "%")
+						mapLevel(access, i -> Component.literal(Math.round(LHConfig.SERVER.reprintDamage.get() * i * 100) + "%")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.content.traits.base;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,11 +42,11 @@ public class AttributeTrait extends MobTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		for (var e : entries) {
 			double val = e.factor.getAsDouble();
 			if (val == 0) continue;
-			list.add(mapLevel(i -> e.attribute().value().toValueComponent(e.op, val * i, TooltipFlag.NORMAL)
+			list.add(mapLevel(access, i -> e.attribute().value().toValueComponent(e.op, val * i, TooltipFlag.NORMAL)
 					.withStyle(ChatFormatting.AQUA)).append(CommonComponents.SPACE).append(
 					Component.translatable(e.attribute.value().getDescriptionId()).withStyle(ChatFormatting.BLUE)));
 		}

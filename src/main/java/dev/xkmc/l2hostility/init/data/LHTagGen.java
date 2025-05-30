@@ -52,6 +52,7 @@ public class LHTagGen {
 	public static final TagKey<EntityType<?>> WHITELIST = createEntityTag("whitelist");
 	public static final TagKey<EntityType<?>> NO_SCALING = createEntityTag("no_scaling");
 	public static final TagKey<EntityType<?>> NO_TRAIT = createEntityTag("no_trait");
+	public static final TagKey<EntityType<?>> HOSTILITY_SPAWNER_BLACKLIST = createEntityTag("hostility_spawner_blacklist");
 
 	public static final TagKey<EntityType<?>> SEMIBOSS = createEntityTag("semiboss");
 	public static final TagKey<EntityType<?>> NO_DROP = createEntityTag("no_drop");
@@ -94,7 +95,7 @@ public class LHTagGen {
 		pvd.addTag(WHITELIST);
 		pvd.addTag(NO_SCALING).addTag(BLACKLIST);
 		pvd.addTag(NO_TRAIT).addTag(BLACKLIST).add(EntityType.ENDERMITE);
-
+		pvd.addTag(HOSTILITY_SPAWNER_BLACKLIST).addTags(NO_SCALING, NO_TRAIT);
 		pvd.addTag(ARMOR_TARGET).add(
 				EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
 				EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON,

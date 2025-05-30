@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,7 +30,7 @@ public class EnvyLootModifier extends LootModifier {
 	protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> list, LootContext context) {
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
 			var opt = LHMiscs.MOB.type().getExisting(le);
-			if (opt.isPresent()) {
+			if (opt.isPresent() && !le.getType().is(LHTagGen.NO_DROP)) {
 				MobTraitCap cap = opt.get();
 				double factor = cap.dropRate;
 				if (context.hasParam(LootContextParams.LAST_DAMAGE_PLAYER)) {

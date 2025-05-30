@@ -5,6 +5,7 @@ import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -28,12 +29,12 @@ public class SelfEffectTrait extends MobTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(LangData.TOOLTIP_SELF_EFFECT.get());
 		ChatFormatting color = effect.value().getCategory().getTooltipFormatting();
-		if (getMaxLevel() == 1) {
+		if (getMaxLevel(access) == 1) {
 			list.add(effect.value().getDisplayName().copy().withStyle(color));
-		} else list.add(mapLevel(e ->
+		} else list.add(mapLevel(access, e ->
 				Component.translatable("potion.withAmplifier", effect.value().getDisplayName(),
 								Component.translatable("potion.potency." + (e - 1)))
 						.withStyle(color))

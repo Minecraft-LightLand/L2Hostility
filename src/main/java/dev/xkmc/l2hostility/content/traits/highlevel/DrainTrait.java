@@ -9,6 +9,7 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -64,15 +65,15 @@ public class DrainTrait extends MobTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-				mapLevel(i -> Component.literal(i + "")
+				mapLevel(access, i -> Component.literal(i + "")
 						.withStyle(ChatFormatting.AQUA)),
-				mapLevel(i -> Component.literal(Math.round(i * LHConfig.SERVER.drainDamage.get() * 100) + "%")
+				mapLevel(access, i -> Component.literal(Math.round(i * LHConfig.SERVER.drainDamage.get() * 100) + "%")
 						.withStyle(ChatFormatting.AQUA)),
-				mapLevel(i -> Component.literal(Math.round(i * LHConfig.SERVER.drainDuration.get() * 100) + "%")
+				mapLevel(access, i -> Component.literal(Math.round(i * LHConfig.SERVER.drainDuration.get() * 100) + "%")
 						.withStyle(ChatFormatting.AQUA)),
-				mapLevel(i -> Component.literal(Math.round(i * LHConfig.SERVER.drainDurationMax.get() / 20f) + "")
+				mapLevel(access, i -> Component.literal(Math.round(i * LHConfig.SERVER.drainDurationMax.get() / 20f) + "")
 						.withStyle(ChatFormatting.AQUA))
 		).withStyle(ChatFormatting.GRAY));
 	}

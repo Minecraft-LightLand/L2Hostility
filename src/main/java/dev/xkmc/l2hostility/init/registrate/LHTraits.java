@@ -7,6 +7,7 @@ import dev.xkmc.l2core.init.L2TagGen;
 import dev.xkmc.l2core.init.reg.datapack.DataMapReg;
 import dev.xkmc.l2core.init.reg.registrate.L2Registrate;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.config.TraitExclusion;
 import dev.xkmc.l2hostility.content.entity.BulletType;
 import dev.xkmc.l2hostility.content.traits.base.AttributeTrait;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
@@ -36,6 +37,9 @@ public class LHTraits {
 
 	public static final DataMapReg<MobTrait, TraitConfig> DATA =
 			L2Hostility.REG.dataMap("trait_data", LHTraits.TRAITS.key(), TraitConfig.class);
+
+	public static final DataMapReg<MobTrait, TraitExclusion> EXCLUSION =
+			L2Hostility.REG.dataMap("trait_exclusion", LHTraits.TRAITS.key(), TraitExclusion.class);
 
 	public static final ProviderType<RegistrateTagsProvider.IntrinsicImpl<MobTrait>> TRAIT_TAGS =
 			L2TagGen.getProvider(TRAITS.key(), TRAITS.reg());
@@ -138,6 +142,7 @@ public class LHTraits {
 									LHConfig.SERVER.grenadeInterval::get, BulletType.EXPLODE, 15),
 							new TraitConfig(100, 100, 5, 100))
 					.addBlacklist(e -> e.addTag(LHTagGen.SEMIBOSS))
+					.dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(SHULKER, 1).build())
 					.desc("Shoot explosive bullets every %s seconds after the previous bullet disappears.")
 					.lang("Grenade").register();
 
@@ -148,6 +153,7 @@ public class LHTraits {
 
 			EROSION = L2Hostility.REGISTRATE.regTrait("erosion", () -> new ErosionTrait(ChatFormatting.DARK_BLUE),
 							new TraitConfig(120, 50, 3, 200))
+					.dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(CORROSION, 1).build())
 					.desc("When hit target, randomly picks %s equipments and reduce their durability by %s. When there aren't enough equipments, increase damage by %s per piece")
 					.lang("Erosion").register();
 
@@ -187,6 +193,7 @@ public class LHTraits {
 
 			MOONWALK = L2Hostility.REGISTRATE.regTrait("moonwalk", () -> new AuraEffectTrait(LHEffects.MOONWALK),
 							new TraitConfig(50, 25, 3, 80))
+					.dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(GRAVITY, 1).build())
 					.desc("Decrease gravity for mobs around it").lang("Moonwalk").register();
 
 			ARENA = L2Hostility.REGISTRATE.regTrait("arena", ArenaTrait::new,
@@ -201,10 +208,13 @@ public class LHTraits {
 		{
 			DEMENTOR = L2Hostility.REGISTRATE.regTrait("dementor", () -> new DementorTrait(ChatFormatting.DARK_GRAY),
 							new TraitConfig(120, 50, 1, 150))
+					.dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(ADAPTIVE, 0.5).build())
 					.desc("Immune to physical damage. Damage bypass armor.")
 					.lang("Dementor").register();
+
 			DISPELL = L2Hostility.REGISTRATE.regTrait("dispell", () -> new DispellTrait(ChatFormatting.DARK_PURPLE),
 							new TraitConfig(100, 50, 3, 150))
+					.dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(DEMENTOR, 0.75).of(ADAPTIVE, 0.5).build())
 					.desc("Immune to magic damage. Damage bypass magical protections. Randomly picks %s enchanted equipment and disable enchantments on them for %s seconds.")
 					.lang("Dispell").register();
 			UNDYING = L2Hostility.REGISTRATE.regTrait("undying", () -> new UndyingTrait(ChatFormatting.DARK_BLUE),
@@ -230,6 +240,7 @@ public class LHTraits {
 			PULLING = L2Hostility.REGISTRATE.regTrait("pulling", () -> new PullingTrait(ChatFormatting.DARK_BLUE),
 							new TraitConfig(80, 50, 1, 100))
 					.addWhitelist(e -> e.addTag(LHTagGen.MELEE_WEAPON_TARGET))
+					.dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(REPELLING, 1).build())
 					.desc("Mob will pull entities hostile to it within %s blocks.")
 					.lang("Pulling").register();
 
@@ -272,11 +283,13 @@ public class LHTraits {
 			WITHER = L2Hostility.REGISTRATE.regTrait("wither", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.WITHER, LHConfig.SERVER.witherTime.get(), lv - 1)),
 					new TraitConfig(20, 50, 3, 20)
-			).tag(TRAIT_TAGS, POTION).lang("Withering").register();
+					).dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(POISON, 0.5).build())
+					.tag(TRAIT_TAGS, POTION).lang("Withering").register();
 			LEVITATION = L2Hostility.REGISTRATE.regTrait("levitation", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.LEVITATION, LHConfig.SERVER.levitationTime.get() * lv)),
 					new TraitConfig(50, 50, 3, 50)
-			).tag(TRAIT_TAGS, POTION).lang("Levitater").register();
+					).dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(SLOWNESS, 0.5).build())
+					.tag(TRAIT_TAGS, POTION).lang("Levitater").register();
 			BLIND = L2Hostility.REGISTRATE.regTrait("blindness", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.BLINDNESS, LHConfig.SERVER.blindTime.get() * lv)),
 					new TraitConfig(30, 25, 3, 40)
@@ -284,15 +297,18 @@ public class LHTraits {
 			CONFUSION = L2Hostility.REGISTRATE.regTrait("nausea", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(MobEffects.CONFUSION, LHConfig.SERVER.confusionTime.get() * lv)),
 					new TraitConfig(30, 25, 3, 40)
-			).tag(TRAIT_TAGS, POTION).lang("Distorter").register();
+					).dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(BLIND, 0.5).build())
+					.tag(TRAIT_TAGS, POTION).lang("Distorter").register();
 			SOUL_BURNER = L2Hostility.REGISTRATE.regTrait("soul_burner", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.FLAME, LHConfig.SERVER.soulBurnerTime.get(), lv - 1)),
 					new TraitConfig(50, 50, 3, 70)
-			).tag(TRAIT_TAGS, POTION).lang("Soul Burner").register();
+					).dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(POISON, 0.5).of(WITHER, 0.5).of(FIERY, 1).build())
+					.tag(TRAIT_TAGS, POTION).lang("Soul Burner").register();
 			FREEZING = L2Hostility.REGISTRATE.regTrait("freezing", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.ICE, LHConfig.SERVER.freezingTime.get() * lv)),
 					new TraitConfig(30, 50, 3, 50)
-			).tag(TRAIT_TAGS, POTION).lang("Freezing").register();
+					).dataMap(EXCLUSION.reg(), TraitExclusion.builder().of(SLOWNESS, 0.5).of(LEVITATION, 0.5).of(BLIND, 0.5).of(CONFUSION, 0.5).build())
+					.tag(TRAIT_TAGS, POTION).lang("Freezing").register();
 			CURSED = L2Hostility.REGISTRATE.regTrait("cursed", () -> new TargetEffectTrait(
 							lv -> new MobEffectInstance(LCEffects.CURSE, LHConfig.SERVER.curseTime.get() * lv)),
 					new TraitConfig(20, 100, 3, 20)

@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -34,13 +35,13 @@ public class CorrosionTrait extends SlotIterateDamageTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-						mapLevel(i -> Component.literal(i + "")
+						mapLevel(access, i -> Component.literal(i + "")
 								.withStyle(ChatFormatting.AQUA)),
-						mapLevel(i -> Component.literal(Math.round(LHConfig.SERVER.corrosionDurability.get() * i * 100) + "%")
+						mapLevel(access, i -> Component.literal(Math.round(LHConfig.SERVER.corrosionDurability.get() * i * 100) + "%")
 								.withStyle(ChatFormatting.AQUA)),
-						mapLevel(i -> Component.literal(Math.round(LHConfig.SERVER.corrosionDamage.get() * i * 100) + "%")
+						mapLevel(access, i -> Component.literal(Math.round(LHConfig.SERVER.corrosionDamage.get() * i * 100) + "%")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

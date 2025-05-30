@@ -5,6 +5,7 @@ import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.traits.base.SelfEffectTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.effect.MobEffects;
@@ -35,12 +36,12 @@ public class FieryTrait extends SelfEffectTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
 						Component.literal(LHConfig.SERVER.fieryTime.get() + "")
 								.withStyle(ChatFormatting.AQUA))
 				.withStyle(ChatFormatting.GRAY));
-		super.addDetail(list);
+		super.addDetail(access, list);
 	}
 
 }

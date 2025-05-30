@@ -104,7 +104,7 @@ public class LHMobCommands extends HostilityCommands {
 
 	private static boolean commandSetTrait(LivingEntity le, MobTraitCap cap, MobTrait trait, int rank) {
 		if (!trait.allow(le)) return false;
-		if (trait.getConfig().max_rank() < rank) return false;
+		if (trait.getConfig(le.registryAccess()).max_rank() < rank) return false;
 		cap.setTrait(trait, rank);
 		return true;
 	}

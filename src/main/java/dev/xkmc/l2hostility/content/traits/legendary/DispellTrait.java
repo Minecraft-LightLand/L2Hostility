@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -65,11 +66,11 @@ public class DispellTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-						mapLevel(i -> Component.literal(i + "")
+						mapLevel(access, i -> Component.literal(i + "")
 								.withStyle(ChatFormatting.AQUA)),
-						mapLevel(i -> Component.literal(LHConfig.SERVER.dispellTime.get() * i / 20 + "")
+						mapLevel(access, i -> Component.literal(LHConfig.SERVER.dispellTime.get() * i / 20 + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

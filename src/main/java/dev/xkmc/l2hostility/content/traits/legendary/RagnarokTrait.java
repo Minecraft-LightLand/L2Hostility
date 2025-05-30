@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -50,11 +51,11 @@ public class RagnarokTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-						mapLevel(i -> Component.literal(i + "")
+						mapLevel(access, i -> Component.literal(i + "")
 								.withStyle(ChatFormatting.AQUA)),
-						mapLevel(i -> Component.literal("" + Math.round(LHConfig.SERVER.ragnarokTime.get() * i / 20f))
+						mapLevel(access, i -> Component.literal("" + Math.round(LHConfig.SERVER.ragnarokTime.get() * i / 20f))
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

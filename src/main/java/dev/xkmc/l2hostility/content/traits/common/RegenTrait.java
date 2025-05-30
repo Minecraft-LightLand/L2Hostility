@@ -4,6 +4,7 @@ import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -27,9 +28,9 @@ public class RegenTrait extends MobTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-						mapLevel(i -> Component.literal((int) Math.round(LHConfig.SERVER.regen.get() * 100 * i) + "")
+						mapLevel(access, i -> Component.literal((int) Math.round(LHConfig.SERVER.regen.get() * 100 * i) + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

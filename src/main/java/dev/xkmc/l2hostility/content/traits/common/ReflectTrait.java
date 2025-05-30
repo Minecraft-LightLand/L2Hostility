@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -28,9 +29,9 @@ public class ReflectTrait extends MobTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-						mapLevel(i -> Component.literal((int) Math.round(100 * (i * LHConfig.SERVER.reflectFactor.get())) + "")
+						mapLevel(access, i -> Component.literal((int) Math.round(100 * (i * LHConfig.SERVER.reflectFactor.get())) + "")
 								.withStyle(ChatFormatting.AQUA)))
 				.withStyle(ChatFormatting.GRAY));
 	}

@@ -1,6 +1,14 @@
+3.0.11
+- Add trait exclusion
+- Make Death Tome not dropping any L2H drops
+- Add RU translation
+- blacklisted mobs may still have levels and traits when addons give them one
+- Fix pandora slot icon on Accessories
+
 3.0.10
 - Include Pandora API
 - Now looting charms can fit into pandora bracelet / necklace
+
 
 3.0.9
 - Tweak configs and level settings for traits to make them more balanced

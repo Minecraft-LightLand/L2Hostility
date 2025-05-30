@@ -3,6 +3,7 @@ package dev.xkmc.l2hostility.content.traits.legendary;
 import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,7 +34,7 @@ public class RepellingTrait extends PushPullTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
 						Component.literal(LHConfig.SERVER.repellRange.get() + "")
 								.withStyle(ChatFormatting.AQUA))

@@ -1,0 +1,65 @@
+{
+  "values": {
+    "l2hostility:dementor": {
+      "excluded": {
+        "l2hostility:adaptive": 0.5
+      }
+    },
+    "l2hostility:dispell": {
+      "excluded": {
+        "l2hostility:adaptive": 0.5,
+        "l2hostility:dementor": 0.75
+      }
+    },
+    "l2hostility:erosion": {
+      "excluded": {
+        "l2hostility:corrosion": 1.0
+      }
+    },
+    "l2hostility:freezing": {
+      "excluded": {
+        "l2hostility:blindness": 0.5,
+        "l2hostility:levitation": 0.5,
+        "l2hostility:nausea": 0.5,
+        "l2hostility:slowness": 0.5
+      }
+    },
+    "l2hostility:grenade": {
+      "excluded": {
+        "l2hostility:shulker": 1.0
+      }
+    },
+    "l2hostility:levitation": {
+      "excluded": {
+        "l2hostility:slowness": 0.5
+      }
+    },
+    "l2hostility:moonwalk": {
+      "excluded": {
+        "l2hostility:gravity": 1.0
+      }
+    },
+    "l2hostility:nausea": {
+      "excluded": {
+        "l2hostility:blindness": 0.5
+      }
+    },
+    "l2hostility:pulling": {
+      "excluded": {
+        "l2hostility:repelling": 1.0
+      }
+    },
+    "l2hostility:soul_burner": {
+      "excluded": {
+        "l2hostility:fiery": 1.0,
+        "l2hostility:poison": 0.5,
+        "l2hostility:wither": 0.5
+      }
+    },
+    "l2hostility:wither": {
+      "excluded": {
+        "l2hostility:poison": 0.5
+      }
+    }
+  }
+}

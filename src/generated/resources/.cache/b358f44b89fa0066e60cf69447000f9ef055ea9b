@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-24T18:39:54.135912	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
+// 1.21.1	2025-05-30T14:21:49.394949	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -236,6 +236,7 @@ d06ef1c337a94235fbf0083adb15508398354435 data/l2hostility/advancement/recipes/mi
 fe37f6df8840e68e96675e55d7dd9d5825483e35 data/l2hostility/advancement/recipes/misc/witch_wand.json
 5cc00ffe96d33c1c100aa6bf50953ca8dacd69dd data/l2hostility/damage_type/killer_aura.json
 eebac420b5800ddcfc0ecc57172d34e99de82b0c data/l2hostility/data_maps/l2hostility/trait/trait_data.json
+4da4154d64f83ba8ae2e61f0f1a3a4f6a09e3afe data/l2hostility/data_maps/l2hostility/trait/trait_exclusion.json
 f689dd25a950129ab74c0b97ef73b815ee804470 data/l2hostility/enchantment/insulator.json
 80995ce7fd1d689c2b0fe889acd503703149cb63 data/l2hostility/enchantment/split_suppressor.json
 552928d3c2b535192e91cf238f8223380ddbd764 data/l2hostility/enchantment/vanish.json
@@ -346,6 +347,7 @@ f46f3cd8fa14a1a94a7bb3dcd1960bf4e051ffc6 data/l2hostility/tags/entity_type/count
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/grenade_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/growth_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/growth_whitelist.json
+681a819d3570afb48ea074b219b222c3e34ef96e data/l2hostility/tags/entity_type/hostility_spawner_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/invisible_blacklist.json
 49a964eff9368382526095b2118557f381bbeb15 data/l2hostility/tags/entity_type/invisible_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/killer_aura_blacklist.json

@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -30,11 +31,11 @@ import java.util.Optional;
 
 public class WitchWand extends Item {
 
-	private static MobEffectInstance getRandom(int maxRank, RandomSource source) {
+	private static MobEffectInstance getRandom(RegistryAccess access, int maxRank, RandomSource source) {
 		var list = LHTraits.TRAITS.get().stream()
 				.filter(e -> e instanceof TargetEffectTrait).toList();
 		TargetEffectTrait trait = (TargetEffectTrait) list.get(source.nextInt(list.size()));
-		int rank = Math.min(maxRank, trait.getConfig().max_rank());
+		int rank = Math.min(maxRank, trait.getConfig(access).max_rank());
 		var ans = trait.func.apply(rank);
 		return new EffectBuilder(ans).setDuration(ans.getDuration() * LHConfig.SERVER.witchWandFactor.get()).ins;
 	}
@@ -52,7 +53,7 @@ public class WitchWand extends Item {
 			ThrownPotion entity = new ThrownPotion(level, player);
 			ItemStack potion = new ItemStack(Items.SPLASH_POTION);
 			int maxRank = LHMiscs.PLAYER.type().getOrCreate(player).maxRankKilled;
-			MobEffectInstance ins = getRandom(maxRank, player.getRandom());
+			MobEffectInstance ins = getRandom(player.registryAccess(), maxRank, player.getRandom());
 			potion.set(DataComponents.POTION_CONTENTS, new PotionContents(
 					Optional.empty(),
 					Optional.of(ins.getEffect().value().getColor()),

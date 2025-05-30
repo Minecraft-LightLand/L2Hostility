@@ -4,6 +4,7 @@ import dev.xkmc.l2core.base.effects.EffectUtil;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffect;
@@ -45,9 +46,9 @@ public class TargetEffectTrait extends MobTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(LangData.TOOLTIP_TARGET_EFFECT.get());
-		list.add(mapLevel(e -> {
+		list.add(mapLevel(access, e -> {
 			MobEffectInstance ins = func.apply(e);
 			MutableComponent ans = Component.translatable(ins.getDescriptionId());
 			MobEffect mobeffect = ins.getEffect().value();

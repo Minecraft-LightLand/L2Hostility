@@ -80,7 +80,6 @@ public class L2Hostility {
 		TraitGLMProvider.register();
 		HostilityTriggers.register();
 
-
 		PATCHOULI.buildModel().buildShapelessRecipe(e -> e
 								.requires(Items.BOOK).requires(Items.ROTTEN_FLESH).requires(Items.BONE),
 						() -> Items.BOOK)

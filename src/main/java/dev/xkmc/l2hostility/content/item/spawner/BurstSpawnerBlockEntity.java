@@ -1,7 +1,6 @@
 package dev.xkmc.l2hostility.content.item.spawner;
 
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
-import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
@@ -79,7 +78,7 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 			);
 			var e = mobsAt(sl, pos).getRandom(level.getRandom());
 			if (e.isPresent()) {
-				if (e.get().type.is(LHTagGen.NO_SCALING) || e.get().type.is(LHTagGen.NO_TRAIT)) {
+				if (e.get().type.is(LHTagGen.HOSTILITY_SPAWNER_BLACKLIST)) {
 					continue;
 				}
 				Entity entity = e.get().type.create(sl);

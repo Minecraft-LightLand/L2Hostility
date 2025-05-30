@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
@@ -61,7 +62,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> list, LootContext context) {
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
 			var opt = LHMiscs.MOB.type().getExisting(le);
-			if (opt.isPresent()) {
+			if (opt.isPresent() && !le.getType().is(LHTagGen.NO_DROP)) {
 				MobTraitCap cap = opt.get();
 				if (trait == null || cap.hasTrait(trait)) {
 					double factor = cap.dropRate;

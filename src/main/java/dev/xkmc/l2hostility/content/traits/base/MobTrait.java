@@ -7,6 +7,7 @@ import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.config.TraitExclusion;
 import dev.xkmc.l2hostility.content.logic.InheritContext;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
@@ -52,15 +53,26 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 		return ans;
 	}
 
-	@Deprecated //TODO
+	public TraitExclusion getExclusion(RegistryAccess access) {
+		var ans = LHTraits.EXCLUSION.get(access, holder());
+		if (ans == null) return TraitExclusion.DEFAULT;
+		return ans;
+	}
+
+	public int getCost(RegistryAccess access, double factor) {
+		return Math.max(1, (int) Math.round(getConfig(access).cost() * factor));
+	}
+
+	public int getMaxLevel(RegistryAccess access) {
+		return getConfig(access).max_rank();
+	}
+
+	@Deprecated
 	public TraitConfig getConfig() {
 		return getConfig(ServerProxy.getRegistryAccess());
 	}
 
-	public int getCost(double factor) {
-		return Math.max(1, (int) Math.round(getConfig().cost() * factor));
-	}
-
+	@Deprecated
 	public int getMaxLevel() {
 		return getConfig().max_rank();
 	}
@@ -135,13 +147,13 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 		return color.getAsInt();
 	}
 
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc").withStyle(ChatFormatting.GRAY));
 	}
 
-	protected MutableComponent mapLevel(Function<Integer, MutableComponent> func) {
+	protected MutableComponent mapLevel(RegistryAccess access, Function<Integer, MutableComponent> func) {
 		MutableComponent comp = null;
-		for (int i = 1; i <= getMaxLevel(); i++) {
+		for (int i = 1; i <= getMaxLevel(access); i++) {
 			if (comp == null) {
 				comp = func.apply(i);
 			} else {

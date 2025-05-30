@@ -10,6 +10,7 @@ import dev.xkmc.l2hostility.init.network.TraitEffects;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
@@ -63,13 +64,13 @@ public class KillerAuraTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public void addDetail(List<Component> list) {
+	public void addDetail(RegistryAccess access, List<Component> list) {
 		list.add(Component.translatable(getDescriptionId() + ".desc",
-				mapLevel(i -> Component.literal(LHConfig.SERVER.killerAuraDamage.get() * i + "")
+				mapLevel(access, i -> Component.literal(LHConfig.SERVER.killerAuraDamage.get() * i + "")
 						.withStyle(ChatFormatting.AQUA)),
 				Component.literal("" + LHConfig.SERVER.killerAuraRange.get())
 						.withStyle(ChatFormatting.AQUA),
-				mapLevel(i -> Component.literal(Math.round(LHConfig.SERVER.killerAuraInterval.get() * 5d / i) * 0.01 + "")
+				mapLevel(access, i -> Component.literal(Math.round(LHConfig.SERVER.killerAuraInterval.get() * 5d / i) * 0.01 + "")
 						.withStyle(ChatFormatting.AQUA))
 		).withStyle(ChatFormatting.GRAY));
 	}

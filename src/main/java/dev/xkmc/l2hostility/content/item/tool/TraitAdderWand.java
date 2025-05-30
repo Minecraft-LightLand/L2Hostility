@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2magic.content.item.utility.BaseWand;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -50,9 +51,9 @@ public class TraitAdderWand extends BaseWand {
 	}
 
 	@Nullable
-	public static Integer decrease(MobTrait k, @Nullable Integer old) {
+	public static Integer decrease(RegistryAccess access, MobTrait k, @Nullable Integer old) {
 		if (old == null || old == 0) {
-			return k.getMaxLevel();
+			return k.getMaxLevel(access);
 		}
 		if (old == 1) {
 			return null;
@@ -61,11 +62,11 @@ public class TraitAdderWand extends BaseWand {
 	}
 
 	@Nullable
-	public static Integer increase(MobTrait k, @Nullable Integer old) {
+	public static Integer increase(RegistryAccess access, MobTrait k, @Nullable Integer old) {
 		if (old == null) {
 			return 1;
 		}
-		if (old == k.getMaxLevel()) {
+		if (old == k.getMaxLevel(access)) {
 			return null;
 		}
 		return old + 1;
@@ -83,10 +84,11 @@ public class TraitAdderWand extends BaseWand {
 		MobTraitCap cap = opt.orElse(LHMiscs.MOB.type().getOrCreate(target));
 		MobTrait trait = get(stack);
 		Integer ans;
+		var access = player.registryAccess();
 		if (player.isShiftKeyDown()) {
-			ans = cap.traits.compute(trait, TraitAdderWand::decrease);
+			ans = cap.traits.compute(trait, (k, i) -> decrease(access, k, i));
 		} else {
-			ans = cap.traits.compute(trait, TraitAdderWand::increase);
+			ans = cap.traits.compute(trait, (k, i) -> increase(access, k, i));
 		}
 		int val = ans == null ? 0 : ans;
 		trait.initialize(target, val);
