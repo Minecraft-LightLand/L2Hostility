@@ -69,13 +69,12 @@ public class TraitConfig extends BaseConfig {
 		var manager = ForgeRegistries.ENTITY_TYPES.tags();
 		assert manager != null;
 		boolean def = true;
+		if (!manager.getTag(blacklist).isEmpty()) {
+			if (type.is(blacklist)) return false;
+		}
 		if (!manager.getTag(whitelist).isEmpty()) {
 			if (type.is(whitelist)) return true;
 			def = false;
-		}
-		if (!manager.getTag(blacklist).isEmpty()) {
-			if (type.is(blacklist)) return false;
-			def = true;
 		}
 		return def;
 	}

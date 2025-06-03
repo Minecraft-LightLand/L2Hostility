@@ -82,7 +82,7 @@ public class BurstSpawnerBlockEntity extends TraitSpawnerBlockEntity {
 			);
 			var e = mobsAt(sl, MobCategory.MONSTER, pos).getRandom(level.getRandom());
 			if (e.isPresent()) {
-				if (e.get().type.is(LHTagGen.NO_SCALING) || e.get().type.is(LHTagGen.NO_TRAIT)) {
+				if (e.get().type.is(LHTagGen.HOSTILITY_SPAWNER_BLACKLIST)) {
 					continue;
 				}
 				Entity entity = e.get().type.create(sl);

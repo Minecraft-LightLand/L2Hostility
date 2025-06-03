@@ -181,7 +181,7 @@ public class LHItems {
 			PLATINUM_STAR = curio("platinum_star", PlatinumStar::new).tag(chaos, hand, charm).register();
 			INFINITY_GLOVE = curio("infinity_glove", InfinityGlove::new).tag(chaos, hand).register();
 
-			ABYSSAL_THORN = curio("abyssal_thorn", AbyssalThorn::new).tag(chaos, curse).register();
+			ABYSSAL_THORN = curio("abyssal_thorn", AbyssalThorn::new).tag(chaos, curse).lang("Abyssal Throne").register();
 			DIVINITY_CROSS = curio("divinity_cross", DivinityCross::new).tag(chaos, charm, curse).register();
 			DIVINITY_LIGHT = curio("divinity_light", DivinityLight::new).tag(chaos, charm, curse).register();
 

@@ -76,6 +76,7 @@ public class LHTagGen {
 	public static final TagKey<EntityType<?>> ARMOR_TARGET = createEntityTag("armor_target");
 	public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
 	public static final TagKey<EntityType<?>> RANGED_WEAPON_TARGET = createEntityTag("ranged_weapon_target");
+	public static final TagKey<EntityType<?>> HOSTILITY_SPAWNER_BLACKLIST = createEntityTag("hostility_spawner_blacklist");
 
 	public static final Map<ResourceLocation, Consumer<RegistrateTagsProvider.IntrinsicImpl<EntityType<?>>>> ENTITY_TAG_BUILDER = new TreeMap<>();
 
@@ -112,6 +113,7 @@ public class LHTagGen {
 		pvd.addTag(WHITELIST);
 		pvd.addTag(NO_SCALING).addTag(BLACKLIST);
 		pvd.addTag(NO_TRAIT).addTag(BLACKLIST).add(EntityType.ENDERMITE);
+		pvd.addTag(HOSTILITY_SPAWNER_BLACKLIST).addTags(NO_SCALING, NO_TRAIT);
 
 		pvd.addTag(ARMOR_TARGET).add(
 				EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,

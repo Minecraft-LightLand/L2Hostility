@@ -1,6 +1,14 @@
+2.5.6
+- Fix health scaling not applying on mobs with entity config
+- Fix trait generation with Abyssal Throne
+- Hostility spawner blacklist tag
+- Trait blacklist has higher priority than Trait whitelist now
+- Add RU translation
+
 2.5.5
 - Tweak configs and level settings for traits to make them more balanced
 - Dementor, Dispell, and Grenade damage will get reduced scaling
+- Allow mobs to have their own level based scaling
 
 2.5.4
 - Allow mobs with high level to use special items from L2Complements

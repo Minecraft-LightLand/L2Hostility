@@ -24,6 +24,7 @@ public class TraitGenerator {
 	private final HashMap<MobTrait, Integer> traits;
 	private final RandomSource rand;
 	private final List<MobTrait> traitPool;
+	private final boolean free;
 
 	private int level, weights;
 
@@ -35,22 +36,22 @@ public class TraitGenerator {
 
 		rand = entity.getRandom();
 		level = mobLevel;
+		free = ins.trait_cost < 0.01;
 
 		var config = cap.getConfigCache(entity);
 		int max = LHConfig.COMMON.maxTraitCount.get();
+		if (config != null && config.maxTraitCount > 0)
+			max = config.maxTraitCount;
+		maxTrait = free ? -1 : (int) (max / ins.trait_cost);
 		if (config != null) {
-			if (config.maxTraitCount > 0) max = config.maxTraitCount;
-			if (ins.trait_cost < 0.01) maxTrait = -1;
-			else maxTrait = (int) (max / ins.trait_cost);
 			for (var base : config.traits()) {
 				if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
 					genBase(base);
 			}
-		} else maxTrait = max;
+		}
 
 		traitPool = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
 				(config == null || !config.blacklist().contains(e)) &&
-						!traits.containsKey(e) &&
 						e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
 		weights = 0;
 		for (var e : traitPool) {
@@ -113,7 +114,7 @@ public class TraitGenerator {
 			}
 			int max = Math.min(ins.getMaxTraitLevel(), e.getMaxLevel());
 			int old = Math.min(e.getMaxLevel(), getRank(e));
-			int rank = Math.min(max, old + rand.nextInt(level / cost) + 1);
+			int rank = free ? max : Math.min(max, old + rand.nextInt(level / cost) + 1);
 			if (rank <= old) {
 				continue;
 			}
