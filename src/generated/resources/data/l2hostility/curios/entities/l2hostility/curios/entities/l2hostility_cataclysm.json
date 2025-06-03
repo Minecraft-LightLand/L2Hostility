@@ -2,8 +2,8 @@
   "entities": [
     "cataclysm:ignis",
     "cataclysm:netherite_monstrosity",
-    "cataclysm:the_leviathan",
     "cataclysm:the_harbinger",
+    "cataclysm:the_leviathan",
     "cataclysm:ender_guardian"
   ],
   "slots": [

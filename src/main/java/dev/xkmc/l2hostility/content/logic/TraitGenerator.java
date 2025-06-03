@@ -9,10 +9,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class TraitGenerator {
 
@@ -27,6 +24,7 @@ public class TraitGenerator {
 	private final RandomSource rand;
 	private final RegistryAccess access;
 	private final TraitPool pool;
+	private final boolean free;
 
 	private int level;
 
@@ -39,22 +37,21 @@ public class TraitGenerator {
 
 		rand = entity.getRandom();
 		level = mobLevel;
+		free = ins.trait_cost < 0.01;
 
 		var config = cap.getConfigCache(entity);
 		int max = LHConfig.SERVER.maxTraitCount.get();
+		if (config != null && config.maxTraitCount > 0) max = config.maxTraitCount;
+		maxTrait = free ? -1 : (int) (max / ins.trait_cost);
 		if (config != null) {
-			if (config.maxTraitCount > 0) max = config.maxTraitCount;
-			if (ins.trait_cost < 0.01) maxTrait = -1;
-			else maxTrait = (int) (max / ins.trait_cost);
 			for (var base : config.traits()) {
 				if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
 					genBase(base);
 			}
-		} else maxTrait = max;
+		}
 
 		var list = LHTraits.TRAITS.get().stream().filter(e ->
 				(config == null || !config.blacklist().contains(e)) &&
-						!traits.containsKey(e) &&
 						e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList();
 		pool = new TraitPool(list, traits);
 
@@ -101,7 +98,7 @@ public class TraitGenerator {
 			}
 			int max = Math.min(ins.getMaxTraitLevel(), e.getMaxLevel(access));
 			int old = Math.min(e.getMaxLevel(access), getRank(e));
-			int rank = Math.min(max, old + rand.nextInt(level / cost) + 1);
+			int rank = free ? max : Math.min(max, old + rand.nextInt(level / cost) + 1);
 			if (rank <= old) {
 				continue;
 			}
@@ -120,6 +117,7 @@ public class TraitGenerator {
 
 		private final LinkedList<TraitEntry> list = new LinkedList<>();
 		private final LinkedHashMap<MobTrait, TraitEntry> map = new LinkedHashMap<>();
+		private final Set<MobTrait> existing = new LinkedHashSet<>();
 		private int weights = 0;
 
 		public TraitPool(List<MobTrait> available, HashMap<MobTrait, Integer> existing) {
@@ -164,6 +162,8 @@ public class TraitGenerator {
 		}
 
 		public void update(MobTrait trait) {
+			if (existing.contains(trait)) return;
+			existing.add(trait);
 			var data = trait.getExclusion(access);
 			for (var pair : data.excluded().entrySet()) {
 				var entry = map.get(pair.getKey().value());

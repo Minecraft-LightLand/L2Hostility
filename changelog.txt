@@ -1,3 +1,8 @@
+3.0.12
+- Fix health scaling not applying on mobs with entity config
+- Fix trait generation with Abyssal Throne
+- Trait blacklist has higher priority than Trait whitelist now
+
 3.0.11
 - Add trait exclusion
 - Make Death Tome not dropping any L2H drops

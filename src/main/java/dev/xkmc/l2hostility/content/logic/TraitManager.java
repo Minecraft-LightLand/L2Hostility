@@ -40,7 +40,7 @@ public class TraitManager {
 			}
 			var config = cap.getConfigCache(le);
 			if (config != null)
-				factor = config.healthScale;
+				factor *= config.healthScale;
 			addAttribute(le, Attributes.MAX_HEALTH, "hostility_health", factor,
 					AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 		}

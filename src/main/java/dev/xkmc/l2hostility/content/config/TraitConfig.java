@@ -24,13 +24,12 @@ public record TraitConfig(int cost, int weight, int max_rank, int min_level) {
 		boolean def = true;
 		var bt = BuiltInRegistries.ENTITY_TYPE.getTag(blacklist);
 		var wt = BuiltInRegistries.ENTITY_TYPE.getTag(whitelist);
+		if (bt.isPresent() && bt.get().size() > 0) {
+			if (type.is(blacklist)) return false;
+		}
 		if (wt.isPresent() && wt.get().size() > 0) {
 			if (type.is(whitelist)) return true;
 			def = false;
-		}
-		if (bt.isPresent() && bt.get().size() > 0) {
-			if (type.is(blacklist)) return false;
-			def = true;
 		}
 		return def;
 	}
