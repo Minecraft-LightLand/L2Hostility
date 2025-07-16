@@ -26,6 +26,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue glowingRangeHidden;
 		public final ForgeConfigSpec.IntValue glowingRangeNear;
 		public final ForgeConfigSpec.BooleanValue showUndyingParticles;
+		public final ForgeConfigSpec.BooleanValue glassForLevelMobsOnly;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			showTraitOverHead = builder.comment("Render Traits in name plate form")
@@ -50,6 +51,8 @@ public class LHConfig {
 					.defineInRange("glowingRangeNear", 16, 1, 256);
 			showUndyingParticles = builder.comment("Render undying particles")
 					.define("showUndyingParticles", true);
+			glassForLevelMobsOnly = builder.comment("Detector Glass outline hostile mobs only")
+					.define("glassForLevelMobsOnly", true);
 		}
 
 	}

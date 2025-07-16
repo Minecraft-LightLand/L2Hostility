@@ -48,6 +48,11 @@ public class ClientGlowingHandler {
 	private static boolean isGlowingImpl(LivingEntity entity) {
 		LocalPlayer player = Proxy.getClientPlayer();
 		if (player != null && playerHasGlass(player)) {
+			if (LHConfig.CLIENT.glassForLevelMobsOnly.get()) {
+				if (!MobTraitCap.HOLDER.shouldHaveCap(entity)) {
+					return false;
+				}
+			}
 			boolean glow = entity.isInvisible() || entity.isInvisibleTo(player);
 			glow |= player.hasEffect(MobEffects.BLINDNESS);
 			glow |= player.hasEffect(MobEffects.DARKNESS);

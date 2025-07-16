@@ -1,3 +1,9 @@
+2.5.8
+- Fix no_drop tag not taking effects
+
+2.5.7
+- Make detector glasses not able to outline mobs not eligible for levels. Can be changed in config
+
 2.5.6
 - Fix health scaling not applying on mobs with entity config
 - Fix trait generation with Abyssal Throne

@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -58,6 +59,7 @@ public class TraitLootModifier extends LootModifier implements ITraitLootRecipe 
 	@Override
 	protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> list, LootContext context) {
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
+			if (le.getType().is(LHTagGen.NO_DROP)) return list;
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
 				if (trait == null || cap.hasTrait(trait)) {

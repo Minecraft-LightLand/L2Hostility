@@ -6,6 +6,7 @@ import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -28,6 +29,7 @@ public class EnvyLootModifier extends LootModifier {
 	@Override
 	protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> list, LootContext context) {
 		if (context.getParam(LootContextParams.THIS_ENTITY) instanceof LivingEntity le) {
+			if (le.getType().is(LHTagGen.NO_DROP)) return list;
 			if (MobTraitCap.HOLDER.isProper(le)) {
 				MobTraitCap cap = MobTraitCap.HOLDER.get(le);
 				double factor = cap.dropRate;
