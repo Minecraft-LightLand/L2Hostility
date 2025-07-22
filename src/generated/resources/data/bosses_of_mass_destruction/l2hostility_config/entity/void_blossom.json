@@ -23,16 +23,19 @@
       "specialConditions": [],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:tank"
         },
         {
+          "cap": false,
           "free": 5,
           "min": 5,
           "trait": "l2hostility:regenerate"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:adaptive"

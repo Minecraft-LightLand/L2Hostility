@@ -25,6 +25,7 @@
         "specialConditions": [],
         "traits": [
           {
+            "cap": false,
             "free": 1,
             "min": 1,
             "trait": "l2hostility:tank"
@@ -54,6 +55,7 @@
         "specialConditions": [],
         "traits": [
           {
+            "cap": false,
             "free": 1,
             "min": 1,
             "trait": "l2hostility:speedy"
@@ -98,6 +100,7 @@
         "specialConditions": [],
         "traits": [
           {
+            "cap": false,
             "free": 1,
             "min": 1,
             "trait": "l2hostility:protection"

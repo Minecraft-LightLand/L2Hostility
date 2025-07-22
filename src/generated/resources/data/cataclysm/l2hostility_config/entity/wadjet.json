@@ -23,11 +23,13 @@
       "specialConditions": [],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:protection"
         },
         {
+          "cap": false,
           "condition": {
             "chance": 1.0,
             "lv": 250

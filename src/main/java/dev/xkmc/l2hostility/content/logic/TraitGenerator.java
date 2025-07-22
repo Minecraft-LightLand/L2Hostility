@@ -43,16 +43,15 @@ public class TraitGenerator {
 		if (config != null && config.maxTraitCount > 0)
 			max = config.maxTraitCount;
 		maxTrait = free ? -1 : (int) (max / ins.trait_cost);
+		traitPool = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
+				(config == null || !config.blacklist().contains(e)) &&
+						e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
 		if (config != null) {
 			for (var base : config.traits()) {
 				if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
 					genBase(base);
 			}
 		}
-
-		traitPool = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
-				(config == null || !config.blacklist().contains(e)) &&
-						e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
 		weights = 0;
 		for (var e : traitPool) {
 			weights += e.getConfig().weight;
@@ -100,6 +99,9 @@ public class TraitGenerator {
 		setRank(e, Math.max(old, rank));
 		if (rank > old) {
 			level -= (rank - old) * cost;
+		}
+		if (base.cap()) {
+			traitPool.remove(e);
 		}
 	}
 

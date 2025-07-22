@@ -26,6 +26,7 @@
       "specialConditions": [],
       "traits": [
         {
+          "cap": false,
           "condition": {
             "chance": 0.5,
             "lv": 150
@@ -35,6 +36,7 @@
           "trait": "l2hostility:reprint"
         },
         {
+          "cap": false,
           "condition": {
             "chance": 0.5,
             "lv": 200

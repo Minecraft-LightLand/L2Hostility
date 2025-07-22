@@ -23,11 +23,13 @@
       "specialConditions": [],
       "traits": [
         {
+          "cap": false,
           "free": 0,
           "min": 1,
           "trait": "l2hostility:adaptive"
         },
         {
+          "cap": false,
           "free": 0,
           "min": 1,
           "trait": "l2hostility:poison"

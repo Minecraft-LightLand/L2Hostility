@@ -23,11 +23,13 @@
       "specialConditions": [],
       "traits": [
         {
+          "cap": false,
           "free": 1,
           "min": 1,
           "trait": "l2hostility:freezing"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 1,
           "trait": "l2hostility:cursed"
