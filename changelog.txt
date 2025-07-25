@@ -1,3 +1,8 @@
+2.5.9
+- support <1% chance display
+- balanced some curios
+- allow trait caps
+
 2.5.8
 - Fix no_drop tag not taking effects
 
