@@ -201,4 +201,18 @@ public enum LangData {
 		return ITEM_ORB_USE.get(item(LHItems.DETECTOR.asStack()), item(LHItems.DETECTOR_GLASSES.asStack()));
 	}
 
+	public static String perc(double val) {
+		var perc = val * 100;
+		var digit = (int) Math.round(perc);
+		if (Math.abs(digit - perc) < 1e-3) {
+			return digit + "";
+		}
+		var thrc = val * 1000;
+		var thgt = (int) Math.round(thrc);
+		if (Math.abs(thgt - thrc) < 1e-3) {
+			return thgt * 0.1 + "";
+		}
+		return perc + "";
+	}
+
 }

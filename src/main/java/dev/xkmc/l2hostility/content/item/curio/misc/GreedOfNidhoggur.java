@@ -32,7 +32,7 @@ public class GreedOfNidhoggur extends CurseCurioItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		int nid = (int) Math.round(100 * LHConfig.COMMON.nidhoggurDropFactor.get());
+		var nid = LangData.perc(LHConfig.COMMON.nidhoggurDropFactor.get());
 		list.add(LangData.ITEM_CHARM_GREED.get(LHConfig.COMMON.greedDropFactor.get()).withStyle(ChatFormatting.GOLD));
 		list.add(LangData.NIDHOGGUR.get(nid).withStyle(ChatFormatting.GOLD));
 	}

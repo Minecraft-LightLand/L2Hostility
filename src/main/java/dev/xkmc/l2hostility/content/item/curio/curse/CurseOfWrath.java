@@ -37,7 +37,7 @@ public class CurseOfWrath extends CurseCurioItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		int rate = (int) Math.round(100 * LHConfig.COMMON.wrathDamageBonus.get());
+		var rate = LangData.perc(LHConfig.COMMON.wrathDamageBonus.get());
 		list.add(LangData.ITEM_CHARM_WRATH.get(rate).withStyle(ChatFormatting.GOLD));
 		ResourceLocation id = ForgeRegistries.ITEMS.getKey(this);
 		assert id != null;

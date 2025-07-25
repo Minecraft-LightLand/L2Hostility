@@ -20,7 +20,7 @@ public class CurseOfGluttony extends CurseCurioItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		int rate = (int) Math.round(100 * LHConfig.COMMON.gluttonyBottleDropRate.get());
+		var rate = LangData.perc(LHConfig.COMMON.gluttonyBottleDropRate.get());
 		list.add(LangData.ITEM_CHARM_GLUTTONY.get(rate).withStyle(ChatFormatting.GOLD));
 	}
 

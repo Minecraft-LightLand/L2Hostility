@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.item.curio.ring;
 
-import dev.xkmc.l2complements.content.item.curios.CurioItem;
 import dev.xkmc.l2hostility.content.item.curio.core.SingletonItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
@@ -12,7 +11,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class RingOfHealing extends SingletonItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.ITEM_RING_HEALING.get(Math.round(LHConfig.COMMON.ringOfHealingRate.get() * 100)).withStyle(ChatFormatting.GOLD));
+		list.add(LangData.ITEM_RING_HEALING.get(LangData.perc(LHConfig.COMMON.ringOfHealingRate.get())).withStyle(ChatFormatting.GOLD));
 	}
 
 	@Override
