@@ -1,3 +1,6 @@
+2.5.10
+- Prevent ragnarok trait from causing CME in mobs reassessing weapon goals
+
 2.5.9
 - support <1% chance display
 - balanced some curios
