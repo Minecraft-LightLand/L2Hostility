@@ -189,10 +189,8 @@ repositories {
             includeGroup "dev.architectury"
         }
     }
-
     maven {
-        // saps.dev Maven (KubeJS and Rhino)
-        url = "https://maven.saps.dev/minecraft"
+        url = uri("https://maven.latvian.dev/releases")
         content {
             includeGroup "dev.latvian.mods"
         }

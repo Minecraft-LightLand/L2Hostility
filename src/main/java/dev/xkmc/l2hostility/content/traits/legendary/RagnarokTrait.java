@@ -6,6 +6,7 @@ import dev.xkmc.l2hostility.content.item.traits.SealedItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
+import dev.xkmc.l2library.init.events.GeneralEventHandler;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,12 +40,16 @@ public class RagnarokTrait extends LegendaryTrait {
 
 	@Override
 	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
+		GeneralEventHandler.schedule(() -> sealItems(level, target));
+	}
+
+	public void sealItems(int level, LivingEntity target) {
 		List<EntitySlotAccess> list = new ArrayList<>(CurioCompat.getItemAccess(target)
 				.stream().filter(RagnarokTrait::allowSeal).toList());
 		int count = Math.min(level, list.size());
 		int time = LHConfig.COMMON.ragnarokTime.get() * level;
 		for (int i = 0; i < count; i++) {
-			int index = attacker.getRandom().nextInt(list.size());
+			int index = target.getRandom().nextInt(list.size());
 			EntitySlotAccess slot = list.remove(index);
 			slot.modify(e -> SealedItem.sealItem(e, time));
 		}
