@@ -6,7 +6,7 @@ ServerEvents.tags('item', event => {
     event.add('l2hostility:trait_item', 'kubejs:hunger')
 })
 
-ServerEvents.tags('l2hostlity:trait', event => {
+ServerEvents.tags('l2hostility:trait', event => {
     event.add('l2hostility:potion_trait', 'kubejs:mining_fatigue')
     event.add('l2hostility:potion_trait', 'kubejs:hunger')
 })
@@ -27,7 +27,7 @@ L2Hostility.newAttackListener()
                     if (L2Hostility.sourceIs(source, "#forge:is_magic")) {
                         e.addDealtModifier(DamageModifier.multTotal(1.5))
                     }
-                    if (L2Hostility.sourceIs(source, "#forge:is_projectile")) {
+                    if (L2Hostility.sourceIs(source, "#minecraft:is_projectile")) {
                         e.addDealtModifier(DamageModifier.multTotal(0.5))
                     }
                 }
