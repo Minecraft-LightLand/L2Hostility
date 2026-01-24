@@ -66,7 +66,7 @@ public class DispellTrait extends LegendaryTrait {
 				!event.getSource().is(Tags.DamageTypes.IS_MAGIC))
 			return;
 		double def = LHConfig.SERVER.dispellDamageReductionBase.get();
-		event.addDealtModifier(DamageModifier.nonlinearPre(7435, val -> (float) (Math.log(val) / Math.log(def)), getRegistryName()));
+		event.addDealtModifier(DamageModifier.nonlinearPre(7435, val -> val < def ? val : (float) (Math.log(val) / Math.log(def)), getRegistryName()));
 	}
 
 	@Override
