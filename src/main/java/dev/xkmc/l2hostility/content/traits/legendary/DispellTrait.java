@@ -14,7 +14,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +66,7 @@ public class DispellTrait extends LegendaryTrait {
 				!source.is(L2DamageTypes.MAGIC))
 			return;
 		double def = LHConfig.COMMON.dispellDamageReductionBase.get();
-		cache.addDealtModifier(DamageModifier.nonlinearPre(7435, val -> (float) (Math.log(val) / Math.log(def))));
+		cache.addDealtModifier(DamageModifier.nonlinearPre(7435, val -> val < def ? val : (float) (Math.log(val) / Math.log(def))));
 	}
 
 

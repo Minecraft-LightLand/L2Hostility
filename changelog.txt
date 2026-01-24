@@ -1,7 +1,10 @@
 2.5.11
+- Dispell and Dementor now is resistant but not immune to magic / physical damage
+- Increase drop chance for cursed droplet and life essence
 - curse curio effect de-duplication
 - curse of wrath and curse of pride now stacks additively
 - only 3 hand curios would take effect when held in hand
+- Fix Ring of Life incorrectly heal on client
 
 2.5.10
 - Prevent ragnarok trait from causing CME in mobs reassessing weapon goals
