@@ -29,6 +29,7 @@ public class RingOfHealing extends SingletonItem {
 	public void curioTick(SlotContext slotContext, ItemStack stack) {
 		LivingEntity wearer = slotContext.entity();
 		if (wearer == null) return;
+		if (wearer.level().isClientSide()) return;
 		if (wearer.tickCount % 20 != 0) return;
 		wearer.heal((float) (LHConfig.COMMON.ringOfHealingRate.get() * wearer.getMaxHealth()));
 	}

@@ -133,7 +133,7 @@ public class LHAttackListener implements AttackListener {
 			if (CurioCompat.hasItemInCurioOrSlot(mob, LHItems.IMAGINE_BREAKER.get())) {
 				event.enable(DefaultDamageState.BYPASS_MAGIC);
 			}
-			if (CurioCompat.hasItemInCurio(mob, LHItems.PLATINUM_STAR.get())) {
+			if (CurioCompat.hasItemInCurioOrSlot(mob, LHItems.PLATINUM_STAR.get())) {
 				event.enable(HostilityDamageState.BYPASS_COOLDOWN);
 			}
 		}

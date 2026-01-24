@@ -48,8 +48,8 @@ public class CurseOfWrath extends CurseCurioItem {
 	public void onHurtTarget(ItemStack stack, LivingEntity user, AttackCache cache) {
 		int level = DifficultyLevel.ofAny(cache.getAttackTarget()) - DifficultyLevel.ofAny(user);
 		if (level > 0) {
-			double rate = LHConfig.COMMON.wrathDamageBonus.get();
-			cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate)));
+			float rate = LHConfig.COMMON.wrathDamageBonus.get().floatValue();
+			cache.addHurtModifier(DamageModifier.multBase(level * rate));
 		}
 	}
 

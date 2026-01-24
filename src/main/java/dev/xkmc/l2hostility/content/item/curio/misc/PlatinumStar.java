@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.content.item.curio.misc;
 
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.EquipCurioItem;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PlatinumStar extends CurseCurioItem {
+public class PlatinumStar extends CurseCurioItem implements EquipCurioItem {
 
 	public PlatinumStar(Properties properties) {
 		super(properties);

@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.compat.curios;
 
 import com.google.common.collect.Multimap;
+import dev.xkmc.l2hostility.content.item.curio.core.EquipCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -55,7 +56,7 @@ public class CurioCompat {
 		List<ItemStack> ans = new ArrayList<>();
 		for (EquipmentSlot e : EquipmentSlot.values()) {
 			ItemStack stack = player.getItemBySlot(e);
-			if (pred.test(stack)) {
+			if (stack.getItem() instanceof EquipCurioItem && pred.test(stack)) {
 				ans.add(stack);
 			}
 		}
