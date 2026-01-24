@@ -4,6 +4,7 @@ import dev.xkmc.l2complements.init.registrate.LCEffects;
 import dev.xkmc.l2core.base.effects.EffectUtil;
 import dev.xkmc.l2damagetracker.contents.attack.DamageData;
 import dev.xkmc.l2hostility.content.item.curio.core.CurseCurioItem;
+import dev.xkmc.l2hostility.content.item.curio.core.EquipCurioItem;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LangData;
 import net.minecraft.ChatFormatting;
@@ -15,7 +16,7 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public class FlamingThorn extends CurseCurioItem {
+public class FlamingThorn extends CurseCurioItem implements EquipCurioItem {
 
 	public FlamingThorn(Properties properties) {
 		super(properties);

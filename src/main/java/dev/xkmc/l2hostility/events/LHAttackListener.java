@@ -116,7 +116,7 @@ public class LHAttackListener implements AttackListener {
 					for (var ent : cap.traits.entrySet()) {
 						factor *= ent.getKey().modifyBonusDamage(source, old, ent.getValue());
 					}
-					data.addHurtModifier(DamageModifier.multTotal(1+(float) factor, SCALING));
+					data.addHurtModifier(DamageModifier.multTotal(1 + (float) factor, SCALING));
 				}
 				TraitEffectCache traitCache = new TraitEffectCache(target);
 				cap.traitEvent((k, v) -> k.onHurtTarget(v, attacker, data, traitCache));
@@ -152,10 +152,8 @@ public class LHAttackListener implements AttackListener {
 		LHMiscs.MOB.type().getExisting(attacker)
 				.ifPresent(cap -> cap.traitEvent((k, v) -> k.onHurtTargetMax(v, attacker, data, traitCache)));
 
-		for (var e : CurioCompat.getItems(mob, e -> e.getItem() instanceof CurseCurioItem)) {
-			if (e.getItem() instanceof CurseCurioItem curse) {
-				curse.onDamage(e, mob, data);
-			}
+		for (var e : CurseCurioItem.getFromPlayer(mob)) {
+			e.item().onDamage(e.stack(), mob, data);
 		}
 		if (masterImmunity(data)) {
 			data.addDealtModifier(DamageModifier.nonlinearFinal(10432, e -> 0, MASTER_IMMUNE));

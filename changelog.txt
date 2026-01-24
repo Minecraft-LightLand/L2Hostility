@@ -1,3 +1,6 @@
+3.0.13
+- curse curio effect de-duplication
+
 3.0.12
 - Fix health scaling not applying on mobs with entity config
 - Fix trait generation with Abyssal Throne

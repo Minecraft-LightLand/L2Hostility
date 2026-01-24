@@ -31,8 +31,8 @@ public class CurseOfPride extends CurseCurioItem {
 	@Override
 	public void onHurtTarget(ItemStack stack, LivingEntity user, DamageData.Offence cache) {
 		int level = DifficultyLevel.ofAny(user);
-		double rate = LHConfig.SERVER.prideDamageBonus.get();
-		cache.addHurtModifier(DamageModifier.multTotal((float) (1 + level * rate), getID()));
+		float rate = LHConfig.SERVER.prideDamageBonus.get().floatValue();
+		cache.addHurtModifier(DamageModifier.multBase(level * rate, getID()));
 	}
 
 	@Override

@@ -19,19 +19,21 @@ import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CurseCurioItem extends MultiSlotItem {
 
 	public static List<GenericItemStack<CurseCurioItem>> getFromPlayer(LivingEntity player) {
 		var list = CurioCompat.getItems(player, e -> e.getItem() instanceof CurseCurioItem);
-		List<GenericItemStack<CurseCurioItem>> ans = new ArrayList<>();
+		Map<CurseCurioItem, GenericItemStack<CurseCurioItem>> ans = new LinkedHashMap<>();
 		for (var e : list) {
 			if (e.getItem() instanceof CurseCurioItem item) {
-				ans.add(new GenericItemStack<>(item, e));
+				ans.put(item, new GenericItemStack<>(item, e));
 			}
 		}
-		return ans;
+		return new ArrayList<>(ans.values());
 	}
 
 	public CurseCurioItem(Properties props) {
