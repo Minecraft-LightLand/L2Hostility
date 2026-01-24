@@ -20,15 +20,15 @@ L2Hostility.newAttackListener()
             if (cap != null && cap.getTraitLevel("kubejs:test_trait") > 0) {
                 if (L2Hostility.entityIs(target, "minecraft:slime")) {
                     if (L2Hostility.sourceIs(source, "#minecraft:is_fire")) {
-                        e.addDealtModifier(DamageModifier.multTotal(0.5))
+                        e.addDealtModifier(DamageModifier.multTotal(0.5), ID.kjs("test_trait"))
                     }
                 }
                 if (L2Hostility.entityIs(target, "minecraft:zombie")) {
                     if (L2Hostility.sourceIs(source, "#neoforge:is_magic")) {
-                        e.addDealtModifier(DamageModifier.multTotal(1.5))
+                        e.addDealtModifier(DamageModifier.multTotal(1.5), ID.kjs("test_trait"))
                     }
                     if (L2Hostility.sourceIs(source, "#minecraft:is_projectile")) {
-                        e.addDealtModifier(DamageModifier.multTotal(0.5))
+                        e.addDealtModifier(DamageModifier.multTotal(0.5), ID.kjs("test_trait"))
                     }
                 }
             }

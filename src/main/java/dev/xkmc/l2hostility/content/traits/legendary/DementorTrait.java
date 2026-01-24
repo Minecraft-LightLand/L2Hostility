@@ -37,7 +37,7 @@ public class DementorTrait extends LegendaryTrait {
 				event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) ||
 				event.getSource().is(Tags.DamageTypes.IS_MAGIC))
 			return;
-		double def = LHConfig.SERVER.dispellDamageReductionBase.get();
+		double def = LHConfig.SERVER.dementorDamageReductionBase.get();
 		event.addDealtModifier(DamageModifier.nonlinearPre(7436, val -> (float) (Math.log(val) / Math.log(def)), getRegistryName()));
 	}
 
