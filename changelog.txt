@@ -1,3 +1,8 @@
+2.5.12
+- Fix Dispell / Dementor damage reduction formula for low damage
+- Reduce scaling from enchantment bypassing damage
+- Killer aura now has half damage scaling, and reflect has no damage scaling
+
 2.5.11
 - Dispell and Dementor now is resistant but not immune to magic / physical damage
 - Increase drop chance for cursed droplet and life essence

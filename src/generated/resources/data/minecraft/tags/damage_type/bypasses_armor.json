@@ -1,6 +1,7 @@
 {
   "values": [
     "l2hostility:killer_aura",
+    "l2hostility:reflect",
     "l2hostility:mob_attack-bypass_armor-bypass_cooldown",
     "l2hostility:mob_attack-bypass_armor-bypass_cooldown-no_anger",
     "l2hostility:mob_attack-bypass_armor-bypass_cooldown-bypass_magic",
