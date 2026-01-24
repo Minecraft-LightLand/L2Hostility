@@ -40,7 +40,7 @@ public class DementorTrait extends LegendaryTrait {
 				source.is(L2DamageTypes.MAGIC))
 			return;
 		double def = LHConfig.COMMON.dementorDamageReductionBase.get();
-		cache.addDealtModifier(DamageModifier.nonlinearPre(7436, val -> val < def ? val : (float) (Math.log(val) / Math.log(def))));
+		cache.addDealtModifier(DamageModifier.nonlinearPre(7436, val -> (float) (val < def ? val / def : Math.log(val) / Math.log(def))));
 	}
 
 }

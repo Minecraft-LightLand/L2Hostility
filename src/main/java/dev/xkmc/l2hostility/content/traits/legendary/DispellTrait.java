@@ -10,7 +10,6 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -28,14 +27,6 @@ public class DispellTrait extends LegendaryTrait {
 	public void onCreateSource(int level, LivingEntity attacker, CreateSourceEvent event) {
 		if (event.getResult() == L2DamageTypes.MOB_ATTACK)
 			event.enable(DefaultDamageState.BYPASS_MAGIC);
-	}
-
-
-	public double modifyBonusDamage(DamageSource source, double factor, int lv) {
-		if (source.getMsgId().equals("mob") && source.is(DamageTypeTags.BYPASSES_EFFECTS)) {
-			return LHConfig.COMMON.dispellDamageFactor.get();
-		}
-		return 1;
 	}
 
 	@Override
@@ -66,7 +57,7 @@ public class DispellTrait extends LegendaryTrait {
 				!source.is(L2DamageTypes.MAGIC))
 			return;
 		double def = LHConfig.COMMON.dispellDamageReductionBase.get();
-		cache.addDealtModifier(DamageModifier.nonlinearPre(7435, val -> val < def ? val : (float) (Math.log(val) / Math.log(def))));
+		cache.addDealtModifier(DamageModifier.nonlinearPre(7435, val -> (float) (val < def ? val / def : Math.log(val) / Math.log(def))));
 	}
 
 

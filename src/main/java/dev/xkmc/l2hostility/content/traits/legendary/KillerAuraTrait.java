@@ -1,6 +1,5 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
-import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -25,6 +24,13 @@ public class KillerAuraTrait extends LegendaryTrait {
 
 	public KillerAuraTrait(ChatFormatting format) {
 		super(format);
+	}
+
+	@Override
+	public double modifyBonusDamage(DamageSource source, double factor, int lv) {
+		if (source.is(LHDamageTypes.KILLER_AURA))
+			return LHConfig.COMMON.killerAuraDamageFactor.get();
+		return 1;
 	}
 
 	@Override

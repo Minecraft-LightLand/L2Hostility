@@ -96,6 +96,9 @@ public class LHAttackListener implements AttackListener {
 				for (var ent : cap.traits.entrySet()) {
 					factor *= ent.getKey().modifyBonusDamage(source, old, ent.getValue());
 				}
+				if (source.is(DamageTypeTags.BYPASSES_EFFECTS)) {
+					factor *= LHConfig.COMMON.dispellDamageFactor.get();
+				}
 				cache.addHurtModifier(DamageModifier.multTotal(1 + (float) factor));
 			}
 			TraitEffectCache traitCache = new TraitEffectCache(target);

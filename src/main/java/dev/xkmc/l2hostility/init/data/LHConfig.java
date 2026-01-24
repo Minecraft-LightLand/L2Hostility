@@ -129,6 +129,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue dispellTime;
 		public final ForgeConfigSpec.DoubleValue dispellDamageFactor;
 		public final ForgeConfigSpec.DoubleValue dementorDamageFactor;
+		public final ForgeConfigSpec.DoubleValue killerAuraDamageFactor;
 		public final ForgeConfigSpec.DoubleValue dispellDamageReductionBase;
 		public final ForgeConfigSpec.DoubleValue dementorDamageReductionBase;
 		public final ForgeConfigSpec.IntValue fieryTime;
@@ -490,12 +491,15 @@ public class LHConfig {
 				reprintBypass = builder.comment("Reprint will gain Void Touch 20 and Vanishing Curse when it hits a mob with max Enchantment level of X or higher")
 						.defineInRange("reprintBypass", 10, 0, 10000);
 
-				dispellDamageFactor = builder.comment("Damage Bonus Factor for dispell-affected damage")
+				dispellDamageFactor = builder.comment("Damage Bonus Factor for enchantment bypassing damage")
 						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
 						.defineInRange("dispellDamageFactor", 0.5, 0, 1);
 				dementorDamageFactor = builder.comment("Damage Bonus Factor for dementor-affected damage")
 						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
 						.defineInRange("dementorDamageFactor", 0.5, 0, 1);
+				killerAuraDamageFactor = builder.comment("Damage Bonus Factor for killer aura damage")
+						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
+						.defineInRange("killerAuraDamageFactor", 0.5, 0, 1);
 				grenadeDamageFactor = builder.comment("Damage Bonus Factor for grenade damage")
 						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
 						.defineInRange("grenadeDamageFactor", 0.25, 0, 1);

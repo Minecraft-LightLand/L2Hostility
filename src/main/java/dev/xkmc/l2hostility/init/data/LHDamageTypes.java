@@ -39,12 +39,15 @@ public class LHDamageTypes extends DamageTypeAndTagsGen {
 	protected static final List<DamageTypeWrapper> LIST = new ArrayList<>();
 
 	public static final ResourceKey<DamageType> KILLER_AURA = create("killer_aura");
+	public static final ResourceKey<DamageType> REFLECT = create("reflect");
 
 	public LHDamageTypes(PackOutput output,
 						 CompletableFuture<HolderLookup.Provider> pvd,
 						 ExistingFileHelper files) {
 		super(output, pvd, files, L2Hostility.MODID);
 		new DamageTypeHolder(KILLER_AURA, new DamageType("killer_aura", DamageScaling.NEVER, 0.1f))
+				.add(DamageTypeTags.BYPASSES_ARMOR, L2DamageTypes.MAGIC);
+		new DamageTypeHolder(REFLECT, new DamageType("indirectMagic", DamageScaling.NEVER, 0f))
 				.add(DamageTypeTags.BYPASSES_ARMOR, L2DamageTypes.MAGIC);
 	}
 
