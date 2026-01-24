@@ -344,11 +344,11 @@ public class LHConfig {
 					gluttonyBottleDropRate = builder.text("Bottle of Curse drop rate per level when using Curse of Gluttony")
 							.defineInRange("gluttonyBottleDropRate", 0.02, 0, 1);
 					wrathDamageBonus = builder.text("Damage bonus per level difference when using Curse of Wrath")
-							.defineInRange("wrathDamageBonus", 0.05, 0, 1);
+							.defineInRange("wrathDamageBonus", 0.02, 0, 1);
 					prideDamageBonus = builder.text("Damage bonus per level when using Curse of Pride")
-							.defineInRange("prideDamageBonus", 0.02, 0, 1);
+							.defineInRange("prideDamageBonus", 0.005, 0, 1);
 					prideHealthBonus = builder.text("Health boost per level in percentage when using Curse of Pride")
-							.defineInRange("prideHealthBonus", 0.02, 0, 1);
+							.defineInRange("prideHealthBonus", 0.005, 0, 1);
 					prideTraitFactor = builder.text("Trait cost multiplier when using Curse of Pride")
 							.defineInRange("prideTraitFactor", 0.5, 0.01, 1);
 				}
@@ -359,9 +359,9 @@ public class LHConfig {
 				nidhoggurExtraLevel = builder.text("Number of level to add when using Greed of Nidhoggur")
 						.defineInRange("nidhoggurExtraLevel", 100, 0, 1000);
 				nidhoggurDropFactor = builder.text("All loot drop factor when using Greed of Nidhoggur")
-						.defineInRange("nidhoggurDropFactor", 0.01, 0, 10);
+						.defineInRange("nidhoggurDropFactor", 0.005, 0, 10);
 				nidhoggurCapAtItemMaxStack = builder.text("Cap drop at item max stack size")
-						.define("nidhoggurCapAtItemMaxStack", false);
+						.define("nidhoggurCapAtItemMaxStack", true);
 				bookOfReprintSpread = builder.text("When using book of reprint to copy books, drop extra on player and does not allow overstacking")
 						.define("bookOfReprintSpread", false);
 

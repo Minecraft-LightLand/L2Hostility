@@ -193,7 +193,7 @@ public class EntityConfig extends BaseConfig {
 
 	}
 
-	public record TraitBase(MobTrait trait, int free, int min, @Nullable TraitCondition condition) {
+	public record TraitBase(MobTrait trait, int free, int min, boolean cap, @Nullable TraitCondition condition) {
 
 	}
 
@@ -246,11 +246,11 @@ public class EntityConfig extends BaseConfig {
 	}
 
 	public static TraitBase trait(MobTrait trait, int free, int min) {
-		return new TraitBase(trait, free, min, null);
+		return new TraitBase(trait, free, min, false, null);
 	}
 
 	public static TraitBase trait(MobTrait trait, int free, int min, int lv, float chance) {
-		return new TraitBase(trait, free, min, new TraitCondition(lv, chance, null));
+		return new TraitBase(trait, free, min, false, new TraitCondition(lv, chance, null));
 	}
 
 }

@@ -89,8 +89,8 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.FIERY.get(), loot1, new ItemStack(Items.BLAZE_ROD, 8), 1, 0.25, 0);
 		add(LHTraits.REGEN.get(), loot1, new ItemStack(Items.GHAST_TEAR, 4), 1, 0, 0.1);
 		add(LHTraits.REGEN.get(), loot3, new ItemStack(LCMats.TOTEMIC_GOLD.getNugget(), 4), 3, 0, 0.1);
-		add(LHTraits.REGEN.get(), loot2, new ItemStack(LCItems.LIFE_ESSENCE.get(), 1), 3, -0.2, 0.08);
-		add(LHTraits.ADAPTIVE.get(), loot2, new ItemStack(LCItems.CURSED_DROPLET.get(), 1), 1, 0, 0.1);
+		add(LHTraits.REGEN.get(), loot2, new ItemStack(LCItems.LIFE_ESSENCE.get(), 1), 2, -0.1, 0.1);
+		add(LHTraits.ADAPTIVE.get(), loot2, new ItemStack(LCItems.CURSED_DROPLET.get(), 1), 1, 0, 0.15);
 		add(LHTraits.REFLECT.get(), loot2, new ItemStack(LCItems.EXPLOSION_SHARD.get(), 1), 1, 0, 0.1);
 		add(LHTraits.DEMENTOR.get(), loot4, new ItemStack(LCItems.SUN_MEMBRANE.get(), 1), 1, 0.2, 0.1);
 		add(LHTraits.DISPELL.get(), loot4, new ItemStack(LCItems.RESONANT_FEATHER.get(), 1), 1, 0.2, 0.1);
@@ -110,9 +110,9 @@ public class TraitGLMProvider extends GlobalLootModifierProvider {
 		add(LHTraits.SOUL_BURNER.get(), loot2, LCItems.SOUL_FLAME.asStack(2), 1, 0, 0.1);
 		add(LHTraits.FREEZING.get(), loot2, LCItems.HARD_ICE.asStack(2), 1, 0, 0.1);
 		add(LHTraits.CURSED.get(), loot1, getPotion(LCEffects.CURSE.key().location()), 1, 0, 0.2);
-		add(LHTraits.CURSED.get(), loot2, LCItems.CURSED_DROPLET.asStack(), 3, 0, 0.05);
-		add(LHTraits.CORROSION.get(), loot2, LCItems.CURSED_DROPLET.asStack(), 1, 0, 0.1);
-		add(LHTraits.EROSION.get(), loot2, LCItems.CURSED_DROPLET.asStack(), 1, 0, 0.1);
+		add(LHTraits.CURSED.get(), loot2, LCItems.CURSED_DROPLET.asStack(), 2, 0, 0.05);
+		add(LHTraits.CORROSION.get(), loot2, LCItems.CURSED_DROPLET.asStack(), 1, 0, 0.2);
+		add(LHTraits.EROSION.get(), loot2, LCItems.CURSED_DROPLET.asStack(), 1, 0, 0.2);
 		add(LHTraits.KILLER_AURA.get(), loot4, LCItems.EMERALD.asStack(), 1, 0, 0.02);
 		add(LHTraits.RAGNAROK.get(), loot4, new ItemStack(LCMats.ETERNIUM.getNugget(), 4), 1, 0, 0.1);
 		add(LHTraits.SHULKER.get(), loot2, LCItems.CAPTURED_BULLET.asStack(), 1, 0, 0.2);

@@ -131,21 +131,25 @@
       "specialConditions": [],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:tank"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 1,
           "trait": "l2hostility:cursed"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:soul_burner"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 0,
           "trait": "l2hostility:master"

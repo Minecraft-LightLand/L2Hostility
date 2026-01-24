@@ -41,7 +41,7 @@ public class CurseOfWrath extends CurseCurioItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext ctx, List<Component> list, TooltipFlag flag) {
-		int rate = (int) Math.round(100 * LHConfig.SERVER.wrathDamageBonus.get());
+		var rate = LangData.perc(LHConfig.SERVER.wrathDamageBonus.get());
 		list.add(LangData.ITEM_CHARM_WRATH.get(rate).withStyle(ChatFormatting.GOLD));
 		if (ctx.level() != null) {
 			addTooltip(list, SET);

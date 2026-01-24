@@ -41,6 +41,7 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 1,
           "min": 1,
           "trait": "l2hostility:split"
@@ -88,6 +89,7 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 1,
           "min": 2,
           "trait": "l2hostility:split"
@@ -135,6 +137,7 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:split"

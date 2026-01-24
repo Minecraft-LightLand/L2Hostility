@@ -21,16 +21,19 @@
       "specialConditions": [],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:protection"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 2,
           "trait": "l2hostility:cursed"
         },
         {
+          "cap": false,
           "condition": {
             "chance": 0.5,
             "lv": 200
@@ -40,6 +43,7 @@
           "trait": "l2hostility:dispell"
         },
         {
+          "cap": false,
           "condition": {
             "chance": 1.0,
             "lv": 250

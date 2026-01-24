@@ -43,18 +43,19 @@ public class TraitGenerator {
 		int max = LHConfig.SERVER.maxTraitCount.get();
 		if (config != null && config.maxTraitCount > 0) max = config.maxTraitCount;
 		maxTrait = free ? -1 : (int) (max / ins.trait_cost);
+		var list = new ArrayList<>(LHTraits.TRAITS.get().stream().filter(e ->
+				(config == null || !config.blacklist().contains(e)) &&
+						e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
 		if (config != null) {
 			for (var base : config.traits()) {
-				if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
-					genBase(base);
+				if (base.condition() == null || base.condition().match(entity, mobLevel, ins)) {
+					if (genBase(base) && base.cap()) {
+						list.remove(base.trait());
+					}
+				}
 			}
 		}
-
-		var list = LHTraits.TRAITS.get().stream().filter(e ->
-				(config == null || !config.blacklist().contains(e)) &&
-						e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList();
 		pool = new TraitPool(list, traits);
-
 	}
 
 	private int getRank(MobTrait e) {
@@ -71,11 +72,11 @@ public class TraitGenerator {
 		}
 	}
 
-	private void genBase(EntityConfig.TraitBase base) {
+	private boolean genBase(EntityConfig.TraitBase base) {
 		MobTrait e = base.trait();
-		if (e == null) return;
+		if (e == null) return false;
 		int maxTrait = TraitManager.getMaxLevel() + 1;
-		if (!e.allow(entity, mobLevel, maxTrait)) return;
+		if (!e.allow(entity, mobLevel, maxTrait)) return false;
 		int max = e.getMaxLevel(access);// config bypass player trait cap
 		int cost = e.getCost(access, ins.trait_cost);
 		int old = Math.min(e.getMaxLevel(access), Math.max(getRank(e), base.free()));
@@ -85,6 +86,7 @@ public class TraitGenerator {
 		if (rank > old) {
 			level -= (rank - old) * cost;
 		}
+		return rank > 0;
 	}
 
 	private void generate() {

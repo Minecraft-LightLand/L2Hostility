@@ -34,21 +34,25 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:growth"
         },
         {
+          "cap": false,
           "free": 3,
           "min": 4,
           "trait": "l2hostility:tank"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 1,
           "trait": "l2hostility:counter_strike"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 1,
           "trait": "l2hostility:dementor"
@@ -89,21 +93,25 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:growth"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:adaptive"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:reflect"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 1,
           "trait": "l2hostility:dispell"
@@ -144,16 +152,19 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:growth"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:tank"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 1,
           "trait": "l2hostility:counter_strike"
@@ -194,16 +205,19 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:growth"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:adaptive"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:reflect"
@@ -244,11 +258,13 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:growth"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:tank"
@@ -289,11 +305,13 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:growth"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:adaptive"
@@ -337,6 +355,7 @@
       ],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:growth"

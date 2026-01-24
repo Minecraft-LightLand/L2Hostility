@@ -1,6 +1,6 @@
 {
   "type": "l2hostility:trait_scaled",
-  "chance": -0.2,
+  "chance": -0.1,
   "conditions": [
     {
       "condition": "minecraft:killed_by_player"
@@ -8,7 +8,7 @@
     {
       "condition": "l2hostility:trait_and_level",
       "maxLevel": 5,
-      "minLevel": 3,
+      "minLevel": 2,
       "trait": "l2hostility:regenerate"
     },
     {
@@ -16,7 +16,7 @@
       "item": "l2hostility:charm_of_looting_2"
     }
   ],
-  "rankBonus": 0.08,
+  "rankBonus": 0.1,
   "result": {
     "count": 1,
     "id": "l2complements:life_essence"

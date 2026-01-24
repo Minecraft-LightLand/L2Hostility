@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
+import dev.xkmc.l2core.events.SchedulerHandler;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
 import dev.xkmc.l2hostility.compat.curios.EntitySlotAccess;
 import dev.xkmc.l2hostility.content.item.traits.SealedItem;
@@ -39,12 +40,16 @@ public class RagnarokTrait extends LegendaryTrait {
 
 	@Override
 	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
+		SchedulerHandler.schedule(() -> sealItems(level, target));
+	}
+
+	public void sealItems(int level, LivingEntity target) {
 		List<EntitySlotAccess> list = new ArrayList<>(CurioCompat.getItemAccess(target)
 				.stream().filter(RagnarokTrait::allowSeal).toList());
 		int count = Math.min(level, list.size());
 		int time = LHConfig.SERVER.ragnarokTime.get() * level;
 		for (int i = 0; i < count; i++) {
-			int index = attacker.getRandom().nextInt(list.size());
+			int index = target.getRandom().nextInt(list.size());
 			EntitySlotAccess slot = list.remove(index);
 			slot.modify(e -> SealedItem.sealItem(e, time));
 		}

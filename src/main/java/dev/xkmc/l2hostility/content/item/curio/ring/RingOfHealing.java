@@ -20,7 +20,7 @@ public class RingOfHealing extends SingletonItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
-		list.add(LangData.ITEM_RING_HEALING.get(Math.round(LHConfig.SERVER.ringOfHealingRate.get() * 100)).withStyle(ChatFormatting.GOLD));
+		list.add(LangData.ITEM_RING_HEALING.get(LangData.perc(LHConfig.SERVER.ringOfHealingRate.get())).withStyle(ChatFormatting.GOLD));
 	}
 
 	@Override

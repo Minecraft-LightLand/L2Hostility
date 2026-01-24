@@ -21,21 +21,25 @@
       "specialConditions": [],
       "traits": [
         {
+          "cap": false,
           "free": 1,
           "min": 2,
           "trait": "l2hostility:speedy"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 2,
           "trait": "l2hostility:weakness"
         },
         {
+          "cap": false,
           "free": 1,
           "min": 1,
           "trait": "l2hostility:undying"
         },
         {
+          "cap": false,
           "condition": {
             "chance": 1.0,
             "lv": 250

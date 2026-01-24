@@ -37,9 +37,9 @@ public class CurseOfPride extends CurseCurioItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext level, List<Component> list, TooltipFlag flag) {
-		int protect = (int) Math.round(100 * LHConfig.SERVER.prideHealthBonus.get());
-		int damage = (int) Math.round(100 * LHConfig.SERVER.prideDamageBonus.get());
-		int trait = (int) Math.round(100 * (1 / LHConfig.SERVER.prideTraitFactor.get() - 1));
+		var protect = LangData.perc(LHConfig.SERVER.prideHealthBonus.get());
+		var damage = LangData.perc(LHConfig.SERVER.prideDamageBonus.get());
+		var trait = LangData.perc(1 / LHConfig.SERVER.prideTraitFactor.get() - 1);
 		list.add(LangData.ITEM_CHARM_PRIDE.get(protect, damage).withStyle(ChatFormatting.GOLD));
 		list.add(LangData.ITEM_CHARM_TRAIT_CHEAP.get(trait).withStyle(ChatFormatting.RED));
 	}

@@ -1,5 +1,11 @@
 3.0.13
 - curse curio effect de-duplication
+- curse of wrath and curse of pride now stacks additively
+- only 3 hand curios would take effect when held in hand
+- Prevent ragnarok trait from causing CME in mobs reassessing weapon goals
+- support <1% chance display
+- balanced some curios
+- allow trait caps
 
 3.0.12
 - Fix health scaling not applying on mobs with entity config

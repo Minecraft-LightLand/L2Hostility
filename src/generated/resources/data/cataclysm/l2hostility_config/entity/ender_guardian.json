@@ -64,16 +64,19 @@
       "specialConditions": [],
       "traits": [
         {
+          "cap": false,
           "free": 2,
           "min": 3,
           "trait": "l2hostility:tank"
         },
         {
+          "cap": false,
           "free": 2,
           "min": 2,
           "trait": "l2hostility:adaptive"
         },
         {
+          "cap": false,
           "free": 3,
           "min": 5,
           "trait": "l2hostility:weakness"
