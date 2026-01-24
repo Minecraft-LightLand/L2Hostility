@@ -1,6 +1,8 @@
 package dev.xkmc.l2hostility.content.traits.legendary;
 
+import dev.xkmc.l2damagetracker.contents.attack.AttackCache;
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
+import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -8,7 +10,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public class DementorTrait extends LegendaryTrait {
 
@@ -30,11 +31,16 @@ public class DementorTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public void onAttackedByOthers(int level, LivingEntity entity, LivingAttackEvent event) {
-		if (!event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				!event.getSource().is(L2DamageTypes.MAGIC)) {
-			event.setCanceled(true);
-		}
+	public void onDamaged(int level, LivingEntity entity, AttackCache cache) {
+		var event = cache.getLivingDamageEvent();
+		if (event == null) return;
+		var source = event.getSource();
+		if (source.is(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
+				source.is(DamageTypeTags.BYPASSES_EFFECTS) ||
+				source.is(L2DamageTypes.MAGIC))
+			return;
+		double def = LHConfig.COMMON.dementorDamageReductionBase.get();
+		cache.addDealtModifier(DamageModifier.nonlinearPre(7436, val -> (float) (Math.log(val) / Math.log(def))));
 	}
+
 }

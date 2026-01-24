@@ -198,11 +198,11 @@ public class LHTraits {
 		{
 			DEMENTOR = L2Hostility.REGISTRATE.regTrait("dementor", () -> new DementorTrait(ChatFormatting.DARK_GRAY),
 							rl -> new TraitConfig(rl, 120, 50, 1, 150))
-					.desc("Immune to physical damage. Damage bypass armor.")
+					.desc("Resistant to physical damage. Damage bypass armor.")
 					.lang("Dementor").register();
 			DISPELL = L2Hostility.REGISTRATE.regTrait("dispell", () -> new DispellTrait(ChatFormatting.DARK_PURPLE),
 							rl -> new TraitConfig(rl, 100, 50, 3, 150))
-					.desc("Immune to magic damage. Damage bypass magical protections. Randomly picks %s enchanted equipment and disable enchantments on them for %s seconds.")
+					.desc("Resistant to magic damage. Damage bypass magical protections. Randomly picks %s enchanted equipment and disable enchantments on them for %s seconds.")
 					.lang("Dispell").register();
 			UNDYING = L2Hostility.REGISTRATE.regTrait("undying", () -> new UndyingTrait(ChatFormatting.DARK_BLUE),
 							rl -> new TraitConfig(rl, 150, 100, 1, 150)
