@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:dispell",
-	  "text": "Mobs with this trait can deal damage that bypass magical protection, and randomly negate enchantments on one of your equipments temporarily. Also, they will be immune to magic damage."
+	  "text": "Mobs with this trait can deal damage that bypass magical protection, and randomly negate enchantments on one of your equipments temporarily. Also, they will be resistant to magic damage."
 	},
 	{
 	  "type": "patchouli:text",

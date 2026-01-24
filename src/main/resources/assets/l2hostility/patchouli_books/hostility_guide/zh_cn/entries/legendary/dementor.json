@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:dementor",
-	  "text": "拥有这个词条的怪物免疫物理攻击，并且攻击目标会无视护甲造成魔法伤害。"
+	  "text": "拥有这个词条的怪物对非魔法攻击有极高抗性，并且攻击目标会无视护甲造成魔法伤害。"
 	},
 	{
 	  "type": "patchouli:text",

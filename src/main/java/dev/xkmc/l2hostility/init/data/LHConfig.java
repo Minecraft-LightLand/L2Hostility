@@ -123,7 +123,9 @@ public class LHConfig {
 		public final ModConfigSpec.DoubleValue reflectFactor;
 		public final ModConfigSpec.IntValue dispellTime;
 		public final ModConfigSpec.DoubleValue dispellDamageFactor;
+		public final ModConfigSpec.DoubleValue dispellDamageReductionBase;
 		public final ModConfigSpec.DoubleValue dementorDamageFactor;
+		public final ModConfigSpec.DoubleValue dementorDamageReductionBase;
 		public final ModConfigSpec.IntValue fieryTime;
 		public final ModConfigSpec.IntValue weakTime;
 		public final ModConfigSpec.IntValue slowTime;
@@ -489,6 +491,20 @@ public class LHConfig {
 				grenadeDamageFactor = builder.comment("Damage Bonus Factor for grenade damage")
 						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
 						.defineInRange("grenadeDamageFactor", 0.25, 0, 1);
+
+
+				dispellDamageReductionBase = builder.comment("Damage Reduction Base for Dispell")
+						.comment("Non-Magic damage will take a log with base of this config number")
+						.comment("Example: 1.1 means 100 -> 48, 1000 -> 72")
+						.comment("Example: 2 means 16 -> 4, 1024 -> 10")
+						.comment("Example: 10 means 100 -> 2, 1000000 -> 6")
+						.defineInRange("dispellDamageReductionBase", 2, 1.01, 100);
+				dementorDamageReductionBase = builder.comment("Damage Reduction Base for Dementor")
+						.comment("Magic damage will take a log with base of this config number")
+						.comment("Example: 1.1 means 100 -> 48, 1000 -> 72")
+						.comment("Example: 2 means 16 -> 4, 1024 -> 10")
+						.comment("Example: 10 means 100 -> 2, 1000000 -> 6")
+						.defineInRange("dementorDamageReductionBase", 2, 1.01, 100);
 
 				effectAura(builder, "gravity", 10);
 				effectAura(builder, "moonwalk", 10);

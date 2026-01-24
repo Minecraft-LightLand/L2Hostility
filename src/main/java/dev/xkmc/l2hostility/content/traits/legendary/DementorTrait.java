@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.content.traits.legendary;
 
 import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2damagetracker.contents.attack.DamageData;
+import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2damagetracker.contents.damage.DefaultDamageState;
 import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.init.data.LHConfig;
@@ -31,10 +32,13 @@ public class DementorTrait extends LegendaryTrait {
 	}
 
 	@Override
-	public boolean onAttackedByOthers(int level, LivingEntity entity, DamageData.Attack event) {
-		return !event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-				!event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) &&
-				!event.getSource().is(Tags.DamageTypes.IS_MAGIC);
+	public void onDamaged(int level, LivingEntity entity, DamageData.Defence event) {
+		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
+				event.getSource().is(DamageTypeTags.BYPASSES_EFFECTS) ||
+				event.getSource().is(Tags.DamageTypes.IS_MAGIC))
+			return;
+		double def = LHConfig.SERVER.dispellDamageReductionBase.get();
+		event.addDealtModifier(DamageModifier.nonlinearPre(7436, val -> (float) (Math.log(val) / Math.log(def)), getRegistryName()));
 	}
 
 }

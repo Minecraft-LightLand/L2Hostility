@@ -6,7 +6,7 @@
 	{
 	  "type": "patchouli:spotlight",
 	  "item": "l2hostility:dementor",
-	  "text": "Mobs with this trait is immune to physical damage, and will deal magical damage that bypasses armor."
+	  "text": "Mobs with this trait is resistant to physical damage, and will deal magical damage that bypasses armor."
 	},
 	{
 	  "type": "patchouli:text",
