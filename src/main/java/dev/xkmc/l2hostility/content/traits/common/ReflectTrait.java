@@ -22,7 +22,7 @@ public class ReflectTrait extends MobTrait {
 
 	@Override
 	public double modifyBonusDamage(DamageSource source, double factor, int lv) {
-		if (source.is(LHDamageTypes.KILLER_AURA))
+		if (source.is(LHDamageTypes.REFLECT))
 			return 0;
 		return 1;
 	}
