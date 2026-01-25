@@ -33,14 +33,6 @@ public class DispellTrait extends LegendaryTrait {
 			event.enable(DefaultDamageState.BYPASS_MAGIC);
 	}
 
-
-	public double modifyBonusDamage(DamageSource source, double factor, int lv) {
-		if (source.getMsgId().equals("mob") && source.is(DamageTypeTags.BYPASSES_EFFECTS)) {
-			return LHConfig.SERVER.dispellDamageFactor.get();
-		}
-		return 1;
-	}
-
 	@Override
 	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
 		List<ItemStack> list = new ArrayList<>();
@@ -66,7 +58,7 @@ public class DispellTrait extends LegendaryTrait {
 				!event.getSource().is(Tags.DamageTypes.IS_MAGIC))
 			return;
 		double def = LHConfig.SERVER.dispellDamageReductionBase.get();
-		event.addDealtModifier(DamageModifier.nonlinearPre(7435, val -> val < def ? val : (float) (Math.log(val) / Math.log(def)), getRegistryName()));
+		event.addDealtModifier(DamageModifier.nonlinearPre(7435, val -> (float) (val < def ? val / def : Math.log(val) / Math.log(def)), getRegistryName()));
 	}
 
 	@Override

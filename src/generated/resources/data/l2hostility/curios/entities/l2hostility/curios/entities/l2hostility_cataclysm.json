@@ -1,10 +1,10 @@
 {
   "entities": [
     "cataclysm:ender_guardian",
+    "cataclysm:netherite_monstrosity",
     "cataclysm:ignis",
-    "cataclysm:the_harbinger",
     "cataclysm:the_leviathan",
-    "cataclysm:netherite_monstrosity"
+    "cataclysm:the_harbinger"
   ],
   "slots": [
     "hands",

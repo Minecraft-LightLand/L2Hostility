@@ -1,10 +1,10 @@
-// 1.21.1	2026-01-24T16:30:21.668499	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
+// 1.21.1	2026-01-24T22:11:17.765647	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 0d15a69c346a80468001a02f1326848a9559d3bf assets/l2hostility/blockstates/miracle_block.json
-2e1b784cfc918e469bdd476402aeef8d6fd7b129 assets/l2hostility/lang/en_ud.json
-9ed66b9605869d22fbfbcdecb957ac6c4408abae assets/l2hostility/lang/en_us.json
+6be9071b5c73b6743ac4c85706694150464813ed assets/l2hostility/lang/en_ud.json
+a53c0dcf3e04e9a0b28a648d2ab450583a78e44a assets/l2hostility/lang/en_us.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets/l2hostility/models/block/chaos_block.json
 b482cdea0faf29842ecf75310f414ce76d12e36a assets/l2hostility/models/block/hostility_beacon.json
 3e128895a51810875704de53d8500ce23da14895 assets/l2hostility/models/block/hostility_beacon_base.json
@@ -235,6 +235,7 @@ d06ef1c337a94235fbf0083adb15508398354435 data/l2hostility/advancement/recipes/mi
 82b59f26a07f7b28719ea026df88f5751e2e459f data/l2hostility/advancement/recipes/misc/witch_charge.json
 fe37f6df8840e68e96675e55d7dd9d5825483e35 data/l2hostility/advancement/recipes/misc/witch_wand.json
 5cc00ffe96d33c1c100aa6bf50953ca8dacd69dd data/l2hostility/damage_type/killer_aura.json
+5cfe2eebb9639d7df6d56ef6f9fb53240fdead54 data/l2hostility/damage_type/reflect.json
 eebac420b5800ddcfc0ecc57172d34e99de82b0c data/l2hostility/data_maps/l2hostility/trait/trait_data.json
 4da4154d64f83ba8ae2e61f0f1a3a4f6a09e3afe data/l2hostility/data_maps/l2hostility/trait/trait_exclusion.json
 f689dd25a950129ab74c0b97ef73b815ee804470 data/l2hostility/enchantment/insulator.json
@@ -415,10 +416,10 @@ bff31230b5ee66358421414dc1689d38bbaa9594 data/l2weaponry/l2hostility_config/weap
 ae3272ea9c6f244c79f6192ef5e9f1d387c45909 data/minecraft/tags/block/beacon_base_blocks.json
 65da76b3a96d076426cc78810d00296dfd0b5679 data/minecraft/tags/block/mineable/pickaxe.json
 6a70fe0b66cbb6fbf8cd0870ea1ad350fae1bf08 data/minecraft/tags/block/needs_diamond_tool.json
-4ecf5c12e1c8d9a3c82275c97ec043b63b2e0dca data/minecraft/tags/damage_type/bypasses_armor.json
+c5f95b98f8a3ae94070efce455419fd4eb410578 data/minecraft/tags/damage_type/bypasses_armor.json
 8f06d01e99277dc97bf8e7db7cc0a8f3ff359d05 data/minecraft/tags/item/enchantable/durability.json
 1267f1fb91d9409b9c666dc8edeecab0cfae4ab0 data/mutantmonsters/l2hostility_config/entity/bosses.json
-4ecf5c12e1c8d9a3c82275c97ec043b63b2e0dca data/neoforge/tags/damage_type/is_magic.json
+c5f95b98f8a3ae94070efce455419fd4eb410578 data/neoforge/tags/damage_type/is_magic.json
 22e853a1701b257608c2c4f4117c5ea2a7448906 data/twilightforest/l2hostility_config/entity/alpha_yeti.json
 ca09d4fc97d810d1242224e4c5ea49307d707b73 data/twilightforest/l2hostility_config/entity/hydra.json
 21523ad500c5d78045c6bc427408db496d9d8860 data/twilightforest/l2hostility_config/entity/knight_phantom.json

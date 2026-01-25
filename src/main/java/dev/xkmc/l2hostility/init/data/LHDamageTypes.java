@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.init.data;
 
 import dev.xkmc.l2damagetracker.init.data.DamageTypeAndTagsGen;
+import dev.xkmc.l2damagetracker.init.data.L2DamageTypes;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -14,10 +15,13 @@ import net.neoforged.neoforge.common.Tags;
 public class LHDamageTypes extends DamageTypeAndTagsGen {
 
 	public static final ResourceKey<DamageType> KILLER_AURA = create("killer_aura");
+	public static final ResourceKey<DamageType> REFLECT = create("reflect");
 
 	public LHDamageTypes() {
 		super(L2Hostility.REGISTRATE);
 		new DamageTypeHolder(KILLER_AURA, new DamageType("killer_aura", DamageScaling.NEVER, 0.1f))
+				.add(DamageTypeTags.BYPASSES_ARMOR, Tags.DamageTypes.IS_MAGIC);
+		new DamageTypeHolder(REFLECT, new DamageType("indirectMagic", DamageScaling.NEVER, 0f))
 				.add(DamageTypeTags.BYPASSES_ARMOR, Tags.DamageTypes.IS_MAGIC);
 	}
 

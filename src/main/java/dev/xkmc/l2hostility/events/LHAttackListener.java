@@ -116,6 +116,9 @@ public class LHAttackListener implements AttackListener {
 					for (var ent : cap.traits.entrySet()) {
 						factor *= ent.getKey().modifyBonusDamage(source, old, ent.getValue());
 					}
+					if (source.is(DamageTypeTags.BYPASSES_ENCHANTMENTS)) {
+						factor *= LHConfig.SERVER.dispellDamageFactor.get();
+					}
 					data.addHurtModifier(DamageModifier.multTotal(1 + (float) factor, SCALING));
 				}
 				TraitEffectCache traitCache = new TraitEffectCache(target);
@@ -172,7 +175,7 @@ public class LHAttackListener implements AttackListener {
 			if (CurioCompat.hasItemInCurioOrSlot(mob, LHItems.IMAGINE_BREAKER.get())) {
 				event.enable(DefaultDamageState.BYPASS_MAGIC);
 			}
-			if (CurioCompat.hasItemInCurio(mob, LHItems.PLATINUM_STAR.get())) {
+			if (CurioCompat.hasItemInCurioOrSlot(mob, LHItems.PLATINUM_STAR.get())) {
 				event.enable(DefaultDamageState.BYPASS_COOLDOWN);
 			}
 		}

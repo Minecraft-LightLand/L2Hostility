@@ -29,6 +29,13 @@ public class KillerAuraTrait extends LegendaryTrait {
 	}
 
 	@Override
+	public double modifyBonusDamage(DamageSource source, double factor, int lv) {
+		if (source.is(LHDamageTypes.KILLER_AURA))
+			return LHConfig.SERVER.killerAuraDamageFactor.get();
+		return 1;
+	}
+
+	@Override
 	public void tick(LivingEntity mob, int level) {
 		int itv = LHConfig.SERVER.killerAuraInterval.get() / level;
 		int damage = LHConfig.SERVER.killerAuraDamage.get() * level;
