@@ -29,8 +29,10 @@ public class SplitTrait extends MobTrait {
 		if (event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
 			return;
 		}
+		if (entity.getTags().contains("l2hostility:split_done")) return;
 		add(entity);
 		add(entity);
+		entity.addTag("l2hostility:split_done");
 	}
 
 	private void add(LivingEntity entity) {

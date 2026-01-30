@@ -13,10 +13,12 @@ import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.jetbrains.annotations.Nullable;
 
 public class HostilityBullet extends ShulkerBullet {
 
-	private BulletType type;
+	@Nullable
+	private BulletType type = null;
 	private int lv;
 
 	public HostilityBullet(EntityType<HostilityBullet> type, Level level) {
@@ -53,20 +55,24 @@ public class HostilityBullet extends ShulkerBullet {
 	@Override
 	protected void onHitBlock(BlockHitResult result) {
 		super.onHitBlock(result);
+		if (type == null) return;
 		type.onHit(this, result, lv);
 	}
 
 	@Override
 	protected void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		tag.putString("BulletType", type.name());
+		if (type != null)
+			tag.putString("BulletType", type.name());
 		tag.putInt("BulletLevel", lv);
 	}
 
 	@Override
 	protected void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		type = BulletType.valueOf(tag.getString("BulletType"));
+		if (tag.contains("BulletType")) {
+			type = BulletType.valueOf(tag.getString("BulletType"));
+		}
 		lv = tag.getInt("BulletLevel");
 	}
 
