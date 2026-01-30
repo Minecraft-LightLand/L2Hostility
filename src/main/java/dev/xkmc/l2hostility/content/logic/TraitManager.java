@@ -53,7 +53,7 @@ public class TraitManager {
 			ans = lv;
 		}
 		// armor
-		if (le.getType().is(LHTagGen.ARMOR_TARGET)) {
+		if (LHConfig.COMMON.enableEquipmentDatapack.get() && le.getType().is(LHTagGen.ARMOR_TARGET)) {
 			ItemPopulator.populateArmors(le, lv, PlayerFinder.getNearestPlayer(le.level(), le) instanceof ServerPlayer sp ? sp : null);
 		}
 		// add traits

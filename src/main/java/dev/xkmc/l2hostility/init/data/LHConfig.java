@@ -95,6 +95,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue allowPlayerAllies;
 		public final ForgeConfigSpec.BooleanValue allowTraitOnOwnable;
 		public final ForgeConfigSpec.DoubleValue dropRateFromSpawner;
+		public final ForgeConfigSpec.BooleanValue enableEquipmentDatapack;
 
 		public final ForgeConfigSpec.IntValue bottleOfCurseLevel;
 		public final ForgeConfigSpec.IntValue envyExtraLevel;
@@ -198,6 +199,8 @@ public class LHConfig {
 					.define("enableEntitySpecificDatapack", true);
 			enableStructureSpecificDatapack = builder.comment("Allow structure specific difficulty configs to load")
 					.define("enableStructureSpecificDatapack", true);
+			enableEquipmentDatapack = builder.comment("Allow datapack configs to add extra items and enchantments to entities")
+					.define("enableEquipmentDatapack", true);
 			builder.push("scaling");
 			{
 				healthFactor = builder.comment("Health factor per level")
