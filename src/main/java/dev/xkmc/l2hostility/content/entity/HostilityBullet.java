@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 public class HostilityBullet extends ShulkerBullet {
 
 	@Nullable
-	private BulletType type = null;
+	protected BulletType type = null;
 	private int lv;
 
 	public HostilityBullet(EntityType<HostilityBullet> type, Level level) {
