@@ -1,3 +1,8 @@
+3.0.14
+- Add config option to turn off all datapack-added equipments
+- Change texture and particle for explosive shulker bullet
+- Player level growth when defeating high level mobs will be limited to as if player defeats similar level mobs
+
 3.0.13
 - Dispell and Dementor now is resistant but not immune to magic / physical damage
 - Halve damage scaling for enchantment bypassing damage
