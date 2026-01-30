@@ -52,7 +52,7 @@ public class L2Hostility {
 
 	public static final String MODID = "l2hostility";
 	public static final PacketHandlerWithConfig HANDLER = new PacketHandlerWithConfig(
-			new ResourceLocation(MODID, "main"), 1,
+			new ResourceLocation(MODID, "main"), 2,
 			e -> e.create(MobCapSyncToClient.class, NetworkDirection.PLAY_TO_CLIENT),
 			e -> e.create(TraitEffectToClient.class, NetworkDirection.PLAY_TO_CLIENT),
 			e -> e.create(LootDataToClient.class, NetworkDirection.PLAY_TO_CLIENT),

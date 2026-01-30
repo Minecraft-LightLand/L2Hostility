@@ -9,12 +9,14 @@ import dev.xkmc.l2damagetracker.compat.CustomAttackListener;
 import dev.xkmc.l2damagetracker.contents.attack.AttackEventHandler;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
-import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import dev.xkmc.l2hostility.init.L2Hostility;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.util.Lazy;
 
 public class LHKJSPlugin extends KubeJSPlugin {
 
-	public static final Lazy<RegistryInfo<MobTrait>> TRAITS = Lazy.of(() -> RegistryInfo.of(LHTraits.TRAITS.key(), MobTrait.class));
+	public static final Lazy<RegistryInfo<MobTrait>> TRAITS = Lazy.of(() -> RegistryInfo.of(ResourceKey.createRegistryKey(new ResourceLocation(L2Hostility.MODID, "trait")), MobTrait.class));
 
 	@Override
 	public void init() {
