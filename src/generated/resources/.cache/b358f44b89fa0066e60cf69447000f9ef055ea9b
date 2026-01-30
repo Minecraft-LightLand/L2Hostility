@@ -1,10 +1,10 @@
-// 1.21.1	2026-01-24T22:11:17.765647	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
+// 1.21.1	2026-01-30T16:35:20.829417	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 0d15a69c346a80468001a02f1326848a9559d3bf assets/l2hostility/blockstates/miracle_block.json
-6be9071b5c73b6743ac4c85706694150464813ed assets/l2hostility/lang/en_ud.json
-a53c0dcf3e04e9a0b28a648d2ab450583a78e44a assets/l2hostility/lang/en_us.json
+7cd01800b38009d9891eaa405f6a14b12e93c934 assets/l2hostility/lang/en_ud.json
+04af57e54e3a401eacf6e021d8391426485cb036 assets/l2hostility/lang/en_us.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets/l2hostility/models/block/chaos_block.json
 b482cdea0faf29842ecf75310f414ce76d12e36a assets/l2hostility/models/block/hostility_beacon.json
 3e128895a51810875704de53d8500ce23da14895 assets/l2hostility/models/block/hostility_beacon_base.json

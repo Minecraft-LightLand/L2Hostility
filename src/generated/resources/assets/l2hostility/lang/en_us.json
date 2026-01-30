@@ -317,6 +317,8 @@
   "l2hostility.configuration.enableCurioCheckFilter.tooltip": "",
   "l2hostility.configuration.enableEntitySpecificDatapack": "Allow entity specific difficulty configs to load",
   "l2hostility.configuration.enableEntitySpecificDatapack.tooltip": "",
+  "l2hostility.configuration.enableEquipmentDatapack": "Allow datapack configs to add extra items and enchantments to entities",
+  "l2hostility.configuration.enableEquipmentDatapack.tooltip": "",
   "l2hostility.configuration.enableHostilityOrbDrop": "Give player hostility orbs when upleveling difficulty",
   "l2hostility.configuration.enableHostilityOrbDrop.tooltip": "",
   "l2hostility.configuration.enableStructureSpecificDatapack": "Allow structure specific difficulty configs to load",
