@@ -9,6 +9,7 @@
 		"ItemStackMixin",
 		"NeoForgeEventHandlerAccessor",
 		"PlayerMixin",
+		"ShulkerBulletMixin",
 		"SlimeMixin"
 	],
 	"client": [
