@@ -3,7 +3,11 @@ package dev.xkmc.l2hostility.content.entity;
 import dev.xkmc.l2hostility.init.registrate.LHEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,9 +17,12 @@ import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class HostilityBullet extends ShulkerBullet {
+public class HostilityBullet extends ShulkerBullet implements IEntityAdditionalSpawnData {
 
 	@Nullable
 	protected BulletType type = null;
@@ -90,4 +97,35 @@ public class HostilityBullet extends ShulkerBullet {
 		}
 		return false;
 	}
+
+	public void tick() {
+		super.tick();
+		if (level().isClientSide) {
+			Vec3 vel = getDeltaMovement();
+			var particle = type == BulletType.EXPLODE ? ParticleTypes.FLAME : ParticleTypes.END_ROD;
+			level().addParticle(particle, getX() - vel.x, getY() - vel.y + 0.15, getZ() - vel.z, 0, 0, 0);
+		}
+	}
+
+	@Override
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+
+	@Override
+	public void writeSpawnData(FriendlyByteBuf buf) {
+		var owner = getOwner();
+		buf.writeInt(owner == null ? -1 : owner.getId());
+		buf.writeInt(type == null ? -1 : type.ordinal());
+	}
+
+	@Override
+	public void readSpawnData(FriendlyByteBuf buf) {
+		int owner = buf.readInt();
+		var e = level().getEntity(owner);
+		if (e != null) setOwner(e);
+		int val = buf.readInt();
+		if (val >= 0) type = BulletType.values()[val];
+	}
+
 }

@@ -1,3 +1,8 @@
+2.5.14
+- Split trait will no longer split twice when some other mods making entity dying twice
+- Add config option to turn off all datapack-added equipments
+- Change texture and particle for explosive shulker bullet
+
 2.5.13
 - Now reflect has no damage scaling
 

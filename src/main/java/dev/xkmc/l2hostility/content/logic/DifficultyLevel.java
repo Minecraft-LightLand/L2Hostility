@@ -42,7 +42,8 @@ public class DifficultyLevel {
 			experience = 0;
 			return;
 		}
-		experience += (int) (growFactor * cap.getLevel() * cap.getLevel());
+		int lv = Math.min(level + 10, cap.getLevel());
+		experience += (int) (growFactor * lv * lv);
 		int factor = LHConfig.COMMON.killsPerLevel.get();
 		while (experience >= (long) level * level * factor) {
 			experience -= (long) level * level * factor;
