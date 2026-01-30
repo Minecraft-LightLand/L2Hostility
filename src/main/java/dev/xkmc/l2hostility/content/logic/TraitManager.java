@@ -58,7 +58,7 @@ public class TraitManager {
 			ans = lv;
 		}
 		// armor
-		if (le.getType().is(LHTagGen.ARMOR_TARGET)) {
+		if (LHConfig.SERVER.enableEquipmentDatapack.get() && le.getType().is(LHTagGen.ARMOR_TARGET)) {
 			if (!NeoForge.EVENT_BUS.post(new HostilityInitEvent.Pre(le, cap, ARMOR)).isCanceled()) {
 				ItemPopulator.populateArmors(le, lv);
 				NeoForge.EVENT_BUS.post(new HostilityInitEvent.Post(le, cap, ARMOR));

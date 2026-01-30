@@ -90,6 +90,7 @@ public class LHConfig {
 		public final ModConfigSpec.BooleanValue allowPlayerAllies;
 		public final ModConfigSpec.BooleanValue allowTraitOnOwnable;
 		public final ModConfigSpec.DoubleValue dropRateFromSpawner;
+		public final ModConfigSpec.BooleanValue enableEquipmentDatapack;
 
 		public final ModConfigSpec.IntValue bottleOfCurseLevel;
 		public final ModConfigSpec.IntValue envyExtraLevel;
@@ -194,6 +195,8 @@ public class LHConfig {
 					.define("enableEntitySpecificDatapack", true);
 			enableStructureSpecificDatapack = builder.text("Allow structure specific difficulty configs to load")
 					.define("enableStructureSpecificDatapack", true);
+			enableEquipmentDatapack = builder.text("Allow datapack configs to add extra items and enchantments to entities")
+					.define("enableEquipmentDatapack", true);
 			builder.push("scaling", "Mob Scaling");
 			{
 				healthFactor = builder.text("Health factor per level")

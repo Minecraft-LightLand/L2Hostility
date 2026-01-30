@@ -162,6 +162,7 @@ public class ItemPopulator {
 	}
 
 	public static void postFill(MobTraitCap cap, LivingEntity le) {
+		if (!LHConfig.SERVER.enableEquipmentDatapack.get()) return;
 		ServerPlayer sp = PlayerFinder.getNearestPlayer(le.level(), le) instanceof ServerPlayer player ? player : null;
 		// add weapon
 		RandomSource r = le.getRandom();
