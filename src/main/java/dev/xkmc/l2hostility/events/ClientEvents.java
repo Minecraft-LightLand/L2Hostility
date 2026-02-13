@@ -20,6 +20,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityAttachment;
@@ -89,10 +90,16 @@ public class ClientEvents {
 		pose.scale(0.025F, -0.025F, 0.025F);
 		Matrix4f matrix4f = pose.last().pose();
 		Font font = event.getEntityRenderer().getFont();
-		float f2 = (float) (-font.width(text) / 2);
-		float f1 = Minecraft.getInstance().options.getBackgroundOpacity(0.25F);
-		int j = (int) (f1 * 255.0F) << 24;
-		font.drawInBatch(text, f2, 0, -1, false, matrix4f, event.getMultiBufferSource(), mode, j, light);
+		int textWidth = font.width(text);
+		float f2 = (float) (-textWidth / 2);
+		int firstPassColor = (mode == Font.DisplayMode.SEE_THROUGH) ? 0x20FFFFFF : 0xFFFFFFFF;
+		int bgColor = Minecraft.getInstance().options.getBackgroundColor(0.25F);
+		renderTextBackground(event.getMultiBufferSource(), mode, matrix4f, f2, textWidth, light, bgColor);
+		font.drawInBatch(text, f2, 0, firstPassColor, false, matrix4f, event.getMultiBufferSource(), mode, 0, light);
+		if (mode == Font.DisplayMode.SEE_THROUGH) {
+			font.drawInBatch(text, f2, 0, 0xFFFFFFFF, false, matrix4f, event.getMultiBufferSource(), Font.DisplayMode.NORMAL, 0, light);
+		}
+
 		pose.popPose();
 	}
 
@@ -183,6 +190,35 @@ public class ClientEvents {
 
 	private static void vertex(PoseStack.Pose entry, VertexConsumer vc, float x, float y, float z, float u, float v) {
 		vc.addVertex(entry.pose(), x, y, z).setUv(u, v).setNormal(entry, 0.0F, 1.0F, 0.0F);
+	}
+
+
+	private static void renderTextBackground(
+			MultiBufferSource bufferSource,
+			Font.DisplayMode mode,
+			Matrix4f matrix4f,
+			float x,
+			int textWidth,
+			int packedLight,
+			int backgroundColor
+	) {
+		if (backgroundColor == 0) return;
+		float alpha = (backgroundColor >>> 24) / 255.0F;
+		float x0 = x - 1.0F;
+		float x1 = x + textWidth + 1.0F;
+		float y0 = 9.0F;
+		float y1 = -1.0F;
+		float z = 0.01F;
+
+		RenderType rt = (mode == Font.DisplayMode.SEE_THROUGH)
+				? RenderType.textBackgroundSeeThrough()
+				: RenderType.textBackground();
+
+		VertexConsumer bg = bufferSource.getBuffer(rt);
+		bg.addVertex(matrix4f, x0, y0, z).setColor(0.0F, 0.0F, 0.0F, alpha).setLight(packedLight);
+		bg.addVertex(matrix4f, x1, y0, z).setColor(0.0F, 0.0F, 0.0F, alpha).setLight(packedLight);
+		bg.addVertex(matrix4f, x1, y1, z).setColor(0.0F, 0.0F, 0.0F, alpha).setLight(packedLight);
+		bg.addVertex(matrix4f, x0, y1, z).setColor(0.0F, 0.0F, 0.0F, alpha).setLight(packedLight);
 	}
 
 }
