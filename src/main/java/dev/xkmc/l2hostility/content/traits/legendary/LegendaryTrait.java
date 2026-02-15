@@ -6,10 +6,16 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 
+import java.util.function.IntSupplier;
+
 public class LegendaryTrait extends MobTrait {
 
 	public LegendaryTrait(ChatFormatting format) {
 		super(format);
+	}
+
+	public LegendaryTrait(IntSupplier color) {
+		super(color);
 	}
 
 	@Override

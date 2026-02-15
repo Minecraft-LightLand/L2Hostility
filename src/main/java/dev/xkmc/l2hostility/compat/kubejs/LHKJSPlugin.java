@@ -21,6 +21,7 @@ public class LHKJSPlugin extends KubeJSPlugin {
 	@Override
 	public void init() {
 		TRAITS.get().addType("basic", BasicTraitBuilder.class, BasicTraitBuilder::new);
+		TRAITS.get().addType("legendary", LegendaryTraitBuilder.class, LegendaryTraitBuilder::new);
 		TRAITS.get().addType("attribute", AttributeTraitBuilder.class, AttributeTraitBuilder::new);
 		TRAITS.get().addType("effect", TargetEffectTraitBuilder.class, TargetEffectTraitBuilder::new);
 

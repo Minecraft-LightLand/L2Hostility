@@ -200,7 +200,7 @@ repositories {
 dependencies {
     implementation fg.deobf("dev.xkmc.l2library:l2library:${l2library_version}-slim")
     implementation fg.deobf("dev.xkmc.l2serial:l2serial:1.2.2")
-    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.5.5-slim")
+    implementation fg.deobf("dev.xkmc.l2complements:l2complements:2.6.1-slim")
 
     implementation(jarJar(fg.deobf("dev.xkmc.l2modularblock:l2modularblock:1.1.0"))) {
         transitive = false
@@ -212,9 +212,9 @@ dependencies {
         jarJar.ranged(it, "[0.4.3,)")
     }
 
-    implementation(jarJar(fg.deobf("dev.xkmc.mob_weapon_api:mob_weapon_api:0.2.3"))) {
+    implementation(jarJar(fg.deobf("dev.xkmc.mob_weapon_api:mob_weapon_api:0.2.13"))) {
         transitive = false
-        jarJar.ranged(it, "[0.2.3,)")
+        jarJar.ranged(it, "[0.2.13,)")
     }
 
     implementation fg.deobf("dev.xkmc.l2tabs:l2tabs:0.3.3")
@@ -245,7 +245,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:4599236")
     runtimeOnly fg.deobf("curse.maven:inventory-sorter-240633:4655091")
 
-    implementation fg.deobf("curse.maven:geckolib-388172:5188427")
+    implementation fg.deobf("curse.maven:geckolib-388172:7553267")
     implementation fg.deobf("curse.maven:placebo-283644:5098182")
     implementation fg.deobf("curse.maven:apothic-attributes-898963:5209162")
     implementation fg.deobf("curse.maven:lionfish-api-1001614:5922047")
@@ -262,8 +262,8 @@ dependencies {
     implementation fg.deobf("curse.maven:mutant-monsters-852665:5107399")
     implementation fg.deobf("curse.maven:mowzies-mobs-250498:5372378")
     implementation fg.deobf("curse.maven:caelus-308989:5281700")
-    compileOnly fg.deobf("curse.maven:playeranimator-658587:4587214")
-    compileOnly fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:6054196")
+    implementation fg.deobf("curse.maven:playeranimator-658587:4587214")
+    implementation fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:7552907")
 
     //runtimeOnly fg.deobf("curse.maven:lightmans-currency-472521:4813507")
     //runtimeOnly fg.deobf("curse.maven:mouse-tweaks-60089:4581240")

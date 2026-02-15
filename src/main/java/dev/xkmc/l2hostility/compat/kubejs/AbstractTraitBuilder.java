@@ -8,6 +8,7 @@ import dev.xkmc.l2serial.util.Wrappers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceLocation;
 
+import java.awt.*;
 import java.util.function.IntSupplier;
 
 public abstract class AbstractTraitBuilder<T extends AbstractTraitBuilder<T>> extends BuilderBase<MobTrait> {
@@ -27,7 +28,7 @@ public abstract class AbstractTraitBuilder<T extends AbstractTraitBuilder<T>> ex
 		return self();
 	}
 
-	public T color(int color) {
+	public T colorRGB(int color) {
 		this.color = () -> color;
 		return self();
 	}

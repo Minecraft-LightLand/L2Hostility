@@ -1,3 +1,9 @@
+2.5.15
+- Increase difficulty required for mobs to hold L2C weapons
+- Add hide_level tag and hide_traits tag
+- Add colorRGB method for KubeJS trait registration
+- Add Legendary Trait for KubeJS trait registration
+
 2.5.14
 - Split trait will no longer split twice when some other mods making entity dying twice
 - Add config option to turn off all datapack-added equipments

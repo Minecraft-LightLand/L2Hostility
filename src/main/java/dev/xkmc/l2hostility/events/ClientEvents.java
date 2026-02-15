@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import dev.xkmc.l2hostility.compat.curios.CurioCompat;
-import dev.xkmc.l2hostility.compat.gateway.GatewayConfigGen;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkClearRenderer;
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
@@ -13,6 +12,7 @@ import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2library.init.events.ClientEffectRenderEvents;
 import dev.xkmc.l2library.util.Proxy;
@@ -55,6 +55,10 @@ public class ClientEvents {
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void renderNamePlate(RenderNameTagEvent event) {
 		if (event.getEntity() instanceof LivingEntity le && MobTraitCap.HOLDER.isProper(le)) {
+			var hide_level = event.getEntity().getType().is(LHTagGen.HIDE_LEVEL);
+			var hide_trait = event.getEntity().getType().is(LHTagGen.HIDE_TRAITS);
+			if (hide_level && hide_trait)
+				return;
 			LocalPlayer player = Proxy.getClientPlayer();
 			assert player != null;
 			var cap = MobTraitCap.HOLDER.get(le);
@@ -63,8 +67,8 @@ public class ClientEvents {
 				return;
 			}
 			var list = cap.getTitle(
-					LHConfig.CLIENT.showLevelOverHead.get(),
-					LHConfig.CLIENT.showTraitOverHead.get()
+					!hide_level && LHConfig.CLIENT.showLevelOverHead.get(),
+					!hide_trait && LHConfig.CLIENT.showTraitOverHead.get()
 			);
 			int offset = list.size();
 			float off = (float) (double) LHConfig.CLIENT.overHeadRenderOffset.get();
