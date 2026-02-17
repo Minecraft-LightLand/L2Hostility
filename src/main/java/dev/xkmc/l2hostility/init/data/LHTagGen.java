@@ -114,6 +114,7 @@ public class LHTagGen {
 	public static void onEntityTagGen(RegistrateTagsProvider.IntrinsicImpl<EntityType<?>> pvd) {
 		pvd.addTag(BLACKLIST);
 		pvd.addTag(WHITELIST);
+		pvd.addTag(HIDE_TITLE);
 		pvd.addTag(HIDE_TRAITS).addTag(HIDE_TITLE);
 		pvd.addTag(HIDE_LEVEL).addTag(HIDE_TITLE);
 		pvd.addTag(NO_SCALING).addTag(BLACKLIST);

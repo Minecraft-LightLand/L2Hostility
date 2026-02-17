@@ -1,4 +1,4 @@
-// 1.20.1	2026-01-24T22:07:58.871671	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider, Tags (traits)]
+// 1.20.1	2026-02-17T16:52:01.200747	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider, Tags (traits)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -318,6 +318,9 @@ f46f3cd8fa14a1a94a7bb3dcd1960bf4e051ffc6 data/l2hostility/tags/entity_types/coun
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/grenade_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/growth_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/growth_whitelist.json
+dfe25ecede52363775fe4583d9b1dd5c6e77708e data/l2hostility/tags/entity_types/hide_level.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/hide_title.json
+dfe25ecede52363775fe4583d9b1dd5c6e77708e data/l2hostility/tags/entity_types/hide_traits.json
 681a819d3570afb48ea074b219b222c3e34ef96e data/l2hostility/tags/entity_types/hostility_spawner_blacklist.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_types/invisible_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/invisible_whitelist.json

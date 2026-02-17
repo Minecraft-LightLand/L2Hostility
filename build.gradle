@@ -249,7 +249,7 @@ dependencies {
     implementation fg.deobf("curse.maven:placebo-283644:5098182")
     implementation fg.deobf("curse.maven:apothic-attributes-898963:5209162")
     implementation fg.deobf("curse.maven:lionfish-api-1001614:5922047")
-    implementation fg.deobf("curse.maven:lendercataclysm-551586:6208724")
+    implementation fg.deobf("curse.maven:lendercataclysm-551586:6906993")
 
     implementation fg.deobf("curse.maven:bosses-of-mass-destruction-forge-941573:4955739")
     implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5037783")

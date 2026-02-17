@@ -1,5 +1,7 @@
-2.5.15
+2.5.16
 - Increase difficulty required for mobs to hold L2C weapons
+
+2.5.15
 - Add hide_level tag and hide_traits tag
 - Add colorRGB method for KubeJS trait registration
 - Add Legendary Trait for KubeJS trait registration
