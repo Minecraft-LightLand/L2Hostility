@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-30T16:35:20.829417	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
+// 1.21.1	2026-02-17T17:01:30.699692	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -143,7 +143,7 @@ bb6f94597a939d6ca78f8a82bb4aca546f1a8e7a data/gateways/advancement/recipes/misc/
 69f221d9b45d1083e7bcdf7f753b775b7b97787b data/gateways/recipe/hostility/split.json
 8d937419c400c1ea3999389ad6254f1ee94b54c0 data/l2archery/l2hostility_config/weapon/bows.json
 d1b5316adc1ba1266148bd74536e3212510b2cad data/l2complements/l2hostility_config/weapon/l2complements.json
-edc910f31c4ef44a64dc63aa1d15e6369e4dba09 data/l2complements/l2hostility_config/weapon/special.json
+be337bad557d6e9c31703dc88883523211797b30 data/l2complements/l2hostility_config/weapon/special.json
 4b9d05f8d5dca02f6cf4f92c3c35a1a94303ad10 data/l2complements/tags/mob_effect/skill_effect.json
 865b4b3f501fc3f54d9a654ae0f1cc2118346f6e data/l2hostility/advancement/burnt/hostility_essence.json
 53db2a68775994e813241e7b27d9cef235376bc3 data/l2hostility/advancement/hostility/abrahadabra.json
@@ -348,6 +348,9 @@ f46f3cd8fa14a1a94a7bb3dcd1960bf4e051ffc6 data/l2hostility/tags/entity_type/count
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/grenade_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/growth_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/growth_whitelist.json
+dfe25ecede52363775fe4583d9b1dd5c6e77708e data/l2hostility/tags/entity_type/hide_level.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/hide_title.json
+dfe25ecede52363775fe4583d9b1dd5c6e77708e data/l2hostility/tags/entity_type/hide_traits.json
 681a819d3570afb48ea074b219b222c3e34ef96e data/l2hostility/tags/entity_type/hostility_spawner_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/invisible_blacklist.json
 49a964eff9368382526095b2118557f381bbeb15 data/l2hostility/tags/entity_type/invisible_whitelist.json

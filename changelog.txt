@@ -1,3 +1,9 @@
+3.0.15
+- Increase difficulty required for mobs to hold L2C weapons
+- Add hide_level tag and hide_traits tag
+- Add colorRGB method for KubeJS trait registration
+- Add Legendary Trait for KubeJS trait registration
+
 3.0.14
 - Add config option to turn off all datapack-added equipments
 - Change texture and particle for explosive shulker bullet

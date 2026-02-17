@@ -25,7 +25,7 @@ public abstract class AbstractTraitBuilder<T extends AbstractTraitBuilder<T>> ex
 		return self();
 	}
 
-	public T color(int color) {
+	public T colorRGB(int color) {
 		this.color = () -> color;
 		return self();
 	}

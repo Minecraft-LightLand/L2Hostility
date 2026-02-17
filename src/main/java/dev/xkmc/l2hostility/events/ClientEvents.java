@@ -12,6 +12,7 @@ import dev.xkmc.l2hostility.content.capability.mob.PerformanceConstants;
 import dev.xkmc.l2hostility.content.item.traits.EnchantmentDisabler;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHItems;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import net.minecraft.client.Minecraft;
@@ -53,6 +54,10 @@ public class ClientEvents {
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void renderNamePlate(RenderNameTagEvent event) {
 		if (!(event.getEntity() instanceof LivingEntity le)) return;
+		var hide_level = le.getType().is(LHTagGen.HIDE_LEVEL);
+		var hide_trait = le.getType().is(LHTagGen.HIDE_TRAITS);
+		if (hide_level && hide_trait)
+			return;
 		boolean needHover = le.isInvisible() || LHConfig.CLIENT.showOnlyWhenHovered.get();
 		if (needHover && Minecraft.getInstance().crosshairPickEntity != le) return;
 		var opt = LHMiscs.MOB.type().getExisting(le);
@@ -60,8 +65,8 @@ public class ClientEvents {
 		if (opt.isEmpty() || player == null) return;
 		var cap = opt.get();
 		var list = cap.getTitle(
-				LHConfig.CLIENT.showLevelOverHead.get(),
-				LHConfig.CLIENT.showTraitOverHead.get()
+				!hide_level && LHConfig.CLIENT.showLevelOverHead.get(),
+				!hide_trait && LHConfig.CLIENT.showTraitOverHead.get()
 		);
 		int offset = list.size();
 		float off = (float) (double) LHConfig.CLIENT.overHeadRenderOffset.get();

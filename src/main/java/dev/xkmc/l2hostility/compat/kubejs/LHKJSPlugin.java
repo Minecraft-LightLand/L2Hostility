@@ -7,16 +7,22 @@ import dev.latvian.mods.kubejs.script.TypeWrapperRegistry;
 import dev.latvian.mods.kubejs.util.RegistryAccessContainer;
 import dev.xkmc.l2damagetracker.contents.attack.DamageModifier;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
 public class LHKJSPlugin implements KubeJSPlugin {
 
+	private static final ResourceKey<Registry<MobTrait>> TRAITS = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(L2Hostility.MODID, "trait"));
+
 	@Override
 	public void registerBuilderTypes(BuilderTypeRegistry registry) {
-		registry.of(LHTraits.TRAITS.key(), reg -> {
+		registry.of(TRAITS, reg -> {
 			reg.add("basic", BasicTraitBuilder.class, BasicTraitBuilder::new);
+			reg.add("legendary", LegendaryTraitBuilder.class, LegendaryTraitBuilder::new);
 			reg.add("attribute", AttributeTraitBuilder.class, AttributeTraitBuilder::new);
 			reg.add("effect", TargetEffectTraitBuilder.class, TargetEffectTraitBuilder::new);
 		});

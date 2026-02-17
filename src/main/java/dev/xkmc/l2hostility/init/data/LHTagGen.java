@@ -56,6 +56,9 @@ public class LHTagGen {
 
 	public static final TagKey<EntityType<?>> SEMIBOSS = createEntityTag("semiboss");
 	public static final TagKey<EntityType<?>> NO_DROP = createEntityTag("no_drop");
+	public static final TagKey<EntityType<?>> HIDE_TRAITS = createEntityTag("hide_traits");
+	public static final TagKey<EntityType<?>> HIDE_LEVEL = createEntityTag("hide_level");
+	public static final TagKey<EntityType<?>> HIDE_TITLE = createEntityTag("hide_title");
 
 	public static final TagKey<EntityType<?>> ARMOR_TARGET = createEntityTag("armor_target");
 	public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
@@ -93,6 +96,9 @@ public class LHTagGen {
 	public static void onEntityTagGen(RegistrateTagsProvider.IntrinsicImpl<EntityType<?>> pvd) {
 		pvd.addTag(BLACKLIST);
 		pvd.addTag(WHITELIST);
+		pvd.addTag(HIDE_TITLE);
+		pvd.addTag(HIDE_TRAITS).addTag(HIDE_TITLE);
+		pvd.addTag(HIDE_LEVEL).addTag(HIDE_TITLE);
 		pvd.addTag(NO_SCALING).addTag(BLACKLIST);
 		pvd.addTag(NO_TRAIT).addTag(BLACKLIST).add(EntityType.ENDERMITE);
 		pvd.addTag(HOSTILITY_SPAWNER_BLACKLIST).addTags(NO_SCALING, NO_TRAIT);
