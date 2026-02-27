@@ -1,3 +1,7 @@
+2.5.17
+- Add config for killer aura sound effect
+- Add tag for reprint blacklist
+
 2.5.16
 - Increase difficulty required for mobs to hold L2C weapons
 
