@@ -53,8 +53,9 @@ public class ClientSyncHandler {
 						center.y + v0.y + 0.5f,
 						center.z + v0.z, 0, 0, 0);
 			}
-			entity.level().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRECHARGE_USE,
-					entity.getSoundSource(), 3, 1.0F, false);
+			if (LHConfig.CLIENT.killerAuraSoundEffect.get())
+				entity.level().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRECHARGE_USE,
+						entity.getSoundSource(), 3, 1.0F, false);
 		}
 	}
 

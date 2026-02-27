@@ -47,6 +47,8 @@ public class LHTagGen {
 
 	public static final TagKey<Enchantment> NO_DISPELL = TagKey.create(Registries.ENCHANTMENT,
 			L2Hostility.loc("no_dispell"));
+	public static final TagKey<Enchantment> NO_REPRINT = TagKey.create(Registries.ENCHANTMENT,
+			L2Hostility.loc("no_reprint"));
 
 	public static final TagKey<EntityType<?>> BLACKLIST = createEntityTag("blacklist");
 	public static final TagKey<EntityType<?>> WHITELIST = createEntityTag("whitelist");
@@ -81,6 +83,9 @@ public class LHTagGen {
 				.addOptional(LCEnchantments.ETERNAL.id().location())
 				.addOptional(LCEnchantments.DURABLE_ARMOR.id().location())
 				.addOptional(LCEnchantments.SOUL_BOUND.id().location());
+		pvd.addTag(NO_REPRINT)
+				.addOptional(LCEnchantments.ETERNAL.id().location())
+				.addOptional(LCEnchantments.INVINCIBLE.id().location());
 	}
 
 	public static void onItemTagGen(RegistrateItemTagsProvider pvd) {

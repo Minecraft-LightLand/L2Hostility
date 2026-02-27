@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
@@ -21,6 +22,7 @@ public class ReprintHandler {
 		Map<Holder<Enchantment>, Integer> newEnch = new LinkedHashMap<>();
 		for (var pair : targetEnch.entrySet()) {
 			var e = pair.getKey();
+			if (e.is(LHTagGen.NO_REPRINT)) continue;
 			if (!dst.isPrimaryItemFor(e)) continue;
 			if (!allow(newEnch, e)) continue;
 			int lv = pair.getIntValue();

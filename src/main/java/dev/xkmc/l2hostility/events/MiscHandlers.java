@@ -58,6 +58,9 @@ public class MiscHandlers {
 		ItemStack book = event.getRight();
 		if (copy.getItem() instanceof BookCopy && book.getItem() instanceof EnchantedBookItem) {
 			var map = EnchantmentHelper.getEnchantmentsForCrafting(book);
+			for (var e : map.keySet()) {
+				if (e.is(LHTagGen.NO_REPRINT)) return;
+			}
 			int cost = 0;
 			for (var e : map.entrySet()) {
 				cost += BookCopy.cost(e.getKey().value(), e.getIntValue());

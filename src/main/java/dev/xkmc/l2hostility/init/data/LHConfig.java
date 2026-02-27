@@ -24,6 +24,7 @@ public class LHConfig {
 		public final ModConfigSpec.IntValue glowingRangeHidden;
 		public final ModConfigSpec.IntValue glowingRangeNear;
 		public final ModConfigSpec.BooleanValue showUndyingParticles;
+		public final ModConfigSpec.BooleanValue killerAuraSoundEffect;
 
 		Client(Builder builder) {
 			markL2();
@@ -49,6 +50,8 @@ public class LHConfig {
 					.defineInRange("glowingRangeNear", 16, 1, 256);
 			showUndyingParticles = builder.text("Render undying particles")
 					.define("showUndyingParticles", true);
+			killerAuraSoundEffect = builder.text("Killer Aura sound effect")
+					.define("killerAuraSoundEffect", true);
 		}
 
 	}
