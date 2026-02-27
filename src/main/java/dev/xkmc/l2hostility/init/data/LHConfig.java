@@ -27,6 +27,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue glowingRangeNear;
 		public final ForgeConfigSpec.BooleanValue showUndyingParticles;
 		public final ForgeConfigSpec.BooleanValue glassForLevelMobsOnly;
+		public final ForgeConfigSpec.BooleanValue killerAuraSoundEffect;
 
 		Client(ForgeConfigSpec.Builder builder) {
 			showTraitOverHead = builder.comment("Render Traits in name plate form")
@@ -53,6 +54,8 @@ public class LHConfig {
 					.define("showUndyingParticles", true);
 			glassForLevelMobsOnly = builder.comment("Detector Glass outline hostile mobs only")
 					.define("glassForLevelMobsOnly", true);
+			killerAuraSoundEffect = builder.comment("Killer Aura sound effect")
+					.define("killerAuraSoundEffect", true);
 		}
 
 	}

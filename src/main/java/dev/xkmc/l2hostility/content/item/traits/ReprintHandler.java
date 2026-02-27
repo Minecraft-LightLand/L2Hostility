@@ -1,8 +1,10 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,6 +18,8 @@ public class ReprintHandler {
 		Map<Enchantment, Integer> newEnch = new LinkedHashMap<>();
 		for (var pair : targetEnch.entrySet()) {
 			Enchantment e = pair.getKey();
+			var holder = ForgeRegistries.ENCHANTMENTS.getHolder(e);
+			if (holder.isEmpty() || holder.get().is(LHTagGen.NO_REPRINT)) continue;
 			if (!dst.canApplyAtEnchantingTable(e)) continue;
 			if (!allow(newEnch, e)) continue;
 			int lv = pair.getValue();

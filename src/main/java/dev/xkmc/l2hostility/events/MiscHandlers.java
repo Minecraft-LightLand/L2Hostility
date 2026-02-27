@@ -26,6 +26,7 @@ import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 
@@ -71,6 +72,10 @@ public class MiscHandlers {
 		ItemStack book = event.getRight();
 		if (copy.getItem() instanceof BookCopy && book.getItem() instanceof EnchantedBookItem) {
 			var map = EnchantmentHelper.getEnchantments(book);
+			for (var e : map.keySet()) {
+				var holder = ForgeRegistries.ENCHANTMENTS.getHolder(e);
+				if (holder.isEmpty() || holder.get().is(LHTagGen.NO_REPRINT)) return;
+			}
 			int cost = 0;
 			for (var e : map.entrySet()) {
 				cost += BookCopy.cost(e.getKey(), e.getValue());

@@ -1,17 +1,14 @@
 package dev.xkmc.l2hostility.init.network;
 
 import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
-import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.l2serial.serialization.codec.TagCodec;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -56,8 +53,9 @@ public class ClientSyncHandler {
 						center.y + v0.y + 0.5f,
 						center.z + v0.z, 0, 0, 0);
 			}
-			entity.level().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRECHARGE_USE,
-					entity.getSoundSource(), 3, 1.0F, false);
+			if (LHConfig.CLIENT.killerAuraSoundEffect.get())
+				entity.level().playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRECHARGE_USE,
+						entity.getSoundSource(), 3, 1.0F, false);
 		}
 	}
 
