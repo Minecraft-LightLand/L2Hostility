@@ -1,10 +1,10 @@
-// 1.21.1	2026-02-17T17:01:30.699692	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
+// 1.21.1	2026-02-28T18:13:15.756087	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 0d15a69c346a80468001a02f1326848a9559d3bf assets/l2hostility/blockstates/miracle_block.json
-7cd01800b38009d9891eaa405f6a14b12e93c934 assets/l2hostility/lang/en_ud.json
-04af57e54e3a401eacf6e021d8391426485cb036 assets/l2hostility/lang/en_us.json
+5ba7c7da7f88298a403180809c87c21e82f8abdd assets/l2hostility/lang/en_ud.json
+2735d7eaf5681b3cf42182036f4f228792844572 assets/l2hostility/lang/en_us.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets/l2hostility/models/block/chaos_block.json
 b482cdea0faf29842ecf75310f414ce76d12e36a assets/l2hostility/models/block/hostility_beacon.json
 3e128895a51810875704de53d8500ce23da14895 assets/l2hostility/models/block/hostility_beacon_base.json
@@ -316,6 +316,7 @@ c1844f6e0a87ee8da580120b8974c8c2a21b80f4 data/l2hostility/recipe/ur_ghast_boss_s
 cb928ca243884810780a9c2bb94fc231f2f34258 data/l2hostility/recipe/witch_wand.json
 1934359a43bfa9b9f4727bc44646d20c17219834 data/l2hostility/tags/block/beacon.json
 00e65543b9191a781cd527ea1afcb4167ca4e8eb data/l2hostility/tags/enchantment/no_dispell.json
+eaaafd3ef6823c313bd3ef0746dc94a5e61dec25 data/l2hostility/tags/enchantment/no_reprint.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/adaptive_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/adaptive_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/arena_blacklist.json

@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "l2complements:eternal",
+      "required": false
+    },
+    {
+      "id": "l2complements:invincible",
+      "required": false
+    }
+  ]
+}

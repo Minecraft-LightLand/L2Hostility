@@ -257,7 +257,7 @@ public class LHConfig {
 						.defineInRange("dropRateFromSpawner", 0.5d, 0, 1);
 				equipmentDropRate = builder.text("Drop rate of equipments spawned via hostility")
 						.defineInRange("equipmentDropRate", 0.085, 0, 1);
-				maxTraitCount = builder.comment("Max number of traits on mobs")
+				maxTraitCount = builder.text("Max number of traits on mobs")
 						.defineInRange("maxTraitCount", 9, 1, 100);
 
 			}
@@ -489,27 +489,27 @@ public class LHConfig {
 				reprintBypass = builder.text("Reprint will gain Void Touch 20 and Vanishing Curse when it hits a mob with max Enchantment level of X or higher")
 						.defineInRange("reprintBypass", 10, 0, 10000);
 
-				dispellDamageFactor = builder.comment("Damage Bonus Factor for enchantment bypassing damage")
+				dispellDamageFactor = builder.text("Damage Bonus Factor for enchantment bypassing damage")
 						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
 						.defineInRange("dispellDamageFactor", 0.5, 0, 1);
-				dementorDamageFactor = builder.comment("Damage Bonus Factor for dementor-affected damage")
+				dementorDamageFactor = builder.text("Damage Bonus Factor for dementor-affected damage")
 						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
 						.defineInRange("dementorDamageFactor", 0.5, 0, 1);
-				killerAuraDamageFactor = builder.comment("Damage Bonus Factor for killer aura damage")
+				killerAuraDamageFactor = builder.text("Damage Bonus Factor for killer aura damage")
 						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
 						.defineInRange("killerAuraDamageFactor", 0.5, 0, 1);
-				grenadeDamageFactor = builder.comment("Damage Bonus Factor for grenade damage")
+				grenadeDamageFactor = builder.text("Damage Bonus Factor for grenade damage")
 						.comment("Example: 0.5 means +2% per level damage bonus becoming +1% per level")
 						.defineInRange("grenadeDamageFactor", 0.25, 0, 1);
 
 
-				dispellDamageReductionBase = builder.comment("Damage Reduction Base for Dispell")
+				dispellDamageReductionBase = builder.text("Damage Reduction Base for Dispell")
 						.comment("Non-Magic damage will take a log with base of this config number")
 						.comment("Example: 1.1 means 100 -> 48, 1000 -> 72")
 						.comment("Example: 2 means 16 -> 4, 1024 -> 10")
 						.comment("Example: 10 means 100 -> 2, 1000000 -> 6")
 						.defineInRange("dispellDamageReductionBase", 2, 1.01, 100);
-				dementorDamageReductionBase = builder.comment("Damage Reduction Base for Dementor")
+				dementorDamageReductionBase = builder.text("Damage Reduction Base for Dementor")
 						.comment("Magic damage will take a log with base of this config number")
 						.comment("Example: 1.1 means 100 -> 48, 1000 -> 72")
 						.comment("Example: 2 means 16 -> 4, 1024 -> 10")
