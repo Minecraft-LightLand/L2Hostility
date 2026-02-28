@@ -504,13 +504,13 @@ public class LHConfig {
 
 
 				dispellDamageReductionBase = builder.text("Damage Reduction Base for Dispell")
-						.comment("Non-Magic damage will take a log with base of this config number")
+						.comment("Magic damage will take a log with base of this config number")
 						.comment("Example: 1.1 means 100 -> 48, 1000 -> 72")
 						.comment("Example: 2 means 16 -> 4, 1024 -> 10")
 						.comment("Example: 10 means 100 -> 2, 1000000 -> 6")
 						.defineInRange("dispellDamageReductionBase", 2, 1.01, 100);
 				dementorDamageReductionBase = builder.text("Damage Reduction Base for Dementor")
-						.comment("Magic damage will take a log with base of this config number")
+						.comment("Non-Magic damage will take a log with base of this config number")
 						.comment("Example: 1.1 means 100 -> 48, 1000 -> 72")
 						.comment("Example: 2 means 16 -> 4, 1024 -> 10")
 						.comment("Example: 10 means 100 -> 2, 1000000 -> 6")
