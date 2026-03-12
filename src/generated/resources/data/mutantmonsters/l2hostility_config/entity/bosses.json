@@ -23,6 +23,7 @@
       "maxLevel": 0,
       "maxTraitCount": -1,
       "minSpawnLevel": 100,
+      "presetTraitsOnly": false,
       "specialConditions": [],
       "traits": [
         {

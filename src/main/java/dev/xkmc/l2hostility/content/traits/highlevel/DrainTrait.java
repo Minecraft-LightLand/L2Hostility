@@ -26,7 +26,7 @@ public class DrainTrait extends MobTrait {
 	public void postInit(LivingEntity mob, int lv) {
 		var cap = MobTraitCap.HOLDER.get(mob);
 		var manager = LHTraits.TRAITS.get().tags();
-		if (manager == null) return;
+		if (manager == null || cap.copied) return;
 		for (int i = 0; i < 4; i++) {
 			var opt = manager.getTag(LHTraits.POTION).getRandomElement(mob.getRandom());
 			if (opt.isEmpty()) continue;

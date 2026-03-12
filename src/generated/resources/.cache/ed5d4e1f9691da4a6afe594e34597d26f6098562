@@ -1,4 +1,4 @@
-// 1.20.1	2026-02-17T16:52:01.200747	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider, Tags (traits)]
+// 1.20.1	2026-03-12T16:30:40.004611	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider, Tags (traits)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -284,6 +284,7 @@ acc7a68fd78965e3a3b5bf36a3839d7b3ff4df7a data/l2hostility/recipes/witch_charge.j
 0692d7fc2ec445309e367634fee532b74dfa573e data/l2hostility/recipes/witch_wand.json
 1934359a43bfa9b9f4727bc44646d20c17219834 data/l2hostility/tags/blocks/beacon.json
 a2196d723630e41add4373ea91db88e531d843de data/l2hostility/tags/enchantment/no_dispell.json
+2f0e50278f09d123e6e21f31e0a4730c53e47a74 data/l2hostility/tags/enchantment/no_reprint.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/adaptive_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/arena_blacklist.json

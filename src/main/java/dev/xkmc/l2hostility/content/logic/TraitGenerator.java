@@ -51,6 +51,10 @@ public class TraitGenerator {
 				if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
 					genBase(base);
 			}
+			if (config.presetTraitsOnly) {
+				traitPool.clear();
+				return;
+			}
 		}
 		weights = 0;
 		for (var e : traitPool) {

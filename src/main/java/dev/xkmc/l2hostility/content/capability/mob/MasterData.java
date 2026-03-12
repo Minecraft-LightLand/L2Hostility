@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -90,6 +89,7 @@ public class MasterData {
 			for (var e : map.values()) {
 				if (e.cooldown <= 0 && data.size() < config.maxTotalCount() &&
 						e.count < e.config.maxCount() &&
+						mob.getHealth() / mob.getMaxHealth() <= e.config.maxHealthPercentage() &&
 						cap.getLevel() >= e.config.minLevel()) {
 					var nd = e.spawn(cap, sl, mob);
 					if (nd != null) {
@@ -159,9 +159,11 @@ public class MasterData {
 			int r = config.spawnRange();
 			BlockPos target = getRandomPos(sl, config.type(), mob, r / 2, 16);
 			if (target == null) return null;
-			var e = config.type().create(sl, null, null, target, MobSpawnType.MOB_SUMMONED, false, false);
+			var e = config.type().create(sl);
 			if (!(e instanceof Mob m)) return null;
+			e.moveTo(target.getCenter());
 			var cap = MobTraitCap.HOLDER.get(m);
+			cap.deinit();
 			RegionalDifficultyModifier diff = (p, c) -> {
 				if (config.copyLevel()) {
 					c.base = parent.getLevel();
@@ -170,6 +172,7 @@ public class MasterData {
 				}
 				if (config.copyTrait()) {
 					cap.traits.putAll(parent.traits);
+					cap.copied = true;
 					c.delegateTrait();
 				}
 			};

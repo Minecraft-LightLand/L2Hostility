@@ -71,7 +71,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	private final HashMap<ResourceLocation, CapStorageData> data = new HashMap<>();
 
 	@SerialClass.SerialField(toClient = true)
-	public boolean summoned = false, minion = false, noDrop = false, fullDrop = false;
+	public boolean summoned = false, minion = false, noDrop = false, fullDrop = false, copied = false;
 
 	@SerialClass.SerialField
 	public double dropRate = 1;
@@ -112,6 +112,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void deinit() {
+		copied = false;
 		traits.clear();
 		lv = 0;
 		stage = Stage.PRE_INIT;
@@ -167,6 +168,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 	}
 
 	public void copyFrom(LivingEntity par, LivingEntity child, MobTraitCap parent) {
+		deinit();
 		InheritContext ctx = new InheritContext(par, parent, child, this, !parent.inherited);
 		parent.inherited = true;
 		lv = parent.lv;
@@ -181,6 +183,7 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 			}
 		}
 		TraitManager.fill(this, child, traits, MobDifficultyCollector.noTrait(lv));
+		copied = true;
 		stage = Stage.INIT;
 	}
 
