@@ -22,6 +22,7 @@
       "maxLevel": 0,
       "maxTraitCount": -1,
       "minSpawnLevel": 0,
+      "presetTraitsOnly": false,
       "specialConditions": [
         {
           "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
@@ -81,6 +82,7 @@
       "maxLevel": 0,
       "maxTraitCount": -1,
       "minSpawnLevel": 0,
+      "presetTraitsOnly": false,
       "specialConditions": [
         {
           "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
@@ -140,6 +142,7 @@
       "maxLevel": 0,
       "maxTraitCount": -1,
       "minSpawnLevel": 0,
+      "presetTraitsOnly": false,
       "specialConditions": [
         {
           "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
@@ -193,6 +196,7 @@
       "maxLevel": 0,
       "maxTraitCount": -1,
       "minSpawnLevel": 0,
+      "presetTraitsOnly": false,
       "specialConditions": [
         {
           "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
@@ -246,6 +250,7 @@
       "maxLevel": 0,
       "maxTraitCount": -1,
       "minSpawnLevel": 0,
+      "presetTraitsOnly": false,
       "specialConditions": [
         {
           "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
@@ -293,6 +298,7 @@
       "maxLevel": 0,
       "maxTraitCount": -1,
       "minSpawnLevel": 0,
+      "presetTraitsOnly": false,
       "specialConditions": [
         {
           "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",
@@ -343,6 +349,7 @@
       "maxLevel": 0,
       "maxTraitCount": -1,
       "minSpawnLevel": 0,
+      "presetTraitsOnly": false,
       "specialConditions": [
         {
           "_class": "dev.xkmc.l2hostility.compat.gateway.GatewayCondition",

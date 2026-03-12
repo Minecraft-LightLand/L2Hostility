@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotAttribute;
@@ -35,6 +36,8 @@ public class CurioCompat {
 	}
 
 	public static boolean hasItemInCurioChecked(LivingEntity le, Item item) {
+		if (!(LHConfig.SERVER.getSpec() instanceof ModConfigSpec spec) || !spec.isLoaded())
+			return false;
 		if (LHConfig.SERVER.enableCurioCheckFilter.get()) {
 			if (le instanceof Enemy || le instanceof Animal)
 				return false;

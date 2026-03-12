@@ -103,6 +103,9 @@ public class EntityConfig extends BaseConfig {
 		public double healthScale = 1, attackScale = 1;
 
 		@SerialField
+		public boolean presetTraitsOnly = false;
+
+		@SerialField
 		public MasterConfig asMaster = null;
 
 		@Deprecated

@@ -93,6 +93,7 @@ public class MasterData {
 			for (var e : map.values()) {
 				if (e.cooldown <= 0 && data.size() < config.maxTotalCount() &&
 						e.count < e.config.maxCount() &&
+						mob.getHealth() / mob.getMaxHealth() <= e.config.maxHealthPercentage() &&
 						cap.getLevel() >= e.config.minLevel()) {
 					var nd = e.spawn(cap, sl, mob);
 					if (nd != null) {
@@ -162,9 +163,11 @@ public class MasterData {
 			int r = config.spawnRange();
 			BlockPos target = getRandomPos(sl, config.type(), mob, r / 2, 16);
 			if (target == null) return null;
-			var e = config.type().create(sl, null, target, MobSpawnType.MOB_SUMMONED, false, false);
+			var e = config.type().create(sl);
 			if (!(e instanceof Mob m) || !LHMiscs.MOB.type().isProper(m)) return null;
 			var cap = LHMiscs.MOB.type().getOrCreate(m);
+			e.moveTo(target.getCenter());
+			cap.deinit();
 			RegionalDifficultyModifier diff = (p, c) -> {
 				if (config.copyLevel()) {
 					c.base = parent.getLevel();
@@ -173,6 +176,7 @@ public class MasterData {
 				}
 				if (config.copyTrait()) {
 					cap.traits.putAll(parent.traits);
+					cap.copied = true;
 					c.delegateTrait();
 				}
 			};

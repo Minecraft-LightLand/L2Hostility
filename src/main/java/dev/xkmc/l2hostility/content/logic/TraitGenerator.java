@@ -54,6 +54,10 @@ public class TraitGenerator {
 					}
 				}
 			}
+			if (config.presetTraitsOnly) {
+				list.clear();
+				traits.clear();
+			}
 		}
 		pool = new TraitPool(list, traits);
 	}

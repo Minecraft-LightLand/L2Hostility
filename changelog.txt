@@ -1,3 +1,9 @@
+3.0.17
+- Add "presetTraitsOnly" field in entity config, stopping entities from generating extra traits
+- Fix master trait "maxHealthPercentage" not taking effect
+- Fix master trait spawned minions still getting random traits when "copyTraits" is true
+- Fix config description and translation
+
 3.0.16
 - Add config for killer aura sound effect
 - Add tag for reprint blacklist

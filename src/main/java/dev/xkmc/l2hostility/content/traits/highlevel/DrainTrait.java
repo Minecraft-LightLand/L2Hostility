@@ -27,14 +27,13 @@ public class DrainTrait extends MobTrait {
 	public void postInit(LivingEntity mob, int lv) {
 		var cap = LHMiscs.MOB.type().getOrCreate(mob);
 		var potions = LHTraits.TRAITS.reg().getTag(LHTraits.POTION);
-		if (potions.isEmpty() || potions.get().size() == 0) return;
+		if (potions.isEmpty() || potions.get().size() == 0 || cap.copied) return;
 		for (int i = 0; i < 4; i++) {
 			var opt = potions.get().getRandomElement(mob.getRandom());
-			if (opt.isEmpty()) continue;
+			if (opt.isEmpty()) return;
 			var trait = opt.get().value();
 			if (trait.allow(mob) && !cap.hasTrait(trait)) {
 				cap.setTrait(trait, lv);
-				return;
 			}
 		}
 	}
