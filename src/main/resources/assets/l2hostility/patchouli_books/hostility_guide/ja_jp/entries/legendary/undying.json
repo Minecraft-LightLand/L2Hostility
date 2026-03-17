@@ -1,0 +1,16 @@
+{
+  "name": "不死",
+  "icon": "l2hostility:undying",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:undying",
+	  "text": "この特性を持つモブは、倒されそうになると体力を全回復して復活します。ただし、回復できない状態や無効ダメージの場合は復活しません。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、回復を阻止する呪い効果が最も有効です。$(br2)特性「呪い」を持つモブを倒すと、呪い効果を付与できる武器のクラフト素材がドロップします。"
+	}
+  ]
+}

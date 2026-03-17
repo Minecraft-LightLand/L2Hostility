@@ -1,0 +1,17 @@
+{
+  "name": "殺意のスポナー",
+  "icon": "l2hostility:hostility_spawner",
+  "category": "l2hostility:mechanics",
+  "sortnum": 5,
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:hostility_spawner",
+	  "text": "このアイテムを使うと、チャンクの危険度をクリアできます。使うには、対象のチャンクに設置して右クリックしてください。敵の大群が召喚され、それらをすべて倒すとそのチャンクの危険度がクリアされます。もしモブが不自然な原因で死亡した場合、スポナーは中断されます。その場合はクリックすると元に戻せます。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "チャンクがクリアされると、危険度タブで確認できます。また、殺意のスポナーを設置すると、クリア済みのチャンクではスポナーが自動的に緑色になります。"
+	}
+  ]
+}

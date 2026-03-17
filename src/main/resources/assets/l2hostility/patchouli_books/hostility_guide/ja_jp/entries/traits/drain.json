@@ -1,0 +1,16 @@
+{
+  "name": "吸収",
+  "icon": "l2hostility:drain",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:drain",
+	  "text": "この特性を持つモブが攻撃すると、対象のランダムな有益な効果を解除し、すべての負の効果の持続時間を延長します。ダメージは対象にかかっている負の効果に応じて増加します。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、効果を解除する手段や耐性を用意しましょう。聖の指輪、反射の指輪、憤怒の呪いを使うか、スカルキウム装備の着用が有効です。"
+	}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "ボマー",
+  "icon": "l2hostility:grenade",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:grenade",
+	  "text": "この特性を持つモブは、爆発弾を発射します。特性ランク1～5に応じて、ブロックを破壊しない火の玉、クリーパー、TNT、ベッド、エンドクリスタルの爆発を引き起こします。"
+	}
+  ]
+}

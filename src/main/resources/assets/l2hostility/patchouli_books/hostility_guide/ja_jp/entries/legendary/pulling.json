@@ -1,0 +1,12 @@
+{
+  "name": "吸引",
+  "icon": "l2hostility:pulling",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:pulling",
+	  "text": "この特性を持つモブは、自分を攻撃対象にしたプレイヤーやエンティティを引き寄せます。"
+	}
+  ]
+}

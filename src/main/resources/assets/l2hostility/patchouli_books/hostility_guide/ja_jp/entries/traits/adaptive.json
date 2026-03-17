@@ -1,0 +1,16 @@
+{
+  "name": "適応",
+  "icon": "l2hostility:adaptive",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:adaptive",
+	  "text": "この特性を持つモブは、攻撃に適応します。直近に受けたダメージタイプを記憶し、それに対して耐性を得ます。記憶できる種類は特性ランクで決まります。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、複数のダメージタイプを使ってモブの記憶を消す必要があります。近接攻撃、トライデント、矢が有効です。$(br2)ランクが高い場合は、ポーション、溶岩、火、サボテン、落下ダメージなども記憶をリセットする手段に有効です。"
+	}
+  ]
+}

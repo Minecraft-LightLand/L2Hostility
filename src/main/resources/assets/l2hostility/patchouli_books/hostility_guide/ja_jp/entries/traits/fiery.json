@@ -1,0 +1,12 @@
+{
+  "name": "火炎",
+  "icon": "l2hostility:fiery",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:fiery",
+	  "text": "この特性を持つモブは、炎に耐性を持ち、攻撃者と攻撃された対象を燃やします。"
+	}
+  ]
+}

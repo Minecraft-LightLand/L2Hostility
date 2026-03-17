@@ -1,0 +1,12 @@
+{
+  "name": "重力場",
+  "icon": "l2hostility:gravity",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:gravity",
+	  "text": "この特性を持つモブは、周囲の重力を強めます。特性ランクが高いほど重力増加効果も強くなります。$(br2)空中の敵から攻撃を受けると、攻撃者を地面に叩き落とします。"
+	}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "反射",
+  "icon": "l2hostility:reflect",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:reflect",
+	  "text": "この特性を持つモブは、直接攻撃を受けるとダメージを反射します。特性ランクが高いほど反射ダメージが増加し、反射は防具を無視する魔法攻撃扱いです。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、矢や投擲武器、魔法ダメージが有効です。"
+	}
+  ]
+}

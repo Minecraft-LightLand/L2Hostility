@@ -1,0 +1,12 @@
+{
+  "name": "反撃",
+  "icon": "l2hostility:counter_strike",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:counter_strike",
+	  "text": "この特性を持つモブは、攻撃されると、たまに反撃します。"
+	}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "再生",
+  "icon": "l2hostility:regenerate",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:regenerate",
+	  "text": "この特性を持つモブは、毎秒体力を回復する。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、素早く倒すか、回復を無効化する呪いが有効です。"
+	}
+  ]
+}

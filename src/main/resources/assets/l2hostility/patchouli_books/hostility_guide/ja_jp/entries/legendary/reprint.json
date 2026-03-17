@@ -1,0 +1,12 @@
+{
+  "name": "複製",
+  "icon": "l2hostility:reprint",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:reprint",
+	  "text": "この特性を持つモブは、攻撃対象の装備に付与されたエンチャントに応じてダメージが増加し、直接攻撃した場合は対象のエンチャントをコピーします。$(br2)ダメージはエンチャントポイントごとに固定割合で増加し、Lv.Xのエンチャントは2^x ポイントとして計算されます。"
+	}
+  ]
+}

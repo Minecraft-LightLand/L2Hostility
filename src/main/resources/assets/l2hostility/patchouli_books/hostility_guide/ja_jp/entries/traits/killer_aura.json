@@ -1,0 +1,16 @@
+{
+  "name": "殺意の波動",
+  "icon": "l2hostility:killer_aura",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:killer_aura",
+	  "text": "この特性を持つモブは、近づくと魔法ダメージを与えます。たとえダメージに耐性があっても、他の攻撃特性が発動します。$(br2)非常に高レベルでのみ出現するので、あまり気にしなくて大丈夫です。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、遠距離攻撃で倒すか、攻撃と効果に耐えられる準備をして挑んでください。"
+	}
+  ]
+}

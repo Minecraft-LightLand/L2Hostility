@@ -1,0 +1,16 @@
+{
+  "name": "テレポート",
+  "icon": "l2hostility:teleport",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:teleport",
+	  "text": "この特性を持つモブは、非魔法ダメージを回避するためにテレポートします。テレポートに失敗しても、飛来する弾を跳ね返せます。$(br2)さらに、モブは対象に直接テレポートすることも可能です。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、魔法ダメージを与える武器、魔法耐性を無視できる武器、もしくはテレポートを防げる武器が有効です。"
+	}
+  ]
+}

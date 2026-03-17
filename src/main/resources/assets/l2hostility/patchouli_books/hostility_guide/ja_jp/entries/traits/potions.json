@@ -1,0 +1,46 @@
+{
+  "name": "ポーション効果系特性",
+  "icon": "l2hostility:blindness",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "モブがバニラのポーション効果を付与可能な特性は7種類あります。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:blindness",
+	  "text": "この特性を持つモブは、視界を低下させる暗闇効果を付与できます。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:nausea",
+	  "text": "この特性を持つモブは、視界を歪める吐き気効果を付与できます。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:levitation",
+	  "text": "この特性を持つモブは、浮遊効果を付与できます。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:slowness",
+	  "text": "この特性を持つモブは、鈍足効果を付与できます。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:weakness",
+	  "text": "この特性を持つモブは、弱体化効果を付与できます。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:poison",
+	  "text": "この特性を持つモブは、毒効果を付与できます。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:wither",
+	  "text": "この特性を持つモブは、衰弱効果を付与できます。"
+	}
+  ]
+}

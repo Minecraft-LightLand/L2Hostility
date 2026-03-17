@@ -1,0 +1,16 @@
+{
+  "name": "鉄壁",
+  "icon": "l2hostility:tank",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:tank",
+	  "text": "この特性を持つモブは、防御力と体力が増加する。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、防具無視や魔法耐性無視の武器が有効です。"
+	}
+  ]
+}

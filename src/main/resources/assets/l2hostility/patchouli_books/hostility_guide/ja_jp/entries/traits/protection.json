@@ -1,0 +1,16 @@
+{
+  "name": "防護",
+  "icon": "l2hostility:protection",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:protection",
+	  "text": "この特性を持つモブは、特性ランクに応じた耐性効果が付与されます。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、耐性を無視できる武器や、すべてのポーション効果を消す浄化のポーションが有効です。"
+	}
+  ]
+}

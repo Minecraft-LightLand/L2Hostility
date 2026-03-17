@@ -1,0 +1,16 @@
+{
+  "name": "分裂",
+  "icon": "l2hostility:split",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:split",
+	  "text": "この特性は単純なモブにのみ適用されます。この特性は特性を持つモブは倒されると2体に分裂し、レベルは半分、特性と特性ランクは元と同じですが、この特性のみ1ランク低くなります。$(br2)分裂したモブはドロップアイテムなし。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブは、特性「不死」が発動しません。ただし、生成されたモブは不死を継承し、分裂できなくなったときに発動します。"
+	}
+  ]
+}

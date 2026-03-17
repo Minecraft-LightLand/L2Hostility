@@ -1,0 +1,26 @@
+{
+  "name": "L2Complements効果系特性",
+  "icon": "l2hostility:freezing",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:text",
+	  "text": "L2Complementsのポーション効果を付与可能な特性は3種類あります。呪い、魂炎、凍結。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:cursed",
+	  "text": "この特性を持つモブは、回復を阻止する呪い効果を付与できます。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:soul_burner",
+	  "text": "この特性を持つモブは、高ダメージを与える魂炎効果を付与できます。"
+	},
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:freezing",
+	  "text": "この特性を持つモブは、対象を鈍化させ視界を悪化させる凍結効果を付与できます。"
+	}
+  ]
+}
