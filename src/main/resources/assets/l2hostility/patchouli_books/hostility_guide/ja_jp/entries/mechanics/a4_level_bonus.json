@@ -1,12 +1,12 @@
 {
-  "name": "プレイヤー危険度",
+  "name": "プレイヤー周辺脅威度",
   "icon": "l2hostility:hostility_orb",
   "category": "l2hostility:mechanics",
   "sortnum": 4,
   "pages": [
 	{
 	  "type": "patchouli:text",
-	  "text": "危険度レベルが一定に達すると、次にモブを倒したときに報酬(殺意のオーブなど)を獲得できます。これまでに獲得した報酬数は確認できます。"
+	  "text": "脅威度レベルが一定に達すると、次にモブを倒したときに報酬(殺意のオーブなど)を獲得できます。これまでに獲得した報酬数は確認できます。"
 	},
 	{
 	  "type": "patchouli:spotlight",
