@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-12T16:30:40.004611	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider, Tags (traits)]
+// 1.20.1	2026-03-26T11:53:20.987711	Registrate Provider for l2hostility [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Tags (attributes), Tags (enchantments), Tags (mob_effects), Patchouli Provider, Tags (traits)]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
@@ -307,6 +307,7 @@ f46f3cd8fa14a1a94a7bb3dcd1960bf4e051ffc6 data/l2hostility/tags/entity_types/coun
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/dispell_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/drain_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/drain_whitelist.json
+d8a36a45f14b2ee9e3df108ba18fcb4b05cd5c94 data/l2hostility/tags/entity_types/effect_immune.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/erosion_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/erosion_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/fiery_blacklist.json
@@ -350,13 +351,13 @@ ebcd146f52a62b349b6314398e2d418692138153 data/l2hostility/tags/entity_types/no_d
 52c5dc3bb3cd7549415d3f88963c61fcecbe268d data/l2hostility/tags/entity_types/ranged_weapon_target.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reflect_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reflect_whitelist.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/regenerate_blacklist.json
+531cbb98916d32cd0028e85fe70eb2122d2f82ee data/l2hostility/tags/entity_types/regenerate_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/regenerate_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/repelling_blacklist.json
 778fdb4a5208400e8f9b783e17704df130baf07b data/l2hostility/tags/entity_types/repelling_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/reprint_whitelist.json
-68d7b5e753acd825763c43098f32c76cf194e095 data/l2hostility/tags/entity_types/semiboss.json
+fe40266d424182fd9d5bd0dcc9a932fab06e5a35 data/l2hostility/tags/entity_types/semiboss.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_types/shulker_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/shulker_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_types/slowness_blacklist.json
@@ -384,6 +385,7 @@ ddeff5cd528e370493ffe7336d2e14fa59fa3fae data/l2hostility/tags/items/beacon_paym
 c11704257529150719574fe8070c7fca05bf7f04 data/l2hostility/tags/items/no_seal.json
 4072165ff119a927f419da1c0ecfc954fdee7f3e data/l2hostility/tags/items/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
+4ee908971a1daa4ea8ec3618a547c66dce77e40c data/l2hostility/tags/mob_effect/drain_ignore.json
 ae3272ea9c6f244c79f6192ef5e9f1d387c45909 data/minecraft/tags/blocks/beacon_base_blocks.json
 65da76b3a96d076426cc78810d00296dfd0b5679 data/minecraft/tags/blocks/mineable/pickaxe.json
 6a70fe0b66cbb6fbf8cd0870ea1ad350fae1bf08 data/minecraft/tags/blocks/needs_diamond_tool.json

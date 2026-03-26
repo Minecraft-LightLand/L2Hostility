@@ -81,6 +81,12 @@ public class CataclysmData {
 							EntityConfig.trait(LHTraits.FREEZING.get(), 2, 3)),
 					List.of(divinity(equipLevel)));
 
+			addEntity(collector, 200, 50, 0.5, 0.8, ModEntities.SCYLLA, List.of(
+							EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+							EntityConfig.trait(LHTraits.CURSED.get(), 1, 1),
+							EntityConfig.trait(LHTraits.LEVITATION.get(), 2, 3)),
+					List.of(divinity(equipLevel)));
+
 			collector.add(L2Hostility.ENTITY, ModEntities.ANCIENT_REMNANT.getId(), new EntityConfig()
 					.put(EntityConfig.entity(200, 50, 0, 0, 0.5, 0.8, List.of(ModEntities.ANCIENT_REMNANT.get()))
 							.trait(List.of(
@@ -175,6 +181,10 @@ public class CataclysmData {
 					EntityConfig.trait(LHTraits.CURSED.get(), 1, 2),
 					EntityConfig.trait(LHTraits.DISPELL.get(), 1, 1, 200, 0.5f),
 					EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1, 250, 1)
+			);
+
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.CLAWDIAN,
+					EntityConfig.trait(LHTraits.DRAIN.get(), 0, 1)
 			);
 		}
 

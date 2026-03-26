@@ -1,0 +1,30 @@
+{
+  "values": [
+    "minecraft:wither",
+    "minecraft:ender_dragon",
+    {
+      "id": "cataclysm:ender_golem",
+      "required": false
+    },
+    {
+      "id": "cataclysm:netherite_monstrosity",
+      "required": false
+    },
+    {
+      "id": "cataclysm:ignis",
+      "required": false
+    },
+    {
+      "id": "cataclysm:the_harbinger",
+      "required": false
+    },
+    {
+      "id": "cataclysm:the_leviathan",
+      "required": false
+    },
+    {
+      "id": "cataclysm:ancient_remnant",
+      "required": false
+    }
+  ]
+}

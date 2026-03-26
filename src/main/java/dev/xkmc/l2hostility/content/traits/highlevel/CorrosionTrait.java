@@ -24,7 +24,7 @@ public class CorrosionTrait extends SlotIterateDamageTrait {
 		if (LHItems.ABRAHADABRA.get().isOn(cache.getAttackTarget())) return;
 		int count = process(level, attacker, cache.getAttackTarget());
 		if (count < level) {
-			cache.addHurtModifier(DamageModifier.multTotal((float) (LHConfig.COMMON.corrosionDamage.get() * level * (level - count))));
+			cache.addHurtModifier(DamageModifier.multTotal(1 + (float) (LHConfig.COMMON.corrosionDamage.get() * level * (level - count))));
 		}
 	}
 

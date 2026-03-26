@@ -1,11 +1,13 @@
 package dev.xkmc.l2hostility.content.item.traits;
 
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2library.base.effects.EffectBuilder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
@@ -27,7 +29,9 @@ public class EffectBooster {
 	}
 
 	public static void boostTrait(LivingEntity target, double factor, int maxTime) {
-		boost(target, e -> e.getCategory() == MobEffectCategory.HARMFUL, 0, factor, maxTime);
+		boost(target, e -> e.getCategory() == MobEffectCategory.HARMFUL &&
+				!ForgeRegistries.MOB_EFFECTS.getHolder(e).map(x -> x.is(LHTagGen.DRAIN_IGNIRE))
+						.orElse(false), 0, factor, maxTime);
 	}
 
 	private static void boost(LivingEntity target, Predicate<MobEffect> pred, int min, double factor, int maxTime) {

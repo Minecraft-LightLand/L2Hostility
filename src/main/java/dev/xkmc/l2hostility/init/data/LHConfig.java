@@ -193,6 +193,7 @@ public class LHConfig {
 		public final ForgeConfigSpec.IntValue auraEffectApplicationInterval;
 		public final ForgeConfigSpec.IntValue selfEffectApplicationInterval;
 		public final ForgeConfigSpec.IntValue maxTraitCount;
+		public final ForgeConfigSpec.BooleanValue enableAdaptiveLeveling;
 
 		public final Map<String, ForgeConfigSpec.BooleanValue> map = new TreeMap<>();
 		public final Map<String, ForgeConfigSpec.IntValue> range = new TreeMap<>();
@@ -267,6 +268,8 @@ public class LHConfig {
 						.defineInRange("equipmentDropRate", 0.085, 0, 1);
 				maxTraitCount = builder.comment("Max number of traits on mobs")
 						.defineInRange("maxTraitCount", 9, 1, 100);
+				enableAdaptiveLeveling = builder.comment("Allow player to increase difficulty by killing mobs")
+						.define("enableAdaptiveLeveling", true);
 
 			}
 			builder.pop();
@@ -274,9 +277,9 @@ public class LHConfig {
 			builder.push("difficulty");
 			{
 				maxPlayerLevel = builder.comment("Max player adaptive level")
-						.defineInRange("maxPlayerLevel", 2000, 100, 100000);
+						.defineInRange("maxPlayerLevel", 2000, 1, 100000);
 				maxMobLevel = builder.comment("Max mob level")
-						.defineInRange("maxMobLevel", 3000, 100, 100000);
+						.defineInRange("maxMobLevel", 3000, 1, 100000);
 				killsPerLevel = builder.comment("Difficulty increment takes this many kills of same level mob")
 						.defineInRange("killsPerLevel", 30, 1, 100000);
 				playerDeathDecay = builder.comment("Decay in player difficulty on death")

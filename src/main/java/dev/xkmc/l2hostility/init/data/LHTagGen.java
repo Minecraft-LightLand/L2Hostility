@@ -73,6 +73,7 @@ public class LHTagGen {
 	public static final TagKey<EntityType<?>> NO_TRAIT = createEntityTag("no_trait");
 
 	public static final TagKey<EntityType<?>> SEMIBOSS = createEntityTag("semiboss");
+	public static final TagKey<EntityType<?>> EFFIMM = createEntityTag("effect_immune");
 	public static final TagKey<EntityType<?>> NO_DROP = createEntityTag("no_drop");
 	public static final TagKey<EntityType<?>> HIDE_TRAITS = createEntityTag("hide_traits");
 	public static final TagKey<EntityType<?>> HIDE_LEVEL = createEntityTag("hide_level");
@@ -82,6 +83,8 @@ public class LHTagGen {
 	public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
 	public static final TagKey<EntityType<?>> RANGED_WEAPON_TARGET = createEntityTag("ranged_weapon_target");
 	public static final TagKey<EntityType<?>> HOSTILITY_SPAWNER_BLACKLIST = createEntityTag("hostility_spawner_blacklist");
+
+	public static final TagKey<MobEffect> DRAIN_IGNIRE = createEffectTag("drain_ignore");
 
 	public static final Map<ResourceLocation, Consumer<RegistrateTagsProvider.IntrinsicImpl<EntityType<?>>>> ENTITY_TAG_BUILDER = new TreeMap<>();
 
@@ -148,6 +151,9 @@ public class LHTagGen {
 			pvd.addTag(NO_DROP).addOptional(TFEntities.DEATH_TOME.getId());
 		}
 
+		var effimm = pvd.addTag(EFFIMM);
+		effimm.add(EntityType.WITHER, EntityType.ENDER_DRAGON);
+
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			pvd.addTag(SEMIBOSS)
 					.addOptional(ModEntities.ENDER_GOLEM.getId())
@@ -162,7 +168,17 @@ public class LHTagGen {
 					.addOptional(ModEntities.KOBOLEDIATOR.getId())
 					.addOptional(ModEntities.WADJET.getId())
 					.addOptional(ModEntities.MALEDICTUS.getId())
-					.addOptional(ModEntities.APTRGANGR.getId());
+					.addOptional(ModEntities.APTRGANGR.getId())
+					.addOptional(ModEntities.SCYLLA.getId())
+					.addOptional(ModEntities.CLAWDIAN.getId());
+
+			pvd.addTag(EFFIMM)
+					.addOptional(ModEntities.ENDER_GOLEM.getId())
+					.addOptional(ModEntities.NETHERITE_MONSTROSITY.getId())
+					.addOptional(ModEntities.IGNIS.getId())
+					.addOptional(ModEntities.THE_HARBINGER.getId())
+					.addOptional(ModEntities.THE_LEVIATHAN.getId())
+					.addOptional(ModEntities.ANCIENT_REMNANT.getId());
 		}
 
 		if (ModList.get().isLoaded(IceAndFire.MODID)) {
@@ -237,12 +253,17 @@ public class LHTagGen {
 		return TagKey.create(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), new ResourceLocation(L2Hostility.MODID, id));
 	}
 
+	public static TagKey<MobEffect> createEffectTag(String id) {
+		return TagKey.create(ForgeRegistries.MOB_EFFECTS.getRegistryKey(), new ResourceLocation(L2Hostility.MODID, id));
+	}
+
 	public static TagKey<MobTrait> createTraitTag(String id) {
 		return TagKey.create(LHTraits.TRAITS.key(), new ResourceLocation(L2Hostility.MODID, id));
 	}
 
 	public static void onEffTagGen(RegistrateTagsProvider.IntrinsicImpl<MobEffect> pvd) {
 		pvd.addTag(TagGen.SKILL_EFFECT).add(LHEffects.ANTIBUILD.get());
+		pvd.addTag(DRAIN_IGNIRE).addTag(TagGen.SKILL_EFFECT);
 	}
 
 }

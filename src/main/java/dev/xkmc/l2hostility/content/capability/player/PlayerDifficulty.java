@@ -126,11 +126,13 @@ public class PlayerDifficulty extends PlayerCapabilityTemplate<PlayerDifficulty>
 
 	public void addKillCredit(MobTraitCap cap) {
 		if (player instanceof FakePlayer) return;
-		double growFactor = 1;
-		for (var stack : CurseCurioItem.getFromPlayer(player)) {
-			growFactor *= stack.item().getGrowFactor(stack.stack(), this, cap);
+		if (LHConfig.COMMON.enableAdaptiveLeveling.get()) {
+			double growFactor = 1;
+			for (var stack : CurseCurioItem.getFromPlayer(player)) {
+				growFactor *= stack.item().getGrowFactor(stack.stack(), this, cap);
+			}
+			difficulty.grow(growFactor, cap);
 		}
-		difficulty.grow(growFactor, cap);
 		cap.traits.values().stream().max(Comparator.naturalOrder())
 				.ifPresent(integer -> maxRankKilled = Math.max(maxRankKilled, integer));
 		if (getLevel().getLevel() > rewardCount * 10 && LHConfig.COMMON.enableHostilityOrbDrop.get()) {

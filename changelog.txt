@@ -1,3 +1,10 @@
+2.5.19
+- Fix corrosion and erosion damage
+- Drain trait no longer remove effects whitelisted by cleanse
+- Add config to disable player adaptive leveling
+- Cataclysm bosses no longer get regen trait
+- Add Scylla default L2H config
+
 2.5.18
 - Add "presetTraitsOnly" field in entity config, stopping entities from generating extra traits
 - Fix master trait "maxHealthPercentage" not taking effect

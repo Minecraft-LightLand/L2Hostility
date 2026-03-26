@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-12T16:30:40.000574	L2Hostility Config
+// 1.20.1	2026-03-26T11:53:20.983547	L2Hostility Config
 9d90a40577207d98f0a4631c5a501a790fbf7b00 data/bosses_of_mass_destruction/l2hostility_config/entity/gauntlet.json
 f542d2a43dad72f9df230479c213353960fd6804 data/bosses_of_mass_destruction/l2hostility_config/entity/lich.json
 22ca3ffd23744dfca303ef30b96cb52ab87b689a data/bosses_of_mass_destruction/l2hostility_config/entity/obsidilith.json
@@ -6,6 +6,7 @@ f542d2a43dad72f9df230479c213353960fd6804 data/bosses_of_mass_destruction/l2hosti
 086b6f91dc71fb6e86cfbc4efbad04b8e14371d2 data/cataclysm/l2hostility_config/entity/amethyst_crab.json
 1a2f9f8d23d05970cc3f73393063fb01c8aa1e43 data/cataclysm/l2hostility_config/entity/ancient_remnant.json
 a5496d4273cf40c58fcf6168234e232949cd6ffb data/cataclysm/l2hostility_config/entity/aptrgangr.json
+bfb802a1387d709adcd0e2b99ca70ea4daaed03c data/cataclysm/l2hostility_config/entity/clawdian.json
 2a06211dc56d53657841bceb25d39d421c4d904a data/cataclysm/l2hostility_config/entity/draugr.json
 14d7a5b2619fa99ecf40b1ddc9ecb65ea1c70966 data/cataclysm/l2hostility_config/entity/elite_draugr.json
 6d4e8d2d62072966c84ad4d929380a3afc06e3cd data/cataclysm/l2hostility_config/entity/ender_golem.json
@@ -16,6 +17,7 @@ c785fa8207cf76a6300c93e0d12c9349e6f57170 data/cataclysm/l2hostility_config/entit
 222d11b66a99825456f31d2ac049e581da4b70ce data/cataclysm/l2hostility_config/entity/maledictus.json
 31d0e88dea6465d2d1e7623a5879956033100a27 data/cataclysm/l2hostility_config/entity/netherite_monstrosity.json
 96d94d8741a2ffeaf6af893fefe5c92f79eb1741 data/cataclysm/l2hostility_config/entity/royal_draugr.json
+a283e3310058b471110f5a0210d2fa8bfbc9204b data/cataclysm/l2hostility_config/entity/scylla.json
 04ed32f37c926d87c6f12d8c99e920c01e752b8b data/cataclysm/l2hostility_config/entity/the_harbinger.json
 36d389f4908b44d08d6d1b9849f77649e6ec6ea0 data/cataclysm/l2hostility_config/entity/the_leviathan.json
 38622968290ab4650e8aba4a175fe42dc144e885 data/cataclysm/l2hostility_config/entity/wadjet.json

@@ -112,7 +112,8 @@ public class LHTraits {
 					.desc("Ignite attacker and attack target for %s seconds. Makes mob immune to fire.")
 					.lang("Fiery").register();
 			REGEN = L2Hostility.REGISTRATE.regTrait("regenerate", () -> new RegenTrait(ChatFormatting.RED),
-							rl -> new TraitConfig(rl, 30, 100, 5, 50))
+							rl -> new TraitConfig(rl, 30, 100, 5, 50)
+									.addBlacklist(e -> e.addTag(LHTagGen.EFFIMM)))
 					.desc("Heals %s%% of full health every second.")
 					.lang("Regenerating").register();
 			ADAPTIVE = L2Hostility.REGISTRATE.regTrait("adaptive", () -> new AdaptingTrait(ChatFormatting.GOLD),

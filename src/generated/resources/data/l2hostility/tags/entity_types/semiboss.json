@@ -57,6 +57,14 @@
       "required": false
     },
     {
+      "id": "cataclysm:scylla",
+      "required": false
+    },
+    {
+      "id": "cataclysm:clawdian",
+      "required": false
+    },
+    {
       "id": "iceandfire:ice_dragon",
       "required": false
     },
