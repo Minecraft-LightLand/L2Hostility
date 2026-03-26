@@ -6,6 +6,7 @@ import dev.xkmc.l2hostility.content.item.traits.EffectBooster;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
@@ -51,7 +52,8 @@ public class DrainTrait extends MobTrait {
 	@Override
 	public void postHurtImpl(int level, LivingEntity attacker, LivingEntity target) {
 		var pos = new ArrayList<>(target.getActiveEffects().stream()
-				.filter(e -> e.getEffect().value().getCategory() == MobEffectCategory.BENEFICIAL)
+				.filter(e -> e.getEffect().value().getCategory() == MobEffectCategory.BENEFICIAL &&
+						!e.getEffect().is(LHTagGen.DRAIN_IGNORE))
 				.toList());
 		for (int i = 0; i < level; i++) {
 			if (pos.isEmpty()) continue;

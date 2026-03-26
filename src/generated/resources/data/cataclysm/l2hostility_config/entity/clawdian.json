@@ -1,0 +1,33 @@
+{
+  "list": [
+    {
+      "attackScale": 0.8,
+      "blacklist": [],
+      "difficulty": {
+        "apply_chance": 1.0,
+        "base": 30,
+        "min": 100,
+        "scale": 0.0,
+        "suppression": 0.0,
+        "trait_chance": 1.0,
+        "variation": 0.0
+      },
+      "entities": "cataclysm:clawdian",
+      "healthScale": 0.8,
+      "items": [],
+      "maxLevel": 0,
+      "maxTraitCount": -1,
+      "minSpawnLevel": 0,
+      "presetTraitsOnly": false,
+      "specialConditions": [],
+      "traits": [
+        {
+          "cap": false,
+          "free": 0,
+          "min": 1,
+          "trait": "l2hostility:drain"
+        }
+      ]
+    }
+  ]
+}

@@ -22,18 +22,20 @@ public abstract class SlotIterateDamageTrait extends MobTrait {
 
 	protected int process(int level, LivingEntity attacker, LivingEntity target) {
 		List<EquipmentSlot> list = new ArrayList<>();
+		int other = 0;
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			ItemStack stack = target.getItemBySlot(slot);
 			if (stack.isDamageableItem()) {
 				list.add(slot);
-			}
+			} else if (!stack.isEmpty())
+				other++;
 		}
 		int count = Math.min(level, list.size());
 		for (int i = 0; i < count; i++) {
 			int index = attacker.getRandom().nextInt(list.size());
 			perform(target, list.remove(index));
 		}
-		return count;
+		return count + other;
 	}
 
 	protected abstract void perform(LivingEntity target, EquipmentSlot slot);

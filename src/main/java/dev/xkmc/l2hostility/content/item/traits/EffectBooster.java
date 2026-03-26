@@ -2,6 +2,8 @@ package dev.xkmc.l2hostility.content.item.traits;
 
 import dev.xkmc.l2core.base.effects.EffectBuilder;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHTagGen;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -16,7 +18,7 @@ public class EffectBooster {
 		double factor = 1 + LHConfig.SERVER.drainDuration.get();
 		int maxTime = LHConfig.SERVER.drainDurationMax.get();
 		int min = LHConfig.SERVER.witchChargeMinDuration.get();
-		boost(target, e -> e.getCategory() == MobEffectCategory.HARMFUL, min, factor, maxTime);
+		boost(target, e -> e.value().getCategory() == MobEffectCategory.HARMFUL, min, factor, maxTime);
 	}
 
 	public static void boostBottle(LivingEntity target) {
@@ -27,13 +29,14 @@ public class EffectBooster {
 	}
 
 	public static void boostTrait(LivingEntity target, double factor, int maxTime) {
-		boost(target, e -> e.getCategory() == MobEffectCategory.HARMFUL, 0, factor, maxTime);
+		boost(target, e -> e.value().getCategory() == MobEffectCategory.HARMFUL &&
+				!e.is(LHTagGen.DRAIN_IGNORE), 0, factor, maxTime);
 	}
 
-	private static void boost(LivingEntity target, Predicate<MobEffect> pred, int min, double factor, int maxTime) {
+	private static void boost(LivingEntity target, Predicate<Holder<MobEffect>> pred, int min, double factor, int maxTime) {
 		var list = new ArrayList<>(target.getActiveEffects());
 		for (var e : list) {
-			if (pred.test(e.getEffect().value())) {
+			if (pred.test(e.getEffect())) {
 				int current = e.getDuration();
 				if (current < min) continue;
 				int max = Math.min(maxTime, (int) (current * factor));

@@ -57,6 +57,14 @@
       "required": false
     },
     {
+      "id": "cataclysm:scylla",
+      "required": false
+    },
+    {
+      "id": "cataclysm:clawdian",
+      "required": false
+    },
+    {
       "id": "bosses_of_mass_destruction:lich",
       "required": false
     },

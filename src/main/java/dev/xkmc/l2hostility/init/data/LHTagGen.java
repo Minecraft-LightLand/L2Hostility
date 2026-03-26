@@ -57,6 +57,7 @@ public class LHTagGen {
 	public static final TagKey<EntityType<?>> HOSTILITY_SPAWNER_BLACKLIST = createEntityTag("hostility_spawner_blacklist");
 
 	public static final TagKey<EntityType<?>> SEMIBOSS = createEntityTag("semiboss");
+	public static final TagKey<EntityType<?>> EFFIMM = createEntityTag("effect_immune");
 	public static final TagKey<EntityType<?>> NO_DROP = createEntityTag("no_drop");
 	public static final TagKey<EntityType<?>> HIDE_TRAITS = createEntityTag("hide_traits");
 	public static final TagKey<EntityType<?>> HIDE_LEVEL = createEntityTag("hide_level");
@@ -65,6 +66,8 @@ public class LHTagGen {
 	public static final TagKey<EntityType<?>> ARMOR_TARGET = createEntityTag("armor_target");
 	public static final TagKey<EntityType<?>> MELEE_WEAPON_TARGET = createEntityTag("melee_weapon_target");
 	public static final TagKey<EntityType<?>> RANGED_WEAPON_TARGET = createEntityTag("ranged_weapon_target");
+
+	public static final TagKey<MobEffect> DRAIN_IGNORE = TagKey.create(Registries.MOB_EFFECT, L2Hostility.loc("drain_ignore"));
 
 	public static final Map<ResourceLocation, Consumer<RegistrateTagsProvider.IntrinsicImpl<EntityType<?>>>> ENTITY_TAG_BUILDER = new TreeMap<>();
 
@@ -126,6 +129,8 @@ public class LHTagGen {
 		pvd.addTag(SEMIBOSS).addTag(Tags.EntityTypes.BOSSES)
 				.add(EntityType.WARDEN, EntityType.ELDER_GUARDIAN, EntityType.RAVAGER);
 
+		var effimm = pvd.addTag(EFFIMM);
+		effimm.add(EntityType.WITHER, EntityType.ENDER_DRAGON);
 
 		if (ModList.get().isLoaded(Cataclysm.MODID)) {
 			pvd.addTag(SEMIBOSS)
@@ -141,7 +146,18 @@ public class LHTagGen {
 					.addOptional(ModEntities.KOBOLEDIATOR.getId())
 					.addOptional(ModEntities.WADJET.getId())
 					.addOptional(ModEntities.MALEDICTUS.getId())
-					.addOptional(ModEntities.APTRGANGR.getId());
+					.addOptional(ModEntities.APTRGANGR.getId())
+					.addOptional(ModEntities.SCYLLA.getId())
+					.addOptional(ModEntities.CLAWDIAN.getId());
+
+			pvd.addTag(EFFIMM)
+					.addOptional(ModEntities.ENDER_GOLEM.getId())
+					.addOptional(ModEntities.NETHERITE_MONSTROSITY.getId())
+					.addOptional(ModEntities.IGNIS.getId())
+					.addOptional(ModEntities.THE_HARBINGER.getId())
+					.addOptional(ModEntities.THE_LEVIATHAN.getId())
+					.addOptional(ModEntities.ANCIENT_REMNANT.getId())
+					.addOptional(ModEntities.SCYLLA.getId());
 		}
 
 		if (ModList.get().isLoaded(TwilightForestMod.ID)) {
@@ -231,6 +247,7 @@ public class LHTagGen {
 
 	public static void onEffTagGen(RegistrateTagsProvider.IntrinsicImpl<MobEffect> pvd) {
 		pvd.addTag(LCTagGen.SKILL_EFFECT).add(LHEffects.ANTIBUILD.get());
+		pvd.addTag(DRAIN_IGNORE).addTag(LCTagGen.SKILL_EFFECT);
 	}
 
 }

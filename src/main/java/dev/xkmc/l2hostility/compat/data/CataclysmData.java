@@ -78,6 +78,12 @@ public class CataclysmData {
 							EntityConfig.trait(LHTraits.FREEZING.get(), 2, 3)),
 					List.of(divinity(equipLevel)));
 
+			addEntity(collector, 200, 50, 0.5, 0.8, ModEntities.SCYLLA, List.of(
+							EntityConfig.trait(LHTraits.TANK.get(), 2, 3),
+							EntityConfig.trait(LHTraits.CURSED.get(), 1, 1),
+							EntityConfig.trait(LHTraits.LEVITATION.get(), 2, 3)),
+					List.of(divinity(equipLevel)));
+
 			collector.add(L2Hostility.ENTITY, ModEntities.ANCIENT_REMNANT.getId(), new EntityConfig()
 					.put(EntityConfig.entity(200, 50, 0, 0, 0.5, 0.8, List.of(ModEntities.ANCIENT_REMNANT.get()))
 							.trait(List.of(
@@ -123,54 +129,58 @@ public class CataclysmData {
 							)));
 		}
 		{
-		addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.ENDER_GOLEM,
-				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
-				EntityConfig.trait(LHTraits.WEAKNESS.get(), 0, 1)
-		);
-		addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.AMETHYST_CRAB,
-				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
-				EntityConfig.trait(LHTraits.POISON.get(), 0, 1)
-		);
-		addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.IGNITED_BERSERKER,
-				EntityConfig.trait(LHTraits.REFLECT.get(), 0, 1),
-				EntityConfig.trait(LHTraits.DRAIN.get(), 0, 1)
-		);
-		addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.KOBOLEDIATOR,
-				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
-				EntityConfig.trait(LHTraits.DISPELL.get(), 0, 1, 250, 1)
-		);
-		addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.WADJET,
-				EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
-				EntityConfig.trait(LHTraits.DEMENTOR.get(), 0, 1, 250, 1)
-		);
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.ENDER_GOLEM,
+					EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
+					EntityConfig.trait(LHTraits.WEAKNESS.get(), 0, 1)
+			);
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.AMETHYST_CRAB,
+					EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
+					EntityConfig.trait(LHTraits.POISON.get(), 0, 1)
+			);
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.IGNITED_BERSERKER,
+					EntityConfig.trait(LHTraits.REFLECT.get(), 0, 1),
+					EntityConfig.trait(LHTraits.DRAIN.get(), 0, 1)
+			);
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.KOBOLEDIATOR,
+					EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1),
+					EntityConfig.trait(LHTraits.DISPELL.get(), 0, 1, 250, 1)
+			);
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.WADJET,
+					EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
+					EntityConfig.trait(LHTraits.DEMENTOR.get(), 0, 1, 250, 1)
+			);
 
-		LHConfigGen.addEntity(collector, 30, 10, ModEntities.DRAUGR,
-				EntityConfig.trait(LHTraits.SPEEDY.get(), 1, 2),
-				EntityConfig.trait(LHTraits.WEAKNESS.get(), 1, 2),
-				EntityConfig.trait(LHTraits.UNDYING.get(), 1, 1),
-				EntityConfig.trait(LHTraits.SPLIT.get(), 1, 1, 250, 1)
-		);
+			LHConfigGen.addEntity(collector, 30, 10, ModEntities.DRAUGR,
+					EntityConfig.trait(LHTraits.SPEEDY.get(), 1, 2),
+					EntityConfig.trait(LHTraits.WEAKNESS.get(), 1, 2),
+					EntityConfig.trait(LHTraits.UNDYING.get(), 1, 1),
+					EntityConfig.trait(LHTraits.SPLIT.get(), 1, 1, 250, 1)
+			);
 
-		LHConfigGen.addEntity(collector, 70, 20, ModEntities.ELITE_DRAUGR,
-				EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
-				EntityConfig.trait(LHTraits.SLOWNESS.get(), 1, 2),
-				EntityConfig.trait(LHTraits.UNDYING.get(), 1, 1),
-				EntityConfig.trait(LHTraits.CORROSION.get(), 0, 1, 250, 1)
-		);
+			LHConfigGen.addEntity(collector, 70, 20, ModEntities.ELITE_DRAUGR,
+					EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
+					EntityConfig.trait(LHTraits.SLOWNESS.get(), 1, 2),
+					EntityConfig.trait(LHTraits.UNDYING.get(), 1, 1),
+					EntityConfig.trait(LHTraits.CORROSION.get(), 0, 1, 250, 1)
+			);
 
-		LHConfigGen.addEntity(collector, 70, 20, ModEntities.ROYAL_DRAUGR,
-				EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
-				EntityConfig.trait(LHTraits.WITHER.get(), 1, 2),
-				EntityConfig.trait(LHTraits.UNDYING.get(), 1, 1),
-				EntityConfig.trait(LHTraits.EROSION.get(), 0, 1, 250, 1)
-		);
+			LHConfigGen.addEntity(collector, 70, 20, ModEntities.ROYAL_DRAUGR,
+					EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
+					EntityConfig.trait(LHTraits.WITHER.get(), 1, 2),
+					EntityConfig.trait(LHTraits.UNDYING.get(), 1, 1),
+					EntityConfig.trait(LHTraits.EROSION.get(), 0, 1, 250, 1)
+			);
 
-		LHConfigGen.addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.APTRGANGR,
-				EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
-				EntityConfig.trait(LHTraits.CURSED.get(), 1, 2),
-				EntityConfig.trait(LHTraits.DISPELL.get(), 1, 1, 200, 0.5f),
-				EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1, 250, 1)
-		);
+			LHConfigGen.addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.APTRGANGR,
+					EntityConfig.trait(LHTraits.PROTECTION.get(), 2, 3),
+					EntityConfig.trait(LHTraits.CURSED.get(), 1, 2),
+					EntityConfig.trait(LHTraits.DISPELL.get(), 1, 1, 200, 0.5f),
+					EntityConfig.trait(LHTraits.ADAPTIVE.get(), 0, 1, 250, 1)
+			);
+
+			addEntity(collector, 100, 30, 0.8, 0.8, ModEntities.CLAWDIAN,
+					EntityConfig.trait(LHTraits.DRAIN.get(), 0, 1)
+			);
 		}
 
 		// weapon

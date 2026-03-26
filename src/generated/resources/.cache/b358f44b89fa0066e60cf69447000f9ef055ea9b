@@ -1,10 +1,10 @@
-// 1.21.1	2026-03-12T16:42:27.823752	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (trait), Tags (damage_type), Custom Registrate Provider]
+// 1.21.1	2026-03-26T14:40:13.986005	Registrate Provider for l2hostility [Registries, Data Maps, Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Patchouli Provider, Tags (mob_effect), Tags (attribute), Tags (enchantment), Tags (damage_type), Tags (trait), Custom Registrate Provider]
 ef92906d268b6b4cc81ff03f4bba145d5423fcca assets/l2hostility/blockstates/chaos_block.json
 79b91fdd2a8e095d81210ffd76589bb5da4dfc45 assets/l2hostility/blockstates/hostility_beacon.json
 d70fdb86a9e889383707aa03fd2b7c8f3faa74cc assets/l2hostility/blockstates/hostility_spawner.json
 0d15a69c346a80468001a02f1326848a9559d3bf assets/l2hostility/blockstates/miracle_block.json
-e8231a68413af1c56c06b2c81b3cf8032f451a13 assets/l2hostility/lang/en_ud.json
-139025f9d605032a34c51e18796297e23bf60fc6 assets/l2hostility/lang/en_us.json
+0a2ca8350c544541e574a0b003f230abe5724749 assets/l2hostility/lang/en_ud.json
+2059e8309ebcf7278dd886beab64fd9794f698b1 assets/l2hostility/lang/en_us.json
 83d25ecf7a92c56a76fb336cfa5395cc865e6fcc assets/l2hostility/models/block/chaos_block.json
 b482cdea0faf29842ecf75310f414ce76d12e36a assets/l2hostility/models/block/hostility_beacon.json
 3e128895a51810875704de53d8500ce23da14895 assets/l2hostility/models/block/hostility_beacon_base.json
@@ -114,6 +114,7 @@ f56d428070246c7003c7d02981b11da4351fb225 data/bosses_of_mass_destruction/l2hosti
 bdb27773003554f7d2051d0f6c8c4523dda0e2f1 data/cataclysm/l2hostility_config/entity/amethyst_crab.json
 2d5cc0cd4e5e26bfafa7c8390aedcd17770db9b3 data/cataclysm/l2hostility_config/entity/ancient_remnant.json
 15d67ceea44acfa0b40d7a2ec80733f20dcf5e08 data/cataclysm/l2hostility_config/entity/aptrgangr.json
+dd236f7a4ec009d441339977019766ff3dd82982 data/cataclysm/l2hostility_config/entity/clawdian.json
 3d5eda9137571c92c829298949ccbc5c99703237 data/cataclysm/l2hostility_config/entity/draugr.json
 856690e572e81aae2f1aea28a6c92194b8c7c833 data/cataclysm/l2hostility_config/entity/elite_draugr.json
 ebbfe8b30b2f03068d688d87309dba72c1bf12e0 data/cataclysm/l2hostility_config/entity/ender_golem.json
@@ -124,6 +125,7 @@ ba04ea491b35c9a43d7003a6b95452ea634835ae data/cataclysm/l2hostility_config/entit
 0dce6be2358a6e0d8ee809f58d879805889f8b6b data/cataclysm/l2hostility_config/entity/maledictus.json
 638034ae955dda63d146536c4852fe50df6e7364 data/cataclysm/l2hostility_config/entity/netherite_monstrosity.json
 0c2b556b3a9a7a75cbb54724df490133f9ae1ed0 data/cataclysm/l2hostility_config/entity/royal_draugr.json
+1b8c536a5b917de5987891596a6dbcb37df6b049 data/cataclysm/l2hostility_config/entity/scylla.json
 829e4e696e3215298cf117d12bdc1ffd4b85e439 data/cataclysm/l2hostility_config/entity/the_harbinger.json
 55f11d1160b409e0e6276ff13ab1890f013789f3 data/cataclysm/l2hostility_config/entity/the_leviathan.json
 76edfab8b15421d2b354080de03efee659cb3275 data/cataclysm/l2hostility_config/entity/wadjet.json
@@ -337,6 +339,7 @@ f46f3cd8fa14a1a94a7bb3dcd1960bf4e051ffc6 data/l2hostility/tags/entity_type/count
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/dispell_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/drain_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/drain_whitelist.json
+692d12a9ab4edc952a832b113691eb772bea7134 data/l2hostility/tags/entity_type/effect_immune.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/erosion_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/erosion_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/fiery_blacklist.json
@@ -380,13 +383,13 @@ ebcd146f52a62b349b6314398e2d418692138153 data/l2hostility/tags/entity_type/no_dr
 3538431ea44345838c5040dc83c5be0d49437f5c data/l2hostility/tags/entity_type/ranged_weapon_target.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/reflect_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/reflect_whitelist.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/regenerate_blacklist.json
+531cbb98916d32cd0028e85fe70eb2122d2f82ee data/l2hostility/tags/entity_type/regenerate_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/regenerate_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/repelling_blacklist.json
 778fdb4a5208400e8f9b783e17704df130baf07b data/l2hostility/tags/entity_type/repelling_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/reprint_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/reprint_whitelist.json
-9b9a9a36ea4f38bb7355c6b01fc94dbccaea1d79 data/l2hostility/tags/entity_type/semiboss.json
+d71dbffd5aae39fcf84d20dbbc84e22251e4ba37 data/l2hostility/tags/entity_type/semiboss.json
 9b7852cb0134c83a9245e6cce61b4edec43d27b5 data/l2hostility/tags/entity_type/shulker_blacklist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/shulker_whitelist.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/l2hostility/tags/entity_type/slowness_blacklist.json
@@ -414,6 +417,7 @@ ddeff5cd528e370493ffe7336d2e14fa59fa3fae data/l2hostility/tags/item/beacon_payme
 c11704257529150719574fe8070c7fca05bf7f04 data/l2hostility/tags/item/no_seal.json
 4072165ff119a927f419da1c0ecfc954fdee7f3e data/l2hostility/tags/item/trait_item.json
 e4d89b365aeac4d8f6734c1b6ade20ccffe4c866 data/l2hostility/tags/l2hostility/trait/potion_trait.json
+4ee908971a1daa4ea8ec3618a547c66dce77e40c data/l2hostility/tags/mob_effect/drain_ignore.json
 d43d210ad5e087b02e96faecf8afa3f0ef47444e data/l2tabs/data_maps/l2tabs/tab/icon.json
 31ba5cac840af21246ac661d322294b7ac69c671 data/l2tabs/data_maps/l2tabs/tab/order.json
 bff31230b5ee66358421414dc1689d38bbaa9594 data/l2weaponry/l2hostility_config/weapon/weapons.json
