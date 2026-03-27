@@ -1,0 +1,16 @@
+{
+  "name": "ラグナロク",
+  "icon": "l2hostility:ragnarok",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:ragnarok",
+	  "text": "この特性を持つモブは、装備やcuriosを封印します。解除するには、モブを倒してアイテムを手に持ち数秒間使用してください。$(br2)非常に高レベルでのみ出現するので、あまり気にしなくて大丈夫です。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、装備を素早く切り替えるか、この特性が出現するレベルに達しないようにしましょう。"
+	}
+  ]
+}

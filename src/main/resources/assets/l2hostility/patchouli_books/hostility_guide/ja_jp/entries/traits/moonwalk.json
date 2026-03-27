@@ -1,0 +1,12 @@
+{
+  "name": "月歩",
+  "icon": "l2hostility:moonwalk",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:moonwalk",
+	  "text": "この特性を持つモブは、周囲の重力を弱めます。特性ランクが高いほど、より重力が弱まります。"
+	}
+  ]
+}

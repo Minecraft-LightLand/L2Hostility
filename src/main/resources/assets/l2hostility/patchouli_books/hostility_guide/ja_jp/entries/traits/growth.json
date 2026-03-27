@@ -1,0 +1,16 @@
+{
+  "name": "増大",
+  "icon": "l2hostility:growth",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:growth",
+	  "text": "この特性はスライム専用です。スライムは同ランクの特性「再生」を獲得し、体力が最大の時に成長します。特性ランクによってサイズは決まる。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "倒すと、この特性は1匹のスライムに継承され、ランクが1下がります。"
+	}
+  ]
+}

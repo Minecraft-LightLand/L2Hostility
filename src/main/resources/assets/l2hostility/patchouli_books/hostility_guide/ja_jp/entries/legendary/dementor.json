@@ -1,0 +1,16 @@
+{
+  "name": "吸魂",
+  "icon": "l2hostility:dementor",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:dementor",
+	  "text": "この特性を持つモブは、物理ダメージに耐性を持ち、防具を無視する魔法ダメージを与えます。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、魔法ダメージを与えられる武器、または魔法耐性を無視できる武器を用意しましょう。さらに、自分を守るためにに強力な防護系エンチャントを装備しておくとより安心できます。"
+	}
+  ]
+}

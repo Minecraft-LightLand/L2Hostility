@@ -1,0 +1,16 @@
+{
+  "name": "解呪",
+  "icon": "l2hostility:dispell",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:dispell",
+	  "text": "この特性を持つモブは、魔法耐性を無視するダメージを与え、装備の一つをランダムに無効化します。さらに、魔法ダメージに耐性を持つ。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、攻撃を防ぐための盾が必要です。盾を使わないと、攻撃の威力が予想以上に強力になることがあります。"
+	}
+  ]
+}

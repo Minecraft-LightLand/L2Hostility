@@ -1,0 +1,16 @@
+{
+  "name": "反発",
+  "icon": "l2hostility:repelling",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:repelling",
+	  "text": "この特性を持つモブは、自分を攻撃対象にしたプレイヤーやエンティティを押し返し、飛来する弾に対して耐性を持ちます。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、魔法ダメージ、爆発、あるいは投擲物無効を無視できる弾丸が有効です。"
+	}
+  ]
+}

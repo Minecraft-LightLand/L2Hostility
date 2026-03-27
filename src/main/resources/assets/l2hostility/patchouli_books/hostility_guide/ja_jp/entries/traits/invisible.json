@@ -1,0 +1,16 @@
+{
+  "name": "透明化",
+  "icon": "l2hostility:invisible",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:invisible",
+	  "text": "この特性を持つモブは、透明になり、装備も透過エンチャントで透明にされます。特性名は直接視認しない限り表示されません。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "透明なモブを見るには、浄化のポーションや発光効果が有効です。"
+	}
+  ]
+}

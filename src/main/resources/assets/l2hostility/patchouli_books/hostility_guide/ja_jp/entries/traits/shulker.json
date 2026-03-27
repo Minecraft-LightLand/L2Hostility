@@ -1,0 +1,12 @@
+{
+  "name": "シェルカー",
+  "icon": "l2hostility:shulker",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:shulker",
+	  "text": "弾を発射します。デフォルトでは浮遊効果はありませんが、他の効果特性を持つ場合、弾がそれらの効果を引き継ぎます。"
+	}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "腐食",
+  "icon": "l2hostility:corrosion",
+  "category": "l2hostility:traits",
+  "pages": [
+	{
+	  "type": "patchouli:spotlight",
+	  "item": "l2hostility:corrosion",
+	  "text": "この特性を持つモブは、装備の耐久値を削ることができ、耐久値が低い装備ほど効果的です。$(br2)非常に高レベルでのみ出現するので、あまり気にしなくて大丈夫です。"
+	},
+	{
+	  "type": "patchouli:text",
+	  "text": "この特性を持つモブには、装備の耐久値を常に高く保つことが重要です。$(br2)硬化と生命修繕のエンチャントを使えば、耐久値を簡単に維持できます。"
+	}
+  ]
+}
