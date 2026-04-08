@@ -63,6 +63,10 @@
     {
       "id": "mutantmonsters:spider_pig",
       "required": false
+    },
+    {
+      "id": "irons_spelbooks:summoned_sword",
+      "required": false
     }
   ]
 }

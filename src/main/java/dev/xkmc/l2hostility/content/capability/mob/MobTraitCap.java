@@ -5,6 +5,8 @@ import dev.xkmc.l2hostility.content.capability.chunk.ChunkDifficulty;
 import dev.xkmc.l2hostility.content.capability.chunk.RegionalDifficultyModifier;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
+import dev.xkmc.l2hostility.content.config.special_config_condition.ContextCondition;
+import dev.xkmc.l2hostility.content.config.special_config_condition.EntityContext;
 import dev.xkmc.l2hostility.content.item.spawner.TraitSpawnerBlockEntity;
 import dev.xkmc.l2hostility.content.logic.*;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
@@ -14,6 +16,7 @@ import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHTagGen;
 import dev.xkmc.l2hostility.init.data.LangData;
+import dev.xkmc.l2hostility.init.entries.LHRegistrate;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityHolder;
 import dev.xkmc.l2library.capability.entity.GeneralCapabilityTemplate;
@@ -129,6 +132,10 @@ public class MobTraitCap extends GeneralCapabilityTemplate<LivingEntity, MobTrai
 
 	@Nullable
 	public EntityConfig.Config getConfigCache(LivingEntity le) {
+		if (configCache == null) {
+			var data = new EntityContext(le);
+			configCache = L2Hostility.ENTITY.getMerged().get(le.getType(), L2Hostility.REGISTRATE.CONDITION_CONTEXT, EntityContext.class, data);
+		}
 		if (configCache == null) {
 			configCache = L2Hostility.ENTITY.getMerged().get(le.getType());
 		}

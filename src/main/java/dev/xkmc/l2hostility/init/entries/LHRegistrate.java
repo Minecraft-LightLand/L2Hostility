@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class LHRegistrate extends L2Registrate {
+	public final ResourceLocation CONDITION_CONTEXT = new ResourceLocation(getModid(), "condition_context");
 
 	public LHRegistrate(String modid) {
 		super(modid);
