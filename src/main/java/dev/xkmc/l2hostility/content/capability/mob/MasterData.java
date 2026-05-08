@@ -47,20 +47,22 @@ public class MasterData {
 	@SerialClass.SerialField(toClient = true)
 	public ArrayList<Minion> data = new ArrayList<>();
 
+	private record MinionKey(EntityType<?> type, double masterMaxHealthPercentage) {}
+
 	@SerialClass.SerialField
-	private LinkedHashMap<EntityType<?>, Data> map = new LinkedHashMap<>();
+	private LinkedHashMap<MinionKey, Data> map = new LinkedHashMap<>();
 
 	public boolean tick(MobTraitCap cap, Mob mob) {
 		var config = MasterTrait.getConfig(mob.getType());
 		if (config == null) return false;
 		for (var e : config.minions())
-			map.computeIfAbsent(e.type(), k -> new Data()).setup(e);
+			map.computeIfAbsent(new MinionKey(e.type(), e.maxHealthPercentage()), k -> new Data()).setup(e);
 		boolean updated = data.removeIf(e -> {
 			e.tick(mob);
 			if (e.minion == null) {
 				return !mob.level().isClientSide();
 			} else {
-				var ent = map.get(e.minion.getType());
+				var ent = map.get(new MinionKey(e.minion.getType(), e.masterMaxHealthPercentage));
 				if (ent != null) ent.count++;
 				return false;
 			}
@@ -111,6 +113,9 @@ public class MasterData {
 
 		@SerialClass.SerialField(toClient = true)
 		public int id;
+
+		@SerialClass.SerialField
+		public double masterMaxHealthPercentage;
 
 		public Mob minion;
 
@@ -187,6 +192,7 @@ public class MasterData {
 			ans.minion = m;
 			ans.uuid = m.getUUID();
 			ans.id = m.getId();
+			ans.masterMaxHealthPercentage = config.maxHealthPercentage();
 			return ans;
 		}
 
