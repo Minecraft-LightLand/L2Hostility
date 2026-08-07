@@ -125,6 +125,8 @@ public class L2Hostility {
 
 
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
+		REGISTRATE.addDataGenerator(ProviderType.LANG, dev.xkmc.l2hostility.editor.base.EditorText::genLang);
+		REGISTRATE.addDataGenerator(ProviderType.LANG, dev.xkmc.l2hostility.editor.util.HostilityEditorLang::genLang);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LHTagGen::onBlockTagGen);
 		REGISTRATE.addDataGenerator(LHTagGen.ENCH_TAGS, LHTagGen::onEnchTagGen);

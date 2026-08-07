@@ -1,0 +1,149 @@
+package dev.xkmc.l2hostility.editor.config;
+
+import dev.xkmc.l2hostility.content.config.EntityConfig;
+import dev.xkmc.l2hostility.editor.base.EditorHandler;
+import dev.xkmc.l2hostility.editor.base.EditorLayout;
+import dev.xkmc.l2hostility.editor.base.EditorList;
+import dev.xkmc.l2hostility.editor.base.EditorScreen;
+import dev.xkmc.l2hostility.editor.base.EditorSession;
+import dev.xkmc.l2hostility.editor.base.EditorText;
+import dev.xkmc.l2hostility.editor.base.FormScreen;
+import dev.xkmc.l2hostility.editor.base.ItemListScreen;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
+public class EntityConfigEntryScreen extends EditorScreen {
+
+	private final EntityConfig.Config config;
+	private final Consumer<EntityConfig.Config> onDone;
+	private final Screen parent;
+	private final EditorSession session = new EditorSession();
+
+	private EditorList list;
+
+	public EntityConfigEntryScreen(Component title, EntityConfig.Config config,
+								   Consumer<EntityConfig.Config> onDone, Screen parent) {
+		super(title);
+		this.config = config;
+		this.onDone = onDone;
+		this.parent = parent;
+	}
+
+	@Override
+	protected void init() {
+		list = new EditorList(minecraft, width, height - 70, 30, height - 40);
+		addRenderableWidget(list);
+		List<Button> row = new ArrayList<>();
+		row.add(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build());
+		row.forEach(this::addRenderableWidget);
+		EditorLayout.centerRow(row, width / 2, height - 30, 5);
+		rebuild();
+	}
+
+	private void rebuild() {
+		List<EditorList.Entry> entries = new ArrayList<>();
+		entries.add(new EditorList.Entry(HostilityEditorLang.ENTITY_LIST.get(),
+				entityIcon(), this::editEntities));
+		entries.add(new EditorList.Entry(HostilityEditorLang.DIFFICULTY_EDIT.get(),
+				null, this::editDifficulty));
+		entries.add(new EditorList.Entry(HostilityEditorLang.TRAIT_BASE_LIST.get(),
+				null, this::editTraits));
+		entries.add(new EditorList.Entry(HostilityEditorLang.TRAIT_BLACKLIST.get(),
+				null, this::editBlacklist));
+		entries.add(new EditorList.Entry(HostilityEditorLang.ITEMS.get(),
+				null, this::editItems));
+		entries.add(new EditorList.Entry(HostilityEditorLang.VALUES_EDIT.get(),
+				null, this::editValues));
+		entries.add(new EditorList.Entry(HostilityEditorLang.MASTER_CONFIG.get(),
+				null, this::editMaster));
+		list.setData(entries);
+	}
+
+	@Nullable
+	private ItemStack entityIcon() {
+		if (config.entities.isEmpty()) return null;
+		return HostilityEditorUtil.entityIcon(config.entities.get(0));
+	}
+
+	private void editEntities() {
+		Minecraft.getInstance().setScreen(new ItemListScreen<>(HostilityEditorLang.ENTITY_LIST.get(),
+				HostilityEditorUtil.writeThroughSet(config.entities), () -> HostilityEditorUtil.writeThroughSet(config.entities),
+				HostilityEditorUtil.listEntityTypes(), HostilityEditorHandlers.ENTITY_TYPE,
+				HostilityEditorLang.SELECT_ENTITY.get(), EntityConfigEntryScreen.this, session));
+	}
+
+	private void editDifficulty() {
+		Minecraft.getInstance().setScreen(new FormScreen<>(HostilityEditorLang.DIFFICULTY_EDIT.get(),
+				HostilityEditorForms.difficultyConfig(config.difficulty()), c -> {
+					config.setDifficulty(c);
+					session.dirty = true;
+				}, EntityConfigEntryScreen.this));
+	}
+
+	private void editTraits() {
+		Minecraft.getInstance().setScreen(new TraitBaseListScreen(
+				HostilityEditorLang.TRAIT_BASE_LIST.get(), config.traits(), EntityConfigEntryScreen.this, session));
+	}
+
+	private void editBlacklist() {
+		Minecraft.getInstance().setScreen(new ItemListScreen<>(HostilityEditorLang.TRAIT_BLACKLIST.get(),
+				config.blacklist(), () -> config.blacklist(),
+				HostilityEditorUtil.listTraits(), HostilityEditorHandlers.TRAIT,
+				HostilityEditorLang.SELECT_TRAIT.get(), EntityConfigEntryScreen.this, session));
+	}
+
+	private void editItems() {
+		Minecraft.getInstance().setScreen(new ItemPoolListScreen(
+				HostilityEditorLang.ITEMS.get(), config.items, EntityConfigEntryScreen.this, session));
+	}
+
+	private void editValues() {
+		Minecraft.getInstance().setScreen(new FormScreen<>(HostilityEditorLang.VALUES_EDIT.get(),
+				HostilityEditorForms.entityValues(config), c -> {
+					session.dirty = true;
+				}, EntityConfigEntryScreen.this));
+	}
+
+	private void editMaster() {
+		Minecraft.getInstance().setScreen(new MasterConfigScreen(
+				config.asMaster, this::setMaster, EntityConfigEntryScreen.this, session));
+	}
+
+	private void setMaster(@Nullable EntityConfig.MasterConfig master) {
+		config.asMaster = master;
+		session.dirty = true;
+	}
+
+	private void exit() {
+		if (session.dirty) {
+			onDone.accept(config);
+		}
+		Minecraft.getInstance().setScreen(parent);
+	}
+
+	@Override
+	public void render(GuiGraphics g, int mx, int my, float pTick) {
+		super.renderBackground(g);
+		super.render(g, mx, my, pTick);
+		g.drawCenteredString(font, this.title, width / 2, 10, 0xFFFFFF);
+	}
+
+	@Override
+	public void onClose() {
+		exit();
+	}
+
+}

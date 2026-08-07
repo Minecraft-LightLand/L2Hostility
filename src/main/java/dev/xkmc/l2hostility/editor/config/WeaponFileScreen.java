@@ -1,0 +1,64 @@
+package dev.xkmc.l2hostility.editor.config;
+
+import dev.xkmc.l2hostility.content.config.WeaponConfig;
+import dev.xkmc.l2hostility.editor.base.EditorList;
+import dev.xkmc.l2hostility.editor.base.EditorToast;
+import dev.xkmc.l2hostility.editor.base.EditorText;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
+import dev.xkmc.l2hostility.init.L2Hostility;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class WeaponFileScreen extends HostilityFileScreen {
+
+	private final WeaponConfig config;
+
+	public WeaponFileScreen(ResourceLocation id, Screen parent) {
+		super(HostilityEditorLang.WEAPON_FILE.get(), id, parent);
+		WeaponConfig base = L2Hostility.WEAPON.getEntry(id);
+		WeaponConfig copy = base == null ? null : dev.xkmc.l2hostility.editor.base.EditorUtil.copy(L2Hostility.WEAPON, base);
+		this.config = copy == null ? HostilityEditorUtil.newWeapon() : copy;
+	}
+
+	@Override
+	protected void rebuild() {
+		List<EditorList.Entry> entries = new ArrayList<>();
+		entries.add(new EditorList.Entry(HostilityEditorLang.MELEE_WEAPONS.get(), null,
+				() -> Minecraft.getInstance().setScreen(new ItemConfigListScreen(HostilityEditorLang.MELEE_WEAPONS.get(),
+						config.melee_weapons, WeaponFileScreen.this, session))));
+		entries.add(new EditorList.Entry(HostilityEditorLang.RANGED_WEAPONS.get(), null,
+				() -> Minecraft.getInstance().setScreen(new ItemConfigListScreen(HostilityEditorLang.RANGED_WEAPONS.get(),
+						config.ranged_weapons, WeaponFileScreen.this, session))));
+		entries.add(new EditorList.Entry(HostilityEditorLang.ARMORS.get(), null,
+				() -> Minecraft.getInstance().setScreen(new ItemConfigListScreen(HostilityEditorLang.ARMORS.get(),
+						config.armors, WeaponFileScreen.this, session))));
+		entries.add(new EditorList.Entry(HostilityEditorLang.SPECIAL_WEAPONS.get(), null,
+				() -> Minecraft.getInstance().setScreen(new SpecialWeaponListScreen(config, WeaponFileScreen.this, session))));
+		entries.add(new EditorList.Entry(HostilityEditorLang.WEAPON_ENCHANTMENTS.get(), null,
+				() -> Minecraft.getInstance().setScreen(new EnchConfigListScreen(HostilityEditorLang.WEAPON_ENCHANTMENTS.get(),
+						config.weapon_enchantments, WeaponFileScreen.this, session))));
+		entries.add(new EditorList.Entry(HostilityEditorLang.ARMOR_ENCHANTMENTS.get(), null,
+				() -> Minecraft.getInstance().setScreen(new EnchConfigListScreen(HostilityEditorLang.ARMOR_ENCHANTMENTS.get(),
+						config.armor_enchantments, WeaponFileScreen.this, session))));
+		list.setData(entries);
+	}
+
+	@Override
+	protected boolean doSave() {
+		try {
+			HostilityEditorUtil.saveWeapon(fileId, config);
+			saveDone(fileId);
+			return true;
+		} catch (Exception e) {
+			EditorToast.show(EditorText.SAVE_FAIL.get(e.getMessage()), EditorText.NOT_IN_WORLD.get());
+			return false;
+		}
+	}
+
+}

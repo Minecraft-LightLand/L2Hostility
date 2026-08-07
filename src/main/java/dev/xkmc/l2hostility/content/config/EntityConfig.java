@@ -129,6 +129,10 @@ public class EntityConfig extends BaseConfig {
 			return difficulty;
 		}
 
+		public void setDifficulty(WorldDifficultyConfig.DifficultyConfig difficulty) {
+			this.difficulty = difficulty;
+		}
+
 		public Config minLevel(int level) {
 			minSpawnLevel = level;
 			return this;
