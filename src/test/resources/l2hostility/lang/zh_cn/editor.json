@@ -180,8 +180,10 @@
 			"summary_atk_scale": "攻击倍率%s",
 			"summary_pct": "%s%%",
 			"summary_preset": "预设",
-			"summary_na": "N/A",
-			"summary_infinite": "∞",
+			"summary_default": "(默认)",
+			"summary_apply": "应用概率%s",
+			"summary_trait_chance": "词条概率%s",
+			"summary_suppress": "压制%s",
 			"structure_server_hint": "（仅单人模式）"
 		}
 	}

@@ -150,8 +150,10 @@ public enum HostilityEditorLang {
 	SUMMARY_PCT("editor.summary_pct", "%s%%", 1, null),
 	STRUCTURE_SERVER_HINT("editor.structure_server_hint", " (singleplayer only)", 0, ChatFormatting.GRAY),
 	SUMMARY_PRESET("editor.summary_preset", "preset", 0, null),
-	SUMMARY_NA("editor.summary_na", "N/A", 0, null),
-	SUMMARY_INFINITE("editor.summary_infinite", "∞", 0, null);
+	SUMMARY_DEFAULT("editor.summary_default", "(default)", 0, null),
+	SUMMARY_APPLY("editor.summary_apply", "apply %s", 1, null),
+	SUMMARY_TRAIT_CHANCE("editor.summary_trait_chance", "traitChance %s", 1, null),
+	SUMMARY_SUPPRESS("editor.summary_suppress", "suppress %s", 1, null);
 
 	private final String key, def;	private final int arg;
 	@Nullable

@@ -204,11 +204,16 @@ public final class HostilityEditorForms {
 	}
 
 	public static Component difficultySummary(WorldDifficultyConfig.DifficultyConfig c) {
-		return summaryGray(
-				HostilityEditorLang.SUMMARY_MIN_LV.get(c.min()),
-				HostilityEditorLang.SUMMARY_BASE.get(c.base()),
-				HostilityEditorLang.SUMMARY_VAR.get(DoubleMapScreen.format(c.variation())),
-				HostilityEditorLang.SUMMARY_SCALE.get(DoubleMapScreen.format(c.scale() * 100) + "%"));
+		if (defaultDifficulty(c)) return HostilityEditorLang.SUMMARY_DEFAULT.get();
+		java.util.ArrayList<Component> parts = new java.util.ArrayList<>();
+		if (c.min() != 0) parts.add(HostilityEditorLang.SUMMARY_MIN_LV.get(c.min()));
+		if (c.base() != 0) parts.add(HostilityEditorLang.SUMMARY_BASE.get(c.base()));
+		if (c.variation() != 0) parts.add(HostilityEditorLang.SUMMARY_VAR.get(DoubleMapScreen.format(c.variation())));
+		if (c.scale() != 0) parts.add(HostilityEditorLang.SUMMARY_SCALE.get(DoubleMapScreen.format(c.scale() * 100) + "%"));
+		if (c.apply_chance() != 1) parts.add(HostilityEditorLang.SUMMARY_APPLY.get(DoubleMapScreen.format(c.apply_chance() * 100) + "%"));
+		if (c.trait_chance() != 1) parts.add(HostilityEditorLang.SUMMARY_TRAIT_CHANCE.get(DoubleMapScreen.format(c.trait_chance() * 100) + "%"));
+		if (c.suppression() != 0) parts.add(HostilityEditorLang.SUMMARY_SUPPRESS.get(DoubleMapScreen.format(c.suppression() * 100) + "%"));
+		return summaryGray(parts.toArray(new Component[0]));
 	}
 
 	public static Component itemConfigSummary(WeaponConfig.ItemConfig c) {
@@ -275,16 +280,15 @@ public final class HostilityEditorForms {
 	}
 
 	public static Component entityValuesSummary(EntityConfig.Config c) {
-		MutableComponent ans = summaryGray(
-				HostilityEditorLang.SUMMARY_MIN_SPAWN.get(c.minSpawnLevel),
-				HostilityEditorLang.SUMMARY_MAX_LV.get(c.maxLevel == 0 ? HostilityEditorLang.SUMMARY_NA.get() : c.maxLevel),
-				HostilityEditorLang.SUMMARY_MAX_TRAIT.get(c.maxTraitCount == -1 ? HostilityEditorLang.SUMMARY_INFINITE.get() : c.maxTraitCount),
-				HostilityEditorLang.SUMMARY_HP_SCALE.get(DoubleMapScreen.format(c.healthScale * 100) + "%"),
-				HostilityEditorLang.SUMMARY_ATK_SCALE.get(DoubleMapScreen.format(c.attackScale * 100) + "%"));
-		if (c.presetTraitsOnly) {
-			ans.append(Component.literal("  ")).append(HostilityEditorLang.SUMMARY_PRESET.get().withStyle(ChatFormatting.GRAY));
-		}
-		return ans;
+		if (defaultValues(c)) return HostilityEditorLang.SUMMARY_DEFAULT.get();
+		java.util.ArrayList<Component> parts = new java.util.ArrayList<>();
+		if (c.minSpawnLevel != 0) parts.add(HostilityEditorLang.SUMMARY_MIN_SPAWN.get(c.minSpawnLevel));
+		if (c.maxLevel != 0) parts.add(HostilityEditorLang.SUMMARY_MAX_LV.get(c.maxLevel));
+		if (c.maxTraitCount != -1) parts.add(HostilityEditorLang.SUMMARY_MAX_TRAIT.get(c.maxTraitCount));
+		if (c.healthScale != 1) parts.add(HostilityEditorLang.SUMMARY_HP_SCALE.get(DoubleMapScreen.format(c.healthScale * 100) + "%"));
+		if (c.attackScale != 1) parts.add(HostilityEditorLang.SUMMARY_ATK_SCALE.get(DoubleMapScreen.format(c.attackScale * 100) + "%"));
+		if (c.presetTraitsOnly) parts.add(HostilityEditorLang.SUMMARY_PRESET.get());
+		return summaryGray(parts.toArray(new Component[0]));
 	}
 
 	public static Component masterSummary(EntityConfig.MasterConfig m) {
