@@ -8,8 +8,7 @@ import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
 import dev.xkmc.l2hostility.editor.base.EditorSaveState;
 import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.home.HostilityHomeScreen;
-import dev.xkmc.l2hostility.editor.home.TabKind;
+import dev.xkmc.l2hostility.editor.home.DifficultyHomeScreen;
 import dev.xkmc.l2hostility.init.L2HostilityClient;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2tabs.tabs.contents.BaseTextScreen;
@@ -39,8 +38,7 @@ public class DifficultyScreen extends BaseTextScreen {
 			addRenderableWidget(Button.builder(
 							EditorText.OPEN.get(),
 							b -> Minecraft.getInstance().setScreen(
-									new HostilityHomeScreen(
-											TabKind.DIFFICULTY,
+									new DifficultyHomeScreen(
 											DifficultyScreen.this)))
 					.bounds(this.leftPos + 8, this.topPos + 72, 90, 20).build());
 		}

@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.editor.base;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -158,9 +159,12 @@ public abstract class EditorHomeScreen extends EditorScreen {
 					() -> toggleCollapsed(ns), isCollapsed));
 			if (showFiles) {
 				for (ResourceLocation f : files) {
-					entries.add(new EditorList.Entry(fileLabel(f).copy()
-							.append(Component.literal("   (" + fileCount(f) + ")"))
-							, null, null, f, isDisabled(f)));
+					Component label = fileLabel(f).copy().append(Component.literal("   (" + fileCount(f) + ")"));
+					boolean disabled = isDisabled(f);
+					if (disabled) {
+						label = label.copy().withStyle(ChatFormatting.RED, ChatFormatting.STRIKETHROUGH);
+					}
+					entries.add(new EditorList.Entry(label, null, null, f, disabled));
 				}
 			}
 		}

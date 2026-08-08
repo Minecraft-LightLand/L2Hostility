@@ -42,14 +42,14 @@ public class PickListScreen<T> extends EditorScreen {
 
 	@Override
 	protected void init() {
+		list = new EditorList(minecraft, width, height - 60, 34, height - 44);
 		search = new EditBox(this.font, width / 2 - 100, 10, 200, 18, EditorText.SEARCH.get());
 		search.setMaxLength(64);
 		search.setResponder(s -> refresh());
 		search.setFocused(true);
+		addRenderableWidget(list);
 		addRenderableWidget(search);
 		setInitialFocus(search);
-		list = new EditorList(minecraft, width, height - 60, 34, height - 44);
-		addRenderableWidget(list);
 		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> onClose())
 				.bounds(width / 2 - 50, height - 30, 100, 20).build());
 		refresh();

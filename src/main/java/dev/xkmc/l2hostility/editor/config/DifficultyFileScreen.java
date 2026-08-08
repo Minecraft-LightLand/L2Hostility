@@ -7,6 +7,8 @@ import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -46,6 +48,9 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 		boolean structures = HostilityEditorUtil.hasStructureRegistry();
 		Component structureLabel = HostilityEditorForms.counted(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(), config.structureDefaultTraits.size())
 				.copy().append(structures ? Component.empty() : HostilityEditorLang.STRUCTURE_SERVER_HINT.get());
+		if (!LHConfig.COMMON.enableStructureSpecificDatapack.get()) {
+			structureLabel = structureLabel.copy().withStyle(ChatFormatting.RED, ChatFormatting.STRIKETHROUGH);
+		}
 		entries.add(new EditorList.Entry(structureLabel, null,
 				structures ? () -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(),
 						config.structureDefaultTraits, () -> config.structureDefaultTraits,
