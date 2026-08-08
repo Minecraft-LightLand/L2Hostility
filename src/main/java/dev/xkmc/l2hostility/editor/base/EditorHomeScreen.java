@@ -129,6 +129,13 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		Minecraft.getInstance().setScreen(exit ? parent : this);
 	}
 
+	/**
+	 * Whether a file row is drawn disabled (light gray). Overridden by the mod's home screen.
+	 */
+	protected boolean isDisabled(ResourceLocation id) {
+		return false;
+	}
+
 	private void rebuild() {
 		List<EditorList.Entry> entries = new ArrayList<>();
 		List<ResourceLocation> ids = listFiles();
@@ -159,7 +166,7 @@ public abstract class EditorHomeScreen extends EditorScreen {
 				for (ResourceLocation f : files) {
 					entries.add(new EditorList.Entry(fileLabel(f).copy()
 							.append(Component.literal("   (" + fileCount(f) + ")"))
-							, null, null, f));
+							, null, null, f, isDisabled(f)));
 				}
 			}
 		}

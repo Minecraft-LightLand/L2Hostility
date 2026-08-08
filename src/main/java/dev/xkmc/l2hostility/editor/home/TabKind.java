@@ -4,7 +4,7 @@ import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import net.minecraft.network.chat.Component;
 
 public enum TabKind {
-	DIFFICULTY, TRAIT, WEAPON, ENTITY, TAGS;
+	DIFFICULTY, TRAIT, WEAPON, ENTITY, TAGS, CONFIG;
 
 	public Component title() {
 		return switch (this) {
@@ -13,6 +13,7 @@ public enum TabKind {
 			case WEAPON -> HostilityEditorLang.WEAPON.get();
 			case ENTITY -> HostilityEditorLang.ENTITY.get();
 			case TAGS -> HostilityEditorLang.TAGS.get();
+			case CONFIG -> HostilityEditorLang.CONFIG.get();
 		};
 	}
 

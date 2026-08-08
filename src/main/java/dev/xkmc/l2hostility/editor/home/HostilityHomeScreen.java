@@ -10,6 +10,7 @@ import dev.xkmc.l2hostility.editor.base.EditorText;
 import dev.xkmc.l2hostility.editor.base.EditorToast;
 import dev.xkmc.l2hostility.editor.config.DifficultyFileScreen;
 import dev.xkmc.l2hostility.editor.config.EntityFileScreen;
+import dev.xkmc.l2hostility.editor.config.LHConfigEdit;
 import dev.xkmc.l2hostility.editor.config.TraitFileScreen;
 import dev.xkmc.l2hostility.editor.config.WeaponFileScreen;
 import dev.xkmc.l2hostility.editor.tag.TagEditScreen;
@@ -17,12 +18,15 @@ import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import dev.xkmc.l2hostility.editor.tag.HostilityTagUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -36,6 +40,22 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 		this.kind = kind;
 	}
 
+	private static final List<ResourceLocation> CONFIG_IDS = List.of(
+			new ResourceLocation("l2hostility", "datapack"),
+			new ResourceLocation("l2hostility", "scaling"),
+			new ResourceLocation("l2hostility", "difficulty"),
+			new ResourceLocation("l2hostility", "orb_and_spawner"),
+			new ResourceLocation("l2hostility", "items"),
+			new ResourceLocation("l2hostility", "performance"));
+
+	@Nullable
+	private static LHConfigEdit.Section configSection(ResourceLocation id) {
+		int idx = CONFIG_IDS.indexOf(id);
+		if (idx < 0) return null;
+		List<LHConfigEdit.Section> sections = LHConfigEdit.generalSections();
+		return idx < sections.size() ? sections.get(idx) : null;
+	}
+
 	@Override
 	protected List<ResourceLocation> listFiles() {
 		return switch (kind) {
@@ -44,6 +64,7 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 			case WEAPON -> idsOf(L2Hostility.WEAPON.getAll());
 			case ENTITY -> idsOf(L2Hostility.ENTITY.getAll());
 			case TAGS -> HostilityEditorUtil.listManagedTags();
+			case CONFIG -> new ArrayList<>(CONFIG_IDS);
 		};
 	}
 
@@ -70,6 +91,10 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 			var trait = LHTraits.TRAITS.get().getValue(id);
 			if (trait != null) return trait.getDesc();
 		}
+		if (kind == TabKind.CONFIG) {
+			LHConfigEdit.Section section = configSection(id);
+			if (section != null) return section.title();
+		}
 		return super.fileLabel(id);
 	}
 
@@ -77,7 +102,28 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 	protected boolean canCreate() {
 		return switch (kind) {
 			case DIFFICULTY, WEAPON, ENTITY -> true;
-			case TRAIT, TAGS -> false;
+			case TRAIT, TAGS, CONFIG -> false;
+		};
+	}
+
+	@Override
+	protected boolean isDisabled(ResourceLocation id) {
+		if (kind == TabKind.TRAIT) {
+			var trait = LHTraits.TRAITS.get().getValue(id);
+			if (trait != null) return trait.isBanned();
+		}
+		return false;
+	}
+
+	/**
+	 * The weapon / entity tabs are shown red and strikethrough when their datapack feature is
+	 * disabled by config.
+	 */
+	private boolean featureDisabled(TabKind k) {
+		return switch (k) {
+			case WEAPON -> !LHConfig.COMMON.enableEquipmentDatapack.get();
+			case ENTITY -> !LHConfig.COMMON.enableEntitySpecificDatapack.get();
+			default -> false;
 		};
 	}
 
@@ -103,6 +149,10 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 				yield cfg == null ? 0 : cfg.list.size();
 			}
 			case TAGS -> HostilityTagUtil.load(id).size();
+			case CONFIG -> {
+				LHConfigEdit.Section section = configSection(id);
+				yield section == null ? 0 : section.fields().size();
+			}
 		};
 	}
 
@@ -114,6 +164,7 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 			case WEAPON -> HostilityEditorLang.WEAPON_EMPTY.get();
 			case ENTITY -> HostilityEditorLang.ENTITY_EMPTY.get();
 			case TAGS -> HostilityEditorLang.TAG_EMPTY.get();
+			case CONFIG -> HostilityEditorLang.CONFIG_EMPTY.get();
 		};
 	}
 
@@ -121,7 +172,7 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 	protected String newFileDefault() {
 		return switch (kind) {
 			case DIFFICULTY -> "l2hostility:new_difficulty";
-			case TRAIT, TAGS -> "l2hostility:new";
+			case TRAIT, TAGS, CONFIG -> "l2hostility:new";
 			case WEAPON -> "l2hostility:new_weapon";
 			case ENTITY -> "l2hostility:new_entity";
 		};
@@ -133,7 +184,7 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 			case DIFFICULTY -> Minecraft.getInstance().setScreen(new DifficultyFileScreen(id, this));
 			case WEAPON -> Minecraft.getInstance().setScreen(new WeaponFileScreen(id, this));
 			case ENTITY -> Minecraft.getInstance().setScreen(new EntityFileScreen(id, this));
-			case TRAIT, TAGS -> EditorToast.show(EditorText.NEW.get(), EditorText.NO_FILE.get());
+			case TRAIT, TAGS, CONFIG -> EditorToast.show(EditorText.NEW.get(), EditorText.NO_FILE.get());
 		}
 	}
 
@@ -145,6 +196,12 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 			case WEAPON -> Minecraft.getInstance().setScreen(new WeaponFileScreen(id, this));
 			case ENTITY -> Minecraft.getInstance().setScreen(new EntityFileScreen(id, this));
 			case TAGS -> Minecraft.getInstance().setScreen(new TagEditScreen(id, this));
+			case CONFIG -> {
+				LHConfigEdit.Section section = configSection(id);
+				if (section != null) {
+					LHConfigEdit.openSectionForm(section.title(), section.fields(), this);
+				}
+			}
 		}
 	}
 
@@ -152,7 +209,11 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 	protected List<EditorTab> tabs() {
 		List<EditorTab> ans = new ArrayList<>();
 		for (TabKind k : TabKind.values()) {
-			ans.add(new EditorTab(k.title(), () -> {
+			Component label = k.title();
+			if (featureDisabled(k)) {
+				label = label.copy().withStyle(ChatFormatting.RED, ChatFormatting.STRIKETHROUGH);
+			}
+			ans.add(new EditorTab(label, () -> {
 				if (k != kind) {
 					Minecraft.getInstance().setScreen(new HostilityHomeScreen(k, parent));
 				}

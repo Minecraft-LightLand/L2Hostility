@@ -76,6 +76,10 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 			this(text, icon, null, onClick, false, false, data, false);
 		}
 
+		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, @Nullable Object data, boolean grey) {
+			this(text, icon, null, onClick, false, false, data, grey);
+		}
+
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, boolean grey) {
 			this(text, icon, null, onClick, false, false, null, grey);
 		}

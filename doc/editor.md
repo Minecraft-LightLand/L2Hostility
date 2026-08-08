@@ -67,8 +67,9 @@ New in `base` (all mod-independent):
 3. `pack.mcmeta` description fixed to this mod.
 4. `EditorHomeScreen` foldable group headers + optional `hasSearch()` search bar.
 5. `EditorFile.configRoot()` — configurable save root (`LHConfig.CLIENT.editorSavePath`, default empty = world datapacks).
-6. `EditorList.Entry` header clicks (fold toggle) — headers may carry an `onClick` + `collapsed` marker.
-7. *(optional polish, same as the "handler refactor" Modular Golems lists as pending)*: consolidate `PickListScreen/ItemListScreen/DoubleMapScreen/Obj2IntMapScreen` constructor functional args behind one `EditorHandler<T>` with default `icon()→null`, `percent()→false`, `maxLevel()→unbounded`. New screens (`ListEditScreen`, `ValueMapScreen`) should adopt this shape from the start; retrofitting the four copied screens is optional and can be deferred.
+6. `EditorList.Entry` header clicks (fold toggle) — headers may carry an `onClick` + `collapsed` marker; a combined `(text, icon, onClick, data, grey)` constructor for styled file rows.
+7. `EditorHomeScreen.isDisabled(id)` hook — rows render **light gray** when disabled (used by the trait tab).
+8. *(optional polish, same as the "handler refactor" Modular Golems lists as pending)*: consolidate `PickListScreen/ItemListScreen/DoubleMapScreen/Obj2IntMapScreen` constructor functional args behind one `EditorHandler<T>` with default `icon()→null`, `percent()→false`, `maxLevel()→unbounded`. New screens (`ListEditScreen`, `ValueMapScreen`) should adopt this shape from the start; retrofitting the four copied screens is optional and can be deferred.
 
 `base` must never import `dev.xkmc.l2hostility.*` (non-editor), matching the golem rule.
 
@@ -86,7 +87,7 @@ New in `base` (all mod-independent):
 
 | Class | Purpose |
 |---|---|
-| `HostilityHomeScreen` | **one** `EditorHomeScreen` subclass parameterized by `TabKind { DIFFICULTY, TRAIT, WEAPON, ENTITY, TAGS }` (instead of five near-identical home subclasses). `tabs()` always returns all five tabs; `activeTab()`/`listFiles()`/`fileCount()`/`emptyMessage()`/`newFileDefault()`/`openNew()`/`openEdit()`/`validateId()`/`canCreate()` dispatch on the kind. `hasSearch()` returns `true` for **trait and entity** tabs (search bar); group headers are foldable everywhere. Holds the entry `parent` (the screen that opened the editor); all tab switches construct a new `HostilityHomeScreen(kind, parent)`. |
+| `HostilityHomeScreen` | **one** `EditorHomeScreen` subclass parameterized by `TabKind { DIFFICULTY, TRAIT, WEAPON, ENTITY, TAGS, CONFIG }` (instead of five near-identical home subclasses). `tabs()` always returns all six tabs; `activeTab()`/`listFiles()`/`fileCount()`/`emptyMessage()`/`newFileDefault()`/`openNew()`/`openEdit()`/`validateId()`/`canCreate()` dispatch on the kind. `hasSearch()` returns `true` for **trait and entity** tabs (search bar); group headers are foldable everywhere. `isDisabled()` returns `true` for **trait** rows whose `MobTrait.isBanned()` holds (own `allow_*` toggle or, for legendary traits, the general legendary toggle) — drawn **light gray**. The **Weapon / Entity tab labels** are drawn **red + strikethrough** when `enableEquipmentDatapack` / `enableEntitySpecificDatapack` is off (`featureDisabled`). The **Config** tab lists fixed config sections (`l2hostility:datapack|scaling|difficulty|orb_and_spawner|items|performance`); each row opens a form over that section's fields and saves the config. Holds the entry `parent` (the screen that opened the editor); all tab switches construct a new `HostilityHomeScreen(kind, parent)`. |
 
 ### config
 
@@ -98,6 +99,7 @@ Per-kind screens (details in §4):
 | trait | `TraitFileScreen` |
 | weapon | `WeaponFileScreen`, `ItemConfigListScreen`, `SpecialWeaponListScreen`, `EnchConfigListScreen`, `SetValueEditScreen` (shared value page: the picked set shown and edited inline via Add/Remove + scalar fields) |
 | entity | `EntityFileScreen` (lists `EntityConfig.Config` directly), `ConfigListScreen` (shared list of `EntityConfig.Config`, used by difficulty default-traits only), `EntityConfigEntryScreen`, `TraitBaseListScreen`, `ItemPoolListScreen`, `ItemEntryListScreen`, `MasterConfigScreen` |
+| config | `LHConfigEdit` — read/write access to `LHConfig.COMMON` for the editor: `FieldDef(label, kind, ConfigValue)` with get/set/`toFormField()`, `traitToggle(path)` / `traitConfigFields(path)` (trait → Forge config mapping), `generalSections()` (non-trait config sections for the Config tab), `openSectionForm(...)` (a `FormScreen` that applies + saves the config and reopens the parent), `saveConfig()` (finds the `ModConfig` for `COMMON_SPEC` via `ConfigTracker` and calls `save()`). Lives in the config package on purpose (not base — the base copy stays mod-independent). |
 
 ### tag
 
@@ -175,15 +177,29 @@ The "Difficulty" tab itself is labelled **World** (`HostilityEditorLang.WORLD`, 
 `TraitHomeScreen`'s file list = **all registered traits** (`LHTraits.TRAITS.get().getKeys()`),
 **not** `L2Hostility.TRAIT.getAll()` — a trait without a datapack file still exists and falls back to
 `TraitConfig.DEFAULT`, so editing must be possible for every trait. Rows show the **trait name**
-(`MobTrait.getDesc()` via the `fileLabel` hook) instead of the raw registry id. `canCreate()` returns `false`
+(`MobTrait.getDesc()` via the `fileLabel` hook) instead of the raw registry id. Trait rows whose
+`isBanned()` holds (own `allow_*` toggle, or the general legendary toggle for legendary traits) are
+drawn **light gray**. `canCreate()` returns `false`
 (traits are code-defined). `TraitFileScreen` loads the current entry
 (`TRAIT.getEntry(id)` or `TraitConfig.DEFAULT` as baseline), deep-copies it (restoring the id, which
 the `JsonCodec` round-trip drops), and edits the four scalar fields `min_level, cost, max_rank,
-weight` in a `FormScreen`. The trait's derived blacklist/whitelist tags are edited **here** (each row
+weight` in a `FormScreen`. In addition it edits, **saved straight to the Forge config on confirm**
+(via `LHConfigEdit.openSectionForm` → `saveConfig()`): a **Trait toggle** row (the `allow_<path>`
+boolean, shown `Enabled`/`Disabled`) and a **Trait config** row (the config values that trait reads,
+e.g. `tankHealth`/`tankArmor`/`tankTough` for `tank`, `fieryTime` for `fiery`, ...; traits without
+dedicated config skip the row). The trait's derived blacklist/whitelist tags are edited **here** (each row
 opens `TagEditScreen` for `<id>_blacklist` / `<id>_whitelist`); per-trait tags are no longer listed
 in the Tags tab. The traffic-fields row appends a brief of the current values
 (`HostilityEditorForms.traitFieldsSummary`); tag rows show plain **Blacklist** / **Whitelist**
 labels (no tag id) + the effective entry count.
+
+### Config
+The **Config** tab (`TabKind.CONFIG`) edits the Forge config (`l2hostility-common.toml`) directly,
+**excluding trait-related config** (the `traits` section + the per-trait `Trait toggle` map, which are
+edited from the Trait tab). It shows six fixed sections (`Datapack` / `Scaling` / `Difficulty` /
+`Orb & Spawner` / `Items` / `Performance`); each row opens a `FormScreen` over that section's fields,
+and confirming applies the values and **saves the config file** (`LHConfigEdit.saveConfig`). Rows
+read live values so returning from the form shows the new values.
 
 ### Weapon
 `WeaponFileScreen` lists six fixed rows (each row shows its entry **count** and is drawn **grey**
@@ -408,6 +424,10 @@ Home screens show a **Reload** button (enabled while `savedFlag`); exiting with 
   `L2Hostility.TRAIT.getEntry(id)`; the `JsonCodec` deep copy drops the protected `id`, so
   `TraitFileScreen` restores it (`TraitConfig.setId`) before editing (otherwise `getBlacklistTag()`
   crashes).
+- **Config editing lives in the `config` package, not `base`** — config-related classes would have
+  gone into `base` in an older port, but they must stay out of it (the base copy is a reusable
+  mod-independent layer; 1.21.1 ships an official config editor so this won't be needed there).
+  `LHConfigEdit` is the only place that reads/writes `LHConfig.COMMON` from the editor.
 - `WeaponConfig.ItemConfig.condition` and `EntityConfig.Config.specialConditions` are
   code-typed/preserved but **not editable in v1** — they survive the `JsonCodec` deep copy, and
   `ItemConfig` edits must carry an existing `condition` forward rather than dropping it.
