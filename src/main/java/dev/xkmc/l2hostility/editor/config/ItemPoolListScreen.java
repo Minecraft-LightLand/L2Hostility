@@ -21,50 +21,44 @@ public class ItemPoolListScreen extends ListEditScreen<EntityConfig.ItemPool> {
 		super(title, data, new Handler(session), parent, session);
 	}
 
-	private static final class Handler implements ListEditScreen.Handler<EntityConfig.ItemPool> {
-
-		private final EditorSession session;
-
-		private Handler(EditorSession session) {
-			this.session = session;
-		}
+	private record Handler(EditorSession session) implements ListEditScreen.Handler<EntityConfig.ItemPool> {
 
 		@Override
-		public Component label(EntityConfig.ItemPool t) {
-			return HostilityEditorForms.itemPoolSummary(t);
-		}
+			public Component label(EntityConfig.ItemPool t) {
+				return HostilityEditorForms.itemPoolSummary(t);
+			}
 
-		@Override
-		@Nullable
-		public ItemStack icon(EntityConfig.ItemPool t) {
-			if (t.entries().isEmpty()) return null;
-			ItemStack stack = t.entries().get(0).stack();
-			return stack.isEmpty() ? null : stack;
-		}
+			@Override
+			@Nullable
+			public ItemStack icon(EntityConfig.ItemPool t) {
+				if (t.entries().isEmpty()) return null;
+				ItemStack stack = t.entries().get(0).stack();
+				return stack.isEmpty() ? null : stack;
+			}
 
-		@Override
-		public Component summary(EntityConfig.ItemPool t) {
-			return HostilityEditorForms.itemPoolSummary(t);
-		}
+			@Override
+			public Component summary(EntityConfig.ItemPool t) {
+				return HostilityEditorForms.itemPoolSummary(t);
+			}
 
-		@Override
-		public void onAdd(Consumer<EntityConfig.ItemPool> onDone, Screen parent) {
-			Minecraft.getInstance().setScreen(new FormScreen<>(HostilityEditorLang.ITEM_POOL.get(),
-					HostilityEditorForms.itemPool(), pool -> {
-						openEntries(pool, onDone, parent);
-					}, parent));
-		}
+			@Override
+			public void onAdd(Consumer<EntityConfig.ItemPool> onDone, Screen parent) {
+				Minecraft.getInstance().setScreen(new FormScreen<>(HostilityEditorLang.ITEM_POOL.get(),
+						HostilityEditorForms.itemPool(), pool -> {
+					openEntries(pool, onDone, parent);
+				}, parent));
+			}
 
-		@Override
-		public void onEdit(EntityConfig.ItemPool cur, Consumer<EntityConfig.ItemPool> onDone, Screen parent) {
-			openEntries(cur, onDone, parent);
-		}
+			@Override
+			public void onEdit(EntityConfig.ItemPool cur, Consumer<EntityConfig.ItemPool> onDone, Screen parent) {
+				openEntries(cur, onDone, parent);
+			}
 
-		private void openEntries(EntityConfig.ItemPool cur, Consumer<EntityConfig.ItemPool> onDone, Screen parent) {
-			Minecraft.getInstance().setScreen(new ItemEntryListScreen(
-					HostilityEditorLang.ITEM_ENTRY_LIST.get(), cur.entries(), parent, session));
-		}
+			private void openEntries(EntityConfig.ItemPool cur, Consumer<EntityConfig.ItemPool> onDone, Screen parent) {
+				Minecraft.getInstance().setScreen(new ItemEntryListScreen(
+						HostilityEditorLang.ITEM_ENTRY_LIST.get(), cur.entries(), parent, session));
+			}
 
-	}
+		}
 
 }

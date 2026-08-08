@@ -1,11 +1,13 @@
 package dev.xkmc.l2hostility.editor.base;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -19,7 +21,8 @@ public class FormScreen<T> extends EditorScreen {
 
 	}
 
-	public record FormField(Component label, String initial, @Nullable Function<String, Component> validate, boolean bool) {
+	public record FormField(Component label, String initial, @Nullable Function<String, Component> validate,
+	                        boolean bool) {
 
 		public static FormField text(Component label, String initial, @Nullable Function<String, Component> validate) {
 			return new FormField(label, initial, validate, false);
@@ -123,14 +126,14 @@ public class FormScreen<T> extends EditorScreen {
 	public boolean mouseScrolled(double mx, double my, double delta) {
 		int max = maxScroll();
 		if (max <= 0) return false;
-		scroll = net.minecraft.util.Mth.clamp(scroll - (int) (delta * 20), 0, max);
+		scroll = Mth.clamp(scroll - (int) (delta * 20), 0, max);
 		layout();
 		return true;
 	}
 
 	private Component boolLabel(int idx) {
 		boolean v = boolValues[idx];
-		return Component.literal(v ? "true" : "false").withStyle(v ? net.minecraft.ChatFormatting.GREEN : net.minecraft.ChatFormatting.RED);
+		return Component.literal(Boolean.toString(v)).withStyle(v ? ChatFormatting.GREEN : ChatFormatting.RED);
 	}
 
 	private void submit() {

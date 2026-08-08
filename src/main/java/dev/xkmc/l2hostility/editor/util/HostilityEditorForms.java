@@ -6,6 +6,7 @@ import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.editor.base.DoubleMapScreen;
+import dev.xkmc.l2hostility.editor.base.EditorFile;
 import dev.xkmc.l2hostility.editor.base.EditorText;
 import dev.xkmc.l2hostility.editor.base.FormScreen;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
@@ -16,6 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
@@ -48,7 +50,7 @@ public final class HostilityEditorForms {
 	@Nullable
 	public static Component optionalRlValidate(String s) {
 		if (s.isBlank()) return null;
-		ResourceLocation id = dev.xkmc.l2hostility.editor.base.EditorFile.parseId(s);
+		ResourceLocation id = EditorFile.parseId(s);
 		return id == null ? EditorText.INVALID_ID.get(s) : null;
 	}
 
@@ -125,7 +127,7 @@ public final class HostilityEditorForms {
 				FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), "1", doubles),
 				FormScreen.FormField.text(HostilityEditorLang.SLOT.get(), "mainhand", null)
 		), v -> new EntityConfig.ItemPool(Integer.parseInt(v.get(0).trim()),
-				(float) Double.parseDouble(v.get(1).trim()), v.get(2).trim(), new java.util.ArrayList<>()));
+				(float) Double.parseDouble(v.get(1).trim()), v.get(2).trim(), new ArrayList<>()));
 	}
 
 	public static FormScreen.FormSpec<EntityConfig.MasterConfig> masterConfig(EntityConfig.MasterConfig cur) {
@@ -206,14 +208,18 @@ public final class HostilityEditorForms {
 
 	public static Component difficultySummary(WorldDifficultyConfig.DifficultyConfig c) {
 		if (defaultDifficulty(c)) return HostilityEditorLang.SUMMARY_DEFAULT.get();
-		java.util.ArrayList<Component> parts = new java.util.ArrayList<>();
+		ArrayList<Component> parts = new ArrayList<>();
 		if (c.min() != 0) parts.add(HostilityEditorLang.SUMMARY_MIN_LV.get(c.min()));
 		if (c.base() != 0) parts.add(HostilityEditorLang.SUMMARY_BASE.get(c.base()));
 		if (c.variation() != 0) parts.add(HostilityEditorLang.SUMMARY_VAR.get(DoubleMapScreen.format(c.variation())));
-		if (c.scale() != 0) parts.add(HostilityEditorLang.SUMMARY_SCALE.get(DoubleMapScreen.format(c.scale() * 100) + "%"));
-		if (c.apply_chance() != 1) parts.add(HostilityEditorLang.SUMMARY_APPLY.get(DoubleMapScreen.format(c.apply_chance() * 100) + "%"));
-		if (c.trait_chance() != 1) parts.add(HostilityEditorLang.SUMMARY_TRAIT_CHANCE.get(DoubleMapScreen.format(c.trait_chance() * 100) + "%"));
-		if (c.suppression() != 0) parts.add(HostilityEditorLang.SUMMARY_SUPPRESS.get(DoubleMapScreen.format(c.suppression() * 100) + "%"));
+		if (c.scale() != 0)
+			parts.add(HostilityEditorLang.SUMMARY_SCALE.get(DoubleMapScreen.format(c.scale() * 100) + "%"));
+		if (c.apply_chance() != 1)
+			parts.add(HostilityEditorLang.SUMMARY_APPLY.get(DoubleMapScreen.format(c.apply_chance() * 100) + "%"));
+		if (c.trait_chance() != 1)
+			parts.add(HostilityEditorLang.SUMMARY_TRAIT_CHANCE.get(DoubleMapScreen.format(c.trait_chance() * 100) + "%"));
+		if (c.suppression() != 0)
+			parts.add(HostilityEditorLang.SUMMARY_SUPPRESS.get(DoubleMapScreen.format(c.suppression() * 100) + "%"));
 		return summaryGray(parts.toArray(new Component[0]));
 	}
 
@@ -253,7 +259,8 @@ public final class HostilityEditorForms {
 		MutableComponent ans = entry(name, summary(
 				HostilityEditorLang.SUMMARY_FREE.get(t.free()),
 				HostilityEditorLang.SUMMARY_MIN.get(t.min())));
-		if (t.cap()) ans.append(Component.literal("  ")).append(HostilityEditorLang.SUMMARY_CAP.get().withStyle(ChatFormatting.GRAY));
+		if (t.cap())
+			ans.append(Component.literal("  ")).append(HostilityEditorLang.SUMMARY_CAP.get().withStyle(ChatFormatting.GRAY));
 		return ans;
 	}
 
@@ -283,12 +290,14 @@ public final class HostilityEditorForms {
 
 	public static Component entityValuesSummary(EntityConfig.Config c) {
 		if (defaultValues(c)) return HostilityEditorLang.SUMMARY_DEFAULT.get();
-		java.util.ArrayList<Component> parts = new java.util.ArrayList<>();
+		ArrayList<Component> parts = new ArrayList<>();
 		if (c.minSpawnLevel != 0) parts.add(HostilityEditorLang.SUMMARY_MIN_SPAWN.get(c.minSpawnLevel));
 		if (c.maxLevel != 0) parts.add(HostilityEditorLang.SUMMARY_MAX_LV.get(c.maxLevel));
 		if (c.maxTraitCount != -1) parts.add(HostilityEditorLang.SUMMARY_MAX_TRAIT.get(c.maxTraitCount));
-		if (c.healthScale != 1) parts.add(HostilityEditorLang.SUMMARY_HP_SCALE.get(DoubleMapScreen.format(c.healthScale * 100) + "%"));
-		if (c.attackScale != 1) parts.add(HostilityEditorLang.SUMMARY_ATK_SCALE.get(DoubleMapScreen.format(c.attackScale * 100) + "%"));
+		if (c.healthScale != 1)
+			parts.add(HostilityEditorLang.SUMMARY_HP_SCALE.get(DoubleMapScreen.format(c.healthScale * 100) + "%"));
+		if (c.attackScale != 1)
+			parts.add(HostilityEditorLang.SUMMARY_ATK_SCALE.get(DoubleMapScreen.format(c.attackScale * 100) + "%"));
 		if (c.presetTraitsOnly) parts.add(HostilityEditorLang.SUMMARY_PRESET.get());
 		return summaryGray(parts.toArray(new Component[0]));
 	}

@@ -2,15 +2,15 @@ package dev.xkmc.l2hostility.editor.config;
 
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.editor.base.EditorList;
-import dev.xkmc.l2hostility.editor.base.EditorToast;
 import dev.xkmc.l2hostility.editor.base.EditorText;
+import dev.xkmc.l2hostility.editor.base.EditorToast;
+import dev.xkmc.l2hostility.editor.base.EditorUtil;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class WeaponFileScreen extends HostilityFileScreen {
 	public WeaponFileScreen(ResourceLocation id, Screen parent) {
 		super(HostilityEditorLang.WEAPON_FILE.get(), id, parent);
 		WeaponConfig base = L2Hostility.WEAPON.getEntry(id);
-		WeaponConfig copy = base == null ? null : dev.xkmc.l2hostility.editor.base.EditorUtil.copy(L2Hostility.WEAPON, base);
+		WeaponConfig copy = base == null ? null : EditorUtil.copy(L2Hostility.WEAPON, base);
 		this.config = copy == null ? HostilityEditorUtil.newWeapon() : copy;
 	}
 

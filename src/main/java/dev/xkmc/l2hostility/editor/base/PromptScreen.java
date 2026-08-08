@@ -25,7 +25,7 @@ public class PromptScreen extends EditorScreen {
 	private Component error;
 
 	public PromptScreen(Component title, Component label, @Nullable String initial,
-						Function<String, Component> validate, Consumer<String> callback, Screen parent) {
+	                    Function<String, Component> validate, Consumer<String> callback, Screen parent) {
 		super(title);
 		this.label = label;
 		this.initial = initial;

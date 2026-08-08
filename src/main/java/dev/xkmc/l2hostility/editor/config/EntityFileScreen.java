@@ -1,12 +1,7 @@
 package dev.xkmc.l2hostility.editor.config;
 
 import dev.xkmc.l2hostility.content.config.EntityConfig;
-import dev.xkmc.l2hostility.editor.base.EditorHandler;
-import dev.xkmc.l2hostility.editor.base.EditorList;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.EditorToast;
-import dev.xkmc.l2hostility.editor.base.EditorUtil;
-import dev.xkmc.l2hostility.editor.base.PickListScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
@@ -15,9 +10,7 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -79,10 +72,10 @@ public class EntityFileScreen extends HostilityFileScreen {
 	private void addConfig() {
 		Minecraft.getInstance().setScreen(new PickListScreen<>(HostilityEditorLang.SELECT_ENTITY.get(),
 				HostilityEditorUtil.listEntityTypes(), EditorHandler.Pick.of(HostilityEditorHandlers.ENTITY_TYPE, t -> {
-					EntityConfig.Config c = new EntityConfig.Config();
-					c.entities.add(t);
-					openEntryEditor(c, configs::add);
-				}), this));
+			EntityConfig.Config c = new EntityConfig.Config();
+			c.entities.add(t);
+			openEntryEditor(c, configs::add);
+		}), this));
 	}
 
 	private void editConfig() {

@@ -1,17 +1,6 @@
 package dev.xkmc.l2hostility.editor.tag;
 
-import dev.xkmc.l2hostility.editor.base.EditorFile;
-import dev.xkmc.l2hostility.editor.base.EditorHandler;
-import dev.xkmc.l2hostility.editor.base.EditorLayout;
-import dev.xkmc.l2hostility.editor.base.EditorList;
-import dev.xkmc.l2hostility.editor.base.EditorSaveState;
-import dev.xkmc.l2hostility.editor.base.EditorScreen;
-import dev.xkmc.l2hostility.editor.base.EditorSession;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.EditorToast;
-import dev.xkmc.l2hostility.editor.base.ExitConfirmScreen;
-import dev.xkmc.l2hostility.editor.base.PickListScreen;
-import dev.xkmc.l2hostility.editor.base.PromptScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
@@ -27,7 +16,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public class TagEditScreen extends EditorScreen {
 
@@ -133,13 +121,13 @@ public class TagEditScreen extends EditorScreen {
 	private void addTag() {
 		Minecraft.getInstance().setScreen(new PromptScreen(HostilityEditorLang.ADD_TAG.get(),
 				EditorText.PICK_TAG.get(), "#l2hostility:", this::validateTag, s -> {
-					ResourceLocation rl = EditorFile.parseId(s.substring(1));
-					if (rl == null) return;
-					values.add(new TagValue(rl.toString(), true, true));
-					session.dirty = true;
-					rebuild();
-					Minecraft.getInstance().setScreen(TagEditScreen.this);
-				}, this));
+			ResourceLocation rl = EditorFile.parseId(s.substring(1));
+			if (rl == null) return;
+			values.add(new TagValue(rl.toString(), true, true));
+			session.dirty = true;
+			rebuild();
+			Minecraft.getInstance().setScreen(TagEditScreen.this);
+		}, this));
 	}
 
 	@Nullable

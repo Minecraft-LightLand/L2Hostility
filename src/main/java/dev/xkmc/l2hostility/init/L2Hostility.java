@@ -15,6 +15,8 @@ import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
+import dev.xkmc.l2hostility.editor.base.EditorText;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.events.LHAttackListener;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.*;
@@ -125,8 +127,8 @@ public class L2Hostility {
 
 
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
-		REGISTRATE.addDataGenerator(ProviderType.LANG, dev.xkmc.l2hostility.editor.base.EditorText::genLang);
-		REGISTRATE.addDataGenerator(ProviderType.LANG, dev.xkmc.l2hostility.editor.util.HostilityEditorLang::genLang);
+		REGISTRATE.addDataGenerator(ProviderType.LANG, EditorText::genLang);
+		REGISTRATE.addDataGenerator(ProviderType.LANG, HostilityEditorLang::genLang);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LHTagGen::onBlockTagGen);
 		REGISTRATE.addDataGenerator(LHTagGen.ENCH_TAGS, LHTagGen::onEnchTagGen);

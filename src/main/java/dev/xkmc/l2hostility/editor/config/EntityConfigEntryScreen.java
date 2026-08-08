@@ -1,14 +1,7 @@
 package dev.xkmc.l2hostility.editor.config;
 
 import dev.xkmc.l2hostility.content.config.EntityConfig;
-import dev.xkmc.l2hostility.editor.base.EditorHandler;
-import dev.xkmc.l2hostility.editor.base.EditorLayout;
-import dev.xkmc.l2hostility.editor.base.EditorList;
-import dev.xkmc.l2hostility.editor.base.EditorScreen;
-import dev.xkmc.l2hostility.editor.base.EditorSession;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.FormScreen;
-import dev.xkmc.l2hostility.editor.base.ItemListScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
@@ -18,7 +11,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -36,7 +28,7 @@ public class EntityConfigEntryScreen extends EditorScreen {
 	private EditorList list;
 
 	public EntityConfigEntryScreen(Component title, EntityConfig.Config config,
-								   Consumer<EntityConfig.Config> onDone, Screen parent) {
+	                               Consumer<EntityConfig.Config> onDone, Screen parent) {
 		super(title);
 		this.config = config;
 		this.onDone = onDone;
@@ -57,10 +49,10 @@ public class EntityConfigEntryScreen extends EditorScreen {
 	private void rebuild() {
 		List<EditorList.Entry> entries = new ArrayList<>();
 		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.APPLIES_TO.get(),
-						HostilityEditorForms.entityListName(config.entities)),
+				HostilityEditorForms.entityListName(config.entities)),
 				entityIcon(), this::editEntities, config.entities.isEmpty()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.DIFFICULTY_EDIT.get(),
-						HostilityEditorForms.difficultySummary(config.difficulty())),
+				HostilityEditorForms.difficultySummary(config.difficulty())),
 				null, this::editDifficulty, HostilityEditorForms.defaultDifficulty(config.difficulty())));
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.TRAIT_BASE_LIST.get(), config.traits().size()),
 				null, this::editTraits, config.traits().isEmpty()));
@@ -69,7 +61,7 @@ public class EntityConfigEntryScreen extends EditorScreen {
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ITEMS.get(), config.items.size()),
 				null, this::editItems, config.items.isEmpty()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.VALUES_EDIT.get(),
-						HostilityEditorForms.entityValuesSummary(config)),
+				HostilityEditorForms.entityValuesSummary(config)),
 				null, this::editValues, HostilityEditorForms.defaultValues(config)));
 		if (HostilityEditorForms.hasMaster(config)) {
 			Component text = config.asMaster == null ? HostilityEditorLang.MASTER_CONFIG.get()
@@ -96,9 +88,9 @@ public class EntityConfigEntryScreen extends EditorScreen {
 	private void editDifficulty() {
 		Minecraft.getInstance().setScreen(new FormScreen<>(HostilityEditorLang.DIFFICULTY_EDIT.get(),
 				HostilityEditorForms.difficultyConfig(config.difficulty()), c -> {
-					config.setDifficulty(c);
-					session.dirty = true;
-				}, EntityConfigEntryScreen.this));
+			config.setDifficulty(c);
+			session.dirty = true;
+		}, EntityConfigEntryScreen.this));
 	}
 
 	private void editTraits() {
@@ -121,8 +113,8 @@ public class EntityConfigEntryScreen extends EditorScreen {
 	private void editValues() {
 		Minecraft.getInstance().setScreen(new FormScreen<>(HostilityEditorLang.VALUES_EDIT.get(),
 				HostilityEditorForms.entityValues(config), c -> {
-					session.dirty = true;
-				}, EntityConfigEntryScreen.this));
+			session.dirty = true;
+		}, EntityConfigEntryScreen.this));
 	}
 
 	private void editMaster() {

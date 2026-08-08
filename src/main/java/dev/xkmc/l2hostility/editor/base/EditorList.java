@@ -9,6 +9,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.List;
+import java.util.function.Supplier;
 
 public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 
@@ -46,7 +48,7 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		return x1 - 6;
 	}
 
-	public void setData(java.util.List<Entry> entries) {
+	public void setData(List<Entry> entries) {
 		clearEntries();
 		entries.forEach(this::addEntry);
 		setSelected(null);
@@ -59,7 +61,7 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		@Nullable
 		private final ItemStack icon;
 		@Nullable
-		private final java.util.function.Supplier<ItemStack> iconSupplier;
+		private final Supplier<ItemStack> iconSupplier;
 		@Nullable
 		private final Runnable onClick;
 		@Nullable
@@ -84,8 +86,8 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 			this(text, icon, null, onClick, false, false, null, grey);
 		}
 
-		public static Entry rotating(Component text, @Nullable java.util.function.Supplier<ItemStack> iconSupplier,
-									 @Nullable Runnable onClick) {
+		public static Entry rotating(Component text, @Nullable Supplier<ItemStack> iconSupplier,
+		                             @Nullable Runnable onClick) {
 			return new Entry(text, null, iconSupplier, onClick, false, false, null, false);
 		}
 
@@ -101,8 +103,8 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 			this(text, null, null, onClick, header, collapsed, null, false);
 		}
 
-		private Entry(Component text, @Nullable ItemStack icon, @Nullable java.util.function.Supplier<ItemStack> iconSupplier,
-					  @Nullable Runnable onClick, boolean header, boolean collapsed, @Nullable Object data, boolean grey) {
+		private Entry(Component text, @Nullable ItemStack icon, @Nullable Supplier<ItemStack> iconSupplier,
+		              @Nullable Runnable onClick, boolean header, boolean collapsed, @Nullable Object data, boolean grey) {
 			this.text = text;
 			this.icon = icon;
 			this.iconSupplier = iconSupplier;

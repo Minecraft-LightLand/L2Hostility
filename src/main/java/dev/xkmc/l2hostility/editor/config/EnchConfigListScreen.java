@@ -60,7 +60,7 @@ public class EnchConfigListScreen extends ListEditScreen<WeaponConfig.EnchConfig
 		 * Opens the value page (level/chance) first; the picked set is edited from there.
 		 */
 		private static void openEditor(Screen parent, Consumer<WeaponConfig.EnchConfig> onDone,
-									  @Nullable WeaponConfig.EnchConfig existing) {
+		                               @Nullable WeaponConfig.EnchConfig existing) {
 			Set<Enchantment> picked = new LinkedHashSet<>();
 			if (existing != null) picked.addAll(existing.enchantments());
 			int level = existing == null ? 0 : existing.level();

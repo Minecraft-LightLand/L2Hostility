@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.function.Supplier;
 
 public class EditorFile {
 
@@ -57,7 +58,7 @@ public class EditorFile {
 	 * this base layer. Returning null falls back to the current world's datapacks folder.
 	 */
 	@Nullable
-	public static java.util.function.Supplier<Path> saveRootOverride;
+	public static Supplier<Path> saveRootOverride;
 
 	public static boolean validNamespace(String ns) {
 		return ns != null && (ns.startsWith("_") || ModList.get().isLoaded(ns));

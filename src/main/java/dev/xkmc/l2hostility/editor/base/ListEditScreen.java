@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class ListEditScreen<T> extends EditorScreen {
 
@@ -22,7 +23,7 @@ public class ListEditScreen<T> extends EditorScreen {
 		ItemStack icon(T t);
 
 		@Nullable
-		default java.util.function.Supplier<ItemStack> iconSupplier(T t) {
+		default Supplier<ItemStack> iconSupplier(T t) {
 			return null;
 		}
 
@@ -117,7 +118,7 @@ public class ListEditScreen<T> extends EditorScreen {
 		}
 		for (T t : data) {
 			Component text = handler.summary(t);
-			java.util.function.Supplier<ItemStack> supplier = handler.iconSupplier(t);
+			Supplier<ItemStack> supplier = handler.iconSupplier(t);
 			entries.add(supplier == null
 					? new EditorList.Entry(text, handler.icon(t), null)
 					: EditorList.Entry.rotating(text, supplier, null));

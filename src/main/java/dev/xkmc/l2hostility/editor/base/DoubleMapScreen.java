@@ -8,11 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class DoubleMapScreen<T> extends EditorScreen {
@@ -43,7 +39,7 @@ public class DoubleMapScreen<T> extends EditorScreen {
 	private Button removeBtn;
 
 	public DoubleMapScreen(Component title, @Nullable Map<T, Double> map, Supplier<Map<T, Double>> create,
-						   List<T> candidates, Handler<T> handler, Screen parent, EditorSession session) {
+	                       List<T> candidates, Handler<T> handler, Screen parent, EditorSession session) {
 		super(title);
 		this.map = map;
 		this.create = create;
@@ -187,7 +183,8 @@ public class DoubleMapScreen<T> extends EditorScreen {
 		Minecraft.getInstance().setScreen(parent);
 	}
 
-	private record AddValueHandler<T>(DoubleMapScreen<T> screen, Handler<T> handler) implements PickListScreen.Handler<T> {
+	private record AddValueHandler<T>(DoubleMapScreen<T> screen,
+	                                  Handler<T> handler) implements PickListScreen.Handler<T> {
 
 		@Override
 		public Component label(T t) {

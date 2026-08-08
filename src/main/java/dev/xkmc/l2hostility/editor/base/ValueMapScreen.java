@@ -54,7 +54,7 @@ public class ValueMapScreen<K, V> extends EditorScreen {
 	private Button removeBtn;
 
 	public ValueMapScreen(Component title, @Nullable Map<K, V> map, Supplier<Map<K, V>> create,
-						  Handler<K, V> handler, Screen parent, EditorSession session) {
+	                      Handler<K, V> handler, Screen parent, EditorSession session) {
 		super(title);
 		this.map = map;
 		this.create = create;
@@ -206,7 +206,8 @@ public class ValueMapScreen<K, V> extends EditorScreen {
 		Minecraft.getInstance().setScreen(parent);
 	}
 
-	private record AddValueHandler<K, V>(ValueMapScreen<K, V> screen, Handler<K, V> handler) implements PickListScreen.Handler<K> {
+	private record AddValueHandler<K, V>(ValueMapScreen<K, V> screen,
+	                                     Handler<K, V> handler) implements PickListScreen.Handler<K> {
 
 		@Override
 		public Component label(K t) {

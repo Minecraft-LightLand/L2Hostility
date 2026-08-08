@@ -1,25 +1,18 @@
 package dev.xkmc.l2hostility.editor.home;
 
 import dev.xkmc.l2hostility.content.config.EntityConfig;
-import dev.xkmc.l2hostility.content.config.TraitConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
-import dev.xkmc.l2hostility.editor.base.EditorSaveState;
-import dev.xkmc.l2hostility.editor.base.EditorTab;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.EditorToast;
-import dev.xkmc.l2hostility.editor.config.DifficultyFileScreen;
-import dev.xkmc.l2hostility.editor.config.EntityFileScreen;
-import dev.xkmc.l2hostility.editor.config.LHConfigEdit;
-import dev.xkmc.l2hostility.editor.config.TraitFileScreen;
-import dev.xkmc.l2hostility.editor.config.WeaponFileScreen;
+import dev.xkmc.l2hostility.editor.base.*;
+import dev.xkmc.l2hostility.editor.config.*;
+import dev.xkmc.l2hostility.editor.tag.HostilityTagUtil;
 import dev.xkmc.l2hostility.editor.tag.TagEditScreen;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
-import dev.xkmc.l2hostility.editor.tag.HostilityTagUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import dev.xkmc.l2library.serial.config.BaseConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -28,10 +21,11 @@ import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
-public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.EditorHomeScreen {
+public class HostilityHomeScreen extends EditorHomeScreen {
 
 	private final TabKind kind;
 
@@ -68,7 +62,7 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 		};
 	}
 
-	private static List<ResourceLocation> idsOf(java.util.Collection<? extends dev.xkmc.l2library.serial.config.BaseConfig> all) {
+	private static List<ResourceLocation> idsOf(Collection<? extends BaseConfig> all) {
 		List<ResourceLocation> ids = new ArrayList<>();
 		for (var cfg : all) {
 			ResourceLocation id = cfg.getID();

@@ -1,23 +1,17 @@
 package dev.xkmc.l2hostility.editor.base;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.function.Function;
 
 public abstract class EditorHomeScreen extends EditorScreen {
@@ -203,10 +197,10 @@ public abstract class EditorHomeScreen extends EditorScreen {
 	private void newFile() {
 		Minecraft.getInstance().setScreen(new PromptScreen(EditorText.NEW.get(), fileIdLabel(),
 				newFileDefault(), validateId(), s -> {
-					ResourceLocation id = EditorFile.parseId(s);
-					if (id == null) return;
-					openNew(id);
-				}, this));
+			ResourceLocation id = EditorFile.parseId(s);
+			if (id == null) return;
+			openNew(id);
+		}, this));
 	}
 
 	private void editFile() {

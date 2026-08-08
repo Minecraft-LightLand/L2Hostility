@@ -1,15 +1,7 @@
 package dev.xkmc.l2hostility.editor.config;
 
 import dev.xkmc.l2hostility.content.config.EntityConfig;
-import dev.xkmc.l2hostility.editor.base.EditorHandler;
-import dev.xkmc.l2hostility.editor.base.EditorLayout;
-import dev.xkmc.l2hostility.editor.base.EditorList;
-import dev.xkmc.l2hostility.editor.base.EditorScreen;
-import dev.xkmc.l2hostility.editor.base.EditorSession;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.FormScreen;
-import dev.xkmc.l2hostility.editor.base.ListEditScreen;
-import dev.xkmc.l2hostility.editor.base.PickListScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
@@ -40,8 +32,8 @@ public class MasterConfigScreen extends EditorScreen {
 	private Button addBtn, editBtn, removeBtn;
 
 	public MasterConfigScreen(@Nullable EntityConfig.MasterConfig master,
-							  Consumer<EntityConfig.MasterConfig> onDone,
-							  Screen parent, EditorSession session) {
+	                          Consumer<EntityConfig.MasterConfig> onDone,
+	                          Screen parent, EditorSession session) {
 		super(HostilityEditorLang.MASTER_CONFIG.get());
 		this.master = master;
 		this.onDone = onDone;
@@ -199,7 +191,8 @@ public class MasterConfigScreen extends EditorScreen {
 		exit();
 	}
 
-	private record MinionHandler(EntityConfig.MasterConfig master) implements ListEditScreen.Handler<EntityConfig.Minion> {
+	private record MinionHandler(
+			EntityConfig.MasterConfig master) implements ListEditScreen.Handler<EntityConfig.Minion> {
 
 		@Override
 		public Component label(EntityConfig.Minion m) {

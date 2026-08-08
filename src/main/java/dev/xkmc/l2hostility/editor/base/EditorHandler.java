@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 public interface EditorHandler<T> extends PickListScreen.Handler<T>, ItemListScreen.Handler<T>,
@@ -48,9 +49,9 @@ public interface EditorHandler<T> extends PickListScreen.Handler<T>, ItemListScr
 
 	}
 
-	record Pick<T>(EditorHandler<T> handler, java.util.function.Consumer<T> onSelect) implements PickListScreen.Handler<T> {
+	record Pick<T>(EditorHandler<T> handler, Consumer<T> onSelect) implements PickListScreen.Handler<T> {
 
-		public static <T> Pick<T> of(EditorHandler<T> handler, java.util.function.Consumer<T> onSelect) {
+		public static <T> Pick<T> of(EditorHandler<T> handler, Consumer<T> onSelect) {
 			return new Pick<>(handler, onSelect);
 		}
 

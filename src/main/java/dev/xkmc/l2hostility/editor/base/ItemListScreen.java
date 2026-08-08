@@ -40,7 +40,7 @@ public class ItemListScreen<T> extends EditorScreen {
 	private Button removeBtn;
 
 	public ItemListScreen(Component title, @Nullable Set<T> set, Supplier<Set<T>> create, List<T> candidates,
-						  Handler<T> handler, Component pickTitle, Screen parent, EditorSession session) {
+	                      Handler<T> handler, Component pickTitle, Screen parent, EditorSession session) {
 		super(title);
 		this.set = set;
 		this.create = create;
@@ -118,7 +118,8 @@ public class ItemListScreen<T> extends EditorScreen {
 				new AddItemHandler<>(this, handler), this));
 	}
 
-	private record AddItemHandler<T>(ItemListScreen<T> screen, Handler<T> handler) implements PickListScreen.Handler<T> {
+	private record AddItemHandler<T>(ItemListScreen<T> screen,
+	                                 Handler<T> handler) implements PickListScreen.Handler<T> {
 
 		@Override
 		public Component label(T t) {

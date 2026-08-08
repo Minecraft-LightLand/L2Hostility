@@ -8,6 +8,7 @@ import dev.xkmc.l2hostility.editor.base.ListEditScreen;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -20,6 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class ItemConfigListScreen extends ListEditScreen<WeaponConfig.ItemConfig> {
 
@@ -43,10 +45,10 @@ public class ItemConfigListScreen extends ListEditScreen<WeaponConfig.ItemConfig
 
 		@Override
 		@Nullable
-		public java.util.function.Supplier<ItemStack> iconSupplier(WeaponConfig.ItemConfig t) {
+		public Supplier<ItemStack> iconSupplier(WeaponConfig.ItemConfig t) {
 			if (t.stack().isEmpty()) return null;
 			return () -> {
-				int idx = (int) ((net.minecraft.Util.getMillis() / 1000) % t.stack().size());
+				int idx = (int) ((Util.getMillis() / 1000) % t.stack().size());
 				return t.stack().get(idx);
 			};
 		}
@@ -70,7 +72,7 @@ public class ItemConfigListScreen extends ListEditScreen<WeaponConfig.ItemConfig
 		 * Opens the value page (level/weight) first; the picked set is edited from there.
 		 */
 		private static void openEditor(Screen parent, Consumer<WeaponConfig.ItemConfig> onDone,
-									  @Nullable WeaponConfig.ItemConfig existing) {
+		                               @Nullable WeaponConfig.ItemConfig existing) {
 			Set<Item> picked = new LinkedHashSet<>();
 			if (existing != null) {
 				for (ItemStack s : existing.stack()) {

@@ -2,32 +2,28 @@ package dev.xkmc.l2hostility.editor.config;
 
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig.ItemConfig;
-import dev.xkmc.l2hostility.editor.base.EditorHandler;
-import dev.xkmc.l2hostility.editor.base.EditorSession;
-import dev.xkmc.l2hostility.editor.base.EditorToast;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.ItemListScreen;
-import dev.xkmc.l2hostility.editor.base.ListEditScreen;
-import dev.xkmc.l2hostility.editor.base.PickListScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScreen.Entry> {
 
@@ -59,7 +55,7 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 				config.special_weapons.put(e.entities(), e.configs());
 			}
 			session().dirty = true;
-			EditorToast.show(EditorText.SAVE.get(), EditorText.SAVE_DONE.get(new net.minecraft.resources.ResourceLocation("l2hostility", "special_weapons")));
+			EditorToast.show(EditorText.SAVE.get(), EditorText.SAVE_DONE.get(new ResourceLocation("l2hostility", "special_weapons")));
 		};
 	}
 
@@ -96,11 +92,11 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 
 		@Override
 		@Nullable
-		public java.util.function.Supplier<ItemStack> iconSupplier(Entry e) {
+		public Supplier<ItemStack> iconSupplier(Entry e) {
 			List<ItemStack> stacks = allStacks(e);
 			if (stacks.isEmpty()) return null;
 			return () -> {
-				int idx = (int) ((net.minecraft.Util.getMillis() / 1000) % stacks.size());
+				int idx = (int) ((Util.getMillis() / 1000) % stacks.size());
 				return stacks.get(idx);
 			};
 		}
@@ -133,7 +129,7 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 	/**
 	 * Two rows: entity set (multi-select) + item config list.
 	 */
-	private static final class EntryScreen extends dev.xkmc.l2hostility.editor.base.EditorScreen {
+	private static final class EntryScreen extends EditorScreen {
 
 		private final Screen parent;
 		private final Entry entry;
@@ -144,25 +140,25 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 			this.entry = entry;
 		}
 
-	@Override
-	protected void init() {
-		var list = new dev.xkmc.l2hostility.editor.base.EditorList(minecraft, width, height - 70, 30, height - 40);
-		addRenderableWidget(list);
-			java.util.List<dev.xkmc.l2hostility.editor.base.EditorList.Entry> rows = new ArrayList<>();
-			rows.add(new dev.xkmc.l2hostility.editor.base.EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ENTITIES.get(), entry.entities().size()), null,
+		@Override
+		protected void init() {
+			var list = new EditorList(minecraft, width, height - 70, 30, height - 40);
+			addRenderableWidget(list);
+			List<EditorList.Entry> rows = new ArrayList<>();
+			rows.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ENTITIES.get(), entry.entities().size()), null,
 					() -> Minecraft.getInstance().setScreen(new ItemListScreen<>(HostilityEditorLang.ENTITIES.get(),
 							entry.entities(), () -> entry.entities(),
 							HostilityEditorUtil.listEntityTypes(), HostilityEditorHandlers.ENTITY_TYPE,
-							HostilityEditorLang.SELECT_ENTITY.get(), EntryScreen.this, new dev.xkmc.l2hostility.editor.base.EditorSession()))));
-			rows.add(new dev.xkmc.l2hostility.editor.base.EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ITEM_CONFIG.get(), entry.configs().size()), null,
+							HostilityEditorLang.SELECT_ENTITY.get(), EntryScreen.this, new EditorSession()))));
+			rows.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ITEM_CONFIG.get(), entry.configs().size()), null,
 					() -> Minecraft.getInstance().setScreen(new ItemConfigListScreen(
 							HostilityEditorLang.ITEM_CONFIG.get(), entry.configs(), EntryScreen.this,
-							new dev.xkmc.l2hostility.editor.base.EditorSession()))));
+							new EditorSession()))));
 			list.setData(rows);
-			var back = net.minecraft.client.gui.components.Button.builder(EditorText.BACK.get(), b -> Minecraft.getInstance().setScreen(parent))
+			var back = Button.builder(EditorText.BACK.get(), b -> Minecraft.getInstance().setScreen(parent))
 					.bounds(0, 0, 60, 20).build();
 			addRenderableWidget(back);
-			dev.xkmc.l2hostility.editor.base.EditorLayout.centerRow(java.util.List.of(back), width / 2, height - 30, 5);
+			EditorLayout.centerRow(List.of(back), width / 2, height - 30, 5);
 		}
 
 		@Override

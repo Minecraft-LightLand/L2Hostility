@@ -161,7 +161,8 @@ public enum HostilityEditorLang {
 	SUMMARY_TRAIT_CHANCE("editor.summary_trait_chance", "traitChance %s", 1, null),
 	SUMMARY_SUPPRESS("editor.summary_suppress", "suppress %s", 1, null);
 
-	private final String key, def;	private final int arg;
+	private final String key, def;
+	private final int arg;
 	@Nullable
 	private final ChatFormatting format;
 

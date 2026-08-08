@@ -28,7 +28,7 @@ public final class LHConfigEdit {
 	private LHConfigEdit() {
 	}
 
-	public enum Kind { BOOL, INT, DOUBLE }
+	public enum Kind {BOOL, INT, DOUBLE}
 
 	/**
 	 * One config value together with the widgets to edit it.
@@ -56,8 +56,9 @@ public final class LHConfigEdit {
 				case BOOL -> FormScreen.FormField.bool(label, (Boolean) value.get());
 				case INT -> FormScreen.FormField.text(label, String.valueOf(((ForgeConfigSpec.IntValue) value).get()),
 						HostilityEditorForms::intValidate);
-				case DOUBLE -> FormScreen.FormField.text(label, String.valueOf(((ForgeConfigSpec.DoubleValue) value).get()),
-						HostilityEditorForms::doubleValidate);
+				case DOUBLE ->
+						FormScreen.FormField.text(label, String.valueOf(((ForgeConfigSpec.DoubleValue) value).get()),
+								HostilityEditorForms::doubleValidate);
 			};
 		}
 	}
@@ -134,9 +135,12 @@ public final class LHConfigEdit {
 			case "soul_burner" -> ans.add(i(c.soulBurnerTime, "soulBurnerTime"));
 			case "freezing" -> ans.add(i(c.freezingTime, "freezingTime"));
 			case "cursed" -> ans.add(i(c.curseTime, "curseTime"));
-			case "teleport" -> ans.addAll(List.of(i(c.teleportDuration, "teleportDuration"), i(c.teleportRange, "teleportRange")));
-			case "repelling" -> ans.addAll(List.of(i(c.repellRange, "repellRange"), d(c.repellStrength, "repellStrength")));
-			case "pulling" -> ans.addAll(List.of(i(c.pullingRange, "pullingRange"), d(c.pullingStrength, "pullingStrength")));
+			case "teleport" ->
+					ans.addAll(List.of(i(c.teleportDuration, "teleportDuration"), i(c.teleportRange, "teleportRange")));
+			case "repelling" ->
+					ans.addAll(List.of(i(c.repellRange, "repellRange"), d(c.repellStrength, "repellStrength")));
+			case "pulling" ->
+					ans.addAll(List.of(i(c.pullingRange, "pullingRange"), d(c.pullingStrength, "pullingStrength")));
 			case "corrosion" -> ans.addAll(List.of(
 					d(c.corrosionDurability, "corrosionDurability"), d(c.corrosionDamage, "corrosionDamage")));
 			case "erosion" -> ans.addAll(List.of(
@@ -154,7 +158,8 @@ public final class LHConfigEdit {
 					d(c.drainDamage, "drainDamage"), d(c.drainDuration, "drainDuration"), i(c.drainDurationMax, "drainDurationMax")));
 			case "counter_strike" -> ans.addAll(List.of(
 					i(c.counterStrikeDuration, "counterStrikeDuration"), i(c.counterStrikeRange, "counterStrikeRange")));
-			case "reprint" -> ans.addAll(List.of(d(c.reprintDamage, "reprintDamage"), i(c.reprintBypass, "reprintBypass")));
+			case "reprint" ->
+					ans.addAll(List.of(d(c.reprintDamage, "reprintDamage"), i(c.reprintBypass, "reprintBypass")));
 			case "dementor" -> ans.addAll(List.of(
 					d(c.dementorDamageFactor, "dementorDamageFactor"), d(c.dementorDamageReductionBase, "dementorDamageReductionBase")));
 			case "gravity", "moonwalk", "arena" -> {

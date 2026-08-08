@@ -1,11 +1,7 @@
 package dev.xkmc.l2hostility.editor.config;
 
 import dev.xkmc.l2hostility.content.config.TraitConfig;
-import dev.xkmc.l2hostility.editor.base.EditorList;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.EditorToast;
-import dev.xkmc.l2hostility.editor.base.EditorUtil;
-import dev.xkmc.l2hostility.editor.base.FormScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import dev.xkmc.l2hostility.editor.tag.HostilityTagUtil;
 import dev.xkmc.l2hostility.editor.tag.TagEditScreen;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
@@ -19,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class TraitFileScreen extends HostilityFileScreen {
 
 	private final TraitConfig config;
@@ -35,15 +32,15 @@ public class TraitFileScreen extends HostilityFileScreen {
 	protected void rebuild() {
 		List<EditorList.Entry> entries = new ArrayList<>();
 		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.TRAIT_FIELDS.get(),
-						HostilityEditorForms.traitFieldsSummary(config)), null,
+				HostilityEditorForms.traitFieldsSummary(config)), null,
 				() -> Minecraft.getInstance().setScreen(new FormScreen<>(HostilityEditorLang.TRAIT_FIELDS.get(),
 						HostilityEditorForms.traitConfig(config), c -> {
-							config.min_level = c.min_level;
-							config.cost = c.cost;
-							config.max_rank = c.max_rank;
-							config.weight = c.weight;
-							session.dirty = true;
-						}, TraitFileScreen.this))));
+					config.min_level = c.min_level;
+					config.cost = c.cost;
+					config.max_rank = c.max_rank;
+					config.weight = c.weight;
+					session.dirty = true;
+				}, TraitFileScreen.this))));
 		LHConfigEdit.FieldDef toggle = LHConfigEdit.traitToggle(fileId.getPath());
 		if (toggle != null) {
 			Component status = toggle.getString().equals("true")

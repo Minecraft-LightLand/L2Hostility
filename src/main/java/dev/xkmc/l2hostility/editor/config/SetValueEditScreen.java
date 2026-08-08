@@ -1,13 +1,6 @@
 package dev.xkmc.l2hostility.editor.config;
 
-import dev.xkmc.l2hostility.editor.base.EditorLayout;
-import dev.xkmc.l2hostility.editor.base.EditorList;
-import dev.xkmc.l2hostility.editor.base.EditorScreen;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.EditorToast;
-import dev.xkmc.l2hostility.editor.base.FormScreen;
-import dev.xkmc.l2hostility.editor.base.ItemListScreen;
-import dev.xkmc.l2hostility.editor.base.PickListScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -51,9 +44,9 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 	private Component error;
 
 	public SetValueEditScreen(Component title, Screen parent, Consumer<R> onDone,
-							  Set<T> picked, List<T> candidates, ItemListScreen.Handler<T> handler,
-							  Component pickTitle,
-							  List<FormScreen.FormField> fields, BiFunction<List<T>, List<String>, R> build) {
+	                          Set<T> picked, List<T> candidates, ItemListScreen.Handler<T> handler,
+	                          Component pickTitle,
+	                          List<FormScreen.FormField> fields, BiFunction<List<T>, List<String>, R> build) {
 		super(title);
 		this.parent = parent;
 		this.onDone = onDone;

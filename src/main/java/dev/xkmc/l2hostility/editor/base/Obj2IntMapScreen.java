@@ -40,8 +40,8 @@ public class Obj2IntMapScreen<M> extends EditorScreen {
 	private Button removeBtn;
 
 	public Obj2IntMapScreen(Component title, @Nullable Map<M, Integer> map, Supplier<Map<M, Integer>> create,
-							List<M> candidates, Handler<M> handler, Component pickTitle,
-							Screen parent, EditorSession session) {
+	                        List<M> candidates, Handler<M> handler, Component pickTitle,
+	                        Screen parent, EditorSession session) {
 		super(title);
 		this.map = map;
 		this.create = create;
@@ -174,7 +174,8 @@ public class Obj2IntMapScreen<M> extends EditorScreen {
 		Minecraft.getInstance().setScreen(parent);
 	}
 
-	private record AddModifierHandler<M>(Obj2IntMapScreen<M> screen, Handler<M> handler) implements PickListScreen.Handler<M> {
+	private record AddModifierHandler<M>(Obj2IntMapScreen<M> screen,
+	                                     Handler<M> handler) implements PickListScreen.Handler<M> {
 
 		@Override
 		public Component label(M m) {

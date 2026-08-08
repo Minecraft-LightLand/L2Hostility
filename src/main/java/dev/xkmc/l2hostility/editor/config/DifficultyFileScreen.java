@@ -2,9 +2,7 @@ package dev.xkmc.l2hostility.editor.config;
 
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
-import dev.xkmc.l2hostility.editor.base.EditorList;
-import dev.xkmc.l2hostility.editor.base.FormScreen;
-import dev.xkmc.l2hostility.editor.base.ValueMapScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
@@ -28,7 +26,7 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 	public DifficultyFileScreen(ResourceLocation id, Screen parent) {
 		super(HostilityEditorLang.DIFFICULTY_FILE.get(), id, parent);
 		WorldDifficultyConfig base = L2Hostility.DIFFICULTY.getEntry(id);
-		WorldDifficultyConfig copy = base == null ? null : dev.xkmc.l2hostility.editor.base.EditorUtil.copy(L2Hostility.DIFFICULTY, base);
+		WorldDifficultyConfig copy = base == null ? null : EditorUtil.copy(L2Hostility.DIFFICULTY, base);
 		this.config = copy == null ? HostilityEditorUtil.newDifficulty() : copy;
 	}
 
@@ -63,8 +61,8 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 			saveDone(fileId);
 			return true;
 		} catch (Exception e) {
-			dev.xkmc.l2hostility.editor.base.EditorToast.show(
-					HostilityEditorLang.INVALID_INTEGER.get(e.getMessage()), dev.xkmc.l2hostility.editor.base.EditorText.NOT_IN_WORLD.get());
+			EditorToast.show(
+					HostilityEditorLang.INVALID_INTEGER.get(e.getMessage()), EditorText.NOT_IN_WORLD.get());
 			return false;
 		}
 	}
@@ -160,7 +158,7 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 	 * Value editor for the difficulty default-traits maps: value = list of Configs (empty
 	 * entities = "all entities" fallback). Structure variant picks keys from the structure list.
 	 */
-	private record ConfigListHandler(dev.xkmc.l2hostility.editor.base.EditorSession session, boolean structure)
+	private record ConfigListHandler(EditorSession session, boolean structure)
 			implements ValueMapScreen.Handler<ResourceLocation, ArrayList<EntityConfig.Config>> {
 
 		@Override

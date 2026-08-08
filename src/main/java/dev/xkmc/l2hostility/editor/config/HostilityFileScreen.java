@@ -1,15 +1,6 @@
 package dev.xkmc.l2hostility.editor.config;
 
-import dev.xkmc.l2hostility.editor.base.EditorFile;
-import dev.xkmc.l2hostility.editor.base.EditorLayout;
-import dev.xkmc.l2hostility.editor.base.EditorList;
-import dev.xkmc.l2hostility.editor.base.EditorSaveState;
-import dev.xkmc.l2hostility.editor.base.EditorScreen;
-import dev.xkmc.l2hostility.editor.base.EditorSession;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.EditorToast;
-import dev.xkmc.l2hostility.editor.base.ExitConfirmScreen;
-import dev.xkmc.l2hostility.editor.base.PromptScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -66,13 +57,13 @@ public abstract class HostilityFileScreen extends EditorScreen {
 	protected void save() {
 		Minecraft.getInstance().setScreen(new PromptScreen(EditorText.SAVE.get(), EditorText.FILE_ID.get(),
 				fileId.toString(), HostilityEditorUtil::validateFileId, s -> {
-					ResourceLocation id = EditorFile.parseId(s);
-					if (id == null) return;
-					fileId = id;
-					if (doSave()) {
-						Minecraft.getInstance().setScreen(HostilityFileScreen.this);
-					}
-				}, this));
+			ResourceLocation id = EditorFile.parseId(s);
+			if (id == null) return;
+			fileId = id;
+			if (doSave()) {
+				Minecraft.getInstance().setScreen(HostilityFileScreen.this);
+			}
+		}, this));
 	}
 
 	protected void saveDone(ResourceLocation id) {

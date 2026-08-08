@@ -1,13 +1,7 @@
 package dev.xkmc.l2hostility.editor.config;
 
 import dev.xkmc.l2hostility.content.config.EntityConfig;
-import dev.xkmc.l2hostility.editor.base.EditorHandler;
-import dev.xkmc.l2hostility.editor.base.EditorSession;
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.EditorUtil;
-import dev.xkmc.l2hostility.editor.base.ListEditScreen;
-import dev.xkmc.l2hostility.editor.base.PickListScreen;
-import dev.xkmc.l2hostility.editor.base.PromptScreen;
+import dev.xkmc.l2hostility.editor.base.*;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;

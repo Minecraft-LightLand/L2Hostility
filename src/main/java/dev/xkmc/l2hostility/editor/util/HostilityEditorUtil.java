@@ -9,6 +9,7 @@ import dev.xkmc.l2hostility.editor.base.EditorFile;
 import dev.xkmc.l2hostility.editor.base.EditorText;
 import dev.xkmc.l2hostility.editor.base.EditorUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
+import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
@@ -18,6 +19,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
@@ -28,6 +30,7 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public class HostilityEditorUtil {
@@ -36,7 +39,7 @@ public class HostilityEditorUtil {
 
 	static {
 		EditorFile.saveRootOverride = () -> {
-			String s = dev.xkmc.l2hostility.init.data.LHConfig.CLIENT.editorSavePath.get();
+			String s = LHConfig.CLIENT.editorSavePath.get();
 			return s == null || s.isBlank() ? null : Path.of(s.trim());
 		};
 	}
@@ -107,7 +110,7 @@ public class HostilityEditorUtil {
 	}
 
 	public static ItemStack enchantIcon() {
-		return new ItemStack(net.minecraft.world.item.Items.ENCHANTED_BOOK);
+		return new ItemStack(Items.ENCHANTED_BOOK);
 	}
 
 	public static Component enchantName(Enchantment ench) {
@@ -154,7 +157,7 @@ public class HostilityEditorUtil {
 		return EditorUtil.save(L2Hostility.ENTITY, id, config, PACK_FOLDER);
 	}
 
-	public static <T> java.util.LinkedHashSet<T> writeThroughSet(java.util.ArrayList<T> list) {
+	public static <T> LinkedHashSet<T> writeThroughSet(ArrayList<T> list) {
 		return new WriteThroughSet<>(list);
 	}
 
@@ -178,11 +181,11 @@ public class HostilityEditorUtil {
 				new ResourceLocation(L2Hostility.MODID, "hostility_spawner_blacklist"));
 	}
 
-	public static final class WriteThroughSet<T> extends java.util.LinkedHashSet<T> {
+	public static final class WriteThroughSet<T> extends LinkedHashSet<T> {
 
-		private final java.util.ArrayList<T> target;
+		private final ArrayList<T> target;
 
-		public WriteThroughSet(java.util.ArrayList<T> target) {
+		public WriteThroughSet(ArrayList<T> target) {
 			this.target = target;
 			addAll(target);
 		}
