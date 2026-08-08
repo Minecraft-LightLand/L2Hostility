@@ -8,7 +8,9 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.editor.base.DoubleMapScreen;
 import dev.xkmc.l2hostility.editor.base.EditorText;
 import dev.xkmc.l2hostility.editor.base.FormScreen;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 
@@ -90,44 +92,6 @@ public final class HostilityEditorForms {
 		});
 	}
 
-	public static FormScreen.FormSpec<WeaponConfig.ItemConfig> itemConfig() {
-		Function<String, Component> ints = intValidate();
-		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "0", ints),
-				FormScreen.FormField.text(HostilityEditorLang.WEIGHT.get(), "100", ints)
-		), v -> new WeaponConfig.ItemConfig(new java.util.ArrayList<>(),
-				Integer.parseInt(v.get(0).trim()), Integer.parseInt(v.get(1).trim())));
-	}
-
-	public static FormScreen.FormSpec<WeaponConfig.ItemConfig> itemConfigForm(int level, int weight) {
-		Function<String, Component> ints = intValidate();
-		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "" + level, ints),
-				FormScreen.FormField.text(HostilityEditorLang.WEIGHT.get(), "" + weight, ints)
-		), v -> new WeaponConfig.ItemConfig(new java.util.ArrayList<>(),
-				Integer.parseInt(v.get(0).trim()), Integer.parseInt(v.get(1).trim())));
-	}
-
-	public static FormScreen.FormSpec<WeaponConfig.EnchConfig> enchConfig() {
-		Function<String, Component> ints = intValidate();
-		Function<String, Component> doubles = doubleValidate();
-		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "0", ints),
-				FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), "0", doubles)
-		), v -> new WeaponConfig.EnchConfig(new java.util.ArrayList<>(),
-				Integer.parseInt(v.get(0).trim()), (float) Double.parseDouble(v.get(1).trim())));
-	}
-
-	public static FormScreen.FormSpec<WeaponConfig.EnchConfig> enchConfigForm(int level, float chance) {
-		Function<String, Component> ints = intValidate();
-		Function<String, Component> doubles = doubleValidate();
-		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "" + level, ints),
-				FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), "" + chance, doubles)
-		), v -> new WeaponConfig.EnchConfig(new java.util.ArrayList<>(),
-				Integer.parseInt(v.get(0).trim()), (float) Double.parseDouble(v.get(1).trim())));
-	}
-
 	public static FormScreen.FormSpec<EntityConfig.TraitBase> traitBase(MobTrait trait, @Nullable EntityConfig.TraitBase cur) {
 		EntityConfig.TraitBase c = cur == null ? new EntityConfig.TraitBase(trait, 0, 0, false, null) : cur;
 		Function<String, Component> ints = intValidate();
@@ -181,11 +145,11 @@ public final class HostilityEditorForms {
 		Function<String, Component> ints = intValidate();
 		Function<String, Component> doubles = doubleValidate();
 		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.MAX_LEVEL.get(), "" + c.maxCount(), ints),
+				FormScreen.FormField.text(HostilityEditorLang.MAX_COUNT.get(), "" + c.maxCount(), ints),
 				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + c.minLevel(), ints),
 				FormScreen.FormField.text(HostilityEditorLang.HEALTH_SCALE.get(), DoubleMapScreen.format(c.maxHealthPercentage()), doubles),
-				FormScreen.FormField.text(HostilityEditorLang.SPAWN_INTERVAL.get(), "" + c.spawnRange(), ints),
-				FormScreen.FormField.text(HostilityEditorLang.SUPPRESSION.get(), "" + c.cooldown(), ints),
+				FormScreen.FormField.text(HostilityEditorLang.SPAWN_RANGE.get(), "" + c.spawnRange(), ints),
+				FormScreen.FormField.text(HostilityEditorLang.COOLDOWN.get(), "" + c.cooldown(), ints),
 				FormScreen.FormField.bool(HostilityEditorLang.COPY_LEVEL.get(), c.copyLevel()),
 				FormScreen.FormField.bool(HostilityEditorLang.COPY_TRAIT.get(), c.copyTrait()),
 				FormScreen.FormField.text(HostilityEditorLang.SCALE.get(), DoubleMapScreen.format(c.linkDistance()), doubles),
@@ -245,45 +209,123 @@ public final class HostilityEditorForms {
 	}
 
 	public static Component difficultySummary(WorldDifficultyConfig.DifficultyConfig c) {
-		return Component.literal("lv " + c.min() + "  base " + c.base()
-				+ "  var " + DoubleMapScreen.format(c.variation())
-				+ "  scale " + DoubleMapScreen.format(c.scale()));
+		return summary(
+				HostilityEditorLang.SUMMARY_MIN_LV.get(c.min()),
+				HostilityEditorLang.SUMMARY_BASE.get(c.base()),
+				HostilityEditorLang.SUMMARY_VAR.get(DoubleMapScreen.format(c.variation())),
+				HostilityEditorLang.SUMMARY_SCALE.get(DoubleMapScreen.format(c.scale())));
 	}
 
 	public static Component itemConfigSummary(WeaponConfig.ItemConfig c) {
-		return Component.literal("lv " + c.level() + "  w " + c.weight()
-				+ "  (" + c.stack().size() + " items)");
+		return summary(
+				HostilityEditorLang.SUMMARY_LV.get(c.level()),
+				HostilityEditorLang.SUMMARY_W.get(c.weight()),
+				HostilityEditorLang.SUMMARY_ITEMS.get(c.stack().size()));
 	}
 
 	public static Component enchConfigSummary(WeaponConfig.EnchConfig c) {
-		return Component.literal(c.enchantments().size() + " enchants  lv " + c.level()
-				+ "  " + DoubleMapScreen.format(c.chance() * 100) + "%");
+		return summary(
+				HostilityEditorLang.SUMMARY_ENCHANTS.get(c.enchantments().size()),
+				HostilityEditorLang.SUMMARY_LV.get(c.level()),
+				HostilityEditorLang.SUMMARY_PCT.get(DoubleMapScreen.format(c.chance() * 100)));
 	}
 
 	public static Component configSummary(EntityConfig.Config c) {
-		String ents = c.entities.isEmpty() ? "all" : "" + c.entities.size();
-		return Component.literal(ents + " entities  " + c.traits().size() + " traits  "
-				+ difficultySummary(c.difficulty()));
+		return entityListName(c.entities).copy().append(Component.literal("  "))
+				.append(HostilityEditorLang.SUMMARY_TRAITS.get(c.traits().size()))
+				.append(Component.literal("  ")).append(difficultySummary(c.difficulty()));
+	}
+
+	/**
+	 * First entity name plus the total count, or a single "All entities" label when empty.
+	 */
+	public static Component entityListName(List<EntityType<?>> entities) {
+		if (entities.isEmpty()) return HostilityEditorLang.ALL_ENTITIES.get();
+		Component name = HostilityEditorUtil.entityName(entities.get(0));
+		if (entities.size() == 1) return name;
+		return name.copy().append(Component.literal(" ... (" + entities.size() + ")"));
 	}
 
 	public static Component traitBaseSummary(EntityConfig.TraitBase t) {
 		Component name = t.trait() == null ? Component.literal("?") : t.trait().getDesc();
-		return name.copy().append(Component.literal("  free " + t.free()
-				+ "  min " + t.min() + (t.cap() ? "  cap" : "")));
+		MutableComponent ans = name.copy().append(Component.literal("  "))
+				.append(summary(HostilityEditorLang.SUMMARY_FREE.get(t.free()),
+						HostilityEditorLang.SUMMARY_MIN.get(t.min())));
+		if (t.cap()) ans.append(Component.literal("  ")).append(HostilityEditorLang.SUMMARY_CAP.get());
+		return ans;
 	}
 
 	public static Component itemPoolSummary(EntityConfig.ItemPool p) {
-		return Component.literal("[" + p.slot() + "]  lv " + p.level()
-				+ "  " + DoubleMapScreen.format(p.chance() * 100) + "%  ("
-				+ p.entries().size() + " entries)");
+		return Component.literal("[" + p.slot() + "]  ")
+				.append(summary(HostilityEditorLang.SUMMARY_LV.get(p.level()),
+						HostilityEditorLang.SUMMARY_PCT.get(DoubleMapScreen.format(p.chance() * 100)),
+						HostilityEditorLang.SUMMARY_ENTRIES.get(p.entries().size())));
 	}
 
 	public static Component itemEntrySummary(EntityConfig.ItemEntry e) {
-		return Component.literal("w " + e.weight());
+		return HostilityEditorLang.SUMMARY_W.get(e.weight());
 	}
 
 	public static Component minionSummary(EntityConfig.Minion m) {
-		return HostilityEditorUtil.entityName(m.type()).copy().append(Component.literal("  x" + m.maxCount()));
+		return HostilityEditorUtil.entityName(m.type()).copy()
+				.append(Component.literal("  "))
+				.append(HostilityEditorLang.SUMMARY_HP.get(DoubleMapScreen.format(m.maxHealthPercentage() * 100) + "%"));
+	}
+
+	public static Component traitFieldsSummary(TraitConfig c) {
+		return summary(
+				HostilityEditorLang.SUMMARY_MIN.get(c.min_level),
+				HostilityEditorLang.SUMMARY_COST.get(c.cost),
+				HostilityEditorLang.SUMMARY_RANK.get(c.max_rank),
+				HostilityEditorLang.SUMMARY_W.get(c.weight));
+	}
+
+	public static Component entityValuesSummary(EntityConfig.Config c) {
+		MutableComponent ans = summary(
+				HostilityEditorLang.SUMMARY_MIN_SPAWN.get(c.minSpawnLevel),
+				HostilityEditorLang.SUMMARY_MAX_LV.get(c.maxLevel == 0 ? HostilityEditorLang.SUMMARY_NA.get() : c.maxLevel),
+				HostilityEditorLang.SUMMARY_MAX_TRAIT.get(c.maxTraitCount == -1 ? HostilityEditorLang.SUMMARY_INFINITE.get() : c.maxTraitCount),
+				HostilityEditorLang.SUMMARY_HP.get(DoubleMapScreen.format(c.healthScale)),
+				HostilityEditorLang.SUMMARY_ATK.get(DoubleMapScreen.format(c.attackScale)));
+		if (c.presetTraitsOnly) {
+			ans.append(Component.literal("  ")).append(HostilityEditorLang.SUMMARY_PRESET.get());
+		}
+		return ans;
+	}
+
+	public static Component masterSummary(EntityConfig.MasterConfig m) {
+		return summary(
+				HostilityEditorLang.SUMMARY_MAX_TOTAL.get(m.maxTotalCount()),
+				HostilityEditorLang.SUMMARY_INTERVAL.get(m.spawnInterval()),
+				HostilityEditorLang.SUMMARY_MINIONS.get(m.minions().size()));
+	}
+
+	public static boolean defaultDifficulty(WorldDifficultyConfig.DifficultyConfig c) {
+		return c.min() == 0 && c.base() == 0 && c.variation() == 0 && c.scale() == 0
+				&& c.apply_chance() == 1 && c.trait_chance() == 1 && c.suppression() == 0;
+	}
+
+	public static boolean defaultValues(EntityConfig.Config c) {
+		return c.minSpawnLevel == 0 && c.maxLevel == 0 && c.maxTraitCount == -1
+				&& c.healthScale == 1 && c.attackScale == 1 && !c.presetTraitsOnly;
+	}
+
+	public static boolean hasMaster(EntityConfig.Config c) {
+		return c.asMaster != null
+				|| c.traits().stream().anyMatch(t -> t.trait() == LHTraits.MASTER.get());
+	}
+
+	public static Component counted(Component base, int n) {
+		return base.copy().append(Component.literal("  (" + n + ")"));
+	}
+
+	private static MutableComponent summary(Component... parts) {
+		MutableComponent ans = Component.empty();
+		for (int i = 0; i < parts.length; i++) {
+			if (i > 0) ans.append(Component.literal("  "));
+			ans.append(parts[i]);
+		}
+		return ans;
 	}
 
 }

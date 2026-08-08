@@ -121,17 +121,10 @@ public abstract class EditorHomeScreen extends EditorScreen {
 			List<ResourceLocation> files = ent.getValue();
 			files.sort(ResourceLocation::compareTo);
 			entries.add(new EditorList.Entry(Component.literal(modName(ns)), true));
-			if (files.size() == 1) {
-				ResourceLocation f = files.get(0);
-				entries.add(new EditorList.Entry(Component.literal(ns).copy()
+			for (ResourceLocation f : files) {
+				entries.add(new EditorList.Entry(fileLabel(f).copy()
 						.append(Component.literal("   (" + fileCount(f) + ")"))
 						, null, null, f));
-			} else {
-				for (ResourceLocation f : files) {
-					entries.add(new EditorList.Entry(Component.literal(f.getPath()).copy()
-							.append(Component.literal("   (" + fileCount(f) + ")"))
-							, null, null, f));
-				}
 			}
 		}
 		list.setData(entries);
@@ -169,6 +162,10 @@ public abstract class EditorHomeScreen extends EditorScreen {
 	}
 
 	protected abstract List<ResourceLocation> listFiles();
+
+	protected Component fileLabel(ResourceLocation id) {
+		return Component.literal(id.getPath());
+	}
 
 	protected boolean canCreate() {
 		return true;

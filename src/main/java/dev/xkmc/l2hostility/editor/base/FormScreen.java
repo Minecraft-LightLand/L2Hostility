@@ -31,7 +31,7 @@ public class FormScreen<T> extends EditorScreen {
 
 	}
 
-	private static final int ROW_H = 30;
+	private static final int ROW_H = 36;
 
 	private final FormSpec<T> spec;
 	private final Consumer<T> onDone;

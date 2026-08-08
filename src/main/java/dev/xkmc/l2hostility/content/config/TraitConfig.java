@@ -27,6 +27,11 @@ public class TraitConfig extends BaseConfig {
 	public TraitConfig() {
 	}
 
+	public TraitConfig setId(ResourceLocation rl) {
+		this.id = rl;
+		return this;
+	}
+
 	public TraitConfig(ResourceLocation rl, int cost, int weight, int maxRank, int minLevel) {
 		this.id = rl;
 		this.cost = cost;

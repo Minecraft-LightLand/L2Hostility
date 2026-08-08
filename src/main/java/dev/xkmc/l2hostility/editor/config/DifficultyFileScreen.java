@@ -35,17 +35,17 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 	@Override
 	protected void rebuild() {
 		List<EditorList.Entry> entries = new ArrayList<>();
-		entries.add(new EditorList.Entry(HostilityEditorLang.DIMENSIONS.get(), null,
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.DIMENSIONS.get(), config.levelMap.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.DIMENSIONS.get(),
 						config.levelMap, () -> config.levelMap, new DimHandler(), DifficultyFileScreen.this, session))));
-		entries.add(new EditorList.Entry(HostilityEditorLang.BIOMES.get(), null,
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.BIOMES.get(), config.biomeMap.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.BIOMES.get(),
 						config.biomeMap, () -> config.biomeMap, new BiomeHandler(), DifficultyFileScreen.this, session))));
-		entries.add(new EditorList.Entry(HostilityEditorLang.LEVEL_DEFAULT_TRAITS.get(), null,
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.LEVEL_DEFAULT_TRAITS.get(), config.levelDefaultTraits.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.LEVEL_DEFAULT_TRAITS.get(),
 						config.levelDefaultTraits, () -> config.levelDefaultTraits,
 						new ConfigListHandler(session, false), DifficultyFileScreen.this, session))));
-		entries.add(new EditorList.Entry(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(), null,
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(), config.structureDefaultTraits.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(),
 						config.structureDefaultTraits, () -> config.structureDefaultTraits,
 						new ConfigListHandler(session, true), DifficultyFileScreen.this, session))));
@@ -191,7 +191,7 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 
 		@Override
 		public Component valueSummary(ArrayList<EntityConfig.Config> v) {
-			return Component.literal(v.size() + " configs");
+			return HostilityEditorLang.SUMMARY_CONFIGS.get(v.size());
 		}
 
 		@Override

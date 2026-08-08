@@ -1,8 +1,8 @@
 # L2Hostility Datapack Editor (`dev.xkmc.l2hostility.editor`)
 
 Client-side datapack editor for the four `l2hostility_config` datapack types (difficulty,
-trait, weapon, entity) plus an extra tab that edits the `l2hostility` namespace **tags** used
-for the trait black/white lists and the global entity black/white list.
+trait, weapon, entity) plus an extra tab that edits the `l2hostility` namespace **tags** used for
+the global entity black/white list (the per-trait black/white lists are edited from the Trait tab).
 
 It writes a new datapack into the active singleplayer world's `datapacks/` folder and offers a
 datapack reload, exactly like Modular Golems' editor. The generic UI/base layer is **copied from
@@ -93,8 +93,8 @@ Per-kind screens (details in §4):
 |---|---|
 | difficulty | `DifficultyFileScreen`, `DimLevelMapScreen`, `BiomeMapScreen`, `DefaultTraitsListScreen` |
 | trait | `TraitFileScreen` |
-| weapon | `WeaponFileScreen`, `ItemConfigListScreen`, `SpecialWeaponListScreen`, `EnchConfigListScreen` |
-| entity | `EntityFileScreen`, `ConfigListScreen` (shared list of `EntityConfig.Config`, reused by difficulty default-traits), `EntityConfigEntryScreen`, `TraitBaseListScreen`, `ItemPoolListScreen`, `ItemEntryListScreen`, `MasterConfigScreen` |
+| weapon | `WeaponFileScreen`, `ItemConfigListScreen`, `SpecialWeaponListScreen`, `EnchConfigListScreen`, `SetValueEditScreen` (shared value page: scalar fields + a button into the multi-select picker) |
+| entity | `EntityFileScreen` (lists `EntityConfig.Config` directly), `ConfigListScreen` (shared list of `EntityConfig.Config`, used by difficulty default-traits only), `EntityConfigEntryScreen`, `TraitBaseListScreen`, `ItemPoolListScreen`, `ItemEntryListScreen`, `MasterConfigScreen` |
 
 ### tag
 
@@ -134,6 +134,8 @@ is the entry screen, so Back from any tab leaves the editor.
   (`ModList.getModContainerById(ns)…getDisplayName()`, namespace fallback). Difficulty/weapon/entity
   files come from `L2Hostility.DIFFICULTY/WEAPON/ENTITY.getAll()` (all loaded datapack files,
   including per-mod compat ones like `twilightforest:ur_ghast`).
+- Every file row shows the file path + `(count)` (file's effective value count); a single-file group
+  (e.g. an addon's one trait) shows the path too — no more modid-only fallback.
 - **Edit** = deep copy (`EditorUtil.copy` → `JsonCodec` round-trip), **New** = fresh config with a
   default id. Dirty tracking via a shared `EditorSession`; **Save** disabled unless dirty; Edit/Remove
   disabled until a row is selected; bottom buttons on one centered row (`EditorLayout.centerRow`).
@@ -145,7 +147,8 @@ is the entry screen, so Back from any tab leaves the editor.
 Per-kind specifics:
 
 ### Difficulty
-`DifficultyFileScreen` lists four fixed rows (like `MaterialEntryScreen`):
+`DifficultyFileScreen` lists four fixed rows (like `MaterialEntryScreen`), each labelled with its
+entry count via `HostilityEditorForms.counted(label, n)`:
 - **Dimensions** → `DimLevelMapScreen`: entries of `levelMap` (key = typed `ResourceLocation`,
   `PromptScreen`; value = `DifficultyConfig`). Add opens the key prompt then a `FormScreen`;
   Edit opens the `FormScreen` for the 7 fields
@@ -159,53 +162,81 @@ Per-kind specifics:
 - **Structure default traits** → same over `structureDefaultTraits`, keys picked via
   `PickListScreen` over `listStructures()`.
 
+The "Difficulty" tab itself is labelled **World** (`HostilityEditorLang.WORLD`, key
+`l2hostility.editor.world`); the section that lists this screen's rows is
+`DifficultyFileScreen`, reachable from that tab.
+
 ### Trait
 `TraitHomeScreen`'s file list = **all registered traits** (`LHTraits.TRAITS.get().getKeys()`),
 **not** `L2Hostility.TRAIT.getAll()` — a trait without a datapack file still exists and falls back to
-`TraitConfig.DEFAULT`, so editing must be possible for every trait. `canCreate()` returns `false`
+`TraitConfig.DEFAULT`, so editing must be possible for every trait. Rows show the **trait name**
+(`MobTrait.getDesc()` via the `fileLabel` hook) instead of the raw registry id. `canCreate()` returns `false`
 (traits are code-defined). `TraitFileScreen` loads the current entry
-(`TRAIT.getEntry(id)` or `TraitConfig.DEFAULT` as baseline), deep-copies it, and edits the four
-scalar fields `min_level, cost, max_rank, weight` in a `FormScreen`. It also shows a hint row with
-the trait's derived blacklist/whitelist tag ids (jumping to the tag tab).
+(`TRAIT.getEntry(id)` or `TraitConfig.DEFAULT` as baseline), deep-copies it (restoring the id, which
+the `JsonCodec` round-trip drops), and edits the four scalar fields `min_level, cost, max_rank,
+weight` in a `FormScreen`. The trait's derived blacklist/whitelist tags are edited **here** (each row
+opens `TagEditScreen` for `<id>_blacklist` / `<id>_whitelist`); per-trait tags are no longer listed
+in the Tags tab. The traffic-fields row appends a brief of the current values
+(`HostilityEditorForms.traitFieldsSummary`); tag rows show plain **Blacklist** / **Whitelist**
+labels (no tag id) + the effective entry count.
 
 ### Weapon
 `WeaponFileScreen` lists six fixed rows:
 - **Melee / Ranged / Armors** → `ItemConfigListScreen` over `melee_weapons` / `ranged_weapons` /
-  `armors` (`ArrayList<ItemConfig>`). Add = pick one or more items (multi-select via
-  `PickListScreen`/`ItemListScreen`) then `FormScreen` for `level, weight`; builds
-  `new ItemConfig(defaultStacks, level, weight)`. Edit re-opens both sub-editors; an existing
-  non-null `ItemCondition` is **carried over unchanged** (see §7), the empty/`AIR` entry from the
+  `armors` (`ArrayList<ItemConfig>`). Add/Edit open `SetValueEditScreen` — the value page
+  (`level, weight`) with a button that opens the item multi-select; building keeps the existing
+  non-null `ItemCondition` **carried over unchanged** (see §7), and the empty/`AIR` entry from the
   default configs keeps working as-is.
 - **Special weapons** → `SpecialWeaponListScreen` over `special_weapons`
   (`LinkedHashMap<LinkedHashSet<EntityType<?>>, ArrayList<ItemConfig>>`), shown as a list of
   `(entity-set, item-config-list)` entries. Add = pick multiple entity types (set editor) then an
   `ItemConfigListScreen`.
 - **Weapon / Armor enchantments** → `EnchConfigListScreen` over `weapon_enchantments` /
-  `armor_enchantments`. Add = pick enchantments (multi-select, icons `Items.ENCHANTED_BOOK`) then
-  `FormScreen` for `level, chance`; builds `new EnchConfig(list, level, chance)`.
+  `armor_enchantments`. Add/Edit open `SetValueEditScreen` — the value page (`level, chance`) with a
+  button into the enchantment multi-select (icons `Items.ENCHANTED_BOOK`).
 
 ### Entity
-`EntityFileScreen` lists `EntityConfig.list` via the shared `ConfigListScreen`
-(`ArrayList<EntityConfig.Config>`). Add = pick an entity type (`PickListScreen`) → new `Config`
-with that entity + default difficulty, then open the entry editor. Each row opens
-`EntityConfigEntryScreen` with rows:
-- **Entities** → `ItemListScreen` over a `LinkedHashSet<EntityType<?>>` write-through view of
-  `config.entities` (ArrayList-backed; sync back before save).
-- **Difficulty** → `FormScreen` (7 fields) rebuilt into `DifficultyConfig` and stored back.
-- **Traits** → `TraitBaseListScreen` over `config.traits()` (`ArrayList<TraitBase>`). Add = pick
-  trait then `FormScreen` for `free, min` + `cap` (bool) + optional `TraitCondition`
-  (`lv, chance, advancement id`; leaving `lv` blank stores a null condition → 3-arg
-  `TraitBase`-style serialization).
-- **Trait blacklist** → `ItemListScreen` over `config.blacklist()` (`LinkedHashSet<MobTrait>`).
-- **Items** → `ItemPoolListScreen` over `config.items`. Add = `FormScreen`
-  (`level, chance, slot`) then `ItemEntryListScreen` over `entries`
+`EntityFileScreen` lists `EntityConfig.list` (`ArrayList<EntityConfig.Config>`) directly, with
+Add/Edit/Remove buttons on the bottom row (no intermediate "Configs" layer). Add = pick an entity
+type (`PickListScreen`) → new `Config` with that entity + default difficulty, then open the entry
+editor. Each row shows the **first entity name + entity count** (e.g. `Zombie ... (3)`, or
+`All entities` for the empty fallback) followed by the trait count + difficulty summary; multi-entity
+lists insert `...` between the name and count. Each row
+opens `EntityConfigEntryScreen`; its rows append a **brief of the current values** via
+`HostilityEditorForms` summaries (built from translatable `l2hostility.editor.summary_*` keys):
+- **Entities** → prefixed with the translatable **`Applies to:`** label, then `ItemListScreen` over a
+  `LinkedHashSet<EntityType<?>>` write-through view of
+  `config.entities` (ArrayList-backed; sync back before save); the row label is the same
+  first-entity + count name.
+- **Difficulty** → `FormScreen` (7 fields) rebuilt into `DifficultyConfig` and stored back; the row
+  appends `difficultySummary` (`minLv/base/var/scale` brief).
+- **Traits** → `TraitBaseListScreen` over `config.traits()` (`ArrayList<TraitBase>`); row shows the
+  trait count. Add = pick trait then `FormScreen` for `free, min` + `cap` (bool) + optional
+  `TraitCondition` (`lv, chance, advancement id`; leaving `lv` blank stores a null condition →
+  3-arg `TraitBase`-style serialization).
+- **Trait blacklist** → `ItemListScreen` over `config.blacklist()` (`LinkedHashSet<MobTrait>`); row
+  shows the blacklist count.
+- **Items** → `ItemPoolListScreen` over `config.items`; row shows the pool count + the items/enchants
+  summary. Add = `FormScreen` (`level, chance, slot`) then `ItemEntryListScreen` over `entries`
   (`ItemEntry(weight, ItemStack)`; Add = pick item then prompt `weight`).
 - **Values** → `FormScreen` editing the public scalar fields directly: `minSpawnLevel, maxLevel,
-  maxTraitCount` (ints), `healthScale, attackScale` (doubles), `presetTraitsOnly` (bool).
-- **Master** → `MasterConfigScreen` (nullable): if `asMaster == null` a row offers "Add";
-  otherwise edit `MasterConfig(maxTotalCount, spawnInterval)` via `FormScreen` plus
-  `MinionListScreen` over `minions` (`Minion` is edited with a `FormScreen` for its 11 scalar
-  fields + optional nested `Config`).
+  maxTraitCount` (ints), `healthScale, attackScale` (doubles), `presetTraitsOnly` (bool); the row
+  appends `entityValuesSummary` (min spawn / max level / max trait / hp / atk brief; `maxLevel 0`
+  shows **N/A** and `maxTraitCount -1` shows **∞**).
+- **Master** → shown only when the config is a master (has an `asMaster` or includes the
+  `l2hostility:master` trait). `MasterConfigScreen` edits the master fields
+  (`maxTotalCount, spawnInterval` as inline edit boxes, first box focused on open) and the **minions
+  list on the same page**
+  (Add/Edit/Remove; `Minion` is edited with a `FormScreen` for its 11 scalar fields + optional
+  nested `Config`, labeled `max count`/`min level`/`hp scale`/`spawn range`/`cooldown`/...).
+  Minion rows show the entity name + **health percentage** brief. The row appends
+  `masterSummary` (minions/cap/interval). "Remove master" clears
+  `asMaster`; with no master yet, a single "Add master"
+  row creates one. On Back the (possibly new/edited) master is written back via the parent's
+  `setMaster`.
+- Rows are drawn **grey** when their content is empty or left at the default value (entities,
+  traits, blacklist, items, values, difficulty, and master-with-no-config), using the `grey` flag
+  on `EditorList.Entry`.
 - `specialConditions` (code-defined subclasses) are **not editable**; they survive the
   `JsonCodec` round-trip copy and are preserved (see §7).
 
@@ -218,14 +249,18 @@ with that entity + default difficulty, then open the entry editor. Each row open
 - **Entity black/white list**: `l2hostility:blacklist`, `l2hostility:whitelist` — consumed by
   `MobTraitCap.HOLDER` (`WHITELIST` grants the cap to any entity; otherwise `Enemy` not in
   `BLACKLIST`).
-- **Trait black/white lists**: for every registered trait path `p`,
-  `l2hostility:p_blacklist` and `l2hostility:p_whitelist` — consumed by `TraitConfig.allows(type)`
-  (`MobTrait.allow`, e.g. `l2hostility:split_whitelist`, `l2hostility:invisible_blacklist`).
-  Plus the fallback `l2hostility:default_blacklist` / `l2hostility:default_whitelist` from
-  `TraitConfig.DEFAULT`, which apply to any trait without its own datapack file
+- **Fallback black/white lists**: `l2hostility:default_blacklist` / `l2hostility:default_whitelist`
+  from `TraitConfig.DEFAULT`, which apply to any trait without its own datapack file
   (`MobTrait.getConfig()` → `L2Hostility.TRAIT.getEntry(...)`, falls back to `DEFAULT`).
-  Derived from the trait registry (`LHTraits.TRAITS.get().getKeys()`), which is exactly the set the
-  mod's `LHTagGen.ENTITY_TAG_BUILDER` emits (every `TraitConfig` constructor registers both tags).
+- **Non-trait entity tags** (all the entity-type tags from `LHTagGen`):
+  `no_scaling`, `no_trait`, `semiboss`, `effect_immune`, `no_drop`, `hide_traits`, `hide_level`,
+  `hide_title`, `armor_target`, `melee_weapon_target`, `ranged_weapon_target`,
+  `hostility_spawner_blacklist`.
+
+Per-trait black/white tags (`l2hostility:<trait>_blacklist` / `..._whitelist`) are **not** listed
+here — they are edited from the Trait tab, which opens `TagEditScreen` for each trait's tags
+(consumed by `TraitConfig.allows(type)`, e.g. `l2hostility:split_whitelist`,
+`l2hostility:invisible_blacklist`).
 
 `TAG_EDIT` rows show the tag id + `(n)` where `n` = number of effective raw values. `canCreate()`
 returns `false` (New disabled with a toast); editing an existing tag is the only flow.
@@ -305,10 +340,16 @@ Home screens show a **Reload** button (enabled while `savedFlag`); exiting with 
 - Rule of thumb (same as golems): anything not l2hostility-specific lives in `base/EditorText`
   (`editor.*`); content-category names (difficulty/trait/weapon/entity/tags, section labels, field
   labels, pick titles, tag labels) stay in `HostilityEditorLang` (`l2hostility.editor.*`).
-- Chinese translations: extend `src/test/resources/l2hostility/lang/zh_cn/main.json` with nested
-  `editor.*` / `l2hostility.editor.*` sections and run the `organize.ResourceOrganizer` lang merger
-  (`LangFileOrganizer`) with Java 17 + gson/guava/datafixerupper from the gradle cache (see the
-  Modular Golems note for the exact classpath invocation pattern).
+- Row text uses translatable keys wherever a literal string made sense before: entry counts
+  (`HostilityEditorForms.counted`), value summaries (`HostilityEditorLang.SUMMARY_*`), and the
+  black/whitelist tag labels (plain `Blacklist`/`Whitelist`, no tag id).
+- Chinese translations live in their **own file**
+  `src/test/resources/l2hostility/lang/zh_cn/editor.json` (nested `editor.*` and
+  `l2hostility.editor.*` sections, alongside the existing `main.json`/`item.json`/etc.); run the
+  `organize.ResourceOrganizer` lang merger (`LangFileOrganizer`) with Java 17 +
+  gson/guava/datafixerupper from the gradle cache (see the Modular Golems note for the exact
+  classpath invocation pattern) to regenerate `src/main/resources/assets/l2hostility/lang/zh_cn.json`.
+- The difficulty **tab title** is `World` (`HostilityEditorLang.WORLD`, `l2hostility.editor.world`).
 
 ## 9. Build / verification
 
@@ -333,6 +374,10 @@ Home screens show a **Reload** button (enabled while `savedFlag`); exiting with 
   picked entity.
 - **Tag edits write `replace: true`** — by design, but warn the user (mod-sourced additions to the
   same tag are overridden).
+- **Trait configs are per-file, not merged** — the Trait tab edits each trait's own
+  `L2Hostility.TRAIT.getEntry(id)`; the `JsonCodec` deep copy drops the protected `id`, so
+  `TraitFileScreen` restores it (`TraitConfig.setId`) before editing (otherwise `getBlacklistTag()`
+  crashes).
 - `WeaponConfig.ItemConfig.condition` and `EntityConfig.Config.specialConditions` are
   code-typed/preserved but **not editable in v1** — they survive the `JsonCodec` deep copy, and
   `ItemConfig` edits must carry an existing `condition` forward rather than dropping it.

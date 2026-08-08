@@ -147,27 +147,24 @@ public class HostilityEditorUtil {
 		return new WriteThroughSet<>(list);
 	}
 
-	public static ResourceLocation traitBlackTag(MobTrait trait) {
-		ResourceLocation rl = trait.getRegistryName();
-		return new ResourceLocation(rl.getNamespace(), rl.getPath() + "_blacklist");
-	}
-
-	public static ResourceLocation traitWhiteTag(MobTrait trait) {
-		ResourceLocation rl = trait.getRegistryName();
-		return new ResourceLocation(rl.getNamespace(), rl.getPath() + "_whitelist");
-	}
-
 	public static List<ResourceLocation> listManagedTags() {
-		List<ResourceLocation> ans = new ArrayList<>();
-		ans.add(new ResourceLocation(L2Hostility.MODID, "blacklist"));
-		ans.add(new ResourceLocation(L2Hostility.MODID, "whitelist"));
-		for (MobTrait trait : listTraits()) {
-			ans.add(traitBlackTag(trait));
-			ans.add(traitWhiteTag(trait));
-		}
-		ans.add(new ResourceLocation(L2Hostility.MODID, "default_blacklist"));
-		ans.add(new ResourceLocation(L2Hostility.MODID, "default_whitelist"));
-		return ans;
+		return List.of(
+				new ResourceLocation(L2Hostility.MODID, "blacklist"),
+				new ResourceLocation(L2Hostility.MODID, "whitelist"),
+				new ResourceLocation(L2Hostility.MODID, "default_blacklist"),
+				new ResourceLocation(L2Hostility.MODID, "default_whitelist"),
+				new ResourceLocation(L2Hostility.MODID, "no_scaling"),
+				new ResourceLocation(L2Hostility.MODID, "no_trait"),
+				new ResourceLocation(L2Hostility.MODID, "semiboss"),
+				new ResourceLocation(L2Hostility.MODID, "effect_immune"),
+				new ResourceLocation(L2Hostility.MODID, "no_drop"),
+				new ResourceLocation(L2Hostility.MODID, "hide_traits"),
+				new ResourceLocation(L2Hostility.MODID, "hide_level"),
+				new ResourceLocation(L2Hostility.MODID, "hide_title"),
+				new ResourceLocation(L2Hostility.MODID, "armor_target"),
+				new ResourceLocation(L2Hostility.MODID, "melee_weapon_target"),
+				new ResourceLocation(L2Hostility.MODID, "ranged_weapon_target"),
+				new ResourceLocation(L2Hostility.MODID, "hostility_spawner_blacklist"));
 	}
 
 	public static final class WriteThroughSet<T> extends java.util.LinkedHashSet<T> {

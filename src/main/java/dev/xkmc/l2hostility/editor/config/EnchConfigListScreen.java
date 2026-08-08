@@ -1,11 +1,9 @@
 package dev.xkmc.l2hostility.editor.config;
 
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
-import dev.xkmc.l2hostility.editor.base.EditorHandler;
 import dev.xkmc.l2hostility.editor.base.EditorSession;
 import dev.xkmc.l2hostility.editor.base.FormScreen;
 import dev.xkmc.l2hostility.editor.base.ListEditScreen;
-import dev.xkmc.l2hostility.editor.base.PickListScreen;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
@@ -50,52 +48,32 @@ public class EnchConfigListScreen extends ListEditScreen<WeaponConfig.EnchConfig
 
 		@Override
 		public void onAdd(Consumer<WeaponConfig.EnchConfig> onDone, Screen parent) {
-			Minecraft.getInstance().setScreen(new EnchPickScreen(parent, onDone, null));
+			openEditor(parent, onDone, null);
 		}
 
 		@Override
 		public void onEdit(WeaponConfig.EnchConfig cur, Consumer<WeaponConfig.EnchConfig> onDone, Screen parent) {
-			Minecraft.getInstance().setScreen(new EnchPickScreen(parent, onDone, cur));
+			openEditor(parent, onDone, cur);
 		}
 
-	}
-
-	private static final class EnchPickScreen extends dev.xkmc.l2hostility.editor.base.ItemListScreen<Enchantment> {
-
-		private final Screen parent;
-		private final Consumer<WeaponConfig.EnchConfig> onDone;
-		@Nullable
-		private final WeaponConfig.EnchConfig existing;
-		private final Set<Enchantment> picked;
-
-		private EnchPickScreen(Screen parent, Consumer<WeaponConfig.EnchConfig> onDone,
-							   @Nullable WeaponConfig.EnchConfig existing) {
-			this(parent, onDone, existing, new LinkedHashSet<>());
-		}
-
-		private EnchPickScreen(Screen parent, Consumer<WeaponConfig.EnchConfig> onDone,
-							   @Nullable WeaponConfig.EnchConfig existing, Set<Enchantment> picked) {
-			super(HostilityEditorLang.SELECT_ENCHANTMENT.get(), picked, () -> new LinkedHashSet<>(),
-					HostilityEditorUtil.listEnchantments(), HostilityEditorHandlers.ENCHANTMENT,
-					HostilityEditorLang.SELECT_ENCHANTMENT.get(), parent, new EditorSession());
-			this.parent = parent;
-			this.onDone = onDone;
-			this.existing = existing;
-			this.picked = picked;
+		/**
+		 * Opens the value page (level/chance) first; the picked set is edited from there.
+		 */
+		private static void openEditor(Screen parent, Consumer<WeaponConfig.EnchConfig> onDone,
+									  @Nullable WeaponConfig.EnchConfig existing) {
+			Set<Enchantment> picked = new LinkedHashSet<>();
 			if (existing != null) picked.addAll(existing.enchantments());
-		}
-
-		@Override
-		public void onClose() {
-			WeaponConfig.EnchConfig base = existing;
-			int level = base == null ? 0 : base.level();
-			float chance = base == null ? 0 : base.chance();
-			Minecraft.getInstance().setScreen(new FormScreen<>(HostilityEditorLang.ENCH_CONFIG.get(),
-					HostilityEditorForms.enchConfigForm(level, chance), c -> {
-						WeaponConfig.EnchConfig ans = new WeaponConfig.EnchConfig(new ArrayList<>(picked), c.level(), c.chance());
-						onDone.accept(ans);
-						Minecraft.getInstance().setScreen(parent);
-					}, parent));
+			int level = existing == null ? 0 : existing.level();
+			float chance = existing == null ? 0 : existing.chance();
+			Minecraft.getInstance().setScreen(new SetValueEditScreen<>(HostilityEditorLang.ENCH_CONFIG.get(),
+					parent, onDone, picked, HostilityEditorUtil.listEnchantments(), HostilityEditorHandlers.ENCHANTMENT,
+					HostilityEditorLang.SELECT_ENCHANTMENT.get(), HostilityEditorLang.SELECT_ENCHANTMENT.get(),
+					List.of(
+							FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "" + level, HostilityEditorForms.intValidate()),
+							FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), "" + chance, HostilityEditorForms.doubleValidate())
+					),
+					(list, v) -> new WeaponConfig.EnchConfig(new ArrayList<>(list),
+							Integer.parseInt(v.get(0).trim()), (float) Double.parseDouble(v.get(1).trim()))));
 		}
 
 	}

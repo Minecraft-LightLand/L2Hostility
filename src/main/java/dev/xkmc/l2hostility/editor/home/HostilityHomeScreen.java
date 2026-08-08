@@ -57,6 +57,15 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 	}
 
 	@Override
+	protected Component fileLabel(ResourceLocation id) {
+		if (kind == TabKind.TRAIT) {
+			var trait = LHTraits.TRAITS.get().getValue(id);
+			if (trait != null) return trait.getDesc();
+		}
+		return super.fileLabel(id);
+	}
+
+	@Override
 	protected boolean canCreate() {
 		return switch (kind) {
 			case DIFFICULTY, WEAPON, ENTITY -> true;

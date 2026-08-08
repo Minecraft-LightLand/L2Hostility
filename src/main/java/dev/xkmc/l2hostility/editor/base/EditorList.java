@@ -54,25 +54,31 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		@Nullable
 		private final Object data;
 		private final boolean header;
+		private final boolean grey;
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick) {
-			this(text, icon, onClick, false, null);
+			this(text, icon, onClick, false, null, false);
 		}
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, @Nullable Object data) {
-			this(text, icon, onClick, false, data);
+			this(text, icon, onClick, false, data, false);
+		}
+
+		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, boolean grey) {
+			this(text, icon, onClick, false, null, grey);
 		}
 
 		public Entry(Component text, boolean header) {
-			this(text, null, null, header, null);
+			this(text, null, null, header, null, false);
 		}
 
-		private Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, boolean header, @Nullable Object data) {
+		private Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, boolean header, @Nullable Object data, boolean grey) {
 			this.text = text;
 			this.icon = icon;
 			this.onClick = onClick;
 			this.header = header;
 			this.data = data;
+			this.grey = grey;
 		}
 
 		@Nullable
@@ -100,7 +106,7 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 				g.renderItem(icon, left + 2, top + 1);
 				x = left + 22;
 			}
-			g.drawString(Minecraft.getInstance().font, text, x, top + 5, 0xFFFFFF);
+			g.drawString(Minecraft.getInstance().font, text, x, top + 5, grey ? 0xAAAAAA : 0xFFFFFF);
 		}
 
 		public void activate() {

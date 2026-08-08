@@ -8,7 +8,7 @@ public enum TabKind {
 
 	public Component title() {
 		return switch (this) {
-			case DIFFICULTY -> HostilityEditorLang.DIFFICULTY.get();
+			case DIFFICULTY -> HostilityEditorLang.WORLD.get();
 			case TRAIT -> HostilityEditorLang.TRAIT.get();
 			case WEAPON -> HostilityEditorLang.WEAPON.get();
 			case ENTITY -> HostilityEditorLang.ENTITY.get();

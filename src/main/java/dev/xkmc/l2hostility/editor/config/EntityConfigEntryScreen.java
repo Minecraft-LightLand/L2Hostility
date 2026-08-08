@@ -55,20 +55,27 @@ public class EntityConfigEntryScreen extends EditorScreen {
 
 	private void rebuild() {
 		List<EditorList.Entry> entries = new ArrayList<>();
-		entries.add(new EditorList.Entry(HostilityEditorLang.ENTITY_LIST.get(),
-				entityIcon(), this::editEntities));
-		entries.add(new EditorList.Entry(HostilityEditorLang.DIFFICULTY_EDIT.get(),
-				null, this::editDifficulty));
-		entries.add(new EditorList.Entry(HostilityEditorLang.TRAIT_BASE_LIST.get(),
-				null, this::editTraits));
-		entries.add(new EditorList.Entry(HostilityEditorLang.TRAIT_BLACKLIST.get(),
-				null, this::editBlacklist));
-		entries.add(new EditorList.Entry(HostilityEditorLang.ITEMS.get(),
-				null, this::editItems));
-		entries.add(new EditorList.Entry(HostilityEditorLang.VALUES_EDIT.get(),
-				null, this::editValues));
-		entries.add(new EditorList.Entry(HostilityEditorLang.MASTER_CONFIG.get(),
-				null, this::editMaster));
+		entries.add(new EditorList.Entry(HostilityEditorLang.APPLIES_TO.get().copy()
+						.append(Component.literal("  ")).append(HostilityEditorForms.entityListName(config.entities)),
+				entityIcon(), this::editEntities, config.entities.isEmpty()));
+		entries.add(new EditorList.Entry(HostilityEditorLang.DIFFICULTY_EDIT.get().copy()
+						.append(Component.literal("  ")).append(HostilityEditorForms.difficultySummary(config.difficulty())),
+				null, this::editDifficulty, HostilityEditorForms.defaultDifficulty(config.difficulty())));
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.TRAIT_BASE_LIST.get(), config.traits().size()),
+				null, this::editTraits, config.traits().isEmpty()));
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.TRAIT_BLACKLIST.get(), config.blacklist().size()),
+				null, this::editBlacklist, config.blacklist().isEmpty()));
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ITEMS.get(), config.items.size()),
+				null, this::editItems, config.items.isEmpty()));
+		entries.add(new EditorList.Entry(HostilityEditorLang.VALUES_EDIT.get().copy()
+						.append(Component.literal("  ")).append(HostilityEditorForms.entityValuesSummary(config)),
+				null, this::editValues, HostilityEditorForms.defaultValues(config)));
+		if (HostilityEditorForms.hasMaster(config)) {
+			entries.add(new EditorList.Entry(HostilityEditorLang.MASTER_CONFIG.get().copy()
+							.append(config.asMaster == null ? Component.empty() :
+									Component.literal("  ").append(HostilityEditorForms.masterSummary(config.asMaster))),
+					null, this::editMaster, config.asMaster == null));
+		}
 		list.setData(entries);
 	}
 
