@@ -74,16 +74,40 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 			return Component.literal(e.entities().size() + " entities");
 		}
 
+		/**
+		 * All non-empty item stacks across the entry's item configs, in order.
+		 */
+		private static List<ItemStack> allStacks(Entry e) {
+			List<ItemStack> ans = new ArrayList<>();
+			for (WeaponConfig.ItemConfig c : e.configs()) {
+				for (ItemStack s : c.stack()) {
+					if (!s.isEmpty()) ans.add(s);
+				}
+			}
+			return ans;
+		}
+
 		@Override
 		@Nullable
 		public ItemStack icon(Entry e) {
-			if (e.entities().isEmpty()) return null;
-			return HostilityEditorUtil.entityIcon(e.entities().iterator().next());
+			List<ItemStack> stacks = allStacks(e);
+			return stacks.isEmpty() ? null : stacks.get(0);
+		}
+
+		@Override
+		@Nullable
+		public java.util.function.Supplier<ItemStack> iconSupplier(Entry e) {
+			List<ItemStack> stacks = allStacks(e);
+			if (stacks.isEmpty()) return null;
+			return () -> {
+				int idx = (int) ((net.minecraft.Util.getMillis() / 1000) % stacks.size());
+				return stacks.get(idx);
+			};
 		}
 
 		@Override
 		public Component summary(Entry e) {
-			return HostilityEditorForms.counted(HostilityEditorLang.ITEM_CONFIG.get(), e.configs().size());
+			return HostilityEditorForms.entityListName(e.entities());
 		}
 
 		@Override

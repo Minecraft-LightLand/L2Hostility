@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
@@ -240,9 +241,9 @@ public final class HostilityEditorForms {
 	/**
 	 * First entity name plus the total count, or a single "All entities" label when empty.
 	 */
-	public static Component entityListName(List<EntityType<?>> entities) {
+	public static Component entityListName(Collection<EntityType<?>> entities) {
 		if (entities.isEmpty()) return HostilityEditorLang.ALL_ENTITIES.get();
-		Component name = HostilityEditorUtil.entityName(entities.get(0));
+		Component name = HostilityEditorUtil.entityName(entities.iterator().next());
 		if (entities.size() == 1) return name;
 		return name.copy().append(Component.literal(" ... (" + entities.size() + ")").withStyle(ChatFormatting.WHITE));
 	}

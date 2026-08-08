@@ -45,16 +45,18 @@ public abstract class EditorHomeScreen extends EditorScreen {
 	protected void init() {
 		int listTop = 34;
 		if (hasSearch()) {
-			search = new EditBox(font, width / 2 - 100, 36, 200, 18, EditorText.SEARCH.get());
-			search.setMaxLength(64);
-			search.setResponder(s -> rebuild());
-			addRenderableWidget(search);
-			setInitialFocus(search);
 			listTop = 58;
 		}
 		list = new EditorList(minecraft, width, height - 40 - listTop, listTop, height - 40);
 		//list.setRenderTopAndBottom(false);
 		addRenderableWidget(list);
+		if (hasSearch()) {
+			search = new EditBox(font, width / 2 - 100, 36, 200, 18, EditorText.SEARCH.get());
+			search.setMaxLength(64);
+			search.setResponder(s -> rebuild());
+			addRenderableWidget(search);
+			setInitialFocus(search);
+		}
 		initTabs();
 		List<Button> row = new ArrayList<>();
 		Button newBtn = Button.builder(EditorText.NEW.get(), b -> newFile()).bounds(0, 0, 60, 20).build();

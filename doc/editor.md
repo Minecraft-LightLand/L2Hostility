@@ -197,10 +197,12 @@ when empty):
   the item icons** (one per second, time-based).
 - **Special weapons** → `SpecialWeaponListScreen` over `special_weapons`
   (`LinkedHashMap<LinkedHashSet<EntityType<?>>, ArrayList<ItemConfig>>`), shown as a list of
-  `(entity-set, item-config-list)` entries. Add = pick multiple entity types (set editor) then an
-  `ItemConfigListScreen`. The entry editor's two entry-point rows carry **count summaries**
-  (`Entities (n)` and `Item config (m)` via `HostilityEditorForms.counted`); the list rows
-  themselves show only the item-config count.
+  `(entity-set, item-config-list)` entries. Row summary = **first entity name + entity count**
+  (`HostilityEditorForms.entityListName`; `All entities` when the set is empty); the icon is the
+  **first non-empty item** from the entry's item configs (spawn eggs are not used), **rotating
+  through all items** when there are several (one per second). Add = pick multiple entity types (set
+  editor) then an `ItemConfigListScreen`. The entry editor's two entry-point rows carry **count
+  summaries** (`Entities (n)` and `Item config (m)` via `HostilityEditorForms.counted`).
 - **Weapon / Armor enchantments** → `EnchConfigListScreen` over `weapon_enchantments` /
   `armor_enchantments`. Add/Edit open `SetValueEditScreen` — the value page (`level, chance`) with
   the enchantment set edited **inline** (Add opens the single-select picker over the remaining
