@@ -51,6 +51,7 @@ public class EntityFileScreen extends HostilityFileScreen {
 			editBtn.active = selected() != null;
 			removeBtn.active = selected() != null;
 		});
+		list.setOnDoubleClick(this::editConfig);
 		return List.of(addBtn, editBtn, removeBtn);
 	}
 

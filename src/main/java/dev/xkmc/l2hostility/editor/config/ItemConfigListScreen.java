@@ -81,7 +81,7 @@ public class ItemConfigListScreen extends ListEditScreen<WeaponConfig.ItemConfig
 			int weight = existing == null ? 100 : existing.weight();
 			Minecraft.getInstance().setScreen(new SetValueEditScreen<>(HostilityEditorLang.ITEM_CONFIG.get(),
 					parent, onDone, picked, EditorUtil.listItems(), HostilityEditorHandlers.ITEM,
-					HostilityEditorLang.SELECT_ITEM.get(), HostilityEditorLang.SELECT_ITEM.get(),
+					HostilityEditorLang.SELECT_ITEM.get(),
 					List.of(
 							FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "" + level, HostilityEditorForms::intValidate),
 							FormScreen.FormField.text(HostilityEditorLang.WEIGHT.get(), "" + weight, HostilityEditorForms::intValidate)

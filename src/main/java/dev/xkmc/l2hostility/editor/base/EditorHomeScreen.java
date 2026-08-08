@@ -48,6 +48,7 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		reloadBtn.active = hasPendingReload();
 		editBtn.active = false;
 		list.setOnSelect(() -> editBtn.active = selected() != null);
+		list.setOnDoubleClick(this::editFile);
 		rebuild();
 	}
 

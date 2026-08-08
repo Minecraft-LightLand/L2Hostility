@@ -83,7 +83,9 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 
 		@Override
 		public Component summary(Entry e) {
-			return Component.literal(e.configs().size() + " item configs");
+			return HostilityEditorForms.entry(
+					Component.literal(e.entities().size() + " entities"),
+					HostilityEditorForms.counted(HostilityEditorLang.ITEM_CONFIG.get(), e.configs().size()));
 		}
 
 		@Override

@@ -67,7 +67,7 @@ public class EnchConfigListScreen extends ListEditScreen<WeaponConfig.EnchConfig
 			float chance = existing == null ? 0 : existing.chance();
 			Minecraft.getInstance().setScreen(new SetValueEditScreen<>(HostilityEditorLang.ENCH_CONFIG.get(),
 					parent, onDone, picked, HostilityEditorUtil.listEnchantments(), HostilityEditorHandlers.ENCHANTMENT,
-					HostilityEditorLang.SELECT_ENCHANTMENT.get(), HostilityEditorLang.SELECT_ENCHANTMENT.get(),
+					HostilityEditorLang.SELECT_ENCHANTMENT.get(),
 					List.of(
 							FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "" + level, HostilityEditorForms::intValidate),
 							FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), "" + chance, HostilityEditorForms::doubleValidate)

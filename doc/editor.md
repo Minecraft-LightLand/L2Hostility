@@ -93,7 +93,7 @@ Per-kind screens (details in §4):
 |---|---|
 | difficulty | `DifficultyFileScreen`, `DimLevelMapScreen`, `BiomeMapScreen`, `DefaultTraitsListScreen` |
 | trait | `TraitFileScreen` |
-| weapon | `WeaponFileScreen`, `ItemConfigListScreen`, `SpecialWeaponListScreen`, `EnchConfigListScreen`, `SetValueEditScreen` (shared value page: scalar fields + a button into the multi-select picker) |
+| weapon | `WeaponFileScreen`, `ItemConfigListScreen`, `SpecialWeaponListScreen`, `EnchConfigListScreen`, `SetValueEditScreen` (shared value page: the picked set shown and edited inline via Add/Remove + scalar fields) |
 | entity | `EntityFileScreen` (lists `EntityConfig.Config` directly), `ConfigListScreen` (shared list of `EntityConfig.Config`, used by difficulty default-traits only), `EntityConfigEntryScreen`, `TraitBaseListScreen`, `ItemPoolListScreen`, `ItemEntryListScreen`, `MasterConfigScreen` |
 
 ### tag
@@ -186,7 +186,8 @@ labels (no tag id) + the effective entry count.
 when empty):
 - **Melee / Ranged / Armors** → `ItemConfigListScreen` over `melee_weapons` / `ranged_weapons` /
   `armors` (`ArrayList<ItemConfig>`). Add/Edit open `SetValueEditScreen` — the value page
-  (`level, weight`) with a button that opens the item multi-select; building keeps the existing
+  (`level, weight`) with the item set edited **inline** (Add opens the single-select picker over
+  the remaining items, Remove deletes the selection); building keeps the existing
   non-null `ItemCondition` **carried over unchanged** (see §7), and the empty/`AIR` entry from the
   default configs keeps working as-is. Rows whose `ItemConfig` holds several items **rotate through
   the item icons** (one per second, time-based).
@@ -195,8 +196,9 @@ when empty):
   `(entity-set, item-config-list)` entries. Add = pick multiple entity types (set editor) then an
   `ItemConfigListScreen`.
 - **Weapon / Armor enchantments** → `EnchConfigListScreen` over `weapon_enchantments` /
-  `armor_enchantments`. Add/Edit open `SetValueEditScreen` — the value page (`level, chance`) with a
-  button into the enchantment multi-select (icons `Items.ENCHANTED_BOOK`).
+  `armor_enchantments`. Add/Edit open `SetValueEditScreen` — the value page (`level, chance`) with
+  the enchantment set edited **inline** (Add opens the single-select picker over the remaining
+  enchantments, Remove deletes the selection; icons `Items.ENCHANTED_BOOK`).
 
 ### Entity
 `EntityFileScreen` lists `EntityConfig.list` (`ArrayList<EntityConfig.Config>`) directly, with

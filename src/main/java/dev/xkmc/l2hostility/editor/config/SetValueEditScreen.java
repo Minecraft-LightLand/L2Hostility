@@ -3,10 +3,11 @@ package dev.xkmc.l2hostility.editor.config;
 import dev.xkmc.l2hostility.editor.base.EditorLayout;
 import dev.xkmc.l2hostility.editor.base.EditorList;
 import dev.xkmc.l2hostility.editor.base.EditorScreen;
-import dev.xkmc.l2hostility.editor.base.EditorSession;
 import dev.xkmc.l2hostility.editor.base.EditorText;
+import dev.xkmc.l2hostility.editor.base.EditorToast;
 import dev.xkmc.l2hostility.editor.base.FormScreen;
 import dev.xkmc.l2hostility.editor.base.ItemListScreen;
+import dev.xkmc.l2hostility.editor.base.PickListScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -17,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -25,8 +25,8 @@ import java.util.function.Consumer;
 
 /**
  * Value page for an entry that is a set of picks plus scalar fields. The picked set is shown
- * and edited from a button that opens the multi-select picker; scalar fields are edited
- * inline. The picker returns to this screen on close.
+ * and edited inline (Add opens the single-select picker, Remove deletes the selection); scalar
+ * fields are edited inline. The picker returns to this screen on close.
  */
 public class SetValueEditScreen<T, R> extends EditorScreen {
 
@@ -37,7 +37,6 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 	private final Set<T> picked;
 	private final List<T> candidates;
 	private final ItemListScreen.Handler<T> handler;
-	private final Component pickButton;
 	private final Component pickTitle;
 	private final List<FormScreen.FormField> fields;
 	private final BiFunction<List<T>, List<String>, R> build;
@@ -46,13 +45,14 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 	private final List<T> order = new ArrayList<>();
 	private final List<EditBox> boxes = new ArrayList<>();
 	private final List<Integer> boxToField = new ArrayList<>();
+	private Button removeBtn;
 	private final String[] values;
 	@Nullable
 	private Component error;
 
 	public SetValueEditScreen(Component title, Screen parent, Consumer<R> onDone,
 							  Set<T> picked, List<T> candidates, ItemListScreen.Handler<T> handler,
-							  Component pickButton, Component pickTitle,
+							  Component pickTitle,
 							  List<FormScreen.FormField> fields, BiFunction<List<T>, List<String>, R> build) {
 		super(title);
 		this.parent = parent;
@@ -60,7 +60,6 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 		this.picked = picked;
 		this.candidates = candidates;
 		this.handler = handler;
-		this.pickButton = pickButton;
 		this.pickTitle = pickTitle;
 		this.fields = fields;
 		this.build = build;
@@ -90,11 +89,15 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 			addRenderableWidget(box);
 		}
 		List<Button> row = new ArrayList<>();
-		row.add(Button.builder(pickButton, b -> selectPicks()).bounds(0, 0, 100, 20).build());
+		row.add(Button.builder(EditorText.ADD.get(), b -> addPick()).bounds(0, 0, 60, 20).build());
+		removeBtn = Button.builder(EditorText.REMOVE.get(), b -> removePick()).bounds(0, 0, 60, 20).build();
+		removeBtn.active = false;
+		row.add(removeBtn);
 		row.add(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent)).bounds(0, 0, 60, 20).build());
 		row.add(Button.builder(EditorText.CONFIRM.get(), b -> submit()).bounds(0, 0, 60, 20).build());
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
+		list.setOnSelect(() -> removeBtn.active = selected() != null);
 		rebuild();
 	}
 
@@ -113,9 +116,55 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 		list.setData(entries);
 	}
 
-	private void selectPicks() {
-		Minecraft.getInstance().setScreen(new ItemListScreen<>(pickTitle, picked, () -> new LinkedHashSet<>(),
-				candidates, handler, pickTitle, this, new EditorSession()));
+	@Nullable
+	private T selected() {
+		EditorList.Entry sel = list.getSelected();
+		if (sel == null) return null;
+		int i = list.children().indexOf(sel);
+		if (i < 0 || i >= order.size()) return null;
+		return order.get(i);
+	}
+
+	private void addPick() {
+		List<T> remaining = new ArrayList<>();
+		for (T t : candidates) {
+			if (!picked.contains(t)) remaining.add(t);
+		}
+		if (remaining.isEmpty()) {
+			EditorToast.show(EditorText.ADD.get(), EditorText.NO_FILE.get());
+			return;
+		}
+		Minecraft.getInstance().setScreen(new PickListScreen<>(pickTitle, remaining,
+				new PickHandler<>(this, handler), this));
+	}
+
+	private void removePick() {
+		T item = selected();
+		if (item == null) return;
+		picked.remove(item);
+		rebuild();
+	}
+
+	private record PickHandler<T>(SetValueEditScreen<T, ?> screen, ItemListScreen.Handler<T> handler)
+			implements PickListScreen.Handler<T> {
+
+		@Override
+		public Component label(T t) {
+			return handler.label(t);
+		}
+
+		@Override
+		@Nullable
+		public ItemStack icon(T t) {
+			return handler.icon(t);
+		}
+
+		@Override
+		public void onSelect(T t) {
+			screen.picked.add(t);
+			Minecraft.getInstance().setScreen(screen);
+		}
+
 	}
 
 	private void submit() {
