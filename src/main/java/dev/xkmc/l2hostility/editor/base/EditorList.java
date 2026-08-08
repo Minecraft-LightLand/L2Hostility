@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.editor.base;
 
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -12,6 +13,9 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 
 	@Nullable
 	private Runnable onSelect;
+	@Nullable
+	private Runnable onDoubleClick;
+	private long lastClick = -1;
 
 	public EditorList(Minecraft mc, int width, int height, int y0, int y1) {
 		super(mc, width, height, y0, y1, 20);
@@ -19,6 +23,10 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 
 	public void setOnSelect(Runnable onSelect) {
 		this.onSelect = onSelect;
+	}
+
+	public void setOnDoubleClick(Runnable onDoubleClick) {
+		this.onDoubleClick = onDoubleClick;
 	}
 
 	@Override
@@ -129,7 +137,14 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		public boolean mouseClicked(double mx, double my, int button) {
 			if (button == 0 && !header) {
 				this.list.setSelected(this);
+				long now = Util.getMillis();
+				boolean dbl = now - ((EditorList) this.list).lastClick < 250;
+				((EditorList) this.list).lastClick = now;
 				activate();
+				if (dbl) {
+					Runnable dblClick = ((EditorList) this.list).onDoubleClick;
+					if (dblClick != null) dblClick.run();
+				}
 				return true;
 			}
 			return super.mouseClicked(mx, my, button);

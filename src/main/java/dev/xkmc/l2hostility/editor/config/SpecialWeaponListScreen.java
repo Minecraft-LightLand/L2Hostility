@@ -14,6 +14,7 @@ import dev.xkmc.l2hostility.editor.util.HostilityEditorHandlers;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
@@ -119,10 +120,10 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 			this.entry = entry;
 		}
 
-		@Override
-		protected void init() {
-			var list = new dev.xkmc.l2hostility.editor.base.EditorList(minecraft, width, height - 70, 30, height - 40);
-			addRenderableWidget(list);
+	@Override
+	protected void init() {
+		var list = new dev.xkmc.l2hostility.editor.base.EditorList(minecraft, width, height - 70, 30, height - 40);
+		addRenderableWidget(list);
 			java.util.List<dev.xkmc.l2hostility.editor.base.EditorList.Entry> rows = new ArrayList<>();
 			rows.add(new dev.xkmc.l2hostility.editor.base.EditorList.Entry(HostilityEditorLang.ENTITIES.get(), null,
 					() -> Minecraft.getInstance().setScreen(new ItemListScreen<>(HostilityEditorLang.ENTITIES.get(),
@@ -143,6 +144,13 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 		@Override
 		public void onClose() {
 			Minecraft.getInstance().setScreen(parent);
+		}
+
+		@Override
+		public void render(GuiGraphics g, int mx, int my, float pTick) {
+			super.renderBackground(g);
+			super.render(g, mx, my, pTick);
+			g.drawCenteredString(font, this.title, width / 2, 10, 0xFFFFFF);
 		}
 
 	}

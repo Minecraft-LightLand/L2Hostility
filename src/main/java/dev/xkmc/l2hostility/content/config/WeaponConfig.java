@@ -42,7 +42,7 @@ public class WeaponConfig extends BaseConfig {
 		int total = 0;
 		List<ItemConfig> list = new ArrayList<>();
 		for (var e : entries) {
-			if (e.test(level, player)) {
+			if (e.test(level, player) && !e.stack.isEmpty()) {
 				list.add(e);
 				total += e.weight();
 			}

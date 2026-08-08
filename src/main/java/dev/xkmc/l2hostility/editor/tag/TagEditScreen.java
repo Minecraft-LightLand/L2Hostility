@@ -76,6 +76,7 @@ public class TagEditScreen extends EditorScreen {
 			editBtn.active = selected() != null;
 			removeBtn.active = selected() != null;
 		});
+		list.setOnDoubleClick(this::toggleRequired);
 		rebuild();
 	}
 

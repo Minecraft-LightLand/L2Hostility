@@ -77,6 +77,7 @@ public class DoubleMapScreen<T> extends EditorScreen {
 			editBtn.active = selectedKey() != null;
 			removeBtn.active = selectedKey() != null;
 		});
+		list.setOnDoubleClick(this::editValue);
 		rebuild();
 	}
 

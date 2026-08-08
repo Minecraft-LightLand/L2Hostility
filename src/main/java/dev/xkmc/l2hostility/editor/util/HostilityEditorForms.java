@@ -217,10 +217,11 @@ public final class HostilityEditorForms {
 	}
 
 	public static Component itemConfigSummary(WeaponConfig.ItemConfig c) {
+		int count = (int) c.stack().stream().filter(s -> !s.isEmpty()).count();
 		return summary(
 				HostilityEditorLang.SUMMARY_LV.get(c.level()),
 				HostilityEditorLang.SUMMARY_W.get(c.weight()),
-				HostilityEditorLang.SUMMARY_ITEMS.get(c.stack().size()));
+				HostilityEditorLang.SUMMARY_ITEMS.get(count));
 	}
 
 	public static Component enchConfigSummary(WeaponConfig.EnchConfig c) {

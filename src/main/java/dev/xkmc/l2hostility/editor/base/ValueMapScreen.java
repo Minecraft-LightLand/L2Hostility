@@ -87,6 +87,7 @@ public class ValueMapScreen<K, V> extends EditorScreen {
 			editBtn.active = selectedKey() != null;
 			removeBtn.active = selectedKey() != null;
 		});
+		list.setOnDoubleClick(this::editValue);
 		rebuild();
 	}
 

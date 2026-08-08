@@ -93,6 +93,7 @@ public class ListEditScreen<T> extends EditorScreen {
 			editBtn.active = selected() != null;
 			removeBtn.active = selected() != null;
 		});
+		list.setOnDoubleClick(this::editItem);
 		rebuild();
 	}
 

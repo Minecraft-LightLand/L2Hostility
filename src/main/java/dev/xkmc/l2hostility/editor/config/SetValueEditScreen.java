@@ -77,7 +77,7 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 		addRenderableWidget(list);
 		for (int i = 0; i < fields.size(); i++) {
 			FormScreen.FormField field = fields.get(i);
-			EditBox box = new EditBox(this.font, width / 2 - 80, 26 + i * ROW_H + 14, 160, 20, field.label());
+			EditBox box = new EditBox(this.font, width / 2 + 40, 26 + i * ROW_H + 14, 120, 20, field.label());
 			box.setMaxLength(64);
 			box.setValue(values[i]);
 			int idx = i;
@@ -151,7 +151,7 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 		g.drawCenteredString(font, this.title, width / 2, 8, 0xFFFFFF);
 		for (int i = 0; i < fields.size(); i++) {
 			FormScreen.FormField field = fields.get(i);
-			g.drawCenteredString(font, field.label(), width / 2, 26 + i * ROW_H, 0xAAAAAA);
+			g.drawString(font, field.label(), width / 2 - 160, 26 + i * ROW_H + 19, 0xAAAAAA);
 		}
 		if (error != null) {
 			g.drawCenteredString(font, error, width / 2, height - 52, 0xFF5555);

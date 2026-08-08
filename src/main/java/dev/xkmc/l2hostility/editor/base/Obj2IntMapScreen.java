@@ -76,6 +76,7 @@ public class Obj2IntMapScreen<M> extends EditorScreen {
 			editBtn.active = selectedKey() != null;
 			removeBtn.active = selectedKey() != null;
 		});
+		list.setOnDoubleClick(this::editModifier);
 		rebuild();
 	}
 

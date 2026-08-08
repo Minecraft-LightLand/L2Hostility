@@ -56,15 +56,15 @@ public class MasterConfigScreen extends EditorScreen {
 			list = new EditorList(minecraft, width, height - 70, 30, height - 40);
 			addRenderableWidget(list);
 		} else {
-			maxBox = new EditBox(font, width / 2 - 80, 44, 160, 20, Component.literal(""));
+			maxBox = new EditBox(font, width / 2 - 60, 28, 140, 20, Component.literal(""));
 			maxBox.setMaxLength(64);
 			maxBox.setValue("" + master.maxTotalCount());
 			maxBox.setResponder(s -> setField(parseInt(s, master.maxTotalCount()), master.spawnInterval()));
-			spawnBox = new EditBox(font, width / 2 - 80, 80, 160, 20, Component.literal(""));
+			spawnBox = new EditBox(font, width / 2 - 60, 56, 140, 20, Component.literal(""));
 			spawnBox.setMaxLength(64);
 			spawnBox.setValue("" + master.spawnInterval());
 			spawnBox.setResponder(s -> setField(master.maxTotalCount(), parseInt(s, master.spawnInterval())));
-			list = new EditorList(minecraft, width, height - 170, 110, height - 50);
+			list = new EditorList(minecraft, width, height - 136, 86, height - 50);
 			addRenderableWidget(list);
 			addRenderableWidget(maxBox);
 			addRenderableWidget(spawnBox);
@@ -111,6 +111,7 @@ public class MasterConfigScreen extends EditorScreen {
 		list.setData(entries);
 		if (master != null) {
 			list.setOnSelect(this::updateButtons);
+			list.setOnDoubleClick(this::editMinion);
 			updateButtons();
 		}
 	}
@@ -188,8 +189,8 @@ public class MasterConfigScreen extends EditorScreen {
 		super.render(g, mx, my, pTick);
 		g.drawCenteredString(font, this.title, width / 2, 10, 0xFFFFFF);
 		if (master != null) {
-			g.drawCenteredString(font, HostilityEditorLang.MAX_TOTAL_COUNT.get(), width / 2, 28, 0xAAAAAA);
-			g.drawCenteredString(font, HostilityEditorLang.SPAWN_INTERVAL.get(), width / 2, 64, 0xAAAAAA);
+			g.drawString(font, HostilityEditorLang.MAX_TOTAL_COUNT.get(), width / 2 - 200, 33, 0xAAAAAA);
+			g.drawString(font, HostilityEditorLang.SPAWN_INTERVAL.get(), width / 2 - 200, 61, 0xAAAAAA);
 		}
 	}
 
