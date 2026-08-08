@@ -93,7 +93,6 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 		}
 
 		@Override
-		@Nullable
 		public Function<String, Component> keyValidate() {
 			return HostilityEditorUtil::validateFileId;
 		}

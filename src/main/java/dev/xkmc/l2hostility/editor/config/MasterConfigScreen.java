@@ -207,7 +207,6 @@ public class MasterConfigScreen extends EditorScreen {
 		}
 
 		@Override
-		@Nullable
 		public ItemStack icon(EntityConfig.Minion m) {
 			return HostilityEditorUtil.entityIcon(m.type());
 		}

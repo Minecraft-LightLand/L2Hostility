@@ -89,7 +89,7 @@ public class DoubleMapScreen<T> extends EditorScreen {
 		for (T k : keys) {
 			order.add(k);
 			entries.add(new EditorList.Entry(
-					handler.label(k).copy().append(Component.literal("   " + display(k, map.get(k)))), handler.icon(k), null));
+					handler.label(k).copy().append(Component.literal("   " + display(k, view().getOrDefault(k, 0.0)))), handler.icon(k), null));
 		}
 		list.setData(entries);
 		updateAddBtn();

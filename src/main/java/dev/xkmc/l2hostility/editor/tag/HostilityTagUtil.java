@@ -8,7 +8,6 @@ import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackResources;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -42,7 +41,6 @@ public final class HostilityTagUtil {
 		return values;
 	}
 
-	@Nullable
 	public static Path save(ResourceLocation tagId, List<TagValue> values) throws IOException {
 		JsonArray arr = new JsonArray();
 		for (TagValue v : values) arr.add(v.toJson());

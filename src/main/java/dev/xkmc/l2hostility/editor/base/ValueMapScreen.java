@@ -146,7 +146,8 @@ public class ValueMapScreen<K, V> extends EditorScreen {
 
 	@Nullable
 	private Component validateKey(String s) {
-		Component err = handler.keyValidate() == null ? null : handler.keyValidate().apply(s);
+		Function<String, Component> validate = handler.keyValidate();
+		Component err = validate == null ? null : validate.apply(s);
 		if (err != null) return err;
 		ResourceLocation rl = EditorFile.parseId(s);
 		if (rl == null) return EditorText.INVALID_ID.get(s);

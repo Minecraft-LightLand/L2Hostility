@@ -88,7 +88,7 @@ public class Obj2IntMapScreen<M> extends EditorScreen {
 		for (M k : keys) {
 			order.add(k);
 			entries.add(new EditorList.Entry(
-					handler.label(k).copy().append(Component.literal("   ")).append(EditorText.LEVEL_FULL.get(map.get(k), handler.maxLevel(k))), null, null));
+					handler.label(k).copy().append(Component.literal("   ")).append(EditorText.LEVEL_FULL.get(view().getOrDefault(k, 0), handler.maxLevel(k))), null, null));
 		}
 		list.setData(entries);
 		updateAddBtn();

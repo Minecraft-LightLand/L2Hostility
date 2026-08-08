@@ -21,6 +21,7 @@ public class ListEditScreen<T> extends EditorScreen {
 		@Nullable
 		ItemStack icon(T t);
 
+		@Nullable
 		default java.util.function.Supplier<ItemStack> iconSupplier(T t) {
 			return null;
 		}

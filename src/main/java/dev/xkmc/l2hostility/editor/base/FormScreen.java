@@ -87,7 +87,7 @@ public class FormScreen<T> extends EditorScreen {
 		addRenderableWidget(Button.builder(EditorText.CONFIRM.get(), b -> submit())
 				.bounds(width / 2 + 10, buttonY(), 100, 20).build());
 		layout();
-		setInitialFocus(boxes.isEmpty() ? null : boxes.get(0));
+		if (!boxes.isEmpty()) setInitialFocus(boxes.get(0));
 	}
 
 	private int labelX() {
