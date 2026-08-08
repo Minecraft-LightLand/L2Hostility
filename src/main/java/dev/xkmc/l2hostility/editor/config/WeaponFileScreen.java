@@ -4,6 +4,7 @@ import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.editor.base.EditorList;
 import dev.xkmc.l2hostility.editor.base.EditorToast;
 import dev.xkmc.l2hostility.editor.base.EditorText;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -29,23 +30,23 @@ public class WeaponFileScreen extends HostilityFileScreen {
 	@Override
 	protected void rebuild() {
 		List<EditorList.Entry> entries = new ArrayList<>();
-		entries.add(new EditorList.Entry(HostilityEditorLang.MELEE_WEAPONS.get(), null,
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.MELEE_WEAPONS.get(), config.melee_weapons.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ItemConfigListScreen(HostilityEditorLang.MELEE_WEAPONS.get(),
-						config.melee_weapons, WeaponFileScreen.this, session))));
-		entries.add(new EditorList.Entry(HostilityEditorLang.RANGED_WEAPONS.get(), null,
+						config.melee_weapons, WeaponFileScreen.this, session)), config.melee_weapons.isEmpty()));
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.RANGED_WEAPONS.get(), config.ranged_weapons.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ItemConfigListScreen(HostilityEditorLang.RANGED_WEAPONS.get(),
-						config.ranged_weapons, WeaponFileScreen.this, session))));
-		entries.add(new EditorList.Entry(HostilityEditorLang.ARMORS.get(), null,
+						config.ranged_weapons, WeaponFileScreen.this, session)), config.ranged_weapons.isEmpty()));
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ARMORS.get(), config.armors.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ItemConfigListScreen(HostilityEditorLang.ARMORS.get(),
-						config.armors, WeaponFileScreen.this, session))));
-		entries.add(new EditorList.Entry(HostilityEditorLang.SPECIAL_WEAPONS.get(), null,
-				() -> Minecraft.getInstance().setScreen(new SpecialWeaponListScreen(config, WeaponFileScreen.this, session))));
-		entries.add(new EditorList.Entry(HostilityEditorLang.WEAPON_ENCHANTMENTS.get(), null,
+						config.armors, WeaponFileScreen.this, session)), config.armors.isEmpty()));
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.SPECIAL_WEAPONS.get(), config.special_weapons.size()), null,
+				() -> Minecraft.getInstance().setScreen(new SpecialWeaponListScreen(config, WeaponFileScreen.this, session)), config.special_weapons.isEmpty()));
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.WEAPON_ENCHANTMENTS.get(), config.weapon_enchantments.size()), null,
 				() -> Minecraft.getInstance().setScreen(new EnchConfigListScreen(HostilityEditorLang.WEAPON_ENCHANTMENTS.get(),
-						config.weapon_enchantments, WeaponFileScreen.this, session))));
-		entries.add(new EditorList.Entry(HostilityEditorLang.ARMOR_ENCHANTMENTS.get(), null,
+						config.weapon_enchantments, WeaponFileScreen.this, session)), config.weapon_enchantments.isEmpty()));
+		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ARMOR_ENCHANTMENTS.get(), config.armor_enchantments.size()), null,
 				() -> Minecraft.getInstance().setScreen(new EnchConfigListScreen(HostilityEditorLang.ARMOR_ENCHANTMENTS.get(),
-						config.armor_enchantments, WeaponFileScreen.this, session))));
+						config.armor_enchantments, WeaponFileScreen.this, session)), config.armor_enchantments.isEmpty()));
 		list.setData(entries);
 	}
 

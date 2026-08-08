@@ -213,7 +213,7 @@ public final class HostilityEditorForms {
 				HostilityEditorLang.SUMMARY_MIN_LV.get(c.min()),
 				HostilityEditorLang.SUMMARY_BASE.get(c.base()),
 				HostilityEditorLang.SUMMARY_VAR.get(DoubleMapScreen.format(c.variation())),
-				HostilityEditorLang.SUMMARY_SCALE.get(DoubleMapScreen.format(c.scale())));
+				HostilityEditorLang.SUMMARY_SCALE.get(DoubleMapScreen.format(c.scale() * 100) + "%"));
 	}
 
 	public static Component itemConfigSummary(WeaponConfig.ItemConfig c) {
@@ -285,8 +285,8 @@ public final class HostilityEditorForms {
 				HostilityEditorLang.SUMMARY_MIN_SPAWN.get(c.minSpawnLevel),
 				HostilityEditorLang.SUMMARY_MAX_LV.get(c.maxLevel == 0 ? HostilityEditorLang.SUMMARY_NA.get() : c.maxLevel),
 				HostilityEditorLang.SUMMARY_MAX_TRAIT.get(c.maxTraitCount == -1 ? HostilityEditorLang.SUMMARY_INFINITE.get() : c.maxTraitCount),
-				HostilityEditorLang.SUMMARY_HP.get(DoubleMapScreen.format(c.healthScale)),
-				HostilityEditorLang.SUMMARY_ATK.get(DoubleMapScreen.format(c.attackScale)));
+				HostilityEditorLang.SUMMARY_HP_SCALE.get(DoubleMapScreen.format(c.healthScale * 100) + "%"),
+				HostilityEditorLang.SUMMARY_ATK_SCALE.get(DoubleMapScreen.format(c.attackScale * 100) + "%"));
 		if (c.presetTraitsOnly) {
 			ans.append(Component.literal("  ")).append(HostilityEditorLang.SUMMARY_PRESET.get());
 		}

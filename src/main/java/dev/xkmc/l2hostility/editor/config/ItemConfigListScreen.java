@@ -42,6 +42,17 @@ public class ItemConfigListScreen extends ListEditScreen<WeaponConfig.ItemConfig
 		}
 
 		@Override
+		@Nullable
+		public java.util.function.Supplier<ItemStack> iconSupplier(WeaponConfig.ItemConfig t) {
+			if (t.stack().isEmpty()) return null;
+			return () -> {
+				var level = Minecraft.getInstance().level;
+				int idx = level == null ? 0 : (int) ((level.getGameTime() / 20) % t.stack().size());
+				return t.stack().get(idx);
+			};
+		}
+
+		@Override
 		public Component summary(WeaponConfig.ItemConfig t) {
 			return HostilityEditorForms.itemConfigSummary(t);
 		}

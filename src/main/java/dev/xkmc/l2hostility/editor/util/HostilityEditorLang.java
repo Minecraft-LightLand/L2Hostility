@@ -145,7 +145,10 @@ public enum HostilityEditorLang {
 	SUMMARY_MINIONS("editor.summary_minions", "%s minions", 1, null),
 	SUMMARY_HP("editor.summary_hp", "hp %s", 1, null),
 	SUMMARY_ATK("editor.summary_atk", "atk %s", 1, null),
+	SUMMARY_HP_SCALE("editor.summary_hp_scale", "hpScale %s", 1, null),
+	SUMMARY_ATK_SCALE("editor.summary_atk_scale", "atkScale %s", 1, null),
 	SUMMARY_PCT("editor.summary_pct", "%s%%", 1, null),
+	STRUCTURE_SERVER_HINT("editor.structure_server_hint", " (singleplayer only)", 0, ChatFormatting.GRAY),
 	SUMMARY_PRESET("editor.summary_preset", "preset", 0, null),
 	SUMMARY_NA("editor.summary_na", "N/A", 0, null),
 	SUMMARY_INFINITE("editor.summary_infinite", "∞", 0, null);

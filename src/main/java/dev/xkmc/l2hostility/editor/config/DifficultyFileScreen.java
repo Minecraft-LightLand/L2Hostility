@@ -45,10 +45,14 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 				() -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.LEVEL_DEFAULT_TRAITS.get(),
 						config.levelDefaultTraits, () -> config.levelDefaultTraits,
 						new ConfigListHandler(session, false), DifficultyFileScreen.this, session))));
-		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(), config.structureDefaultTraits.size()), null,
-				() -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(),
+		boolean structures = HostilityEditorUtil.hasStructureRegistry();
+		Component structureLabel = HostilityEditorForms.counted(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(), config.structureDefaultTraits.size())
+				.copy().append(structures ? Component.empty() : HostilityEditorLang.STRUCTURE_SERVER_HINT.get());
+		entries.add(new EditorList.Entry(structureLabel, null,
+				structures ? () -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(),
 						config.structureDefaultTraits, () -> config.structureDefaultTraits,
-						new ConfigListHandler(session, true), DifficultyFileScreen.this, session))));
+						new ConfigListHandler(session, true), DifficultyFileScreen.this, session)) : null,
+				!structures));
 		list.setData(entries);
 	}
 

@@ -56,7 +56,7 @@ New in `base` (all mod-independent):
 
 | Class | Purpose |
 |---|---|
-| `FormScreen` | **generic multi-field form.** `FormSpec<T> = (List<FormField> fields, Function<List<String>, T> build)`; `FormField` is either text `(label, initial, validator)` or boolean `(label, initial)` (rendered as a toggle). Confirmed values passed to `build` in field order; bools arrive as `"true"/"false"`. Used for every record/scalar edit in L2Hostility configs (see §4). |
+| `FormScreen` | **generic multi-field form.** `FormSpec<T> = (List<FormField> fields, Function<List<String>, T> build)`; `FormField` is either text `(label, initial, validator)` or boolean `(label, initial)` (rendered as a toggle). Labels and controls share a row (label left, control right); if the fields don't fit, the form scrolls with the mouse wheel and the bottom buttons stay fixed. Confirmed values passed to `build` in field order; bools arrive as `"true"/"false"`. Used for every record/scalar edit in L2Hostility configs (see §4). |
 | `ListEditScreen<T>` | **generic ordered-list editor** for `List<T>` (Add/Edit/Remove/Back). `Handler<T> = { label, icon, void onAdd(Consumer<T> onDone, Screen parent), void onEdit(T cur, Consumer<T> onDone, Screen parent) }`. Add calls `onAdd` (the handler opens whatever screen chain builds a default `T`), Edit calls `onEdit`; `onDone` replaces the item in the list + sets `session.dirty`. |
 | `ValueMapScreen<K,V>` | **map editor with form-editable values**: Add (pick key from candidates via `PickListScreen` or type a key) / Edit (open `FormScreen` built from `FormSpec<V>`) / Remove. `Handler<K>` for the key label/icon + `Function<V,Component> summary` for the row text. |
 | `TagFile` | generic tag-file I/O: `save(ResourceLocation tagId, JsonElement valuesArray, String packFolder)` writes `data/<ns>/tags/entity_types/<path>.json` with `{"replace": true, "values": [...]}` and (re)uses `EditorFile.writePackMeta`; `read(PackResources, tagId)` helper for raw value extraction. |
@@ -73,7 +73,7 @@ New in `base` (all mod-independent):
 
 | Class | Purpose |
 |---|---|
-| `HostilityEditorUtil` | registry/data access: `listEntityTypes` (from `ForgeRegistries.ENTITY_TYPES`, sorted, icons via `SpawnEggItem.byId`), `listTraits` (`LHTraits.TRAITS.get().getValues()`, label `MobTrait.getDesc()`, icon `trait.asItem()`), `listEnchantments`, `listBiomes` / `listStructures` (from `Minecraft.getInstance().level.registryAccess()`), `validateFileId`, `newDifficulty/newWeapon/newEntity`, `save` (wraps `EditorFile.save` with `PACK_FOLDER = "l2hostility_editor"`), tag helpers `listManagedTags()`, `traitBlackTag(trait)/traitWhiteTag(trait)`. |
+| `HostilityEditorUtil` | registry/data access: `listEntityTypes` (from `ForgeRegistries.ENTITY_TYPES`, sorted, icons via `SpawnEggItem.byId`), `listTraits` (`LHTraits.TRAITS.get().getValues()`, label `MobTrait.getDesc()`, icon `trait.asItem()`), `listEnchantments`, `listBiomes` (from `Minecraft.getInstance().level.registryAccess()`), `listStructures` (from the **integrated server** registry access, `getSingleplayerServer()`; empty when no singleplayer server), `validateFileId`, `newDifficulty/newWeapon/newEntity`, `save` (wraps `EditorFile.save` with `PACK_FOLDER = "l2hostility_editor"`), tag helpers `listManagedTags()`, `traitBlackTag(trait)/traitWhiteTag(trait)`. |
 | `HostilityEditorLang` | l2hostility-specific lang, keys under `l2hostility.editor.*` (tab/file titles, section labels, field labels, entity/trait/enchantment pick titles, tag labels, errors). |
 | `HostilityEditorForms` | `FormSpec<T>` builders for every editable record/scalar: `DifficultyConfig`, `TraitConfig` fields, `ItemConfig`, `EnchConfig`, `TraitBase` (+ `TraitCondition`), `ItemPool`, `ItemEntry`, `MasterConfig`, `Minion`, `EntityConfig.Config` scalars. Includes the value↔string conversions (e.g. `DoubleMapScreen.format`-style trimming for doubles). |
 | `HostilityEditorHandlers` | shared `EditorHandler` instances: `ENTITY_TYPE`, `TRAIT`, `ENCHANTMENT`, `BIOME`, `STRUCTURE`, `ITEM` (label/icon). |
@@ -160,7 +160,8 @@ entry count via `HostilityEditorForms.counted(label, n)`:
   (§ entity). Note: a `Config` with an **empty `entities` list is the "all entities" fallback**
   (see `WorldDifficultyConfig.get`); the list screen lets Add create one without picking an entity.
 - **Structure default traits** → same over `structureDefaultTraits`, keys picked via
-  `PickListScreen` over `listStructures()`.
+  `PickListScreen` over `listStructures()` (fetched from the **integrated server** registry, so the
+  row is disabled/greyed with a "singleplayer only" hint when no singleplayer server is present).
 
 The "Difficulty" tab itself is labelled **World** (`HostilityEditorLang.WORLD`, key
 `l2hostility.editor.world`); the section that lists this screen's rows is
@@ -181,12 +182,14 @@ in the Tags tab. The traffic-fields row appends a brief of the current values
 labels (no tag id) + the effective entry count.
 
 ### Weapon
-`WeaponFileScreen` lists six fixed rows:
+`WeaponFileScreen` lists six fixed rows (each row shows its entry **count** and is drawn **grey**
+when empty):
 - **Melee / Ranged / Armors** → `ItemConfigListScreen` over `melee_weapons` / `ranged_weapons` /
   `armors` (`ArrayList<ItemConfig>`). Add/Edit open `SetValueEditScreen` — the value page
   (`level, weight`) with a button that opens the item multi-select; building keeps the existing
   non-null `ItemCondition` **carried over unchanged** (see §7), and the empty/`AIR` entry from the
-  default configs keeps working as-is.
+  default configs keeps working as-is. Rows whose `ItemConfig` holds several items **rotate through
+  the item icons** (one per second, time-based).
 - **Special weapons** → `SpecialWeaponListScreen` over `special_weapons`
   (`LinkedHashMap<LinkedHashSet<EntityType<?>>, ArrayList<ItemConfig>>`), shown as a list of
   `(entity-set, item-config-list)` entries. Add = pick multiple entity types (set editor) then an
@@ -209,7 +212,7 @@ opens `EntityConfigEntryScreen`; its rows append a **brief of the current values
   `config.entities` (ArrayList-backed; sync back before save); the row label is the same
   first-entity + count name.
 - **Difficulty** → `FormScreen` (7 fields) rebuilt into `DifficultyConfig` and stored back; the row
-  appends `difficultySummary` (`minLv/base/var/scale` brief).
+  appends `difficultySummary` (`minLv/base/var/scale%` brief; `scale` is shown as a percentage).
 - **Traits** → `TraitBaseListScreen` over `config.traits()` (`ArrayList<TraitBase>`); row shows the
   trait count. Add = pick trait then `FormScreen` for `free, min` + `cap` (bool) + optional
   `TraitCondition` (`lv, chance, advancement id`; leaving `lv` blank stores a null condition →
@@ -220,12 +223,14 @@ opens `EntityConfigEntryScreen`; its rows append a **brief of the current values
   summary. Add = `FormScreen` (`level, chance, slot`) then `ItemEntryListScreen` over `entries`
   (`ItemEntry(weight, ItemStack)`; Add = pick item then prompt `weight`).
 - **Values** → `FormScreen` editing the public scalar fields directly: `minSpawnLevel, maxLevel,
-  maxTraitCount` (ints), `healthScale, attackScale` (doubles), `presetTraitsOnly` (bool); the row
-  appends `entityValuesSummary` (min spawn / max level / max trait / hp / atk brief; `maxLevel 0`
-  shows **N/A** and `maxTraitCount -1` shows **∞**).
+  maxTraitCount` (ints), `healthScale, attackScale` (doubles, edited as floating point), `presetTraitsOnly`
+  (bool); the row appends `entityValuesSummary` (min spawn / max level / max trait / hpScale / atkScale
+  brief, scales shown as percentages; `maxLevel 0` shows **N/A** and `maxTraitCount -1` shows **∞**).
 - **Master** → shown only when the config is a master (has an `asMaster` or includes the
   `l2hostility:master` trait). `MasterConfigScreen` edits the master fields
-  (`maxTotalCount, spawnInterval` as inline edit boxes, first box focused on open) and the **minions
+  (`maxTotalCount, spawnInterval` as inline edit boxes, first box focused on open; the boxes render
+  with their normal background — `EditorList` disables the top/bottom shading strips that used to
+  paint over widgets added before the list) and the **minions
   list on the same page**
   (Add/Edit/Remove; `Minion` is edited with a `FormScreen` for its 11 scalar fields + optional
   nested `Config`, labeled `max count`/`min level`/`hp scale`/`spawn range`/`cooldown`/...).

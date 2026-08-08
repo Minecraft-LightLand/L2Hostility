@@ -176,10 +176,13 @@
 			"summary_minions": "%s个随从",
 			"summary_hp": "生命%s",
 			"summary_atk": "攻击%s",
+			"summary_hp_scale": "生命倍率%s",
+			"summary_atk_scale": "攻击倍率%s",
 			"summary_pct": "%s%%",
 			"summary_preset": "预设",
 			"summary_na": "N/A",
-			"summary_infinite": "∞"
+			"summary_infinite": "∞",
+			"structure_server_hint": "（仅单人模式）"
 		}
 	}
 }

@@ -31,7 +31,9 @@ public class FormScreen<T> extends EditorScreen {
 
 	}
 
-	private static final int ROW_H = 36;
+	private static final int ROW_H = 26;
+	private static final int BOX_W = 120;
+	private static final int CONTENT_TOP = 24;
 
 	private final FormSpec<T> spec;
 	private final Consumer<T> onDone;
@@ -39,8 +41,10 @@ public class FormScreen<T> extends EditorScreen {
 
 	private final boolean[] boolValues;
 	private final List<EditBox> boxes = new ArrayList<>();
+	private final List<Button> boolBtns = new ArrayList<>();
 	private final List<Integer> boxToField = new ArrayList<>();
 	private final List<Integer> boolToField = new ArrayList<>();
+	private int scroll;
 	@Nullable
 	private Component error;
 
@@ -57,7 +61,6 @@ public class FormScreen<T> extends EditorScreen {
 		int bi = 0;
 		for (int i = 0; i < spec.fields().size(); i++) {
 			FormField field = spec.fields().get(i);
-			int fy = 26 + i * ROW_H;
 			if (field.bool()) {
 				int idx = bi++;
 				boolToField.add(i);
@@ -66,10 +69,11 @@ public class FormScreen<T> extends EditorScreen {
 					boolValues[idx] = !boolValues[idx];
 					b.setMessage(boolLabel(idx));
 					error = null;
-				}).bounds(width / 2 - 80, fy + 14, 160, 20).build();
+				}).bounds(boxX(), 0, BOX_W, 20).build();
+				boolBtns.add(btn);
 				addRenderableWidget(btn);
 			} else {
-				EditBox box = new EditBox(this.font, width / 2 - 80, fy + 14, 160, 20, field.label());
+				EditBox box = new EditBox(this.font, boxX(), 0, BOX_W, 20, field.label());
 				box.setMaxLength(64);
 				box.setValue(field.initial());
 				box.setResponder(s -> error = null);
@@ -78,12 +82,50 @@ public class FormScreen<T> extends EditorScreen {
 				addRenderableWidget(box);
 			}
 		}
-		int rowY = 26 + spec.fields().size() * ROW_H;
 		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
-				.bounds(width / 2 - 110, rowY, 100, 20).build());
+				.bounds(width / 2 - 110, buttonY(), 100, 20).build());
 		addRenderableWidget(Button.builder(EditorText.CONFIRM.get(), b -> submit())
-				.bounds(width / 2 + 10, rowY, 100, 20).build());
+				.bounds(width / 2 + 10, buttonY(), 100, 20).build());
+		layout();
 		setInitialFocus(boxes.isEmpty() ? null : boxes.get(0));
+	}
+
+	private int labelX() {
+		return width / 2 - 160;
+	}
+
+	private int boxX() {
+		return width / 2 + 40;
+	}
+
+	private int fieldY(int i) {
+		return CONTENT_TOP + i * ROW_H - scroll;
+	}
+
+	private int buttonY() {
+		return height - 30;
+	}
+
+	private int maxScroll() {
+		return Math.max(0, spec.fields().size() * ROW_H - (buttonY() - 10 - CONTENT_TOP));
+	}
+
+	private void layout() {
+		for (int i = 0; i < boxes.size(); i++) {
+			boxes.get(i).setY(fieldY(boxToField.get(i)) + 2);
+		}
+		for (int i = 0; i < boolBtns.size(); i++) {
+			boolBtns.get(i).setY(fieldY(boolToField.get(i)) + 2);
+		}
+	}
+
+	@Override
+	public boolean mouseScrolled(double mx, double my, double delta) {
+		int max = maxScroll();
+		if (max <= 0) return false;
+		scroll = net.minecraft.util.Mth.clamp(scroll - (int) (delta * 20), 0, max);
+		layout();
+		return true;
 	}
 
 	private Component boolLabel(int idx) {
@@ -129,11 +171,10 @@ public class FormScreen<T> extends EditorScreen {
 		g.drawCenteredString(font, this.title, width / 2, 8, 0xFFFFFF);
 		for (int i = 0; i < spec.fields().size(); i++) {
 			FormField field = spec.fields().get(i);
-			int fy = 26 + i * ROW_H;
-			g.drawCenteredString(font, field.label(), width / 2, fy, 0xAAAAAA);
+			g.drawString(font, field.label(), labelX(), fieldY(i) + 5, 0xAAAAAA);
 		}
 		if (error != null) {
-			g.drawCenteredString(font, error, width / 2, 26 + spec.fields().size() * ROW_H + 24, 0xFF5555);
+			g.drawCenteredString(font, error, width / 2, buttonY() - 12, 0xFF5555);
 		}
 	}
 

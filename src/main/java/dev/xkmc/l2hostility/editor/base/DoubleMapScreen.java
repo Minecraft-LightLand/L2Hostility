@@ -159,7 +159,8 @@ public class DoubleMapScreen<T> extends EditorScreen {
 	}
 
 	public static String format(double v) {
-		String s = String.format(Locale.ROOT, "%.6f", v);
+		double r = Math.round(v * 1e4) / 1e4;
+		String s = String.format(Locale.ROOT, "%.6f", r);
 		while (s.endsWith("0")) {
 			s = s.substring(0, s.length() - 1);
 		}

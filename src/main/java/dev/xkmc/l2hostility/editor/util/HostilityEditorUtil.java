@@ -61,10 +61,14 @@ public class HostilityEditorUtil {
 		return ans;
 	}
 
+	public static boolean hasStructureRegistry() {
+		return Minecraft.getInstance().getSingleplayerServer() != null;
+	}
+
 	public static List<ResourceKey<Structure>> listStructures() {
-		var level = Minecraft.getInstance().level;
-		if (level == null) return List.of();
-		Registry<Structure> reg = level.registryAccess().registryOrThrow(Registries.STRUCTURE);
+		var server = Minecraft.getInstance().getSingleplayerServer();
+		if (server == null) return List.of();
+		Registry<Structure> reg = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
 		List<ResourceKey<Structure>> ans = new ArrayList<>(reg.registryKeySet());
 		ans.sort((a, b) -> a.location().toString().compareToIgnoreCase(b.location().toString()));
 		return ans;

@@ -21,6 +21,10 @@ public class ListEditScreen<T> extends EditorScreen {
 		@Nullable
 		ItemStack icon(T t);
 
+		default java.util.function.Supplier<ItemStack> iconSupplier(T t) {
+			return null;
+		}
+
 		Component summary(T t);
 
 		void onAdd(Consumer<T> onDone, Screen parent);
@@ -111,7 +115,10 @@ public class ListEditScreen<T> extends EditorScreen {
 		}
 		for (T t : data) {
 			Component text = handler.summary(t);
-			entries.add(new EditorList.Entry(text, handler.icon(t), null));
+			java.util.function.Supplier<ItemStack> supplier = handler.iconSupplier(t);
+			entries.add(supplier == null
+					? new EditorList.Entry(text, handler.icon(t), null)
+					: EditorList.Entry.rotating(text, supplier, null));
 		}
 		list.setData(entries);
 	}

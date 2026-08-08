@@ -50,6 +50,8 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		@Nullable
 		private final ItemStack icon;
 		@Nullable
+		private final java.util.function.Supplier<ItemStack> iconSupplier;
+		@Nullable
 		private final Runnable onClick;
 		@Nullable
 		private final Object data;
@@ -57,24 +59,31 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		private final boolean grey;
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick) {
-			this(text, icon, onClick, false, null, false);
+			this(text, icon, null, onClick, false, null, false);
 		}
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, @Nullable Object data) {
-			this(text, icon, onClick, false, data, false);
+			this(text, icon, null, onClick, false, data, false);
 		}
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, boolean grey) {
-			this(text, icon, onClick, false, null, grey);
+			this(text, icon, null, onClick, false, null, grey);
+		}
+
+		public static Entry rotating(Component text, @Nullable java.util.function.Supplier<ItemStack> iconSupplier,
+									 @Nullable Runnable onClick) {
+			return new Entry(text, null, iconSupplier, onClick, false, null, false);
 		}
 
 		public Entry(Component text, boolean header) {
-			this(text, null, null, header, null, false);
+			this(text, null, null, null, header, null, false);
 		}
 
-		private Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, boolean header, @Nullable Object data, boolean grey) {
+		private Entry(Component text, @Nullable ItemStack icon, @Nullable java.util.function.Supplier<ItemStack> iconSupplier,
+					  @Nullable Runnable onClick, boolean header, @Nullable Object data, boolean grey) {
 			this.text = text;
 			this.icon = icon;
+			this.iconSupplier = iconSupplier;
 			this.onClick = onClick;
 			this.header = header;
 			this.data = data;
@@ -102,8 +111,9 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 				g.fill(left, top - 2, left + rowWidth, top + itemHeight + 2, 0x20FFFFFF);
 			}
 			int x = left + 2;
-			if (icon != null) {
-				g.renderItem(icon, left + 2, top + 1);
+			ItemStack useIcon = iconSupplier != null ? iconSupplier.get() : icon;
+			if (useIcon != null && !useIcon.isEmpty()) {
+				g.renderItem(useIcon, left + 2, top + 1);
 				x = left + 22;
 			}
 			g.drawString(Minecraft.getInstance().font, text, x, top + 5, grey ? 0xAAAAAA : 0xFFFFFF);
