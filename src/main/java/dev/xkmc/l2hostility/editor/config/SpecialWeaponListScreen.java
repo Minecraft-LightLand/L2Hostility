@@ -83,9 +83,7 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 
 		@Override
 		public Component summary(Entry e) {
-			return HostilityEditorForms.entry(
-					Component.literal(e.entities().size() + " entities"),
-					HostilityEditorForms.counted(HostilityEditorLang.ITEM_CONFIG.get(), e.configs().size()));
+			return HostilityEditorForms.counted(HostilityEditorLang.ITEM_CONFIG.get(), e.configs().size());
 		}
 
 		@Override
@@ -127,12 +125,12 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 		var list = new dev.xkmc.l2hostility.editor.base.EditorList(minecraft, width, height - 70, 30, height - 40);
 		addRenderableWidget(list);
 			java.util.List<dev.xkmc.l2hostility.editor.base.EditorList.Entry> rows = new ArrayList<>();
-			rows.add(new dev.xkmc.l2hostility.editor.base.EditorList.Entry(HostilityEditorLang.ENTITIES.get(), null,
+			rows.add(new dev.xkmc.l2hostility.editor.base.EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ENTITIES.get(), entry.entities().size()), null,
 					() -> Minecraft.getInstance().setScreen(new ItemListScreen<>(HostilityEditorLang.ENTITIES.get(),
 							entry.entities(), () -> entry.entities(),
 							HostilityEditorUtil.listEntityTypes(), HostilityEditorHandlers.ENTITY_TYPE,
 							HostilityEditorLang.SELECT_ENTITY.get(), EntryScreen.this, new dev.xkmc.l2hostility.editor.base.EditorSession()))));
-			rows.add(new dev.xkmc.l2hostility.editor.base.EditorList.Entry(HostilityEditorLang.ITEM_CONFIG.get(), null,
+			rows.add(new dev.xkmc.l2hostility.editor.base.EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ITEM_CONFIG.get(), entry.configs().size()), null,
 					() -> Minecraft.getInstance().setScreen(new ItemConfigListScreen(
 							HostilityEditorLang.ITEM_CONFIG.get(), entry.configs(), EntryScreen.this,
 							new dev.xkmc.l2hostility.editor.base.EditorSession()))));

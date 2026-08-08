@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.editor.base;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -65,35 +66,45 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		private final Object data;
 		private final boolean header;
 		private final boolean grey;
+		private final boolean collapsed;
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick) {
-			this(text, icon, null, onClick, false, null, false);
+			this(text, icon, null, onClick, false, false, null, false);
 		}
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, @Nullable Object data) {
-			this(text, icon, null, onClick, false, data, false);
+			this(text, icon, null, onClick, false, false, data, false);
 		}
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, boolean grey) {
-			this(text, icon, null, onClick, false, null, grey);
+			this(text, icon, null, onClick, false, false, null, grey);
 		}
 
 		public static Entry rotating(Component text, @Nullable java.util.function.Supplier<ItemStack> iconSupplier,
 									 @Nullable Runnable onClick) {
-			return new Entry(text, null, iconSupplier, onClick, false, null, false);
+			return new Entry(text, null, iconSupplier, onClick, false, false, null, false);
 		}
 
 		public Entry(Component text, boolean header) {
-			this(text, null, null, null, header, null, false);
+			this(text, null, null, null, header, false, null, false);
+		}
+
+		public Entry(Component text, boolean header, @Nullable Runnable onClick) {
+			this(text, null, null, onClick, header, false, null, false);
+		}
+
+		public Entry(Component text, boolean header, @Nullable Runnable onClick, boolean collapsed) {
+			this(text, null, null, onClick, header, collapsed, null, false);
 		}
 
 		private Entry(Component text, @Nullable ItemStack icon, @Nullable java.util.function.Supplier<ItemStack> iconSupplier,
-					  @Nullable Runnable onClick, boolean header, @Nullable Object data, boolean grey) {
+					  @Nullable Runnable onClick, boolean header, boolean collapsed, @Nullable Object data, boolean grey) {
 			this.text = text;
 			this.icon = icon;
 			this.iconSupplier = iconSupplier;
 			this.onClick = onClick;
 			this.header = header;
+			this.collapsed = collapsed;
 			this.data = data;
 			this.grey = grey;
 		}
@@ -112,7 +123,9 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		public void render(GuiGraphics g, int index, int top, int left, int rowWidth, int itemHeight, int mx, int my, boolean hovered, float partialTick) {
 			if (header) {
 				g.fill(left, top - 2, left + rowWidth, top + itemHeight + 2, 0x20AAAAAA);
-				g.drawString(Minecraft.getInstance().font, text, left + 2, top + 5, 0xAAAAAA);
+				Component label = text.copy().withStyle(ChatFormatting.WHITE)
+						.append(Component.literal(collapsed ? " [+]" : " [-]").withStyle(ChatFormatting.GRAY));
+				g.drawString(Minecraft.getInstance().font, label, left + 2, top + 5, 0xAAAAAA);
 				return;
 			}
 			if (hovered) {
@@ -135,17 +148,24 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 
 		@Override
 		public boolean mouseClicked(double mx, double my, int button) {
-			if (button == 0 && !header) {
-				this.list.setSelected(this);
-				long now = Util.getMillis();
-				boolean dbl = now - ((EditorList) this.list).lastClick < 250;
-				((EditorList) this.list).lastClick = now;
-				activate();
-				if (dbl) {
-					Runnable dblClick = ((EditorList) this.list).onDoubleClick;
-					if (dblClick != null) dblClick.run();
+			if (button == 0) {
+				if (header) {
+					if (onClick != null) {
+						onClick.run();
+						return true;
+					}
+				} else {
+					this.list.setSelected(this);
+					long now = Util.getMillis();
+					boolean dbl = now - ((EditorList) this.list).lastClick < 250;
+					((EditorList) this.list).lastClick = now;
+					activate();
+					if (dbl) {
+						Runnable dblClick = ((EditorList) this.list).onDoubleClick;
+						if (dblClick != null) dblClick.run();
+					}
+					return true;
 				}
-				return true;
 			}
 			return super.mouseClicked(mx, my, button);
 		}

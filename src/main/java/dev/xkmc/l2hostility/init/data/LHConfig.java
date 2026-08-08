@@ -15,6 +15,7 @@ public class LHConfig {
 
 	public static class Client {
 
+		public final ForgeConfigSpec.ConfigValue<String> editorSavePath;
 		public final ForgeConfigSpec.BooleanValue showTraitOverHead;
 		public final ForgeConfigSpec.BooleanValue showLevelOverHead;
 		public final ForgeConfigSpec.IntValue overHeadRenderDistance;
@@ -30,6 +31,12 @@ public class LHConfig {
 		public final ForgeConfigSpec.BooleanValue killerAuraSoundEffect;
 
 		Client(ForgeConfigSpec.Builder builder) {
+			editorSavePath = builder.comment("Save path override for the in-game editor.",
+							"Leave empty to save into the current world's datapacks folder.",
+							"Set to an absolute path of a datapacks folder (the folder containing datapack pack folders)",
+							"to save into a global datapack loader location instead, e.g. the folder used by",
+							"OpenLoader's 'datapacks' or a modpack's global data folder.")
+					.define("editorSavePath", "");
 			showTraitOverHead = builder.comment("Render Traits in name plate form")
 					.define("showTraitOverHead", true);
 			showLevelOverHead = builder.comment("Render mob level in name plate form")

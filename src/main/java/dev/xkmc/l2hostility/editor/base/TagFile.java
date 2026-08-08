@@ -5,12 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.world.level.storage.LevelResource;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -30,11 +27,10 @@ public class TagFile {
 	 * Writes a tag JSON for the given tag id with replace:true. Values are raw tag entries.
 	 */
 	public static Path save(ResourceLocation tagId, JsonElement valuesArray, String packFolder) throws IOException {
-		IntegratedServer server = Minecraft.getInstance().getSingleplayerServer();
-		if (server == null) {
+		Path root = EditorFile.configRoot();
+		if (root == null) {
 			throw new IOException("no active world");
 		}
-		Path root = server.getWorldPath(LevelResource.DATAPACK_DIR);
 		Path pack = root.resolve(packFolder);
 		Files.createDirectories(pack);
 		JsonObject obj = new JsonObject();

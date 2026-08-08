@@ -31,7 +31,7 @@ Copied verbatim from `ModularGolems.editor.base` with `package dev.xkmc.modularg
 
 | Class | Purpose |
 |---|---|
-| `EditorFile` | config file machinery: `save(type,id,config,packFolder)`, `copy`, `parseId`, `validNamespace`, `worldDatapacks`/`currentWorldDir`, writes `pack.mcmeta`. **Improvement:** `pack.mcmeta` description string becomes "L2Hostility Editor". |
+| `EditorFile` | config file machinery: `save(type,id,config,packFolder)`, `copy`, `parseId`, `validNamespace`, `worldDatapacks`/`currentWorldDir`, writes `pack.mcmeta`. **Improvements:** `pack.mcmeta` description string becomes "L2Hostility Editor"; save root resolved via `configRoot()`, which honors the pluggable `saveRootOverride` supplier (set from `HostilityEditorUtil` to read `LHConfig.CLIENT.editorSavePath`) before falling back to the current world's datapacks folder. |
 | `EditorUtil` | generic pickers/labels: `listItems`, `listTags`, `itemName`, `tagName`, `itemIngredient`, `tagIngredient`, `ingredientIcon`, `ingredientText`, `save`, `copy`, `byId`. |
 | `EditorSaveState` | static `savedFlag` (a save is pending a datapack reload) + `canEdit()` (singleplayer + cheats + creative). |
 | `EditorText` | generic lang enum, keys under `editor.*` (neutral). |
@@ -49,7 +49,7 @@ Copied verbatim from `ModularGolems.editor.base` with `package dev.xkmc.modularg
 | `IngredientScreen` | item/tag/clear picker for an `Ingredient`. **Not used by L2Hostility configs** (no ingredient fields) but kept in the copy for completeness. |
 | `ExitConfirmScreen` | Save / Discard / Cancel dialog for leaving a dirty file. |
 | `ReloadConfirmScreen` | "Reload now / Later" dialog shown on editor exit when a save is pending. |
-| `EditorHomeScreen` | abstract shared home: grouped file list (namespace headers), top tab bar, New/Edit/Reload/Back bottom row. **Improvement:** add `protected boolean canCreate() { return true; }`; the New button's `active` is set from it (tag and trait tabs return `false`). |
+| `EditorHomeScreen` | abstract shared home: grouped file list (namespace headers), top tab bar, New/Edit/Reload/Back bottom row. **Improvements:** add `protected boolean canCreate() { return true; }`; the New button's `active` is set from it (tag and trait tabs return `false`). Group headers are **foldable** (click toggles collapse, `[+]/[-]` marker; collapsed groups are skipped unless the search query matches the namespace). `hasSearch()` (default `false`) shows an `EditBox` search bar above the list; it filters rows by `namespace path` (collapsed groups auto-expand on a namespace match). |
 | `LinkButton`, `package-info.java` | underline-on-hover button; `@MethodsReturnNonnullByDefault` + `@ParametersAreNonnullByDefault`. |
 
 New in `base` (all mod-independent):
@@ -65,7 +65,10 @@ New in `base` (all mod-independent):
 1. `EditorHomeScreen.canCreate()` hook (New disabled per tab).
 2. `FormScreen`, `ListEditScreen`, `ValueMapScreen`, `TagFile` added (L2Hostility's data model is mostly records/lists, which the golem base can't edit).
 3. `pack.mcmeta` description fixed to this mod.
-4. *(optional polish, same as the "handler refactor" Modular Golems lists as pending)*: consolidate `PickListScreen/ItemListScreen/DoubleMapScreen/Obj2IntMapScreen` constructor functional args behind one `EditorHandler<T>` with default `icon()→null`, `percent()→false`, `maxLevel()→unbounded`. New screens (`ListEditScreen`, `ValueMapScreen`) should adopt this shape from the start; retrofitting the four copied screens is optional and can be deferred.
+4. `EditorHomeScreen` foldable group headers + optional `hasSearch()` search bar.
+5. `EditorFile.configRoot()` — configurable save root (`LHConfig.CLIENT.editorSavePath`, default empty = world datapacks).
+6. `EditorList.Entry` header clicks (fold toggle) — headers may carry an `onClick` + `collapsed` marker.
+7. *(optional polish, same as the "handler refactor" Modular Golems lists as pending)*: consolidate `PickListScreen/ItemListScreen/DoubleMapScreen/Obj2IntMapScreen` constructor functional args behind one `EditorHandler<T>` with default `icon()→null`, `percent()→false`, `maxLevel()→unbounded`. New screens (`ListEditScreen`, `ValueMapScreen`) should adopt this shape from the start; retrofitting the four copied screens is optional and can be deferred.
 
 `base` must never import `dev.xkmc.l2hostility.*` (non-editor), matching the golem rule.
 
@@ -83,7 +86,7 @@ New in `base` (all mod-independent):
 
 | Class | Purpose |
 |---|---|
-| `HostilityHomeScreen` | **one** `EditorHomeScreen` subclass parameterized by `TabKind { DIFFICULTY, TRAIT, WEAPON, ENTITY, TAGS }` (instead of five near-identical home subclasses). `tabs()` always returns all five tabs; `activeTab()`/`listFiles()`/`fileCount()`/`emptyMessage()`/`newFileDefault()`/`openNew()`/`openEdit()`/`validateId()`/`canCreate()` dispatch on the kind. Holds the entry `parent` (the screen that opened the editor); all tab switches construct a new `HostilityHomeScreen(kind, parent)`. |
+| `HostilityHomeScreen` | **one** `EditorHomeScreen` subclass parameterized by `TabKind { DIFFICULTY, TRAIT, WEAPON, ENTITY, TAGS }` (instead of five near-identical home subclasses). `tabs()` always returns all five tabs; `activeTab()`/`listFiles()`/`fileCount()`/`emptyMessage()`/`newFileDefault()`/`openNew()`/`openEdit()`/`validateId()`/`canCreate()` dispatch on the kind. `hasSearch()` returns `true` for **trait and entity** tabs (search bar); group headers are foldable everywhere. Holds the entry `parent` (the screen that opened the editor); all tab switches construct a new `HostilityHomeScreen(kind, parent)`. |
 
 ### config
 
@@ -140,7 +143,8 @@ is the entry screen, so Back from any tab leaves the editor.
   default id. Dirty tracking via a shared `EditorSession`; **Save** disabled unless dirty; Edit/Remove
   disabled until a row is selected; bottom buttons on one centered row (`EditorLayout.centerRow`).
 - **Save** prompts for a file id (prefilled), writes via
-  `HostilityEditorUtil.save` → `EditorFile.save(type, id, config, PACK_FOLDER)`, stays on the file
+  `HostilityEditorUtil.save` → `EditorFile.save(type, id, config, PACK_FOLDER)` into
+  `EditorFile.configRoot()`, stays on the file
   screen (dirty cleared), sets `EditorSaveState.savedFlag = true`. Exit with unsaved changes →
   `ExitConfirmScreen`.
 
@@ -194,7 +198,9 @@ when empty):
 - **Special weapons** → `SpecialWeaponListScreen` over `special_weapons`
   (`LinkedHashMap<LinkedHashSet<EntityType<?>>, ArrayList<ItemConfig>>`), shown as a list of
   `(entity-set, item-config-list)` entries. Add = pick multiple entity types (set editor) then an
-  `ItemConfigListScreen`.
+  `ItemConfigListScreen`. The entry editor's two entry-point rows carry **count summaries**
+  (`Entities (n)` and `Item config (m)` via `HostilityEditorForms.counted`); the list rows
+  themselves show only the item-config count.
 - **Weapon / Armor enchantments** → `EnchConfigListScreen` over `weapon_enchantments` /
   `armor_enchantments`. Add/Edit open `SetValueEditScreen` — the value page (`level, chance`) with
   the enchantment set edited **inline** (Add opens the single-select picker over the remaining
@@ -293,18 +299,19 @@ Tags are edited as **raw `TagValue` entries**, not resolved entities, so tag ref
 ### Save
 `HostilityTagUtil.save(tagId, List<TagValue>)` writes, via `TagFile`:
 ```
-<world>/datapacks/l2hostility_editor/data/<ns>/tags/entity_types/<path>.json
+<save-root>/l2hostility_editor/data/<ns>/tags/entity_types/<path>.json
 {
   "replace": true,
   "values": ["minecraft:zombie", {"id": "mod:boss", "required": false}, "#l2hostility:semiboss"]
 }
 ```
-`replace: true` is deliberate: the editor pack is a world datapack that sits above the mod's
-built-in datapack, so the edited tag fully overrides the generated one (required for removals).
-Tradeoff (surfaced in a `SAVE_NOTE`-style hint): once a tag is edited, later additions to that tag
-from mod datapacks are overridden until the editor tag is re-edited/removed. Tag ids are fixed (the
-row you opened), so there is no file-id prompt; dirty tracking, Save enablement and exit-confirm
-work as usual, and save sets `EditorSaveState.savedFlag`.
+where `<save-root>` is the current world's `datapacks/` folder by default (see §6 for the
+configurable override). `replace: true` is deliberate: the editor pack is a world datapack that sits
+above the mod's built-in datapack, so the edited tag fully overrides the generated one (required for
+removals). Tradeoff (surfaced in a `SAVE_NOTE`-style hint): once a tag is edited, later additions to
+that tag from mod datapacks are overridden until the editor tag is re-edited/removed. Tag ids are
+fixed (the row you opened), so there is no file-id prompt; dirty tracking, Save enablement and
+exit-confirm work as usual, and save sets `EditorSaveState.savedFlag`.
 
 `TagEditScreen` actions: **Add entity** (`PickListScreen` over `listEntityTypes()`),
 **Add tag** (`PromptScreen`, input `#namespace:path`), **Edit** toggles `required`, **Remove** deletes
@@ -314,9 +321,20 @@ the selected raw value.
 
 ## 6. JSON output paths
 
+### Save root (configurable)
+Every editor save goes through `EditorFile.configRoot()`. The base layer keeps a `saveRootOverride`
+supplier (null by default); `HostilityEditorUtil` sets it to read
+`LHConfig.CLIENT.editorSavePath` (client config, `l2hostility-client.toml`, default `""`). When the
+override returns a path, it is used as the **datapacks folder** root; otherwise saves go to the
+current world's `datapacks/` folder (`worldDatapacks()`). Set the config to the absolute path of a
+datapacks folder (the folder that contains datapack pack folders) to save into a global datapack
+loader location instead of the world — e.g. OpenLoader's datapacks folder or a modpack's global data
+folder. The editor pack folder name (`l2hostility_editor`) is still resolved underneath the chosen
+root. Defaulting to the world path keeps existing saves working unchanged.
+
 Configs:
 ```
-<world>/datapacks/l2hostility_editor/data/<namespace>/l2hostility_config/<difficulty|trait|weapon|entity>/<path>.json
+<save-root>/l2hostility_editor/data/<namespace>/l2hostility_config/<difficulty|trait|weapon|entity>/<path>.json
 ```
 (`PACK_FOLDER = "l2hostility_editor"`; path via `ConfigTypeEntry.asPath` = `data/<ns>/l2hostility_config/<name>/<path>`.
 Serialization uses `JsonCodec.toJson(config, type.cls())` + pretty GSON, exactly like datagen.)
@@ -324,11 +342,12 @@ Serialization uses `JsonCodec.toJson(config, type.cls())` + pretty GSON, exactly
 
 Tags:
 ```
-<world>/datapacks/l2hostility_editor/data/l2hostility/tags/entity_types/<path>.json
+<save-root>/l2hostility_editor/data/l2hostility/tags/entity_types/<path>.json
 ```
 
 New packs written to a world's `datapacks/` are **not auto-enabled**; apply via `/reload`, the
-editor's Reload button, or the world's Datapack Selection screen.
+editor's Reload button, or the world's Datapack Selection screen. When saving to a custom
+`editorSavePath`, enable the pack through the loader that reads that folder.
 
 ## 7. Reload handling
 
@@ -373,7 +392,9 @@ Home screens show a **Reload** button (enabled while `savedFlag`); exiting with 
 
 - `src/generated/resources` is a real source set — never delete it.
 - `base` must never import `dev.xkmc.l2hostility.*`; only l2library/l2serial/vanilla/net/registrate
-  (those are already on our classpath).
+  (those are already on our classpath). The configurable save root keeps this rule: base exposes
+  `EditorFile.saveRootOverride` (a `Supplier<Path>`), and the l2hostility layer wires it to
+  `LHConfig.CLIENT.editorSavePath` from `HostilityEditorUtil`'s static init.
 - **Trait tab lists registered traits, not loaded config files** — otherwise traits whose datapack
   file is missing (falling back to `TraitConfig.DEFAULT`) couldn't be edited.
 - **Empty `entities` list in a `EntityConfig.Config` inside difficulty default traits = "all

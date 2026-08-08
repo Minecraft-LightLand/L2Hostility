@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -11,8 +12,11 @@ import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Function;
 
@@ -22,15 +26,33 @@ public abstract class EditorHomeScreen extends EditorScreen {
 	private EditorList list;
 	private Button reloadBtn;
 	private Button editBtn;
+	private EditBox search;
+	private final Set<String> collapsed = new HashSet<>();
 
 	protected EditorHomeScreen(Component title, Screen parent) {
 		super(title);
 		this.parent = parent;
 	}
 
+	/**
+	 * Whether this tab shows a search box filtering the file list.
+	 */
+	protected boolean hasSearch() {
+		return false;
+	}
+
 	@Override
 	protected void init() {
-		list = new EditorList(minecraft, width, height, 34, height - 40);
+		int listTop = 34;
+		if (hasSearch()) {
+			search = new EditBox(font, width / 2 - 100, 36, 200, 18, EditorText.SEARCH.get());
+			search.setMaxLength(64);
+			search.setResponder(s -> rebuild());
+			addRenderableWidget(search);
+			setInitialFocus(search);
+			listTop = 58;
+		}
+		list = new EditorList(minecraft, width, height - 40 - listTop, listTop, height - 40);
 		//list.setRenderTopAndBottom(false);
 		addRenderableWidget(list);
 		initTabs();
@@ -117,18 +139,40 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		for (ResourceLocation id : ids) {
 			groups.computeIfAbsent(id.getNamespace(), k -> new ArrayList<>()).add(id);
 		}
+		String query = searchText().toLowerCase(Locale.ROOT);
 		for (var ent : groups.entrySet()) {
 			String ns = ent.getKey();
 			List<ResourceLocation> files = ent.getValue();
 			files.sort(ResourceLocation::compareTo);
-			entries.add(new EditorList.Entry(Component.literal(modName(ns)), true));
-			for (ResourceLocation f : files) {
-				entries.add(new EditorList.Entry(fileLabel(f).copy()
-						.append(Component.literal("   (" + fileCount(f) + ")"))
-						, null, null, f));
+			if (!query.isEmpty()) {
+				files.removeIf(f -> !(ns + " " + f.getPath()).toLowerCase(Locale.ROOT).contains(query));
+			}
+			boolean isCollapsed = collapsed.contains(ns);
+			boolean matches = !query.isEmpty() && ns.toLowerCase(Locale.ROOT).contains(query);
+			boolean showFiles = !isCollapsed || matches;
+			if (files.isEmpty() && !matches) continue;
+			entries.add(new EditorList.Entry(Component.literal(modName(ns)), true,
+					() -> toggleCollapsed(ns), isCollapsed));
+			if (showFiles) {
+				for (ResourceLocation f : files) {
+					entries.add(new EditorList.Entry(fileLabel(f).copy()
+							.append(Component.literal("   (" + fileCount(f) + ")"))
+							, null, null, f));
+				}
 			}
 		}
 		list.setData(entries);
+	}
+
+	private void toggleCollapsed(String ns) {
+		if (!collapsed.add(ns)) {
+			collapsed.remove(ns);
+		}
+		rebuild();
+	}
+
+	private String searchText() {
+		return search == null ? "" : search.getValue();
 	}
 
 	private static String modName(String ns) {

@@ -57,6 +57,14 @@ public class HostilityHomeScreen extends dev.xkmc.l2hostility.editor.base.Editor
 	}
 
 	@Override
+	protected boolean hasSearch() {
+		return switch (kind) {
+			case TRAIT, ENTITY -> true;
+			default -> false;
+		};
+	}
+
+	@Override
 	protected Component fileLabel(ResourceLocation id) {
 		if (kind == TabKind.TRAIT) {
 			var trait = LHTraits.TRAITS.get().getValue(id);

@@ -34,6 +34,13 @@ public class HostilityEditorUtil {
 
 	public static final String PACK_FOLDER = "l2hostility_editor";
 
+	static {
+		EditorFile.saveRootOverride = () -> {
+			String s = dev.xkmc.l2hostility.init.data.LHConfig.CLIENT.editorSavePath.get();
+			return s == null || s.isBlank() ? null : Path.of(s.trim());
+		};
+	}
+
 	public static List<EntityType<?>> listEntityTypes() {
 		List<EntityType<?>> ans = new ArrayList<>(ForgeRegistries.ENTITY_TYPES.getValues());
 		ans.sort(EditorUtil.byId(e -> ForgeRegistries.ENTITY_TYPES.getKey(e).toString()));
