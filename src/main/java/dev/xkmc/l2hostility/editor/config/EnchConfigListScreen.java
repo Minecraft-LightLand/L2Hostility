@@ -69,8 +69,8 @@ public class EnchConfigListScreen extends ListEditScreen<WeaponConfig.EnchConfig
 					parent, onDone, picked, HostilityEditorUtil.listEnchantments(), HostilityEditorHandlers.ENCHANTMENT,
 					HostilityEditorLang.SELECT_ENCHANTMENT.get(), HostilityEditorLang.SELECT_ENCHANTMENT.get(),
 					List.of(
-							FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "" + level, HostilityEditorForms.intValidate()),
-							FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), "" + chance, HostilityEditorForms.doubleValidate())
+							FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "" + level, HostilityEditorForms::intValidate),
+							FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), "" + chance, HostilityEditorForms::doubleValidate)
 					),
 					(list, v) -> new WeaponConfig.EnchConfig(new ArrayList<>(list),
 							Integer.parseInt(v.get(0).trim()), (float) Double.parseDouble(v.get(1).trim()))));

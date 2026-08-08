@@ -18,6 +18,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -55,11 +56,11 @@ public class EntityConfigEntryScreen extends EditorScreen {
 
 	private void rebuild() {
 		List<EditorList.Entry> entries = new ArrayList<>();
-		entries.add(new EditorList.Entry(HostilityEditorLang.APPLIES_TO.get().copy()
-						.append(Component.literal("  ")).append(HostilityEditorForms.entityListName(config.entities)),
+		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.APPLIES_TO.get(),
+						HostilityEditorForms.entityListName(config.entities)),
 				entityIcon(), this::editEntities, config.entities.isEmpty()));
-		entries.add(new EditorList.Entry(HostilityEditorLang.DIFFICULTY_EDIT.get().copy()
-						.append(Component.literal("  ")).append(HostilityEditorForms.difficultySummary(config.difficulty())),
+		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.DIFFICULTY_EDIT.get(),
+						HostilityEditorForms.difficultySummary(config.difficulty())),
 				null, this::editDifficulty, HostilityEditorForms.defaultDifficulty(config.difficulty())));
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.TRAIT_BASE_LIST.get(), config.traits().size()),
 				null, this::editTraits, config.traits().isEmpty()));
@@ -67,14 +68,14 @@ public class EntityConfigEntryScreen extends EditorScreen {
 				null, this::editBlacklist, config.blacklist().isEmpty()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ITEMS.get(), config.items.size()),
 				null, this::editItems, config.items.isEmpty()));
-		entries.add(new EditorList.Entry(HostilityEditorLang.VALUES_EDIT.get().copy()
-						.append(Component.literal("  ")).append(HostilityEditorForms.entityValuesSummary(config)),
+		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.VALUES_EDIT.get(),
+						HostilityEditorForms.entityValuesSummary(config)),
 				null, this::editValues, HostilityEditorForms.defaultValues(config)));
 		if (HostilityEditorForms.hasMaster(config)) {
-			entries.add(new EditorList.Entry(HostilityEditorLang.MASTER_CONFIG.get().copy()
-							.append(config.asMaster == null ? Component.empty() :
-									Component.literal("  ").append(HostilityEditorForms.masterSummary(config.asMaster))),
-					null, this::editMaster, config.asMaster == null));
+			Component text = config.asMaster == null ? HostilityEditorLang.MASTER_CONFIG.get()
+					: HostilityEditorForms.entry(HostilityEditorLang.MASTER_CONFIG.get(),
+					HostilityEditorForms.masterSummary(config.asMaster));
+			entries.add(new EditorList.Entry(text, null, this::editMaster, config.asMaster == null));
 		}
 		list.setData(entries);
 	}

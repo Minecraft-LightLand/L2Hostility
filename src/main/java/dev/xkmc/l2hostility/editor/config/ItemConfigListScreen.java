@@ -84,8 +84,8 @@ public class ItemConfigListScreen extends ListEditScreen<WeaponConfig.ItemConfig
 					parent, onDone, picked, EditorUtil.listItems(), HostilityEditorHandlers.ITEM,
 					HostilityEditorLang.SELECT_ITEM.get(), HostilityEditorLang.SELECT_ITEM.get(),
 					List.of(
-							FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "" + level, HostilityEditorForms.intValidate()),
-							FormScreen.FormField.text(HostilityEditorLang.WEIGHT.get(), "" + weight, HostilityEditorForms.intValidate())
+							FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "" + level, HostilityEditorForms::intValidate),
+							FormScreen.FormField.text(HostilityEditorLang.WEIGHT.get(), "" + weight, HostilityEditorForms::intValidate)
 					),
 					(list, v) -> {
 						ArrayList<ItemStack> stacks = new ArrayList<>();

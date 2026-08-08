@@ -41,8 +41,8 @@ public class ItemEntryListScreen extends ListEditScreen<EntityConfig.ItemEntry> 
 
 		@Override
 		public Component summary(EntityConfig.ItemEntry t) {
-			return t.stack().getHoverName().copy()
-					.append(Component.literal("   w " + t.weight()));
+			return HostilityEditorForms.entry(t.stack().getHoverName(),
+					Component.literal("w " + t.weight()));
 		}
 
 		@Override
@@ -59,7 +59,7 @@ public class ItemEntryListScreen extends ListEditScreen<EntityConfig.ItemEntry> 
 
 		private void promptWeight(EntityConfig.ItemEntry cur, Consumer<EntityConfig.ItemEntry> onDone, Screen parent) {
 			Minecraft.getInstance().setScreen(new PromptScreen(EditorText.EDIT.get(), HostilityEditorLang.WEIGHT.get(),
-					"" + cur.weight(), HostilityEditorForms.intValidate(), s -> onDone.accept(
+					"" + cur.weight(), HostilityEditorForms::intValidate, s -> onDone.accept(
 					new EntityConfig.ItemEntry(Integer.parseInt(s.trim()), cur.stack())), parent));
 		}
 

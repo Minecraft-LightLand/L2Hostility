@@ -14,7 +14,6 @@ import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -35,8 +34,8 @@ public class TraitFileScreen extends HostilityFileScreen {
 	@Override
 	protected void rebuild() {
 		List<EditorList.Entry> entries = new ArrayList<>();
-		entries.add(new EditorList.Entry(HostilityEditorLang.TRAIT_FIELDS.get().copy()
-						.append(Component.literal("  ")).append(HostilityEditorForms.traitFieldsSummary(config)), null,
+		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.TRAIT_FIELDS.get(),
+						HostilityEditorForms.traitFieldsSummary(config)), null,
 				() -> Minecraft.getInstance().setScreen(new FormScreen<>(HostilityEditorLang.TRAIT_FIELDS.get(),
 						HostilityEditorForms.traitConfig(config), c -> {
 							config.min_level = c.min_level;

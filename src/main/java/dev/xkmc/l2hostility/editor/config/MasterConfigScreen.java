@@ -64,11 +64,11 @@ public class MasterConfigScreen extends EditorScreen {
 			spawnBox.setMaxLength(64);
 			spawnBox.setValue("" + master.spawnInterval());
 			spawnBox.setResponder(s -> setField(master.maxTotalCount(), parseInt(s, master.spawnInterval())));
+			list = new EditorList(minecraft, width, height - 170, 110, height - 50);
+			addRenderableWidget(list);
 			addRenderableWidget(maxBox);
 			addRenderableWidget(spawnBox);
 			setInitialFocus(maxBox);
-			list = new EditorList(minecraft, width, height - 170, 110, height - 50);
-			addRenderableWidget(list);
 			addBtn = Button.builder(EditorText.ADD.get(), b -> addMinion()).bounds(0, 0, 60, 20).build();
 			row.add(addBtn);
 			editBtn = Button.builder(EditorText.EDIT.get(), b -> editMinion()).bounds(0, 0, 60, 20).build();

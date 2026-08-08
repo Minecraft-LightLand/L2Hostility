@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.editor.base;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -97,7 +98,7 @@ public class ValueMapScreen<K, V> extends EditorScreen {
 		for (K k : keys) {
 			order.add(k);
 			entries.add(new EditorList.Entry(
-					handler.keyLabel(k).copy().append(Component.literal("   ")).append(handler.valueSummary(view().get(k))),
+					handler.keyLabel(k).copy().append(Component.literal("   ")).append(handler.valueSummary(view().get(k)).copy().withStyle(ChatFormatting.GRAY)),
 					handler.keyIcon(k), null));
 		}
 		list.setData(entries);
