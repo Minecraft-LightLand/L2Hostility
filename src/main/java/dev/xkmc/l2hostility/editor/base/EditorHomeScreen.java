@@ -20,6 +20,7 @@ public abstract class EditorHomeScreen extends EditorScreen {
 
 	protected final Screen parent;
 	private EditorList list;
+	@Nullable
 	private Button reloadBtn;
 	private Button editBtn;
 	private EditBox search;
@@ -44,6 +45,22 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		return false;
 	}
 
+	/**
+	 * Whether this tab shows a Reload button for pending datapack changes. The config tab edits the
+	 * Forge config rather than datapacks, so it disables this.
+	 */
+	protected boolean hasReload() {
+		return true;
+	}
+
+	/**
+	 * Whether this tab shows a New button. The trait and config tabs have a fixed set of files, so
+	 * they disable this.
+	 */
+	protected boolean hasNew() {
+		return true;
+	}
+
 	@Override
 	protected void init() {
 		int listTop = 34;
@@ -62,17 +79,21 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		}
 		initTabs();
 		List<Button> row = new ArrayList<>(extraButtons());
-		Button newBtn = Button.builder(EditorText.NEW.get(), b -> newFile()).bounds(0, 0, 60, 20).build();
-		newBtn.active = canCreate();
-		row.add(newBtn);
+		if (hasNew()) {
+			Button newBtn = Button.builder(EditorText.NEW.get(), b -> newFile()).bounds(0, 0, 60, 20).build();
+			newBtn.active = canCreate();
+			row.add(newBtn);
+		}
 		editBtn = Button.builder(EditorText.EDIT.get(), b -> editFile()).bounds(0, 0, 60, 20).build();
 		row.add(editBtn);
-		reloadBtn = Button.builder(EditorText.RELOAD.get(), b -> reloadNow(false)).bounds(0, 0, 60, 20).build();
-		row.add(reloadBtn);
+		if (hasReload()) {
+			reloadBtn = Button.builder(EditorText.RELOAD.get(), b -> reloadNow(false)).bounds(0, 0, 60, 20).build();
+			row.add(reloadBtn);
+		}
 		row.add(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build());
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
-		reloadBtn.active = hasPendingReload();
+		if (reloadBtn != null) reloadBtn.active = hasPendingReload();
 		editBtn.active = false;
 		list.setOnSelect(() -> editBtn.active = selected() != null);
 		list.setOnDoubleClick(this::editFile);

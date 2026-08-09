@@ -44,6 +44,11 @@ public class TraitHomeScreen extends HostilityHomeScreen {
 	}
 
 	@Override
+	protected boolean hasNew() {
+		return false;
+	}
+
+	@Override
 	protected boolean isDisabled(ResourceLocation id) {
 		var trait = LHTraits.TRAITS.get().getValue(id);
 		return trait != null && trait.isBanned();

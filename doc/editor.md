@@ -49,7 +49,7 @@ Copied verbatim from `ModularGolems.editor.base` with `package dev.xkmc.modularg
 | `IngredientScreen` | item/tag/clear picker for an `Ingredient`. **Not used by L2Hostility configs** (no ingredient fields) but kept in the copy for completeness. |
 | `ExitConfirmScreen` | Save / Discard / Cancel dialog for leaving a dirty file. |
 | `ReloadConfirmScreen` | "Reload now / Later" dialog shown on editor exit when a save is pending. |
-| `EditorHomeScreen` | abstract shared home: grouped file list (namespace headers), top tab bar, New/Edit/Reload/Back bottom row. **Improvements:** add `protected boolean canCreate() { return true; }`; the New button's `active` is set from it (tag and trait tabs return `false`). Group headers are **foldable** (click toggles collapse, `[+]/[-]` marker; collapsed groups are skipped unless the search query matches the namespace). `hasSearch()` (default `false`) shows an `EditBox` search bar above the list; it filters rows by `namespace path` (collapsed groups auto-expand on a namespace match). Further overridable hooks: `rowSuffix(id)` (default `"   (count)"`), `fileTooltip(id)` (nullable tooltip per row, rendered via `EditorList`), `extraButtons()` (extra widgets inserted into the bottom row before New), `groupName(ns)` (translated group header; `ConfigHomeScreen` maps `client`/`common`). |
+| `EditorHomeScreen` | abstract shared home: grouped file list (namespace headers), top tab bar, New/Edit/Reload/Back bottom row (Reload only when `hasReload()`, which the config tab disables; New only when `hasNew()`, which the trait and config tabs disable). **Improvements:** add `protected boolean canCreate() { return true; }`; the New button's `active` is set from it (tag and trait tabs return `false`). Group headers are **foldable** (click toggles collapse, `[+]/[-]` marker; collapsed groups are skipped unless the search query matches the namespace). `hasSearch()` (default `false`) shows an `EditBox` search bar above the list; it filters rows by `namespace path` (collapsed groups auto-expand on a namespace match). Further overridable hooks: `rowSuffix(id)` (default `"   (count)"`), `fileTooltip(id)` (nullable tooltip per row, rendered via `EditorList`), `extraButtons()` (extra widgets inserted into the bottom row before New), `groupName(ns)` (translated group header; `ConfigHomeScreen` maps `client`/`common`), `hasReload()` (default `true`), `hasNew()` (default `true`). |
 | `EditorList` | the `ObjectSelectionList` behind `EditorHomeScreen`; `EditorList.TooltipHolder` wraps a row entry + its tooltip, `renderRowTooltips(g)`/`renderRowTooltip(...)` draw the hovered row's tooltip. |
 | `LinkButton`, `package-info.java` | underline-on-hover button; `@MethodsReturnNonnullByDefault` + `@ParametersAreNonnullByDefault`. |
 
@@ -203,10 +203,12 @@ tab). `ConfigHomeScreen` groups its rows into **two categories** (`client` / `co
 config (`l2hostility-client.toml`, sections `Overhead` / `Glasses` / `Misc`) and the common config
 (`l2hostility-common.toml`, sections `Datapack` / `Scaling` / `Difficulty` / `Orb & Spawner` /
 `Items` / `Performance`); each row opens a `FormScreen` over that section's fields, and confirming
-applies the values and **saves the config file(s)** (`LHConfigEdit.saveConfig`). A **Reset** button
-in the top row resets every editable field to its declared default
-(`FieldDef.reset` → `value.getDefault()` switched on `Kind`) and saves. Rows read live values so
-returning from the form shows the new values.
+ applies the values and **saves the config file(s)** (`LHConfigEdit.saveConfig`). A **Reset** button
+ in the top row resets every editable field to its declared default
+ (`FieldDef.reset` → `value.getDefault()` switched on `Kind`), saves, and calls
+ `rebuildWidgets()` to refresh the page and tabs. The config tab has **no Reload button**
+ (`hasReload()` returns `false` — it edits the Forge config, not datapacks). Rows read live values so
+ returning from the form shows the new values.
 
 ### Weapon
 `WeaponFileScreen` lists six fixed rows (each row shows its entry **count** and is drawn **grey**
@@ -382,7 +384,8 @@ editor's Reload button, or the world's Datapack Selection screen. When saving to
 Identical to Modular Golems: `EditorSaveState.savedFlag` set on every successful save; cleared when
 an actual reload happens (Reload button / exit "Reload now") or on
 `TagsUpdatedEvent`/`CLIENT_PACKET_RECEIVED` (manual `/reload`, world rejoin) via `EditorReloadHooks`.
-Home screens show a **Reload** button (enabled while `savedFlag`); exiting with the flag set shows
+Home screens show a **Reload** button (enabled while `savedFlag`; the config tab hides it via
+`hasReload()`); exiting with the flag set shows
 `ReloadConfirmScreen`. Reload runs
 `server.execute(() -> server.reloadResources(server.getPackRepository().getSelectedIds()))`.
 

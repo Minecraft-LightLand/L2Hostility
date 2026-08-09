@@ -50,6 +50,16 @@ public class ConfigHomeScreen extends HostilityHomeScreen {
 	}
 
 	@Override
+	protected boolean hasNew() {
+		return false;
+	}
+
+	@Override
+	protected boolean hasReload() {
+		return false;
+	}
+
+	@Override
 	protected List<ResourceLocation> listFiles() {
 		return new ArrayList<>(CONFIG_IDS);
 	}
@@ -101,6 +111,7 @@ public class ConfigHomeScreen extends HostilityHomeScreen {
 		Button reset = EditorTip.tip(Button.builder(EditorText.RESET.get(), b -> {
 			LHConfigEdit.resetToDefault();
 			EditorToast.show(EditorText.RESET.get(), EditorText.RESET_DONE.get());
+			rebuildWidgets();
 		}).bounds(0, 0, 60, 20).build(), HostilityEditorLang.RESET_TIP.get());
 		return List.of(reset);
 	}
