@@ -342,6 +342,7 @@
   "l2hostility.editor.tag.info.ranged_weapon_target": "此标签中的实体可以持有弓/弩。",
   "l2hostility.editor.tag.info.hostility_spawner_blacklist": "此标签中的实体不能被恶意刷怪笼生成。",
   "l2hostility.configuration.datapack": "数据包",
+  "l2hostility.configuration.editor": "编辑器",
   "l2hostility.configuration.overhead": "头顶显示",
   "l2hostility.configuration.glasses": "侦测眼镜",
   "l2hostility.configuration.misc": "杂项",

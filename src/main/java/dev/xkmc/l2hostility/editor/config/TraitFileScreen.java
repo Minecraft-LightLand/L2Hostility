@@ -54,7 +54,7 @@ public class TraitFileScreen extends HostilityFileScreen {
 				configLabel.append(Component.literal("  ")).append(status);
 			}
 			entries.add(new EditorList.Entry(configLabel, null,
-					() -> LHConfigEdit.openSectionForm(HostilityEditorLang.TRAIT_CONFIG.get(), configFields, TraitFileScreen.this),
+					() -> LHConfigEdit.INSTANCE.openSectionForm(HostilityEditorLang.TRAIT_CONFIG.get(), configFields, TraitFileScreen.this),
 					HostilityEditorLang.ROW_TRAIT_CONFIG_TIP.get()));
 		}
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.BLACKLIST_TAG.get(),

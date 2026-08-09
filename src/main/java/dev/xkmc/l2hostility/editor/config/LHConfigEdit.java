@@ -1,9 +1,7 @@
 package dev.xkmc.l2hostility.editor.config;
 
-import dev.xkmc.l2hostility.editor.base.EditorText;
-import dev.xkmc.l2hostility.editor.base.EditorToast;
-import dev.xkmc.l2hostility.editor.base.FormScreen;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
+import dev.xkmc.l2hostility.editor.base.ConfigEdit;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
@@ -12,159 +10,70 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHConfig.Client;
 import dev.xkmc.l2hostility.init.data.LHConfig.Common;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.config.ConfigTracker;
-import net.minecraftforge.fml.config.ModConfig;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
- * Read/write access to the Forge config for the editor. Lives in the config package rather than
- * base on purpose (the base layer is a mod-independent copy; this is l2hostility-specific).
+ * L2Hostility-specific config access for the editor: supplies the config specs, lang keys and
+ * sections of this mod. Generic logic lives in {@link ConfigEdit}.
  */
-public final class LHConfigEdit {
+public final class LHConfigEdit extends ConfigEdit {
+
+	/**
+	 * The single config editor instance used by this mod.
+	 */
+	public static final LHConfigEdit INSTANCE = new LHConfigEdit();
+
+	private static final String LANG_PREFIX = L2Hostility.MODID + ".configuration.";
+
+	private static final ResourceLocation CONFIG_ID = new ResourceLocation(L2Hostility.MODID, "config");
 
 	private LHConfigEdit() {
 	}
 
-	public enum Kind {BOOL, INT, DOUBLE}
-
-	/**
-	 * One config value together with the widgets to edit it.
-	 */
-	public record FieldDef(Component label, Kind kind, ForgeConfigSpec.ConfigValue<?> value,
-	                       @Nullable List<Component> fixed) {
-
-		public FieldDef(Component label, Kind kind, ForgeConfigSpec.ConfigValue<?> value) {
-			this(label, kind, value, null);
-		}
-
-		public String getString() {
-			return switch (kind) {
-				case BOOL -> String.valueOf(((ForgeConfigSpec.BooleanValue) value).get());
-				case INT -> String.valueOf(((ForgeConfigSpec.IntValue) value).get());
-				case DOUBLE -> String.valueOf(((ForgeConfigSpec.DoubleValue) value).get());
-			};
-		}
-
-		public void set(String s) {
-			switch (kind) {
-				case BOOL -> ((ForgeConfigSpec.BooleanValue) value).set(Boolean.parseBoolean(s));
-				case INT -> ((ForgeConfigSpec.IntValue) value).set(Integer.parseInt(s));
-				case DOUBLE -> ((ForgeConfigSpec.DoubleValue) value).set(Double.parseDouble(s));
-			}
-		}
-
-		/**
-		 * Resets this value to the default declared in the Forge config spec.
-		 */
-		public void reset() {
-			switch (kind) {
-				case BOOL -> ((ForgeConfigSpec.BooleanValue) value).set(((ForgeConfigSpec.BooleanValue) value).getDefault());
-				case INT -> ((ForgeConfigSpec.IntValue) value).set(((ForgeConfigSpec.IntValue) value).getDefault());
-				case DOUBLE -> ((ForgeConfigSpec.DoubleValue) value).set(((ForgeConfigSpec.DoubleValue) value).getDefault());
-			}
-		}
-
-		/**
-		 * Tooltip lines for this value: the config name as the first line, then an explicit text
-		 * when given, otherwise the translation {@code l2hostility.configuration.<option>.tooltip}
-		 * when one is registered, otherwise the comment that was declared with the Forge config value.
-		 */
-		@Nullable
-		public List<Component> tooltip() {
-			List<Component> ans = new ArrayList<>();
-			ans.add(label.copy().withStyle(ChatFormatting.YELLOW));
-			if (fixed != null) {
-				ans.addAll(fixed);
-				return ans;
-			}
-			List<String> path = value.getPath();
-			String key = "l2hostility.configuration." + path.get(path.size() - 1) + ".tooltip";
-			if (I18n.exists(key)) {
-				ans.addAll(splitLines(I18n.get(key)));
-				return ans;
-			}
-			Object vs = LHConfig.COMMON_SPEC.getSpec().get(path);
-			if (vs instanceof ForgeConfigSpec.ValueSpec vs2) {
-				String comment = vs2.getComment();
-				if (comment != null && !comment.isBlank()) {
-					ans.addAll(splitLines(comment));
-				}
-			}
-			return ans;
-		}
-
-		private static List<Component> splitLines(String text) {
-			List<Component> ans = new ArrayList<>();
-			for (String line : text.split("\n")) {
-				String trimmed = line.trim();
-				if (!trimmed.isEmpty()) ans.add(Component.literal(trimmed));
-			}
-			return ans;
-		}
-
-		public FormScreen.FormField toFormField() {
-			Component[] tip = tooltip() == null ? new Component[0] : tooltip().toArray(new Component[0]);
-			return switch (kind) {
-				case BOOL -> FormScreen.FormField.bool(label, (Boolean) value.get(), tip);
-				case INT -> FormScreen.FormField.text(label, String.valueOf(((ForgeConfigSpec.IntValue) value).get()),
-						HostilityEditorForms::intValidate, tip);
-				case DOUBLE ->
-						FormScreen.FormField.text(label, String.valueOf(((ForgeConfigSpec.DoubleValue) value).get()),
-								HostilityEditorForms::doubleValidate, tip);
-			};
-		}
+	@Override
+	protected ForgeConfigSpec commonSpec() {
+		return LHConfig.COMMON_SPEC;
 	}
 
-	/**
-	 * A named group of config fields (a config section).
-	 */
-	public record Section(Component title, List<FieldDef> fields) {
-
+	@Override
+	protected ForgeConfigSpec clientSpec() {
+		return LHConfig.CLIENT_SPEC;
 	}
 
-	private static final ResourceLocation CONFIG_ID = new ResourceLocation("l2hostility", "config");
-
-	/**
-	 * Writes the common and client configs to disk. The values are already applied in memory via
-	 * {@code set}.
-	 */
-	public static void saveConfig() {
-		for (ModConfig c : ConfigTracker.INSTANCE.configSets().getOrDefault(ModConfig.Type.COMMON, Set.of())) {
-			if (c.getSpec() == LHConfig.COMMON_SPEC) {
-				c.save();
-			}
-		}
-		for (ModConfig c : ConfigTracker.INSTANCE.configSets().getOrDefault(ModConfig.Type.CLIENT, Set.of())) {
-			if (c.getSpec() == LHConfig.CLIENT_SPEC) {
-				c.save();
-			}
-		}
+	@Override
+	protected String configLangPrefix() {
+		return LANG_PREFIX;
 	}
 
-	/**
-	 * Opens a form over the given fields; on confirm the values are applied and saved, and the
-	 * parent screen is reopened (re-reading the config).
-	 */
-	public static void openSectionForm(Component title, List<FieldDef> fields, Screen parent) {
-		List<FormScreen.FormField> form = new ArrayList<>();
-		for (FieldDef f : fields) form.add(f.toFormField());
-		Minecraft.getInstance().setScreen(new FormScreen<>(title, new FormScreen.FormSpec<>(form, values -> {
-			for (int i = 0; i < fields.size(); i++) fields.get(i).set(values.get(i));
-			saveConfig();
-			EditorToast.show(EditorText.SAVE.get(), EditorText.SAVE_DONE.get(CONFIG_ID));
-			return null;
-		}), t -> Minecraft.getInstance().setScreen(parent), parent, true));
+	@Override
+	protected ResourceLocation configId() {
+		return CONFIG_ID;
+	}
+
+	@Override
+	@Nullable
+	protected Component validateInt(String s) {
+		return HostilityEditorForms.intValidate(s);
+	}
+
+	@Override
+	@Nullable
+	protected Component validateDouble(String s) {
+		return HostilityEditorForms.doubleValidate(s);
+	}
+
+	@Override
+	protected List<Section> homeSections() {
+		List<Section> ans = new ArrayList<>(clientSections());
+		ans.addAll(generalSections());
+		return ans;
 	}
 
 	/**
@@ -274,13 +183,17 @@ public final class LHConfigEdit {
 		return new FieldDef(optionName(name), Kind.DOUBLE, value);
 	}
 
+	private static FieldDef s(ForgeConfigSpec.ConfigValue<String> value, String name) {
+		return new FieldDef(optionName(name), Kind.STRING, value);
+	}
+
 	/**
 	 * Display name of a config option: its translation when one is registered, otherwise the raw
 	 * option name.
 	 */
 	private static Component optionName(String name) {
-		if (I18n.exists("l2hostility.configuration." + name))
-			return Component.translatable("l2hostility.configuration." + name);
+		if (I18n.exists(LANG_PREFIX + name))
+			return Component.translatable(LANG_PREFIX + name);
 		return Component.literal(name);
 	}
 
@@ -289,8 +202,8 @@ public final class LHConfigEdit {
 	 * given English fallback.
 	 */
 	private static Component sectionName(String key, String fallback) {
-		if (I18n.exists("l2hostility.configuration." + key))
-			return Component.translatable("l2hostility.configuration." + key);
+		if (I18n.exists(LANG_PREFIX + key))
+			return Component.translatable(LANG_PREFIX + key);
 		return Component.literal(fallback);
 	}
 
@@ -352,12 +265,13 @@ public final class LHConfigEdit {
 	}
 
 	/**
-	 * Config sections of the client config. String options (e.g. the editor save path) are not
-	 * editable in the form and thus not included.
+	 * Config sections of the client config, including the editor save path.
 	 */
 	public static List<Section> clientSections() {
 		Client c = LHConfig.CLIENT;
 		return List.of(
+				new Section(sectionName("editor", "Editor"), List.of(
+						s(c.editorSavePath, "editorSavePath"))),
 				new Section(sectionName("overhead", "Overhead display"), List.of(
 						b(c.showTraitOverHead, "showTraitOverHead"), b(c.showLevelOverHead, "showLevelOverHead"),
 						i(c.overHeadRenderDistance, "overHeadRenderDistance"), d(c.overHeadRenderOffset, "overHeadRenderOffset"),
@@ -368,25 +282,6 @@ public final class LHConfigEdit {
 						b(c.glassForLevelMobsOnly, "glassForLevelMobsOnly"))),
 				new Section(sectionName("misc", "Misc"), List.of(
 						b(c.showUndyingParticles, "showUndyingParticles"), b(c.killerAuraSoundEffect, "killerAuraSoundEffect"))));
-	}
-
-	/**
-	 * All config sections edited from the config home: client and common, excluding trait configs.
-	 */
-	public static List<Section> allHomeSections() {
-		List<Section> ans = new ArrayList<>(clientSections());
-		ans.addAll(generalSections());
-		return ans;
-	}
-
-	/**
-	 * Resets every config value edited from the config home to its default and saves the config.
-	 */
-	public static void resetToDefault() {
-		for (Section s : allHomeSections()) {
-			for (FieldDef f : s.fields()) f.reset();
-		}
-		saveConfig();
 	}
 
 }

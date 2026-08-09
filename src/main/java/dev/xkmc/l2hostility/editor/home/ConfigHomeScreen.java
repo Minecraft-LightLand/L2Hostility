@@ -20,7 +20,7 @@ public class ConfigHomeScreen extends HostilityHomeScreen {
 	private static final String CLIENT = "client";
 	private static final String COMMON = "common";
 
-	private static final List<String> CLIENT_KEYS = List.of("overhead", "glasses", "misc");
+	private static final List<String> CLIENT_KEYS = List.of("editor", "overhead", "glasses", "misc");
 	private static final List<String> COMMON_KEYS = List.of("datapack", "scaling", "difficulty",
 			"orb_and_spawner", "items", "performance");
 
@@ -102,14 +102,14 @@ public class ConfigHomeScreen extends HostilityHomeScreen {
 	protected void openEdit(ResourceLocation id) {
 		LHConfigEdit.Section section = configSection(id);
 		if (section != null) {
-			LHConfigEdit.openSectionForm(section.title(), section.fields(), this);
+			LHConfigEdit.INSTANCE.openSectionForm(section.title(), section.fields(), this);
 		}
 	}
 
 	@Override
 	protected List<Button> extraButtons() {
 		Button reset = EditorTip.tip(Button.builder(EditorText.RESET.get(), b -> {
-			LHConfigEdit.resetToDefault();
+			LHConfigEdit.INSTANCE.resetToDefault();
 			EditorToast.show(EditorText.RESET.get(), EditorText.RESET_DONE.get());
 			rebuildWidgets();
 		}).bounds(0, 0, 60, 20).build(), HostilityEditorLang.RESET_TIP.get());
