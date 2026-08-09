@@ -201,6 +201,7 @@
   "l2hostility.editor.add_value": "Add value",
   "l2hostility.editor.advancement_id": "Advancement id (optional)",
   "l2hostility.editor.all_entities": "All entities",
+  "l2hostility.editor.allow": "Allow: ",
   "l2hostility.editor.applies_to": "Applies to:",
   "l2hostility.editor.apply_chance": "Apply chance",
   "l2hostility.editor.armor_enchantments": "Armor enchantments",

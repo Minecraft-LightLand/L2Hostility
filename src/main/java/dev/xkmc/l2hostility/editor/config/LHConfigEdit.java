@@ -3,10 +3,14 @@ package dev.xkmc.l2hostility.editor.config;
 import dev.xkmc.l2hostility.editor.base.EditorText;
 import dev.xkmc.l2hostility.editor.base.EditorToast;
 import dev.xkmc.l2hostility.editor.base.FormScreen;
+import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
+import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHConfig.Common;
+import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -153,8 +157,18 @@ public final class LHConfigEdit {
 	public static FieldDef traitToggle(String traitPath) {
 		ForgeConfigSpec.BooleanValue toggle = LHConfig.COMMON.map.get(traitPath);
 		if (toggle == null) return null;
-		return new FieldDef(Component.literal("allow_" + traitPath), Kind.BOOL, toggle,
+		return new FieldDef(allowLabel(traitPath), Kind.BOOL, toggle,
 				List.of(HostilityEditorLang.TRAIT_TOGGLE_TIP.get()));
+	}
+
+	/**
+	 * Display name of the allow toggle for a trait: a translatable "Allow: " prefix followed by the
+	 * translated trait name.
+	 */
+	private static Component allowLabel(String traitPath) {
+		MobTrait trait = LHTraits.TRAITS.get().getValue(new ResourceLocation(L2Hostility.MODID, traitPath));
+		Component name = trait == null ? Component.literal(traitPath) : HostilityEditorUtil.traitName(trait);
+		return HostilityEditorLang.ALLOW.get().append(name);
 	}
 
 	/**

@@ -314,6 +314,7 @@
   "l2hostility.editor.config": "配置",
   "l2hostility.editor.config_empty": "没有配置部分。",
   "l2hostility.editor.trait_toggle": "词条开关",
+  "l2hostility.editor.allow": "允许: ",
   "l2hostility.editor.trait_config": "词条配置",
   "l2hostility.editor.enabled": "已启用",
   "l2hostility.editor.disabled": "已禁用",

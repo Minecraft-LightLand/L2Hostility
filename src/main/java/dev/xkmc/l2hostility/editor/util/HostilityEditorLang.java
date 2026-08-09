@@ -23,6 +23,7 @@ public enum HostilityEditorLang {
 	CONFIG_EMPTY("editor.config_empty", "No config sections.", 0, ChatFormatting.GRAY),
 	TRAIT_TOGGLE("editor.trait_toggle", "Trait toggle", 0, null),
 	TRAIT_CONFIG("editor.trait_config", "Trait config", 0, null),
+	ALLOW("editor.allow", "Allow: ", 0, null),
 	CONFIG_ENABLED("editor.enabled", "Enabled", 0, null),
 	CONFIG_DISABLED("editor.disabled", "Disabled", 0, ChatFormatting.RED),
 	TAG_HASH_HINT("editor.tag_hash_hint", "Must start with '#'", 0, ChatFormatting.RED),
