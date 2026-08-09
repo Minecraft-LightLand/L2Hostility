@@ -41,11 +41,11 @@ Copied verbatim from `ModularGolems.editor.base` with `package dev.xkmc.modularg
 | `EditorLayout` | static `centerRow(List<Button>, centerX, y, gap)`. |
 | `EditorToast` | `SystemToast` wrapper. |
 | `EditorScreen` | base `Screen` subclass (handles resize via `rebuildWidgets`). |
-| `PickListScreen<T>` | searchable picker (EditBox + list), Cancel, Esc/parent navigation. |
+| `PickListScreen<T>` | searchable picker (EditBox + list), Cancel, Esc/parent navigation. The search box matches both the row label (translated display name) and the handler's `searchKey` (registry name), so e.g. an entity can be found by its translated name or by `namespace:path`. |
 | `PromptScreen` | modal labeled EditBox with validator + Cancel/Confirm. |
 | `DoubleMapScreen<T>` | value-map editor (Add/Edit/Remove), optional per-entry percent display. |
 | `Obj2IntMapScreen<M>` | int-map editor with per-object `maxLevel` (`Function<M,Integer>`), `Lv x/y`, validates `1..max`. |
-| `ItemListScreen<T>` | set editor over candidates with icon+label (generic over `T`: reused for entity types, traits, enchantments, items, item stacks). |
+| `ItemListScreen<T>` | set editor over candidates with icon+label (generic over `T`: reused for entity types, traits, enchantments, items, item stacks). Its `Handler` also provides the pick `searchKey` (registry name). |
 | `IngredientScreen` | item/tag/clear picker for an `Ingredient`. **Not used by L2Hostility configs** (no ingredient fields) but kept in the copy for completeness. |
 | `ExitConfirmScreen` | Save / Discard / Cancel dialog for leaving a dirty file. |
 | `ReloadConfirmScreen` | "Reload now / Later" dialog shown on editor exit when a save is pending. |
@@ -81,7 +81,7 @@ New in `base` (all mod-independent):
 | `HostilityEditorUtil` | registry/data access: `listEntityTypes` (from `ForgeRegistries.ENTITY_TYPES`, sorted, icons via `SpawnEggItem.byId`), `listTraits` (`LHTraits.TRAITS.get().getValues()`, label `MobTrait.getDesc()`, icon `trait.asItem()`), `listEnchantments`, `listBiomes` (from `Minecraft.getInstance().level.registryAccess()`), `listStructures` (from the **integrated server** registry access, `getSingleplayerServer()`; empty when no singleplayer server), `validateFileId`, `newDifficulty/newWeapon/newEntity`, `save` (wraps `EditorFile.save` with `PACK_FOLDER = "l2hostility_editor"`), tag helpers `listManagedTags()`, `traitBlackTag(trait)/traitWhiteTag(trait)`. |
 | `HostilityEditorLang` | l2hostility-specific lang, keys under `l2hostility.editor.*` (tab/file titles, section labels, field labels, entity/trait/enchantment pick titles, tag labels, errors). |
 | `HostilityEditorForms` | `FormSpec<T>` builders for every editable record/scalar: `DifficultyConfig`, `TraitConfig` fields, `ItemConfig`, `EnchConfig`, `TraitBase` (+ `TraitCondition`), `ItemPool`, `ItemEntry`, `MasterConfig`, `Minion`, `EntityConfig.Config` scalars. Includes the value↔string conversions (e.g. `DoubleMapScreen.format`-style trimming for doubles). |
-| `HostilityEditorHandlers` | shared `EditorHandler` instances: `ENTITY_TYPE`, `TRAIT`, `ENCHANTMENT`, `BIOME`, `STRUCTURE`, `ITEM` (label/icon). |
+| `HostilityEditorHandlers` | shared `EditorHandler` instances: `ENTITY_TYPE`, `TRAIT`, `ENCHANTMENT`, `BIOME`, `STRUCTURE`, `ITEM` (label/icon). Each `searchKey` returns the registry name (`namespace:path`), so the pick search matches the translated name or the id. |
 | `EditorReloadHooks` | client Forge-bus subscriber: clears `EditorSaveState.savedFlag` on `TagsUpdatedEvent` with cause `CLIENT_PACKET_RECEIVED` (fires on manual `/reload` and world rejoin). Registered via `@Mod.EventBusSubscriber(modid = L2Hostility.MODID, value = Dist.CLIENT)`. |
 
 ### home
