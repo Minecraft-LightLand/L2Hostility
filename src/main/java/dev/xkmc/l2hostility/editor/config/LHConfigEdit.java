@@ -9,6 +9,7 @@ import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHConfig.Common;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -58,24 +59,32 @@ public final class LHConfigEdit {
 		}
 
 		/**
-		 * Tooltip lines for this value: an explicit text when given, otherwise the comment that
-		 * was declared with the Forge config value.
+		 * Tooltip lines for this value: an explicit text when given, otherwise the translation
+		 * {@code l2hostility.configuration.<option>.tooltip} when one is registered, otherwise the
+		 * comment that was declared with the Forge config value.
 		 */
 		@Nullable
 		public List<Component> tooltip() {
 			if (fixed != null) return fixed;
-			Object vs = LHConfig.COMMON_SPEC.getSpec().get(value.getPath());
+			List<String> path = value.getPath();
+			String key = "l2hostility.configuration." + path.get(path.size() - 1) + ".tooltip";
+			if (I18n.exists(key)) return splitLines(I18n.get(key));
+			Object vs = LHConfig.COMMON_SPEC.getSpec().get(path);
 			if (vs instanceof ForgeConfigSpec.ValueSpec vs2) {
 				String comment = vs2.getComment();
 				if (comment == null || comment.isBlank()) return null;
-				List<Component> ans = new ArrayList<>();
-				for (String line : comment.split("\n")) {
-					String trimmed = line.trim();
-					if (!trimmed.isEmpty()) ans.add(Component.literal(trimmed));
-				}
-				return ans;
+				return splitLines(comment);
 			}
 			return null;
+		}
+
+		private static List<Component> splitLines(String text) {
+			List<Component> ans = new ArrayList<>();
+			for (String line : text.split("\n")) {
+				String trimmed = line.trim();
+				if (!trimmed.isEmpty()) ans.add(Component.literal(trimmed));
+			}
+			return ans;
 		}
 
 		public FormScreen.FormField toFormField() {
@@ -213,15 +222,35 @@ public final class LHConfigEdit {
 	}
 
 	private static FieldDef b(ForgeConfigSpec.BooleanValue value, String name) {
-		return new FieldDef(Component.literal(name), Kind.BOOL, value);
+		return new FieldDef(optionName(name), Kind.BOOL, value);
 	}
 
 	private static FieldDef i(ForgeConfigSpec.IntValue value, String name) {
-		return new FieldDef(Component.literal(name), Kind.INT, value);
+		return new FieldDef(optionName(name), Kind.INT, value);
 	}
 
 	private static FieldDef d(ForgeConfigSpec.DoubleValue value, String name) {
-		return new FieldDef(Component.literal(name), Kind.DOUBLE, value);
+		return new FieldDef(optionName(name), Kind.DOUBLE, value);
+	}
+
+	/**
+	 * Display name of a config option: its translation when one is registered, otherwise the raw
+	 * option name.
+	 */
+	private static Component optionName(String name) {
+		if (I18n.exists("l2hostility.configuration." + name))
+			return Component.translatable("l2hostility.configuration." + name);
+		return Component.literal(name);
+	}
+
+	/**
+	 * Display name of a config section: its translation when one is registered, otherwise the
+	 * given English fallback.
+	 */
+	private static Component sectionName(String key, String fallback) {
+		if (I18n.exists("l2hostility.configuration." + key))
+			return Component.translatable("l2hostility.configuration." + key);
+		return Component.literal(fallback);
 	}
 
 	/**
@@ -231,11 +260,11 @@ public final class LHConfigEdit {
 	public static List<Section> generalSections() {
 		Common c = LHConfig.COMMON;
 		return List.of(
-				new Section(Component.literal("Datapack"), List.of(
+				new Section(sectionName("datapack", "Datapack"), List.of(
 						b(c.enableEntitySpecificDatapack, "enableEntitySpecificDatapack"),
 						b(c.enableStructureSpecificDatapack, "enableStructureSpecificDatapack"),
 						b(c.enableEquipmentDatapack, "enableEquipmentDatapack"))),
-				new Section(Component.literal("Scaling"), List.of(
+				new Section(sectionName("scaling", "Scaling"), List.of(
 						d(c.healthFactor, "healthFactor"), b(c.exponentialHealth, "exponentialHealth"),
 						d(c.damageFactor, "damageFactor"), b(c.exponentialDamage, "exponentialDamage"),
 						d(c.expDropFactor, "expDropFactor"), d(c.drownedTridentChancePerLevel, "drownedTridentChancePerLevel"),
@@ -250,17 +279,17 @@ public final class LHConfigEdit {
 						b(c.allowPlayerAllies, "allowPlayerAllies"), b(c.allowTraitOnOwnable, "allowTraitOnOwnable"),
 						d(c.dropRateFromSpawner, "dropRateFromSpawner"), d(c.equipmentDropRate, "equipmentDropRate"),
 						i(c.maxTraitCount, "maxTraitCount"), b(c.enableAdaptiveLeveling, "enableAdaptiveLeveling"))),
-				new Section(Component.literal("Difficulty"), List.of(
+				new Section(sectionName("difficulty", "Difficulty"), List.of(
 						i(c.maxPlayerLevel, "maxPlayerLevel"), i(c.maxMobLevel, "maxMobLevel"),
 						i(c.killsPerLevel, "killsPerLevel"), d(c.playerDeathDecay, "playerDeathDecay"),
 						b(c.keepInventoryRuleKeepDifficulty, "keepInventoryRuleKeepDifficulty"),
 						b(c.deathDecayDimension, "deathDecayDimension"), b(c.deathDecayTraitCap, "deathDecayTraitCap"),
 						i(c.newPlayerProtectRange, "newPlayerProtectRange"))),
-				new Section(Component.literal("Orb & Spawner"), List.of(
+				new Section(sectionName("orb_and_spawner", "Orb & Spawner"), List.of(
 						b(c.allowHostilityOrb, "allowHostilityOrb"), b(c.enableHostilityOrbDrop, "enableHostilityOrbDrop"),
 						i(c.orbRadius, "orbRadius"), b(c.allowHostilitySpawner, "allowHostilitySpawner"),
 						i(c.hostilitySpawnCount, "hostilitySpawnCount"), i(c.hostilitySpawnLevelFactor, "hostilitySpawnLevelFactor"))),
-				new Section(Component.literal("Items"), List.of(
+				new Section(sectionName("items", "Items"), List.of(
 						b(c.banBottles, "banBottles"),
 						b(c.disableHostilityLootCurioRequirement, "disableHostilityLootCurioRequirement"),
 						i(c.bottleOfCurseLevel, "bottleOfCurseLevel"), i(c.witchChargeMinDuration, "witchChargeMinDuration"),
@@ -276,7 +305,7 @@ public final class LHConfigEdit {
 						i(c.abrahadabraExtraLevel, "abrahadabraExtraLevel"), i(c.nidhoggurExtraLevel, "nidhoggurExtraLevel"),
 						d(c.nidhoggurDropFactor, "nidhoggurDropFactor"), b(c.nidhoggurCapAtItemMaxStack, "nidhoggurCapAtItemMaxStack"),
 						b(c.bookOfReprintSpread, "bookOfReprintSpread"), d(c.insulatorFactor, "insulatorFactor"))),
-				new Section(Component.literal("Performance"), List.of(
+				new Section(sectionName("performance", "Performance"), List.of(
 						b(c.enableCurioCheckFilter, "enableCurioCheckFilter"), i(c.removeTraitCheckInterval, "removeTraitCheckInterval"),
 						i(c.auraEffectApplicationInterval, "auraEffectApplicationInterval"), i(c.selfEffectApplicationInterval, "selfEffectApplicationInterval"))));
 	}
