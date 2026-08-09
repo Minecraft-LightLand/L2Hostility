@@ -293,6 +293,12 @@
 		"killerAuraDamageFactor": "杀戮光环伤害的伤害加成系数",
 		"killerAuraDamageFactor.tooltip": "示例: 0.5 表示每级 +2% 的伤害加成变为每级 +1%\n 默认: 0.5\n 范围: 0.0 ~ 1.0",
 		"killerAuraSoundEffect": "杀戮光环音效",
-		"killerAuraSoundEffect.tooltip": ""
+		"killerAuraSoundEffect.tooltip": "",
+		"datapack": "数据包",
+		"enableAdaptiveLeveling": "允许击杀怪物提升难度",
+		"enableAdaptiveLeveling.tooltip": "允许玩家通过击杀怪物来提升难度\n 默认: true",
+		"enchantmentFactor": "每级怪物附魔能力加成",
+		"enchantmentFactor.tooltip": "每级获得的附魔加成\n注意：仅当安装 Apotheosis 时使用\n否则过高的附魔等级不会产生任何附魔\n 默认: 0\n 范围: 0 ~ 1000",
+		"grenadeInterval": "榴弹发射间隔"
 	}
 }

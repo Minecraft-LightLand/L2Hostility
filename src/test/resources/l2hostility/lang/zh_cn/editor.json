@@ -280,7 +280,23 @@
 			"tag_info_armor_target": "此标签中的实体可以被恶意机制装备盔甲。",
 			"tag_info_melee_weapon_target": "此标签中的实体可以持有近战武器。",
 			"tag_info_ranged_weapon_target": "此标签中的实体可以持有弓/弩。",
-			"tag_info_hostility_spawner_blacklist": "此标签中的实体不能被恶意刷怪笼生成。"
+			"tag_info_hostility_spawner_blacklist": "此标签中的实体不能被恶意刷怪笼生成。",
+			"tag_blacklist": "黑名单",
+			"tag_whitelist": "白名单",
+			"tag_default_blacklist": "词条默认黑名单",
+			"tag_default_whitelist": "词条默认白名单",
+			"tag_no_scaling": "无数值加成名单",
+			"tag_no_trait": "无词条名单",
+			"tag_semiboss": "类boss生物",
+			"tag_effect_immune": "效果免疫生物",
+			"tag_no_drop": "无掉落",
+			"tag_hide_traits": "隐藏词条",
+			"tag_hide_level": "隐藏等级",
+			"tag_hide_title": "隐藏标题",
+			"tag_armor_target": "护甲目标",
+			"tag_melee_weapon_target": "近战武器目标",
+			"tag_ranged_weapon_target": "远程武器目标",
+			"tag_hostility_spawner_blacklist": "刷怪笼黑名单"
 		}
 	}
 }

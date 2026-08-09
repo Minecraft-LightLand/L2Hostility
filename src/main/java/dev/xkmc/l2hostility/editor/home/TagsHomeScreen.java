@@ -31,6 +31,29 @@ public class TagsHomeScreen extends HostilityHomeScreen {
 	}
 
 	@Override
+	protected Component fileLabel(ResourceLocation id) {
+		return switch (id.getPath()) {
+			case "blacklist" -> HostilityEditorLang.TAG_NAME_BLACKLIST.get();
+			case "whitelist" -> HostilityEditorLang.TAG_NAME_WHITELIST.get();
+			case "default_blacklist" -> HostilityEditorLang.TAG_NAME_DEFAULT_BLACKLIST.get();
+			case "default_whitelist" -> HostilityEditorLang.TAG_NAME_DEFAULT_WHITELIST.get();
+			case "no_scaling" -> HostilityEditorLang.TAG_NAME_NO_SCALING.get();
+			case "no_trait" -> HostilityEditorLang.TAG_NAME_NO_TRAIT.get();
+			case "semiboss" -> HostilityEditorLang.TAG_NAME_SEMIBOSS.get();
+			case "effect_immune" -> HostilityEditorLang.TAG_NAME_EFFECT_IMMUNE.get();
+			case "no_drop" -> HostilityEditorLang.TAG_NAME_NO_DROP.get();
+			case "hide_traits" -> HostilityEditorLang.TAG_NAME_HIDE_TRAITS.get();
+			case "hide_level" -> HostilityEditorLang.TAG_NAME_HIDE_LEVEL.get();
+			case "hide_title" -> HostilityEditorLang.TAG_NAME_HIDE_TITLE.get();
+			case "armor_target" -> HostilityEditorLang.TAG_NAME_ARMOR_TARGET.get();
+			case "melee_weapon_target" -> HostilityEditorLang.TAG_NAME_MELEE_WEAPON_TARGET.get();
+			case "ranged_weapon_target" -> HostilityEditorLang.TAG_NAME_RANGED_WEAPON_TARGET.get();
+			case "hostility_spawner_blacklist" -> HostilityEditorLang.TAG_NAME_SPAWNER_BLACKLIST.get();
+			default -> super.fileLabel(id);
+		};
+	}
+
+	@Override
 	@Nullable
 	protected Component fileTooltip(ResourceLocation id) {
 		return switch (id.getPath()) {

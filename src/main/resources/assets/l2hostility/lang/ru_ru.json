@@ -685,5 +685,19 @@
   "trait.l2hostility.weakness": "Слабость",
   "trait.l2hostility.weakness.desc": "Накладывает эффект слабости при атаке",
   "trait.l2hostility.wither": "Иссушение",
-  "trait.l2hostility.wither.desc": "Накладывает иссушение на цель при атаке"
+  "trait.l2hostility.wither.desc": "Накладывает иссушение на цель при атаке",
+  "l2hostility.configuration.datapack": "Датапаки",
+  "l2hostility.configuration.dementorDamageReductionBase": "База снижения урона для Дементора",
+  "l2hostility.configuration.dementorDamageReductionBase.tooltip": "Немагический урон снижается по логарифму с этим числом в качестве основания\nПример: 1.1 означает 100 -> 48, 1000 -> 72\nПример: 2 означает 16 -> 4, 1024 -> 10\nПример: 10 означает 100 -> 2, 1000000 -> 6\n По умолчанию: 2.0\n Диапазон: 1.01 ~ 100.0",
+  "l2hostility.configuration.dispellDamageReductionBase": "База снижения урона для Рассеивания",
+  "l2hostility.configuration.dispellDamageReductionBase.tooltip": "Магический урон снижается по логарифму с этим числом в качестве основания\nПример: 1.1 означает 100 -> 48, 1000 -> 72\nПример: 2 означает 16 -> 4, 1024 -> 10\nПример: 10 означает 100 -> 2, 1000000 -> 6\n По умолчанию: 2.0\n Диапазон: 1.01 ~ 100.0",
+  "l2hostility.configuration.enableAdaptiveLeveling": "Разрешить повышение сложности за убийства",
+  "l2hostility.configuration.enableAdaptiveLeveling.tooltip": "Позволяет игроку повышать сложность, убивая мобов\n По умолчанию: true",
+  "l2hostility.configuration.enableEquipmentDatapack": "Разрешить датапакам добавлять предметы и зачарования существам",
+  "l2hostility.configuration.enableEquipmentDatapack.tooltip": "",
+  "l2hostility.configuration.enchantmentFactor": "Бонус зачарования за уровень",
+  "l2hostility.configuration.enchantmentFactor.tooltip": "Бонус зачарования за уровень\nПримечание: используйте только при установленном Apotheosis\nИначе слишком высокий уровень зачарования не даст результата\n По умолчанию: 0\n Диапазон: 0 ~ 1000",
+  "l2hostility.configuration.grenadeInterval": "Интервал взрывов шалкеров",
+  "l2hostility.configuration.killerAuraDamageFactor": "Коэффициент урона Ауры убийцы",
+  "l2hostility.configuration.killerAuraDamageFactor.tooltip": "Пример: 0.5 означает, что бонус +2% урона за уровень станет +1%\n По умолчанию: 0.5\n Диапазон: 0.0 ~ 1.0"
 }

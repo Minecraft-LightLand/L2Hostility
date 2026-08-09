@@ -7,6 +7,7 @@ import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHConfig.Common;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
@@ -59,23 +60,32 @@ public final class LHConfigEdit {
 		}
 
 		/**
-		 * Tooltip lines for this value: an explicit text when given, otherwise the translation
-		 * {@code l2hostility.configuration.<option>.tooltip} when one is registered, otherwise the
-		 * comment that was declared with the Forge config value.
+		 * Tooltip lines for this value: the config name as the first line, then an explicit text
+		 * when given, otherwise the translation {@code l2hostility.configuration.<option>.tooltip}
+		 * when one is registered, otherwise the comment that was declared with the Forge config value.
 		 */
 		@Nullable
 		public List<Component> tooltip() {
-			if (fixed != null) return fixed;
+			List<Component> ans = new ArrayList<>();
+			ans.add(label.copy().withStyle(ChatFormatting.YELLOW));
+			if (fixed != null) {
+				ans.addAll(fixed);
+				return ans;
+			}
 			List<String> path = value.getPath();
 			String key = "l2hostility.configuration." + path.get(path.size() - 1) + ".tooltip";
-			if (I18n.exists(key)) return splitLines(I18n.get(key));
+			if (I18n.exists(key)) {
+				ans.addAll(splitLines(I18n.get(key)));
+				return ans;
+			}
 			Object vs = LHConfig.COMMON_SPEC.getSpec().get(path);
 			if (vs instanceof ForgeConfigSpec.ValueSpec vs2) {
 				String comment = vs2.getComment();
-				if (comment == null || comment.isBlank()) return null;
-				return splitLines(comment);
+				if (comment != null && !comment.isBlank()) {
+					ans.addAll(splitLines(comment));
+				}
 			}
-			return null;
+			return ans;
 		}
 
 		private static List<Component> splitLines(String text) {
