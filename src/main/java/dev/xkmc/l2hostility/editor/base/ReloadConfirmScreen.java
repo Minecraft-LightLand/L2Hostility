@@ -20,10 +20,10 @@ public class ReloadConfirmScreen extends EditorScreen {
 	@Override
 	protected void init() {
 		int c = width / 2;
-		addRenderableWidget(Button.builder(EditorText.RELOAD_NOW.get(), b -> onNow.run())
-				.bounds(c - 155, height / 2 + 20, 140, 20).build());
-		addRenderableWidget(Button.builder(EditorText.LATER.get(), b -> onLater.run())
-				.bounds(c + 15, height / 2 + 20, 100, 20).build());
+		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.RELOAD_NOW.get(), b -> onNow.run())
+				.bounds(c - 155, height / 2 + 20, 140, 20).build(), EditorText.RELOAD_TIP.get()));
+		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.LATER.get(), b -> onLater.run())
+				.bounds(c + 15, height / 2 + 20, 100, 20).build(), EditorText.SAVE_NOTE.get()));
 	}
 
 	@Override

@@ -48,7 +48,22 @@ public enum EditorText {
 	LATER("editor.later", "Later", 0, null),
 	DISCARD("editor.discard", "Discard", 0, null),
 	UNSAVED_TITLE("editor.unsaved_title", "Unsaved changes", 0, null),
-	UNSAVED_NOTE("editor.unsaved_note", "You have unsaved changes. Save them before leaving?", 0, ChatFormatting.GRAY);
+	UNSAVED_NOTE("editor.unsaved_note", "You have unsaved changes. Save them before leaving?", 0, ChatFormatting.GRAY),
+
+	OPEN_TIP("editor.open_tip", "Open the datapack and config editor", 0, ChatFormatting.GRAY),
+	NEW_TIP("editor.new_tip", "Create a new datapack file", 0, ChatFormatting.GRAY),
+	EDIT_TIP("editor.edit_tip", "Edit the selected entry", 0, ChatFormatting.GRAY),
+	REMOVE_TIP("editor.remove_tip", "Remove the selected entry", 0, ChatFormatting.GRAY),
+	SAVE_TIP("editor.save_tip", "Write changes to the world datapack folder", 0, ChatFormatting.GRAY),
+	BACK_TIP("editor.back_tip", "Return to the previous screen", 0, ChatFormatting.GRAY),
+	ADD_TIP("editor.add_tip", "Add a new entry", 0, ChatFormatting.GRAY),
+	CANCEL_TIP("editor.cancel_tip", "Discard this edit and go back", 0, ChatFormatting.GRAY),
+	CONFIRM_TIP("editor.confirm_tip", "Apply these values", 0, ChatFormatting.GRAY),
+	SEARCH_TIP("editor.search_tip", "Filter the list by name", 0, ChatFormatting.GRAY),
+	RELOAD_TIP("editor.reload_tip", "Reload datapacks so saved files take effect", 0, ChatFormatting.GRAY),
+	PICK_ITEM_TIP("editor.pick_item_tip", "Pick an item", 0, ChatFormatting.GRAY),
+	PICK_TAG_TIP("editor.pick_tag_tip", "Pick an item tag (listed with '#')", 0, ChatFormatting.GRAY),
+	CLEAR_TIP("editor.clear_tip", "Set the current selection to empty", 0, ChatFormatting.GRAY);
 
 	private final String key, def;
 	private final int arg;

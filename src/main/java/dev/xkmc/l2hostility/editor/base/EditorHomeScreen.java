@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.network.chat.Component;
@@ -54,14 +55,18 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		}
 		initTabs();
 		List<Button> row = new ArrayList<>();
-		Button newBtn = Button.builder(EditorText.NEW.get(), b -> newFile()).bounds(0, 0, 60, 20).build();
+		Button newBtn = EditorTip.tip(Button.builder(EditorText.NEW.get(), b -> newFile()).bounds(0, 0, 60, 20).build(),
+				EditorText.NEW_TIP.get());
 		newBtn.active = canCreate();
 		row.add(newBtn);
-		editBtn = Button.builder(EditorText.EDIT.get(), b -> editFile()).bounds(0, 0, 60, 20).build();
+		editBtn = EditorTip.tip(Button.builder(EditorText.EDIT.get(), b -> editFile()).bounds(0, 0, 60, 20).build(),
+				EditorText.EDIT_TIP.get());
 		row.add(editBtn);
-		reloadBtn = Button.builder(EditorText.RELOAD.get(), b -> reloadNow(false)).bounds(0, 0, 60, 20).build();
+		reloadBtn = EditorTip.tip(Button.builder(EditorText.RELOAD.get(), b -> reloadNow(false)).bounds(0, 0, 60, 20).build(),
+				EditorText.RELOAD_TIP.get());
 		row.add(reloadBtn);
-		row.add(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build());
+		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build(),
+				EditorText.BACK_TIP.get()));
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		reloadBtn.active = hasPendingReload();
@@ -87,8 +92,11 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		int x = (width - total) / 2;
 		for (int i = 0; i < tabs.size(); i++) {
 			int idx = i;
-			addRenderableWidget(new TabButton(x, 10, widths.get(i), h, tabs.get(i).label(), i == active,
-					b -> openTab(idx)));
+			EditorTab tab = tabs.get(i);
+			TabButton btn = new TabButton(x, 10, widths.get(i), h, tab.label(), i == active,
+					b -> openTab(idx));
+			if (tab.tooltip() != null) btn.setTooltip(Tooltip.create(tab.tooltip()));
+			addRenderableWidget(btn);
 			x += widths.get(i) + gap;
 		}
 	}

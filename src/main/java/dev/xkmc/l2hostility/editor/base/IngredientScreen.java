@@ -34,10 +34,14 @@ public class IngredientScreen extends EditorScreen {
 	@Override
 	protected void init() {
 		List<Button> row = new ArrayList<>();
-		row.add(Button.builder(EditorText.PICK_ITEM.get(), b -> pickItem()).bounds(0, 0, 70, 20).build());
-		row.add(Button.builder(EditorText.PICK_TAG.get(), b -> pickTag()).bounds(0, 0, 70, 20).build());
-		row.add(Button.builder(EditorText.CLEAR.get(), b -> apply(Ingredient.EMPTY)).bounds(0, 0, 60, 20).build());
-		row.add(Button.builder(EditorText.BACK.get(), b -> Minecraft.getInstance().setScreen(parent)).bounds(0, 0, 60, 20).build());
+		row.add(EditorTip.tip(Button.builder(EditorText.PICK_ITEM.get(), b -> pickItem()).bounds(0, 0, 70, 20).build(),
+				EditorText.PICK_ITEM_TIP.get()));
+		row.add(EditorTip.tip(Button.builder(EditorText.PICK_TAG.get(), b -> pickTag()).bounds(0, 0, 70, 20).build(),
+				EditorText.PICK_TAG_TIP.get()));
+		row.add(EditorTip.tip(Button.builder(EditorText.CLEAR.get(), b -> apply(Ingredient.EMPTY)).bounds(0, 0, 60, 20).build(),
+				EditorText.CLEAR_TIP.get()));
+		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> Minecraft.getInstance().setScreen(parent)).bounds(0, 0, 60, 20).build(),
+				EditorText.BACK_TIP.get()));
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 	}

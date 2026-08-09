@@ -41,10 +41,10 @@ public class PromptScreen extends EditorScreen {
 		box.setMaxLength(256);
 		box.setResponder(s -> error = null);
 		addRenderableWidget(box);
-		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
-				.bounds(width / 2 - 104, height / 2 + 18, 100, 20).build());
-		addRenderableWidget(Button.builder(EditorText.CONFIRM.get(), b -> submit())
-				.bounds(width / 2 + 4, height / 2 + 18, 100, 20).build());
+		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
+				.bounds(width / 2 - 104, height / 2 + 18, 100, 20).build(), EditorText.CANCEL_TIP.get()));
+		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.CONFIRM.get(), b -> submit())
+				.bounds(width / 2 + 4, height / 2 + 18, 100, 20).build(), EditorText.CONFIRM_TIP.get()));
 		setInitialFocus(box);
 	}
 

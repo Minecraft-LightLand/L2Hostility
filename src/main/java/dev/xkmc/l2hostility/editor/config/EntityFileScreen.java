@@ -35,9 +35,12 @@ public class EntityFileScreen extends HostilityFileScreen {
 
 	@Override
 	protected List<Button> extraButtons() {
-		addBtn = Button.builder(EditorText.ADD.get(), b -> addConfig()).bounds(0, 0, 60, 20).build();
-		editBtn = Button.builder(EditorText.EDIT.get(), b -> editConfig()).bounds(0, 0, 60, 20).build();
-		removeBtn = Button.builder(EditorText.REMOVE.get(), b -> removeConfig()).bounds(0, 0, 60, 20).build();
+		addBtn = EditorTip.tip(Button.builder(EditorText.ADD.get(), b -> addConfig()).bounds(0, 0, 60, 20).build(),
+				HostilityEditorLang.ADD_ENTITY_CONFIG_TIP.get());
+		editBtn = EditorTip.tip(Button.builder(EditorText.EDIT.get(), b -> editConfig()).bounds(0, 0, 60, 20).build(),
+				HostilityEditorLang.EDIT_ENTITY_CONFIG_TIP.get());
+		removeBtn = EditorTip.tip(Button.builder(EditorText.REMOVE.get(), b -> removeConfig()).bounds(0, 0, 60, 20).build(),
+				HostilityEditorLang.REMOVE_ENTITY_CONFIG_TIP.get());
 		editBtn.active = false;
 		removeBtn.active = false;
 		list.setOnSelect(() -> {

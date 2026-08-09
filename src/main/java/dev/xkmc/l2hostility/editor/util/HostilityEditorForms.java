@@ -58,13 +58,13 @@ public final class HostilityEditorForms {
 		Function<String, Component> ints = HostilityEditorForms::intValidate;
 		Function<String, Component> doubles = HostilityEditorForms::doubleValidate;
 		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + cur.min(), ints),
-				FormScreen.FormField.text(HostilityEditorLang.BASE.get(), "" + cur.base(), ints),
-				FormScreen.FormField.text(HostilityEditorLang.VARIATION.get(), DoubleMapScreen.format(cur.variation()), doubles),
-				FormScreen.FormField.text(HostilityEditorLang.SCALE.get(), DoubleMapScreen.format(cur.scale()), doubles),
-				FormScreen.FormField.text(HostilityEditorLang.APPLY_CHANCE.get(), DoubleMapScreen.format(cur.apply_chance()), doubles),
-				FormScreen.FormField.text(HostilityEditorLang.TRAIT_CHANCE.get(), DoubleMapScreen.format(cur.trait_chance()), doubles),
-				FormScreen.FormField.text(HostilityEditorLang.SUPPRESSION.get(), DoubleMapScreen.format(cur.suppression()), doubles)
+				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + cur.min(), ints, HostilityEditorLang.DIFF_MIN_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.BASE.get(), "" + cur.base(), ints, HostilityEditorLang.DIFF_BASE_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.VARIATION.get(), DoubleMapScreen.format(cur.variation()), doubles, HostilityEditorLang.DIFF_VAR_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.SCALE.get(), DoubleMapScreen.format(cur.scale()), doubles, HostilityEditorLang.DIFF_SCALE_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.APPLY_CHANCE.get(), DoubleMapScreen.format(cur.apply_chance()), doubles, HostilityEditorLang.DIFF_APPLY_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.TRAIT_CHANCE.get(), DoubleMapScreen.format(cur.trait_chance()), doubles, HostilityEditorLang.DIFF_TRAIT_CHANCE_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.SUPPRESSION.get(), DoubleMapScreen.format(cur.suppression()), doubles, HostilityEditorLang.DIFF_SUPPRESS_TIP.get())
 		), v -> new WorldDifficultyConfig.DifficultyConfig(
 				Integer.parseInt(v.get(0).trim()),
 				Integer.parseInt(v.get(1).trim()),
@@ -78,10 +78,10 @@ public final class HostilityEditorForms {
 	public static FormScreen.FormSpec<TraitConfig> traitConfig(TraitConfig cur) {
 		Function<String, Component> ints = HostilityEditorForms::intValidate;
 		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + cur.min_level, ints),
-				FormScreen.FormField.text(HostilityEditorLang.COST.get(), "" + cur.cost, ints),
-				FormScreen.FormField.text(HostilityEditorLang.MAX_RANK.get(), "" + cur.max_rank, ints),
-				FormScreen.FormField.text(HostilityEditorLang.WEIGHT.get(), "" + cur.weight, ints)
+				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + cur.min_level, ints, HostilityEditorLang.TRAIT_MIN_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.COST.get(), "" + cur.cost, ints, HostilityEditorLang.TRAIT_COST_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.MAX_RANK.get(), "" + cur.max_rank, ints, HostilityEditorLang.TRAIT_MAX_RANK_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.WEIGHT.get(), "" + cur.weight, ints, HostilityEditorLang.TRAIT_WEIGHT_TIP.get())
 		), v -> {
 			TraitConfig ans = new TraitConfig();
 			ans.min_level = Integer.parseInt(v.get(0).trim());
@@ -97,12 +97,12 @@ public final class HostilityEditorForms {
 		Function<String, Component> ints = HostilityEditorForms::intValidate;
 		Function<String, Component> doubles = HostilityEditorForms::doubleValidate;
 		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.FREE.get(), "" + c.free(), ints),
-				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + c.min(), ints),
-				FormScreen.FormField.bool(HostilityEditorLang.CAP.get(), c.cap()),
-				FormScreen.FormField.text(HostilityEditorLang.LV.get(), c.condition() == null ? "" : "" + c.condition().lv(), HostilityEditorForms::optionalInt),
-				FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), c.condition() == null ? "" : DoubleMapScreen.format(c.condition().chance()), HostilityEditorForms::optionalDouble),
-				FormScreen.FormField.text(HostilityEditorLang.ADVANCEMENT_ID.get(), c.condition() == null || c.condition().id() == null ? "" : c.condition().id().toString(), HostilityEditorForms::optionalRlValidate)
+				FormScreen.FormField.text(HostilityEditorLang.FREE.get(), "" + c.free(), ints, HostilityEditorLang.FREE_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + c.min(), ints, HostilityEditorLang.RANK_MIN_TIP.get()),
+				FormScreen.FormField.bool(HostilityEditorLang.CAP.get(), c.cap(), HostilityEditorLang.CAP_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.LV.get(), c.condition() == null ? "" : "" + c.condition().lv(), HostilityEditorForms::optionalInt, HostilityEditorLang.LV_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), c.condition() == null ? "" : DoubleMapScreen.format(c.condition().chance()), HostilityEditorForms::optionalDouble, HostilityEditorLang.CHANCE_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.ADVANCEMENT_ID.get(), c.condition() == null || c.condition().id() == null ? "" : c.condition().id().toString(), HostilityEditorForms::optionalRlValidate, HostilityEditorLang.ADVANCEMENT_TIP.get())
 		), v -> {
 			boolean cap = v.get(2).equals("true");
 			String lv = v.get(3).trim();
@@ -123,9 +123,9 @@ public final class HostilityEditorForms {
 		Function<String, Component> ints = HostilityEditorForms::intValidate;
 		Function<String, Component> doubles = HostilityEditorForms::doubleValidate;
 		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "0", ints),
-				FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), "1", doubles),
-				FormScreen.FormField.text(HostilityEditorLang.SLOT.get(), "mainhand", null)
+				FormScreen.FormField.text(HostilityEditorLang.LEVEL.get(), "0", ints, HostilityEditorLang.ITEM_LEVEL_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.CHANCE.get(), "1", doubles, HostilityEditorLang.ITEM_CHANCE_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.SLOT.get(), "mainhand", null, HostilityEditorLang.SLOT_TIP.get())
 		), v -> new EntityConfig.ItemPool(Integer.parseInt(v.get(0).trim()),
 				(float) Double.parseDouble(v.get(1).trim()), v.get(2).trim(), new ArrayList<>()));
 	}
@@ -133,8 +133,8 @@ public final class HostilityEditorForms {
 	public static FormScreen.FormSpec<EntityConfig.MasterConfig> masterConfig(EntityConfig.MasterConfig cur) {
 		Function<String, Component> ints = HostilityEditorForms::intValidate;
 		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.MAX_TOTAL_COUNT.get(), "" + cur.maxTotalCount(), ints),
-				FormScreen.FormField.text(HostilityEditorLang.SPAWN_INTERVAL.get(), "" + cur.spawnInterval(), ints)
+				FormScreen.FormField.text(HostilityEditorLang.MAX_TOTAL_COUNT.get(), "" + cur.maxTotalCount(), ints, HostilityEditorLang.MASTER_MAX_TOTAL_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.SPAWN_INTERVAL.get(), "" + cur.spawnInterval(), ints, HostilityEditorLang.MASTER_SPAWN_INTERVAL_TIP.get())
 		), v -> new EntityConfig.MasterConfig(Integer.parseInt(v.get(0).trim()),
 				Integer.parseInt(v.get(1).trim()), cur.minions()));
 	}
@@ -145,16 +145,16 @@ public final class HostilityEditorForms {
 		Function<String, Component> ints = HostilityEditorForms::intValidate;
 		Function<String, Component> doubles = HostilityEditorForms::doubleValidate;
 		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.MAX_COUNT.get(), "" + c.maxCount(), ints),
-				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + c.minLevel(), ints),
-				FormScreen.FormField.text(HostilityEditorLang.HEALTH_SCALE.get(), DoubleMapScreen.format(c.maxHealthPercentage()), doubles),
-				FormScreen.FormField.text(HostilityEditorLang.SPAWN_RANGE.get(), "" + c.spawnRange(), ints),
-				FormScreen.FormField.text(HostilityEditorLang.COOLDOWN.get(), "" + c.cooldown(), ints),
-				FormScreen.FormField.bool(HostilityEditorLang.COPY_LEVEL.get(), c.copyLevel()),
-				FormScreen.FormField.bool(HostilityEditorLang.COPY_TRAIT.get(), c.copyTrait()),
-				FormScreen.FormField.text(HostilityEditorLang.SCALE.get(), DoubleMapScreen.format(c.linkDistance()), doubles),
-				FormScreen.FormField.bool(HostilityEditorLang.PROTECT_MASTER.get(), c.protectMaster()),
-				FormScreen.FormField.bool(HostilityEditorLang.DISCARD_ON_UNLINK.get(), c.discardOnUnlink())
+				FormScreen.FormField.text(HostilityEditorLang.MAX_COUNT.get(), "" + c.maxCount(), ints, HostilityEditorLang.MAX_COUNT_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + c.minLevel(), ints, HostilityEditorLang.MINION_MIN_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.HEALTH_SCALE.get(), DoubleMapScreen.format(c.maxHealthPercentage()), doubles, HostilityEditorLang.MINION_HP_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.SPAWN_RANGE.get(), "" + c.spawnRange(), ints, HostilityEditorLang.SPAWN_RANGE_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.COOLDOWN.get(), "" + c.cooldown(), ints, HostilityEditorLang.COOLDOWN_TIP.get()),
+				FormScreen.FormField.bool(HostilityEditorLang.COPY_LEVEL.get(), c.copyLevel(), HostilityEditorLang.COPY_LEVEL_TIP.get()),
+				FormScreen.FormField.bool(HostilityEditorLang.COPY_TRAIT.get(), c.copyTrait(), HostilityEditorLang.COPY_TRAIT_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.SCALE.get(), DoubleMapScreen.format(c.linkDistance()), doubles, HostilityEditorLang.LINK_DISTANCE_TIP.get()),
+				FormScreen.FormField.bool(HostilityEditorLang.PROTECT_MASTER.get(), c.protectMaster(), HostilityEditorLang.PROTECT_MASTER_TIP.get()),
+				FormScreen.FormField.bool(HostilityEditorLang.DISCARD_ON_UNLINK.get(), c.discardOnUnlink(), HostilityEditorLang.DISCARD_UNLINK_TIP.get())
 		), v -> new EntityConfig.Minion(type,
 				Integer.parseInt(v.get(0).trim()), Integer.parseInt(v.get(1).trim()),
 				Double.parseDouble(v.get(2).trim()), Integer.parseInt(v.get(3).trim()),
@@ -167,12 +167,12 @@ public final class HostilityEditorForms {
 		Function<String, Component> ints = HostilityEditorForms::intValidate;
 		Function<String, Component> doubles = HostilityEditorForms::doubleValidate;
 		return new FormScreen.FormSpec<>(List.of(
-				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + cur.minSpawnLevel, ints),
-				FormScreen.FormField.text(HostilityEditorLang.MAX_LEVEL.get(), "" + cur.maxLevel, ints),
-				FormScreen.FormField.text(HostilityEditorLang.MAX_TRAIT_COUNT.get(), "" + cur.maxTraitCount, ints),
-				FormScreen.FormField.text(HostilityEditorLang.HEALTH_SCALE.get(), DoubleMapScreen.format(cur.healthScale), doubles),
-				FormScreen.FormField.text(HostilityEditorLang.ATTACK_SCALE.get(), DoubleMapScreen.format(cur.attackScale), doubles),
-				FormScreen.FormField.bool(HostilityEditorLang.PRESET_TRAITS_ONLY.get(), cur.presetTraitsOnly)
+				FormScreen.FormField.text(HostilityEditorLang.MIN_LEVEL.get(), "" + cur.minSpawnLevel, ints, HostilityEditorLang.ENTITY_MIN_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.MAX_LEVEL.get(), "" + cur.maxLevel, ints, HostilityEditorLang.ENTITY_MAX_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.MAX_TRAIT_COUNT.get(), "" + cur.maxTraitCount, ints, HostilityEditorLang.ENTITY_MAX_TRAIT_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.HEALTH_SCALE.get(), DoubleMapScreen.format(cur.healthScale), doubles, HostilityEditorLang.HEALTH_SCALE_TIP.get()),
+				FormScreen.FormField.text(HostilityEditorLang.ATTACK_SCALE.get(), DoubleMapScreen.format(cur.attackScale), doubles, HostilityEditorLang.ATTACK_SCALE_TIP.get()),
+				FormScreen.FormField.bool(HostilityEditorLang.PRESET_TRAITS_ONLY.get(), cur.presetTraitsOnly, HostilityEditorLang.PRESET_ONLY_TIP.get())
 		), v -> {
 			cur.minSpawnLevel = Integer.parseInt(v.get(0).trim());
 			cur.maxLevel = Integer.parseInt(v.get(1).trim());

@@ -9,6 +9,7 @@ import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -41,7 +42,7 @@ public class TraitFileScreen extends HostilityFileScreen {
 					config.max_rank = c.max_rank;
 					config.weight = c.weight;
 					session.dirty = true;
-				}, TraitFileScreen.this))));
+				}, TraitFileScreen.this)), HostilityEditorLang.ROW_TRAIT_FIELDS_TIP.get()));
 		List<LHConfigEdit.FieldDef> configFields = LHConfigEdit.traitFields(fileId.getPath());
 		if (!configFields.isEmpty()) {
 			MutableComponent configLabel = HostilityEditorForms.counted(HostilityEditorLang.TRAIT_CONFIG.get(), configFields.size()).copy();
@@ -53,15 +54,24 @@ public class TraitFileScreen extends HostilityFileScreen {
 				configLabel.append(Component.literal("  ")).append(status);
 			}
 			entries.add(new EditorList.Entry(configLabel, null,
-					() -> LHConfigEdit.openSectionForm(HostilityEditorLang.TRAIT_CONFIG.get(), configFields, TraitFileScreen.this)));
+					() -> LHConfigEdit.openSectionForm(HostilityEditorLang.TRAIT_CONFIG.get(), configFields, TraitFileScreen.this),
+					HostilityEditorLang.ROW_TRAIT_CONFIG_TIP.get()));
 		}
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.BLACKLIST_TAG.get(),
 				HostilityTagUtil.load(config.getBlacklistTag().location()).size()), null,
-				() -> Minecraft.getInstance().setScreen(new TagEditScreen(config.getBlacklistTag().location(), TraitFileScreen.this))));
+				() -> Minecraft.getInstance().setScreen(new TagEditScreen(config.getBlacklistTag().location(), TraitFileScreen.this)),
+				HostilityEditorLang.ROW_BLACKLIST_TIP.get()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.WHITELIST_TAG.get(),
 				HostilityTagUtil.load(config.getWhitelistTag().location()).size()), null,
-				() -> Minecraft.getInstance().setScreen(new TagEditScreen(config.getWhitelistTag().location(), TraitFileScreen.this))));
+				() -> Minecraft.getInstance().setScreen(new TagEditScreen(config.getWhitelistTag().location(), TraitFileScreen.this)),
+				HostilityEditorLang.ROW_WHITELIST_TIP.get()));
 		list.setData(entries);
+	}
+
+	@Override
+	public void render(GuiGraphics g, int mx, int my, float pTick) {
+		super.render(g, mx, my, pTick);
+		list.renderRowTooltip(g);
 	}
 
 	@Override

@@ -40,7 +40,7 @@ public class EntityConfigEntryScreen extends EditorScreen {
 		list = new EditorList(minecraft, width, height - 70, 30, height - 40);
 		addRenderableWidget(list);
 		List<Button> row = new ArrayList<>();
-		row.add(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build());
+		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build(), EditorText.BACK_TIP.get()));
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		rebuild();
@@ -50,24 +50,27 @@ public class EntityConfigEntryScreen extends EditorScreen {
 		List<EditorList.Entry> entries = new ArrayList<>();
 		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.APPLIES_TO.get(),
 				HostilityEditorForms.entityListName(config.entities)),
-				entityIcon(), this::editEntities, config.entities.isEmpty()));
+				entityIcon(), this::editEntities, config.entities.isEmpty(),
+				HostilityEditorLang.ROW_APPLIES_TO_TIP.get()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.DIFFICULTY_EDIT.get(),
 				HostilityEditorForms.difficultySummary(config.difficulty())),
-				null, this::editDifficulty, HostilityEditorForms.defaultDifficulty(config.difficulty())));
+				null, this::editDifficulty, HostilityEditorForms.defaultDifficulty(config.difficulty()),
+				HostilityEditorLang.ROW_DIFF_TIP.get()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.TRAIT_BASE_LIST.get(), config.traits().size()),
-				null, this::editTraits, config.traits().isEmpty()));
+				null, this::editTraits, config.traits().isEmpty(), HostilityEditorLang.ROW_TRAITS_TIP.get()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.TRAIT_BLACKLIST.get(), config.blacklist().size()),
-				null, this::editBlacklist, config.blacklist().isEmpty()));
+				null, this::editBlacklist, config.blacklist().isEmpty(), HostilityEditorLang.ROW_BLACK_TIP.get()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ITEMS.get(), config.items.size()),
-				null, this::editItems, config.items.isEmpty()));
+				null, this::editItems, config.items.isEmpty(), HostilityEditorLang.ROW_ITEMS_TIP.get()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.entry(HostilityEditorLang.VALUES_EDIT.get(),
 				HostilityEditorForms.entityValuesSummary(config)),
-				null, this::editValues, HostilityEditorForms.defaultValues(config)));
+				null, this::editValues, HostilityEditorForms.defaultValues(config), HostilityEditorLang.ROW_VALUES_TIP.get()));
 		if (HostilityEditorForms.hasMaster(config)) {
 			Component text = config.asMaster == null ? HostilityEditorLang.MASTER_CONFIG.get()
 					: HostilityEditorForms.entry(HostilityEditorLang.MASTER_CONFIG.get(),
 					HostilityEditorForms.masterSummary(config.asMaster));
-			entries.add(new EditorList.Entry(text, null, this::editMaster, config.asMaster == null));
+			entries.add(new EditorList.Entry(text, null, this::editMaster, config.asMaster == null,
+					HostilityEditorLang.ROW_MASTER_TIP.get()));
 		}
 		list.setData(entries);
 	}
@@ -139,6 +142,7 @@ public class EntityConfigEntryScreen extends EditorScreen {
 		super.renderBackground(g);
 		super.render(g, mx, my, pTick);
 		g.drawCenteredString(font, this.title, width / 2, 10, 0xFFFFFF);
+		list.renderRowTooltip(g);
 	}
 
 	@Override

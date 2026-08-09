@@ -61,13 +61,17 @@ public class Obj2IntMapScreen<M> extends EditorScreen {
 		list = new EditorList(minecraft, width, height - 70, 30, height - 40);
 		addRenderableWidget(list);
 		List<Button> row = new ArrayList<>();
-		addBtn = Button.builder(EditorText.ADD.get(), b -> addModifier()).bounds(0, 0, 60, 20).build();
+		addBtn = EditorTip.tip(Button.builder(EditorText.ADD.get(), b -> addModifier()).bounds(0, 0, 60, 20).build(),
+				EditorText.ADD_TIP.get());
 		row.add(addBtn);
-		editBtn = Button.builder(EditorText.EDIT.get(), b -> editModifier()).bounds(0, 0, 60, 20).build();
+		editBtn = EditorTip.tip(Button.builder(EditorText.EDIT.get(), b -> editModifier()).bounds(0, 0, 60, 20).build(),
+				EditorText.EDIT_TIP.get());
 		row.add(editBtn);
-		removeBtn = Button.builder(EditorText.REMOVE.get(), b -> removeModifier()).bounds(0, 0, 60, 20).build();
+		removeBtn = EditorTip.tip(Button.builder(EditorText.REMOVE.get(), b -> removeModifier()).bounds(0, 0, 60, 20).build(),
+				EditorText.REMOVE_TIP.get());
 		row.add(removeBtn);
-		row.add(Button.builder(EditorText.BACK.get(), b -> onClose()).bounds(0, 0, 60, 20).build());
+		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> onClose()).bounds(0, 0, 60, 20).build(),
+				EditorText.BACK_TIP.get()));
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		editBtn.active = false;

@@ -4,6 +4,7 @@ import dev.xkmc.l2hostility.editor.base.EditorText;
 import dev.xkmc.l2hostility.editor.base.EditorToast;
 import dev.xkmc.l2hostility.editor.base.FormScreen;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.data.LHConfig.Common;
 import net.minecraft.client.Minecraft;
@@ -33,7 +34,12 @@ public final class LHConfigEdit {
 	/**
 	 * One config value together with the widgets to edit it.
 	 */
-	public record FieldDef(Component label, Kind kind, ForgeConfigSpec.ConfigValue<?> value) {
+	public record FieldDef(Component label, Kind kind, ForgeConfigSpec.ConfigValue<?> value,
+	                       @Nullable List<Component> fixed) {
+
+		public FieldDef(Component label, Kind kind, ForgeConfigSpec.ConfigValue<?> value) {
+			this(label, kind, value, null);
+		}
 
 		public String getString() {
 			return switch (kind) {
@@ -51,14 +57,36 @@ public final class LHConfigEdit {
 			}
 		}
 
+		/**
+		 * Tooltip lines for this value: an explicit text when given, otherwise the comment that
+		 * was declared with the Forge config value.
+		 */
+		@Nullable
+		public List<Component> tooltip() {
+			if (fixed != null) return fixed;
+			Object vs = LHConfig.COMMON_SPEC.getValues().get(value.getPath());
+			if (vs instanceof ForgeConfigSpec.ValueSpec vs2) {
+				String comment = vs2.getComment();
+				if (comment == null || comment.isBlank()) return null;
+				List<Component> ans = new ArrayList<>();
+				for (String line : comment.split("\n")) {
+					String trimmed = line.trim();
+					if (!trimmed.isEmpty()) ans.add(Component.literal(trimmed));
+				}
+				return ans;
+			}
+			return null;
+		}
+
 		public FormScreen.FormField toFormField() {
+			Component[] tip = tooltip() == null ? new Component[0] : tooltip().toArray(new Component[0]);
 			return switch (kind) {
-				case BOOL -> FormScreen.FormField.bool(label, (Boolean) value.get());
+				case BOOL -> FormScreen.FormField.bool(label, (Boolean) value.get(), tip);
 				case INT -> FormScreen.FormField.text(label, String.valueOf(((ForgeConfigSpec.IntValue) value).get()),
-						HostilityEditorForms::intValidate);
+						HostilityEditorForms::intValidate, tip);
 				case DOUBLE ->
 						FormScreen.FormField.text(label, String.valueOf(((ForgeConfigSpec.DoubleValue) value).get()),
-								HostilityEditorForms::doubleValidate);
+								HostilityEditorForms::doubleValidate, tip);
 			};
 		}
 	}
@@ -105,7 +133,9 @@ public final class LHConfigEdit {
 	@Nullable
 	public static FieldDef traitToggle(String traitPath) {
 		ForgeConfigSpec.BooleanValue toggle = LHConfig.COMMON.map.get(traitPath);
-		return toggle == null ? null : new FieldDef(Component.literal("allow_" + traitPath), Kind.BOOL, toggle);
+		if (toggle == null) return null;
+		return new FieldDef(Component.literal("allow_" + traitPath), Kind.BOOL, toggle,
+				List.of(HostilityEditorLang.TRAIT_TOGGLE_TIP.get()));
 	}
 
 	/**

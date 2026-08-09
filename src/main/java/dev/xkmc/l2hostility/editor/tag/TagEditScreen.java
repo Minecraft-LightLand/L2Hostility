@@ -44,17 +44,23 @@ public class TagEditScreen extends EditorScreen {
 		list = new EditorList(minecraft, width, height - 70, 30, height - 40);
 		addRenderableWidget(list);
 		List<Button> row = new ArrayList<>();
-		addEntBtn = Button.builder(HostilityEditorLang.ADD_ENTITY.get(), b -> addEntity()).bounds(0, 0, 50, 20).build();
+		addEntBtn = EditorTip.tip(Button.builder(HostilityEditorLang.ADD_ENTITY.get(), b -> addEntity()).bounds(0, 0, 50, 20).build(),
+				HostilityEditorLang.ADD_ENTITY_TIP.get());
 		row.add(addEntBtn);
-		addTagBtn = Button.builder(HostilityEditorLang.ADD_TAG.get(), b -> addTag()).bounds(0, 0, 50, 20).build();
+		addTagBtn = EditorTip.tip(Button.builder(HostilityEditorLang.ADD_TAG.get(), b -> addTag()).bounds(0, 0, 50, 20).build(),
+				HostilityEditorLang.ADD_TAG_TIP.get());
 		row.add(addTagBtn);
-		editBtn = Button.builder(EditorText.EDIT.get(), b -> toggleRequired()).bounds(0, 0, 50, 20).build();
+		editBtn = EditorTip.tip(Button.builder(EditorText.EDIT.get(), b -> toggleRequired()).bounds(0, 0, 50, 20).build(),
+				HostilityEditorLang.EDIT_TAG_TIP.get());
 		row.add(editBtn);
-		removeBtn = Button.builder(EditorText.REMOVE.get(), b -> removeValue()).bounds(0, 0, 50, 20).build();
+		removeBtn = EditorTip.tip(Button.builder(EditorText.REMOVE.get(), b -> removeValue()).bounds(0, 0, 50, 20).build(),
+				EditorText.REMOVE_TIP.get());
 		row.add(removeBtn);
-		saveBtn = Button.builder(EditorText.SAVE.get(), b -> save()).bounds(0, 0, 50, 20).build();
+		saveBtn = EditorTip.tip(Button.builder(EditorText.SAVE.get(), b -> save()).bounds(0, 0, 50, 20).build(),
+				EditorText.SAVE_TIP.get());
 		row.add(saveBtn);
-		row.add(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 50, 20).build());
+		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 50, 20).build(),
+				EditorText.BACK_TIP.get()));
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		editBtn.active = false;

@@ -22,14 +22,23 @@ public class FormScreen<T> extends EditorScreen {
 	}
 
 	public record FormField(Component label, String initial, @Nullable Function<String, Component> validate,
-	                        boolean bool) {
+	                        boolean bool, @Nullable List<Component> tooltip) {
 
 		public static FormField text(Component label, String initial, @Nullable Function<String, Component> validate) {
-			return new FormField(label, initial, validate, false);
+			return new FormField(label, initial, validate, false, null);
+		}
+
+		public static FormField text(Component label, String initial, @Nullable Function<String, Component> validate,
+		                             Component... tooltip) {
+			return new FormField(label, initial, validate, false, tooltip.length == 0 ? null : List.of(tooltip));
 		}
 
 		public static FormField bool(Component label, boolean initial) {
-			return new FormField(label, "" + initial, null, true);
+			return new FormField(label, "" + initial, null, true, null);
+		}
+
+		public static FormField bool(Component label, boolean initial, Component... tooltip) {
+			return new FormField(label, "" + initial, null, true, tooltip.length == 0 ? null : List.of(tooltip));
 		}
 
 	}
@@ -85,10 +94,10 @@ public class FormScreen<T> extends EditorScreen {
 				addRenderableWidget(box);
 			}
 		}
-		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
-				.bounds(width / 2 - 110, buttonY(), 100, 20).build());
-		addRenderableWidget(Button.builder(EditorText.CONFIRM.get(), b -> submit())
-				.bounds(width / 2 + 10, buttonY(), 100, 20).build());
+		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
+				.bounds(width / 2 - 110, buttonY(), 100, 20).build(), EditorText.CANCEL_TIP.get()));
+		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.CONFIRM.get(), b -> submit())
+				.bounds(width / 2 + 10, buttonY(), 100, 20).build(), EditorText.CONFIRM_TIP.get()));
 		layout();
 		if (!boxes.isEmpty()) setInitialFocus(boxes.get(0));
 	}
@@ -176,9 +185,32 @@ public class FormScreen<T> extends EditorScreen {
 			FormField field = spec.fields().get(i);
 			g.drawString(font, field.label(), labelX(), fieldY(i) + 5, 0xAAAAAA);
 		}
+		List<Component> tip = hoveredTip(mx, my);
+		if (tip != null && !tip.isEmpty()) {
+			g.renderComponentTooltip(font, tip, mx, my);
+		}
 		if (error != null) {
 			g.drawCenteredString(font, error, width / 2, buttonY() - 12, 0xFF5555);
 		}
+	}
+
+	/**
+	 * Tooltip of the field row under the mouse, if any.
+	 */
+	@Nullable
+	private List<Component> hoveredTip(int mx, int my) {
+		int top = CONTENT_TOP;
+		int bottom = buttonY() - 10;
+		for (int i = 0; i < spec.fields().size(); i++) {
+			FormField field = spec.fields().get(i);
+			if (field.tooltip() == null) continue;
+			int y = fieldY(i);
+			if (y + ROW_H < top || y > bottom) continue;
+			if (my >= y && my < y + ROW_H && mx >= labelX() && mx <= boxX() + BOX_W) {
+				return field.tooltip();
+			}
+		}
+		return null;
 	}
 
 	@Override

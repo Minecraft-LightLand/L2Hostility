@@ -10,6 +10,7 @@ import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -37,14 +38,17 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 		List<EditorList.Entry> entries = new ArrayList<>();
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.DIMENSIONS.get(), config.levelMap.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.DIMENSIONS.get(),
-						config.levelMap, () -> config.levelMap, new DimHandler(), DifficultyFileScreen.this, session))));
+						config.levelMap, () -> config.levelMap, new DimHandler(), DifficultyFileScreen.this, session)),
+				HostilityEditorLang.ROW_DIMENSIONS_TIP.get()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.BIOMES.get(), config.biomeMap.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.BIOMES.get(),
-						config.biomeMap, () -> config.biomeMap, new BiomeHandler(), DifficultyFileScreen.this, session))));
+						config.biomeMap, () -> config.biomeMap, new BiomeHandler(), DifficultyFileScreen.this, session)),
+				HostilityEditorLang.ROW_BIOMES_TIP.get()));
 		entries.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.LEVEL_DEFAULT_TRAITS.get(), config.levelDefaultTraits.size()), null,
 				() -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.LEVEL_DEFAULT_TRAITS.get(),
 						config.levelDefaultTraits, () -> config.levelDefaultTraits,
-						new ConfigListHandler(session, false), DifficultyFileScreen.this, session))));
+						new ConfigListHandler(session, false), DifficultyFileScreen.this, session)),
+				HostilityEditorLang.ROW_LEVEL_DEF_TRAITS_TIP.get()));
 		boolean structures = HostilityEditorUtil.hasStructureRegistry();
 		Component structureLabel = HostilityEditorForms.counted(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(), config.structureDefaultTraits.size())
 				.copy().append(structures ? Component.empty() : HostilityEditorLang.STRUCTURE_SERVER_HINT.get());
@@ -55,7 +59,7 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 				structures ? () -> Minecraft.getInstance().setScreen(new ValueMapScreen<>(HostilityEditorLang.STRUCTURE_DEFAULT_TRAITS.get(),
 						config.structureDefaultTraits, () -> config.structureDefaultTraits,
 						new ConfigListHandler(session, true), DifficultyFileScreen.this, session)) : null,
-				!structures));
+				!structures, HostilityEditorLang.ROW_STRUCTURE_DEF_TRAITS_TIP.get()));
 		list.setData(entries);
 	}
 
@@ -70,6 +74,12 @@ public class DifficultyFileScreen extends HostilityFileScreen {
 					HostilityEditorLang.INVALID_INTEGER.get(e.getMessage()), EditorText.NOT_IN_WORLD.get());
 			return false;
 		}
+	}
+
+	@Override
+	public void render(GuiGraphics g, int mx, int my, float pTick) {
+		super.render(g, mx, my, pTick);
+		list.renderRowTooltip(g);
 	}
 
 	private record DimHandler() implements ValueMapScreen.Handler<ResourceLocation, WorldDifficultyConfig.DifficultyConfig> {

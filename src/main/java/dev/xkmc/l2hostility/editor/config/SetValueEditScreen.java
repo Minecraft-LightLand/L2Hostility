@@ -82,12 +82,16 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 			addRenderableWidget(box);
 		}
 		List<Button> row = new ArrayList<>();
-		row.add(Button.builder(EditorText.ADD.get(), b -> addPick()).bounds(0, 0, 60, 20).build());
-		removeBtn = Button.builder(EditorText.REMOVE.get(), b -> removePick()).bounds(0, 0, 60, 20).build();
+		row.add(EditorTip.tip(Button.builder(EditorText.ADD.get(), b -> addPick()).bounds(0, 0, 60, 20).build(),
+				EditorText.ADD_TIP.get()));
+		removeBtn = EditorTip.tip(Button.builder(EditorText.REMOVE.get(), b -> removePick()).bounds(0, 0, 60, 20).build(),
+				EditorText.REMOVE_TIP.get());
 		removeBtn.active = false;
 		row.add(removeBtn);
-		row.add(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent)).bounds(0, 0, 60, 20).build());
-		row.add(Button.builder(EditorText.CONFIRM.get(), b -> submit()).bounds(0, 0, 60, 20).build());
+		row.add(EditorTip.tip(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent)).bounds(0, 0, 60, 20).build(),
+				EditorText.CANCEL_TIP.get()));
+		row.add(EditorTip.tip(Button.builder(EditorText.CONFIRM.get(), b -> submit()).bounds(0, 0, 60, 20).build(),
+				EditorText.CONFIRM_TIP.get()));
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		list.setOnSelect(() -> removeBtn.active = selected() != null);
@@ -195,9 +199,27 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 			FormScreen.FormField field = fields.get(i);
 			g.drawString(font, field.label(), width / 2 - 160, 26 + i * ROW_H + 19, 0xAAAAAA);
 		}
+		List<Component> tip = hoveredTip(mx, my);
+		if (tip != null && !tip.isEmpty()) {
+			g.renderComponentTooltip(font, tip, mx, my);
+		}
 		if (error != null) {
 			g.drawCenteredString(font, error, width / 2, height - 52, 0xFF5555);
 		}
+	}
+
+	@Nullable
+	private List<Component> hoveredTip(int mx, int my) {
+		int boxX = width / 2 + 40;
+		for (int i = 0; i < fields.size(); i++) {
+			FormScreen.FormField field = fields.get(i);
+			if (field.tooltip() == null) continue;
+			int y = 26 + i * ROW_H;
+			if (my >= y && my < y + ROW_H && mx >= width / 2 - 170 && mx <= boxX + 120) {
+				return field.tooltip();
+			}
+		}
+		return null;
 	}
 
 	@Override

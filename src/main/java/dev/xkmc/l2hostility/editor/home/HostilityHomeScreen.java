@@ -1,6 +1,7 @@
 package dev.xkmc.l2hostility.editor.home;
 
 import dev.xkmc.l2hostility.editor.base.*;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import dev.xkmc.l2library.serial.config.BaseConfig;
 import net.minecraft.ChatFormatting;
@@ -9,6 +10,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -62,13 +64,29 @@ public abstract class HostilityHomeScreen extends EditorHomeScreen {
 				label = label.copy().withStyle(ChatFormatting.RED, ChatFormatting.STRIKETHROUGH);
 			}
 			int idx = i;
-			ans.add(new EditorTab(label, () -> {
+			ans.add(new EditorTab(label, tabTooltip(i), () -> {
 				if (idx != index) {
 					Minecraft.getInstance().setScreen(TABS.get(idx).apply(parent));
 				}
 			}));
 		}
 		return ans;
+	}
+
+	/**
+	 * Tooltip text of the i-th tab (see {@link HostilityEditorLang} TAB_*_TIP keys).
+	 */
+	@Nullable
+	private static Component tabTooltip(int i) {
+		return switch (i) {
+			case 0 -> HostilityEditorLang.TAB_WORLD_TIP.get();
+			case 1 -> HostilityEditorLang.TAB_TRAIT_TIP.get();
+			case 2 -> HostilityEditorLang.TAB_WEAPON_TIP.get();
+			case 3 -> HostilityEditorLang.TAB_ENTITY_TIP.get();
+			case 4 -> HostilityEditorLang.TAB_TAGS_TIP.get();
+			case 5 -> HostilityEditorLang.TAB_CONFIG_TIP.get();
+			default -> null;
+		};
 	}
 
 	@Override

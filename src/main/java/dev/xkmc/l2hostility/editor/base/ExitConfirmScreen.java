@@ -21,12 +21,12 @@ public class ExitConfirmScreen extends EditorScreen {
 	@Override
 	protected void init() {
 		int c = width / 2;
-		addRenderableWidget(Button.builder(EditorText.SAVE.get(), b -> onSave.run())
-				.bounds(c - 160, height / 2 + 20, 100, 20).build());
-		addRenderableWidget(Button.builder(EditorText.DISCARD.get(), b -> onDiscard.run())
-				.bounds(c - 50, height / 2 + 20, 100, 20).build());
-		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
-				.bounds(c + 60, height / 2 + 20, 100, 20).build());
+		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.SAVE.get(), b -> onSave.run())
+				.bounds(c - 160, height / 2 + 20, 100, 20).build(), EditorText.SAVE_TIP.get()));
+		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.DISCARD.get(), b -> onDiscard.run())
+				.bounds(c - 50, height / 2 + 20, 100, 20).build(), EditorText.CANCEL_TIP.get()));
+		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
+				.bounds(c + 60, height / 2 + 20, 100, 20).build(), EditorText.BACK_TIP.get()));
 	}
 
 	@Override

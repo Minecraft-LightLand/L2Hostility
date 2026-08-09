@@ -20,6 +20,10 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 	private Runnable onDoubleClick;
 	private long lastClick = -1;
 
+	@Nullable
+	private Component hoveredTooltip;
+	private int hoveredX, hoveredY;
+
 	public EditorList(Minecraft mc, int width, int height, int y0, int y1) {
 		super(mc, width, height, y0, y1, 20);
 	}
@@ -30,6 +34,23 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 
 	public void setOnDoubleClick(Runnable onDoubleClick) {
 		this.onDoubleClick = onDoubleClick;
+	}
+
+	@Override
+	public void render(GuiGraphics g, int mx, int my, float partialTick) {
+		hoveredTooltip = null;
+		super.render(g, mx, my, partialTick);
+		hoveredX = mx;
+		hoveredY = my;
+	}
+
+	/**
+	 * Renders the tooltip of the hovered row, if any. Call after the list is drawn.
+	 */
+	public void renderRowTooltip(GuiGraphics g) {
+		if (hoveredTooltip != null) {
+			g.renderComponentTooltip(Minecraft.getInstance().font, List.of(hoveredTooltip), hoveredX, hoveredY);
+		}
 	}
 
 	@Override
@@ -69,42 +90,50 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		private final boolean header;
 		private final boolean grey;
 		private final boolean collapsed;
+		@Nullable
+		private final Component tooltip;
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick) {
-			this(text, icon, null, onClick, false, false, null, false);
+			this(text, icon, null, onClick, false, false, null, false, null);
 		}
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, @Nullable Object data) {
-			this(text, icon, null, onClick, false, false, data, false);
+			this(text, icon, null, onClick, false, false, data, false, null);
 		}
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, @Nullable Object data, boolean grey) {
-			this(text, icon, null, onClick, false, false, data, grey);
+			this(text, icon, null, onClick, false, false, data, grey, null);
 		}
 
 		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, boolean grey) {
-			this(text, icon, null, onClick, false, false, null, grey);
+			this(text, icon, null, onClick, false, false, null, grey, null);
+		}
+
+		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, boolean grey,
+		             @Nullable Component tooltip) {
+			this(text, icon, null, onClick, false, false, null, grey, tooltip);
 		}
 
 		public static Entry rotating(Component text, @Nullable Supplier<ItemStack> iconSupplier,
 		                             @Nullable Runnable onClick) {
-			return new Entry(text, null, iconSupplier, onClick, false, false, null, false);
+			return new Entry(text, null, iconSupplier, onClick, false, false, null, false, null);
 		}
 
 		public Entry(Component text, boolean header) {
-			this(text, null, null, null, header, false, null, false);
+			this(text, null, null, null, header, false, null, false, null);
 		}
 
 		public Entry(Component text, boolean header, @Nullable Runnable onClick) {
-			this(text, null, null, onClick, header, false, null, false);
+			this(text, null, null, onClick, header, false, null, false, null);
 		}
 
 		public Entry(Component text, boolean header, @Nullable Runnable onClick, boolean collapsed) {
-			this(text, null, null, onClick, header, collapsed, null, false);
+			this(text, null, null, onClick, header, collapsed, null, false, null);
 		}
 
 		private Entry(Component text, @Nullable ItemStack icon, @Nullable Supplier<ItemStack> iconSupplier,
-		              @Nullable Runnable onClick, boolean header, boolean collapsed, @Nullable Object data, boolean grey) {
+		              @Nullable Runnable onClick, boolean header, boolean collapsed, @Nullable Object data, boolean grey,
+		              @Nullable Component tooltip) {
 			this.text = text;
 			this.icon = icon;
 			this.iconSupplier = iconSupplier;
@@ -113,6 +142,7 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 			this.collapsed = collapsed;
 			this.data = data;
 			this.grey = grey;
+			this.tooltip = tooltip;
 		}
 
 		@Nullable
@@ -144,6 +174,9 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 				x = left + 22;
 			}
 			g.drawString(Minecraft.getInstance().font, text, x, top + 5, grey ? 0xAAAAAA : 0xFFFFFF);
+			if (hovered && tooltip != null) {
+				((EditorList) this.list).hoveredTooltip = tooltip;
+			}
 		}
 
 		public void activate() {
