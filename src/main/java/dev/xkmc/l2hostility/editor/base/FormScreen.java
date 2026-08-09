@@ -3,11 +3,11 @@ package dev.xkmc.l2hostility.editor.base;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -57,9 +57,10 @@ public class FormScreen<T> extends EditorScreen {
 	private final List<Button> boolBtns = new ArrayList<>();
 	private final List<Integer> boxToField = new ArrayList<>();
 	private final List<Integer> boolToField = new ArrayList<>();
-	private int scroll;
 	@Nullable
 	private Component error;
+	@Nullable
+	private FormList list;
 
 	public FormScreen(Component title, FormSpec<T> spec, Consumer<T> onDone, Screen parent) {
 		this(title, spec, onDone, parent, false);
@@ -83,29 +84,28 @@ public class FormScreen<T> extends EditorScreen {
 				int idx = bi++;
 				boolToField.add(i);
 				boolValues[idx] = field.initial().equals("true");
-				Button btn = Button.builder(boolLabel(idx), b -> {
-					boolValues[idx] = !boolValues[idx];
-					b.setMessage(boolLabel(idx));
-					error = null;
-				}).bounds(boxX(), 0, BOX_W, 20).build();
-				boolBtns.add(btn);
-				addRenderableWidget(btn);
+				boolBtns.add(Button.builder(boolLabel(idx), b -> {
+				}).bounds(0, 0, BOX_W, 20).build());
 			} else {
-				EditBox box = new EditBox(this.font, boxX(), 0, BOX_W, 20, field.label());
+				EditBox box = new EditBox(this.font, 0, 0, BOX_W, 20, field.label());
 				box.setMaxLength(64);
 				box.setValue(field.initial());
 				box.setResponder(s -> error = null);
 				boxes.add(box);
 				boxToField.add(i);
-				addRenderableWidget(box);
 			}
 		}
+		list = new FormList(minecraft, width, buttonY() - 10 - CONTENT_TOP, CONTENT_TOP, buttonY() - 10, ROW_H);
+		list.setRenderSelection(false);
+		for (int i = 0; i < spec.fields().size(); i++) {
+			list.addRow(new FormEntry(i));
+		}
+		addRenderableWidget(list);
 		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
 				.bounds(width / 2 - 110, buttonY(), 100, 20).build());
 		addRenderableWidget(Button.builder(EditorText.CONFIRM.get(), b -> submit())
 				.bounds(width / 2 + 10, buttonY(), 100, 20).build());
-		layout();
-		if (!boxes.isEmpty()) setInitialFocus(boxes.get(0));
+		if (!boxes.isEmpty()) boxes.get(0).setFocused(true);
 	}
 
 	private int labelX() {
@@ -134,53 +134,19 @@ public class FormScreen<T> extends EditorScreen {
 		return Component.literal(cut.isEmpty() ? "..." : cut + "...").withStyle(label.getStyle());
 	}
 
-	private int fieldY(int i) {
-		return CONTENT_TOP + i * ROW_H - scroll;
-	}
-
 	private int buttonY() {
 		return height - 30;
-	}
-
-	private int maxScroll() {
-		return Math.max(0, spec.fields().size() * ROW_H - (buttonY() - 10 - CONTENT_TOP));
-	}
-
-	private void layout() {
-		int top = CONTENT_TOP;
-		int bottom = buttonY() - 10;
-		for (int i = 0; i < boxes.size(); i++) {
-			EditBox box = boxes.get(i);
-			box.setY(fieldY(boxToField.get(i)) + 2);
-			box.setVisible(inBand(boxToField.get(i), top, bottom) || box.isFocused());
-		}
-		for (int i = 0; i < boolBtns.size(); i++) {
-			boolBtns.get(i).setY(fieldY(boolToField.get(i)) + 2);
-			boolBtns.get(i).visible = inBand(boolToField.get(i), top, bottom);
-		}
-	}
-
-	/**
-	 * Whether the row of the given field is (partially) inside the content band, i.e. not scrolled
-	 * far enough to overlap the title or the bottom buttons.
-	 */
-	private boolean inBand(int fieldIdx, int top, int bottom) {
-		int y = fieldY(fieldIdx);
-		return y + ROW_H >= top && y <= bottom;
-	}
-
-	@Override
-	public boolean mouseScrolled(double mx, double my, double delta) {
-		int max = maxScroll();
-		if (max <= 0) return false;
-		scroll = Mth.clamp(scroll - (int) (delta * 20), 0, max);
-		layout();
-		return true;
 	}
 
 	private Component boolLabel(int idx) {
 		boolean v = boolValues[idx];
 		return Component.literal(Boolean.toString(v)).withStyle(v ? ChatFormatting.GREEN : ChatFormatting.RED);
+	}
+
+	private void toggleBool(int idx) {
+		boolValues[idx] = !boolValues[idx];
+		boolBtns.get(idx).setMessage(boolLabel(idx));
+		error = null;
 	}
 
 	private void submit() {
@@ -211,7 +177,18 @@ public class FormScreen<T> extends EditorScreen {
 			submit();
 			return true;
 		}
+		for (EditBox box : boxes) {
+			if (box.isFocused() && box.keyPressed(keyCode, scanCode, modifiers)) return true;
+		}
 		return super.keyPressed(keyCode, scanCode, modifiers);
+	}
+
+	@Override
+	public boolean charTyped(char codePoint, int modifiers) {
+		for (EditBox box : boxes) {
+			if (box.isFocused() && box.charTyped(codePoint, modifiers)) return true;
+		}
+		return super.charTyped(codePoint, modifiers);
 	}
 
 	@Override
@@ -219,17 +196,11 @@ public class FormScreen<T> extends EditorScreen {
 		super.renderBackground(g);
 		super.render(g, mx, my, pTick);
 		g.drawCenteredString(font, this.title, width / 2, 8, 0xFFFFFF);
-		int top = CONTENT_TOP;
-		int bottom = buttonY() - 10;
-		for (int i = 0; i < spec.fields().size(); i++) {
-			FormField field = spec.fields().get(i);
-			int y = fieldY(i);
-			if (y + ROW_H < top || y > bottom) continue;
-			g.drawString(font, fitLabel(field), labelX(), y + 5, 0xAAAAAA);
-		}
-		List<Component> tip = hoveredTip(mx, my);
-		if (tip != null && !tip.isEmpty()) {
-			g.renderComponentTooltip(font, tip, mx, my);
+		if (list != null) {
+			List<Component> tip = hoveredTip(mx, my);
+			if (tip != null && !tip.isEmpty()) {
+				g.renderComponentTooltip(font, tip, mx, my);
+			}
 		}
 		if (error != null) {
 			g.drawCenteredString(font, error, width / 2, buttonY() - 12, 0xFF5555);
@@ -242,17 +213,18 @@ public class FormScreen<T> extends EditorScreen {
 	 */
 	@Nullable
 	private List<Component> hoveredTip(int mx, int my) {
-		int top = CONTENT_TOP;
-		int bottom = buttonY() - 10;
-		for (int i = 0; i < spec.fields().size(); i++) {
-			FormField field = spec.fields().get(i);
-			if (field.tooltip() == null) continue;
-			int y = fieldY(i);
-			if (y + ROW_H < top || y > bottom) continue;
-			int right = labelX() + font.width(fitLabel(field));
-			if (my >= y && my < y + ROW_H && mx >= labelX() && mx <= right) {
-				return field.tooltip();
-			}
+		if (list == null) return null;
+		FormEntry hovered = list.hoveredEntry();
+		if (hovered == null) return null;
+		int idx = list.children().indexOf(hovered);
+		if (idx < 0) return null;
+		FormField field = spec.fields().get(idx);
+		if (field.tooltip() == null) return null;
+		int top = list.rowTop(idx);
+		Component label = fitLabel(field);
+		int right = labelX() + font.width(label);
+		if (my >= top && my < top + ROW_H && mx >= labelX() && mx <= right) {
+			return field.tooltip();
 		}
 		return null;
 	}
@@ -280,6 +252,97 @@ public class FormScreen<T> extends EditorScreen {
 		} else {
 			Minecraft.getInstance().setScreen(parent);
 		}
+	}
+
+	/**
+	 * List panel that renders the form rows. Each row draws its label and value widget inside the
+	 * list viewport, so both are clipped to the content band when scrolled.
+	 */
+	private class FormList extends ObjectSelectionList<FormEntry> {
+
+		FormList(Minecraft mc, int width, int height, int y0, int y1, int itemHeight) {
+			super(mc, width, height, y0, y1, itemHeight);
+		}
+
+		@Override
+		public int getRowWidth() {
+			return width;
+		}
+
+		@Override
+		protected int getScrollbarPosition() {
+			return width - 6;
+		}
+
+		void addRow(FormEntry entry) {
+			addEntry(entry);
+		}
+
+		int rowTop(int index) {
+			return getRowTop(index);
+		}
+
+		@Nullable
+		FormEntry hoveredEntry() {
+			return getHovered();
+		}
+
+	}
+
+	private class FormEntry extends ObjectSelectionList.Entry<FormEntry> {
+
+		private final int field;
+
+		FormEntry(int field) {
+			this.field = field;
+		}
+
+		private int index() {
+			return list.children().indexOf(this);
+		}
+
+		@Override
+		public void render(GuiGraphics g, int index, int top, int left, int rowWidth, int itemHeight,
+		                   int mx, int my, boolean hovered, float partialTick) {
+			if (hovered) {
+				g.fill(left, top - 2, left + rowWidth, top + itemHeight + 2, 0x20FFFFFF);
+			}
+			FormField f = spec.fields().get(field);
+			g.drawString(font, fitLabel(f), labelX(), top + 5, 0xAAAAAA);
+			int by = top + 3;
+			if (f.bool()) {
+				Button btn = boolBtns.get(boolToField.indexOf(field));
+				btn.setX(boxX());
+				btn.setY(by);
+				btn.render(g, mx, my, partialTick);
+			} else {
+				EditBox box = boxes.get(boxToField.indexOf(field));
+				box.setX(boxX());
+				box.setY(by);
+				box.render(g, mx, my, partialTick);
+			}
+		}
+
+		@Override
+		public boolean mouseClicked(double mx, double my, int button) {
+			if (button != 0) return false;
+			FormField f = spec.fields().get(field);
+			int top = FormScreen.this.list.rowTop(index());
+			boolean inBox = mx >= boxX() && mx <= boxX() + BOX_W && my >= top && my < top + ROW_H;
+			for (EditBox box : boxes) box.setFocused(false);
+			if (f.bool()) {
+				if (inBox) toggleBool(boolToField.indexOf(field));
+			} else if (inBox) {
+				boxes.get(boxToField.indexOf(field)).setFocused(true);
+			}
+			return true;
+		}
+
+		@Override
+		public Component getNarration() {
+			return spec.fields().get(field).label();
+		}
+
 	}
 
 }

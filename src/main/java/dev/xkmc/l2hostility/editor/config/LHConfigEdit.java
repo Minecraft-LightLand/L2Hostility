@@ -9,6 +9,7 @@ import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import dev.xkmc.l2hostility.init.data.LHConfig.Client;
 import dev.xkmc.l2hostility.init.data.LHConfig.Common;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
 import net.minecraft.ChatFormatting;
@@ -60,6 +61,17 @@ public final class LHConfigEdit {
 				case BOOL -> ((ForgeConfigSpec.BooleanValue) value).set(Boolean.parseBoolean(s));
 				case INT -> ((ForgeConfigSpec.IntValue) value).set(Integer.parseInt(s));
 				case DOUBLE -> ((ForgeConfigSpec.DoubleValue) value).set(Double.parseDouble(s));
+			}
+		}
+
+		/**
+		 * Resets this value to the default declared in the Forge config spec.
+		 */
+		public void reset() {
+			switch (kind) {
+				case BOOL -> ((ForgeConfigSpec.BooleanValue) value).set(((ForgeConfigSpec.BooleanValue) value).getDefault());
+				case INT -> ((ForgeConfigSpec.IntValue) value).set(((ForgeConfigSpec.IntValue) value).getDefault());
+				case DOUBLE -> ((ForgeConfigSpec.DoubleValue) value).set(((ForgeConfigSpec.DoubleValue) value).getDefault());
 			}
 		}
 
@@ -124,13 +136,18 @@ public final class LHConfigEdit {
 	private static final ResourceLocation CONFIG_ID = new ResourceLocation("l2hostility", "config");
 
 	/**
-	 * Writes the common config to disk. The values are already applied in memory via {@code set}.
+	 * Writes the common and client configs to disk. The values are already applied in memory via
+	 * {@code set}.
 	 */
 	public static void saveConfig() {
 		for (ModConfig c : ConfigTracker.INSTANCE.configSets().getOrDefault(ModConfig.Type.COMMON, Set.of())) {
 			if (c.getSpec() == LHConfig.COMMON_SPEC) {
 				c.save();
-				return;
+			}
+		}
+		for (ModConfig c : ConfigTracker.INSTANCE.configSets().getOrDefault(ModConfig.Type.CLIENT, Set.of())) {
+			if (c.getSpec() == LHConfig.CLIENT_SPEC) {
+				c.save();
 			}
 		}
 	}
@@ -332,6 +349,44 @@ public final class LHConfigEdit {
 				new Section(sectionName("performance", "Performance"), List.of(
 						b(c.enableCurioCheckFilter, "enableCurioCheckFilter"), i(c.removeTraitCheckInterval, "removeTraitCheckInterval"),
 						i(c.auraEffectApplicationInterval, "auraEffectApplicationInterval"), i(c.selfEffectApplicationInterval, "selfEffectApplicationInterval"))));
+	}
+
+	/**
+	 * Config sections of the client config. String options (e.g. the editor save path) are not
+	 * editable in the form and thus not included.
+	 */
+	public static List<Section> clientSections() {
+		Client c = LHConfig.CLIENT;
+		return List.of(
+				new Section(sectionName("overhead", "Overhead display"), List.of(
+						b(c.showTraitOverHead, "showTraitOverHead"), b(c.showLevelOverHead, "showLevelOverHead"),
+						i(c.overHeadRenderDistance, "overHeadRenderDistance"), d(c.overHeadRenderOffset, "overHeadRenderOffset"),
+						b(c.overHeadRenderFullBright, "overHeadRenderFullBright"), i(c.overHeadLevelColor, "overHeadLevelColor"),
+						i(c.overHeadLevelColorAbyss, "overHeadLevelColorAbyss"), b(c.showOnlyWhenHovered, "showOnlyWhenHovered"))),
+				new Section(sectionName("glasses", "Detector Glasses"), List.of(
+						i(c.glowingRangeHidden, "glowingRangeHidden"), i(c.glowingRangeNear, "glowingRangeNear"),
+						b(c.glassForLevelMobsOnly, "glassForLevelMobsOnly"))),
+				new Section(sectionName("misc", "Misc"), List.of(
+						b(c.showUndyingParticles, "showUndyingParticles"), b(c.killerAuraSoundEffect, "killerAuraSoundEffect"))));
+	}
+
+	/**
+	 * All config sections edited from the config home: client and common, excluding trait configs.
+	 */
+	public static List<Section> allHomeSections() {
+		List<Section> ans = new ArrayList<>(clientSections());
+		ans.addAll(generalSections());
+		return ans;
+	}
+
+	/**
+	 * Resets every config value edited from the config home to its default and saves the config.
+	 */
+	public static void resetToDefault() {
+		for (Section s : allHomeSections()) {
+			for (FieldDef f : s.fields()) f.reset();
+		}
+		saveConfig();
 	}
 
 }

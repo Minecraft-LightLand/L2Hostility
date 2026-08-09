@@ -41,6 +41,8 @@ public enum EditorText {
 	MAX_SHORT("editor.max_short", "max %s", 1, null),
 	INVALID_INT("editor.invalid_int", "Not a valid integer 1..%s: %s", 2, ChatFormatting.RED),
 	RELOAD("editor.reload", "Reload", 0, null),
+	RESET("editor.reset", "Reset", 0, null),
+	RESET_DONE("editor.reset_done", "Config reset to default values.", 0, null),
 	RELOAD_TITLE("editor.reload_title", "Reload datapacks?", 0, null),
 	RELOAD_NOTE("editor.reload_note", "Run the datapack reload now, or do it manually later?", 0, ChatFormatting.GRAY),
 	RELOAD_NOW("editor.reload_now", "Reload now", 0, null),

@@ -49,14 +49,15 @@ Copied verbatim from `ModularGolems.editor.base` with `package dev.xkmc.modularg
 | `IngredientScreen` | item/tag/clear picker for an `Ingredient`. **Not used by L2Hostility configs** (no ingredient fields) but kept in the copy for completeness. |
 | `ExitConfirmScreen` | Save / Discard / Cancel dialog for leaving a dirty file. |
 | `ReloadConfirmScreen` | "Reload now / Later" dialog shown on editor exit when a save is pending. |
-| `EditorHomeScreen` | abstract shared home: grouped file list (namespace headers), top tab bar, New/Edit/Reload/Back bottom row. **Improvements:** add `protected boolean canCreate() { return true; }`; the New button's `active` is set from it (tag and trait tabs return `false`). Group headers are **foldable** (click toggles collapse, `[+]/[-]` marker; collapsed groups are skipped unless the search query matches the namespace). `hasSearch()` (default `false`) shows an `EditBox` search bar above the list; it filters rows by `namespace path` (collapsed groups auto-expand on a namespace match). |
+| `EditorHomeScreen` | abstract shared home: grouped file list (namespace headers), top tab bar, New/Edit/Reload/Back bottom row. **Improvements:** add `protected boolean canCreate() { return true; }`; the New button's `active` is set from it (tag and trait tabs return `false`). Group headers are **foldable** (click toggles collapse, `[+]/[-]` marker; collapsed groups are skipped unless the search query matches the namespace). `hasSearch()` (default `false`) shows an `EditBox` search bar above the list; it filters rows by `namespace path` (collapsed groups auto-expand on a namespace match). Further overridable hooks: `rowSuffix(id)` (default `"   (count)"`), `fileTooltip(id)` (nullable tooltip per row, rendered via `EditorList`), `extraButtons()` (extra widgets inserted into the bottom row before New), `groupName(ns)` (translated group header; `ConfigHomeScreen` maps `client`/`common`). |
+| `EditorList` | the `ObjectSelectionList` behind `EditorHomeScreen`; `EditorList.TooltipHolder` wraps a row entry + its tooltip, `renderRowTooltips(g)`/`renderRowTooltip(...)` draw the hovered row's tooltip. |
 | `LinkButton`, `package-info.java` | underline-on-hover button; `@MethodsReturnNonnullByDefault` + `@ParametersAreNonnullByDefault`. |
 
 New in `base` (all mod-independent):
 
 | Class | Purpose |
 |---|---|
-| `FormScreen` | **generic multi-field form.** `FormSpec<T> = (List<FormField> fields, Function<List<String>, T> build)`; `FormField` is either text `(label, initial, validator)` or boolean `(label, initial)` (rendered as a toggle). Labels and controls share a row (label left, control right); if the fields don't fit, the form scrolls with the mouse wheel and the bottom buttons stay fixed. Confirmed values passed to `build` in field order; bools arrive as `"true"/"false"`. Used for every record/scalar edit in L2Hostility configs (see §4). |
+| `FormScreen` | **generic multi-field form.** `FormSpec<T> = (List<FormField> fields, Function<List<String>, T> build)`; `FormField` is either text `(label, initial, validator)` or boolean `(label, initial)` (rendered as a toggle). Labels and controls share a row (label left, control right) and are rendered inside an `ObjectSelectionList` panel, so rows (label + edit box/toggle) are clipped to the content band and scrolled with the mouse wheel while the bottom buttons stay fixed. Confirmed values passed to `build` in field order; bools arrive as `"true"/"false"`. Used for every record/scalar edit in L2Hostility configs (see §4). |
 | `ListEditScreen<T>` | **generic ordered-list editor** for `List<T>` (Add/Edit/Remove/Back). `Handler<T> = { label, icon, void onAdd(Consumer<T> onDone, Screen parent), void onEdit(T cur, Consumer<T> onDone, Screen parent) }`. Add calls `onAdd` (the handler opens whatever screen chain builds a default `T`), Edit calls `onEdit`; `onDone` replaces the item in the list + sets `session.dirty`. |
 | `ValueMapScreen<K,V>` | **map editor with form-editable values**: Add (pick key from candidates via `PickListScreen` or type a key) / Edit (open `FormScreen` built from `FormSpec<V>`) / Remove. `Handler<K>` for the key label/icon + `Function<V,Component> summary` for the row text. |
 | `TagFile` | generic tag-file I/O: `save(ResourceLocation tagId, JsonElement valuesArray, String packFolder)` writes `data/<ns>/tags/entity_types/<path>.json` with `{"replace": true, "values": [...]}` and (re)uses `EditorFile.writePackMeta`; `read(PackResources, tagId)` helper for raw value extraction. |
@@ -87,7 +88,7 @@ New in `base` (all mod-independent):
 
 | Class | Purpose |
 |---|---|
-| `HostilityHomeScreen` | **one** `EditorHomeScreen` subclass parameterized by `TabKind { DIFFICULTY, TRAIT, WEAPON, ENTITY, TAGS, CONFIG }` (instead of five near-identical home subclasses). `tabs()` always returns all six tabs; `activeTab()`/`listFiles()`/`fileCount()`/`emptyMessage()`/`newFileDefault()`/`openNew()`/`openEdit()`/`validateId()`/`canCreate()` dispatch on the kind. `hasSearch()` returns `true` for **trait and entity** tabs (search bar); group headers are foldable everywhere. `isDisabled()` returns `true` for **trait** rows whose `MobTrait.isBanned()` holds (own `allow_*` toggle or, for legendary traits, the general legendary toggle) — drawn **light gray**. The **Weapon / Entity tab labels** are drawn **red + strikethrough** when `enableEquipmentDatapack` / `enableEntitySpecificDatapack` is off (`featureDisabled`). The **Config** tab lists fixed config sections (`l2hostility:datapack|scaling|difficulty|orb_and_spawner|items|performance`); each row opens a form over that section's fields and saves the config. Holds the entry `parent` (the screen that opened the editor); all tab switches construct a new `HostilityHomeScreen(kind, parent)`. |
+| `HostilityHomeScreen` | **one** `EditorHomeScreen` subclass parameterized by `TabKind { DIFFICULTY, TRAIT, WEAPON, ENTITY, TAGS, CONFIG }` (instead of five near-identical home subclasses). `tabs()` always returns all six tabs; `activeTab()`/`listFiles()`/`fileCount()`/`emptyMessage()`/`newFileDefault()`/`openNew()`/`openEdit()`/`validateId()`/`canCreate()` dispatch on the kind. `hasSearch()` returns `true` for **trait and entity** tabs (search bar); group headers are foldable everywhere. `isDisabled()` returns `true` for **trait** rows whose `MobTrait.isBanned()` holds (own `allow_*` toggle or, for legendary traits, the general legendary toggle) — drawn **light gray**, with a `fileTooltip` explaining which toggle disables them. The **Weapon / Entity tab labels** are drawn **red + strikethrough** when `enableEquipmentDatapack` / `enableEntitySpecificDatapack` is off (`featureDisabled`). The **Config** tab is `ConfigHomeScreen` (not `HostilityHomeScreen`): its list rows are the **client / common** config sections and it adds a **Reset** button. Holds the entry `parent` (the screen that opened the editor); all tab switches construct a new `HostilityHomeScreen(kind, parent)`. |
 
 ### config
 
@@ -99,7 +100,7 @@ Per-kind screens (details in §4):
 | trait | `TraitFileScreen` |
 | weapon | `WeaponFileScreen`, `ItemConfigListScreen`, `SpecialWeaponListScreen`, `EnchConfigListScreen`, `SetValueEditScreen` (shared value page: the picked set shown and edited inline via Add/Remove + scalar fields) |
 | entity | `EntityFileScreen` (lists `EntityConfig.Config` directly), `ConfigListScreen` (shared list of `EntityConfig.Config`, used by difficulty default-traits only), `EntityConfigEntryScreen`, `TraitBaseListScreen`, `ItemPoolListScreen`, `ItemEntryListScreen`, `MasterConfigScreen` |
-| config | `LHConfigEdit` — read/write access to `LHConfig.COMMON` for the editor: `FieldDef(label, kind, ConfigValue)` with get/set/`toFormField()`, `traitToggle(path)` / `traitConfigFields(path)` (trait → Forge config mapping), `generalSections()` (non-trait config sections for the Config tab), `openSectionForm(...)` (a `FormScreen` that applies + saves the config and reopens the parent), `saveConfig()` (finds the `ModConfig` for `COMMON_SPEC` via `ConfigTracker` and calls `save()`). Lives in the config package on purpose (not base — the base copy stays mod-independent). |
+| config | `ConfigHomeScreen` (client/common section list + Reset), `LHConfigEdit` — read/write access to `LHConfig.COMMON`/`LHConfig.CLIENT` for the editor: `FieldDef(label, kind, ConfigValue)` with get/set/`toFormField()`/`reset()` (restores `getDefault()` switched on `Kind`), `traitToggle(path)` / `traitConfigFields(path)` (trait → Forge config mapping), `clientSections()` (non-trait client sections) / `generalSections()` (non-trait common sections) / `allHomeSections()`, `openSectionForm(...)` (a `FormScreen` that applies + saves the config and reopens the parent), `resetToDefault()` (resets every home section field then saves), `saveConfig()` (finds the `ModConfig`s for `COMMON_SPEC`/`CLIENT_SPEC` via `ConfigTracker` and calls `save()` on both). Lives in the config package on purpose (not base — the base copy stays mod-independent). |
 
 ### tag
 
@@ -179,7 +180,9 @@ The "Difficulty" tab itself is labelled **World** (`HostilityEditorLang.WORLD`, 
 `TraitConfig.DEFAULT`, so editing must be possible for every trait. Rows show the **trait name**
 (`MobTrait.getDesc()` via the `fileLabel` hook) instead of the raw registry id. Trait rows whose
 `isBanned()` holds (own `allow_*` toggle, or the general legendary toggle for legendary traits) are
-drawn **light gray**. `canCreate()` returns `false`
+drawn **light gray**; their tooltip (`fileTooltip` hook) explains which toggle disables them —
+`TRAIT_DISABLED_TOGGLE` when the trait's own `allow_*` is off, `TRAIT_DISABLED_LEGENDARY` when it is a
+`LegendaryTrait` and the global legendary toggle is off. `canCreate()` returns `false`
 (traits are code-defined). `TraitFileScreen` loads the current entry
 (`TRAIT.getEntry(id)` or `TraitConfig.DEFAULT` as baseline), deep-copies it (restoring the id, which
 the `JsonCodec` round-trip drops), and edits the four scalar fields `min_level, cost, max_rank,
@@ -194,12 +197,16 @@ in the Tags tab. The traffic-fields row appends a brief of the current values
 labels (no tag id) + the effective entry count.
 
 ### Config
-The **Config** tab (`TabKind.CONFIG`) edits the Forge config (`l2hostility-common.toml`) directly,
-**excluding trait-related config** (the `traits` section + the per-trait `Trait toggle` map, which are
-edited from the Trait tab). It shows six fixed sections (`Datapack` / `Scaling` / `Difficulty` /
-`Orb & Spawner` / `Items` / `Performance`); each row opens a `FormScreen` over that section's fields,
-and confirming applies the values and **saves the config file** (`LHConfigEdit.saveConfig`). Rows
-read live values so returning from the form shows the new values.
+The **Config** tab (`TabKind.CONFIG`) edits the Forge configs directly, **excluding trait-related
+config** (the `traits` section + the per-trait `Trait toggle` map, which are edited from the Trait
+tab). `ConfigHomeScreen` groups its rows into **two categories** (`client` / `common`): the client
+config (`l2hostility-client.toml`, sections `Overhead` / `Glasses` / `Misc`) and the common config
+(`l2hostility-common.toml`, sections `Datapack` / `Scaling` / `Difficulty` / `Orb & Spawner` /
+`Items` / `Performance`); each row opens a `FormScreen` over that section's fields, and confirming
+applies the values and **saves the config file(s)** (`LHConfigEdit.saveConfig`). A **Reset** button
+in the top row resets every editable field to its declared default
+(`FieldDef.reset` → `value.getDefault()` switched on `Kind`) and saves. Rows read live values so
+returning from the form shows the new values.
 
 ### Weapon
 `WeaponFileScreen` lists six fixed rows (each row shows its entry **count** and is drawn **grey**
@@ -225,6 +232,9 @@ when empty):
   enchantments, Remove deletes the selection; icons `Items.ENCHANTED_BOOK`).
 
 ### Entity
+`EntityHomeScreen` (the **Entity tab**) lists the entity config files (`L2Hostility.ENTITY.getAll()`);
+when a file holds exactly **one** config whose `entities` list has exactly **one** entry, its row
+suffix shows that entity's name in white instead of the `(1)` count (`rowSuffix` override).
 `EntityFileScreen` lists `EntityConfig.list` (`ArrayList<EntityConfig.Config>`) directly, with
 Add/Edit/Remove buttons on the bottom row (no intermediate "Configs" layer). Add = pick an entity
 type (`PickListScreen`) → new `Config` with that entity + default difficulty, then open the entry

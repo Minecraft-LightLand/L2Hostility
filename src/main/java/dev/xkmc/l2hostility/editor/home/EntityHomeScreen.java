@@ -2,9 +2,11 @@ package dev.xkmc.l2hostility.editor.home;
 
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.editor.config.EntityFileScreen;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorForms;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.init.L2Hostility;
 import dev.xkmc.l2hostility.init.data.LHConfig;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -37,6 +39,16 @@ public class EntityHomeScreen extends HostilityHomeScreen {
 	protected int fileCount(ResourceLocation id) {
 		EntityConfig cfg = L2Hostility.ENTITY.getEntry(id);
 		return cfg == null ? 0 : cfg.list.size();
+	}
+
+	@Override
+	protected Component rowSuffix(ResourceLocation id) {
+		EntityConfig cfg = L2Hostility.ENTITY.getEntry(id);
+		if (cfg != null && cfg.list.size() == 1 && cfg.list.get(0).entities.size() == 1) {
+			Component name = HostilityEditorForms.entityListName(cfg.list.get(0).entities);
+			return Component.literal("  ").append(name).withStyle(ChatFormatting.WHITE);
+		}
+		return super.rowSuffix(id);
 	}
 
 	@Override

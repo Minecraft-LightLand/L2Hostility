@@ -31,6 +31,13 @@ public abstract class EditorHomeScreen extends EditorScreen {
 	}
 
 	/**
+	 * Extra buttons placed before New/Edit on the bottom row.
+	 */
+	protected List<Button> extraButtons() {
+		return new ArrayList<>();
+	}
+
+	/**
 	 * Whether this tab shows a search box filtering the file list.
 	 */
 	protected boolean hasSearch() {
@@ -54,7 +61,7 @@ public abstract class EditorHomeScreen extends EditorScreen {
 			setInitialFocus(search);
 		}
 		initTabs();
-		List<Button> row = new ArrayList<>();
+		List<Button> row = new ArrayList<>(extraButtons());
 		Button newBtn = Button.builder(EditorText.NEW.get(), b -> newFile()).bounds(0, 0, 60, 20).build();
 		newBtn.active = canCreate();
 		row.add(newBtn);
@@ -165,14 +172,14 @@ public abstract class EditorHomeScreen extends EditorScreen {
 						.toLowerCase(Locale.ROOT).contains(query));
 			}
 			boolean isCollapsed = collapsed.contains(ns);
-			boolean matches = !query.isEmpty() && (ns + " " + modName(ns)).toLowerCase(Locale.ROOT).contains(query);
+			boolean matches = !query.isEmpty() && (ns + " " + groupName(ns)).toLowerCase(Locale.ROOT).contains(query);
 			boolean showFiles = !isCollapsed || matches;
 			if (files.isEmpty() && !matches) continue;
-			entries.add(new EditorList.Entry(Component.literal(modName(ns)), true,
+			entries.add(new EditorList.Entry(Component.literal(groupName(ns)), true,
 					() -> toggleCollapsed(ns), isCollapsed));
 			if (showFiles) {
 				for (ResourceLocation f : files) {
-					Component label = fileLabel(f).copy().append(Component.literal("   (" + fileCount(f) + ")"));
+					Component label = fileLabel(f).copy().append(rowSuffix(f));
 					boolean disabled = isDisabled(f);
 					if (disabled) {
 						label = label.copy().withStyle(ChatFormatting.RED, ChatFormatting.STRIKETHROUGH);
@@ -198,7 +205,11 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		return search == null ? "" : search.getValue();
 	}
 
-	private static String modName(String ns) {
+	/**
+	 * Display name of a group header in the file list. Defaults to the mod display name of the
+	 * namespace; subclasses can override to show translated categories.
+	 */
+	protected String groupName(String ns) {
 		var opt = ModList.get().getModContainerById(ns);
 		if (opt.isPresent()) {
 			return opt.get().getModInfo().getDisplayName();
@@ -233,6 +244,14 @@ public abstract class EditorHomeScreen extends EditorScreen {
 
 	protected Component fileLabel(ResourceLocation id) {
 		return Component.literal(id.getPath());
+	}
+
+	/**
+	 * Text appended to a file row label. Defaults to the entry count; subclasses can replace it
+	 * (e.g. with the single entity name of a config that has exactly one entry).
+	 */
+	protected Component rowSuffix(ResourceLocation id) {
+		return Component.literal("   (" + fileCount(id) + ")");
 	}
 
 	protected boolean canCreate() {
