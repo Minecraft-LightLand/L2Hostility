@@ -206,12 +206,12 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 
 	@Nullable
 	private List<Component> hoveredTip(int mx, int my) {
-		int boxX = width / 2 + 40;
 		for (int i = 0; i < fields.size(); i++) {
 			FormScreen.FormField field = fields.get(i);
 			if (field.tooltip() == null) continue;
 			int y = 26 + i * ROW_H;
-			if (my >= y && my < y + ROW_H && mx >= width / 2 - 170 && mx <= boxX + 120) {
+			int right = width / 2 - 160 + font.width(field.label());
+			if (my >= y && my < y + ROW_H && mx >= width / 2 - 160 && mx <= right) {
 				return field.tooltip();
 			}
 		}

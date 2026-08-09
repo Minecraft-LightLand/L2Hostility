@@ -64,7 +64,7 @@ public final class LHConfigEdit {
 		@Nullable
 		public List<Component> tooltip() {
 			if (fixed != null) return fixed;
-			Object vs = LHConfig.COMMON_SPEC.getValues().get(value.getPath());
+			Object vs = LHConfig.COMMON_SPEC.getSpec().get(value.getPath());
 			if (vs instanceof ForgeConfigSpec.ValueSpec vs2) {
 				String comment = vs2.getComment();
 				if (comment == null || comment.isBlank()) return null;
@@ -124,7 +124,7 @@ public final class LHConfigEdit {
 			saveConfig();
 			EditorToast.show(EditorText.SAVE.get(), EditorText.SAVE_DONE.get(CONFIG_ID));
 			return null;
-		}), t -> Minecraft.getInstance().setScreen(parent), parent));
+		}), t -> Minecraft.getInstance().setScreen(parent), parent, true));
 	}
 
 	/**

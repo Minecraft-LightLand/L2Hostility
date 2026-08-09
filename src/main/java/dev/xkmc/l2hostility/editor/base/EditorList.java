@@ -74,6 +74,7 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 		entries.forEach(this::addEntry);
 		setSelected(null);
 		if (onSelect != null) onSelect.run();
+		setScrollAmount(getScrollAmount());
 	}
 
 	public static class Entry extends ObjectSelectionList.Entry<Entry> {

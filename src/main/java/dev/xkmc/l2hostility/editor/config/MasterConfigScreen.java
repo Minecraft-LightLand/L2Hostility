@@ -48,11 +48,11 @@ public class MasterConfigScreen extends EditorScreen {
 			list = new EditorList(minecraft, width, height - 70, 30, height - 40);
 			addRenderableWidget(list);
 		} else {
-			maxBox = new EditBox(font, width / 2 - 60, 28, 140, 20, Component.literal(""));
+			maxBox = new EditBox(font, boxX(), 28, 140, 20, Component.literal(""));
 			maxBox.setMaxLength(64);
 			maxBox.setValue("" + master.maxTotalCount());
 			maxBox.setResponder(s -> setField(parseInt(s, master.maxTotalCount()), master.spawnInterval()));
-			spawnBox = new EditBox(font, width / 2 - 60, 56, 140, 20, Component.literal(""));
+			spawnBox = new EditBox(font, boxX(), 56, 140, 20, Component.literal(""));
 			spawnBox.setMaxLength(64);
 			spawnBox.setValue("" + master.spawnInterval());
 			spawnBox.setResponder(s -> setField(master.maxTotalCount(), parseInt(s, master.spawnInterval())));
@@ -181,9 +181,36 @@ public class MasterConfigScreen extends EditorScreen {
 		super.render(g, mx, my, pTick);
 		g.drawCenteredString(font, this.title, width / 2, 10, 0xFFFFFF);
 		if (master != null) {
-			g.drawString(font, HostilityEditorLang.MAX_TOTAL_COUNT.get(), width / 2 - 200, 33, 0xAAAAAA);
-			g.drawString(font, HostilityEditorLang.SPAWN_INTERVAL.get(), width / 2 - 200, 61, 0xAAAAAA);
+			g.drawString(font, HostilityEditorLang.MAX_TOTAL_COUNT.get(), labelX(), 33, 0xAAAAAA);
+			g.drawString(font, HostilityEditorLang.SPAWN_INTERVAL.get(), labelX(), 61, 0xAAAAAA);
+			List<Component> tip = labelTip(mx, my);
+			if (tip != null && !tip.isEmpty()) {
+				g.renderComponentTooltip(font, tip, mx, my);
+			}
 		}
+	}
+
+	@Nullable
+	private List<Component> labelTip(int mx, int my) {
+		if (hoverLabel(mx, my, 28, HostilityEditorLang.MAX_TOTAL_COUNT.get())) {
+			return List.of(HostilityEditorLang.MASTER_MAX_TOTAL_TIP.get());
+		}
+		if (hoverLabel(mx, my, 56, HostilityEditorLang.SPAWN_INTERVAL.get())) {
+			return List.of(HostilityEditorLang.MASTER_SPAWN_INTERVAL_TIP.get());
+		}
+		return null;
+	}
+
+	private boolean hoverLabel(int mx, int my, int boxY, Component label) {
+		return my >= boxY && my < boxY + 20 && mx >= labelX() && mx <= labelX() + font.width(label);
+	}
+
+	private int labelX() {
+		return Math.max(4, width / 2 - 160);
+	}
+
+	private int boxX() {
+		return Math.max(4, width / 2 + 40);
 	}
 
 	@Override

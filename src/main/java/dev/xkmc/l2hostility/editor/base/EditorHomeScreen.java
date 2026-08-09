@@ -153,10 +153,11 @@ public abstract class EditorHomeScreen extends EditorScreen {
 			List<ResourceLocation> files = ent.getValue();
 			files.sort(ResourceLocation::compareTo);
 			if (!query.isEmpty()) {
-				files.removeIf(f -> !(ns + " " + f.getPath()).toLowerCase(Locale.ROOT).contains(query));
+				files.removeIf(f -> !(ns + " " + f.getPath() + " " + fileLabel(f).getString())
+						.toLowerCase(Locale.ROOT).contains(query));
 			}
 			boolean isCollapsed = collapsed.contains(ns);
-			boolean matches = !query.isEmpty() && ns.toLowerCase(Locale.ROOT).contains(query);
+			boolean matches = !query.isEmpty() && (ns + " " + modName(ns)).toLowerCase(Locale.ROOT).contains(query);
 			boolean showFiles = !isCollapsed || matches;
 			if (files.isEmpty() && !matches) continue;
 			entries.add(new EditorList.Entry(Component.literal(modName(ns)), true,

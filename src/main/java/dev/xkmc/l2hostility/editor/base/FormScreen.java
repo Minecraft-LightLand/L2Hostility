@@ -50,6 +50,7 @@ public class FormScreen<T> extends EditorScreen {
 	private final FormSpec<T> spec;
 	private final Consumer<T> onDone;
 	private final Screen parent;
+	private final boolean saveOnClose;
 
 	private final boolean[] boolValues;
 	private final List<EditBox> boxes = new ArrayList<>();
@@ -61,10 +62,15 @@ public class FormScreen<T> extends EditorScreen {
 	private Component error;
 
 	public FormScreen(Component title, FormSpec<T> spec, Consumer<T> onDone, Screen parent) {
+		this(title, spec, onDone, parent, false);
+	}
+
+	public FormScreen(Component title, FormSpec<T> spec, Consumer<T> onDone, Screen parent, boolean saveOnClose) {
 		super(title);
 		this.spec = spec;
 		this.onDone = onDone;
 		this.parent = parent;
+		this.saveOnClose = saveOnClose;
 		this.boolValues = new boolean[spec.fields().stream().mapToInt(e -> e.bool() ? 1 : 0).sum()];
 	}
 
@@ -123,12 +129,26 @@ public class FormScreen<T> extends EditorScreen {
 	}
 
 	private void layout() {
+		int top = CONTENT_TOP;
+		int bottom = buttonY() - 10;
 		for (int i = 0; i < boxes.size(); i++) {
-			boxes.get(i).setY(fieldY(boxToField.get(i)) + 2);
+			EditBox box = boxes.get(i);
+			box.setY(fieldY(boxToField.get(i)) + 2);
+			box.setVisible(inBand(boxToField.get(i), top, bottom) || box.isFocused());
 		}
 		for (int i = 0; i < boolBtns.size(); i++) {
 			boolBtns.get(i).setY(fieldY(boolToField.get(i)) + 2);
+			boolBtns.get(i).visible = inBand(boolToField.get(i), top, bottom);
 		}
+	}
+
+	/**
+	 * Whether the row of the given field is (partially) inside the content band, i.e. not scrolled
+	 * far enough to overlap the title or the bottom buttons.
+	 */
+	private boolean inBand(int fieldIdx, int top, int bottom) {
+		int y = fieldY(fieldIdx);
+		return y + ROW_H >= top && y <= bottom;
 	}
 
 	@Override
@@ -181,9 +201,13 @@ public class FormScreen<T> extends EditorScreen {
 		super.renderBackground(g);
 		super.render(g, mx, my, pTick);
 		g.drawCenteredString(font, this.title, width / 2, 8, 0xFFFFFF);
+		int top = CONTENT_TOP;
+		int bottom = buttonY() - 10;
 		for (int i = 0; i < spec.fields().size(); i++) {
 			FormField field = spec.fields().get(i);
-			g.drawString(font, field.label(), labelX(), fieldY(i) + 5, 0xAAAAAA);
+			int y = fieldY(i);
+			if (y + ROW_H < top || y > bottom) continue;
+			g.drawString(font, field.label(), labelX(), y + 5, 0xAAAAAA);
 		}
 		List<Component> tip = hoveredTip(mx, my);
 		if (tip != null && !tip.isEmpty()) {
@@ -195,7 +219,8 @@ public class FormScreen<T> extends EditorScreen {
 	}
 
 	/**
-	 * Tooltip of the field row under the mouse, if any.
+	 * Tooltip of the field row under the mouse, if any. Only the label text (not the editbox/bool
+	 * button) triggers the tooltip.
 	 */
 	@Nullable
 	private List<Component> hoveredTip(int mx, int my) {
@@ -206,16 +231,37 @@ public class FormScreen<T> extends EditorScreen {
 			if (field.tooltip() == null) continue;
 			int y = fieldY(i);
 			if (y + ROW_H < top || y > bottom) continue;
-			if (my >= y && my < y + ROW_H && mx >= labelX() && mx <= boxX() + BOX_W) {
+			int right = labelX() + font.width(field.label());
+			if (my >= y && my < y + ROW_H && mx >= labelX() && mx <= right) {
 				return field.tooltip();
 			}
 		}
 		return null;
 	}
 
+	/**
+	 * Whether any field value differs from its initial value.
+	 */
+	private boolean changed() {
+		int bi = 0;
+		for (int i = 0; i < spec.fields().size(); i++) {
+			FormField field = spec.fields().get(i);
+			if (field.bool()) {
+				if (boolValues[bi++] != Boolean.parseBoolean(field.initial())) return true;
+			} else if (!boxes.get(boxToField.indexOf(i)).getValue().equals(field.initial())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public void onClose() {
-		Minecraft.getInstance().setScreen(parent);
+		if (saveOnClose && changed()) {
+			submit();
+		} else {
+			Minecraft.getInstance().setScreen(parent);
+		}
 	}
 
 }
