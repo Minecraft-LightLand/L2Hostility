@@ -11,6 +11,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class TagsHomeScreen extends HostilityHomeScreen {
@@ -27,6 +28,30 @@ public class TagsHomeScreen extends HostilityHomeScreen {
 	@Override
 	protected List<ResourceLocation> listFiles() {
 		return HostilityEditorUtil.listManagedTags();
+	}
+
+	@Override
+	@Nullable
+	protected Component fileTooltip(ResourceLocation id) {
+		return switch (id.getPath()) {
+			case "blacklist" -> HostilityEditorLang.TAG_INFO_BLACKLIST.get();
+			case "whitelist" -> HostilityEditorLang.TAG_INFO_WHITELIST.get();
+			case "default_blacklist" -> HostilityEditorLang.TAG_INFO_DEFAULT_BLACKLIST.get();
+			case "default_whitelist" -> HostilityEditorLang.TAG_INFO_DEFAULT_WHITELIST.get();
+			case "no_scaling" -> HostilityEditorLang.TAG_INFO_NO_SCALING.get();
+			case "no_trait" -> HostilityEditorLang.TAG_INFO_NO_TRAIT.get();
+			case "semiboss" -> HostilityEditorLang.TAG_INFO_SEMIBOSS.get();
+			case "effect_immune" -> HostilityEditorLang.TAG_INFO_EFFECT_IMMUNE.get();
+			case "no_drop" -> HostilityEditorLang.TAG_INFO_NO_DROP.get();
+			case "hide_traits" -> HostilityEditorLang.TAG_INFO_HIDE_TRAITS.get();
+			case "hide_level" -> HostilityEditorLang.TAG_INFO_HIDE_LEVEL.get();
+			case "hide_title" -> HostilityEditorLang.TAG_INFO_HIDE_TITLE.get();
+			case "armor_target" -> HostilityEditorLang.TAG_INFO_ARMOR_TARGET.get();
+			case "melee_weapon_target" -> HostilityEditorLang.TAG_INFO_MELEE_WEAPON_TARGET.get();
+			case "ranged_weapon_target" -> HostilityEditorLang.TAG_INFO_RANGED_WEAPON_TARGET.get();
+			case "hostility_spawner_blacklist" -> HostilityEditorLang.TAG_INFO_SPAWNER_BLACKLIST.get();
+			default -> null;
+		};
 	}
 
 	@Override

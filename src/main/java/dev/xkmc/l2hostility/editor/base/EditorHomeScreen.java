@@ -135,6 +135,14 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		return false;
 	}
 
+	/**
+	 * Tooltip shown when hovering a file row, or null for none. Overridden by subclasses.
+	 */
+	@Nullable
+	protected Component fileTooltip(ResourceLocation id) {
+		return null;
+	}
+
 	private void rebuild() {
 		List<EditorList.Entry> entries = new ArrayList<>();
 		List<ResourceLocation> ids = listFiles();
@@ -169,7 +177,10 @@ public abstract class EditorHomeScreen extends EditorScreen {
 					if (disabled) {
 						label = label.copy().withStyle(ChatFormatting.RED, ChatFormatting.STRIKETHROUGH);
 					}
-					entries.add(new EditorList.Entry(label, null, null, f, disabled));
+					Component tip = fileTooltip(f);
+					entries.add(tip == null
+							? new EditorList.Entry(label, null, null, f, disabled)
+							: new EditorList.Entry(label, null, null, f, disabled, tip));
 				}
 			}
 		}
@@ -254,6 +265,7 @@ public abstract class EditorHomeScreen extends EditorScreen {
 	public void render(GuiGraphics g, int mx, int my, float pTick) {
 		super.renderBackground(g);
 		super.render(g, mx, my, pTick);
+		if (list != null) list.renderRowTooltip(g);
 	}
 
 }

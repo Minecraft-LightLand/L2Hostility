@@ -116,6 +116,24 @@ public class FormScreen<T> extends EditorScreen {
 		return width / 2 + 40;
 	}
 
+	/**
+	 * Max width of a field label before it would overlap the edit box. Translated labels can be
+	 * longer than the English option names.
+	 */
+	private int maxLabelWidth() {
+		return boxX() - labelX() - 6;
+	}
+
+	/**
+	 * The label to draw: truncated with an ellipsis when it does not fit next to the edit box.
+	 */
+	private Component fitLabel(FormField field) {
+		Component label = field.label();
+		if (font.width(label) <= maxLabelWidth()) return label;
+		String cut = font.plainSubstrByWidth(label.getString(), Math.max(0, maxLabelWidth() - 3));
+		return Component.literal(cut.isEmpty() ? "..." : cut + "...").withStyle(label.getStyle());
+	}
+
 	private int fieldY(int i) {
 		return CONTENT_TOP + i * ROW_H - scroll;
 	}
@@ -207,7 +225,7 @@ public class FormScreen<T> extends EditorScreen {
 			FormField field = spec.fields().get(i);
 			int y = fieldY(i);
 			if (y + ROW_H < top || y > bottom) continue;
-			g.drawString(font, field.label(), labelX(), y + 5, 0xAAAAAA);
+			g.drawString(font, fitLabel(field), labelX(), y + 5, 0xAAAAAA);
 		}
 		List<Component> tip = hoveredTip(mx, my);
 		if (tip != null && !tip.isEmpty()) {
@@ -231,7 +249,7 @@ public class FormScreen<T> extends EditorScreen {
 			if (field.tooltip() == null) continue;
 			int y = fieldY(i);
 			if (y + ROW_H < top || y > bottom) continue;
-			int right = labelX() + font.width(field.label());
+			int right = labelX() + font.width(fitLabel(field));
 			if (my >= y && my < y + ROW_H && mx >= labelX() && mx <= right) {
 				return field.tooltip();
 			}

@@ -115,6 +115,11 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 			this(text, icon, null, onClick, false, false, null, grey, tooltip);
 		}
 
+		public Entry(Component text, @Nullable ItemStack icon, @Nullable Runnable onClick, @Nullable Object data,
+		             boolean grey, @Nullable Component tooltip) {
+			this(text, icon, null, onClick, false, false, data, grey, tooltip);
+		}
+
 		public static Entry rotating(Component text, @Nullable Supplier<ItemStack> iconSupplier,
 		                             @Nullable Runnable onClick) {
 			return new Entry(text, null, iconSupplier, onClick, false, false, null, false, null);

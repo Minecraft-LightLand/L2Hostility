@@ -54,6 +54,12 @@
 			"entity_file": "实体文件",
 			"tags": "标签",
 			"tag_file": "标签文件",
+			"config": "配置",
+			"config_empty": "没有配置部分。",
+			"trait_toggle": "词条开关",
+			"trait_config": "词条配置",
+			"enabled": "已启用",
+			"disabled": "已禁用",
 			"tag_hash_hint": "必须以'#'开头",
 			"empty_no_files": "无条目。点击新建以创建文件。",
 			"difficulty_empty": "未加载难度文件。请先进入世界。",
@@ -258,7 +264,23 @@
 			"tip_tab_tags": "编辑战利品表与词条筛选使用的实体/方块标签。",
 			"tip_tab_trait": "配置词条：等级消耗、权重、最大阶级与实体白名单/黑名单。",
 			"tip_tab_weapon": "配置有等级怪物生成时携带的近战武器、盔甲、特殊物品与附魔。",
-			"tip_tab_world": "编辑逐维度与逐生物群系的难度等级、缩放与默认词条。"
+			"tip_tab_world": "编辑逐维度与逐生物群系的难度等级、缩放与默认词条。",
+			"tag_info_blacklist": "此标签中的实体永远不会获得等级或词条。",
+			"tag_info_whitelist": "此标签中的实体在符合条件时必定获得词条。",
+			"tag_info_default_blacklist": "词条的默认实体黑名单。此标签中的实体不会被抽取词条。",
+			"tag_info_default_whitelist": "词条的默认实体白名单。此标签中的实体是词条的优先目标。",
+			"tag_info_no_scaling": "此标签中的实体永远不会获得基于等级的属性缩放。",
+			"tag_info_no_trait": "此标签中的实体永远不会获得词条。",
+			"tag_info_semiboss": "小Boss实体，恶意机制会将其视为更强的怪物。",
+			"tag_info_effect_immune": "此标签中的实体免疫词条施加的效果。",
+			"tag_info_no_drop": "此标签中的实体不会掉落恶意战利品。",
+			"tag_info_hide_traits": "隐藏这些实体头顶的词条显示。",
+			"tag_info_hide_level": "隐藏这些实体头顶的等级显示。",
+			"tag_info_hide_title": "隐藏这些实体的Boss标题。",
+			"tag_info_armor_target": "此标签中的实体可以被恶意机制装备盔甲。",
+			"tag_info_melee_weapon_target": "此标签中的实体可以持有近战武器。",
+			"tag_info_ranged_weapon_target": "此标签中的实体可以持有弓/弩。",
+			"tag_info_hostility_spawner_blacklist": "此标签中的实体不能被恶意刷怪笼生成。"
 		}
 	}
 }
