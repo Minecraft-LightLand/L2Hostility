@@ -40,7 +40,7 @@ public class EntityConfigEntryScreen extends EditorScreen {
 		list = new EditorList(minecraft, width, height - 70, 30, height - 40);
 		addRenderableWidget(list);
 		List<Button> row = new ArrayList<>();
-		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build(), EditorText.BACK_TIP.get()));
+		row.add(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build());
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		rebuild();

@@ -61,14 +61,11 @@ public class MasterConfigScreen extends EditorScreen {
 			addRenderableWidget(maxBox);
 			addRenderableWidget(spawnBox);
 			setInitialFocus(maxBox);
-			addBtn = EditorTip.tip(Button.builder(EditorText.ADD.get(), b -> addMinion()).bounds(0, 0, 60, 20).build(),
-					EditorText.ADD_TIP.get());
+			addBtn = Button.builder(EditorText.ADD.get(), b -> addMinion()).bounds(0, 0, 60, 20).build();
 			row.add(addBtn);
-			editBtn = EditorTip.tip(Button.builder(EditorText.EDIT.get(), b -> editMinion()).bounds(0, 0, 60, 20).build(),
-					EditorText.EDIT_TIP.get());
+			editBtn = Button.builder(EditorText.EDIT.get(), b -> editMinion()).bounds(0, 0, 60, 20).build();
 			row.add(editBtn);
-			removeBtn = EditorTip.tip(Button.builder(EditorText.REMOVE.get(), b -> removeMinion()).bounds(0, 0, 60, 20).build(),
-					EditorText.REMOVE_TIP.get());
+			removeBtn = Button.builder(EditorText.REMOVE.get(), b -> removeMinion()).bounds(0, 0, 60, 20).build();
 			row.add(removeBtn);
 			row.add(EditorTip.tip(Button.builder(HostilityEditorLang.REMOVE_MASTER.get(), b -> {
 				master = null;
@@ -77,8 +74,7 @@ public class MasterConfigScreen extends EditorScreen {
 				Minecraft.getInstance().setScreen(parent);
 			}).bounds(0, 0, 60, 20).build(), HostilityEditorLang.REMOVE_MASTER_TIP.get()));
 		}
-		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build(),
-				EditorText.BACK_TIP.get()));
+		row.add(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build());
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		rebuild();

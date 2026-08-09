@@ -82,16 +82,12 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 			addRenderableWidget(box);
 		}
 		List<Button> row = new ArrayList<>();
-		row.add(EditorTip.tip(Button.builder(EditorText.ADD.get(), b -> addPick()).bounds(0, 0, 60, 20).build(),
-				EditorText.ADD_TIP.get()));
-		removeBtn = EditorTip.tip(Button.builder(EditorText.REMOVE.get(), b -> removePick()).bounds(0, 0, 60, 20).build(),
-				EditorText.REMOVE_TIP.get());
+		row.add(Button.builder(EditorText.ADD.get(), b -> addPick()).bounds(0, 0, 60, 20).build());
+		removeBtn = Button.builder(EditorText.REMOVE.get(), b -> removePick()).bounds(0, 0, 60, 20).build();
 		removeBtn.active = false;
 		row.add(removeBtn);
-		row.add(EditorTip.tip(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent)).bounds(0, 0, 60, 20).build(),
-				EditorText.CANCEL_TIP.get()));
-		row.add(EditorTip.tip(Button.builder(EditorText.CONFIRM.get(), b -> submit()).bounds(0, 0, 60, 20).build(),
-				EditorText.CONFIRM_TIP.get()));
+		row.add(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent)).bounds(0, 0, 60, 20).build());
+		row.add(Button.builder(EditorText.CONFIRM.get(), b -> submit()).bounds(0, 0, 60, 20).build());
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		list.setOnSelect(() -> removeBtn.active = selected() != null);

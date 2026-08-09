@@ -60,14 +60,11 @@ public class ItemListScreen<T> extends EditorScreen {
 		list = new EditorList(minecraft, width, height - 70, 30, height - 40);
 		addRenderableWidget(list);
 		List<Button> row = new ArrayList<>();
-		addBtn = EditorTip.tip(Button.builder(EditorText.ADD.get(), b -> addItem()).bounds(0, 0, 60, 20).build(),
-				EditorText.ADD_TIP.get());
+		addBtn = Button.builder(EditorText.ADD.get(), b -> addItem()).bounds(0, 0, 60, 20).build();
 		row.add(addBtn);
-		removeBtn = EditorTip.tip(Button.builder(EditorText.REMOVE.get(), b -> removeItem()).bounds(0, 0, 60, 20).build(),
-				EditorText.REMOVE_TIP.get());
+		removeBtn = Button.builder(EditorText.REMOVE.get(), b -> removeItem()).bounds(0, 0, 60, 20).build();
 		row.add(removeBtn);
-		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> onClose()).bounds(0, 0, 60, 20).build(),
-				EditorText.BACK_TIP.get()));
+		row.add(Button.builder(EditorText.BACK.get(), b -> onClose()).bounds(0, 0, 60, 20).build());
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		removeBtn.active = false;

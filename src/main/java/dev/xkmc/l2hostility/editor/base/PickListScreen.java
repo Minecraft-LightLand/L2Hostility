@@ -50,8 +50,8 @@ public class PickListScreen<T> extends EditorScreen {
 		addRenderableWidget(list);
 		addRenderableWidget(search);
 		setInitialFocus(search);
-		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.CANCEL.get(), b -> onClose())
-				.bounds(width / 2 - 50, height - 30, 100, 20).build(), EditorText.CANCEL_TIP.get()));
+		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> onClose())
+				.bounds(width / 2 - 50, height - 30, 100, 20).build());
 		refresh();
 	}
 

@@ -53,14 +53,11 @@ public class TagEditScreen extends EditorScreen {
 		editBtn = EditorTip.tip(Button.builder(EditorText.EDIT.get(), b -> toggleRequired()).bounds(0, 0, 50, 20).build(),
 				HostilityEditorLang.EDIT_TAG_TIP.get());
 		row.add(editBtn);
-		removeBtn = EditorTip.tip(Button.builder(EditorText.REMOVE.get(), b -> removeValue()).bounds(0, 0, 50, 20).build(),
-				EditorText.REMOVE_TIP.get());
+		removeBtn = Button.builder(EditorText.REMOVE.get(), b -> removeValue()).bounds(0, 0, 50, 20).build();
 		row.add(removeBtn);
-		saveBtn = EditorTip.tip(Button.builder(EditorText.SAVE.get(), b -> save()).bounds(0, 0, 50, 20).build(),
-				EditorText.SAVE_TIP.get());
+		saveBtn = Button.builder(EditorText.SAVE.get(), b -> save()).bounds(0, 0, 50, 20).build();
 		row.add(saveBtn);
-		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 50, 20).build(),
-				EditorText.BACK_TIP.get()));
+		row.add(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 50, 20).build());
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		editBtn.active = false;

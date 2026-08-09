@@ -155,8 +155,8 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 							HostilityEditorLang.ITEM_CONFIG.get(), entry.configs(), EntryScreen.this,
 							new EditorSession()))));
 			list.setData(rows);
-			var back = EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> Minecraft.getInstance().setScreen(parent))
-					.bounds(0, 0, 60, 20).build(), EditorText.BACK_TIP.get());
+			var back = Button.builder(EditorText.BACK.get(), b -> Minecraft.getInstance().setScreen(parent))
+					.bounds(0, 0, 60, 20).build();
 			addRenderableWidget(back);
 			EditorLayout.centerRow(List.of(back), width / 2, height - 30, 5);
 		}

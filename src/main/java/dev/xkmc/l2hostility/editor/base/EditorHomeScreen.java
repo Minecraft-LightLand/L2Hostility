@@ -55,18 +55,14 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		}
 		initTabs();
 		List<Button> row = new ArrayList<>();
-		Button newBtn = EditorTip.tip(Button.builder(EditorText.NEW.get(), b -> newFile()).bounds(0, 0, 60, 20).build(),
-				EditorText.NEW_TIP.get());
+		Button newBtn = Button.builder(EditorText.NEW.get(), b -> newFile()).bounds(0, 0, 60, 20).build();
 		newBtn.active = canCreate();
 		row.add(newBtn);
-		editBtn = EditorTip.tip(Button.builder(EditorText.EDIT.get(), b -> editFile()).bounds(0, 0, 60, 20).build(),
-				EditorText.EDIT_TIP.get());
+		editBtn = Button.builder(EditorText.EDIT.get(), b -> editFile()).bounds(0, 0, 60, 20).build();
 		row.add(editBtn);
-		reloadBtn = EditorTip.tip(Button.builder(EditorText.RELOAD.get(), b -> reloadNow(false)).bounds(0, 0, 60, 20).build(),
-				EditorText.RELOAD_TIP.get());
+		reloadBtn = Button.builder(EditorText.RELOAD.get(), b -> reloadNow(false)).bounds(0, 0, 60, 20).build();
 		row.add(reloadBtn);
-		row.add(EditorTip.tip(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build(),
-				EditorText.BACK_TIP.get()));
+		row.add(Button.builder(EditorText.BACK.get(), b -> exit()).bounds(0, 0, 60, 20).build());
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		reloadBtn.active = hasPendingReload();

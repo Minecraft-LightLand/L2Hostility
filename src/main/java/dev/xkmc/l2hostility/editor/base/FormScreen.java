@@ -94,10 +94,10 @@ public class FormScreen<T> extends EditorScreen {
 				addRenderableWidget(box);
 			}
 		}
-		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
-				.bounds(width / 2 - 110, buttonY(), 100, 20).build(), EditorText.CANCEL_TIP.get()));
-		addRenderableWidget(EditorTip.tip(Button.builder(EditorText.CONFIRM.get(), b -> submit())
-				.bounds(width / 2 + 10, buttonY(), 100, 20).build(), EditorText.CONFIRM_TIP.get()));
+		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
+				.bounds(width / 2 - 110, buttonY(), 100, 20).build());
+		addRenderableWidget(Button.builder(EditorText.CONFIRM.get(), b -> submit())
+				.bounds(width / 2 + 10, buttonY(), 100, 20).build());
 		layout();
 		if (!boxes.isEmpty()) setInitialFocus(boxes.get(0));
 	}

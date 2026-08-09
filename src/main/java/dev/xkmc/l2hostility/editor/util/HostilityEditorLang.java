@@ -162,10 +162,10 @@ public enum HostilityEditorLang {
 	SUMMARY_SUPPRESS("editor.summary_suppress", "suppress %s", 1, null),
 
 	// Field tooltips (shown when hovering a form row)
-	DIFF_MIN_TIP("editor.tip_diff_min", "Lowest level mobs can have in this area. Mobs below it are brought up to this level.", 0, ChatFormatting.GRAY),
-	DIFF_BASE_TIP("editor.tip_diff_base", "Base level added to the difficulty of this area. Combined with the world difficulty it decides the mob level.", 0, ChatFormatting.GRAY),
+	DIFF_MIN_TIP("editor.tip_diff_min", "Lowest level mobs can have. Mobs below it are brought up to this level.", 0, ChatFormatting.GRAY),
+	DIFF_BASE_TIP("editor.tip_diff_base", "Base level added to the difficulty of this entry. Combined with the world difficulty it decides the mob level.", 0, ChatFormatting.GRAY),
 	DIFF_VAR_TIP("editor.tip_diff_var", "Random variation of the difficulty around the base level. Higher values make mob levels more spread out.", 0, ChatFormatting.GRAY),
-	DIFF_SCALE_TIP("editor.tip_diff_scale", "Multiplier on the accumulated difficulty (game kills + distance + section). Mob level = base + difficulty * scale.", 0, ChatFormatting.GRAY),
+	DIFF_SCALE_TIP("editor.tip_diff_scale", "Multiplier on the accumulated difficulty. Mob level = base + difficulty * scale.", 0, ChatFormatting.GRAY),
 	DIFF_APPLY_TIP("editor.tip_diff_apply", "Chance that health/damage scaling and traits actually apply. 1 applies to every mob, values below 1 skip some.", 0, ChatFormatting.GRAY),
 	DIFF_TRAIT_CHANCE_TIP("editor.tip_diff_trait_chance", "Multiplied chance that a trait is rolled for a mob, on top of the global trait chance.", 0, ChatFormatting.GRAY),
 	DIFF_SUPPRESS_TIP("editor.tip_diff_suppress", "Chance to stop after one trait is added. 0 (with a minimum level set) guarantees the trait roll to always apply.", 0, ChatFormatting.GRAY),
