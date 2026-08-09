@@ -24,6 +24,14 @@ public class PickListScreen<T> extends EditorScreen {
 
 		void onSelect(T t);
 
+		/**
+		 * Extra text matched by the search box in addition to {@link #label} (e.g. the registry
+		 * name), or empty for none.
+		 */
+		default String searchKey(T t) {
+			return "";
+		}
+
 	}
 
 	private final List<T> candidates;
@@ -59,8 +67,10 @@ public class PickListScreen<T> extends EditorScreen {
 		String q = search.getValue().toLowerCase(Locale.ROOT);
 		List<EditorList.Entry> entries = new ArrayList<>();
 		for (T t : candidates) {
-			String name = handler.label(t).getString().toLowerCase(Locale.ROOT);
-			if (q.isEmpty() || name.contains(q)) {
+			String name = handler.label(t).getString();
+			String key = handler.searchKey(t);
+			String all = (name + " " + key).toLowerCase(Locale.ROOT);
+			if (q.isEmpty() || all.contains(q)) {
 				ItemStack ic = handler.icon(t);
 				entries.add(new EditorList.Entry(handler.label(t), ic, () -> handler.onSelect(t)));
 			}

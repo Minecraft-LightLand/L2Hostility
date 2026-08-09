@@ -153,6 +153,11 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 		}
 
 		@Override
+		public String searchKey(T t) {
+			return handler.searchKey(t);
+		}
+
+		@Override
 		public void onSelect(T t) {
 			screen.picked.add(t);
 			Minecraft.getInstance().setScreen(screen);
