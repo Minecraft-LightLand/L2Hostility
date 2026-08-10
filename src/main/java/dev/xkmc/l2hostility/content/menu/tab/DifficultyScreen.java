@@ -6,6 +6,9 @@ import dev.xkmc.l2hostility.content.capability.chunk.SectionDifficulty;
 import dev.xkmc.l2hostility.content.capability.player.PlayerDifficulty;
 import dev.xkmc.l2hostility.content.logic.MobDifficultyCollector;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
+import dev.xkmc.l2hostility.editor.base.EditorSaveState;
+import dev.xkmc.l2hostility.editor.base.EditorText;
+import dev.xkmc.l2hostility.editor.home.DifficultyHomeScreen;
 import dev.xkmc.l2hostility.init.data.LangData;
 import dev.xkmc.l2hostility.init.registrate.LHMiscs;
 import dev.xkmc.l2tabs.init.L2Tabs;
@@ -15,6 +18,7 @@ import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
@@ -31,6 +35,14 @@ public class DifficultyScreen extends BaseTextScreen {
 	public void init() {
 		super.init();
 		new TabManager<>(this, new InvTabData()).init(this::addRenderableWidget, LHMiscs.TAB_DIFFICULTY.get());
+		if (EditorSaveState.canEdit()) {
+			addRenderableWidget(Button.builder(
+							EditorText.OPEN.get(),
+							b -> Minecraft.getInstance().setScreen(
+									new DifficultyHomeScreen(
+											DifficultyScreen.this)))
+					.bounds(this.leftPos + 8, this.topPos + 72, 90, 20).build());
+		}
 	}
 
 	public void render(GuiGraphics g, int mx, int my, float ptick) {

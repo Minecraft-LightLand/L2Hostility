@@ -13,6 +13,7 @@ public class LHConfig {
 
 	public static class Client extends ConfigInit {
 
+		public final ModConfigSpec.ConfigValue<String> editorSavePath;
 		public final ModConfigSpec.BooleanValue showTraitOverHead;
 		public final ModConfigSpec.BooleanValue showLevelOverHead;
 		public final ModConfigSpec.IntValue overHeadRenderDistance;
@@ -28,6 +29,8 @@ public class LHConfig {
 
 		Client(Builder builder) {
 			markL2();
+			editorSavePath = builder.text("Save path override for the in-game editor.")
+					.define("editorSavePath", "");
 			showTraitOverHead = builder.text("Render Traits in name plate form")
 					.define("showTraitOverHead", true);
 			showLevelOverHead = builder.text("Render mob level in name plate form")
