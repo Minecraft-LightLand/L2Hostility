@@ -5,12 +5,17 @@ import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.data.LHConfig;
 import dev.xkmc.l2hostility.init.registrate.LHTraits;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class TraitGenerator {
 
@@ -23,10 +28,10 @@ public class TraitGenerator {
 	private final MobDifficultyCollector ins;
 	private final HashMap<MobTrait, Integer> traits;
 	private final RandomSource rand;
-	private final List<MobTrait> traitPool;
+	private final TraitPool pool;
 	private final boolean free;
 
-	private int level, weights;
+	private int level;
 
 	private TraitGenerator(MobTraitCap cap, LivingEntity entity, int mobLevel, HashMap<MobTrait, Integer> traits, MobDifficultyCollector ins) {
 		this.entity = entity;
@@ -43,24 +48,22 @@ public class TraitGenerator {
 		if (config != null && config.maxTraitCount > 0)
 			max = config.maxTraitCount;
 		maxTrait = free ? -1 : (int) (max / ins.trait_cost);
-		traitPool = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
+		var list = new ArrayList<>(LHTraits.TRAITS.get().getValues().stream().filter(e ->
 				(config == null || !config.blacklist().contains(e)) &&
 						e.allow(entity, mobLevel, ins.getMaxTraitLevel())).toList());
 		if (config != null) {
 			for (var base : config.traits()) {
-				if (base.condition() == null || base.condition().match(entity, mobLevel, ins))
-					genBase(base);
+				if (base.condition() == null || base.condition().match(entity, mobLevel, ins)) {
+					if (genBase(base) && base.cap()) {
+						list.remove(base.trait());
+					}
+				}
 			}
 			if (config.presetTraitsOnly) {
-				traitPool.clear();
-				return;
+				list.clear();
 			}
 		}
-		weights = 0;
-		for (var e : traitPool) {
-			weights += e.getConfig().weight;
-		}
-
+		pool = new TraitPool(list, traits);
 	}
 
 	private int getRank(MobTrait e) {
@@ -71,30 +74,17 @@ public class TraitGenerator {
 		if (rank == 0) {
 			traits.remove(e);
 		} else {
+			if (pool != null && getRank(e) == 0)
+				pool.update(e);
 			traits.put(e, rank);
 		}
 	}
 
-	private MobTrait pop() {
-		int val = rand.nextInt(weights);
-		MobTrait e = traitPool.get(0);
-		for (var x : traitPool) {
-			val -= x.getConfig().weight;
-			if (val <= 0) {
-				e = x;
-				break;
-			}
-		}
-		weights -= e.getConfig().weight;
-		traitPool.remove(e);
-		return e;
-	}
-
-	private void genBase(EntityConfig.TraitBase base) {
+	private boolean genBase(EntityConfig.TraitBase base) {
 		MobTrait e = base.trait();
-		if (e == null) return;
+		if (e == null) return false;
 		int maxTrait = TraitManager.getMaxLevel() + 1;
-		if (!e.allow(entity, mobLevel, maxTrait)) return;
+		if (!e.allow(entity, mobLevel, maxTrait)) return false;
 		int max = e.getMaxLevel();// config bypass player trait cap
 		int cost = e.getCost(ins.trait_cost);
 		int old = Math.min(e.getMaxLevel(), Math.max(getRank(e), base.free()));
@@ -104,16 +94,14 @@ public class TraitGenerator {
 		if (rank > old) {
 			level -= (rank - old) * cost;
 		}
-		if (base.cap()) {
-			traitPool.remove(e);
-		}
+		return rank > 0;
 	}
 
 	private void generate() {
-		while (level > 0 && !traitPool.isEmpty()) {
+		while (level > 0 && !pool.isEmpty()) {
 			if (maxTrait > 0 && traits.size() >= maxTrait)
 				break;
-			MobTrait e = pop();
+			MobTrait e = pool.pop();
 			int cost = e.getCost(ins.trait_cost);
 			if (cost > level) {
 				continue;
@@ -133,6 +121,118 @@ public class TraitGenerator {
 		for (var e : traits.entrySet()) {
 			e.getKey().initialize(entity, e.getValue());
 		}
+	}
+
+	private static MobTrait getTrait(ResourceLocation id) {
+		return LHTraits.TRAITS.get().getValue(id);
+	}
+
+	private class TraitPool {
+
+		private final LinkedList<TraitEntry> list = new LinkedList<>();
+		private final LinkedHashMap<MobTrait, TraitEntry> map = new LinkedHashMap<>();
+		private final Set<MobTrait> existing = new LinkedHashSet<>();
+		private int weights = 0;
+
+		public TraitPool(List<MobTrait> available, HashMap<MobTrait, Integer> existing) {
+			for (var trait : available) {
+				var ent = new TraitEntry(trait);
+				list.add(ent);
+				map.put(trait, ent);
+			}
+			for (var e : this.list) {
+				weights += e.weight();
+			}
+			for (var trait : existing.keySet()) {
+				update(trait);
+			}
+			purge();
+		}
+
+		private MobTrait pop() {
+			int val = rand.nextInt(weights);
+			var e = list.getFirst();
+			var itr = list.iterator();
+			while (itr.hasNext()) {
+				var x = itr.next();
+				val -= x.weight();
+				if (val <= 0) {
+					e = x;
+					itr.remove();
+					map.remove(e.trait);
+					weights -= e.weight();
+					return e.trait;
+				}
+			}
+			//supposed to be unreachable
+			list.remove(e);
+			map.remove(e.trait);
+			weights -= e.weight();
+			return e.trait;
+		}
+
+		public boolean isEmpty() {
+			return list.isEmpty();
+		}
+
+		public void update(MobTrait trait) {
+			if (existing.contains(trait)) return;
+			existing.add(trait);
+			var data = trait.getExclusion();
+			for (var pair : data.getExcluded().entrySet()) {
+				var t = getTrait(pair.getKey());
+				if (t == null) continue;
+				var entry = map.get(t);
+				if (entry == null) continue;
+				weights -= entry.updateExclusion(pair.getValue());
+			}
+			for (var e : list) {
+				var exc = e.trait.getExclusion();
+				var val = exc.getValue(trait.getRegistryName());
+				if (val == 0) continue;
+				weights -= e.updateExclusion(val);
+			}
+			purge();
+		}
+
+		private void purge() {
+			var itr = list.iterator();
+			while (itr.hasNext()) {
+				var x = itr.next();
+				if (x.weight() == 0) {
+					itr.remove();
+					map.remove(x.trait);
+				}
+			}
+		}
+
+	}
+
+	private class TraitEntry {
+
+		private final MobTrait trait;
+		private final int baseWeight;
+		private double chance;
+		private int weight;
+
+		private TraitEntry(MobTrait trait) {
+			this.trait = trait;
+			chance = 1;
+			baseWeight = trait.getConfig().weight;
+			weight = baseWeight;
+		}
+
+		public int weight() {
+			return weight;
+		}
+
+		public int updateExclusion(double value) {
+			int old = weight;
+			chance *= 1 - value;
+			weight = (int) (baseWeight * chance);
+			return old - weight;
+		}
+
 	}
 
 

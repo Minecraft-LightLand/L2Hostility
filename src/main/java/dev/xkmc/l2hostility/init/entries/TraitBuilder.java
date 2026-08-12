@@ -10,6 +10,7 @@ import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import com.tterrag.registrate.util.nullness.NonnullType;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.config.TraitExclusion;
 import dev.xkmc.l2hostility.content.item.traits.TraitSymbol;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -58,6 +59,13 @@ public class TraitBuilder<T extends MobTrait, P> extends AbstractBuilder<MobTrai
 	@NotNull
 	protected T createEntry() {
 		return this.sup.get();
+	}
+
+	public TraitBuilder<T, P> exclusion(TraitExclusion exclusion) {
+		ResourceLocation rl = new ResourceLocation(getOwner().getModid(), getName());
+		LHRegistrate reg = Wrappers.cast(getOwner());
+		reg.addTraitConfig(e -> e.add(L2Hostility.TRAIT_EXCLUSION, rl, exclusion));
+		return this;
 	}
 
 	public TraitBuilder<T, P> desc(String s) {

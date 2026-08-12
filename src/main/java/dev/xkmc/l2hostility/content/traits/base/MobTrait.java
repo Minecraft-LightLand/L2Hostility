@@ -5,6 +5,7 @@ import dev.xkmc.l2damagetracker.contents.attack.CreateSourceEvent;
 import dev.xkmc.l2hostility.content.capability.mob.MobTraitCap;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.config.TraitExclusion;
 import dev.xkmc.l2hostility.content.logic.InheritContext;
 import dev.xkmc.l2hostility.content.logic.TraitEffectCache;
 import dev.xkmc.l2hostility.content.logic.TraitManager;
@@ -51,6 +52,13 @@ public class MobTrait extends NamedEntry<MobTrait> implements ItemLike {
 	public TraitConfig getConfig() {
 		TraitConfig ans = L2Hostility.TRAIT.getEntry(getRegistryName());
 		if (ans == null) return TraitConfig.DEFAULT;
+		return ans;
+	}
+
+	@SuppressWarnings("ConstantConditions")
+	public TraitExclusion getExclusion() {
+		TraitExclusion ans = L2Hostility.TRAIT_EXCLUSION.getEntry(getRegistryName());
+		if (ans == null) return TraitExclusion.DEFAULT;
 		return ans;
 	}
 

@@ -1,0 +1,6 @@
+{
+  "excluded": {
+    "l2hostility:adaptive": 0.5,
+    "l2hostility:dementor": 0.75
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "excluded": {
+    "l2hostility:blindness": 0.5,
+    "l2hostility:levitation": 0.5,
+    "l2hostility:nausea": 0.5,
+    "l2hostility:slowness": 0.5
+  }
+}
