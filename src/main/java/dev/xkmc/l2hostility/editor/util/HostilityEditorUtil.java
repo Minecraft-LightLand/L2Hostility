@@ -2,6 +2,7 @@ package dev.xkmc.l2hostility.editor.util;
 
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.TraitConfig;
+import dev.xkmc.l2hostility.content.config.TraitExclusion;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
 import dev.xkmc.l2hostility.content.traits.base.MobTrait;
@@ -28,10 +29,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class HostilityEditorUtil {
 
@@ -54,6 +59,23 @@ public class HostilityEditorUtil {
 		List<MobTrait> ans = new ArrayList<>(LHTraits.TRAITS.get().getValues());
 		ans.sort(EditorUtil.byId(e -> e.getRegistryName().toString()));
 		return ans;
+	}
+
+	public static List<ResourceLocation> listTraitIds() {
+		List<ResourceLocation> ans = new ArrayList<>(LHTraits.TRAITS.get().getKeys());
+		ans.sort(ResourceLocation::compareTo);
+		return ans;
+	}
+
+	public static Component traitIdName(ResourceLocation id) {
+		MobTrait trait = LHTraits.TRAITS.get().getValue(id);
+		return trait != null ? trait.getDesc() : Component.literal(id.toString());
+	}
+
+	@Nullable
+	public static ItemStack traitIdIcon(ResourceLocation id) {
+		MobTrait trait = LHTraits.TRAITS.get().getValue(id);
+		return trait == null ? null : traitIcon(trait);
 	}
 
 	public static List<Enchantment> listEnchantments() {
@@ -155,6 +177,93 @@ public class HostilityEditorUtil {
 
 	public static Path saveEntity(ResourceLocation id, EntityConfig config) throws IOException {
 		return EditorUtil.save(L2Hostility.ENTITY, id, config, PACK_FOLDER);
+	}
+
+	public static TraitExclusion newTraitExclusion() {
+		return new TraitExclusion();
+	}
+
+	public static Path saveTraitExclusion(ResourceLocation id, TraitExclusion config) throws IOException {
+		return EditorUtil.save(L2Hostility.TRAIT_EXCLUSION, id, config, PACK_FOLDER);
+	}
+
+	/**
+	 * Deletes the editor's own trait_exclusion file for the given carrier, if present. Only ever
+	 * touches the editor pack under {@link EditorFile#configRoot()}; a missing file is a no-op and
+	 * the mod's built-in datapack default re-applies.
+	 */
+	public static void deleteTraitExclusion(ResourceLocation id) {
+		Path root = EditorFile.configRoot();
+		if (root == null) return;
+		Path file = root.resolve(PACK_FOLDER).resolve(L2Hostility.TRAIT_EXCLUSION.asPath(id) + ".json");
+		try {
+			Files.deleteIfExists(file);
+		} catch (IOException ignored) {
+		}
+	}
+
+	/**
+	 * Connected components of the undirected exclusion graph over all loaded trait_exclusion data.
+	 * A cluster lists every trait involved in at least one relation (as carrier or target).
+	 */
+	public static List<List<ResourceLocation>> exclusionClusters() {
+		Map<ResourceLocation, ResourceLocation> parent = buildExclusionGraph();
+		Map<ResourceLocation, List<ResourceLocation>> groups = new LinkedHashMap<>();
+		for (ResourceLocation id : parent.keySet()) {
+			groups.computeIfAbsent(findRoot(parent, id), k -> new ArrayList<>()).add(id);
+		}
+		List<List<ResourceLocation>> ans = new ArrayList<>(groups.values());
+		ans.forEach(l -> l.sort(ResourceLocation::compareTo));
+		ans.sort((a, b) -> a.get(0).toString().compareToIgnoreCase(b.get(0).toString()));
+		return ans;
+	}
+
+	/**
+	 * Cluster of the loaded exclusion graph that contains {@code id}, or a singleton list when the
+	 * trait takes part in no relation.
+	 */
+	public static List<ResourceLocation> groupOf(ResourceLocation id) {
+		Map<ResourceLocation, ResourceLocation> parent = buildExclusionGraph();
+		if (!parent.containsKey(id)) return List.of(id);
+		ResourceLocation root = findRoot(parent, id);
+		List<ResourceLocation> ans = new ArrayList<>();
+		for (ResourceLocation x : parent.keySet()) {
+			if (findRoot(parent, x).equals(root)) ans.add(x);
+		}
+		ans.sort(ResourceLocation::compareTo);
+		return ans;
+	}
+
+	/**
+	 * Ids of traits that take part in at least one exclusion relation (carrier or target).
+	 */
+	public static Set<ResourceLocation> activeExclusionIds() {
+		return new LinkedHashSet<>(buildExclusionGraph().keySet());
+	}
+
+	private static Map<ResourceLocation, ResourceLocation> buildExclusionGraph() {
+		Map<ResourceLocation, ResourceLocation> parent = new LinkedHashMap<>();
+		for (var cfg : L2Hostility.TRAIT_EXCLUSION.getAll()) {
+			ResourceLocation carrier = cfg.getID();
+			if (carrier == null) continue;
+			for (ResourceLocation target : cfg.getExcluded().keySet()) {
+				ResourceLocation cr = findRoot(parent, carrier);
+				ResourceLocation tr = findRoot(parent, target);
+				if (!cr.equals(tr)) parent.put(cr, tr);
+			}
+		}
+		return parent;
+	}
+
+	private static ResourceLocation findRoot(Map<ResourceLocation, ResourceLocation> parent, ResourceLocation x) {
+		ResourceLocation p = parent.get(x);
+		if (p == null) {
+			parent.put(x, x);
+			return x;
+		}
+		if (p.equals(x)) return x;
+		parent.put(x, findRoot(parent, p));
+		return parent.get(x);
 	}
 
 	public static <T> LinkedHashSet<T> writeThroughSet(ArrayList<T> list) {

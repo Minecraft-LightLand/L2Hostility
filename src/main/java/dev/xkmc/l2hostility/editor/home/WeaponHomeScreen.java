@@ -15,7 +15,7 @@ import java.util.List;
 public class WeaponHomeScreen extends HostilityHomeScreen {
 
 	public WeaponHomeScreen(Screen parent) {
-		super(HostilityEditorLang.WEAPON.get(), 2, parent);
+		super(HostilityEditorLang.WEAPON.get(), 3, parent);
 	}
 
 	@Override

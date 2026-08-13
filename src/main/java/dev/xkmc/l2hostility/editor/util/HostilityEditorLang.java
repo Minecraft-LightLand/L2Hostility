@@ -13,6 +13,15 @@ public enum HostilityEditorLang {
 	DIFFICULTY_FILE("editor.difficulty_file", "Difficulty file", 0, null),
 	TRAIT("editor.trait", "Trait", 0, null),
 	TRAIT_FILE("editor.trait_file", "Trait file", 0, null),
+	TRAIT_EXCLUSION("editor.trait_exclusion", "Excl", 0, null),
+	TRAIT_EXCLUSION_FILE("editor.trait_exclusion_file", "Trait exclusion", 0, null),
+	TRAIT_EXCLUSION_EMPTY("editor.trait_exclusion_empty", "No traits registered.", 0, ChatFormatting.GRAY),
+	ACTIVE("editor.active", "Active", 0, null),
+	INACTIVE("editor.inactive", "Inactive", 0, null),
+	EXCLUDED_GRID("editor.excluded_grid", "Exclusion grid", 0, null),
+	EXCLUDES_TITLE("editor.excludes_title", "%s excludes %s", 2, null),
+	GRID_HINT("editor.grid_hint", "Row trait reduces the roll weight of the column trait. Click a cell to edit; blank or 0 removes it.", 0, ChatFormatting.GRAY),
+	CLEAR_CELL("editor.clear_cell", "Leave blank to remove the exclusion.", 0, ChatFormatting.GRAY),
 	WEAPON("editor.weapon", "Weapon", 0, null),
 	WEAPON_FILE("editor.weapon_file", "Weapon file", 0, null),
 	ENTITY("editor.entity", "Entity", 0, null),
@@ -239,6 +248,7 @@ public enum HostilityEditorLang {
 	ROW_ARMOR_ENCH_TIP("editor.tip_row_armor_ench", "Enchantments added to the armor of leveled mobs.", 0, ChatFormatting.GRAY),
 
 	ROW_APPLIES_TO_TIP("editor.tip_row_applies", "Which entity types this config applies to. Empty = all entities.", 0, ChatFormatting.GRAY),
+	ROW_GRID_TIP("editor.tip_row_grid", "Open the exclusion grid for this group of traits.", 0, ChatFormatting.GRAY),
 	ROW_DIFF_TIP("editor.tip_row_diff", "Per-entity difficulty overrides for these entity types.", 0, ChatFormatting.GRAY),
 	ROW_TRAITS_TIP("editor.tip_row_traits", "Preset traits these entities receive. Conditions can limit when they apply.", 0, ChatFormatting.GRAY),
 	ROW_BLACK_TIP("editor.tip_row_black", "Traits that are never rolled for these entities.", 0, ChatFormatting.GRAY),
@@ -287,6 +297,7 @@ public enum HostilityEditorLang {
 	TAB_WEAPON_TIP("editor.tip_tab_weapon", "Configure the melee weapons, armors, special items and enchantments level mobs spawn with.", 0, ChatFormatting.GRAY),
 	TAB_ENTITY_TIP("editor.tip_tab_entity", "Configure per-entity types: spawning levels, stats scaling, items and traits.", 0, ChatFormatting.GRAY),
 	TAB_TAGS_TIP("editor.tip_tab_tags", "Edit entity/block tags used by loot tables and trait filters.", 0, ChatFormatting.GRAY),
+	TAB_TRAIT_EXCLUSION_TIP("editor.tip_tab_trait_exclusion", "Traits that reduce each other's roll weight. Each trait opens the grid of its relation group.", 0, ChatFormatting.GRAY),
 	TAB_CONFIG_TIP("editor.tip_tab_config", "Edit global numeric values: scaling, difficulty, items and performance.", 0, ChatFormatting.GRAY);
 
 	private final String key, def;

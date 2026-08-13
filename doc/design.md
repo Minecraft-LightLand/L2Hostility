@@ -611,14 +611,16 @@ Misc registrations: wrapped player attributes `ADD_LEVEL` (`l2damagetracker.extr
 ## 14. The in-game config editor (`editor/`)
 
 The editor is a client-side, in-world datapack editor layered on the same config system. Visible
-from any `HostilityHomeScreen`, it has six tabs (HostilityHomeScreen.java:32-38):
+from any `HostilityHomeScreen`, it has seven tabs (HostilityHomeScreen.java:32-38):
 
 1. **World** → `DifficultyHomeScreen` (WorldDifficultyConfig files)
 2. **Traits** → `TraitHomeScreen` / `TraitFileScreen` (TraitConfig files)
-3. **Weapons** → `WeaponHomeScreen` (WeaponConfig files)
-4. **Entities** → `EntityHomeScreen` (EntityConfig files, incl. master/minion/item pools)
-5. **Tags** → `TagsHomeScreen` (trait/entity tag files)
-6. **Config** → `ConfigHomeScreen` (the Forge `LHConfig` common/client spec sections)
+3. **Excl** → `TraitExclusionHomeScreen` / `TraitExclusionGridScreen` (TraitExclusion files, edited
+   as a per-group icon grid; see doc/editor.md §4)
+4. **Weapons** → `WeaponHomeScreen` (WeaponConfig files)
+5. **Entities** → `EntityHomeScreen` (EntityConfig files, incl. master/minion/item pools)
+6. **Tags** → `TagsHomeScreen` (trait/entity tag files)
+7. **Config** → `ConfigHomeScreen` (the Forge `LHConfig` common/client spec sections)
 
 Generic form/list/map screens live in `editor/base/` (copied from ModularGolems, see
 `doc/migration.md`); L2Hostility-specific wrappers (`editor/config/`, `editor/home/`) bind them to
@@ -684,3 +686,10 @@ commit the diff.**
   on an interval.
 - `PerformanceConstants` centralizes the tick-interval constants (trait sync, NAN_FIX,
   removeTraitInterval).
+
+---
+
+## Commit stamp
+
+Documentation written against commit `61891ee` (2026-08-13, "design v1"). Line numbers and behavior
+described herein correspond to this commit; update this stamp when the doc is updated.

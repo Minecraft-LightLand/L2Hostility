@@ -17,7 +17,7 @@ import java.util.List;
 public class TagsHomeScreen extends HostilityHomeScreen {
 
 	public TagsHomeScreen(Screen parent) {
-		super(HostilityEditorLang.TAGS.get(), 4, parent);
+		super(HostilityEditorLang.TAGS.get(), 5, parent);
 	}
 
 	@Override

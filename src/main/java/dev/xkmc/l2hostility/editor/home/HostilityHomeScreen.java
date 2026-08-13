@@ -32,6 +32,7 @@ public abstract class HostilityHomeScreen extends EditorHomeScreen {
 	private static final List<Function<Screen, HostilityHomeScreen>> TABS = List.of(
 			DifficultyHomeScreen::new,
 			TraitHomeScreen::new,
+			TraitExclusionHomeScreen::new,
 			WeaponHomeScreen::new,
 			EntityHomeScreen::new,
 			TagsHomeScreen::new,
@@ -81,10 +82,11 @@ public abstract class HostilityHomeScreen extends EditorHomeScreen {
 		return switch (i) {
 			case 0 -> HostilityEditorLang.TAB_WORLD_TIP.get();
 			case 1 -> HostilityEditorLang.TAB_TRAIT_TIP.get();
-			case 2 -> HostilityEditorLang.TAB_WEAPON_TIP.get();
-			case 3 -> HostilityEditorLang.TAB_ENTITY_TIP.get();
-			case 4 -> HostilityEditorLang.TAB_TAGS_TIP.get();
-			case 5 -> HostilityEditorLang.TAB_CONFIG_TIP.get();
+			case 2 -> HostilityEditorLang.TAB_TRAIT_EXCLUSION_TIP.get();
+			case 3 -> HostilityEditorLang.TAB_WEAPON_TIP.get();
+			case 4 -> HostilityEditorLang.TAB_ENTITY_TIP.get();
+			case 5 -> HostilityEditorLang.TAB_TAGS_TIP.get();
+			case 6 -> HostilityEditorLang.TAB_CONFIG_TIP.get();
 			default -> null;
 		};
 	}

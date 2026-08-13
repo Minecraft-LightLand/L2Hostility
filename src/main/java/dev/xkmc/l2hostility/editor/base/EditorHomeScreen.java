@@ -108,7 +108,7 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		int total = 0;
 		List<Integer> widths = new ArrayList<>();
 		for (EditorTab t : tabs) {
-			int w = Math.max(60, font.width(t.label()) + 24);
+			int w = Math.max(52, font.width(t.label()) + 16);
 			widths.add(w);
 			total += w;
 		}
@@ -181,7 +181,7 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		}
 		Map<String, List<ResourceLocation>> groups = new TreeMap<>();
 		for (ResourceLocation id : ids) {
-			groups.computeIfAbsent(id.getNamespace(), k -> new ArrayList<>()).add(id);
+			groups.computeIfAbsent(groupOf(id), k -> new ArrayList<>()).add(id);
 		}
 		String query = searchText().toLowerCase(Locale.ROOT);
 		for (var ent : groups.entrySet()) {
@@ -244,6 +244,14 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		if (sel == null) return null;
 		Object data = sel.getData();
 		return data instanceof ResourceLocation id ? id : null;
+	}
+
+	/**
+	 * Group key of a file row in the home list. Defaults to the namespace, which is also used to
+	 * label the group header (via {@link #groupName}).
+	 */
+	protected String groupOf(ResourceLocation id) {
+		return id.getNamespace();
 	}
 
 	private void newFile() {

@@ -49,7 +49,7 @@ Copied verbatim from `ModularGolems.editor.base` with `package dev.xkmc.modularg
 | `IngredientScreen` | item/tag/clear picker for an `Ingredient`. **Not used by L2Hostility configs** (no ingredient fields) but kept in the copy for completeness. |
 | `ExitConfirmScreen` | Save / Discard / Cancel dialog for leaving a dirty file. |
 | `ReloadConfirmScreen` | "Reload now / Later" dialog shown on editor exit when a save is pending. |
-| `EditorHomeScreen` | abstract shared home: grouped file list (namespace headers), top tab bar, New/Edit/Reload/Back bottom row (Reload only when `hasReload()`, which the config tab disables; New only when `hasNew()`, which the trait and config tabs disable). **Improvements:** add `protected boolean canCreate() { return true; }`; the New button's `active` is set from it (tag and trait tabs return `false`). Group headers are **foldable** (click toggles collapse, `[+]/[-]` marker; collapsed groups are skipped unless the search query matches the namespace). `hasSearch()` (default `false`) shows an `EditBox` search bar above the list; it filters rows by `namespace path` (collapsed groups auto-expand on a namespace match). Further overridable hooks: `rowSuffix(id)` (default `"   (count)"`), `fileTooltip(id)` (nullable tooltip per row, rendered via `EditorList`), `extraButtons()` (extra widgets inserted into the bottom row before New), `groupName(ns)` (translated group header; `ConfigHomeScreen` maps `client`/`common`), `hasReload()` (default `true`), `hasNew()` (default `true`). |
+| `EditorHomeScreen` | abstract shared home: grouped file list (namespace headers), top tab bar, New/Edit/Reload/Back bottom row (Reload only when `hasReload()`, which the config tab disables; New only when `hasNew()`, which the trait and config tabs disable). **Improvements:** add `protected boolean canCreate() { return true; }`; the New button's `active` is set from it (tag and trait tabs return `false`). Group headers are **foldable** (click toggles collapse, `[+]/[-]` marker; collapsed groups are skipped unless the search query matches the namespace). `hasSearch()` (default `false`) shows an `EditBox` search bar above the list; it filters rows by `namespace path` (collapsed groups auto-expand on a namespace match). Further overridable hooks: `rowSuffix(id)` (default `"   (count)"`), `fileTooltip(id)` (nullable tooltip per row, rendered via `EditorList`), `extraButtons()` (extra widgets inserted into the bottom row before New), `groupName(ns)` (translated group header; `ConfigHomeScreen` maps `client`/`common`), `hasReload()` (default `true`), `hasNew()` (default `true`), `groupOf(id)` (extra grouping key returned by `sectionOf()`, default the id's namespace — used by the trait-exclusion home to split **Active/Inactive**). |
 | `EditorList` | the `ObjectSelectionList` behind `EditorHomeScreen`; `EditorList.TooltipHolder` wraps a row entry + its tooltip, `renderRowTooltips(g)`/`renderRowTooltip(...)` draw the hovered row's tooltip. |
 | `LinkButton`, `package-info.java` | underline-on-hover button; `@MethodsReturnNonnullByDefault` + `@ParametersAreNonnullByDefault`. |
 
@@ -60,11 +60,12 @@ New in `base` (all mod-independent):
 | `FormScreen` | **generic multi-field form.** `FormSpec<T> = (List<FormField> fields, Function<List<String>, T> build)`; `FormField` is either text `(label, initial, validator)` or boolean `(label, initial)` (rendered as a toggle). Labels and controls share a row (label left, control right) and are rendered inside an `ObjectSelectionList` panel, so rows (label + edit box/toggle) are clipped to the content band and scrolled with the mouse wheel while the bottom buttons stay fixed. Confirmed values passed to `build` in field order; bools arrive as `"true"/"false"`. Used for every record/scalar edit in L2Hostility configs (see §4). |
 | `ListEditScreen<T>` | **generic ordered-list editor** for `List<T>` (Add/Edit/Remove/Back). `Handler<T> = { label, icon, void onAdd(Consumer<T> onDone, Screen parent), void onEdit(T cur, Consumer<T> onDone, Screen parent) }`. Add calls `onAdd` (the handler opens whatever screen chain builds a default `T`), Edit calls `onEdit`; `onDone` replaces the item in the list + sets `session.dirty`. |
 | `ValueMapScreen<K,V>` | **map editor with form-editable values**: Add (pick key from candidates via `PickListScreen` or type a key) / Edit (open `FormScreen` built from `FormSpec<V>`) / Remove. `Handler<K>` for the key label/icon + `Function<V,Component> summary` for the row text. |
+| `ExclusionGridScreen<T>` | **generic icon grid editor** for symmetric relation data (`Map<T, Map<T, Double>>`). Sticky icon row/col headers (trait icons), cells show the raw factor via `DoubleMapScreen.format`; diagonal is hidden; clicking a cell opens `PromptScreen` (blank or `0` **removes the entry**). `+ Add` picks from candidates via `PickListScreen` and is **transient** — it only changes the in-memory map, no `session.dirty` (so a stray add reverts on re-entry unless an actual cell was edited); adding an id that already belongs to another group pulls that whole group in. `- Remove` **nukes** the selected row + column (wipes the carrier's whole file). `Handler<T> = { label, icon, cellLabel(a,b), onAdd(picked) → new member list }`. |
 | `TagFile` | generic tag-file I/O: `save(ResourceLocation tagId, JsonElement valuesArray, String packFolder)` writes `data/<ns>/tags/entity_types/<path>.json` with `{"replace": true, "values": [...]}` and (re)uses `EditorFile.writePackMeta`; `read(PackResources, tagId)` helper for raw value extraction. |
 
 **Improvements over Modular Golems' base** (summary):
 1. `EditorHomeScreen.canCreate()` hook (New disabled per tab).
-2. `FormScreen`, `ListEditScreen`, `ValueMapScreen`, `TagFile` added (L2Hostility's data model is mostly records/lists, which the golem base can't edit).
+2. `FormScreen`, `ListEditScreen`, `ValueMapScreen`, `TagFile`, `ExclusionGridScreen` added (L2Hostility's data model is mostly records/lists, which the golem base can't edit).
 3. `pack.mcmeta` description fixed to this mod.
 4. `EditorHomeScreen` foldable group headers + optional `hasSearch()` search bar.
 5. `EditorFile.configRoot()` — configurable save root (`LHConfig.CLIENT.editorSavePath`, default empty = world datapacks).
@@ -88,7 +89,7 @@ New in `base` (all mod-independent):
 
 | Class | Purpose |
 |---|---|
-| `HostilityHomeScreen` | **one** `EditorHomeScreen` subclass parameterized by `TabKind { DIFFICULTY, TRAIT, WEAPON, ENTITY, TAGS, CONFIG }` (instead of five near-identical home subclasses). `tabs()` always returns all six tabs; `activeTab()`/`listFiles()`/`fileCount()`/`emptyMessage()`/`newFileDefault()`/`openNew()`/`openEdit()`/`validateId()`/`canCreate()` dispatch on the kind. `hasSearch()` returns `true` for **trait and entity** tabs (search bar); group headers are foldable everywhere. `isDisabled()` returns `true` for **trait** rows whose `MobTrait.isBanned()` holds (own `allow_*` toggle or, for legendary traits, the general legendary toggle) — drawn **light gray**, with a `fileTooltip` explaining which toggle disables them. The **Weapon / Entity tab labels** are drawn **red + strikethrough** when `enableEquipmentDatapack` / `enableEntitySpecificDatapack` is off (`featureDisabled`). The **Config** tab is `ConfigHomeScreen` (not `HostilityHomeScreen`): its list rows are the **client / common** config sections and it adds a **Reset** button. Holds the entry `parent` (the screen that opened the editor); all tab switches construct a new `HostilityHomeScreen(kind, parent)`. |
+| `HostilityHomeScreen` | **one** `EditorHomeScreen` subclass parameterized by `TabKind { DIFFICULTY, TRAIT, TRAIT_EXCLUSION, WEAPON, ENTITY, TAGS, CONFIG }` (instead of six near-identical home subclasses). `tabs()` always returns all seven tabs; `activeTab()`/`listFiles()`/`fileCount()`/`emptyMessage()`/`newFileDefault()`/`openNew()`/`openEdit()`/`validateId()`/`canCreate()` dispatch on the kind. `hasSearch()` returns `true` for the **trait, trait-exclusion and entity** tabs (search bar); group headers are foldable everywhere. `isDisabled()` returns `true` for **trait** rows whose `MobTrait.isBanned()` holds (own `allow_*` toggle or, for legendary traits, the general legendary toggle) — drawn **light gray**, with a `fileTooltip` explaining which toggle disables them. The **Weapon / Entity tab labels** are drawn **red + strikethrough** when `enableEquipmentDatapack` / `enableEntitySpecificDatapack` is off (`featureDisabled`). The **Config** tab is `ConfigHomeScreen` (not `HostilityHomeScreen`): its list rows are the **client / common** config sections and it adds a **Reset** button. The **Trait Exclusion** tab is `TraitExclusionHomeScreen` (see §4): its rows are the registered traits split into **Active / Inactive** groups (see `groupOf` hook below), and `canCreate()/hasNew()` return `false`. Holds the entry `parent` (the screen that opened the editor); all tab switches construct a new `HostilityHomeScreen(kind, parent)`. |
 
 ### config
 
@@ -119,7 +120,7 @@ Per-kind screens (details in §4):
   Placement: below the info lines at `topPos + 8 + <info height>`, left-aligned like the info text.
 - It is only added when `EditorSaveState.canEdit()` is true: singleplayer server present AND
   `getWorldData().getAllowCommands()` AND the player is creative (`player.isCreative()`).
-- `HostilityHomeScreen(TabKind.DIFFICULTY, this)` is the landing screen; the other four kinds are
+- `HostilityHomeScreen(TabKind.DIFFICULTY, this)` is the landing screen; the other six kinds are
   reached via the top tab bar (rendered generically by `EditorHomeScreen` from `tabs()` +
   `activeTab()`).
 - *(alternative, not chosen)*: register a dedicated "Editor" l2tabs tab like `TAB_DIFFICULTY`;
@@ -195,6 +196,26 @@ opens `TagEditScreen` for `<id>_blacklist` / `<id>_whitelist`); per-trait tags a
 in the Tags tab. The traffic-fields row appends a brief of the current values
 (`HostilityEditorForms.traitFieldsSummary`); tag rows show plain **Blacklist** / **Whitelist**
 labels (no tag id) + the effective entry count.
+
+### Trait Exclusion
+The **Trait Exclusion** tab (`TabKind.TRAIT_EXCLUSION`, label "Excl") edits
+`L2Hostility.TRAIT_EXCLUSION`, the `trait_exclusion` registry where each carrier's
+`excluded: Map<ResourceLocation, Double>` reduces that trait's roll weight by `chance *= 1 - rate`
+(see TraitGenerator). The home (`TraitExclusionHomeScreen`) lists **all registered traits**
+(`HostilityEditorUtil.listTraitIds`, same union with loaded-but-unregistered ids as the Trait tab),
+split into **Active** (in ≥1 relation) and **Inactive** groups via the `groupOf(id)` hook (a
+union-find over the loaded registry data; `HostilityEditorUtil.exclusionClusters`). Rows are
+banned-grey + tooltipped like the Trait tab; `canCreate()/hasNew()` are `false` (New is a toast).
+
+Opening a trait enters `TraitExclusionGridScreen`, which edits the whole **relation group** the trait
+belongs to (derived, not stored): it loads every carrier in the group into one in-memory map and
+opens the generic `ExclusionGridScreen<ResourceLocation>` (see §1). Row/cell labels and icons use
+`traitIdName`/`traitIdIcon`; each cell sets `row.excluded[col]` (blank or `0` removes the entry; a
+zeroed bridging cell is how two merged groups are **split** — nuking a row would wipe the file). Add
+is transient; Remove nukes the selected carrier. Saving **batches per carrier**:
+`HostilityEditorUtil.saveTraitExclusion(id, cfg)` writes each carrier that still has entries, and
+`deleteTraitExclusion(id)` deletes the editor-pack file for carriers that ended up empty (restoring
+the datagen/jar default), scoped to the save root — no-op when absent.
 
 ### Config
 The **Config** tab (`TabKind.CONFIG`) edits the Forge configs directly, **excluding trait-related
@@ -369,6 +390,11 @@ Configs:
 (`PACK_FOLDER = "l2hostility_editor"`; path via `ConfigTypeEntry.asPath` = `data/<ns>/l2hostility_config/<name>/<path>`.
 Serialization uses `JsonCodec.toJson(config, type.cls())` + pretty GSON, exactly like datagen.)
 `pack.mcmeta` (`pack_format: 15`, description "L2Hostility Editor") is written once.
+
+Trait exclusion (`TRAIT_EXCLUSION`, saved per carrier — see §4):
+```
+<save-root>/l2hostility_editor/data/<namespace>/l2hostility_config/trait_exclusion/<carrier>.json
+```
 
 Tags:
 ```

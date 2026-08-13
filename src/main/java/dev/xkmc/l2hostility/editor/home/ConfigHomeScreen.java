@@ -32,7 +32,7 @@ public class ConfigHomeScreen extends HostilityHomeScreen {
 	}
 
 	public ConfigHomeScreen(Screen parent) {
-		super(HostilityEditorLang.CONFIG.get(), 5, parent);
+		super(HostilityEditorLang.CONFIG.get(), 6, parent);
 	}
 
 	@Nullable

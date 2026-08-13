@@ -17,7 +17,7 @@ import java.util.List;
 public class EntityHomeScreen extends HostilityHomeScreen {
 
 	public EntityHomeScreen(Screen parent) {
-		super(HostilityEditorLang.ENTITY.get(), 3, parent);
+		super(HostilityEditorLang.ENTITY.get(), 4, parent);
 	}
 
 	@Override
