@@ -50,7 +50,7 @@ public class PickListScreen<T> extends EditorScreen {
 
 	@Override
 	protected void init() {
-		list = new EditorList(minecraft, width, height - 60, 34, height - 44);
+		list = new EditorList(minecraft, width, height - 60, 34, EditorList.ITEM_HEIGHT);
 		search = new EditBox(this.font, width / 2 - 100, 10, 200, 18, EditorText.SEARCH.get());
 		search.setMaxLength(64);
 		search.setResponder(s -> refresh());

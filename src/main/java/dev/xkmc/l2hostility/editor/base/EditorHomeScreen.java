@@ -67,7 +67,7 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		if (hasSearch()) {
 			listTop = 58;
 		}
-		list = new EditorList(minecraft, width, height - 40 - listTop, listTop, height - 40);
+		list = new EditorList(minecraft, width, height - 40 - listTop, listTop, EditorList.ITEM_HEIGHT);
 		//list.setRenderTopAndBottom(false);
 		addRenderableWidget(list);
 		if (hasSearch()) {

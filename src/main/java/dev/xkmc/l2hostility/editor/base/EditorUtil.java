@@ -27,7 +27,7 @@ public class EditorUtil {
 	}
 
 	public static List<Item> listItems() {
-		List<Item> ans = BuiltInRegistries.ITEM.stream().toList();
+		List<Item> ans = new ArrayList<>(BuiltInRegistries.ITEM.stream().toList());
 		ans.removeIf(e -> BuiltInRegistries.ITEM.getKey(e) == null);
 		ans.sort(byId(e -> BuiltInRegistries.ITEM.getKey(e).toString()));
 		return ans;

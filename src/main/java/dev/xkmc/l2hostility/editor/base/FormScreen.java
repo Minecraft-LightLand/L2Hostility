@@ -95,7 +95,7 @@ public class FormScreen<T> extends EditorScreen {
 				boxToField.add(i);
 			}
 		}
-		list = new FormList(minecraft, width, buttonY() - 10 - CONTENT_TOP, CONTENT_TOP, buttonY() - 10);
+		list = new FormList(minecraft, width, buttonY() - 10 - CONTENT_TOP, CONTENT_TOP, ROW_H);
 		for (int i = 0; i < spec.fields().size(); i++) {
 			list.addRow(new FormEntry(i));
 		}

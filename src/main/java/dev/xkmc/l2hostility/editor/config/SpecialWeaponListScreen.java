@@ -145,7 +145,7 @@ public class SpecialWeaponListScreen extends ListEditScreen<SpecialWeaponListScr
 
 		@Override
 		protected void init() {
-			var list = new EditorList(minecraft, width, height - 70, 30, height - 40);
+			var list = new EditorList(minecraft, width, height - 70, 30, EditorList.ITEM_HEIGHT);
 			addRenderableWidget(list);
 			List<EditorList.Entry> rows = new ArrayList<>();
 			rows.add(new EditorList.Entry(HostilityEditorForms.counted(HostilityEditorLang.ENTITIES.get(), entry.entities().size()), null,

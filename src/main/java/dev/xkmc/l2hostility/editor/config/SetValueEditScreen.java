@@ -65,7 +65,7 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 	@Override
 	protected void init() {
 		int top = 26 + fields.size() * ROW_H + 10;
-		list = new EditorList(minecraft, width, height - 40 - top, top, height - 40);
+		list = new EditorList(minecraft, width, height - 40 - top, top, EditorList.ITEM_HEIGHT);
 		addRenderableWidget(list);
 		for (int i = 0; i < fields.size(); i++) {
 			FormScreen.FormField field = fields.get(i);

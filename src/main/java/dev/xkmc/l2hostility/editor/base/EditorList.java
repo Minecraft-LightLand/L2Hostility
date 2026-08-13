@@ -14,6 +14,8 @@ import java.util.function.Supplier;
 
 public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 
+	public static final int ITEM_HEIGHT = 20;
+
 	@Nullable
 	private Runnable onSelect;
 	@Nullable
@@ -24,8 +26,8 @@ public class EditorList extends ObjectSelectionList<EditorList.Entry> {
 	private Component hoveredTooltip;
 	private int hoveredX, hoveredY;
 
-	public EditorList(Minecraft mc, int width, int height, int y0, int y1) {
-		super(mc, width, height, y0, y1);
+	public EditorList(Minecraft mc, int width, int height, int y0, int itemHeight) {
+		super(mc, width, height, y0, itemHeight);
 	}
 
 	public void setOnSelect(Runnable onSelect) {

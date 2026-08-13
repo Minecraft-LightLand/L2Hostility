@@ -58,7 +58,7 @@ public class Obj2IntMapScreen<M> extends EditorScreen {
 
 	@Override
 	protected void init() {
-		list = new EditorList(minecraft, width, height - 70, 30, height - 40);
+		list = new EditorList(minecraft, width, height - 70, 30, EditorList.ITEM_HEIGHT);
 		addRenderableWidget(list);
 		List<Button> row = new ArrayList<>();
 		addBtn = Button.builder(EditorText.ADD.get(), b -> addModifier()).bounds(0, 0, 60, 20).build();

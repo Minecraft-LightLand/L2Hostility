@@ -71,7 +71,13 @@ public enum EditorText {
 	public MutableComponent get(Object... args) {
 		if (args.length != arg)
 			throw new IllegalArgumentException("for " + name() + ": expect " + arg + " parameters, got " + args.length);
-		MutableComponent ans = Component.translatable(key, args);
+		Object[] copy = new Object[args.length];
+		for (int i = 0; i < args.length; i++) {
+			Object a = args[i];
+			copy[i] = a instanceof Component || a instanceof Number || a instanceof Boolean || a instanceof String
+					? a : String.valueOf(a);
+		}
+		MutableComponent ans = Component.translatable(key, copy);
 		if (format != null) {
 			ans = ans.withStyle(format);
 		}

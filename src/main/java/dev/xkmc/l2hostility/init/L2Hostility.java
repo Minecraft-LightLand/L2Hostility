@@ -17,6 +17,8 @@ import dev.xkmc.l2hostility.content.capability.mob.MobCapSyncToClient;
 import dev.xkmc.l2hostility.content.config.EntityConfig;
 import dev.xkmc.l2hostility.content.config.WeaponConfig;
 import dev.xkmc.l2hostility.content.config.WorldDifficultyConfig;
+import dev.xkmc.l2hostility.editor.base.EditorText;
+import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.events.LHAttackListener;
 import dev.xkmc.l2hostility.init.advancements.HostilityTriggers;
 import dev.xkmc.l2hostility.init.data.*;
@@ -107,6 +109,8 @@ public class L2Hostility {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void gatherData(GatherDataEvent event) {
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::addTranslations);
+		REGISTRATE.addDataGenerator(ProviderType.LANG, EditorText::genLang);
+		REGISTRATE.addDataGenerator(ProviderType.LANG, HostilityEditorLang::genLang);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 		REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, LHTagGen::onBlockTagGen);
 		REGISTRATE.addDataGenerator(L2TagGen.ENCH_TAGS, LHTagGen::onEnchTagGen);

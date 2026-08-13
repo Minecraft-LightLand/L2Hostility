@@ -45,7 +45,7 @@ public class MasterConfigScreen extends EditorScreen {
 	protected void init() {
 		List<Button> row = new ArrayList<>();
 		if (master == null) {
-			list = new EditorList(minecraft, width, height - 70, 30, height - 40);
+			list = new EditorList(minecraft, width, height - 70, 30, EditorList.ITEM_HEIGHT);
 			addRenderableWidget(list);
 		} else {
 			maxBox = new EditBox(font, boxX(), 28, 140, 20, Component.literal(""));
@@ -56,7 +56,7 @@ public class MasterConfigScreen extends EditorScreen {
 			spawnBox.setMaxLength(64);
 			spawnBox.setValue("" + master.spawnInterval());
 			spawnBox.setResponder(s -> setField(master.maxTotalCount(), parseInt(s, master.spawnInterval())));
-			list = new EditorList(minecraft, width, height - 136, 86, height - 50);
+			list = new EditorList(minecraft, width, height - 136, 86, EditorList.ITEM_HEIGHT);
 			addRenderableWidget(list);
 			addRenderableWidget(maxBox);
 			addRenderableWidget(spawnBox);

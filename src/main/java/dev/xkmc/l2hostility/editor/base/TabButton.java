@@ -1,18 +1,22 @@
 package dev.xkmc.l2hostility.editor.base;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class TabButton extends Button {
 
-	private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.parse("textures/gui/tab_button.png");
-	private static final int TEXTURE_WIDTH = 130;
-	private static final int TEXTURE_HEIGHT = 24;
-	private static final int TEXTURE_BORDER = 2;
-	private static final int TEXTURE_BORDER_BOTTOM = 0;
+	private static final WidgetSprites SPRITES = new WidgetSprites(
+			ResourceLocation.withDefaultNamespace("widget/tab_selected"),
+			ResourceLocation.withDefaultNamespace("widget/tab"),
+			ResourceLocation.withDefaultNamespace("widget/tab_selected_highlighted"),
+			ResourceLocation.withDefaultNamespace("widget/tab_highlighted")
+	);
+
 	private static final int SELECTED_OFFSET = 3;
 
 	private final boolean selected;
@@ -24,8 +28,9 @@ public class TabButton extends Button {
 
 	@Override
 	protected void renderWidget(GuiGraphics g, int mx, int my, float partialTick) {
-		g.blit(TEXTURE_LOCATION, getX(), getY(), getWidth(), getHeight(), 0, getTextureY(),
-				TEXTURE_WIDTH, TEXTURE_HEIGHT, 256, 256);
+		RenderSystem.enableBlend();
+		g.blitSprite(SPRITES.get(selected, isHoveredOrFocused()), getX(), getY(), getWidth(), getHeight());
+		RenderSystem.disableBlend();
 		var font = Minecraft.getInstance().font;
 		int color = selected ? 0xFFFFFFFF : 0xFFA0A0A0;
 		int top = getY() + (selected ? 0 : SELECTED_OFFSET);
@@ -37,18 +42,6 @@ public class TabButton extends Button {
 			int y = getY() + getHeight() - 2;
 			g.fill(x, y, x + w, y + 1, color);
 		}
-	}
-
-	private int getTextureY() {
-		int i = 2;
-		if (selected && isHoveredOrFocused()) {
-			i = 1;
-		} else if (selected) {
-			i = 0;
-		} else if (isHoveredOrFocused()) {
-			i = 3;
-		}
-		return i * TEXTURE_HEIGHT;
 	}
 
 }

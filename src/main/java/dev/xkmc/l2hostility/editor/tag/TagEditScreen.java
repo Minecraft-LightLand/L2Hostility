@@ -41,7 +41,7 @@ public class TagEditScreen extends EditorScreen {
 
 	@Override
 	protected void init() {
-		list = new EditorList(minecraft, width, height - 70, 30, height - 40);
+		list = new EditorList(minecraft, width, height - 70, 30, EditorList.ITEM_HEIGHT);
 		addRenderableWidget(list);
 		List<Button> row = new ArrayList<>();
 		addEntBtn = EditorTip.tip(Button.builder(HostilityEditorLang.ADD_ENTITY.get(), b -> addEntity()).bounds(0, 0, 50, 20).build(),
