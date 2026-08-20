@@ -20,10 +20,13 @@ public class ReloadConfirmScreen extends EditorScreen {
 	@Override
 	protected void init() {
 		int c = width / 2;
+		int gap = 10;
+		int w = Math.max(120, Math.max(font.width(EditorText.RELOAD_NOW.get()),
+				font.width(EditorText.LATER.get())) + 24);
 		addRenderableWidget(Button.builder(EditorText.RELOAD_NOW.get(), b -> onNow.run())
-				.bounds(c - 155, height / 2 + 20, 140, 20).build());
+				.bounds(c - w - gap / 2, height / 2 + 20, w, 20).build());
 		addRenderableWidget(Button.builder(EditorText.LATER.get(), b -> onLater.run())
-				.bounds(c + 15, height / 2 + 20, 100, 20).build());
+				.bounds(c + gap / 2, height / 2 + 20, w, 20).build());
 	}
 
 	@Override

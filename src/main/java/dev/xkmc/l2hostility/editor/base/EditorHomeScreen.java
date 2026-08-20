@@ -1,5 +1,6 @@
 package dev.xkmc.l2hostility.editor.base;
 
+import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -10,7 +11,11 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraftforge.fml.ModList;
+
+import java.util.Collection;
+import java.util.LinkedHashSet;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -150,7 +155,17 @@ public abstract class EditorHomeScreen extends EditorScreen {
 		setReloaded();
 		IntegratedServer server = Minecraft.getInstance().getSingleplayerServer();
 		if (server != null) {
-			server.execute(() -> server.reloadResources(server.getPackRepository().getSelectedIds()));
+			server.execute(() -> {
+				PackRepository repo = server.getPackRepository();
+				// Rescan the datapacks folder so the just-written editor pack becomes available,
+				// then enable it (it is not in the world's saved selection yet) before reloading.
+				repo.reload();
+				Collection<String> selected = new LinkedHashSet<>(repo.getSelectedIds());
+            if (!selected.contains(HostilityEditorUtil.PACK_FOLDER)) {
+                selected.add(HostilityEditorUtil.PACK_FOLDER);
+            }
+				server.reloadResources(selected);
+			});
 			EditorToast.show(EditorText.RELOAD.get(), EditorText.RELOAD_DONE.get());
 		}
 		Minecraft.getInstance().setScreen(exit ? parent : this);
