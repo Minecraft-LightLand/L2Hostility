@@ -11,6 +11,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.items.ItemHandlerHelper;
+import net.minecraftforge.items.wrapper.PlayerMainInvWrapper;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
@@ -31,6 +33,14 @@ public class PocketOfRestoration extends CurioItem implements ICurioItem {
 		tag.putLong(START, time);
 	}
 
+	private static boolean addToInventory(Player player, ItemStack stack) {
+		var inv = new PlayerMainInvWrapper(player.getInventory());
+		if (!ItemHandlerHelper.insertItemStacked(inv, stack, true).isEmpty()) {
+			return false;
+		}
+		return ItemHandlerHelper.insertItemStacked(inv, stack, false).isEmpty();
+	}
+
 	public PocketOfRestoration(Properties properties, int durability) {
 		super(properties, durability);
 	}
@@ -49,10 +59,10 @@ public class PocketOfRestoration extends CurioItem implements ICurioItem {
 			if (le.level().getGameTime() >= time + dur) {
 				ItemStack result = ItemStack.of(tag.getCompound(SealedItem.DATA));
 				EntitySlotAccess slot = CurioCompat.decode(tag.getString(KEY), le);
-				if (slot != null && slot.get().isEmpty()) {
-					slot.set(result);
+				ItemStack remain = slot == null ? result : slot.insert(result);
+				if (remain.isEmpty()) {
 					stack.getTag().remove(ROOT);
-				} else if (le instanceof Player player && player.addItem(result)) {
+				} else if (le instanceof Player player && addToInventory(player, remain)) {
 					stack.getTag().remove(ROOT);
 				}
 
