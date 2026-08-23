@@ -10,6 +10,14 @@ public interface EntitySlotAccess {
 
 	void set(ItemStack stack);
 
+	default ItemStack insert(ItemStack stack) {
+		if (get().isEmpty()) {
+			set(stack);
+			return ItemStack.EMPTY;
+		}
+		return stack;
+	}
+
 	default void modify(Function<ItemStack, ItemStack> func) {
 		set(func.apply(get()));
 	}

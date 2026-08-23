@@ -186,6 +186,17 @@ public class CurioCompat {
 		}
 
 		@Override
+		public ItemStack insert(ItemStack stack) {
+			if (handler.getSlots() <= slot) {
+				return stack;
+			}
+			if (!handler.insertItem(slot, stack, true).isEmpty()) {
+				return stack;
+			}
+			return handler.insertItem(slot, stack, false);
+		}
+
+		@Override
 		public String getID() {
 			return "curios/" + id + "/" + slot;
 		}
