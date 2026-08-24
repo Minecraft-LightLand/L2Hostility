@@ -29,7 +29,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -185,21 +184,6 @@ public class HostilityEditorUtil {
 
 	public static Path saveTraitExclusion(ResourceLocation id, TraitExclusion config) throws IOException {
 		return EditorUtil.save(L2Hostility.TRAIT_EXCLUSION, id, config, PACK_FOLDER);
-	}
-
-	/**
-	 * Deletes the editor's own trait_exclusion file for the given carrier, if present. Only ever
-	 * touches the editor pack under {@link EditorFile#configRoot()}; a missing file is a no-op and
-	 * the mod's built-in datapack default re-applies.
-	 */
-	public static void deleteTraitExclusion(ResourceLocation id) {
-		Path root = EditorFile.configRoot();
-		if (root == null) return;
-		Path file = root.resolve(PACK_FOLDER).resolve(L2Hostility.TRAIT_EXCLUSION.asPath(id) + ".json");
-		try {
-			Files.deleteIfExists(file);
-		} catch (IOException ignored) {
-		}
 	}
 
 	/**

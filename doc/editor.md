@@ -207,15 +207,19 @@ split into **Active** (in ≥1 relation) and **Inactive** groups via the `groupO
 union-find over the loaded registry data; `HostilityEditorUtil.exclusionClusters`). Rows are
 banned-grey + tooltipped like the Trait tab; `canCreate()/hasNew()` are `false` (New is a toast).
 
-Opening a trait enters `TraitExclusionGridScreen`, which edits the whole **relation group** the trait
-belongs to (derived, not stored): it loads every carrier in the group into one in-memory map and
-opens the generic `ExclusionGridScreen<ResourceLocation>` (see §1). Row/cell labels and icons use
-`traitIdName`/`traitIdIcon`; each cell sets `row.excluded[col]` (blank or `0` removes the entry; a
-zeroed bridging cell is how two merged groups are **split** — nuking a row would wipe the file). Add
-is transient; Remove nukes the selected carrier. Saving **batches per carrier**:
-`HostilityEditorUtil.saveTraitExclusion(id, cfg)` writes each carrier that still has entries, and
-`deleteTraitExclusion(id)` deletes the editor-pack file for carriers that ended up empty (restoring
-the datagen/jar default), scoped to the save root — no-op when absent.
+Opening a trait enters `TraitExclusionEdit.create`, which edits the whole **relation group** the
+trait belongs to (derived, not stored): it loads every carrier in the group into one in-memory map
+and opens the generic `ExclusionGridScreen<ResourceLocation>` directly (see §1; no intermediate
+list screen). Row/cell labels and icons use `traitIdName`/`traitIdIcon`; cells display the
+relation **symmetrically** — whichever direction carries a value, or the product of both — while a
+cell click still edits that cell's own direction. Each cell sets `row.excluded[col]` (blank or `0`
+removes the entry; a zeroed bridging cell is how two merged groups are **split** — nuking a row
+would wipe the file). Add is transient; Remove nukes the selected carrier. The grid scrolls both
+vertically (wheel) and horizontally (shift + wheel) with scroll bars for both axes, and scales
+cell text down to fit. Saving **batches per member**: each relation is stored under the trait with
+more exclusion entries (alphabetically higher id on ties), and every group member gets a file —
+including empty ones — so the editor pack replaces built-in JSONs instead of deleting back to
+them (`HostilityEditorUtil.saveTraitExclusion`).
 
 ### Config
 The **Config** tab (`TabKind.CONFIG`) edits the Forge configs directly, **excluding trait-related

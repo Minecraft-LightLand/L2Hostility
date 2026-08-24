@@ -615,7 +615,7 @@ from any `HostilityHomeScreen`, it has seven tabs (HostilityHomeScreen.java:32-3
 
 1. **World** → `DifficultyHomeScreen` (WorldDifficultyConfig files)
 2. **Traits** → `TraitHomeScreen` / `TraitFileScreen` (TraitConfig files)
-3. **Excl** → `TraitExclusionHomeScreen` / `TraitExclusionGridScreen` (TraitExclusion files, edited
+3. **Excl** → `TraitExclusionHomeScreen` / `TraitExclusionEdit` (TraitExclusion files, edited
    as a per-group icon grid; see doc/editor.md §4)
 4. **Weapons** → `WeaponHomeScreen` (WeaponConfig files)
 5. **Entities** → `EntityHomeScreen` (EntityConfig files, incl. master/minion/item pools)

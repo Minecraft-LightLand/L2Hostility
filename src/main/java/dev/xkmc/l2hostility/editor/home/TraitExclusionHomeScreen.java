@@ -4,7 +4,7 @@ import dev.xkmc.l2hostility.content.traits.base.MobTrait;
 import dev.xkmc.l2hostility.content.traits.legendary.LegendaryTrait;
 import dev.xkmc.l2hostility.editor.base.EditorText;
 import dev.xkmc.l2hostility.editor.base.EditorToast;
-import dev.xkmc.l2hostility.editor.config.TraitExclusionGridScreen;
+import dev.xkmc.l2hostility.editor.config.TraitExclusionEdit;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorLang;
 import dev.xkmc.l2hostility.editor.util.HostilityEditorUtil;
 import dev.xkmc.l2hostility.init.L2Hostility;
@@ -102,7 +102,7 @@ public class TraitExclusionHomeScreen extends HostilityHomeScreen {
 
 	@Override
 	protected int fileCount(ResourceLocation id) {
-		return HostilityEditorUtil.groupOf(id).size();
+		return Math.max(0, HostilityEditorUtil.groupOf(id).size() - 1);
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class TraitExclusionHomeScreen extends HostilityHomeScreen {
 
 	@Override
 	protected void openEdit(ResourceLocation id) {
-		Minecraft.getInstance().setScreen(new TraitExclusionGridScreen(id, this));
+		Minecraft.getInstance().setScreen(TraitExclusionEdit.create(id, this));
 	}
 
 }
