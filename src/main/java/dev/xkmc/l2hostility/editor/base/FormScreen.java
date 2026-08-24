@@ -168,7 +168,14 @@ public class FormScreen<T> extends EditorScreen {
 				values.add(val);
 			}
 		}
+		// For save-on-close forms (e.g. the config tab), do not write or toast when nothing
+		// was actually changed: just return to the parent screen.
+		if (saveOnClose && !changed()) {
+			Minecraft.getInstance().setScreen(parent);
+			return;
+		}
 		onDone.accept(spec.build().apply(values));
+		Minecraft.getInstance().setScreen(parent);
 	}
 
 	@Override
