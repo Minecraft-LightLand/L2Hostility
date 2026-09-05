@@ -99,6 +99,7 @@ public class EntityConfigEntryScreen extends EditorScreen {
 				HostilityEditorForms.difficultyConfig(config.difficulty()), c -> {
 			config.setDifficulty(c);
 			session.dirty = true;
+			Minecraft.getInstance().setScreen(EntityConfigEntryScreen.this);
 		}, EntityConfigEntryScreen.this));
 	}
 
