@@ -38,8 +38,12 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 	private final List<T> order = new ArrayList<>();
 	private final List<EditBox> boxes = new ArrayList<>();
 	private final List<Integer> boxToField = new ArrayList<>();
+	private Button confirmBtn;
+	private Button resetBtn;
 	private Button removeBtn;
 	private final String[] values;
+	private final Set<T> initialPicked;
+	private final String[] initialValues;
 	@Nullable
 	private Component error;
 
@@ -57,9 +61,12 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 		this.fields = fields;
 		this.build = build;
 		this.values = new String[fields.size()];
+		this.initialValues = new String[fields.size()];
 		for (int i = 0; i < fields.size(); i++) {
 			values[i] = fields.get(i).initial();
+			initialValues[i] = fields.get(i).initial();
 		}
+		this.initialPicked = new java.util.LinkedHashSet<>(picked);
 	}
 
 	@Override
@@ -76,6 +83,7 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 			box.setResponder(s -> {
 				values[idx] = s;
 				error = null;
+				updateConfirmButton();
 			});
 			boxes.add(box);
 			boxToField.add(i);
@@ -87,11 +95,41 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 		removeBtn.active = false;
 		row.add(removeBtn);
 		row.add(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent)).bounds(0, 0, 60, 20).build());
-		row.add(Button.builder(EditorText.CONFIRM.get(), b -> submit()).bounds(0, 0, 60, 20).build());
+		resetBtn = Button.builder(EditorText.RESET.get(), b -> resetValue()).bounds(0, 0, 60, 20).build();
+		row.add(resetBtn);
+		confirmBtn = Button.builder(EditorText.CONFIRM.get(), b -> submit()).bounds(0, 0, 60, 20).build();
+		row.add(confirmBtn);
 		row.forEach(this::addRenderableWidget);
 		EditorLayout.centerRow(row, width / 2, height - 30, 5);
 		list.setOnSelect(() -> removeBtn.active = selected() != null);
 		rebuild();
+		updateConfirmButton();
+	}
+
+	private boolean changed() {
+		if (!new java.util.LinkedHashSet<>(picked).equals(initialPicked)) return true;
+		for (int i = 0; i < values.length; i++) {
+			if (!values[i].equals(initialValues[i])) return true;
+		}
+		return false;
+	}
+
+	private void updateConfirmButton() {
+		boolean b = changed();
+		confirmBtn.active = b;
+		resetBtn.active = b;
+	}
+
+	private void resetValue() {
+		picked.clear();
+		picked.addAll(initialPicked);
+		for (int i = 0; i < fields.size(); i++) {
+			values[i] = initialValues[i];
+			boxes.get(i).setValue(initialValues[i]);
+		}
+		error = null;
+		rebuild();
+		updateConfirmButton();
 	}
 
 	private void rebuild() {
@@ -136,6 +174,7 @@ public class SetValueEditScreen<T, R> extends EditorScreen {
 		if (item == null) return;
 		picked.remove(item);
 		rebuild();
+		updateConfirmButton();
 	}
 
 	private record PickHandler<T>(SetValueEditScreen<T, ?> screen, ItemListScreen.Handler<T> handler)

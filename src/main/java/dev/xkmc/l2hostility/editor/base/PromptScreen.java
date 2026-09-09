@@ -21,6 +21,8 @@ public class PromptScreen extends EditorScreen {
 	private final Screen parent;
 
 	private EditBox box;
+	private Button confirmBtn;
+	private Button resetBtn;
 	@Nullable
 	private Component error;
 
@@ -39,18 +41,47 @@ public class PromptScreen extends EditorScreen {
 		box = new EditBox(this.font, width / 2 - 100, height / 2 - 10, 200, 20, label);
 		box.setValue(initial == null ? "" : initial);
 		box.setMaxLength(256);
-		box.setResponder(s -> error = null);
+		box.setResponder(s -> {
+			error = null;
+			updateConfirmButton();
+		});
 		addRenderableWidget(box);
+		int c = width / 2;
+		int gap = 10;
+		int w = Math.max(90, Math.max(font.width(EditorText.CANCEL.get()),
+				Math.max(font.width(EditorText.RESET.get()), font.width(EditorText.CONFIRM.get()))) + 20);
+		int x = c - (3 * w + 2 * gap) / 2;
 		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
-				.bounds(width / 2 - 104, height / 2 + 18, 100, 20).build());
-		addRenderableWidget(Button.builder(EditorText.CONFIRM.get(), b -> submit())
-				.bounds(width / 2 + 4, height / 2 + 18, 100, 20).build());
+				.bounds(x, height / 2 + 18, w, 20).build());
+		resetBtn = Button.builder(EditorText.RESET.get(), b -> resetValue())
+				.bounds(x + w + gap, height / 2 + 18, w, 20).build();
+		addRenderableWidget(resetBtn);
+		confirmBtn = Button.builder(EditorText.CONFIRM.get(), b -> submit())
+				.bounds(x + 2 * (w + gap), height / 2 + 18, w, 20).build();
+		addRenderableWidget(confirmBtn);
 		setInitialFocus(box);
+		updateConfirmButton();
 	}
 
 	@Override
 	public void onClose() {
 		Minecraft.getInstance().setScreen(parent);
+	}
+
+	private boolean changed() {
+		return initial == null ? !box.getValue().isEmpty() : !box.getValue().equals(initial);
+	}
+
+	private void updateConfirmButton() {
+		boolean b = changed();
+		confirmBtn.active = b;
+		resetBtn.active = b;
+	}
+
+	private void resetValue() {
+		box.setValue(initial == null ? "" : initial);
+		error = null;
+		updateConfirmButton();
 	}
 
 	private void submit() {

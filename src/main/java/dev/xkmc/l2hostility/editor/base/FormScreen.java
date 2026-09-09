@@ -57,6 +57,8 @@ public class FormScreen<T> extends EditorScreen {
 	private final List<Button> boolBtns = new ArrayList<>();
 	private final List<Integer> boxToField = new ArrayList<>();
 	private final List<Integer> boolToField = new ArrayList<>();
+	private Button confirmBtn;
+	private Button resetBtn;
 	@Nullable
 	private Component error;
 	@Nullable
@@ -90,7 +92,10 @@ public class FormScreen<T> extends EditorScreen {
 				EditBox box = new EditBox(this.font, 0, 0, BOX_W, 20, field.label());
 				box.setMaxLength(64);
 				box.setValue(field.initial());
-				box.setResponder(s -> error = null);
+				box.setResponder(s -> {
+					error = null;
+					updateConfirmButton();
+				});
 				boxes.add(box);
 				boxToField.add(i);
 			}
@@ -100,11 +105,21 @@ public class FormScreen<T> extends EditorScreen {
 			list.addRow(new FormEntry(i));
 		}
 		addRenderableWidget(list);
+		int c = width / 2;
+		int gap = 10;
+		int w = Math.max(90, max(font.width(EditorText.CANCEL.get()),
+				font.width(EditorText.RESET.get()), font.width(EditorText.CONFIRM.get())) + 20);
+		int x = c - (3 * w + 2 * gap) / 2;
 		addRenderableWidget(Button.builder(EditorText.CANCEL.get(), b -> Minecraft.getInstance().setScreen(parent))
-				.bounds(width / 2 - 110, buttonY(), 100, 20).build());
-		addRenderableWidget(Button.builder(EditorText.CONFIRM.get(), b -> submit())
-				.bounds(width / 2 + 10, buttonY(), 100, 20).build());
+				.bounds(x, buttonY(), w, 20).build());
+		resetBtn = Button.builder(EditorText.RESET.get(), b -> resetValue())
+				.bounds(x + w + gap, buttonY(), w, 20).build();
+		addRenderableWidget(resetBtn);
+		confirmBtn = Button.builder(EditorText.CONFIRM.get(), b -> submit())
+				.bounds(x + 2 * (w + gap), buttonY(), w, 20).build();
+		addRenderableWidget(confirmBtn);
 		if (!boxes.isEmpty()) boxes.get(0).setFocused(true);
+		updateConfirmButton();
 	}
 
 	private int labelX() {
@@ -146,6 +161,23 @@ public class FormScreen<T> extends EditorScreen {
 		boolValues[idx] = !boolValues[idx];
 		boolBtns.get(idx).setMessage(boolLabel(idx));
 		error = null;
+		updateConfirmButton();
+	}
+
+	private void resetValue() {
+		int bi = 0;
+		for (int i = 0; i < spec.fields().size(); i++) {
+			FormField field = spec.fields().get(i);
+			if (field.bool()) {
+				int idx = bi++;
+				boolValues[idx] = Boolean.parseBoolean(field.initial());
+				boolBtns.get(idx).setMessage(boolLabel(idx));
+			} else {
+				boxes.get(boxToField.indexOf(i)).setValue(field.initial());
+			}
+		}
+		error = null;
+		updateConfirmButton();
 	}
 
 	private void submit() {
@@ -242,6 +274,16 @@ public class FormScreen<T> extends EditorScreen {
 			}
 		}
 		return false;
+	}
+
+	private void updateConfirmButton() {
+		boolean b = changed();
+		confirmBtn.active = b;
+		resetBtn.active = b;
+	}
+
+	private static int max(int a, int b, int c) {
+		return Math.max(a, Math.max(b, c));
 	}
 
 	@Override
